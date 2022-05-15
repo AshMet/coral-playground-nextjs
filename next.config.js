@@ -18,4 +18,14 @@ module.exports = withPWA({
   eslint: {
     dirs: ["src"],
   },
+  pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/admin/dashboards/default',
+        permanent: true,
+      },
+    ]
+  },
 });
