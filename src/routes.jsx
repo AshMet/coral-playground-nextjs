@@ -1,9 +1,10 @@
+/* eslint-disable import/no-cycle */
 import { Icon } from "@chakra-ui/react";
 // import React from "react";
 import {
   // MdDashboard,
   MdHome,
-  // MdLock,
+  MdLock,
   MdOutlineShoppingCart,
 } from "react-icons/md";
 
@@ -24,40 +25,34 @@ import NFTProfile from "pages/admin/nfts/profile";
 // import AccountSettings from "pages/admin/main/account/settings";
 // import AccountAllCourses from "pages/admin/main/account/courses";
 // import AccountCoursePage from "pages/admin/main/account/coursePage";
-
 // import UserNew from "pages/admin/main/users/newUser";
 // import UsersOverview from "pages/admin/main/users/overview";
 // import UsersReports from "pages/admin/main/users/reports";
-
 // import ProfileSettings from "pages/admin/main/profile/settings";
 // import ProfileOverview from "pages/admin/main/profile/overview";
 // import ProfileNewsfeed from "pages/admin/main/profile/newsfeed";
-
 // import ApplicationsKanban from "pages/admin/main/applications/kanban";
 // import ApplicationsDataTables from "pages/admin/main/applications/dataTables";
 // import ApplicationsCalendar from "pages/admin/main/applications/calendar";
-
 // import EcommerceNewProduct from "pages/admin/main/ecommerce/newProduct";
 // import EcommerceProductSettings from "pages/admin/main/ecommerce/settingsProduct";
 // import EcommerceProductPage from "pages/admin/main/ecommerce/pageProduct";
 // import EcommerceOrderList from "pages/admin/main/ecommerce/orderList";
 // import EcommerceOrderDetails from "pages/admin/main/ecommerce/orderDetails";
 // import EcommerceReferrals from "pages/admin/main/ecommerce/referrals";
-
 // import OthersNotifications from "pages/admin/main/others/notifications";
 // import OthersPricing from "pages/admin/main/others/pricing";
-
 // Auth Imports
 // import ForgotPasswordCentered from "pages/auth/forgotPassword/ForgotPasswordCentered.jsx";
 // import ForgotPasswordDefault from "pages/auth/forgotPassword/ForgotPasswordDefault.jsx";
 // import LockCentered from "pages/auth/lock/LockCentered.jsx";
 // import LockDefault from "pages/auth/lock/LockDefault.jsx";
-// import SignInCentered from "pages/auth/signIn/SignInCentered.jsx";
-// import SignInDefault from "pages/auth/signIn/SignInDefault.jsx";
-// import SignUpCentered from "pages/auth/signUp/SignUpCentered.jsx";
-// import SignUpDefault from "pages/auth/signUp/SignUpDefault.jsx";
-// import VerificationCentered from "pages/auth/verification/VerificationCentered.jsx";
-// import VerificationDefault from "pages/auth/verification/VerificationDefault.jsx";
+import SignInCentered from "pages/auth/signIn/SignInCentered";
+import SignInDefault from "pages/auth/signIn/SignInDefault";
+import SignUpCentered from "pages/auth/signUp/SignUpCentered";
+import SignUpDefault from "pages/auth/signUp/SignUpDefault";
+import VerificationCentered from "pages/auth/verification/VerificationCentered";
+import VerificationDefault from "pages/auth/verification/VerificationDefault";
 
 const routes = [
   // --- Dashboards ---
@@ -351,144 +346,144 @@ const routes = [
   //   ],
   // },
   // --- Authentication ---
-  // {
-  //   name: "Authentication",
-  //   path: "/auth",
-  //   icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-  //   collapse: true,
-  //   items: [
-  //     // --- Sign In ---
-  //     {
-  //       name: "Sign In",
-  //       path: "/sign-in",
-  //       collapse: true,
-  //       items: [
-  //         {
-  //           name: "Default",
-  //           layout: "/auth",
-  //           path: "/sign-in/default",
-  //           icon: (
-  //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
-  //           ),
-  //           component: SignInDefault,
-  //         },
-  //         {
-  //           name: "Centered",
-  //           layout: "/auth",
-  //           path: "/sign-in/centered",
-  //           icon: (
-  //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
-  //           ),
-  //           component: SignInCentered,
-  //         },
-  //       ],
-  //     },
-  //     // --- Sign Up ---
-  //     {
-  //       name: "Sign Up",
-  //       path: "/sign-up",
-  //       collapse: true,
-  //       items: [
-  //         {
-  //           name: "Default",
-  //           layout: "/auth",
-  //           path: "/sign-up/default",
-  //           icon: (
-  //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
-  //           ),
-  //           component: SignUpDefault,
-  //         },
-  //         {
-  //           name: "Centered",
-  //           layout: "/auth",
-  //           path: "/sign-up/centered",
-  //           icon: (
-  //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
-  //           ),
-  //           component: SignUpCentered,
-  //         },
-  //       ],
-  //     },
-  //     // --- Verification ---
-  //     {
-  //       name: "Verification",
-  //       path: "/verification",
-  //       collapse: true,
-  //       items: [
-  //         {
-  //           name: "Default",
-  //           layout: "/auth",
-  //           path: "/verification/default",
-  //           icon: (
-  //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
-  //           ),
-  //           component: VerificationDefault,
-  //         },
-  //         {
-  //           name: "Centered",
-  //           layout: "/auth",
-  //           path: "/verification/centered",
-  //           icon: (
-  //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
-  //           ),
-  //           component: VerificationCentered,
-  //         },
-  //       ],
-  //     },
-  //     // --- Lock ---
-  //     {
-  //       name: "Lock",
-  //       path: "/lock",
-  //       collapse: true,
-  //       items: [
-  //         {
-  //           name: "Default",
-  //           layout: "/auth",
-  //           path: "/lock/default",
-  //           icon: (
-  //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
-  //           ),
-  //           component: LockDefault,
-  //         },
-  //         {
-  //           name: "Centered",
-  //           layout: "/auth",
-  //           path: "/lock/centered",
-  //           icon: (
-  //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
-  //           ),
-  //           component: LockCentered,
-  //         },
-  //       ],
-  //     },
-  //     // --- Forgot Password ---
-  //     {
-  //       name: "Forgot Password",
-  //       path: "/forgot-password",
-  //       collapse: true,
-  //       items: [
-  //         {
-  //           name: "Default",
-  //           layout: "/auth",
-  //           path: "/forgot-password/default",
-  //           icon: (
-  //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
-  //           ),
-  //           component: ForgotPasswordDefault,
-  //         },
-  //         {
-  //           name: "Centered",
-  //           layout: "/auth",
-  //           path: "/forgot-password/centered",
-  //           icon: (
-  //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
-  //           ),
-  //           component: ForgotPasswordCentered,
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
+  {
+    name: "Authentication",
+    path: "/auth",
+    icon: <Icon as={MdLock} width="20px" height="20px" color="inherit" />,
+    collapse: true,
+    items: [
+      // --- Sign In ---
+      {
+        name: "Sign In",
+        path: "/sign-in",
+        collapse: true,
+        items: [
+          {
+            name: "Default",
+            layout: "/auth",
+            path: "/sign-in/default",
+            icon: (
+              <Icon as={MdHome} width="16px" height="16px" color="inherit" />
+            ),
+            component: SignInDefault,
+          },
+          {
+            name: "Centered",
+            layout: "/auth",
+            path: "/sign-in/centered",
+            icon: (
+              <Icon as={MdHome} width="16px" height="16px" color="inherit" />
+            ),
+            component: SignInCentered,
+          },
+        ],
+      },
+      // --- Sign Up ---
+      {
+        name: "Sign Up",
+        path: "/sign-up",
+        collapse: true,
+        items: [
+          {
+            name: "Default",
+            layout: "/auth",
+            path: "/sign-up/default",
+            icon: (
+              <Icon as={MdHome} width="16px" height="16px" color="inherit" />
+            ),
+            component: SignUpDefault,
+          },
+          {
+            name: "Centered",
+            layout: "/auth",
+            path: "/sign-up/centered",
+            icon: (
+              <Icon as={MdHome} width="16px" height="16px" color="inherit" />
+            ),
+            component: SignUpCentered,
+          },
+        ],
+      },
+      // --- Verification ---
+      {
+        name: "Verification",
+        path: "/verification",
+        collapse: true,
+        items: [
+          {
+            name: "Default",
+            layout: "/auth",
+            path: "/verification/default",
+            icon: (
+              <Icon as={MdHome} width="16px" height="16px" color="inherit" />
+            ),
+            component: VerificationDefault,
+          },
+          {
+            name: "Centered",
+            layout: "/auth",
+            path: "/verification/centered",
+            icon: (
+              <Icon as={MdHome} width="16px" height="16px" color="inherit" />
+            ),
+            component: VerificationCentered,
+          },
+        ],
+      },
+      //     // --- Lock ---
+      //     {
+      //       name: "Lock",
+      //       path: "/lock",
+      //       collapse: true,
+      //       items: [
+      //         {
+      //           name: "Default",
+      //           layout: "/auth",
+      //           path: "/lock/default",
+      //           icon: (
+      //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
+      //           ),
+      //           component: LockDefault,
+      //         },
+      //         {
+      //           name: "Centered",
+      //           layout: "/auth",
+      //           path: "/lock/centered",
+      //           icon: (
+      //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
+      //           ),
+      //           component: LockCentered,
+      //         },
+      //       ],
+      //     },
+      //     // --- Forgot Password ---
+      //     {
+      //       name: "Forgot Password",
+      //       path: "/forgot-password",
+      //       collapse: true,
+      //       items: [
+      //         {
+      //           name: "Default",
+      //           layout: "/auth",
+      //           path: "/forgot-password/default",
+      //           icon: (
+      //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
+      //           ),
+      //           component: ForgotPasswordDefault,
+      //         },
+      //         {
+      //           name: "Centered",
+      //           layout: "/auth",
+      //           path: "/forgot-password/centered",
+      //           icon: (
+      //             <Icon as={MdHome} width='16px' height='16px' color='inherit' />
+      //           ),
+      //           component: ForgotPasswordCentered,
+      //         },
+      //       ],
+      //     },
+    ],
+  },
 ];
 
 export default routes;
