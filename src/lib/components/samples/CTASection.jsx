@@ -1,4 +1,6 @@
-import { Box, Button, Code, Flex, Image, Link } from "@chakra-ui/react";
+import { Box, Button, Code, Flex } from "@chakra-ui/react";
+import Image from "next/image";
+import Link from "next/link";
 import { AiFillGithub } from "react-icons/ai";
 
 const repoLink = "https://github.com/sozonome/nextarter-chakra";

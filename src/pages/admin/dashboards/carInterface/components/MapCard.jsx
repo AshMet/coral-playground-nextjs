@@ -7,13 +7,12 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-
 // Custom components
 import { IoPaperPlane } from "react-icons/io5";
 import { MdLocationOn } from "react-icons/md";
 
 import Card from "../../../../../components/card/Card";
-import { SearchBar } from "components/navbar/searchBar/SearchBar";
+import SearchBar from "components/navbar/searchBar/SearchBar";
 // import Map from "react-map-gl";
 
 // Assets

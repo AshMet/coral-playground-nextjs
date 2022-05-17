@@ -16,7 +16,6 @@ import {
   useColorModeValue,
   useColorMode,
 } from "@chakra-ui/react";
-
 // Custom Components
 import PropTypes from "prop-types";
 // import React from "react";
@@ -25,10 +24,10 @@ import PropTypes from "prop-types";
 import { FaEthereum } from "react-icons/fa";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import { MdNotificationsNone, MdInfoOutline } from "react-icons/md";
-import routes from "../../routes";
 
-import { ItemContent } from "components/menu/ItemContent";
-import { SearchBar } from "components/navbar/searchBar/SearchBar";
+import routes from "../../routes";
+import ItemContent from "../menu/ItemContent";
+import SearchBar from "components/navbar/searchBar/SearchBar";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
 
 export default function HeaderLinks(props) {

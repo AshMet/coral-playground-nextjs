@@ -33,11 +33,11 @@ import PropTypes from "prop-types";
 // Custom components
 import { GoChevronDown } from "react-icons/go";
 
+import SidebarContext from "../../contexts/SidebarContext";
 import routes from "../../routes";
 import { HorizonLogo } from "../icons/Icons";
 import NavLink from "../navLinks/NavLink";
 import { SidebarResponsive } from "../sidebar/Sidebar";
-import { SidebarContext } from "../../contexts/SidebarContext";
 
 // Assets
 // import dropdownMain from "assets/img/layout/dropdownMain.png";

@@ -12,10 +12,10 @@ import Footer from "../../components/footer/FooterAdmin";
 // Layout components
 import Navbar from "../../components/navbar/NavbarAdmin";
 import Sidebar from "../../components/sidebar/Sidebar";
-import { SidebarContext } from "contexts/SidebarContext";
+import SidebarContext from "../../contexts/SidebarContext";
+import routes from "../../routes";
 
 // import { Redirect, Route, Switch } from "react-router-dom";
-import routes from "../../routes";
 // import "mapbox-gl/dist/mapbox-gl.css";
 
 // Custom Chakra theme
