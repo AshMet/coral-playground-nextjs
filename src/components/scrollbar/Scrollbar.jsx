@@ -1,6 +1,8 @@
+/* eslint-disable sonarjs/no-identical-functions */
+/* eslint-disable sonarjs/no-duplicate-string */
 import { Box } from "@chakra-ui/react";
 
-import React from "react";
+// import React from "react";
 
 export const renderTrack = ({ style, ...props }) => {
   const trackStyle = {

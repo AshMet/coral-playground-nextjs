@@ -8,7 +8,6 @@ import {
   Badge,
   Icon,
 } from "@chakra-ui/react";
-
 // Custom components
 // import React from "react";
 import { MdOutlineTimer } from "react-icons/md";

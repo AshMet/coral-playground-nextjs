@@ -1,12 +1,12 @@
 // Chakra imports
 import { Box, Flex, Text } from "@chakra-ui/react";
 // Custom components
-import Card from "components/card/Card";
-import FixedPlugin from "components/fixedPlugin/FixedPlugin";
-import Footer from "components/footer/FooterAuthCentered";
-import Navbar from "components/navbar/NavbarAuth";
+import Card from "../../../components/card/Card";
+import FixedPlugin from "../../../components/fixedPlugin/FixedPlugin";
+import Footer from "../../../components/footer/FooterAuthCentered";
+import Navbar from "../../../components/navbar/NavbarAuth";
 import PropTypes from "prop-types";
-import React from "react";
+// import React from "react";
 
 function AuthCentered(props) {
   const { children, title, description, image, cardTop, cardBottom } = props;

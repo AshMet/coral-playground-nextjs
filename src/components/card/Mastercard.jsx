@@ -2,7 +2,6 @@
 
 // Chakra imports
 import { Flex, Box, Icon, Text, Spacer } from "@chakra-ui/react";
-
 // Custom components
 import { RiMastercardFill } from "react-icons/ri";
 
