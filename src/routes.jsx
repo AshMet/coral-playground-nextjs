@@ -18,7 +18,7 @@ import NFTPage from "pages/admin/nfts/page";
 import NFTProfile from "pages/admin/nfts/profile";
 import NFTDrops from "pages/admin/nfts/drops";
 // Main Imports
-import AccountBilling from "pages/admin/main/account/billing";
+// import AccountBilling from "pages/admin/main/account/billing";
 // import AccountApplications from "pages/admin/main/account/application";
 // import AccountInvoice from "pages/admin/main/account/invoice";
 // import AccountSettings from "pages/admin/main/account/settings";
@@ -139,24 +139,24 @@ const routes = [
     ],
   },
   // --- Main pages ---
-  {
-    name: "Main Pages",
-    path: "/main",
-    icon: <Icon as={MdDashboard} width="20px" height="20px" color="inherit" />,
-    collapse: true,
-    items: [
-      {
-        name: "Account",
-        path: "/main/account",
-        collapse: true,
-        items: [
-          {
-            name: "Billing",
-            layout: "/admin",
-            path: "/main/account/billing",
-            exact: false,
-            component: AccountBilling,
-          },
+  // {
+  //   name: "Main Pages",
+  //   path: "/main",
+  //   icon: <Icon as={MdDashboard} width="20px" height="20px" color="inherit" />,
+  //   collapse: true,
+  //   items: [
+  //     {
+  //       name: "Account",
+  //       path: "/main/account",
+  //       collapse: true,
+  //       items: [
+  //         {
+  //           name: "Billing",
+  //           layout: "/admin",
+  //           path: "/main/account/billing",
+  //           exact: false,
+  //           component: AccountBilling,
+  //         },
           // {
           //   name: "Application",
           //   layout: "/admin",
@@ -192,8 +192,8 @@ const routes = [
           //   exact: false,
           //   component: AccountCoursePage,
           // },
-        ],
-      },
+      //   ],
+      // },
       // {
       //   name: "Ecommerce",
       //   path: "/main/users",
@@ -348,8 +348,8 @@ const routes = [
       //     },
       //   ],
       // },
-    ],
-  },
+  //   ],
+  // },
   // --- Authentication ---
   // {
   //   name: "Authentication",
