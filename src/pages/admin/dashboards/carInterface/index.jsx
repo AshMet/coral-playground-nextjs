@@ -49,12 +49,10 @@ import {
 import Card from "../../../../components/card/Card";
 // import React from "react";
 import { ButtonLeft, ButtonRight } from "../../../../components/icons/Icons";
-
 // Assets
-
-import EagleView from "./components/EagleView";
+import EagleView from "../../../../components/pages/carInterface/EagleView";
 // import MapCard from "./components/MapCard";
-import Phone from "./components/Phone";
+import Phone from "components/pages/carInterface/Phone";
 
 export default function Default() {
   // Chakra Color Mode

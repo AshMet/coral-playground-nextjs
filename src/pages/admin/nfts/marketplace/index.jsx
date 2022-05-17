@@ -48,12 +48,11 @@ import Nft5 from "../../../../../public/img/nfts/Nft5.png";
 import Nft6 from "../../../../../public/img/nfts/Nft6.png";
 import Card from "../../../../components/card/Card";
 import NFT from "../../../../components/card/NFT";
-
-import Banner from "./components/Banner";
-import HistoryItem from "./components/HistoryItem";
-import TableTopCreators from "./components/TableTopCreators";
-import tableColumnsTopCreators from "./variables/tableColumnsTopCreators";
-import tableDataTopCreators from "./variables/tableDataTopCreators.json";
+import Banner from "../../../../components/pages/nftMarketplace/Banner";
+import HistoryItem from "../../../../components/pages/nftMarketplace/HistoryItem";
+import TableTopCreators from "../../../../components/pages/nftMarketplace/TableTopCreators";
+import tableColumnsTopCreators from "../../../../variables/nftMarketplace/tableColumnsTopCreators";
+import tableDataTopCreators from "../../../../variables/nftMarketplace/tableDataTopCreators.json";
 
 export default function Marketplace() {
   // Chakra Color Mode

@@ -64,11 +64,10 @@ import Nft5 from "../../../../../public/img/nfts/Nft5.png";
 import Nft6 from "../../../../../public/img/nfts/Nft6.png";
 import NftBanner3 from "../../../../../public/img/nfts/NftBanner3.png";
 // import Image from "../../../../components/actions/NextChakraImg";
+import Banner from "../../../../components/pages/nftProfile/Banner";
+import SearchBar from "../../../../components/pages/nftProfile/Search";
 import NFT from "components/card/NFT";
 import { HSeparator } from "components/separator/Separator";
-
-import Banner from "./components/Banner";
-import SearchBar from "./components/Search";
 
 export default function Collection() {
   const [tabState, setTabState] = useState("collected");

@@ -37,22 +37,20 @@ import {
 // Custom components
 import { MdDashboard, MdApps } from "react-icons/md";
 
+// Assets
 import Avatar1 from "../../../../../public/img/avatars/avatar1.png";
 import Avatar2 from "../../../../../public/img/avatars/avatar2.png";
 import Avatar3 from "../../../../../public/img/avatars/avatar3.png";
 import Avatar4 from "../../../../../public/img/avatars/avatar4.png";
 import Nft2 from "../../../../../public/img/nfts/Nft2.png";
-
-// Assets
 import Nft4 from "../../../../../public/img/nfts/Nft4.png";
 import Nft5 from "../../../../../public/img/nfts/Nft5.png";
 import Nft6 from "../../../../../public/img/nfts/Nft6.png";
 import NftBanner2 from "../../../../../public/img/nfts/NftBanner2.png";
 import NftProfile from "../../../../../public/img/nfts/NftProfile.png";
 import NFT from "../../../../components/card/NFT";
-
-import Banner from "./components/Banner";
-import SearchBar from "./components/Search";
+import Banner from "../../../../components/pages/nftCollection/Banner";
+import SearchBar from "../../../../components/pages/nftCollection/Search";
 
 export default function Collection() {
   const textColor = useColorModeValue("secondaryGray.900", "white");

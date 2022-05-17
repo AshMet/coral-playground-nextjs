@@ -45,11 +45,10 @@ import Nft5 from "../../../../../public/img/nfts/Nft5.png";
 import Nft6 from "../../../../../public/img/nfts/Nft6.png";
 import NftLarge1 from "../../../../../public/img/nfts/NftLarge1.png";
 import Card from "../../../../components/card/Card";
+import Auction from "../../../../components/pages/nftDrops/Auction";
+import Banner from "../../../../components/pages/nftDrops/Banner";
+import Description from "../../../../components/pages/nftDrops/Description";
 import NFT from "components/card/NFT";
-
-import Auction from "./components/Auction";
-import Banner from "./components/Banner";
-import Description from "./components/Description";
 // import TableLastOffer from "./components/TableLastOffer";
 
 export default function Page() {

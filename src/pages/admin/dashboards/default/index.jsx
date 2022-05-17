@@ -26,18 +26,18 @@
 import { Flex, Grid, useColorModeValue } from "@chakra-ui/react";
 
 // Custom components
-import { VSeparator } from "../../../../components/separator/Separator";
 
-import Balance from "./components/Balance";
-import DailyTraffic from "./components/DailyTraffic";
-import MostVisitedTable from "./components/MostVisitedTable";
-import OverallRevenue from "./components/OverallRevenue";
-import ProfitEstimation from "./components/ProfitEstimation";
-import ProjectStatus from "./components/ProjectStatus";
-import YourCard from "./components/YourCard";
-import YourTransfers from "./components/YourTransfers";
-import tableColumnsMostVisited from "./variables/tableColumnsMostVisited";
-import tableDataMostVisited from "./variables/tableDataMostVisited.json";
+import Balance from "../../../../components/pages/defaultDashboard/Balance";
+import DailyTraffic from "../../../../components/pages/defaultDashboard/DailyTraffic";
+import MostVisitedTable from "../../../../components/pages/defaultDashboard/MostVisitedTable";
+import OverallRevenue from "../../../../components/pages/defaultDashboard/OverallRevenue";
+import ProfitEstimation from "../../../../components/pages/defaultDashboard/ProfitEstimation";
+import ProjectStatus from "../../../../components/pages/defaultDashboard/ProjectStatus";
+import YourCard from "../../../../components/pages/defaultDashboard/YourCard";
+import YourTransfers from "../../../../components/pages/defaultDashboard/YourTransfers";
+import { VSeparator } from "../../../../components/separator/Separator";
+import tableColumnsMostVisited from "variables/defaultDashboard/tableColumnsMostVisited";
+import tableDataMostVisited from "variables/defaultDashboard/tableDataMostVisited.json";
 
 export default function Default() {
   // Chakra Color Mode

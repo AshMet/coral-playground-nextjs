@@ -27,16 +27,15 @@ import { Button, Box, Grid, SimpleGrid } from "@chakra-ui/react";
 // import home from "assets/img/dashboards/home.png";
 // Custom components
 import Card from "../../../../components/card/Card";
-
 // import React from "react";
-import AddDevice from "./components/AddDevice";
-import Consumption from "./components/Consumption";
-import General from "./components/General";
-import Light from "./components/Light";
-import MapCard from "./components/MapCard";
-import Plan from "./components/Plan";
-import Temperature from "./components/Temperature";
-import Weather from "./components/Weather";
+import AddDevice from "../../../../components/pages/smartHome/AddDevice";
+import Consumption from "../../../../components/pages/smartHome/Consumption";
+import General from "../../../../components/pages/smartHome/General";
+import Light from "../../../../components/pages/smartHome/Light";
+import MapCard from "../../../../components/pages/smartHome/MapCard";
+import Plan from "../../../../components/pages/smartHome/Plan";
+import Temperature from "../../../../components/pages/smartHome/Temperature";
+import Weather from "../../../../components/pages/smartHome/Weather";
 
 export default function Default() {
   // Chakra Color Mode
