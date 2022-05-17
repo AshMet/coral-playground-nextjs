@@ -1,4 +1,4 @@
-export const tableColumnsManagement = [
+const tableColumnsManagement = [
   {
     Header: "Name",
     accessor: "name",
@@ -24,3 +24,5 @@ export const tableColumnsManagement = [
     accessor: "button",
   },
 ];
+
+export default tableColumnsManagement;

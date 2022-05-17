@@ -35,11 +35,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
-import Card from "components/card/Card.js";
-import React from "react";
 import { FaChild, FaFan } from "react-icons/fa";
-import { ButtonLeft, ButtonRight } from "components/icons/Icons";
-// Assets
 import {
   MdLibraryMusic,
   MdLiveTv,
@@ -49,6 +45,13 @@ import {
   MdChevronLeft,
   MdChevronRight,
 } from "react-icons/md";
+
+import Card from "../../../../components/card/Card";
+// import React from "react";
+import { ButtonLeft, ButtonRight } from "../../../../components/icons/Icons";
+
+// Assets
+
 import EagleView from "./components/EagleView";
 // import MapCard from "./components/MapCard";
 import Phone from "./components/Phone";
@@ -69,174 +72,177 @@ export default function Default() {
         "2xl": "1fr",
       }}
       gap={{ base: "20px", xl: "20px" }}
-      display={{ base: "block", lg: "grid" }}>
-      <EagleView gridArea='1 / 1 / 2 / 2' />
-      <Box gridArea='1 / 2 / 2 / 3'>
+      display={{ base: "block", lg: "grid" }}
+    >
+      <EagleView gridArea="1 / 1 / 2 / 2" />
+      <Box gridArea="1 / 2 / 2 / 3">
         <Phone />
-        <SimpleGrid mt='20px' columns='3' gap='20px' mb='20px'>
+        <SimpleGrid mt="20px" columns="3" gap="20px" mb="20px">
           <Card p={{ base: "28px", md: "50px" }}>
-            <Icon color={textColorSecondary} as={FaChild} w='40px' h='40px' />
+            <Icon color={textColorSecondary} as={FaChild} w="40px" h="40px" />
           </Card>
           <Card p={{ base: "28px", md: "50px" }}>
             <Icon
               color={textColorSecondary}
-              alignSelf='center'
+              alignSelf="center"
               as={MdLock}
-              w='40px'
-              h='40px'
+              w="40px"
+              h="40px"
             />
           </Card>
           <Card p={{ base: "28px", md: "50px" }}>
             <Icon
               color={textColorSecondary}
-              alignSelf='center'
+              alignSelf="center"
               as={MdLibraryMusic}
-              w='40px'
-              h='40px'
+              w="40px"
+              h="40px"
             />
           </Card>
           <Card p={{ base: "28px", md: "50px" }}>
             <Icon
               color={textColorSecondary}
-              alignSelf='center'
+              alignSelf="center"
               as={FaFan}
-              w='40px'
-              h='40px'
+              w="40px"
+              h="40px"
             />
           </Card>
           <Card p={{ base: "28px", md: "50px" }}>
             <Icon
               color={textColorSecondary}
-              alignSelf='center'
+              alignSelf="center"
               as={MdLiveTv}
-              w='40px'
-              h='40px'
+              w="40px"
+              h="40px"
             />
           </Card>
           <Card p={{ base: "28px", md: "50px" }}>
             <Icon
               color={textColorSecondary}
-              alignSelf='center'
+              alignSelf="center"
               as={MdPhoneInTalk}
-              w='40px'
-              h='40px'
+              w="40px"
+              h="40px"
             />
           </Card>
         </SimpleGrid>
 
-        <SimpleGrid mt='20px' columns='2' gap='20px' mb='20px'>
+        <SimpleGrid mt="20px" columns="2" gap="20px" mb="20px">
           <Card p={{ base: "28px", md: "50px" }}>
-            <Box m='auto'>
+            <Box m="auto">
               <Icon
-                transform='rotate(90deg)'
+                transform="rotate(90deg)"
                 color={textColorSecondary}
                 as={MdChevronLeft}
-                w='24px'
-                h='24px'
+                w="24px"
+                h="24px"
                 ms={{ base: "32px" }}
               />
-              <Flex position='relative'>
+              <Flex position="relative">
                 <Text
-                  position='absolute'
-                  right='50%'
-                  top='50%'
-                  transform='translate(-50%,-50%)'
+                  position="absolute"
+                  right="50%"
+                  top="50%"
+                  transform="translate(-50%,-50%)"
                   color={textColorSecondary}
-                  fontSize='md'
-                  fontWeight='700'
-                  lineHeight='100%'>
+                  fontSize="md"
+                  fontWeight="700"
+                  lineHeight="100%"
+                >
                   L
                 </Text>
                 <Icon
                   color={textColorSecondary}
                   as={MdChevronLeft}
-                  w='24px'
-                  h='24px'
+                  w="24px"
+                  h="24px"
                 />
-                <ButtonLeft color={textColorSecondary} w='44px' h='29px' />
+                <ButtonLeft color={textColorSecondary} w="44px" h="29px" />
                 <Icon
                   color={textColorSecondary}
                   as={MdChevronRight}
-                  w='24px'
-                  h='24px'
+                  w="24px"
+                  h="24px"
                 />
               </Flex>
               <Icon
-                transform='rotate(90deg)'
+                transform="rotate(90deg)"
                 color={textColorSecondary}
                 as={MdChevronRight}
-                w='24px'
-                h='24px'
+                w="24px"
+                h="24px"
                 mt={{ base: "6px" }}
                 ms={{ base: "32px" }}
               />
             </Box>
           </Card>
           <Card p={{ base: "28px", md: "50px" }}>
-            <Box m='auto'>
+            <Box m="auto">
               <Icon
-                transform='rotate(90deg)'
+                transform="rotate(90deg)"
                 color={textColorSecondary}
                 as={MdChevronLeft}
-                w='24px'
-                h='24px'
+                w="24px"
+                h="24px"
                 ms={{ base: "32px" }}
               />
-              <Flex position='relative'>
+              <Flex position="relative">
                 <Text
-                  position='absolute'
-                  right='50%'
-                  top='50%'
-                  transform='translate(-50%,-50%)'
+                  position="absolute"
+                  right="50%"
+                  top="50%"
+                  transform="translate(-50%,-50%)"
                   color={textColorSecondary}
-                  fontSize='md'
-                  fontWeight='700'
-                  lineHeight='100%'>
+                  fontSize="md"
+                  fontWeight="700"
+                  lineHeight="100%"
+                >
                   R
                 </Text>
                 <Icon
                   color={textColorSecondary}
                   as={MdChevronLeft}
-                  w='24px'
-                  h='24px'
+                  w="24px"
+                  h="24px"
                 />
-                <ButtonRight color={textColorSecondary} w='44px' h='29px' />
+                <ButtonRight color={textColorSecondary} w="44px" h="29px" />
                 <Icon
                   color={textColorSecondary}
                   as={MdChevronRight}
-                  w='24px'
-                  h='24px'
+                  w="24px"
+                  h="24px"
                 />
               </Flex>
               <Icon
-                transform='rotate(90deg)'
+                transform="rotate(90deg)"
                 color={textColorSecondary}
                 as={MdChevronRight}
-                w='24px'
-                h='24px'
+                w="24px"
+                h="24px"
                 mt={{ base: "6px" }}
                 ms={{ base: "32px" }}
               />
             </Box>
           </Card>
         </SimpleGrid>
-        <Card flexDirection='row' p='50px' mb={{ base: "20px", lg: "0px" }}>
+        <Card flexDirection="row" p="50px" mb={{ base: "20px", lg: "0px" }}>
           <Icon
-            h='30px'
-            w='30px'
-            me='20px'
+            h="30px"
+            w="30px"
+            me="20px"
             as={MdOutlineWbSunny}
             color={textColorSecondary}
           />
-          <Slider defaultValue={10} zIndex='0'>
-            <SliderTrack h='4px' borderRadius='78px'>
+          <Slider defaultValue={10} zIndex="0">
+            <SliderTrack h="4px" borderRadius="78px">
               <SliderFilledTrack bg={textColorSecondary} />
             </SliderTrack>
             <SliderThumb
-              boxShadow='0px 3px 27px -20px rgba(112, 144, 176, 0.51)'
-              w='18px'
-              h='18px'
-              border='4px solid'
+              boxShadow="0px 3px 27px -20px rgba(112, 144, 176, 0.51)"
+              w="18px"
+              h="18px"
+              border="4px solid"
               borderColor={textColorSecondary}
               bg={brandBg}
               index={0}

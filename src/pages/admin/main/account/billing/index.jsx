@@ -20,31 +20,34 @@
 
 */
 
-import React from "react";
+// import React from "react";
 // Chakra imports
 import { Flex, SimpleGrid } from "@chakra-ui/react";
+
 // Custom components
+import Balance from "./components/Balance";
+import Invoices from "./components/Invoices";
+import Market from "./components/Market";
+import PaymentMethod from "./components/PaymentMethod";
 import YourCard from "./components/YourCard";
 import YourTransactions from "./components/YourTransactions";
 import YourTransfers from "./components/YourTransfers";
-import Invoices from "./components/Invoices";
-import Balance from "./components/Balance";
-import Market from "./components/Market";
-import PaymentMethod from "./components/PaymentMethod";
+
 export default function Billing() {
   // Chakra Color Mode
   return (
     <Flex pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <Flex direction='column' width='stretch'>
+      <Flex direction="column" width="stretch">
         <SimpleGrid
           columns={{ sm: 1, md: 1, lg: 1, xl: 3 }}
-          gap='20px'
-          mb='20px'>
+          gap="20px"
+          mb="20px"
+        >
           <Flex>
             <YourCard />
           </Flex>
-          <Flex direction='column'>
-            <Balance mb='20px' />
+          <Flex direction="column">
+            <Balance mb="20px" />
             <PaymentMethod />
           </Flex>
           <Flex>
@@ -53,8 +56,9 @@ export default function Billing() {
         </SimpleGrid>
         <SimpleGrid
           columns={{ sm: 1, md: 1, lg: 1, xl: 3 }}
-          gap='20px'
-          mb='20px'>
+          gap="20px"
+          mb="20px"
+        >
           <Flex>
             <YourTransactions />
           </Flex>
