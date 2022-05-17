@@ -1,3 +1,6 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-param-reassign */
+/* eslint-disable sonarjs/no-duplicate-string */
 // Sidebar
 
 export const lineChartDataSidebar = [
@@ -1391,13 +1394,13 @@ export const lineBarChartOptions = {
 };
 
 function generateData(baseval, count, yrange) {
-  var i = 0;
-  var series = [];
+  let i = 0;
+  const series = [];
   while (i < count) {
-    var x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;
-    var y =
+    const x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;
+    const y =
       Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-    var z = Math.floor(Math.random() * (75 - 15 + 1)) + 15;
+    const z = Math.floor(Math.random() * (75 - 15 + 1)) + 15;
 
     series.push([x, y, z]);
     baseval += 86400000;

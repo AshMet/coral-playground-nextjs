@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { createBreakpoints } from "@chakra-ui/theme-tools";
 
 export const breakpoints = createBreakpoints({

@@ -1,4 +1,6 @@
+/* eslint-disable import/prefer-default-export */
 import { mode } from "@chakra-ui/theme-tools";
+
 export const progressStyles = {
   components: {
     Progress: {

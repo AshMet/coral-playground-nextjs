@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
@@ -20,14 +21,16 @@
 
 */
 
-import React from "react";
+// import React from "react";
 // Chakra imports
 import { Flex, Grid, useColorModeValue } from "@chakra-ui/react";
+
 // Custom components
+import { VSeparator } from "../../../../components/separator/Separator";
+
 import Balance from "./components/Balance";
 import DailyTraffic from "./components/DailyTraffic";
 import MostVisitedTable from "./components/MostVisitedTable";
-import { VSeparator } from "components/separator/Separator";
 import OverallRevenue from "./components/OverallRevenue";
 import ProfitEstimation from "./components/ProfitEstimation";
 import ProjectStatus from "./components/ProjectStatus";
@@ -42,13 +45,15 @@ export default function Default() {
   return (
     <Flex
       direction={{ base: "column", xl: "row" }}
-      pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <Flex direction='column' width='stretch'>
+      pt={{ base: "130px", md: "80px", xl: "80px" }}
+    >
+      <Flex direction="column" width="stretch">
         <Grid
-          mb='20px'
+          mb="20px"
           gridTemplateColumns={{ base: "repeat(2, 1fr)", "2xl": "720fr 350fr" }}
-          gap='20px'
-          display={{ base: "block", lg: "grid" }}>
+          gap="20px"
+          display={{ base: "block", lg: "grid" }}
+        >
           <Flex gridArea={{ base: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}>
             <OverallRevenue />
           </Flex>
@@ -57,7 +62,7 @@ export default function Default() {
           </Flex>
         </Grid>
         <Grid
-          gap='20px'
+          gap="20px"
           gridTemplateColumns={{
             md: "repeat(2, 1fr)",
             "2xl": "repeat(3, 1fr)",
@@ -66,7 +71,8 @@ export default function Default() {
             md: "repeat(2, 1fr)",
             "2xl": "1fr",
           }}
-          mb='20px'>
+          mb="20px"
+        >
           <Flex gridArea={{ md: "1 / 1 / 2 / 2", "2xl": "1 / 1 / 2 / 2" }}>
             <DailyTraffic />
           </Flex>
@@ -79,8 +85,9 @@ export default function Default() {
         </Grid>
         <Grid
           templateColumns={{ base: "repeat(2, 1fr)", "2xl": "350fr 720fr" }}
-          gap='20px'
-          display={{ base: "block", lg: "grid" }}>
+          gap="20px"
+          display={{ base: "block", lg: "grid" }}
+        >
           <Flex gridArea={{ base: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}>
             <YourTransfers />
           </Flex>
@@ -93,7 +100,7 @@ export default function Default() {
         </Grid>
       </Flex>
       <VSeparator
-        mx='20px'
+        mx="20px"
         bg={paleGray}
         display={{ base: "none", xl: "flex" }}
       />

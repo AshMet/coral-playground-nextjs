@@ -32,8 +32,9 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+
 import CenteredAuth from "layouts/auth/types/Centered";
-import React from "react";
+// import React from "react";
 
 function ForgotPassword() {
   // Chakra color mode
@@ -45,80 +46,85 @@ function ForgotPassword() {
 
   return (
     <CenteredAuth
-      image={"linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"}
+      image="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
       cardTop={{ base: "140px", md: "24vh" }}
-      cardBottom={{ base: "50px", lg: "auto" }}>
+      cardBottom={{ base: "50px", lg: "auto" }}
+    >
       <Flex
-        w='100%'
-        maxW='max-content'
+        w="100%"
+        maxW="max-content"
         mx={{ base: "auto", lg: "0px" }}
-        me='auto'
-        h='100%'
-        justifyContent='center'
+        me="auto"
+        h="100%"
+        justifyContent="center"
         px={{ base: "25px", md: "0px" }}
-        flexDirection='column'>
-        <Box me='auto' mb='34px'>
+        flexDirection="column"
+      >
+        <Box me="auto" mb="34px">
           <Heading
             color={textColor}
-            fontSize='36px'
-            mb='16px'
+            fontSize="36px"
+            mb="16px"
             mx={{ base: "auto", lg: "unset" }}
-            textAlign={{ base: "center", lg: "left" }}>
+            textAlign={{ base: "center", lg: "left" }}
+          >
             2-Step Verification
           </Heading>
           <Text
             color={textColorSecondary}
-            fontSize='md'
+            fontSize="md"
             maxW={{ base: "95%", md: "100%" }}
             mx={{ base: "auto", lg: "unset" }}
-            textAlign={{ base: "center", lg: "left" }}>
+            textAlign={{ base: "center", lg: "left" }}
+          >
             Enter your 2-Step Verification email code to unlock!
           </Text>
         </Box>
         <Flex
-          zIndex='2'
-          direction='column'
+          zIndex="2"
+          direction="column"
           w={{ base: "100%", md: "425px" }}
-          maxW='100%'
-          background='transparent'
-          borderRadius='15px'
+          maxW="100%"
+          background="transparent"
+          borderRadius="15px"
           mx={{ base: "auto", lg: "unset" }}
-          me='auto'
-          mb={{ base: "20px", md: "auto" }}>
+          me="auto"
+          mb={{ base: "20px", md: "auto" }}
+        >
           <FormControl>
-            <Flex justify='center'>
-              <PinInput mx='auto' otp>
+            <Flex justify="center">
+              <PinInput mx="auto" otp>
                 <PinInputField
-                  fontSize='36px'
+                  fontSize="36px"
                   color={textColor}
-                  borderRadius='16px'
+                  borderRadius="16px"
                   borderColor={borderColor}
                   h={{ base: "63px", md: "95px" }}
                   w={{ base: "63px", md: "95px" }}
-                  me='10px'
+                  me="10px"
                 />
                 <PinInputField
-                  fontSize='36px'
+                  fontSize="36px"
                   color={textColor}
-                  borderRadius='16px'
+                  borderRadius="16px"
                   borderColor={borderColor}
                   h={{ base: "63px", md: "95px" }}
                   w={{ base: "63px", md: "95px" }}
-                  me='10px'
+                  me="10px"
                 />
                 <PinInputField
-                  fontSize='36px'
+                  fontSize="36px"
                   color={textColor}
-                  borderRadius='16px'
+                  borderRadius="16px"
                   borderColor={borderColor}
                   h={{ base: "63px", md: "95px" }}
                   w={{ base: "63px", md: "95px" }}
-                  me='10px'
+                  me="10px"
                 />
                 <PinInputField
-                  fontSize='36px'
+                  fontSize="36px"
                   color={textColor}
-                  borderRadius='16px'
+                  borderRadius="16px"
                   borderColor={borderColor}
                   h={{ base: "63px", md: "95px" }}
                   w={{ base: "63px", md: "95px" }}
@@ -127,31 +133,34 @@ function ForgotPassword() {
             </Flex>
 
             <Button
-              fontSize='14px'
-              variant='brand'
-              borderRadius='16px'
-              fontWeight='500'
-              w='100%'
-              h='50'
-              mb='24px'
-              mt='12px'>
+              fontSize="14px"
+              variant="brand"
+              borderRadius="16px"
+              fontWeight="500"
+              w="100%"
+              h="50"
+              mb="24px"
+              mt="12px"
+            >
               Unlock
             </Button>
           </FormControl>
           <Flex
-            flexDirection='column'
-            justifyContent='center'
-            alignItems='start'
-            maxW='100%'
-            mt='0px'>
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="start"
+            maxW="100%"
+            mt="0px"
+          >
             <Text
               color={textColorDetails}
-              fontWeight='400'
-              fontSize='14px'
+              fontWeight="400"
+              fontSize="14px"
               mx={{ base: "auto", lg: "unset" }}
-              textAlign={{ base: "center", lg: "left" }}>
-              Haven't received it?
-              <Text color={textColorBrand} as='span' ms='5px' fontWeight='500'>
+              textAlign={{ base: "center", lg: "left" }}
+            >
+              {`Haven't received it?`}
+              <Text color={textColorBrand} as="span" ms="5px" fontWeight="500">
                 Resend a new code
               </Text>
             </Text>

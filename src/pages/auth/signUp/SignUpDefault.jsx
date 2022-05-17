@@ -39,14 +39,16 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Assets
-import illustration from "assets/img/auth/auth.png";
-import { HSeparator } from "components/separator/Separator";
-import DefaultAuth from "layouts/auth/types/Default";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+
+import illustration from "../../../../public/img/auth/auth.png";
+import NavLink from "components/navLinks/NavLink";
+import { HSeparator } from "components/separator/Separator";
+import DefaultAuth from "layouts/auth/types/Default";
 
 function SignUp() {
   // Chakra color mode
@@ -70,61 +72,66 @@ function SignUp() {
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
       <Flex
-        w='100%'
-        maxW='max-content'
+        w="100%"
+        maxW="max-content"
         mx={{ base: "auto", lg: "0px" }}
-        me='auto'
-        h='100%'
-        justifyContent='center'
+        me="auto"
+        h="100%"
+        justifyContent="center"
         mb={{ base: "30px", md: "60px" }}
         px={{ base: "25px", md: "0px" }}
         mt={{ base: "40px", md: "8vh" }}
-        flexDirection='column'>
-        <Box me='auto'>
+        flexDirection="column"
+      >
+        <Box me="auto">
           <Heading
             color={textColor}
             fontSize={{ base: "34px", lg: "36px" }}
-            mb='10px'>
+            mb="10px"
+          >
             Sign Up
           </Heading>
           <Text
-            mb='36px'
-            ms='4px'
+            mb="36px"
+            ms="4px"
             color={textColorSecondary}
-            fontWeight='400'
-            fontSize='md'>
+            fontWeight="400"
+            fontSize="md"
+          >
             Enter your email and password to sign up!
           </Text>
         </Box>
         <Flex
-          zIndex='2'
-          direction='column'
+          zIndex="2"
+          direction="column"
           w={{ base: "100%", md: "420px" }}
-          maxW='100%'
-          background='transparent'
-          borderRadius='15px'
+          maxW="100%"
+          background="transparent"
+          borderRadius="15px"
           mx={{ base: "auto", lg: "unset" }}
-          me='auto'
-          mb={{ base: "20px", md: "auto" }}>
+          me="auto"
+          mb={{ base: "20px", md: "auto" }}
+        >
           <Button
-            fontSize='sm'
-            me='0px'
-            mb='26px'
-            py='15px'
-            h='50px'
-            borderRadius='16px'
+            fontSize="sm"
+            me="0px"
+            mb="26px"
+            py="15px"
+            h="50px"
+            borderRadius="16px"
             bg={googleBg}
             color={googleText}
-            fontWeight='500'
+            fontWeight="500"
             _hover={googleHover}
             _active={googleActive}
-            _focus={googleActive}>
-            <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
+            _focus={googleActive}
+          >
+            <Icon as={FcGoogle} w="20px" h="20px" me="10px" />
             Sign up with Google
           </Button>
-          <Flex align='center' mb='25px'>
+          <Flex align="center" mb="25px">
             <HSeparator />
-            <Text color={textColorSecondary} mx='14px'>
+            <Text color={textColorSecondary} mx="14px">
               or
             </Text>
             <HSeparator />
@@ -132,86 +139,91 @@ function SignUp() {
           <FormControl>
             <SimpleGrid
               columns={{ base: "1", md: "2" }}
-              gap={{ sm: "10px", md: "26px" }}>
-              <Flex direction='column'>
+              gap={{ sm: "10px", md: "26px" }}
+            >
+              <Flex direction="column">
                 <FormLabel
-                  display='flex'
-                  ms='4px'
-                  fontSize='sm'
-                  fontWeight='500'
+                  display="flex"
+                  ms="4px"
+                  fontSize="sm"
+                  fontWeight="500"
                   color={textColor}
-                  mb='8px'>
+                  mb="8px"
+                >
                   First name<Text color={brandStars}>*</Text>
                 </FormLabel>
                 <Input
-                  isRequired={true}
-                  fontSize='sm'
+                  isRequired
+                  fontSize="sm"
                   ms={{ base: "0px", md: "4px" }}
-                  placeholder='First name'
-                  variant='auth'
-                  mb='24px'
-                  size='lg'
+                  placeholder="First name"
+                  variant="auth"
+                  mb="24px"
+                  size="lg"
                 />
               </Flex>
-              <Flex direction='column'>
+              <Flex direction="column">
                 <FormLabel
-                  display='flex'
-                  ms='4px'
-                  fontSize='sm'
-                  fontWeight='500'
+                  display="flex"
+                  ms="4px"
+                  fontSize="sm"
+                  fontWeight="500"
                   color={textColor}
-                  mb='8px'>
+                  mb="8px"
+                >
                   Last name<Text color={brandStars}>*</Text>
                 </FormLabel>
                 <Input
-                  isRequired={true}
-                  variant='auth'
-                  fontSize='sm'
-                  placeholder='Last name'
-                  mb='24px'
-                  size='lg'
+                  isRequired
+                  variant="auth"
+                  fontSize="sm"
+                  placeholder="Last name"
+                  mb="24px"
+                  size="lg"
                 />
               </Flex>
             </SimpleGrid>
             <FormLabel
-              display='flex'
-              ms='4px'
-              fontSize='sm'
-              fontWeight='500'
+              display="flex"
+              ms="4px"
+              fontSize="sm"
+              fontWeight="500"
               color={textColor}
-              mb='8px'>
+              mb="8px"
+            >
               Email<Text color={brandStars}>*</Text>
             </FormLabel>
             <Input
-              isRequired={true}
-              variant='auth'
-              fontSize='sm'
-              type='email'
-              placeholder='mail@simmmple.com'
-              mb='24px'
-              size='lg'
+              isRequired
+              variant="auth"
+              fontSize="sm"
+              type="email"
+              placeholder="mail@simmmple.com"
+              mb="24px"
+              size="lg"
             />
             <FormLabel
-              ms='4px'
-              fontSize='sm'
-              fontWeight='500'
-              isRequired={true}
+              ms="4px"
+              fontSize="sm"
+              fontWeight="500"
+              isRequired
               color={textColor}
-              display='flex'>
+              display="flex"
+            >
               Password<Text color={brandStars}>*</Text>
             </FormLabel>
-            <InputGroup size='md'>
+            <InputGroup size="md">
               <Input
-                isRequired={true}
-                variant='auth'
-                fontSize='sm'
+                isRequired
+                variant="auth"
+                fontSize="sm"
                 ms={{ base: "0px", md: "4px" }}
-                placeholder='Min. 8 characters'
-                mb='24px'
-                size='lg'
+                placeholder="Min. 8 characters"
+                mb="24px"
+                size="lg"
                 type={show ? "text" : "password"}
               />
-              <InputRightElement display='flex' alignItems='center' mt='4px'>
+              <InputRightElement display="flex" alignItems="center" mt="4px">
                 <Icon
                   color={textColorSecondary}
                   _hover={{ cursor: "pointer" }}
@@ -220,59 +232,65 @@ function SignUp() {
                 />
               </InputRightElement>
             </InputGroup>
-            <Flex justifyContent='space-between' align='center' mb='24px'>
-              <FormControl display='flex' alignItems='start'>
+            <Flex justifyContent="space-between" align="center" mb="24px">
+              <FormControl display="flex" alignItems="start">
                 <Checkbox
-                  id='remember-login'
-                  colorScheme='brandScheme'
-                  me='10px'
-                  mt='3px'
+                  id="remember-login"
+                  colorScheme="brandScheme"
+                  me="10px"
+                  mt="3px"
                 />
                 <FormLabel
-                  htmlFor='remember-login'
-                  mb='0'
-                  fontWeight='normal'
+                  htmlFor="remember-login"
+                  mb="0"
+                  fontWeight="normal"
                   color={textColor}
-                  fontSize='sm'>
+                  fontSize="sm"
+                >
                   By creating an account means you agree to the{" "}
                   <Link
-                    href='https://simmmple.com/terms-of-service'
-                    fontWeight='500'>
+                    href="https://simmmple.com/terms-of-service"
+                    fontWeight="500"
+                  >
                     Terms and Conditions,
                   </Link>{" "}
                   and our{" "}
                   <Link
-                    href='https://simmmple.com/privacy-policy'
-                    fontWeight='500'>
+                    href="https://simmmple.com/privacy-policy"
+                    fontWeight="500"
+                  >
                     Privacy Policy
                   </Link>
                 </FormLabel>
               </FormControl>
             </Flex>
             <Button
-              variant='brand'
-              fontSize='14px'
-              fontWeight='500'
-              w='100%'
-              h='50'
-              mb='24px'>
+              variant="brand"
+              fontSize="14px"
+              fontWeight="500"
+              w="100%"
+              h="50"
+              mb="24px"
+            >
               Create my account
             </Button>
           </FormControl>
           <Flex
-            flexDirection='column'
-            justifyContent='center'
-            alignItems='start'
-            maxW='100%'
-            mt='0px'>
-            <Text color={textColorDetails} fontWeight='400' fontSize='sm'>
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="start"
+            maxW="100%"
+            mt="0px"
+          >
+            <Text color={textColorDetails} fontWeight="400" fontSize="sm">
               Already a member?
-              <NavLink to='/auth/sign-in'>
+              <NavLink to="/auth/sign-in">
                 <Text
                   color={textColorBrand}
-                  as='span'
-                  ms='5px'
-                  fontWeight='500'>
+                  as="span"
+                  ms="5px"
+                  fontWeight="500"
+                >
                   Sign in
                 </Text>
               </NavLink>

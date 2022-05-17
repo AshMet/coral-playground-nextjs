@@ -1,4 +1,7 @@
+/* eslint-disable sonarjs/no-duplicate-string */
+/* eslint-disable import/prefer-default-export */
 import { mode } from "@chakra-ui/theme-tools";
+
 export const buttonStyles = {
   components: {
     Button: {

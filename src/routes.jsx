@@ -1,7 +1,7 @@
 import { Icon } from "@chakra-ui/react";
 // import React from "react";
 import {
-  MdDashboard,
+  // MdDashboard,
   MdHome,
   // MdLock,
   MdOutlineShoppingCart,
@@ -13,10 +13,10 @@ import DashboardsDefault from "pages/admin/dashboards/default";
 import DashboardsSmartHome from "pages/admin/dashboards/smartHome";
 // NFT Imports
 import NFTCollection from "pages/admin/nfts/collection";
+import NFTDrops from "pages/admin/nfts/drops";
 import NFTMarketplace from "pages/admin/nfts/marketplace";
 import NFTPage from "pages/admin/nfts/page";
 import NFTProfile from "pages/admin/nfts/profile";
-import NFTDrops from "pages/admin/nfts/drops";
 // Main Imports
 // import AccountBilling from "pages/admin/main/account/billing";
 // import AccountApplications from "pages/admin/main/account/application";
@@ -157,197 +157,197 @@ const routes = [
   //           exact: false,
   //           component: AccountBilling,
   //         },
-          // {
-          //   name: "Application",
-          //   layout: "/admin",
-          //   path: "/main/account/application",
-          //   exact: false,
-          //   component: AccountApplications,
-          // },
-          // {
-          //   name: "Invoice",
-          //   layout: "/admin",
-          //   path: "/main/account/invoice",
-          //   exact: false,
-          //   component: AccountInvoice,
-          // },
-          // {
-          //   name: "Settings",
-          //   layout: "/admin",
-          //   path: "/main/account/settings",
-          //   exact: false,
-          //   component: AccountSettings,
-          // },
-          // {
-          //   name: "All Courses",
-          //   layout: "/admin",
-          //   path: "/main/account/all-courses",
-          //   exact: false,
-          //   component: AccountAllCourses,
-          // },
-          // {
-          //   name: "Course Page",
-          //   layout: "/admin",
-          //   path: "/main/account/course-page",
-          //   exact: false,
-          //   component: AccountCoursePage,
-          // },
-      //   ],
-      // },
-      // {
-      //   name: "Ecommerce",
-      //   path: "/main/users",
-      //   collapse: true,
-      //   items: [
-      //     {
-      //       name: "New Product",
-      //       layout: "/admin",
-      //       path: "/main/ecommerce/new-prodcut",
-      //       exact: false,
-      //       component: EcommerceNewProduct,
-      //     },
-      //     {
-      //       name: "Product Settings",
-      //       layout: "/admin",
-      //       path: "/main/ecommerce/settings",
-      //       exact: false,
-      //       component: EcommerceProductSettings,
-      //     },
-      //     {
-      //       name: "Product Page",
-      //       layout: "/admin",
-      //       path: "/main/ecommerce/page-example",
-      //       exact: false,
-      //       component: EcommerceProductPage,
-      //     },
-      //     {
-      //       name: "Order List",
-      //       layout: "/admin",
-      //       path: "/main/ecommerce/order-list",
-      //       exact: false,
-      //       component: EcommerceOrderList,
-      //     },
-      //     {
-      //       name: "Order Details",
-      //       layout: "/admin",
-      //       path: "/main/ecommerce/order-details",
-      //       exact: false,
-      //       component: EcommerceOrderDetails,
-      //     },
-      //     {
-      //       name: "Referrals",
-      //       layout: "/admin",
-      //       path: "/main/ecommerce/referrals",
-      //       exact: false,
-      //       component: EcommerceReferrals,
-      //     },
-      //   ],
-      // },
-      // {
-      //   name: "Users",
-      //   path: "/main/users",
-      //   collapse: true,
-      //   items: [
-      //     {
-      //       name: "New User",
-      //       layout: "/admin",
-      //       path: "/main/users/new-user",
-      //       exact: false,
-      //       component: UserNew,
-      //     },
-      //     {
-      //       name: "Users Overview",
-      //       layout: "/admin",
-      //       path: "/main/users/users-overview",
-      //       exact: false,
-      //       component: UsersOverview,
-      //     },
-      //     {
-      //       name: "Users Reports",
-      //       layout: "/admin",
-      //       path: "/main/users/users-reports",
-      //       exact: false,
-      //       component: UsersReports,
-      //     },
-      //   ],
-      // },
-      // {
-      //   name: "Applications",
-      //   path: "/main/applications",
-      //   collapse: true,
-      //   items: [
-      //     {
-      //       name: "Kanban",
-      //       layout: "/admin",
-      //       path: "/main/applications/kanban",
-      //       exact: false,
-      //       component: ApplicationsKanban,
-      //     },
-      //     {
-      //       name: "Data Tables",
-      //       layout: "/admin",
-      //       path: "/main/applications/data-tables",
-      //       exact: false,
-      //       component: ApplicationsDataTables,
-      //     },
-      //     {
-      //       name: "Calendar",
-      //       layout: "/admin",
-      //       path: "/main/applications/calendar",
-      //       exact: false,
-      //       component: ApplicationsCalendar,
-      //     },
-      //   ],
-      // },
-      // {
-      //   name: "Profile",
-      //   path: "/main/profile",
-      //   collapse: true,
-      //   items: [
-      //     {
-      //       name: "Profile Overview",
-      //       layout: "/admin",
-      //       path: "/main/profile/overview",
-      //       exact: false,
-      //       component: ProfileOverview,
-      //     },
-      //     {
-      //       name: "Profile Settings",
-      //       layout: "/admin",
-      //       path: "/main/profile/settings",
-      //       exact: false,
-      //       component: ProfileSettings,
-      //     },
-      //     {
-      //       name: "News Feed",
-      //       layout: "/admin",
-      //       path: "/main/profile/newsfeed",
-      //       exact: false,
-      //       component: ProfileNewsfeed,
-      //     },
-      //   ],
-      // },
-      // {
-      //   name: "Others",
-      //   path: "/main/others",
-      //   collapse: true,
-      //   items: [
-      //     {
-      //       name: "Notifications",
-      //       layout: "/admin",
-      //       path: "/main/others/notifications",
-      //       exact: false,
-      //       component: OthersNotifications,
-      //     },
-      //     {
-      //       name: "Pricing",
-      //       layout: "/auth",
-      //       path: "/main/others/pricing",
-      //       exact: false,
-      //       component: OthersPricing,
-      //     },
-      //   ],
-      // },
+  // {
+  //   name: "Application",
+  //   layout: "/admin",
+  //   path: "/main/account/application",
+  //   exact: false,
+  //   component: AccountApplications,
+  // },
+  // {
+  //   name: "Invoice",
+  //   layout: "/admin",
+  //   path: "/main/account/invoice",
+  //   exact: false,
+  //   component: AccountInvoice,
+  // },
+  // {
+  //   name: "Settings",
+  //   layout: "/admin",
+  //   path: "/main/account/settings",
+  //   exact: false,
+  //   component: AccountSettings,
+  // },
+  // {
+  //   name: "All Courses",
+  //   layout: "/admin",
+  //   path: "/main/account/all-courses",
+  //   exact: false,
+  //   component: AccountAllCourses,
+  // },
+  // {
+  //   name: "Course Page",
+  //   layout: "/admin",
+  //   path: "/main/account/course-page",
+  //   exact: false,
+  //   component: AccountCoursePage,
+  // },
+  //   ],
+  // },
+  // {
+  //   name: "Ecommerce",
+  //   path: "/main/users",
+  //   collapse: true,
+  //   items: [
+  //     {
+  //       name: "New Product",
+  //       layout: "/admin",
+  //       path: "/main/ecommerce/new-prodcut",
+  //       exact: false,
+  //       component: EcommerceNewProduct,
+  //     },
+  //     {
+  //       name: "Product Settings",
+  //       layout: "/admin",
+  //       path: "/main/ecommerce/settings",
+  //       exact: false,
+  //       component: EcommerceProductSettings,
+  //     },
+  //     {
+  //       name: "Product Page",
+  //       layout: "/admin",
+  //       path: "/main/ecommerce/page-example",
+  //       exact: false,
+  //       component: EcommerceProductPage,
+  //     },
+  //     {
+  //       name: "Order List",
+  //       layout: "/admin",
+  //       path: "/main/ecommerce/order-list",
+  //       exact: false,
+  //       component: EcommerceOrderList,
+  //     },
+  //     {
+  //       name: "Order Details",
+  //       layout: "/admin",
+  //       path: "/main/ecommerce/order-details",
+  //       exact: false,
+  //       component: EcommerceOrderDetails,
+  //     },
+  //     {
+  //       name: "Referrals",
+  //       layout: "/admin",
+  //       path: "/main/ecommerce/referrals",
+  //       exact: false,
+  //       component: EcommerceReferrals,
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "Users",
+  //   path: "/main/users",
+  //   collapse: true,
+  //   items: [
+  //     {
+  //       name: "New User",
+  //       layout: "/admin",
+  //       path: "/main/users/new-user",
+  //       exact: false,
+  //       component: UserNew,
+  //     },
+  //     {
+  //       name: "Users Overview",
+  //       layout: "/admin",
+  //       path: "/main/users/users-overview",
+  //       exact: false,
+  //       component: UsersOverview,
+  //     },
+  //     {
+  //       name: "Users Reports",
+  //       layout: "/admin",
+  //       path: "/main/users/users-reports",
+  //       exact: false,
+  //       component: UsersReports,
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "Applications",
+  //   path: "/main/applications",
+  //   collapse: true,
+  //   items: [
+  //     {
+  //       name: "Kanban",
+  //       layout: "/admin",
+  //       path: "/main/applications/kanban",
+  //       exact: false,
+  //       component: ApplicationsKanban,
+  //     },
+  //     {
+  //       name: "Data Tables",
+  //       layout: "/admin",
+  //       path: "/main/applications/data-tables",
+  //       exact: false,
+  //       component: ApplicationsDataTables,
+  //     },
+  //     {
+  //       name: "Calendar",
+  //       layout: "/admin",
+  //       path: "/main/applications/calendar",
+  //       exact: false,
+  //       component: ApplicationsCalendar,
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "Profile",
+  //   path: "/main/profile",
+  //   collapse: true,
+  //   items: [
+  //     {
+  //       name: "Profile Overview",
+  //       layout: "/admin",
+  //       path: "/main/profile/overview",
+  //       exact: false,
+  //       component: ProfileOverview,
+  //     },
+  //     {
+  //       name: "Profile Settings",
+  //       layout: "/admin",
+  //       path: "/main/profile/settings",
+  //       exact: false,
+  //       component: ProfileSettings,
+  //     },
+  //     {
+  //       name: "News Feed",
+  //       layout: "/admin",
+  //       path: "/main/profile/newsfeed",
+  //       exact: false,
+  //       component: ProfileNewsfeed,
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "Others",
+  //   path: "/main/others",
+  //   collapse: true,
+  //   items: [
+  //     {
+  //       name: "Notifications",
+  //       layout: "/admin",
+  //       path: "/main/others/notifications",
+  //       exact: false,
+  //       component: OthersNotifications,
+  //     },
+  //     {
+  //       name: "Pricing",
+  //       layout: "/auth",
+  //       path: "/main/others/pricing",
+  //       exact: false,
+  //       component: OthersPricing,
+  //     },
+  //   ],
+  // },
   //   ],
   // },
   // --- Authentication ---

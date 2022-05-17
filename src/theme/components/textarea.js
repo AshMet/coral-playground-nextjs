@@ -1,4 +1,9 @@
+/* eslint-disable sonarjs/no-identical-functions */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable sonarjs/no-duplicate-string */
+/* eslint-disable import/prefer-default-export */
 import { mode } from "@chakra-ui/theme-tools";
+
 export const textareaStyles = {
   components: {
     Textarea: {
