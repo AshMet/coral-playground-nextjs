@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable sonarjs/no-identical-functions */
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/no-array-index-key */
@@ -6,6 +7,8 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
+
+// Chakra imports
 import {
   Box,
   Button,
@@ -23,19 +26,15 @@ import {
   useDisclosure,
   SimpleGrid,
 } from "@chakra-ui/react";
-import PropTypes from "prop-types";
-
 // import React from "react";
-// import { NavLink } from "react-router-dom";
-
-// Chakra imports
-
+import PropTypes from "prop-types";
 // Custom components
 import { GoChevronDown } from "react-icons/go";
 
 import SidebarContext from "../../contexts/SidebarContext";
 import routes from "../../routes";
 import { HorizonLogo } from "../icons/Icons";
+// import { NavLink } from "react-router-dom";
 import NavLink from "../navLinks/NavLink";
 import { SidebarResponsive } from "../sidebar/Sidebar";
 

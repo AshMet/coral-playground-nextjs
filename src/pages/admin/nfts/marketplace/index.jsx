@@ -52,7 +52,7 @@ import NFT from "../../../../components/card/NFT";
 import Banner from "./components/Banner";
 import HistoryItem from "./components/HistoryItem";
 import TableTopCreators from "./components/TableTopCreators";
-import { tableColumnsTopCreators } from "./variables/tableColumnsTopCreators";
+import tableColumnsTopCreators from "./variables/tableColumnsTopCreators";
 import tableDataTopCreators from "./variables/tableDataTopCreators.json";
 
 export default function Marketplace() {

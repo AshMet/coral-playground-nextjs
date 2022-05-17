@@ -1,5 +1,4 @@
-/* eslint-disable import/prefer-default-export */
-export const tableColumnsTopCreators = [
+const tableColumnsTopCreators = [
   {
     Header: "Name",
     accessor: "name",
@@ -13,3 +12,5 @@ export const tableColumnsTopCreators = [
     accessor: "rating",
   },
 ];
+
+export default tableColumnsTopCreators;

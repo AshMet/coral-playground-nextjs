@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 export const tableColumnsLastOffer = [
   {
     Header: "Price",
@@ -17,3 +16,5 @@ export const tableColumnsLastOffer = [
     accessor: "from",
   },
 ];
+
+export default tableColumnsLastOffer;
