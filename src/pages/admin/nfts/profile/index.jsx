@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable react/jsx-no-bind */
 /*!
@@ -38,7 +39,6 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 import { useState } from "react";
-
 // Chakra imports
 import { IoMdHeartEmpty } from "react-icons/io";
 import {

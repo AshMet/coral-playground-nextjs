@@ -1,4 +1,4 @@
-export const tableColumnsMostVisited = [
+const tableColumnsMostVisited = [
   {
     Header: "Page Name",
     accessor: "page name",
@@ -20,3 +20,5 @@ export const tableColumnsMostVisited = [
     accessor: "bounce rate",
   },
 ];
+
+export default tableColumnsMostVisited;

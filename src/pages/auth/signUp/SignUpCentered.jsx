@@ -21,8 +21,6 @@
 */
 
 // import { NavLink } from "react-router-dom";
-import React from "react";
-// Chakra imports
 import {
   Box,
   Button,
@@ -40,9 +38,9 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-
+import React from "react";
+// Chakra imports
 // Custom components
-
 // Assets
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";

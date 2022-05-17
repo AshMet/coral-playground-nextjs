@@ -36,7 +36,7 @@ import ProfitEstimation from "./components/ProfitEstimation";
 import ProjectStatus from "./components/ProjectStatus";
 import YourCard from "./components/YourCard";
 import YourTransfers from "./components/YourTransfers";
-import { tableColumnsMostVisited } from "./variables/tableColumnsMostVisited";
+import tableColumnsMostVisited from "./variables/tableColumnsMostVisited";
 import tableDataMostVisited from "./variables/tableDataMostVisited.json";
 
 export default function Default() {

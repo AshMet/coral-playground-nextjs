@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// Chakra imports
 import { Flex, Box, useColorModeValue } from "@chakra-ui/react";
 // import React from "react";
-
-// Chakra imports
-
 // Custom components
 // import { HorizonLogo } from "components/icons/Icons";
+import Image from "next/image";
+
 import { HSeparator } from "components/separator/Separator";
 // import Image from "../../actions/NextChakraImg";
-import Image from "next/image";
 
 export function SidebarBrand() {
   //   Chakra color mode

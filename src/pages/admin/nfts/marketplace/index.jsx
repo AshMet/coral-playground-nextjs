@@ -33,7 +33,6 @@ import {
 } from "@chakra-ui/react";
 
 // Custom components
-import Card from "../../../../components/card/Card";
 // import React from "react";
 
 // Assets
@@ -47,6 +46,7 @@ import Nft3 from "../../../../../public/img/nfts/Nft3.png";
 import Nft4 from "../../../../../public/img/nfts/Nft4.png";
 import Nft5 from "../../../../../public/img/nfts/Nft5.png";
 import Nft6 from "../../../../../public/img/nfts/Nft6.png";
+import Card from "../../../../components/card/Card";
 import NFT from "../../../../components/card/NFT";
 
 import Banner from "./components/Banner";
