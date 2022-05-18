@@ -4,7 +4,6 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
 import { Box, Flex, Text } from "@chakra-ui/react";
-
 // Custom components
 import PropTypes from "prop-types";
 

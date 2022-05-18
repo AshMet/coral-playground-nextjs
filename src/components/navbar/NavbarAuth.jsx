@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable func-names */
 /* eslint-disable sonarjs/no-identical-functions */
 /* eslint-disable react/jsx-no-constructed-context-values */
