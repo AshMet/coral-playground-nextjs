@@ -1,3 +1,4 @@
+/* eslint-disable import/order */
 /* eslint-disable sonarjs/no-duplicated-branches */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-shadow */

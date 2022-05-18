@@ -45,10 +45,10 @@ import Nft5 from "../../../../../public/img/nfts/Nft5.png";
 import Nft6 from "../../../../../public/img/nfts/Nft6.png";
 import NftLarge1 from "../../../../../public/img/nfts/NftLarge1.png";
 import Card from "../../../../components/card/Card";
-import Auction from "../../../../components/pages/nftDrops/Auction";
 import Banner from "../../../../components/pages/nftDrops/Banner";
 import Description from "../../../../components/pages/nftDrops/Description";
 import NFT from "components/card/NFT";
+import ColorPicker from "components/pages/nftDrops/ColorPicker";
 // import TableLastOffer from "./components/TableLastOffer";
 
 export default function Page() {
@@ -62,7 +62,7 @@ export default function Page() {
         maxW="100%"
         gridTemplateColumns={{
           base: "1fr",
-          lg: "1fr 1fr",
+          lg: "2fr 1fr",
           "2xl": "1fr 0.95fr",
         }}
         gap={{ base: "20px", xl: "20px" }}
@@ -71,18 +71,35 @@ export default function Page() {
         <Flex flexDirection="column" gridArea="1 / 1 / 2 / 2">
           <Banner image={NftLarge1} />
           <Description
-            desc="The Abstractus® project is an online art show and the First Art NFTs on Ethereum, launched on May 9, 2017. Abstractus® features 28 unique series of cards from 7 different artists. Abstractus® are referenced with CryptoAbstractus® and Crypto in the original ERC-721 Non-Fungible Token Standard, and pre-dates them both. Join the Abstractus® Discord and check out theAbstractus® Docs to find out more."
+            desc={` Octo is the genesis character in the coral playground and the first of many to come. With a limited mint quantity of 1000, 
+            this NFT will represent early adopters in our project and help us accelerate our delivery milestones.
+            Additionally, as with all our our drops, 10% of all profits will be set aside for marine preservation initiatives to be voted
+            on by the coral DAO.`}
             creator="simmmple.web"
           />
         </Flex>
         <Flex flexDirection="column" gridArea="1 / 2 / 2 / 3" pt="60px">
-          <Auction
-            name="Color Abstractus®"
-            creator="Simmmple"
+          <ColorPicker
+            name="Agro Octo®"
+            creator="#FFFFFF"
             creatorAvatar={AvatarSimmmple}
-            price="3.87 ETH"
+            price="#000000"
             bid={2.82}
           />
+          <Flex
+            direction="column"
+            w="100%"
+            overflowX={{ sm: "scroll", lg: "hidden" }}
+          >
+            <Flex
+              align="center"
+              justify="space-between"
+              w="100%"
+              px="22px"
+              pb="8px"
+              boxShadow="0px 40px 58px -20px rgba(112, 144, 176, 0.12)"
+            />
+          </Flex>
           <Card px="0px" mb="20px" mt="66px">
             {/* <TableLastOffer
               tableData={tableDataLastOffer}

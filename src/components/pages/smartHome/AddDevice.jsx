@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
 import { Box, Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react";
-
 // Custom components
 // import React from "react";
 import { MdAdd } from "react-icons/md";

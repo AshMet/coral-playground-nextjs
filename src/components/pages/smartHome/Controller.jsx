@@ -1,8 +1,8 @@
+/* eslint-disable func-names */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/prop-types */
 // Chakra imports
 import { Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react";
-
 // Custom components
 import { useState } from "react";
 

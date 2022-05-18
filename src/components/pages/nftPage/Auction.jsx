@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+// Chakra imports
 import {
   Avatar,
   Box,
@@ -9,9 +10,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // import React from "react";
-
-// Chakra imports
-
 // Assets
 import { IoMdTrendingUp } from "react-icons/io";
 import { MdVerified, MdOutlineMonetizationOn } from "react-icons/md";

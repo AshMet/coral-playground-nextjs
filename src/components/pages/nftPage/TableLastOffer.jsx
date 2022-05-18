@@ -2,6 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react/prop-types */
+// Chakra imports
 import {
   Button,
   Flex,
@@ -17,9 +18,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useMemo } from "react";
-
-// Chakra imports
-
 // React Table
 import { FaEthereum } from "react-icons/fa";
 import {
