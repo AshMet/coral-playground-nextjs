@@ -9,10 +9,16 @@ import defaultSEOConfig from "../../next-seo.config";
 import theme from "../theme/theme";
 import "../../public/css/App.css";
 // import "lib/styles/globals.css";
-// import AuthLayout from "layouts/auth";
-import AdminLayout from "layouts/admin";
+// import AuthCentered from "layouts/auth/types/Centered";
+// import AdminLayout from "layouts/admin";
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+type ComponentWithPageLayout = AppProps & {
+  Component: AppProps["Component"] & {
+    PageLayout?: React.ComponentType;
+  };
+};
+
+const MyApp = ({ Component, pageProps }: ComponentWithPageLayout) => {
   return (
     <ChakraProvider theme={theme}>
       <Head>
@@ -22,9 +28,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <DefaultSeo {...defaultSEOConfig} />
-      <AdminLayout>
+      {Component.PageLayout ? (
+        <Component.PageLayout>
+          <Component {...pageProps} />
+        </Component.PageLayout>
+      ) : (
+        // <AdminLayout>
         <Component {...pageProps} />
-      </AdminLayout>
+        // </AdminLayout>
+      )}
     </ChakraProvider>
   );
 };

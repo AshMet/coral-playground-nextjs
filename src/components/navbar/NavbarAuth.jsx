@@ -27,6 +27,7 @@ import {
   useDisclosure,
   SimpleGrid,
 } from "@chakra-ui/react";
+import Image from "next/image";
 // import React from "react";
 import PropTypes from "prop-types";
 // Custom components
@@ -34,7 +35,6 @@ import { GoChevronDown } from "react-icons/go";
 
 import SidebarContext from "../../contexts/SidebarContext";
 import routes from "../../routes";
-import { HorizonLogo } from "../icons/Icons";
 // import { NavLink } from "react-router-dom";
 import NavLink from "../navLinks/NavLink";
 import { SidebarResponsive } from "../sidebar/Sidebar";
@@ -75,23 +75,23 @@ export default function AuthNavbar(props) {
     console.log(foundRoute);
     return foundRoute[0].items;
   }
-  function getLinksCollapse(routeName) {
-    const foundRoute = routes.filter(function (route) {
-      return route.items && route.name === routeName;
-    });
+  // function getLinksCollapse(routeName) {
+  //   const foundRoute = routes.filter(function (route) {
+  //     return route.items && route.name === routeName;
+  //   });
 
-    return foundRoute[0].items.filter(function (link) {
-      return link.collapse === true;
-    });
-  }
-  const authObject = getLinksCollapse("Authentication");
-  const mainObject = getLinksCollapse("Main Pages");
+  //   return foundRoute[0].items.filter(function (link) {
+  //     return link.collapse === true;
+  //   });
+  // }
+  // const authObject = getLinksCollapse("Authentication");
+  // const mainObject = getLinksCollapse("Main Pages");
   const dashboardsObject = getLinks("Dashboards");
   const nftsObject = getLinks("NFTs");
-  const logoColor = useColorModeValue("white", "white");
+  // const logoColor = useColorModeValue("white", "white");
   // Chakra color mode
 
-  const textColor = useColorModeValue("navy.700", "white");
+  // const textColor = useColorModeValue("navy.700", "white");
   const menuBg = useColorModeValue("white", "navy.900");
   const mainText = "#fff";
   const navbarBg = "none";
@@ -112,7 +112,8 @@ export default function AuthNavbar(props) {
       color={mainText}
     >
       <Stack direction="row" spacing="12px" align="center" justify="center">
-        <HorizonLogo h="26px" w="175px" color={logoColor} />
+        {/* <HorizonLogo h="26px" w="175px" color={logoColor} /> */}
+        <Image src="/svg/coral-logo.svg" width="200px" height="45px" />
       </Stack>
       <Text fontsize="sm" mt="3px">
         {logoText}
@@ -132,7 +133,8 @@ export default function AuthNavbar(props) {
         alignItems="center"
         color={mainText}
       >
-        <HorizonLogo h="26px" w="175px" my="32px" color={logoColor} />
+        <Image src="/svg/coral-logo.svg" width="200px" height="45px" />
+        {/* <HorizonLogo h="26px" w="175px" my="32px" color={logoColor} /> */}
       </Link>
     );
     // mainText = useColorModeValue("gray.700", "gray.200");
@@ -175,78 +177,78 @@ export default function AuthNavbar(props) {
       );
     });
   };
-  const createMainLinks = (routes) => {
-    return routes.map((link, key) => {
-      if (link.collapse === true) {
-        return (
-          <Stack key={key} direction="column" maxW="max-content">
-            <Stack
-              direction="row"
-              spacing="0px"
-              align="center"
-              cursor="default"
-            >
-              <Text
-                textTransform="uppercase"
-                fontWeight="bold"
-                fontSize="sm"
-                me="auto"
-                color={textColor}
-              >
-                {link.name}
-              </Text>
-            </Stack>
-            <Stack direction="column" bg={menuBg}>
-              {createMainLinks(link.items)}
-            </Stack>
-          </Stack>
-        );
-      }
-      return (
-        <NavLink key={key} to={link.layout + link.path}>
-          <Text color="gray.400" fontSize="sm" fontWeight="normal">
-            {link.name}
-          </Text>
-        </NavLink>
-      );
-    });
-  };
-  const createAuthLinks = (routes) => {
-    return routes.map((link, key) => {
-      if (link.collapse === true) {
-        return (
-          <Stack key={key} direction="column" maxW="max-content">
-            <Stack
-              direction="row"
-              spacing="0px"
-              align="center"
-              cursor="default"
-            >
-              <Text
-                textTransform="uppercase"
-                fontWeight="bold"
-                fontSize="sm"
-                me="auto"
-                color={textColor}
-              >
-                {link.name}
-              </Text>
-            </Stack>
-            <Stack direction="column" bg={menuBg}>
-              {createAuthLinks(link.items)}
-            </Stack>
-          </Stack>
-        );
-      }
-      return (
-        <NavLink key={key} to={link.layout + link.path}>
-          <Text color="gray.400" fontSize="sm" fontWeight="normal">
-            {link.name}
-          </Text>
-        </NavLink>
-      );
-    });
-  };
+  // const createMainLinks = (routes) => {
+  //   return routes.map((link, key) => {
+  //     if (link.collapse === true) {
+  //       return (
+  //         <Stack key={key} direction="column" maxW="max-content">
+  //           <Stack
+  //             direction="row"
+  //             spacing="0px"
+  //             align="center"
+  //             cursor="default"
+  //           >
+  //             <Text
+  //               textTransform="uppercase"
+  //               fontWeight="bold"
+  //               fontSize="sm"
+  //               me="auto"
+  //               color={textColor}
+  //             >
+  //               {link.name}
+  //             </Text>
+  //           </Stack>
+  //           <Stack direction="column" bg={menuBg}>
+  //             {createMainLinks(link.items)}
+  //           </Stack>
+  //         </Stack>
+  //       );
+  //     }
+  //     return (
+  //       <NavLink key={key} to={link.layout + link.path}>
+  //         <Text color="gray.400" fontSize="sm" fontWeight="normal">
+  //           {link.name}
+  //         </Text>
+  //       </NavLink>
+  //     );
+  //   });
+  // };
+  // const createAuthLinks = (routes) => {
+  //   return routes.map((link, key) => {
+  //     if (link.collapse === true) {
+  //       return (
+  //         <Stack key={key} direction="column" maxW="max-content">
+  //           <Stack
+  //             direction="row"
+  //             spacing="0px"
+  //             align="center"
+  //             cursor="default"
+  //           >
+  //             <Text
+  //               textTransform="uppercase"
+  //               fontWeight="bold"
+  //               fontSize="sm"
+  //               me="auto"
+  //               color={textColor}
+  //             >
+  //               {link.name}
+  //             </Text>
+  //           </Stack>
+  //           <Stack direction="column" bg={menuBg}>
+  //             {createAuthLinks(link.items)}
+  //           </Stack>
+  //         </Stack>
+  //       );
+  //     }
+  //     return (
+  //       <NavLink key={key} to={link.layout + link.path}>
+  //         <Text color="gray.400" fontSize="sm" fontWeight="normal">
+  //           {link.name}
+  //         </Text>
+  //       </NavLink>
+  //     );
+  //   });
+  // };
   const linksAuth = (
     <HStack display={{ sm: "none", lg: "flex" }} spacing="20px">
       <Stack
@@ -379,7 +381,7 @@ export default function AuthNavbar(props) {
               minW="280px"
               gap="24px"
             >
-              {createMainLinks(mainObject)}
+              {/* {createMainLinks(mainObject)} */}
             </SimpleGrid>
             {/* <Image borderRadius='16px' src={dropdownMain} /> */}
           </MenuList>
@@ -428,7 +430,7 @@ export default function AuthNavbar(props) {
               minW="180px"
               gap="24px"
             >
-              {createAuthLinks(authObject)}
+              {/* {createAuthLinks(authObject)} */}
             </SimpleGrid>
             {/* <Image borderRadius='16px' src={dropdown} /> */}
           </MenuList>

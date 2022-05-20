@@ -13,6 +13,7 @@ import FixedPlugin from "components/fixedPlugin/FixedPlugin";
 import Footer from "components/footer/FooterAuthDefault";
 // Custom components
 // import { NavLink } from "react-router-dom";
+import NavLink from "components/navLinks/NavLink";
 // Assets
 
 function AuthIllustration(props) {
@@ -36,30 +37,34 @@ function AuthIllustration(props) {
         justifyContent="start"
         direction="column"
       >
-        {/* <NavLink
-          to='/admin'
+        <NavLink
+          to="/admin"
           style={() => ({
             width: "fit-content",
             marginTop: "40px",
-          })}>
+          })}
+        >
           <Flex
-            align='center'
+            align="center"
             ps={{ base: "25px", lg: "0px" }}
             pt={{ lg: "0px", xl: "0px" }}
-            w='fit-content'>
+            w="fit-content"
+          >
             <Icon
               as={FaChevronLeft}
-              me='12px'
-              h='13px'
-              w='8px'
-              color='secondaryGray.600'
+              me="12px"
+              h="13px"
+              w="8px"
+              color="secondaryGray.600"
             />
-            <Text ms='0px' fontSize='sm' color='secondaryGray.600'>
+            <Text ms="0px" fontSize="sm" color="secondaryGray.600">
               Back to Simmmple
             </Text>
           </Flex>
-        </NavLink> */}
+        </NavLink>
+        {/* Insert template body here */}
         {children}
+        {/* Insert template body here */}
         <Box
           display={{ base: "none", md: "block" }}
           h="100%"

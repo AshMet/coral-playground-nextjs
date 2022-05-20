@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable sonarjs/no-duplicate-string */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
@@ -51,6 +52,7 @@ import NftProfile from "../../../../../public/img/nfts/NftProfile.png";
 import NFT from "../../../../components/card/NFT";
 import Banner from "../../../../components/pages/nftCollection/Banner";
 import SearchBar from "../../../../components/pages/nftCollection/Search";
+import AdminLayout from "layouts/admin";
 
 export default function Collection() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -286,3 +288,5 @@ export default function Collection() {
     </Box>
   );
 }
+
+Collection.PageLayout = AdminLayout;

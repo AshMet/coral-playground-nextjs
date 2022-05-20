@@ -252,4 +252,6 @@ function SignIn() {
   );
 }
 
+// SignIn.PageLayout = CenteredAuth;
+
 export default SignIn;

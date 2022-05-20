@@ -19,8 +19,8 @@ export default function FixedPlugin(props) {
       position="fixed"
       zIndex="99"
       variant="no-effects"
-      left={document.documentElement.dir === "rtl" ? "35px" : ""}
-      right={document.documentElement.dir === "rtl" ? "" : "35px"}
+      // left={document.documentElement.dir === "rtl" ? "35px" : ""}
+      // right={document.documentElement.dir === "rtl" ? "" : "35px"}
       bottom="30px"
       border="1px solid"
       borderColor="#6a53ff"

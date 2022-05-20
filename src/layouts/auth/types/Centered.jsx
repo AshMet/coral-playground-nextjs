@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -6,16 +7,38 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 // Custom components
 import PropTypes from "prop-types";
+// import { useState } from "react";
 
 import Card from "../../../components/card/Card";
 import FixedPlugin from "../../../components/fixedPlugin/FixedPlugin";
 import Footer from "../../../components/footer/FooterAuthCentered";
 import Navbar from "../../../components/navbar/NavbarAuth";
+// import SidebarContext from "../../../contexts/SidebarContext";
 // import React from "react";
 
 function AuthCentered(props) {
+  // const [toggleSidebar, setToggleSidebar] = useState(false);
   const { children, title, description, image, cardTop, cardBottom } = props;
   return (
+    // <Box>
+    //   <SidebarContext.Provider
+    //     value={{
+    //       toggleSidebar,
+    //       setToggleSidebar,
+    //     }}
+    //   >
+    //     <Box
+    //       float="right"
+    //       minHeight="100vh"
+    //       height="100%"
+    //       position="relative"
+    //       w="100%"
+    //       transition="all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1)"
+    //       transitionDuration=".2s, .2s, .35s"
+    //       transitionProperty="top, bottom, width"
+    //       transitionTimingFunction="linear, linear, ease"
+    //     >
+    //       <Box mx="auto" minH="100vh">
     <Flex
       direction="column"
       alignSelf="center"
@@ -80,6 +103,10 @@ function AuthCentered(props) {
       </Card>
       <Footer />
     </Flex>
+    //       </Box>
+    //     </Box>
+    //   </SidebarContext.Provider>
+    // </Box>
   );
 }
 // PROPS

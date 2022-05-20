@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable sonarjs/no-duplicate-string */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
@@ -36,6 +37,7 @@ import ProjectStatus from "../../../../components/pages/defaultDashboard/Project
 import YourCard from "../../../../components/pages/defaultDashboard/YourCard";
 import YourTransfers from "../../../../components/pages/defaultDashboard/YourTransfers";
 import { VSeparator } from "../../../../components/separator/Separator";
+import AdminLayout from "layouts/admin";
 import tableColumnsMostVisited from "variables/defaultDashboard/tableColumnsMostVisited";
 import tableDataMostVisited from "variables/defaultDashboard/tableDataMostVisited.json";
 
@@ -111,3 +113,5 @@ export default function Default() {
     </Flex>
   );
 }
+
+Default.PageLayout = AdminLayout;

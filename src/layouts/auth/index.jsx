@@ -9,6 +9,8 @@ import { useState } from "react";
 import SidebarContext from "../../contexts/SidebarContext";
 import routes from "../../routes";
 
+import AuthCentered from "./types/Centered";
+
 // Chakra imports
 // Layout components
 
@@ -59,9 +61,9 @@ export default function Auth() {
           transitionProperty="top, bottom, width"
           transitionTimingFunction="linear, linear, ease"
         >
-          {getRoute() ? (
-            <Box mx="auto" minH="100vh">
-              {/* <Switch>
+          {/* {getRoute() ? ( */}
+          <Box mx="auto" minH="100vh">
+            {/* <Switch>
                 {getRoutes(routes)}
                 <Redirect
                   from="/auth"
@@ -69,8 +71,8 @@ export default function Auth() {
                   "
                 />
               </Switch> */}
-            </Box>
-          ) : null}
+          </Box>
+          {/* ) : null} */}
         </Box>
       </SidebarContext.Provider>
     </Box>
