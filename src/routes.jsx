@@ -352,6 +352,11 @@ const routes = [
     icon: <Icon as={MdLock} width="20px" height="20px" color="inherit" />,
     collapse: true,
     items: [
+      {
+        name: "Home",
+        layout: "/auth",
+        path: "/home",
+      },
       // --- Sign In ---
       {
         name: "Sign In",
