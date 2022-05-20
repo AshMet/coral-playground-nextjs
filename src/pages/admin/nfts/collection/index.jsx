@@ -289,4 +289,6 @@ export default function Collection() {
   );
 }
 
-Collection.PageLayout = AdminLayout;
+Collection.getLayout = function getLayout(page) {
+  return <AdminLayout>{page}</AdminLayout>;
+};

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable func-names */
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable react/jsx-no-bind */
@@ -68,6 +69,7 @@ import Banner from "../../../../components/pages/nftProfile/Banner";
 import SearchBar from "../../../../components/pages/nftProfile/Search";
 import NFT from "components/card/NFT";
 import { HSeparator } from "components/separator/Separator";
+import AdminLayout from "layouts/admin";
 
 export default function Collection() {
   const [tabState, setTabState] = useState("collected");
@@ -476,3 +478,7 @@ export default function Collection() {
     </Box>
   );
 }
+
+Collection.getLayout = function getLayout(page) {
+  return <AdminLayout>{page}</AdminLayout>;
+};

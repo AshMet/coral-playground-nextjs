@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
@@ -52,6 +53,7 @@ import TableLastOffer from "../../../../components/pages/nftPage/TableLastOffer"
 import { tableColumnsLastOffer } from "../../../../variables/nftPage/tableColumnsLastOffer";
 import tableDataLastOffer from "../../../../variables/nftPage/tableDataLastOffer.json";
 import NFT from "components/card/NFT";
+import AdminLayout from "layouts/admin";
 
 export default function Page() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -178,3 +180,7 @@ export default function Page() {
     </Box>
   );
 }
+
+Page.getLayout = function getLayout(page) {
+  return <AdminLayout>{page}</AdminLayout>;
+};

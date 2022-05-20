@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
@@ -53,6 +54,7 @@ import { ButtonLeft, ButtonRight } from "../../../../components/icons/Icons";
 import EagleView from "../../../../components/pages/carInterface/EagleView";
 // import MapCard from "./components/MapCard";
 import Phone from "components/pages/carInterface/Phone";
+import AdminLayout from "layouts/admin";
 
 export default function Default() {
   // Chakra Color Mode
@@ -252,3 +254,7 @@ export default function Default() {
     </Grid>
   );
 }
+
+Default.getLayout = function getLayout(page) {
+  return <AdminLayout>{page}</AdminLayout>;
+};

@@ -114,4 +114,6 @@ export default function Default() {
   );
 }
 
-Default.PageLayout = AdminLayout;
+Default.getLayout = function getLayout(page) {
+  return <AdminLayout>{page}</AdminLayout>;
+};

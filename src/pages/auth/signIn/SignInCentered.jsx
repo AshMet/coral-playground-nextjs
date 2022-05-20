@@ -253,5 +253,8 @@ function SignIn() {
 }
 
 // SignIn.PageLayout = CenteredAuth;
+// SignIn.getLayout = function getLayout(page) {
+//   return <CenteredAuth>{page}</CenteredAuth>;
+// };
 
 export default SignIn;

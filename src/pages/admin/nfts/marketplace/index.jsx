@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
@@ -53,6 +54,7 @@ import HistoryItem from "../../../../components/pages/nftMarketplace/HistoryItem
 import TableTopCreators from "../../../../components/pages/nftMarketplace/TableTopCreators";
 import tableColumnsTopCreators from "../../../../variables/nftMarketplace/tableColumnsTopCreators";
 import tableDataTopCreators from "../../../../variables/nftMarketplace/tableDataTopCreators.json";
+import AdminLayout from "layouts/admin";
 
 export default function Marketplace() {
   // Chakra Color Mode
@@ -313,3 +315,7 @@ export default function Marketplace() {
     </Box>
   );
 }
+
+Marketplace.getLayout = function getLayout(page) {
+  return <AdminLayout>{page}</AdminLayout>;
+};

@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import { ChakraProvider } from "@chakra-ui/react";
 import { DefaultSeo } from "next-seo";
-import type { AppProps } from "next/app";
+// import type { AppProps } from "next/app";
 import Head from "next/head";
 
 import defaultSEOConfig from "../../next-seo.config";
@@ -12,13 +13,14 @@ import "../../public/css/App.css";
 // import AuthCentered from "layouts/auth/types/Centered";
 // import AdminLayout from "layouts/admin";
 
-type ComponentWithPageLayout = AppProps & {
-  Component: AppProps["Component"] & {
-    PageLayout?: React.ComponentType;
-  };
-};
+// type ComponentWithPageLayout = AppProps & {
+//   Component: AppProps["Component"] & {
+//     PageLayout?: React.ComponentType;
+//   };
+// };
 
-const MyApp = ({ Component, pageProps }: ComponentWithPageLayout) => {
+const MyApp = ({ Component, pageProps }) => {
+  const getLayout = Component.getLayout || ((page) => page);
   return (
     <ChakraProvider theme={theme}>
       <Head>
@@ -28,15 +30,7 @@ const MyApp = ({ Component, pageProps }: ComponentWithPageLayout) => {
         />
       </Head>
       <DefaultSeo {...defaultSEOConfig} />
-      {Component.PageLayout ? (
-        <Component.PageLayout>
-          <Component {...pageProps} />
-        </Component.PageLayout>
-      ) : (
-        // <AdminLayout>
-        <Component {...pageProps} />
-        // </AdminLayout>
-      )}
+      {getLayout(<Component {...pageProps} />)}
     </ChakraProvider>
   );
 };

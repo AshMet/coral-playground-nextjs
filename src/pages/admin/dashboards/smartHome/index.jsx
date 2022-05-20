@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
@@ -36,6 +37,7 @@ import MapCard from "../../../../components/pages/smartHome/MapCard";
 import Plan from "../../../../components/pages/smartHome/Plan";
 import Temperature from "../../../../components/pages/smartHome/Temperature";
 import Weather from "../../../../components/pages/smartHome/Weather";
+import AdminLayout from "layouts/admin";
 
 export default function Default() {
   // Chakra Color Mode
@@ -94,3 +96,7 @@ export default function Default() {
     </Grid>
   );
 }
+
+Default.getLayout = function getLayout(page) {
+  return <AdminLayout>{page}</AdminLayout>;
+};

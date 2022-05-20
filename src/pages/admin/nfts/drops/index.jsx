@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
@@ -50,8 +51,9 @@ import Description from "../../../../components/pages/nftDrops/Description";
 import NFT from "components/card/NFT";
 import ColorPicker from "components/pages/nftDrops/ColorPicker";
 // import TableLastOffer from "./components/TableLastOffer";
+import AdminLayout from "layouts/admin";
 
-export default function Page() {
+export default function Drops() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   // Chakra Color Mode
   return (
@@ -193,3 +195,7 @@ export default function Page() {
     </Box>
   );
 }
+
+Drops.getLayout = function getLayout(page) {
+  return <AdminLayout>{page}</AdminLayout>;
+};
