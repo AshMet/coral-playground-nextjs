@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
-import { faqs } from "./FaqInputs";
+import faqs from "./FaqInputs";
 
 export default function HomeFAQ() {
   return (
