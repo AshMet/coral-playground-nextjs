@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -16,31 +21,234 @@ import {
   Text,
   useColorModeValue,
   useColorMode,
+  Tooltip,
 } from "@chakra-ui/react";
 // Custom Components
 import PropTypes from "prop-types";
 // import React from "react";
 // Assets
 // import navImage from "assets/img/layout/Navbar.png";
-import { FaEthereum } from "react-icons/fa";
+import { FaBitcoin, FaEthereum } from "react-icons/fa";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
-import { MdNotificationsNone, MdInfoOutline } from "react-icons/md";
+import { IoLogOutOutline, IoWalletOutline } from "react-icons/io5";
+import { MdInfoOutline } from "react-icons/md";
+import { user, useMoralis } from "react-moralis";
 
 import routes from "../../routes";
-import ItemContent from "../menu/ItemContent";
+// import ItemContent from "../menu/ItemContent";
+import { ProfileIcon } from "components/icons/Icons";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import Balance from "components/navbar/Balance";
 import SearchBar from "components/navbar/searchBar/SearchBar";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
+
+function SignedOutMenuList() {
+  const menuBg = useColorModeValue("white", "navy.800");
+  const shadow = useColorModeValue(
+    "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
+    "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
+  );
+  const { isAuthenticating, authenticate } = useMoralis();
+  return (
+    <Menu>
+      <MenuButton p="0px">
+        <Avatar
+          _hover={{ cursor: "pointer" }}
+          color="white"
+          name="Adela Parkson"
+          bg="#11047A"
+          size="sm"
+          w="40px"
+          h="40px"
+        />
+      </MenuButton>
+      <MenuList
+        boxShadow={shadow}
+        p="0px"
+        mt="10px"
+        borderRadius="20px"
+        bg={menuBg}
+        border="none"
+      >
+        <Flex w="100%" p="10px" mb="0px" borderBottom="1px solid gray">
+          <MenuItem
+            _hover={{ bg: "none" }}
+            _focus={{ bg: "none" }}
+            borderRadius="8px"
+            px="14px"
+          >
+            <Button
+              isLoading={isAuthenticating}
+              onClick={() => authenticate()}
+              variant="link"
+              colorScheme="purple"
+              size="sm"
+              mr={4}
+              leftIcon={<IoWalletOutline w="22px" h="22px" me="0px" ml="5" />}
+            >
+              Connect Wallet
+            </Button>
+          </MenuItem>
+        </Flex>
+        <Flex flexDirection="column" p="10px">
+          <MenuItem
+            _hover={{ bg: "none" }}
+            _focus={{ bg: "none" }}
+            borderRadius="8px"
+            px="14px"
+          >
+            <Button
+              isLoading={isAuthenticating}
+              // onClick={() => navigate("/auth/signin")}
+              variant="link"
+              size="sm"
+              color="teal"
+              leftIcon={<ProfileIcon />}
+            >
+              Sign In
+            </Button>
+          </MenuItem>
+          <MenuItem
+            _hover={{ bg: "none" }}
+            _focus={{ bg: "none" }}
+            color="red.400"
+            borderRadius="8px"
+            px="14px"
+          >
+            <Button
+              isLoading={isAuthenticating}
+              // onClick={() => navigate("/auth/signup")}
+              variant="link"
+              size="sm"
+              mt={1}
+              mr={4}
+              leftIcon={<IoWalletOutline />}
+            >
+              Sign Up
+            </Button>
+          </MenuItem>
+        </Flex>
+      </MenuList>
+    </Menu>
+  );
+}
+
+function SignedInMenuList() {
+  const menuBg = useColorModeValue("white", "navy.800");
+  const textColor = useColorModeValue("secondaryGray.900", "white");
+  const navbarIcon = useColorModeValue("gray.400", "white");
+  const borderColor = useColorModeValue("#E6ECFA", "rgba(135, 140, 189, 0.3)");
+  const shadow = useColorModeValue(
+    "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
+    "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
+  );
+  const { user, isAuthenticating, logout } = useMoralis();
+  return (
+    <Menu>
+      <MenuButton p="0px">
+        <Avatar
+          _hover={{ cursor: "pointer" }}
+          color="white"
+          name={user.attributes.username}
+          src={user.attributes?.avatar?._url}
+          bg="#11047A"
+          size="sm"
+          w="40px"
+          h="40px"
+        />
+      </MenuButton>
+      <MenuList
+        boxShadow={shadow}
+        p="0px"
+        mt="10px"
+        borderRadius="20px"
+        bg={menuBg}
+        border="none"
+      >
+        <Flex w="100%" mb="0px">
+          <Text
+            ps="20px"
+            pt="16px"
+            pb="10px"
+            w="100%"
+            pr="15px"
+            borderBottom="1px solid"
+            borderColor={borderColor}
+            fontSize="sm"
+            fontWeight="700"
+            color={textColor}
+          >
+            {user.attributes.accounts[0].substring(0, 7)} {` ...... `}
+            {user.attributes.accounts[0].slice(-7)}
+          </Text>
+        </Flex>
+        <Flex flexDirection="column" p="10px">
+          <MenuItem
+            _hover={{ bg: "none" }}
+            _focus={{ bg: "none" }}
+            borderRadius="8px"
+            px="14px"
+          >
+            <Button
+              // onClick={() => navigate("/admin/edit_profile")}
+              variant="link"
+              size="sm"
+              mr={4}
+              leftIcon={<ProfileIcon />}
+            >
+              Profile
+            </Button>
+          </MenuItem>
+          <MenuItem
+            _hover={{ bg: "none" }}
+            _focus={{ bg: "none" }}
+            color="red.400"
+            borderRadius="8px"
+            px="14px"
+          >
+            <Button
+              isLoading={isAuthenticating}
+              onClick={() => logout()}
+              variant="link"
+              colorScheme="red"
+              size="sm"
+              mr={4}
+              leftIcon={
+                <IoLogOutOutline
+                  color={navbarIcon}
+                  w="22px"
+                  h="22px"
+                  me="0px"
+                  ml="5"
+                />
+              }
+            >
+              Log Out
+            </Button>
+          </MenuItem>
+        </Flex>
+      </MenuList>
+    </Menu>
+  );
+}
 
 export default function HeaderLinks(props) {
   const { secondary } = props;
   const { colorMode, toggleColorMode } = useColorMode();
+  const {
+    isAuthenticated,
+    Moralis,
+    // logout,
+    user,
+    // isAuthUndefined,
+    // isAuthenticating,
+    // authenticate,
+  } = useMoralis();
   // Chakra Color Mode
   const navbarIcon = useColorModeValue("gray.400", "white");
   const menuBg = useColorModeValue("white", "navy.800");
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const textColorBrand = useColorModeValue("brand.700", "brand.400");
   const ethColor = useColorModeValue("gray.700", "white");
-  const borderColor = useColorModeValue("#E6ECFA", "rgba(135, 140, 189, 0.3)");
   const ethBg = useColorModeValue("secondaryGray.300", "navy.900");
   const ethBox = useColorModeValue("white", "navy.800");
   const shadow = useColorModeValue(
@@ -48,6 +256,12 @@ export default function HeaderLinks(props) {
     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
   );
   const borderButton = useColorModeValue("secondaryGray.500", "whiteAlpha.200");
+
+  const getFiat = async function () {
+    Moralis.initPlugins();
+    await Moralis.Plugins.fiat.buy();
+  };
+
   return (
     <Flex
       w={{ sm: "100%", md: "auto" }}
@@ -84,81 +298,23 @@ export default function HeaderLinks(props) {
         >
           <Icon color={ethColor} w="9px" h="14px" as={FaEthereum} />
         </Flex>
-        <Text
-          w="max-content"
-          color={ethColor}
-          fontSize="sm"
-          fontWeight="700"
-          me="6px"
-        >
-          1,924
-          <Text as="span" display={{ base: "none", md: "unset" }}>
-            {" "}
-            ETH
-          </Text>
-        </Text>
+        <Balance user={user} />
       </Flex>
       <SidebarResponsive routes={routes} />
       <Menu>
-        <MenuButton display="flex" alignItems="center" p="0px">
-          <Icon
-            mt="6px"
-            as={MdNotificationsNone}
-            color={navbarIcon}
-            w="18px"
-            h="18px"
-            me="10px"
-          />
-        </MenuButton>
-        <MenuList
-          boxShadow={shadow}
-          p="20px"
-          borderRadius="20px"
-          bg={menuBg}
-          border="none"
-          mt="22px"
-          me={{ base: "30px", md: "unset" }}
-          minW={{ base: "unset", md: "400px", xl: "450px" }}
-          maxW={{ base: "360px", md: "unset" }}
-        >
-          <Flex jusitfy="space-between" w="100%" mb="20px">
-            <Text fontSize="md" fontWeight="600" color={textColor}>
-              Notifications
-            </Text>
-            <Text
-              fontSize="sm"
-              fontWeight="500"
-              color={textColorBrand}
-              ms="auto"
-              cursor="pointer"
-            >
-              Mark all read
-            </Text>
-          </Flex>
-          <Flex flexDirection="column">
-            <MenuItem
-              _hover={{ bg: "none" }}
-              _focus={{ bg: "none" }}
-              px="0"
-              borderRadius="8px"
-              mb="10px"
-            >
-              <ItemContent info="Horizon UI Dashboard PRO" aName="Alicia" />
-            </MenuItem>
-            <MenuItem
-              _hover={{ bg: "none" }}
-              _focus={{ bg: "none" }}
-              px="0"
-              borderRadius="8px"
-              mb="10px"
-            >
-              <ItemContent
-                info="Horizon Design System Free"
-                aName="Josh Henry"
-              />
-            </MenuItem>
-          </Flex>
-        </MenuList>
+        <Tooltip label="Buy Crypto">
+          <MenuButton display="flex" alignItems="center" p="0px">
+            <Icon
+              mt="6px"
+              as={FaBitcoin}
+              color={navbarIcon}
+              w="18px"
+              h="18px"
+              me="10px"
+              onClick={() => getFiat()}
+            />
+          </MenuButton>
+        </Tooltip>
       </Menu>
 
       <Menu>
@@ -223,88 +379,31 @@ export default function HeaderLinks(props) {
         </MenuList>
       </Menu>
 
-      <Button
-        variant="no-hover"
-        bg="transparent"
-        p="0px"
-        minW="unset"
-        minH="unset"
-        h="18px"
-        w="max-content"
-        onClick={toggleColorMode}
+      <Tooltip
+        label={`${
+          colorMode === "dark" ? "Toggle Light Mode" : "Toggle Dark Mode"
+        }`}
       >
-        <Icon
-          me="10px"
-          h="18px"
-          w="18px"
-          color={navbarIcon}
-          as={colorMode === "light" ? IoMdMoon : IoMdSunny}
-        />
-      </Button>
-      <Menu>
-        <MenuButton p="0px">
-          <Avatar
-            _hover={{ cursor: "pointer" }}
-            color="white"
-            name="Adela Parkson"
-            bg="#11047A"
-            size="sm"
-            w="40px"
-            h="40px"
-          />
-        </MenuButton>
-        <MenuList
-          boxShadow={shadow}
+        <Button
+          variant="no-hover"
+          bg="transparent"
           p="0px"
-          mt="10px"
-          borderRadius="20px"
-          bg={menuBg}
-          border="none"
+          minW="unset"
+          minH="unset"
+          h="18px"
+          w="max-content"
+          onClick={toggleColorMode}
         >
-          <Flex w="100%" mb="0px">
-            <Text
-              ps="20px"
-              pt="16px"
-              pb="10px"
-              w="100%"
-              borderBottom="1px solid"
-              borderColor={borderColor}
-              fontSize="sm"
-              fontWeight="700"
-              color={textColor}
-            >
-              👋&nbsp; Hey, Adela
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" p="10px">
-            <MenuItem
-              _hover={{ bg: "none" }}
-              _focus={{ bg: "none" }}
-              borderRadius="8px"
-              px="14px"
-            >
-              <Text fontSize="sm">Profile Settings</Text>
-            </MenuItem>
-            <MenuItem
-              _hover={{ bg: "none" }}
-              _focus={{ bg: "none" }}
-              borderRadius="8px"
-              px="14px"
-            >
-              <Text fontSize="sm">Newsletter Settings</Text>
-            </MenuItem>
-            <MenuItem
-              _hover={{ bg: "none" }}
-              _focus={{ bg: "none" }}
-              color="red.400"
-              borderRadius="8px"
-              px="14px"
-            >
-              <Text fontSize="sm">Log out</Text>
-            </MenuItem>
-          </Flex>
-        </MenuList>
-      </Menu>
+          <Icon
+            me="10px"
+            h="18px"
+            w="18px"
+            color={navbarIcon}
+            as={colorMode === "light" ? IoMdMoon : IoMdSunny}
+          />
+        </Button>
+      </Tooltip>
+      {!isAuthenticated ? <SignedOutMenuList /> : <SignedInMenuList />}
     </Flex>
   );
 }

@@ -28,4 +28,9 @@ module.exports = withPWA({
       },
     ]
   },
+  images: {
+    domains: [
+      'avatars.dicebear.com'
+    ]
+  }
 });

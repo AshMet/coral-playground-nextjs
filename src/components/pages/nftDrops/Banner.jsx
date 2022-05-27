@@ -13,16 +13,24 @@ import Octopus from "./Octopus";
 
 export default function Banner(props) {
   const [like, setLike] = useState(false);
-  const { image } = props;
+  const {
+    image,
+    bodyBase,
+    bodyShading,
+    tentacles,
+    tentacleShading,
+    eyeColor,
+    backgroundColor,
+  } = props;
   const bgGradient =
     "linear-gradient(138.87deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 94.09%)";
   // Character Coloring
-  const [bodyBase, setBodyBase] = useState("#ffffff"); // default: #71c6c1
-  const [bodyShading, setBodyShading] = useState("#ffffff");
-  const [tentacles, setTentacles] = useState("#ffffff");
-  const [tentacleShading, setTentacleShading] = useState("#ffffff");
-  const [eyeColor, setEyeColor] = useState("#ffffff");
-  const [backgroundColor, setBackgroundColor] = useState("#ffffff");
+  // const [bodyBase, setBodyBase] = useState("#ffffff"); // default: #71c6c1
+  // const [bodyShading, setBodyShading] = useState("#ffffff");
+  // const [tentacles, setTentacles] = useState("#ffffff");
+  // const [tentacleShading, setTentacleShading] = useState("#ffffff");
+  // const [eyeColor, setEyeColor] = useState("#ffffff");
+  // const [backgroundColor, setBackgroundColor] = useState("#ffffff");
 
   // Chakra Color Mode
   return (

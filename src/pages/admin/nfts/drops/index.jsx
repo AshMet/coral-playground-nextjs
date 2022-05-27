@@ -35,6 +35,8 @@ import {
 // import React from "react";
 
 // Assets
+import { useState } from "react";
+
 import Avatar1 from "../../../../../public/img/avatars/avatar1.png";
 import Avatar2 from "../../../../../public/img/avatars/avatar2.png";
 import Avatar3 from "../../../../../public/img/avatars/avatar3.png";
@@ -55,7 +57,13 @@ import AdminLayout from "layouts/admin";
 
 export default function Drops() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  // Chakra Color Mode
+  const [bodyBase, setBodyBase] = useState("#ffffff"); // default: #71c6c1
+  const [bodyShading, setBodyShading] = useState("#ffffff");
+  const [tentacles, setTentacles] = useState("#ffffff");
+  const [tentacleShading, setTentacleShading] = useState("#ffffff");
+  const [eyeColor, setEyeColor] = useState("#ffffff");
+  const [backgroundColor, setBackgroundColor] = useState("#ffffff");
+
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
@@ -71,22 +79,35 @@ export default function Drops() {
         display={{ base: "block", lg: "grid" }}
       >
         <Flex flexDirection="column" gridArea="1 / 1 / 2 / 2">
-          <Banner image={NftLarge1} />
+          <Banner
+            bodyBase={bodyBase}
+            bodyShading={bodyShading}
+            tentacles={tentacles}
+            tentacleShading={tentacleShading}
+            eyeColor={eyeColor}
+            backgroundColor={backgroundColor}
+            image={NftLarge1}
+          />
           <Description
-            desc={` Octo is the genesis character in the coral playground and the first of many to come. With a limited mint quantity of 1000, 
+            desc={`Octo is the genesis character in the coral playground and the first of many to come. With a limited mint quantity of 1000, 
             this NFT will represent early adopters in our project and help us accelerate our delivery milestones.
-            Additionally, as with all our our drops, 10% of all profits will be set aside for marine preservation initiatives to be voted
+            Additionally, as with all our drops, 10% of all profits will be set aside for marine preservation initiatives to be voted
             on by the coral DAO.`}
-            creator="simmmple.web"
+            creator="ash.met"
           />
         </Flex>
         <Flex flexDirection="column" gridArea="1 / 2 / 2 / 3" pt="60px">
           <ColorPicker
-            name="Agro Octo®"
             creator="#FFFFFF"
             creatorAvatar={AvatarSimmmple}
             price="#000000"
-            bid={2.82}
+            mintPrice={0.1}
+            setBodyBase={setBodyBase}
+            setBodyShading={setBodyShading}
+            setTentacles={setTentacles}
+            setTentacleShading={setTentacleShading}
+            setEyeColor={setEyeColor}
+            setBackgroundColor={setBackgroundColor}
           />
           <Flex
             direction="column"

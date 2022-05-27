@@ -1,6 +1,10 @@
-// import React from "react";
+import { Box, Flex, Text, Input, Button } from "@chakra-ui/react";
+import Image from "next/image";
+import { useContext } from "react";
+
 // Chakra imports
-import { Box, Flex, Text, Badge, LightMode } from "@chakra-ui/react";
+import { CoralPgContext } from "../../../contexts/CoralPgContext";
+
 // import LineChart from "components/charts/LineChart";
 // Custom components
 // import {
@@ -9,6 +13,16 @@ import { Box, Flex, Text, Badge, LightMode } from "@chakra-ui/react";
 // } from "variables/charts";
 export default function SidebarDocs() {
   const bgColor = "linear-gradient(135deg, #868CFF 0%, #4318FF 100%)";
+
+  const {
+    isAuthenticated,
+    // buyTokens,
+    // getBalance,
+    nickname,
+    setNickname,
+    username,
+    handleSetUsername,
+  } = useContext(CoralPgContext);
 
   return (
     <Flex
@@ -22,13 +36,13 @@ export default function SidebarDocs() {
     >
       <Flex
         direction="column"
-        mb="12px"
+        mb="25px"
         align="center"
         justify="center"
         px="15px"
         pt="30px"
       >
-        <Text
+        {/* <Text
           fontSize={{ base: "lg", xl: "2xl" }}
           color="white"
           fontWeight="bold"
@@ -37,32 +51,59 @@ export default function SidebarDocs() {
           px="10px"
         >
           $3942.58
-        </Text>
-        <Text
+        </Text> */}
+        {isAuthenticated && (
+          <>
+            <Box>
+              <Image
+                src={`https://avatars.dicebear.com/api/miniavs/${username}.svg`}
+                alt="profile"
+                height={100}
+                width={100}
+              />
+            </Box>
+            {!username ? (
+              <>
+                <Box>
+                  <Input
+                    type="text"
+                    placeholder="Username...."
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                  />
+                </Box>
+                <Button
+                  colorScheme="purple"
+                  size="sm"
+                  borderRadius="58px"
+                  mt="10px"
+                  onClick={handleSetUsername}
+                >
+                  Set Nickname
+                </Button>
+              </>
+            ) : (
+              <Box>
+                <Text>Wecome {username}</Text>
+              </Box>
+            )}
+          </>
+        )}
+        {/* <Text
           fontSize="sm"
           color="white"
           px="10px"
           mb="14px"
           textAlign="center"
         >
-          Total balance
-        </Text>
-        <LightMode>
-          <Badge
-            colorScheme="green"
-            color="green.500"
-            size="lg"
-            borderRadius="58px"
-          >
-            +2.45%
-          </Badge>
-        </LightMode>
-        <Box h="160px">
-          {/* <LineChart
+          Username
+        </Text> */}
+        {/* <Box h="160px">
+          <LineChart
             chartData={lineChartDataSidebar}
             chartOptions={lineChartOptionsSidebar}
-          /> */}
-        </Box>
+          />
+        </Box> */}
       </Flex>
     </Flex>
   );
