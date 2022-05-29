@@ -1,3 +1,6 @@
+/* eslint-disable sonarjs/no-identical-functions */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable consistent-return */
 /* eslint-disable import/no-cycle */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
@@ -32,9 +35,8 @@ import {
   useColorModeValue,
   SimpleGrid,
 } from "@chakra-ui/react";
-
-// Custom components
-// import React from "react";
+import { useEffect, useState } from "react";
+import { useMoralisQuery } from "react-moralis";
 
 // Assets
 import Avatar1 from "../../../../../public/img/avatars/avatar1.png";
@@ -60,6 +62,51 @@ export default function Marketplace() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
+
+  const [trendingNfts, setTrendingNfts] = useState();
+  const [recentNfts, setRecentNfts] = useState();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {
+    data: trendingData,
+    error: trendingError,
+    isLoading: trendingIsLoading,
+  } = useMoralisQuery("DivePhoto", (query) =>
+    query
+      .select(
+        "name",
+        "priceInWei",
+        "user.nickname",
+        "user.username",
+        "nftId",
+        "nftFilePath"
+      )
+      .descending("updatedAt")
+      .limit(3)
+  );
+
+  const {
+    data: recentData,
+    error: recentError,
+    isLoading: recentIsLoading,
+  } = useMoralisQuery("DivePhoto", (query) =>
+    query
+      .select(
+        "name",
+        "priceInWei",
+        "user.nickname",
+        "user.username",
+        "nftId",
+        "nftFilePath"
+      )
+      .limit(3)
+  );
+
+  useEffect(() => {
+    if (!trendingData) return null;
+    setTrendingNfts(trendingData);
+    setRecentNfts(recentData);
+  }, [trendingData, recentData]);
+
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
@@ -121,57 +168,25 @@ export default function Marketplace() {
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
-              <NFT
-                name="Abstract Colors"
-                author="By Esthera Jackson"
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft1}
-                currentBid="0.91 ETH"
-                download="#"
-              />
-              <NFT
-                name="ETH AI Brain"
-                author="By Nick Wilson"
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft2}
-                currentBid="0.91 ETH"
-                download="#"
-              />
-              <NFT
-                name="Mesh Gradients "
-                author="By Will Smith"
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft3}
-                currentBid="0.91 ETH"
-                download="#"
-              />
+              {recentNfts?.length > 0 &&
+                recentNfts
+                  .map((asset) => {
+                    const nft = asset?.attributes;
+                    const user = nft?.user?.attributes;
+
+                    return (
+                      <NFT
+                        key={nft?.id}
+                        name={nft?.name}
+                        author={user?.nickname || user?.username}
+                        bidders={[Avatar1, Avatar2, Avatar3, Avatar4]}
+                        image={nft?.nftFilePath}
+                        currentBid={nft.priceInWei / 1000000000000000000}
+                        download="#"
+                      />
+                    );
+                  })
+                  .reverse()}
             </SimpleGrid>
             <Text
               mt="45px"
@@ -188,57 +203,25 @@ export default function Marketplace() {
               gap="20px"
               mb={{ base: "20px", xl: "0px" }}
             >
-              <NFT
-                name="Swipe Circles"
-                author="By Peter Will"
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft4}
-                currentBid="0.91 ETH"
-                download="#"
-              />
-              <NFT
-                name="Colorful Heaven"
-                author="By Mark Benjamin"
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft5}
-                currentBid="0.91 ETH"
-                download="#"
-              />
-              <NFT
-                name="3D Cubes Art"
-                author="By Manny Gates"
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft6}
-                currentBid="0.91 ETH"
-                download="#"
-              />
+              {trendingNfts?.length > 0 &&
+                trendingNfts
+                  .map((asset) => {
+                    const nft = asset?.attributes;
+                    const user = nft?.user?.attributes;
+
+                    return (
+                      <NFT
+                        key={nft?.id}
+                        name={nft?.name}
+                        author={user?.nickname || user?.username}
+                        bidders={[Avatar1, Avatar2, Avatar3, Avatar4]}
+                        image={nft?.nftFilePath}
+                        currentBid={nft.priceInWei / 1000000000000000000}
+                        download="#"
+                      />
+                    );
+                  })
+                  .reverse()}
             </SimpleGrid>
           </Flex>
         </Flex>

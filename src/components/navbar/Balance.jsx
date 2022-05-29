@@ -1,32 +1,19 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-console */
-import { Text, useColorModeValue } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useMoralisWeb3Api } from "react-moralis";
+import { Button, Text, useColorModeValue } from "@chakra-ui/react";
+import { useContext, useEffect } from "react";
+import { useMoralis } from "react-moralis";
 
-export default function Balance(props) {
-  const { user } = props;
-  const Web3Api = useMoralisWeb3Api();
-  const [ethBalance, setEthBalance] = useState(0);
+import { CoralPgContext } from "../../contexts/CoralPgContext";
 
-  const fetchNativeBalance = async () => {
-    const result = await Web3Api.account
-      .getNativeBalance({
-        chain: "mumbai",
-        address: user.get("ethAddress"),
-      })
-      .catch((e) => console.log(e));
-    if (result.balance) {
-      const ethInWei = Web3Api.Moralis.Units.FromWei(result.balance);
-      setEthBalance(parseFloat(ethInWei).toFixed(3));
-      // setEthBalance(result.balance);
-    }
-  };
+export default function Balance() {
+  const { isAuthenticating, authenticate } = useMoralis();
+  const { ethBalance, getEthBalance } = useContext(CoralPgContext);
 
   useEffect(() => {
-    fetchNativeBalance();
-  }, []);
+    getEthBalance();
+  }, [ethBalance]);
 
   return (
     <Text
@@ -36,10 +23,25 @@ export default function Balance(props) {
       fontWeight="700"
       me="6px"
     >
-      {ethBalance}
+      {parseFloat(ethBalance).toFixed(3)}
       <Text as="span" display={{ base: "none", md: "unset" }}>
         {" "}
-        MATIC
+        {ethBalance ? (
+          <Text as="span" ml={1}>
+            MATIC
+          </Text>
+        ) : (
+          <Button
+            isLoading={isAuthenticating}
+            onClick={() => authenticate()}
+            variant="link"
+            colorScheme="purple"
+            size="sm"
+            mr={1}
+          >
+            Connect Wallet
+          </Button>
+        )}
       </Text>
     </Text>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable import/no-cycle */
 /* eslint-disable sonarjs/no-duplicate-string */
 /*!
@@ -36,17 +37,15 @@ import {
 // import Image from "next/image";
 // import React from "react";
 // Custom components
+import { useState, useEffect } from "react";
 import { MdDashboard, MdApps } from "react-icons/md";
+import { useMoralisQuery } from "react-moralis";
 
 // Assets
 import Avatar1 from "../../../../../public/img/avatars/avatar1.png";
 import Avatar2 from "../../../../../public/img/avatars/avatar2.png";
 import Avatar3 from "../../../../../public/img/avatars/avatar3.png";
 import Avatar4 from "../../../../../public/img/avatars/avatar4.png";
-import Nft2 from "../../../../../public/img/nfts/Nft2.png";
-import Nft4 from "../../../../../public/img/nfts/Nft4.png";
-import Nft5 from "../../../../../public/img/nfts/Nft5.png";
-import Nft6 from "../../../../../public/img/nfts/Nft6.png";
 import NftBanner2 from "../../../../../public/img/nfts/NftBanner2.png";
 import NftProfile from "../../../../../public/img/nfts/NftProfile.png";
 import NFT from "../../../../components/card/NFT";
@@ -65,7 +64,30 @@ export default function Collection() {
     { bg: "gray.200" },
     { bg: "whiteAlpha.200" }
   );
-  // Chakra Color Mode
+
+  const [ownedNFTs, setOwnedNFTs] = useState();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { data, error, isLoading } = useMoralisQuery("DivePhoto", (query) =>
+    query
+      .equalTo(
+        "nftContractAddress",
+        "0x29a1d6FFA3d19492ef80B026A987b2E72890B934"
+      )
+      .select(
+        "name",
+        "priceInWei",
+        "user.nickname",
+        "user.username",
+        "nftId",
+        "nftFilePath"
+      )
+  );
+
+  useEffect(() => {
+    if (!data) return null;
+    setOwnedNFTs(data);
+  }, [data]);
+
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}
@@ -146,142 +168,19 @@ export default function Collection() {
         More from this Collection
       </Text>
       <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
-        <NFT
-          name="Swipe Circles"
-          author="By Peter Will"
-          bidders={[
-            Avatar1,
-            Avatar2,
-            Avatar3,
-            Avatar4,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-          ]}
-          image={Nft4}
-          currentBid="0.91 ETH"
-          download="#"
-        />
-        <NFT
-          name="Colorful Heaven"
-          author="By Mark Benjamin"
-          bidders={[
-            Avatar1,
-            Avatar2,
-            Avatar3,
-            Avatar4,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-          ]}
-          image={Nft5}
-          currentBid="0.91 ETH"
-          download="#"
-        />
-        <NFT
-          name="3D Cubes Art"
-          author="By Manny Gates"
-          bidders={[
-            Avatar1,
-            Avatar2,
-            Avatar3,
-            Avatar4,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-          ]}
-          image={Nft6}
-          currentBid="0.91 ETH"
-          download="#"
-        />
-        <NFT
-          name="ETH AI Brain"
-          author="By Nick Wilson"
-          bidders={[
-            Avatar1,
-            Avatar2,
-            Avatar3,
-            Avatar4,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-          ]}
-          image={Nft2}
-          currentBid="0.91 ETH"
-          download="#"
-        />
-        <NFT
-          name="Swipe Circles"
-          author="By Peter Will"
-          bidders={[
-            Avatar1,
-            Avatar2,
-            Avatar3,
-            Avatar4,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-          ]}
-          image={Nft4}
-          currentBid="0.91 ETH"
-          download="#"
-        />
-        <NFT
-          name="Colorful Heaven"
-          author="By Mark Benjamin"
-          bidders={[
-            Avatar1,
-            Avatar2,
-            Avatar3,
-            Avatar4,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-          ]}
-          image={Nft5}
-          currentBid="0.91 ETH"
-          download="#"
-        />
-        <NFT
-          name="3D Cubes Art"
-          author="By Manny Gates"
-          bidders={[
-            Avatar1,
-            Avatar2,
-            Avatar3,
-            Avatar4,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-          ]}
-          image={Nft6}
-          currentBid="0.91 ETH"
-          download="#"
-        />
-        <NFT
-          name="ETH AI Brain"
-          author="By Nick Wilson"
-          bidders={[
-            Avatar1,
-            Avatar2,
-            Avatar3,
-            Avatar4,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-            Avatar1,
-          ]}
-          image={Nft2}
-          currentBid="0.91 ETH"
-          download="#"
-        />
+        {ownedNFTs?.length > 0 &&
+          ownedNFTs
+            .map((nft) => (
+              <NFT
+                name={nft.attributes.name}
+                author={nft.attributes.user?.attributes?.nickname}
+                bidders={[Avatar1, Avatar2, Avatar3, Avatar4, Avatar1, Avatar2]}
+                image={nft.attributes.nftFilePath}
+                currentBid={nft.attributes.priceInWei / 1000000000000000000}
+                download="#"
+              />
+            ))
+            .reverse()}
       </SimpleGrid>
 
       {/* Delete Product */}

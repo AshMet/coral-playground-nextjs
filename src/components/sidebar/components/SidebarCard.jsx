@@ -2,15 +2,8 @@ import { Box, Flex, Text, Input, Button } from "@chakra-ui/react";
 import Image from "next/image";
 import { useContext } from "react";
 
-// Chakra imports
 import { CoralPgContext } from "../../../contexts/CoralPgContext";
 
-// import LineChart from "components/charts/LineChart";
-// Custom components
-// import {
-//   lineChartDataSidebar,
-//   lineChartOptionsSidebar,
-// } from "variables/charts";
 export default function SidebarDocs() {
   const bgColor = "linear-gradient(135deg, #868CFF 0%, #4318FF 100%)";
 
@@ -42,16 +35,6 @@ export default function SidebarDocs() {
         px="15px"
         pt="30px"
       >
-        {/* <Text
-          fontSize={{ base: "lg", xl: "2xl" }}
-          color="white"
-          fontWeight="bold"
-          lineHeight="150%"
-          textAlign="center"
-          px="10px"
-        >
-          $3942.58
-        </Text> */}
         {isAuthenticated && (
           <>
             <Box>
@@ -89,21 +72,6 @@ export default function SidebarDocs() {
             )}
           </>
         )}
-        {/* <Text
-          fontSize="sm"
-          color="white"
-          px="10px"
-          mb="14px"
-          textAlign="center"
-        >
-          Username
-        </Text> */}
-        {/* <Box h="160px">
-          <LineChart
-            chartData={lineChartDataSidebar}
-            chartOptions={lineChartOptionsSidebar}
-          />
-        </Box> */}
       </Flex>
     </Flex>
   );

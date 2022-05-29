@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/no-cycle */
 /* eslint-disable func-names */
 /* eslint-disable sonarjs/no-duplicate-string */
@@ -39,7 +41,7 @@ import {
   Tab,
   TabPanel,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // Chakra imports
 import { IoMdHeartEmpty } from "react-icons/io";
 import {
@@ -54,6 +56,8 @@ import {
 // Custom components
 
 // Assets
+import { useMoralis, useMoralisQuery } from "react-moralis";
+
 import Avatar1 from "../../../../../public/img/avatars/avatar1.png";
 import Avatar2 from "../../../../../public/img/avatars/avatar2.png";
 import Avatar3 from "../../../../../public/img/avatars/avatar3.png";
@@ -85,6 +89,53 @@ export default function Collection() {
     { bg: "whiteAlpha.200" }
   );
   const paleGray = useColorModeValue("secondaryGray.400", "whiteAlpha.100");
+  const { user } = useMoralis();
+  const [ownedNFTs, setOwnedNFTs] = useState();
+  const { data, error, isLoading } = useMoralisQuery("DivePhoto", (query) =>
+    query
+      .equalTo("user", "xXqccpOW5MhKBcu2FcoraMwB")
+      .select(
+        "name",
+        "priceInWei",
+        "user.nickname",
+        "user.username",
+        "nftId",
+        "nftFilePath"
+      )
+  );
+
+  useEffect(() => {
+    if (!data) return null;
+    setOwnedNFTs(data);
+  }, [data, user]);
+
+  const collectedList = (
+    <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
+      {ownedNFTs?.length > 0 &&
+        ownedNFTs
+          .map((nft) => (
+            <NFT
+              name={nft.attributes.name}
+              author={nft.attributes.user?.attributes?.nickname}
+              bidders={[
+                Avatar1,
+                Avatar2,
+                Avatar3,
+                Avatar4,
+                Avatar1,
+                Avatar1,
+                Avatar1,
+                Avatar1,
+              ]}
+              image={nft.attributes.nftFilePath}
+              currentBid={nft.attributes.priceInWei / 1000000000000000000}
+              download="#"
+            />
+          ))
+          .reverse()}
+    </SimpleGrid>
+  );
+
   const panelExample = (
     <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
       <NFT
@@ -468,7 +519,7 @@ export default function Collection() {
           4 Results
         </Text>
         <TabPanels>
-          <TabPanel px="0px">{panelExample}</TabPanel>
+          <TabPanel px="0px">{collectedList}</TabPanel>
           <TabPanel px="0px">{panelExample}</TabPanel>
           <TabPanel px="0px">{panelExample}</TabPanel>
           <TabPanel px="0px">{panelExample}</TabPanel>

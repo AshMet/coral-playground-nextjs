@@ -29,8 +29,11 @@ module.exports = withPWA({
     ]
   },
   images: {
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: [
-      'avatars.dicebear.com'
+      'avatars.dicebear.com',
+      'ipfs.moralis.io'
     ]
   }
 });

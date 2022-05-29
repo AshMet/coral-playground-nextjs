@@ -8,7 +8,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ethers } from "ethers";
 import { createContext, useState, useEffect } from "react";
-import { useMoralis, useMoralisQuery } from "react-moralis";
+import { useMoralis, useMoralisQuery, useMoralisWeb3Api } from "react-moralis";
 
 import {
   coralOctoAbi,
@@ -25,13 +25,14 @@ export const CoralPgProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [formattedAccount, setFormattedAccount] = useState("");
   const [balance, setBalance] = useState("");
+  const [ethBalance, setEthBalance] = useState("");
   const [tokenAmount, setTokenAmount] = useState("");
   const [amountDue, setAmountDue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [etherscanLink, setEtherscanLink] = useState("");
   const [nickname, setNickname] = useState("");
   const [username, setUsername] = useState("");
-  // const [assets, setAssets] = useState([]);
+  const [assets, setAssets] = useState([]);
   const [recentTransactions, setRecentTransactions] = useState([]);
   const [ownedItems, setOwnedItems] = useState([]);
 
@@ -43,6 +44,7 @@ export const CoralPgProvider = ({ children }) => {
     user,
     isWeb3Enabled,
   } = useMoralis();
+  const Web3Api = useMoralisWeb3Api();
 
   const {
     data: userData,
@@ -54,13 +56,13 @@ export const CoralPgProvider = ({ children }) => {
     data: assetsData,
     error: assetsDataError,
     isLoading: assetsDataIsLoading,
-  } = useMoralisQuery("Assets");
+  } = useMoralisQuery("DivePhoto");
 
   useEffect(async () => {
     console.log(assetsData);
     await enableWeb3();
-    // await getAssets();
-    await getOwnedAssets();
+    await getAssets();
+    // await getOwnedAssets();
   }, [userData, assetsData, assetsDataIsLoading, userDataIsLoading]);
 
   useEffect(async () => {
@@ -70,7 +72,8 @@ export const CoralPgProvider = ({ children }) => {
     await listenToUpdates();
 
     if (isAuthenticated) {
-      await getBalance();
+      // await getBalance();
+      await getEthBalance();
       const currentUsername = await user?.get("nickname");
       setUsername(currentUsername);
       const account = await user?.get("ethAddress");
@@ -80,13 +83,14 @@ export const CoralPgProvider = ({ children }) => {
     } else {
       setCurrentAccount("");
       setFormattedAccount("");
-      setBalance("");
+      // setBalance("");
+      setEthBalance("");
     }
   }, [
     isWeb3Enabled,
     isAuthenticated,
-    balance,
-    setBalance,
+    ethBalance,
+    setEthBalance,
     authenticate,
     currentAccount,
     setUsername,
@@ -142,22 +146,45 @@ export const CoralPgProvider = ({ children }) => {
     }
   };
 
-  const getBalance = async () => {
+  // const getBalance = async () => {
+  //   try {
+  //     if (!isAuthenticated || !currentAccount) return;
+  //     const options = {
+  //       contractAddress: coralOctoAddress,
+  //       functionName: "balanceOf",
+  //       abi: coralOctoAbi,
+  //       params: {
+  //         account: currentAccount,
+  //       },
+  //     };
+
+  //     if (isWeb3Enabled) {
+  //       const response = await Moralis.executeFunction(options);
+  //       console.log(response.toString());
+  //       setBalance(response.toString());
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const getEthBalance = async () => {
     try {
       if (!isAuthenticated || !currentAccount) return;
       const options = {
-        contractAddress: coralOctoAddress,
-        functionName: "balanceOf",
-        abi: coralOctoAbi,
-        params: {
-          account: currentAccount,
-        },
+        chain: "mumbai",
+        address: user?.get("ethAddress"),
       };
 
       if (isWeb3Enabled) {
-        const response = await Moralis.executeFunction(options);
+        const response = await Web3Api.account.getNativeBalance(options);
         console.log(response.toString());
-        setBalance(response.toString());
+        if (response?.balance) {
+          const ethBalanceValue = Web3Api.Moralis.Units.FromWei(
+            response.balance
+          );
+          setEthBalance(ethBalanceValue);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -201,17 +228,16 @@ export const CoralPgProvider = ({ children }) => {
     }
   };
 
-  // const getAssets = async () => {
-  //   try {
-  //     await enableWeb3();
-  //     const query = new Moralis.Query('Assets')
-  //     const results = await query.find()
-
-  //     setAssets(assetsData);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getAssets = async () => {
+    try {
+      await enableWeb3();
+      // const query = new Moralis.Query("DivePhoto");
+      // const results = await query.find();
+      setAssets(assetsData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const listenToUpdates = async () => {
     const query = new Moralis.Query("EthTransactions");
@@ -225,8 +251,8 @@ export const CoralPgProvider = ({ children }) => {
 
   const getOwnedAssets = async () => {
     try {
-      const query = new Moralis.Query("_User");
-      const results = await query.find();
+      // const query = new Moralis.Query("_User");
+      // const results = await query.find();
 
       if (userData[0]) {
         setOwnedItems((prevItems) => [
@@ -245,8 +271,10 @@ export const CoralPgProvider = ({ children }) => {
         formattedAccount,
         isAuthenticated,
         buyTokens,
-        getBalance,
-        balance,
+        // getBalance,
+        getEthBalance,
+        // balance,
+        ethBalance,
         setTokenAmount,
         tokenAmount,
         amountDue,
@@ -262,7 +290,7 @@ export const CoralPgProvider = ({ children }) => {
         username,
         setUsername,
         handleSetUsername,
-        // assets,
+        assets,
         recentTransactions,
         ownedItems,
       }}
