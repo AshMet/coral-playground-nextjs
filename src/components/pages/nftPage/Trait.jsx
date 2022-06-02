@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
 import { Box, Text, useColorModeValue } from "@chakra-ui/react";
+
 // Custom components
 import Card from "components/card/Card";
 

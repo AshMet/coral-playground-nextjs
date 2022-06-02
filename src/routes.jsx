@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import { Icon, Badge } from "@chakra-ui/react";
+import { Icon } from "@chakra-ui/react";
 // import React from "react";
 import {
   // MdDashboard,

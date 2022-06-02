@@ -1,17 +1,11 @@
 import { Button, Flex, Link, Text } from "@chakra-ui/react";
-// import React from "react";
-
-// Chakra imports
-
-// Assets
-// import banner from "assets/img/nfts/NftBanner1.png";
 
 export default function Banner() {
   // Chakra Color Mode
   return (
     <Flex
       direction="column"
-      // bgImage={banner}
+      bgImage="/img/nfts/CoralHeroBg.jpg"
       bgSize="cover"
       py={{ base: "30px", md: "56px" }}
       px={{ base: "30px", md: "64px" }}

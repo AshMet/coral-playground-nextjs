@@ -30,11 +30,6 @@ import {
   useColorModeValue,
   SimpleGrid,
 } from "@chakra-ui/react";
-
-// Custom components
-// import React from "react";
-
-// Assets
 import { useState } from "react";
 
 import Avatar1 from "../../../../../public/img/avatars/avatar1.png";

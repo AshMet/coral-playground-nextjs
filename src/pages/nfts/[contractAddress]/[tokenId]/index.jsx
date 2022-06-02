@@ -32,11 +32,6 @@ import {
   useColorModeValue,
   SimpleGrid,
 } from "@chakra-ui/react";
-
-// Custom components
-// import React from "react";
-
-// Assets
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useMoralisQuery } from "react-moralis";

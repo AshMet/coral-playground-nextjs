@@ -42,7 +42,6 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-// Chakra imports
 import { IoMdHeartEmpty } from "react-icons/io";
 import {
   MdDashboard,
@@ -52,10 +51,6 @@ import {
   MdAccessTime,
   MdOutlineLocalOffer,
 } from "react-icons/md";
-
-// Custom components
-
-// Assets
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 
 import Avatar1 from "../../../../../public/img/avatars/avatar1.png";

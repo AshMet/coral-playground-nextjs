@@ -259,7 +259,12 @@ export default function HeaderLinks(props) {
 
   const getFiat = async function () {
     Moralis.initPlugins();
-    await Moralis.Plugins.fiat.buy();
+    await Moralis.Plugins.fiat.buy(
+      {},
+      {
+        disableTriggers: true,
+      }
+    );
   };
 
   return (
