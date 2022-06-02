@@ -14,16 +14,18 @@ import {
 import { IoMdTrendingUp } from "react-icons/io";
 import { MdVerified, MdOutlineMonetizationOn } from "react-icons/md";
 
+import TraitsList from "components/pages/nftPage/TraitsList";
+
 export default function Auction(props) {
   // Chakra Color Mode
-  const { name, price, creator, creatorAvatar, bid } = props;
+  const { name, price, creator, creatorAvatar, metadata, desc } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const shadow = useColorModeValue(
-    " 0px 50px 40px -34px rgba(112, 144, 176, 0.16)",
-    "unset"
-  );
-  const borderColor = useColorModeValue("secondaryGray.400", "transparent");
-  const cardBg = useColorModeValue("white", "navy.800");
+  // const shadow = useColorModeValue(
+  //   " 0px 50px 40px -34px rgba(112, 144, 176, 0.16)",
+  //   "unset"
+  // );
+  // const borderColor = useColorModeValue("secondaryGray.400", "transparent");
+  // const cardBg = useColorModeValue("white", "navy.800");
   return (
     <Flex
       direction="column"
@@ -102,92 +104,7 @@ export default function Auction(props) {
           </Box>
         </Flex>
       </Flex>
-      <Flex
-        w="100%"
-        align="center"
-        p="60px"
-        direction="column"
-        border="1px solid"
-        borderColor={borderColor}
-        boxShadow={shadow}
-        bg={cardBg}
-        borderRadius="30px"
-        mb="50px"
-      >
-        <Text fontWeight="500" color={textColor} fontSize="22px">
-          Current Bid
-        </Text>
-        <Text
-          fontWeight="700"
-          color={textColor}
-          fontSize={{ base: "48px", md: "54px", xl: "64px" }}
-          my="10px"
-          lineHeight="100%"
-        >
-          {bid} ETH
-        </Text>
-        <Flex mb={{ base: "0px", md: "30px" }}>
-          <Text
-            fontWeight="700"
-            color="secondaryGray.600"
-            fontSize="24px"
-            mb="50px"
-          >
-            $10.927,84
-          </Text>
-          <Icon
-            ms="6px"
-            mt="4px"
-            as={IoMdTrendingUp}
-            h="24px"
-            w="24px"
-            color="green.500"
-          />
-        </Flex>
-
-        <Text fontSize="xl" color={textColor} fontWeight="500" mb="28px">
-          Auction ends in
-        </Text>
-        <Flex w="100%" justify="center">
-          <Flex direction="column" align="center" me="60px">
-            <Text
-              color={textColor}
-              fontSize={{ base: "34px", md: "44px" }}
-              fontWeight="700"
-            >
-              20
-            </Text>
-            <Text color="secondaryGray.600" fontSize="24px" fontWeight="500">
-              Hrs
-            </Text>
-          </Flex>
-          <Flex direction="column" align="center" me="60px">
-            <Text
-              color={textColor}
-              fontSize={{ base: "34px", md: "44px" }}
-              fontWeight="700"
-            >
-              37
-            </Text>
-            <Text color="secondaryGray.600" fontSize="24px" fontWeight="500">
-              Mins
-            </Text>
-          </Flex>
-          <Flex direction="column" align="center">
-            <Text
-              color={textColor}
-              fontSize={{ base: "34px", md: "44px" }}
-              fontWeight="700"
-            >
-              49
-            </Text>
-            <Text color="secondaryGray.600" fontSize="24px" fontWeight="500">
-              Secs
-            </Text>
-          </Flex>
-        </Flex>
-      </Flex>
-
+      <TraitsList metadata={metadata} description={desc} />
       <Button variant="brand" fontSize="sm" fontWeight="500" h="46px">
         Place a bid
       </Button>

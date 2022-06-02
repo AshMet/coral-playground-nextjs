@@ -272,6 +272,8 @@ export default function ColorPicker(props) {
               borderRadius="50px"
               justify="center"
               align="center"
+              border="1px solid"
+              borderColor="gray.300"
               bg={bodyBaseText}
               onClick={() => setBodyBaseColorPicker(true)}
             />
@@ -312,6 +314,8 @@ export default function ColorPicker(props) {
               borderRadius="50px"
               justify="center"
               align="center"
+              border="1px solid"
+              borderColor="gray.300"
               bg={bodyShadingText}
               onClick={() => setBodyShadingColorPicker(true)}
             />
@@ -352,6 +356,8 @@ export default function ColorPicker(props) {
               borderRadius="50px"
               justify="center"
               align="center"
+              border="1px solid"
+              borderColor="gray.300"
               bg={tentaclesText}
               onClick={() => setTentaclesColorPicker(true)}
             />
@@ -393,6 +399,8 @@ export default function ColorPicker(props) {
               borderRadius="50px"
               justify="center"
               align="center"
+              border="1px solid"
+              borderColor="gray.300"
               bg={tentacleShadingText}
               onClick={() => setTentacleShadingColorPicker(true)}
             />
@@ -433,6 +441,8 @@ export default function ColorPicker(props) {
               borderRadius="50px"
               justify="center"
               align="center"
+              border="1px solid"
+              borderColor="gray.300"
               bg={eyeColorText}
               onClick={() => setEyeColorPicker(true)}
             />
@@ -470,6 +480,8 @@ export default function ColorPicker(props) {
               borderRadius="50px"
               justify="center"
               align="center"
+              border="1px solid"
+              borderColor="gray.300"
               bg={backgroundColorText}
               onClick={() => setBackgroundColorPicker(true)}
             />

@@ -56,7 +56,7 @@ import {
 // Custom components
 
 // Assets
-import { useMoralis, useMoralisQuery } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 
 import Avatar1 from "../../../../../public/img/avatars/avatar1.png";
 import Avatar2 from "../../../../../public/img/avatars/avatar2.png";
@@ -71,6 +71,7 @@ import NftBanner3 from "../../../../../public/img/nfts/NftBanner3.png";
 // import Image from "../../../../components/actions/NextChakraImg";
 import Banner from "../../../../components/pages/nftProfile/Banner";
 import SearchBar from "../../../../components/pages/nftProfile/Search";
+import CollectionCard from "components/card/CollectionCard";
 import NFT from "components/card/NFT";
 import { HSeparator } from "components/separator/Separator";
 import AdminLayout from "layouts/admin";
@@ -90,19 +91,8 @@ export default function Collection() {
   );
   const paleGray = useColorModeValue("secondaryGray.400", "whiteAlpha.100");
   const { user } = useMoralis();
+  const { data, error, isLoading } = useMoralisCloudFunction("getUserNFTs");
   const [ownedNFTs, setOwnedNFTs] = useState();
-  const { data, error, isLoading } = useMoralisQuery("DivePhoto", (query) =>
-    query
-      .equalTo("user", "xXqccpOW5MhKBcu2FcoraMwB")
-      .select(
-        "name",
-        "priceInWei",
-        "user.nickname",
-        "user.username",
-        "nftId",
-        "nftFilePath"
-      )
-  );
 
   useEffect(() => {
     if (!data) return null;
@@ -113,25 +103,8 @@ export default function Collection() {
     <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
       {ownedNFTs?.length > 0 &&
         ownedNFTs
-          .map((nft) => (
-            <NFT
-              name={nft.attributes.name}
-              author={nft.attributes.user?.attributes?.nickname}
-              bidders={[
-                Avatar1,
-                Avatar2,
-                Avatar3,
-                Avatar4,
-                Avatar1,
-                Avatar1,
-                Avatar1,
-                Avatar1,
-              ]}
-              image={nft.attributes.nftFilePath}
-              currentBid={nft.attributes.priceInWei / 1000000000000000000}
-              download="#"
-            />
-          ))
+          .slice(10, 13)
+          .map((nft) => <CollectionCard nft={nft} />)
           .reverse()}
     </SimpleGrid>
   );

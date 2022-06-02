@@ -7,13 +7,14 @@ import {
   Button,
   Flex,
   Icon,
-  Link,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
+import Nft1 from "../../../public/img/nfts/Nft1.png";
 import Image from "../actions/NextChakraImg";
 
 // Custom components
@@ -21,7 +22,7 @@ import Card from "./Card";
 // Assets
 
 export default function NFT(props) {
-  const { image, name, author, bidders, download, currentBid } = props;
+  const { image, name, author, bidders, download, currentBid, to } = props;
   const [like, setLike] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
   const textColorBid = useColorModeValue("brand.500", "white");
@@ -37,13 +38,14 @@ export default function NFT(props) {
     >
       <Flex direction={{ base: "column" }} justify="center">
         <Box position="relative">
-          <Image
-            src={image}
-            width="300"
-            height="300"
-            layout="fill"
-            borderRadius="20px"
-          />
+          <Link href="nfts/[contractAddress]/[tokenId]" as={to}>
+            <Image
+              src={image || Nft1}
+              width="300"
+              height="300"
+              borderRadius="20px"
+            />
+          </Link>
           <Button
             position="absolute"
             bg="white"

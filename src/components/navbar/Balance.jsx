@@ -23,7 +23,7 @@ export default function Balance() {
       fontWeight="700"
       me="6px"
     >
-      {parseFloat(ethBalance).toFixed(3)}
+      {ethBalance && parseFloat(ethBalance).toFixed(3)}
       <Text as="span" display={{ base: "none", md: "unset" }}>
         {" "}
         {ethBalance ? (
