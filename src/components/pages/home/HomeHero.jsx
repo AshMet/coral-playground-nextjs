@@ -2,7 +2,6 @@ import {
   Heading,
   Text,
   Box,
-  useColorModeValue,
   Stack,
   Image,
   Flex,
@@ -22,7 +21,6 @@ const HomeHero = () => {
   return (
     <Flex
       direction={{ base: "column", md: "row" }}
-      bg={useColorModeValue("brand.500")}
       bgImage="url(/svg/wave-bg.svg)"
       bgRepeat="no-repeat"
       px={8}

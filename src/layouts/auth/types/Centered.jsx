@@ -44,7 +44,7 @@ function AuthCentered(props) {
       alignSelf="center"
       justifySelf="center"
       overflow="hidden"
-      mx={{ base: "10px", lg: "0px" }}
+      mx="0px"
       minH="100vh"
     >
       <FixedPlugin />

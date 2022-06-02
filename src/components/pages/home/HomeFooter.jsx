@@ -9,7 +9,7 @@ import { Parallax } from "react-scroll-parallax";
 const HomeFooter = () => (
   <Flex
     maxW="full"
-    w="auto"
+    minW="100%"
     direction="column"
     // mx={{ base: "-10px", md: "-50px" }}
     backgroundImage="/svg/ocean-floor-bg.svg"
@@ -25,9 +25,9 @@ const HomeFooter = () => (
     >
       <Grid templateColumns="repeat(4, 1fr)" gap={400} maxW="3xl">
         <Parallax
-          easing="easeOutCubic"
+          easing="easeInCubic"
           translateX={[100, 100]}
-          translateY={[300, 200]}
+          translateY={[400, 200]}
         >
           <Box>
             <Image

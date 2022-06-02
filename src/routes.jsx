@@ -207,13 +207,13 @@ const routes = [
     collapse: true,
     items: [
       {
-        name: "Main Dashboard",
+        name: "Learn",
         layout: "/admin",
         path: "/dashboards/default",
         component: DashboardsDefault,
       },
       {
-        name: "Car Interface",
+        name: "Explore",
         layout: "/admin",
         path: "/dashboards/carInterface",
         component: DashboardsCarInterface,
@@ -228,14 +228,7 @@ const routes = [
   },
   // --- NFTs ---
   {
-    name: (
-      <>
-        NFT
-        <Badge fontSize="xs" p="2px" bgColor="red.700" ml="20px">
-          Testnet
-        </Badge>
-      </>
-    ),
+    name: "NFTs",
     path: "/nfts",
     icon: (
       <Icon

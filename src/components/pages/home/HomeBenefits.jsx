@@ -30,7 +30,7 @@ const Feature = (props) => {
         >
           <Icon
             boxSize={6}
-            color={useColorModeValue("gray.800", "gray.300")}
+            color={useColorModeValue("white", "gray.300")}
             // fill="none"
             // viewBox="0 0 24 24"
             // stroke="currentColor"

@@ -57,11 +57,11 @@ export default function AuthNavbar(props) {
     onOpen: onOpenDashboards,
     onClose: onCloseDashboards,
   } = useDisclosure();
-  const {
-    isOpen: isOpenMain,
-    onOpen: onOpenMain,
-    onClose: onCloseMain,
-  } = useDisclosure();
+  // const {
+  //   isOpen: isOpenMain,
+  //   onOpen: onOpenMain,
+  //   onClose: onCloseMain,
+  // } = useDisclosure();
   const {
     isOpen: isOpenNft,
     onOpen: onOpenNft,
@@ -75,23 +75,23 @@ export default function AuthNavbar(props) {
     console.log(foundRoute);
     return foundRoute[0]?.items;
   }
-  // function getLinksCollapse(routeName) {
-  //   const foundRoute = routes.filter(function (route) {
-  //     return route.items && route.name === routeName;
-  //   });
+  function getLinksCollapse(routeName) {
+    const foundRoute = routes?.filter(function (route) {
+      return route?.items && route?.name === routeName;
+    });
 
-  //   return foundRoute[0].items.filter(function (link) {
-  //     return link.collapse === true;
-  //   });
-  // }
-  // const authObject = getLinksCollapse("Authentication");
+    return foundRoute[0].items.filter(function (link) {
+      return link.collapse === true;
+    });
+  }
+  const authObject = getLinksCollapse("Get Started");
   // const mainObject = getLinksCollapse("Main Pages");
-  const dashboardsObject = getLinks("Dashboards");
+  const dashboardsObject = getLinks("Activities");
   const nftsObject = getLinks("NFTs");
   // const logoColor = useColorModeValue("white", "white");
   // Chakra color mode
 
-  // const textColor = useColorModeValue("navy.700", "white");
+  const textColor = useColorModeValue("navy.700", "white");
   const menuBg = useColorModeValue("white", "navy.900");
   const mainText = "#fff";
   const navbarBg = "none";
@@ -148,7 +148,7 @@ export default function AuthNavbar(props) {
     // navbarPosition = "fixed";
   }
   const createNftsLinks = (routes) => {
-    return routes.map((link, key) => {
+    return routes?.map((link, key) => {
       return (
         <NavLink
           key={key}
@@ -163,7 +163,7 @@ export default function AuthNavbar(props) {
     });
   };
   const createDashboardsLinks = (routes) => {
-    return routes.map((link, key) => {
+    return routes?.map((link, key) => {
       return (
         <NavLink
           key={key}
@@ -213,42 +213,42 @@ export default function AuthNavbar(props) {
   //     );
   //   });
   // };
-  // const createAuthLinks = (routes) => {
-  //   return routes.map((link, key) => {
-  //     if (link.collapse === true) {
-  //       return (
-  //         <Stack key={key} direction="column" maxW="max-content">
-  //           <Stack
-  //             direction="row"
-  //             spacing="0px"
-  //             align="center"
-  //             cursor="default"
-  //           >
-  //             <Text
-  //               textTransform="uppercase"
-  //               fontWeight="bold"
-  //               fontSize="sm"
-  //               me="auto"
-  //               color={textColor}
-  //             >
-  //               {link.name}
-  //             </Text>
-  //           </Stack>
-  //           <Stack direction="column" bg={menuBg}>
-  //             {createAuthLinks(link.items)}
-  //           </Stack>
-  //         </Stack>
-  //       );
-  //     }
-  //     return (
-  //       <NavLink key={key} to={link.layout + link.path}>
-  //         <Text color="gray.400" fontSize="sm" fontWeight="normal">
-  //           {link.name}
-  //         </Text>
-  //       </NavLink>
-  //     );
-  //   });
-  // };
+  const createAuthLinks = (routes) => {
+    return routes?.map((link, key) => {
+      if (link.collapse === true) {
+        return (
+          <Stack key={key} direction="column" maxW="max-content">
+            <Stack
+              direction="row"
+              spacing="0px"
+              align="center"
+              cursor="default"
+            >
+              <Text
+                textTransform="uppercase"
+                fontWeight="bold"
+                fontSize="sm"
+                me="auto"
+                color={textColor}
+              >
+                {link.name}
+              </Text>
+            </Stack>
+            <Stack direction="column" bg={menuBg}>
+              {createAuthLinks(link.items)}
+            </Stack>
+          </Stack>
+        );
+      }
+      return (
+        <NavLink key={key} to={link.layout + link.path}>
+          <Text color="gray.400" fontSize="sm" fontWeight="normal">
+            {link.name}
+          </Text>
+        </NavLink>
+      );
+    });
+  };
   const linksAuth = (
     <HStack display={{ sm: "none", lg: "flex" }} spacing="20px">
       <Stack
@@ -263,7 +263,7 @@ export default function AuthNavbar(props) {
         position="relative"
       >
         <Text fontSize="sm" color={mainText}>
-          Dashboards
+          Activities
         </Text>
         <Box>
           <Icon
@@ -337,7 +337,7 @@ export default function AuthNavbar(props) {
           </MenuList>
         </Menu>
       </Stack>
-      <Stack
+      {/* <Stack
         direction="row"
         spacing="4px"
         align="center"
@@ -381,12 +381,12 @@ export default function AuthNavbar(props) {
               minW="280px"
               gap="24px"
             >
-              {/* {createMainLinks(mainObject)} */}
+              {createMainLinks(mainObject)}
             </SimpleGrid>
-            {/* <Image borderRadius='16px' src={dropdownMain} /> */}
+            <Image borderRadius='16px' src={dropdownMain} />
           </MenuList>
         </Menu>
-      </Stack>
+      </Stack> */}
       <Stack
         direction="row"
         spacing="4px"
@@ -399,7 +399,7 @@ export default function AuthNavbar(props) {
         position="relative"
       >
         <Text fontSize="sm" color={mainText}>
-          Authentications
+          Getting Started
         </Text>
         <Box>
           <Icon
@@ -430,7 +430,7 @@ export default function AuthNavbar(props) {
               minW="180px"
               gap="24px"
             >
-              {/* {createAuthLinks(authObject)} */}
+              {createAuthLinks(authObject)}
             </SimpleGrid>
             {/* <Image borderRadius='16px' src={dropdown} /> */}
           </MenuList>
@@ -500,7 +500,7 @@ export default function AuthNavbar(props) {
                 lg: "flex",
               }}
             >
-              Buy Now
+              Sign Up
             </Button>
           </Link>
         </Flex>
