@@ -1,24 +1,25 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 /** @type {import('next-seo').DefaultSeoProps} */
 const defaultSEOConfig = {
-  title: "nextarter-chakra",
-  titleTemplate: "%s | nextarter-chakra",
-  defaultTitle: "nextarter-chakra",
-  description: "Next.js + chakra-ui + TypeScript template",
-  canonical: "https://nextarter-chakra.sznm.dev",
+  title: "Coral Playground",
+  titleTemplate: "%s | Coral Playground",
+  defaultTitle: "Coral Playground",
+  description: "Welcome to the Ocean Metaverse",
+  canonical: "https://www.coralplayground.com",
   openGraph: {
-    url: "https://nextarter-chakra.sznm.dev",
-    title: "nextarter-chakra",
-    description: "Next.js + chakra-ui + TypeScript template",
+    url: "https://www.coralplayground.com",
+    title: "Coral Playground",
+    description: "Welcome to the Ocean Metaverse",
     images: [
       {
-        url: "https://og-image.sznm.dev/**nextarter-chakra**.sznm.dev.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fsznm.dev%2Favataaars.svg&widths=250",
-        alt: "nextarter-chakra.sznm.dev og-image",
+        url: "https://www.newsecuritybeat.org/wp-content/uploads/2020/12/shutterstock_737988934-645x430.jpg",
+        alt: "Coral Playground",
       },
     ],
-    site_name: "nextarter-chakra",
+    site_name: "Coral Playground",
   },
   twitter: {
-    handle: "@sozonome",
+    handle: "@AshMetwalli",
     cardType: "summary_large_image",
   },
 };
