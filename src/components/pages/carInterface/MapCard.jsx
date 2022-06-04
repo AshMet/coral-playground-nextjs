@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/prop-types */
@@ -78,7 +79,7 @@ export default function MapCard(props) {
         >
           <MiniStatistics
             name={
-              mapLocation.country &&
+              mapLocation?.country &&
               `${mapLocation?.city}, ${mapLocation?.country}`
             }
             value={mapLocation?.name || "Select Dive Site"}

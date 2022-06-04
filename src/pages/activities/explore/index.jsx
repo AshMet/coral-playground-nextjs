@@ -34,13 +34,8 @@ import { useState } from "react";
 // Chakra imports
 // Custom components
 // import { IoPaperPlane } from "react-icons/io5";
-
 import { useMoralisCloudFunction } from "react-moralis";
 
-// import centreIconDark from "../../../../public/img/activities/centre_icon_dark.svg";
-// import centreIconLight from "../../../../public/img/activities/centre_icon_light.svg";
-// import diveIconDark from "../../../../public/img/activities/dive_icon_dark.svg";
-// import diveIconLight from "../../../../public/img/activities/dive_icon_light.svg";
 // Assets
 import Card from "components/card/Card";
 // import SearchBar from "components/navbar/searchBar/SearchBar";
