@@ -1,18 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable react/prop-types */
 // import React from "react";
+import { Icon, Flex, Badge, useColorModeValue, Button } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import {
-  Box,
-  Button,
-  Icon,
-  Flex,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
-// Custom components
-import { IoPaperPlane } from "react-icons/io5";
-import { MdLocationOn } from "react-icons/md";
+  MdCreditCard,
+  MdPerson,
+  MdShowChart,
+  MdChevronRight,
+} from "react-icons/md";
 
-import Card from "components/card/Card";
-import SearchBar from "components/navbar/searchBar/SearchBar";
+import MiniStatistics from "components/card/MiniStatistics";
+import IconBox from "components/icons/IconBox";
+// Custom components
+
 // import Map from "react-map-gl";
 
 // Assets
@@ -21,193 +23,173 @@ import SearchBar from "components/navbar/searchBar/SearchBar";
 // const MAPBOX_TOKEN =
 //   "pk.eyJ1Ijoic2ltbW1wbGUiLCJhIjoiY2wxeG1hd24xMDEzYzNrbWs5emFkdm16ZiJ9.q9s0sSKQFFaT9fyrC-7--g"; // Set your mapbox token her
 
-export default function YourTransfers(props) {
-  const { ...rest } = props;
+export default function MapCard(props) {
+  const { mapLocation } = props;
+  const router = useRouter();
   // const mapStyles = useColorModeValue(
   //   "mapbox://styles/simmmple/ckwxecg1wapzp14s9qlus38p0",
   //   "mapbox://styles/simmmple/cl0qqjr3z000814pq7428ptk5"
   // );
   // Chakra color mode
-  const brand = useColorModeValue("brand.500", "brand.400");
+  // const brand = useColorModeValue("brand.500", "brand.400");
   const inputBg = useColorModeValue(
     { base: "secondaryGray.300", md: "white" },
     { base: "navy.700", md: "navy.900" }
   );
-  const textColorSecondary = useColorModeValue("secondaryGray.700", "white");
-  const dash = useColorModeValue("234318FFFF", "237551FFFF");
+  // Chakra Color Mode
+  const brandColor = useColorModeValue("brand.500", "white");
+  const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
+  // const textColorSecondary = useColorModeValue("secondaryGray.700", "white");
+  // const dash = useColorModeValue("234318FFFF", "237551FFFF");
+
+  const viewLocationDetails = function () {
+    // ReactGA.event({
+    //   category: "Diving",
+    //   action: "View Site Details",
+    // });
+    mapLocation.type === "dive_site"
+      ? router.push(`/activities/dive_site/${mapLocation?.location_id}`)
+      : router.push(`/activities/dive_centre/${mapLocation?.location_id}`);
+  };
+
   return (
-    <Card
-      justifyContent="center"
-      position="relative"
-      direction="column"
+    <Flex
       w="100%"
-      p="20px"
-      zIndex="0"
-      minH={{ base: "600px", lg: "100%" }}
-      {...rest}
+      mt={{ base: "12px", md: "10px" }}
+      direction={{ base: "row", md: "row" }}
+      align={{ base: "end", md: "unset" }}
+      mb={{ base: "0px", md: "0px" }}
     >
       <Flex
-        direction="column"
-        position={{ base: "unset", md: "absolute" }}
-        p={{ base: "0", md: "20px" }}
-        w={{ base: "100%", md: "calc(100% - 40px)" }}
-        h="calc(100% - 40px)"
-        zIndex="1"
+        position="relative"
+        bg={inputBg}
+        w="100%"
+        borderRadius="30px"
+        // p={{ base: "10px", md: "10px" }}
+        pt="10px"
+        px="10px"
+        mt="auto"
       >
-        <SearchBar
-          w={{ base: "100%", md: "292px" }}
-          placeholder="Search your next destination"
-          background={inputBg}
-          mb="auto"
-        />
         <Flex
+          direction={{ sm: "column", md: "row" }}
+          gap="10px"
+          mb="10px"
           w="100%"
-          mt={{ base: "12px", md: "0px" }}
-          direction={{ base: "row", md: "row" }}
-          align={{ base: "end", md: "unset" }}
-          mb={{ base: "20px", md: "0px" }}
         >
-          <Flex
-            position="relative"
-            bg={inputBg}
-            w={{ base: "calc( 100% - 50px )", md: "max-content" }}
-            borderRadius="30px"
-            p={{ base: "30px", md: "30px" }}
-            mt="auto"
-          >
-            <Flex
-              position="absolute"
-              zIndex={1.1}
-              h="calc(100% - 60px)"
-              w="2px"
-              left="36.5px"
-              bgImage={`url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%${dash}' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='5' stroke-linecap='square'/%3e%3c/svg%3e");`}
-            />
-            <Flex w="100%" direction="column" me={{ base: "20px", md: "40px" }}>
-              <Flex
-                mb="50px"
-                w={{ base: "100%", md: "100%" }}
-                h="max-content"
-                zIndex="2"
-              >
-                <Box
-                  me="14px"
-                  border="3px solid"
-                  borderColor={brand}
-                  bg={inputBg}
-                  h="16px"
-                  w="16px"
-                  borderRadius="50%"
+          <MiniStatistics
+            name={
+              mapLocation.country &&
+              `${mapLocation?.city}, ${mapLocation?.country}`
+            }
+            value={mapLocation?.name || "Select Dive Site"}
+          />
+          {mapLocation?.menuItem1 && (
+            <MiniStatistics
+              startContent={
+                <IconBox
+                  w="56px"
+                  h="56px"
+                  bg={boxBg}
+                  icon={
+                    <Icon
+                      w="32px"
+                      h="32px"
+                      as={MdShowChart}
+                      color={brandColor}
+                    />
+                  }
                 />
-                <Text
-                  w="max-content"
-                  color={textColorSecondary}
-                  fontSize="md"
-                  fontWeight="500"
-                >
-                  Your location
-                </Text>
-              </Flex>
-              <Flex w="100%" h="max-content" zIndex="2" ms="-4px" bg={inputBg}>
-                <Icon
-                  color={brand}
-                  as={MdLocationOn}
-                  me="10px"
-                  w="24px"
-                  h="24px"
-                />
-                <Text
-                  minW="max-content"
-                  color={textColorSecondary}
-                  fontSize="md"
-                  fontWeight="500"
-                >
-                  W. Street 253
-                </Text>
-              </Flex>
-            </Flex>
-            <Flex direction="column">
-              <Flex
-                mb="16px"
-                w="100%"
-                direction="column"
-                h="max-content"
-                zIndex="2"
-              >
-                <Text
-                  w="max-content"
-                  color={textColorSecondary}
-                  fontSize="sm"
-                  fontWeight="500"
-                >
-                  Distance
-                </Text>
-                <Text
-                  w="max-content"
-                  color={textColorSecondary}
-                  fontSize="lg"
-                  lineHeight="100%"
-                  fontWeight="500"
-                >
-                  34 km
-                </Text>
-              </Flex>
-              <Flex
-                w="100%"
-                direction="column"
-                h="max-content"
-                zIndex="2"
-                ms="-4px"
-              >
-                <Text
-                  w="max-content"
-                  color={textColorSecondary}
-                  fontSize="sm"
-                  fontWeight="500"
-                >
-                  Time
-                </Text>
-                <Text
-                  w="max-content"
-                  color={textColorSecondary}
-                  fontSize="lg"
-                  lineHeight="100%"
-                  fontWeight="500"
-                >
-                  20 min
-                </Text>
-              </Flex>
-            </Flex>
-          </Flex>
-          <Button
-            borderRadius="50%"
-            ms={{ base: "14px", md: "auto" }}
-            bg="white"
-            w={{ base: "45px", md: "70px" }}
-            h={{ base: "45px", md: "70px" }}
-            minW={{ base: "45px", md: "70px" }}
-            minH={{ base: "45px", md: "70px" }}
-            variant="no-hover"
-          >
-            <Icon
-              as={IoPaperPlane}
-              color="secondaryGray.700"
-              w={{ base: "18px", md: "25px" }}
-              h={{ base: "18px", md: "25px" }}
+              }
+              name="Depth"
+              value={mapLocation.menuItem1}
             />
-          </Button>
+          )}
+          {mapLocation?.menuItem3 && (
+            <MiniStatistics
+              startContent={
+                <IconBox
+                  w="56px"
+                  h="56px"
+                  bg={boxBg}
+                  icon={
+                    <Icon w="32px" h="32px" as={MdPerson} color={brandColor} />
+                  }
+                />
+              }
+              name="Access"
+              value={mapLocation.menuItem3}
+            />
+          )}
+          <MiniStatistics
+            startContent={
+              <IconBox
+                w="56px"
+                h="56px"
+                bg={boxBg}
+                icon={
+                  <Icon
+                    w="32px"
+                    h="32px"
+                    as={MdCreditCard}
+                    color={brandColor}
+                  />
+                }
+              />
+            }
+            name={
+              mapLocation.type === "dive_site" ? "Cert Level" : "Memberships"
+            }
+            value={mapLocation?.menuItem2?.map((type) => (
+              <Badge colorScheme="teal" borderRadius="15px">
+                {type}
+              </Badge>
+            ))}
+          />
+          <MiniStatistics
+            // startContent={
+            //   <IconBox
+            //     w="56px"
+            //     h="56px"
+            //     bg={boxBg}
+            //     icon={<Icon w="32px" h="32px" as={MdRedo} color={brandColor} />}
+            //   />
+            // }
+            name={
+              mapLocation.type === "dive_site" ? "Diving Types" : "Languages"
+            }
+            value={
+              <Flex wrap="wrap" gap={1}>
+                {mapLocation?.menuItem4?.map((type) => (
+                  <Badge colorScheme="teal" borderRadius="15px">
+                    {type}
+                  </Badge>
+                ))}
+              </Flex>
+            }
+          />
+          {mapLocation?.name && (
+            <Button
+              borderRadius="50%"
+              ms={{ base: "14px", md: "auto" }}
+              my="auto"
+              bg="purple.400"
+              w={{ base: "45px", md: "70px" }}
+              h={{ base: "45px", md: "70px" }}
+              minW={{ base: "45px", md: "70px" }}
+              minH={{ base: "45px", md: "70px" }}
+              variant="no-hover"
+              onClick={viewLocationDetails}
+            >
+              <Icon
+                as={MdChevronRight}
+                color="white"
+                w={{ base: "18px", md: "25px" }}
+                h={{ base: "18px", md: "25px" }}
+              />
+            </Button>
+          )}
         </Flex>
       </Flex>
-      {/* <Map
-        initialViewState={{
-          latitude: 37.692,
-          longitude: -122.435,
-          zoom: 13,
-        }}
-        style={{ borderRadius: "20px", width: "100%", minHeight: "600px" }}
-        mapStyle={mapStyles}
-        mapboxAccessToken={MAPBOX_TOKEN}
-      /> */}
-    </Card>
+    </Flex>
   );
 }

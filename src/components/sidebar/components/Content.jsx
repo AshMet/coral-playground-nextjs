@@ -42,16 +42,14 @@ function SidebarContent(props) {
       pt="25px"
       borderRadius="30px"
     >
-      {isAuthenticated && (
-        <>
-          <Brand />
-          <Stack direction="column" mb="auto" mt="8px">
-            <Box ps="20px" pe={{ md: "16px", "2xl": "1px" }}>
-              <Links routes={routes} />
-            </Box>
-          </Stack>
+      <Brand />
+      <Stack direction="column" mb="auto" mt="8px">
+        <Box ps="20px" pe={{ md: "16px", "2xl": "1px" }}>
+          <Links routes={routes} />
+        </Box>
+      </Stack>
 
-          {/* <Box
+      {/* <Box
             ps="20px"
             pe={{ md: "16px", "2xl": "0px" }}
             mt="60px"
@@ -59,46 +57,42 @@ function SidebarContent(props) {
           >
             <SidebarCard />
           </Box> */}
-          <Flex mt="75px" mb="56px" justifyContent="center" alignItems="center">
-            <Avatar h="48px" w="48px" src={avatar4} me="20px" />
-            <Box>
-              {username ? (
-                <>
-                  <Text color={textColor} fontSize="md" fontWeight="700">
-                    {`@${username}`}
-                  </Text>
-                  <Text
-                    color="secondaryGray.600"
-                    fontSize="sm"
-                    fontWeight="400"
-                  >
-                    Pro Diver
-                  </Text>
-                </>
-              ) : (
-                <>
-                  <Box>
-                    <Input
-                      type="text"
-                      placeholder="Username...."
-                      value={nickname}
-                      onChange={(e) => setNickname(e.target.value)}
-                    />
-                  </Box>
-                  <Button
-                    colorScheme="purple"
-                    size="sm"
-                    borderRadius="58px"
-                    mt="10px"
-                    onClick={handleSetUsername}
-                  >
-                    Set Nickname
-                  </Button>
-                </>
-              )}
-            </Box>
-          </Flex>
-        </>
+      {isAuthenticated && (
+        <Flex mt="75px" mb="56px" justifyContent="center" alignItems="center">
+          <Avatar h="48px" w="48px" src={avatar4} me="20px" />
+          <Box>
+            {username ? (
+              <>
+                <Text color={textColor} fontSize="md" fontWeight="700">
+                  {`@${username}`}
+                </Text>
+                <Text color="secondaryGray.600" fontSize="sm" fontWeight="400">
+                  Pro Diver
+                </Text>
+              </>
+            ) : (
+              <>
+                <Box>
+                  <Input
+                    type="text"
+                    placeholder="Username...."
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                  />
+                </Box>
+                <Button
+                  colorScheme="purple"
+                  size="sm"
+                  borderRadius="58px"
+                  mt="10px"
+                  onClick={handleSetUsername}
+                >
+                  Set Nickname
+                </Button>
+              </>
+            )}
+          </Box>
+        </Flex>
       )}
     </Flex>
   );

@@ -52,7 +52,7 @@ import Card from "../../../../components/card/Card";
 import { ButtonLeft, ButtonRight } from "../../../../components/icons/Icons";
 // Assets
 import EagleView from "../../../../components/pages/carInterface/EagleView";
-// import MapCard from "./components/MapCard";
+import MapCard from "components/pages/carInterface/MapCard";
 import Phone from "components/pages/carInterface/Phone";
 import AdminLayout from "layouts/admin";
 
@@ -250,7 +250,7 @@ export default function Default() {
           </Slider>
         </Card>
       </Box>
-      {/* <MapCard gridArea={{ base: "2 / 1 / 3 / 3", "2xl": "1 / 3 / 2 / 4" }} /> */}
+      <MapCard gridArea={{ base: "2 / 1 / 3 / 3", "2xl": "1 / 3 / 2 / 4" }} />
     </Grid>
   );
 }

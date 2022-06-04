@@ -8,12 +8,15 @@ const Image = chakra(NextImage, {
     [
       "src",
       "alt",
+      "layout",
       "quality",
       "placeholder",
       "blurDataURL",
       "loader ",
       "width",
       "height",
+      "h",
+      "w",
     ].includes(prop),
 });
 

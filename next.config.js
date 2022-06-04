@@ -33,7 +33,9 @@ module.exports = withPWA({
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: [
       'avatars.dicebear.com',
-      'ipfs.moralis.io'
+      'ipfs.moralis.io',
+      'iebxsikux8zn.usemoralis.com',
+      'localhost'
     ]
   }
 });

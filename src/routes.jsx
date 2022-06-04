@@ -201,7 +201,7 @@ const routes = [
   },
   // --- Dashboards ---
   {
-    name: "Activities",
+    name: "Dashboards",
     path: "/dashboards",
     icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
     collapse: true,
@@ -223,6 +223,21 @@ const routes = [
         layout: "/admin",
         path: "/dashboards/smartHome",
         component: DashboardsSmartHome,
+      },
+    ],
+  },
+  // --- Activities ---
+  {
+    name: "Activities",
+    path: "/dashboards",
+    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+    collapse: true,
+    items: [
+      {
+        name: "Explore",
+        layout: "",
+        path: "/activities/explore",
+        component: DashboardsCarInterface,
       },
     ],
   },

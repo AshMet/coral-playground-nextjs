@@ -22,15 +22,12 @@ import "../../public/css/App.css";
 // };
 
 const MyApp = ({ Component, pageProps }) => {
-  // const APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-  // const SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+  const APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+  const SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
   const getLayout = Component.getLayout || ((page) => page);
   return (
     <ChakraProvider theme={theme}>
-      <MoralisProvider
-        appId="kxgDmvo8khufRzG1NwBQRyCsYqFu9DWJhsez8xW8"
-        serverUrl="https://iebxsikux8zn.usemoralis.com:2053/server"
-      >
+      <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
         <CoralPgProvider>
           <Head>
             <meta
