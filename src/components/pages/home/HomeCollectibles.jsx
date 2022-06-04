@@ -119,7 +119,10 @@ export default function HomeBenefits() {
               <Parallax translateY={[60, 0, "easeOutExpo"]}>
                 <Flex direction="column">
                   <Box mb="20px" position="relative" borderRadius="15px">
-                    <Image src="/img/home/clown_fish.png" borderRadius="15px" />
+                    <Image
+                      src="/img/home/clown_fish.jpeg"
+                      borderRadius="15px"
+                    />
                     <Box
                       w="100%"
                       h="100%"
