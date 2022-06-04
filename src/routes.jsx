@@ -1,17 +1,21 @@
 /* eslint-disable import/no-cycle */
 import { Icon } from "@chakra-ui/react";
-// import React from "react";
+import { FaEthereum } from "react-icons/fa";
+import { GiScubaMask, GiGraduateCap } from "react-icons/gi";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 import {
   // MdDashboard,
   MdHome,
   MdLock,
   MdOutlineShoppingCart,
+  MdOutlineLogin,
 } from "react-icons/md";
 
 // Admin Imports
+import Learn from "pages/activities/learn";
 import DashboardsCarInterface from "pages/admin/dashboards/carInterface";
-import DashboardsDefault from "pages/admin/dashboards/default";
-import DashboardsSmartHome from "pages/admin/dashboards/smartHome";
+// import DashboardsDefault from "pages/admin/dashboards/default";
+// import DashboardsSmartHome from "pages/admin/dashboards/smartHome";
 // NFT Imports
 import NFTCollection from "pages/admin/nfts/collection";
 import NFTDrops from "pages/admin/nfts/drops";
@@ -59,65 +63,35 @@ const routes = [
   {
     name: "Get Started",
     path: "/auth",
-    icon: <Icon as={MdLock} width="20px" height="20px" color="inherit" />,
+    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
     collapse: true,
     items: [
       {
         name: "Home",
         layout: "/auth",
         path: "/home",
+        icon: <Icon as={MdHome} width="15px" height="20px" color="inherit" />,
       },
       // --- Sign In ---
       {
         name: "Sign In",
-        path: "/sign-in",
-        collapse: true,
-        items: [
-          // {
-          //   name: "Default",
-          //   layout: "/auth",
-          //   path: "/sign-in/default",
-          //   icon: (
-          //     <Icon as={MdHome} width="16px" height="16px" color="inherit" />
-          //   ),
-          //   component: SignInDefault,
-          // },
-          {
-            name: "Centered",
-            layout: "/auth",
-            path: "/signIn/SignInCentered",
-            icon: (
-              <Icon as={MdHome} width="16px" height="16px" color="inherit" />
-            ),
-            // component: SignInCentered,
-          },
-        ],
+        layout: "/auth",
+        path: "/signIn/SignInCentered",
+        icon: (
+          <Icon
+            as={MdOutlineLogin}
+            width="15px"
+            height="20px"
+            color="inherit"
+          />
+        ),
       },
       // --- Sign Up ---
       {
         name: "Sign Up",
-        path: "/sign-up",
-        collapse: true,
-        items: [
-          // {
-          //   name: "Default",
-          //   layout: "/auth",
-          //   path: "/sign-up/default",
-          //   icon: (
-          //     <Icon as={MdHome} width="16px" height="16px" color="inherit" />
-          //   ),
-          //   component: SignUpDefault,
-          // },
-          {
-            name: "Centered",
-            layout: "/auth",
-            path: "/signUp/SignUpCentered",
-            icon: (
-              <Icon as={MdHome} width="16px" height="16px" color="inherit" />
-            ),
-            // component: SignUpCentered,
-          },
-        ],
+        layout: "/auth",
+        path: "/signUp/SignUpCentered",
+        icon: <Icon as={MdLock} width="15px" height="20px" color="inherit" />,
       },
       // --- Verification ---
       // {
@@ -200,37 +174,37 @@ const routes = [
     ],
   },
   // --- Dashboards ---
-  {
-    name: "Dashboards",
-    path: "/dashboards",
-    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
-    collapse: true,
-    items: [
-      {
-        name: "Learn",
-        layout: "/admin",
-        path: "/dashboards/default",
-        component: DashboardsDefault,
-      },
-      {
-        name: "Explore",
-        layout: "/admin",
-        path: "/dashboards/carInterface",
-        component: DashboardsCarInterface,
-      },
-      {
-        name: "Smart Home",
-        layout: "/admin",
-        path: "/dashboards/smartHome",
-        component: DashboardsSmartHome,
-      },
-    ],
-  },
+  // {
+  //   name: "Dashboards",
+  //   path: "/dashboards",
+  //   icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+  //   collapse: true,
+  //   items: [
+  //     {
+  //       name: "Learn",
+  //       layout: "/admin",
+  //       path: "/dashboards/default",
+  //       component: DashboardsDefault,
+  //     },
+  //     {
+  //       name: "Explore",
+  //       layout: "/admin",
+  //       path: "/dashboards/carInterface",
+  //       component: DashboardsCarInterface,
+  //     },
+  //     {
+  //       name: "Smart Home",
+  //       layout: "/admin",
+  //       path: "/dashboards/smartHome",
+  //       component: DashboardsSmartHome,
+  //     },
+  //   ],
+  // },
   // --- Activities ---
   {
     name: "Activities",
     path: "/dashboards",
-    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+    icon: <Icon as={GiScubaMask} width="20px" height="20px" color="inherit" />,
     collapse: true,
     items: [
       {
@@ -238,6 +212,23 @@ const routes = [
         layout: "",
         path: "/activities/explore",
         component: DashboardsCarInterface,
+        icon: (
+          <Icon
+            as={HiOutlineLocationMarker}
+            width="15px"
+            height="20px"
+            color="inherit"
+          />
+        ),
+      },
+      {
+        name: "Learn",
+        layout: "",
+        path: "/activities/learn",
+        component: Learn,
+        icon: (
+          <Icon as={GiGraduateCap} width="15px" height="20px" color="inherit" />
+        ),
       },
     ],
   },
@@ -245,20 +236,21 @@ const routes = [
   {
     name: "NFTs",
     path: "/nfts",
-    icon: (
-      <Icon
-        as={MdOutlineShoppingCart}
-        width="20px"
-        height="20px"
-        color="inherit"
-      />
-    ),
+    icon: <Icon as={FaEthereum} width="20px" height="20px" color="inherit" />,
     collapse: true,
     items: [
       {
         name: "Marketplace",
         layout: "",
         path: "/nfts/marketplace",
+        icon: (
+          <Icon
+            as={MdOutlineShoppingCart}
+            width="15px"
+            height="15px"
+            color="inherit"
+          />
+        ),
         component: NFTMarketplace,
         secondary: true,
       },
