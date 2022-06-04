@@ -48,7 +48,7 @@ export default function MapCard(props) {
     //   category: "Diving",
     //   action: "View Site Details",
     // });
-    mapLocation.type === "dive_site"
+    mapLocation?.type === "dive_site"
       ? router.push(`/activities/dive_site/${mapLocation?.location_id}`)
       : router.push(`/activities/dive_centre/${mapLocation?.location_id}`);
   };
@@ -102,7 +102,7 @@ export default function MapCard(props) {
                 />
               }
               name="Depth"
-              value={mapLocation.menuItem1}
+              value={mapLocation?.menuItem1}
             />
           )}
           {mapLocation?.menuItem3 && (
@@ -118,7 +118,7 @@ export default function MapCard(props) {
                 />
               }
               name="Access"
-              value={mapLocation.menuItem3}
+              value={mapLocation?.menuItem3}
             />
           )}
           <MiniStatistics
@@ -138,7 +138,7 @@ export default function MapCard(props) {
               />
             }
             name={
-              mapLocation.type === "dive_site" ? "Cert Level" : "Memberships"
+              mapLocation?.type === "dive_site" ? "Cert Level" : "Memberships"
             }
             value={mapLocation?.menuItem2?.map((type) => (
               <Badge colorScheme="teal" borderRadius="15px">
@@ -156,7 +156,7 @@ export default function MapCard(props) {
             //   />
             // }
             name={
-              mapLocation.type === "dive_site" ? "Diving Types" : "Languages"
+              mapLocation?.type === "dive_site" ? "Diving Types" : "Languages"
             }
             value={
               <Flex wrap="wrap" gap={1}>
