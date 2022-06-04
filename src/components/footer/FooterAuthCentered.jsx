@@ -1,12 +1,12 @@
 // import React from "react";
 import {
   Flex,
-  Link,
   List,
   ListItem,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import Link from "next/link";
 
 export default function Footer() {
   const textColor = useColorModeValue("gray.400", "white");
@@ -39,16 +39,16 @@ export default function Footer() {
         {" "}
         &copy; {1900 + new Date().getYear()}
         <Text as="span" fontWeight="500" ms="4px">
-          Horizon UI. All Rights Reserved. Made with love by
           <Link
             mx="3px"
             color={textColor}
-            href="https://www.simmmple.com"
+            href="auth/home"
             target="_blank"
             fontWeight="700"
           >
-            Simmmple!
-          </Link>
+            Coral Playground
+          </Link>{" "}
+          All Rights Reserved
         </Text>
       </Text>
       <List display="flex">
@@ -58,12 +58,8 @@ export default function Footer() {
             md: "44px",
           }}
         >
-          <Link
-            fontWeight="500"
-            color={textColor}
-            href="mailto:hello@simmmple.com"
-          >
-            Support
+          <Link fontWeight="500" color={textColor} href="auth/home">
+            About Us
           </Link>
         </ListItem>
         <ListItem
@@ -72,12 +68,8 @@ export default function Footer() {
             md: "44px",
           }}
         >
-          <Link
-            fontWeight="500"
-            color={textColor}
-            href="https://www.simmmple.com/licenses"
-          >
-            License
+          <Link fontWeight="500" color={textColor} href="auth/home">
+            How It Works
           </Link>
         </ListItem>
         <ListItem
@@ -86,21 +78,13 @@ export default function Footer() {
             md: "44px",
           }}
         >
-          <Link
-            fontWeight="500"
-            color={textColor}
-            href="https://simmmple.com/terms-of-service"
-          >
-            Terms of Use
+          <Link fontWeight="500" color={textColor} href="auth/home">
+            Timeline
           </Link>
         </ListItem>
         <ListItem>
-          <Link
-            fontWeight="500"
-            color={textColor}
-            href="https://www.blog.simmmple.com/"
-          >
-            Blog
+          <Link fontWeight="500" color={textColor} href="auth/home/">
+            Mission
           </Link>
         </ListItem>
       </List>

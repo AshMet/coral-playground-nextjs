@@ -6,6 +6,8 @@ import { Text, Icon, useColorModeValue } from "@chakra-ui/react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 // Custom components
 import Card from "components/card/Card";
+// import "react-calendar/dist/Calendar.css";
+import "./MiniCalendar.module.css";
 
 export default function MiniCalendar(props) {
   const { selectRange, ...rest } = props;

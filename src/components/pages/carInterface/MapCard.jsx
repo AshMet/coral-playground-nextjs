@@ -102,7 +102,7 @@ export default function MapCard(props) {
                 />
               }
               name="Depth"
-              value={mapLocation?.menuItem1}
+              value={`${mapLocation?.menuItem1} m`}
             />
           )}
           {mapLocation?.menuItem3 && (

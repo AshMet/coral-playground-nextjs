@@ -75,16 +75,16 @@ export default function AuthNavbar(props) {
     console.log(foundRoute);
     return foundRoute[0]?.items;
   }
-  function getLinksCollapse(routeName) {
-    const foundRoute = routes?.filter(function (route) {
-      return route?.items && route?.name === routeName;
-    });
+  // function getLinksCollapse(routeName) {
+  //   const foundRoute = routes?.filter(function (route) {
+  //     return route?.items && route?.name === routeName;
+  //   });
 
-    return foundRoute[0].items.filter(function (link) {
-      return link.collapse === true;
-    });
-  }
-  const authObject = getLinksCollapse("Get Started");
+  //   return foundRoute[0].items.filter(function (link) {
+  //     return link.collapse === true;
+  //   });
+  // }
+  const authObject = getLinks("Get Started");
   // const mainObject = getLinksCollapse("Main Pages");
   const dashboardsObject = getLinks("Activities");
   const nftsObject = getLinks("NFTs");
@@ -115,7 +115,7 @@ export default function AuthNavbar(props) {
         {/* <HorizonLogo h="26px" w="175px" color={logoColor} /> */}
         <Image src="/svg/coral-logo.svg" width="200px" height="45px" />
       </Stack>
-      <Text fontsize="sm" mt="3px">
+      <Text fontSize="sm" mt="3px">
         {logoText}
       </Text>
     </Link>

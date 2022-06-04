@@ -15,14 +15,14 @@
 .react-calendar__navigation {
   align-items: center;
 }
-abbr[title] {
+/* abbr[title] {
   border-bottom: none;
   -webkit-text-decoration: unset;
   text-decoration: unset;
   -webkit-text-decoration: unset;
   -webkit-text-decoration: unset;
   text-decoration: unset !important;
-}
+} */
 .react-calendar__navigation__prev-button {
   background-color: #4318ff !important;
   border-radius: 10px;

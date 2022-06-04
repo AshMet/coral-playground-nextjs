@@ -11,8 +11,6 @@ import defaultSEOConfig from "../../next-seo.config";
 import { CoralPgProvider } from "../contexts/CoralPgContext";
 import theme from "../theme/theme";
 import "../../public/css/App.css";
-import "react-calendar/dist/Calendar.css";
-import "../../public/css/MiniCalendar.css";
 // import AuthCentered from "layouts/auth/types/Centered";
 // import AdminLayout from "layouts/admin";
 

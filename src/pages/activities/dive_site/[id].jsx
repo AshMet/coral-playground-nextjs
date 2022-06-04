@@ -43,7 +43,6 @@ import { useRouter } from "next/router";
 // Custom components
 import { useState, useEffect } from "react";
 import { FaRegAddressCard } from "react-icons/fa";
-import { HiOutlineBadgeCheck } from "react-icons/hi";
 import { IoBoatOutline } from "react-icons/io5";
 import { VscSymbolRuler } from "react-icons/vsc";
 import { useMoralisQuery } from "react-moralis";
@@ -398,81 +397,17 @@ export default function DiveSiteDetails() {
                       }
                     />
                     <Flex direction="column">
-                      <Text
-                        fontSize="sm"
-                        fontWeight="bold"
-                        color={textColor}
-                        mb="10px"
-                      >
+                      <Text fontSize="sm" fontWeight="bold" color={textColor}>
                         Certification Level
                       </Text>
-                      <Flex wrap="wrap" gap={3}>
-                        {certLevel?.map((level) => (
-                          <Badge
-                            colorScheme="teal"
-                            borderRadius="15px"
-                            display="flex"
-                            px={4}
-                            py={2}
-                            justifyContent="center"
-                          >
-                            {level}
-                          </Badge>
-                        ))}
-                      </Flex>
-                      {/* <Text color="gray.400" fontSize="xs">
-                        Wreck, Night Dive, Deep, Corals, Sandy Bottom, Top 100 site, drift
-                      </Text> */}
                     </Flex>
                   </Flex>
                   <Spacer />
-                </Flex>
-
-                <Flex align="center" w="100%">
-                  <Flex align="center">
-                    <IconBox
-                      as="box"
-                      h="40px"
-                      minW="40px"
-                      bg={iconBoxBg}
-                      me="18px"
-                      icon={
-                        <HiOutlineBadgeCheck
-                          h="20px"
-                          w="20px"
-                          color={iconColor}
-                        />
-                      }
-                    />
-                    <Flex direction="column">
-                      <Text
-                        fontSize="sm"
-                        fontWeight="bold"
-                        color={textColor}
-                        mb="10px"
-                      >
-                        Diving Types
-                      </Text>
-                      <Flex wrap="wrap" gap={3}>
-                        {divingTypes?.map((type) => (
-                          <Badge
-                            colorScheme="teal"
-                            borderRadius="15px"
-                            display="flex"
-                            px={4}
-                            py={2}
-                            justifyContent="center"
-                          >
-                            {type}
-                          </Badge>
-                        ))}
-                      </Flex>
-                      {/* <Text color="gray.400" fontSize="xs">
-                        Wreck, Night Dive, Deep, Corals, Sandy Bottom, Top 100 site, drift
-                      </Text> */}
-                    </Flex>
-                  </Flex>
-                  <Spacer />
+                  <Text fontWeight="bold" color="green.400" fontSize="lg">
+                    {certLevel?.map(
+                      (level, index) => (index ? ", " : "") + level
+                    )}
+                  </Text>
                 </Flex>
               </Stack>
               <Accordion
@@ -533,16 +468,20 @@ export default function DiveSiteDetails() {
                     <AccordionIcon color="gray.500" />
                   </AccordionButton>
                   <AccordionPanel p="18px 0px 10px 0px">
-                    <Text
-                      color="secondaryGray.600"
-                      fontWeight="500"
-                      fontSize="md"
-                      textAlign="left"
-                      alignSelf="flex-start"
-                      justifySelf="flex-start"
-                    >
-                      Coming Soon
-                    </Text>
+                    <Flex wrap="wrap" gap={3}>
+                      {divingTypes?.map((type) => (
+                        <Badge
+                          colorScheme="teal"
+                          borderRadius="15px"
+                          display="flex"
+                          px={4}
+                          py={2}
+                          justifyContent="center"
+                        >
+                          {type}
+                        </Badge>
+                      ))}
+                    </Flex>
                   </AccordionPanel>
                 </AccordionItem>
                 <AccordionItem border="none">
