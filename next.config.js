@@ -23,7 +23,7 @@ module.exports = withPWA({
     return [
       {
         source: '/',
-        destination: '/admin/dashboards/default',
+        destination: '/auth/home',
         permanent: true,
       },
     ]
