@@ -100,15 +100,15 @@ export default function Default() {
           direction="column"
           w="100%"
           h="100%"
-          p="20px"
+          p={{ sm: "0px", md: "20px" }}
           zIndex="0"
-          minH={{ base: "1000px", lg: "100%" }}
+          minH={{ base: "calc(120% - 0px)", lg: "100%" }}
         >
           <Flex
             direction="column"
             position={{ base: "unset", md: "absolute" }}
-            w={{ base: "100%", md: "calc(100% - 40px)" }}
-            h={{ sm: "100%", md: "calc(100% - 40px)" }}
+            w="100%"
+            h={{ sm: "calc(100% - 40px)", md: "calc(100% - 40px)" }}
             zIndex="1"
           >
             {/* <SearchBar
@@ -117,42 +117,44 @@ export default function Default() {
               background={inputBg}
               mb="auto"
             /> */}
-            <GoogleMap
-              mapContainerStyle={containerStyle}
-              center={center}
-              zoom={4}
-              options={mapOptions}
-              mb="0px"
-            >
-              {data && (
-                <MarkerClusterer options={clusterOptions}>
-                  {(clusterer) =>
-                    data.map((location) => (
-                      <Marker
-                        key={createKey(location)}
-                        position={{ lat: location.lat, lng: location.lng }}
-                        clusterer={clusterer}
-                        onClick={() => setMapLocation(location)}
-                        icon={{
-                          url:
-                            location.type === "dive_site"
-                              ? colorMode === "light"
-                                ? "/img/activities/dive_icon_dark.svg"
-                                : "/img/activities/dive_icon_light.svg"
-                              : colorMode === "light"
-                              ? "/img/activities/centre_icon_dark.svg"
-                              : "/img/activities/centre_icon_light.svg",
-                          scaledSize:
-                            location.lat === mapLocation.lat
-                              ? new window.google.maps.Size(50, 50)
-                              : new window.google.maps.Size(34, 34),
-                        }}
-                      />
-                    ))
-                  }
-                </MarkerClusterer>
-              )}
-            </GoogleMap>
+            <Box minH="calc(100vh - 275px)">
+              <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={center}
+                zoom={4}
+                options={mapOptions}
+                mb="0px"
+              >
+                {data && (
+                  <MarkerClusterer options={clusterOptions}>
+                    {(clusterer) =>
+                      data.map((location) => (
+                        <Marker
+                          key={createKey(location)}
+                          position={{ lat: location.lat, lng: location.lng }}
+                          clusterer={clusterer}
+                          onClick={() => setMapLocation(location)}
+                          icon={{
+                            url:
+                              location.type === "dive_site"
+                                ? colorMode === "light"
+                                  ? "/img/activities/dive_icon_dark.svg"
+                                  : "/img/activities/dive_icon_light.svg"
+                                : colorMode === "light"
+                                ? "/img/activities/centre_icon_dark.svg"
+                                : "/img/activities/centre_icon_light.svg",
+                            scaledSize:
+                              location.lat === mapLocation.lat
+                                ? new window.google.maps.Size(50, 50)
+                                : new window.google.maps.Size(34, 34),
+                          }}
+                        />
+                      ))
+                    }
+                  </MarkerClusterer>
+                )}
+              </GoogleMap>
+            </Box>
             <MapCard mapLocation={mapLocation} />
           </Flex>
           {/* <Map

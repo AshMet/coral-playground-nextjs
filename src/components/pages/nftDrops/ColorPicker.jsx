@@ -256,13 +256,16 @@ export default function ColorPicker(props) {
         color={textColor}
         fontSize={{ base: "36px", "2xl": "54px" }}
         fontWeight="700"
-        mb="-30px"
+        // mb="-30px"
         lineHeight="100%"
       >
         {name}
       </Text>
+      <Text color="gray.500" fontSize="md" mt={3}>
+        {`Select your character's colors. Every character is guaranteed to be unique.`}
+      </Text>
       {/* Start Color Picker */}
-      <SimpleGrid gap={{ sm: "12px" }} columns={2} mt="65px" mb="40px">
+      <SimpleGrid gap={{ sm: "12px" }} columns={2} mt="25px" mb="40px">
         <Flex direction="column">
           <Flex alignItems="center">
             <Box
@@ -538,7 +541,7 @@ export default function ColorPicker(props) {
         >
           {mintPrice} ETH
         </Text>
-        <Flex mb={{ base: "0px", md: "30px" }}>
+        {/* <Flex mb={{ base: "0px", md: "30px" }}>
           <Text
             fontWeight="700"
             color="secondaryGray.600"
@@ -555,9 +558,15 @@ export default function ColorPicker(props) {
             w="24px"
             color="green.500"
           />
-        </Flex>
+        </Flex> */}
 
-        <Text fontSize="xl" color={textColor} fontWeight="500" mb="28px">
+        <Text
+          fontSize="xl"
+          color={textColor}
+          fontWeight="500"
+          mb="28px"
+          mt="30px"
+        >
           Minting begins in
         </Text>
         <Flex w="100%" justify="center">
@@ -567,7 +576,7 @@ export default function ColorPicker(props) {
               fontSize={{ base: "34px", md: "44px" }}
               fontWeight="700"
             >
-              20
+              -
             </Text>
             <Text color="secondaryGray.600" fontSize="24px" fontWeight="500">
               Hrs
@@ -579,7 +588,7 @@ export default function ColorPicker(props) {
               fontSize={{ base: "34px", md: "44px" }}
               fontWeight="700"
             >
-              37
+              --
             </Text>
             <Text color="secondaryGray.600" fontSize="24px" fontWeight="500">
               Mins
@@ -591,7 +600,7 @@ export default function ColorPicker(props) {
               fontSize={{ base: "34px", md: "44px" }}
               fontWeight="700"
             >
-              49
+              --
             </Text>
             <Text color="secondaryGray.600" fontSize="24px" fontWeight="500">
               Secs

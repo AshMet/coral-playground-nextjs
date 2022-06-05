@@ -126,7 +126,7 @@ export default function Drops() {
           </Card>
         </Flex>
       </Grid>
-      <Text
+      {/* <Text
         mt="25px"
         mb="36px"
         color={textColor}
@@ -135,8 +135,8 @@ export default function Drops() {
         fontWeight="700"
       >
         More from this Collection
-      </Text>
-      <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
+      </Text> */}
+      {/* <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
         <NFT
           name="Swipe Circles"
           author="By Peter Will"
@@ -205,7 +205,7 @@ export default function Drops() {
           currentBid="0.91 ETH"
           download="#"
         />
-      </SimpleGrid>
+      </SimpleGrid> */}
 
       {/* Delete Product */}
     </Box>

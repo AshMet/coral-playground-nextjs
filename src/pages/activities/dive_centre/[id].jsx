@@ -165,7 +165,7 @@ export default function DiveCentreDetails() {
                 align
                 mx={{ sm: "auto", lg: "auto", xl: "0px" }}
                 width="100%"
-                height="100%"
+                height={{ sm: "300px", md: "400px", lg: "500px" }}
                 position="relative"
               >
                 {imageUrl && (

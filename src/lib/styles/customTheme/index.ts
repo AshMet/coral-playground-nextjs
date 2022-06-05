@@ -7,6 +7,10 @@ import fonts from "./fonts";
 const customTheme = extendTheme({
   fonts,
   colors,
+  config: {
+    useSystemColorMode: true,
+    initialColorMode: "dark",
+  },
   components: {
     Button,
   },

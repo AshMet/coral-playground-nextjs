@@ -27,8 +27,6 @@ import {
   useDisclosure,
   SimpleGrid,
 } from "@chakra-ui/react";
-import Image from "next/image";
-// import React from "react";
 import PropTypes from "prop-types";
 // Custom components
 import { GoChevronDown } from "react-icons/go";
@@ -38,10 +36,11 @@ import routes from "../../routes";
 // import { NavLink } from "react-router-dom";
 import NavLink from "../navLinks/NavLink";
 import { SidebarResponsive } from "../sidebar/Sidebar";
+import Image from "components/actions/NextChakraImg";
 
 // Assets
-// import dropdownMain from "assets/img/layout/dropdownMain.png";
-// import dropdown from "assets/img/layout/dropdown.png";
+// import"/img/layout/dropdown.png"ain from "assets/img/layout"/img/layout/dropdown.png"ain.png";
+// import"/img/layout/dropdown.png"from "assets/img/layout"/img/layout/dropdown.png"png";
 
 export default function AuthNavbar(props) {
   const { logo, logoText, secondary, sidebarWidth, ...rest } = props;
@@ -134,7 +133,6 @@ export default function AuthNavbar(props) {
         color={mainText}
       >
         <Image src="/svg/coral-logo.svg" width="200px" height="45px" />
-        {/* <HorizonLogo h="26px" w="175px" my="32px" color={logoColor} /> */}
       </Link>
     );
     // mainText = useColorModeValue("gray.700", "gray.200");
@@ -290,7 +288,12 @@ export default function AuthNavbar(props) {
             <SimpleGrid columns="1" gap="8px" w="150px">
               {createDashboardsLinks(dashboardsObject)}
             </SimpleGrid>
-            {/* <Image w='110px' h='110px' borderRadius='16px' src={dropdown} /> */}
+            <Image
+              width="110px"
+              height="110px"
+              borderRadius="16px"
+              src="/img/home/diving-badge.png"
+            />
           </MenuList>
         </Menu>
       </Stack>
@@ -333,7 +336,12 @@ export default function AuthNavbar(props) {
             <SimpleGrid columns="1" gap="8px" w="150px">
               {createNftsLinks(nftsObject)}
             </SimpleGrid>
-            {/* <Image w='110px' h='110px' borderRadius='16px' src={dropdown} /> */}
+            <Image
+              width="150px"
+              height="110px"
+              borderRadius="16px"
+              src="/img/home/octopus_bg.png"
+            />
           </MenuList>
         </Menu>
       </Stack>
@@ -383,7 +391,7 @@ export default function AuthNavbar(props) {
             >
               {createMainLinks(mainObject)}
             </SimpleGrid>
-            <Image borderRadius='16px' src={dropdownMain} />
+            <Image borderRadius='16px' src="/img/layout/dropdown.png"ain} />
           </MenuList>
         </Menu>
       </Stack> */}
@@ -432,7 +440,12 @@ export default function AuthNavbar(props) {
             >
               {createAuthLinks(authObject)}
             </SimpleGrid>
-            {/* <Image borderRadius='16px' src={dropdown} /> */}
+            <Image
+              width="110px"
+              height="110px"
+              borderRadius="16px"
+              src="/img/home/clown_fish.jpeg"
+            />
           </MenuList>
         </Menu>
       </Stack>

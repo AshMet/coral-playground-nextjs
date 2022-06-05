@@ -95,10 +95,13 @@ export default function Collection() {
         <Flex flexDirection="column">
           <Banner
             image={NftBanner2}
-            profile={NftProfile}
+            profile="/img/home/octopus_bg.png"
             creator="ash.met"
             name="Agro Octo®"
-            desc="The Abstractus® project is an online art show and the First Art NFTs on Ethereum, launched on May 9, 2017. Abstractus® features 28 unique series of cards from 7 different artists. Abstractus® are referenced with CryptoAbstractus® and Crypto in the original ERC-721 Non-Fungible Token Standard, and pre-dates them both. Join the Abstractus® Discord and check out theAbstractus® Docs to find out more."
+            desc={`Octo is the genesis character in the coral playground and the first of many to come. With a limited mint quantity of 1000, 
+            this NFT will represent early adopters in our project and help us accelerate our delivery milestones.
+            Additionally, as with all our drops, 10% of all profits will be set aside for marine preservation initiatives to be voted
+            on by the coral DAO.`}
             floor={0.56}
             volume={33.8}
             owners={4.6}

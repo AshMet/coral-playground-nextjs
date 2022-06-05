@@ -1,7 +1,12 @@
 /* eslint-disable import/no-cycle */
 import { Icon } from "@chakra-ui/react";
 import { FaEthereum } from "react-icons/fa";
-import { GiScubaMask, GiGraduateCap } from "react-icons/gi";
+import {
+  GiScubaMask,
+  GiGraduateCap,
+  GiOctopus,
+  GiLockedChest,
+} from "react-icons/gi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import {
   // MdDashboard,
@@ -9,19 +14,21 @@ import {
   MdLock,
   MdOutlineShoppingCart,
   MdOutlineLogin,
+  MdOutlineCollections,
 } from "react-icons/md";
 
 // Admin Imports
+import Explore from "pages/activities/explore";
 import Learn from "pages/activities/learn";
-import DashboardsCarInterface from "pages/admin/dashboards/carInterface";
+// import DashboardsCarInterface from "pages/admin/dashboards/carInterface";
 // import DashboardsDefault from "pages/admin/dashboards/default";
 // import DashboardsSmartHome from "pages/admin/dashboards/smartHome";
 // NFT Imports
 import NFTCollection from "pages/admin/nfts/collection";
 import NFTDrops from "pages/admin/nfts/drops";
 import NFTMarketplace from "pages/admin/nfts/marketplace";
-import NFTPage from "pages/admin/nfts/page";
-import NFTProfile from "pages/admin/nfts/profile";
+// import NFTPage from "pages/admin/nfts/page";
+// import NFTProfile from "pages/admin/nfts/profile";
 // Main Imports
 // import AccountBilling from "pages/admin/main/account/billing";
 // import AccountApplications from "pages/admin/main/account/application";
@@ -63,7 +70,7 @@ const routes = [
   {
     name: "Get Started",
     path: "/auth",
-    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+    icon: <Icon as={GiOctopus} width="20px" height="20px" color="inherit" />,
     collapse: true,
     items: [
       {
@@ -202,16 +209,16 @@ const routes = [
   // },
   // --- Activities ---
   {
-    name: "Activities",
+    name: "Explore",
     path: "/dashboards",
     icon: <Icon as={GiScubaMask} width="20px" height="20px" color="inherit" />,
     collapse: true,
     items: [
       {
-        name: "Explore",
+        name: "Map",
         layout: "",
         path: "/activities/explore",
-        component: DashboardsCarInterface,
+        component: Explore,
         icon: (
           <Icon
             as={HiOutlineLocationMarker}
@@ -222,7 +229,7 @@ const routes = [
         ),
       },
       {
-        name: "Learn",
+        name: "Certifications",
         layout: "",
         path: "/activities/learn",
         component: Learn,
@@ -258,27 +265,38 @@ const routes = [
         name: "Collection",
         layout: "/admin",
         path: "/nfts/collection",
+        icon: (
+          <Icon
+            as={MdOutlineCollections}
+            width="15px"
+            height="15px"
+            color="inherit"
+          />
+        ),
         component: NFTCollection,
         secondary: true,
       },
-      {
-        name: "NFT Page",
-        layout: "/admin",
-        path: "/nfts/page",
-        component: NFTPage,
-        secondary: true,
-      },
-      {
-        name: "Profile",
-        layout: "/admin",
-        path: "/nfts/profile",
-        component: NFTProfile,
-        secondary: true,
-      },
+      // {
+      //   name: "NFT Page",
+      //   layout: "/admin",
+      //   path: "/nfts/page",
+      //   component: NFTPage,
+      //   secondary: true,
+      // },
+      // {
+      //   name: "Profile",
+      //   layout: "/admin",
+      //   path: "/nfts/profile",
+      //   component: NFTProfile,
+      //   secondary: true,
+      // },
       {
         name: "Drops",
         layout: "/admin",
         path: "/nfts/drops",
+        icon: (
+          <Icon as={GiLockedChest} width="15px" height="15px" color="inherit" />
+        ),
         component: NFTDrops,
         secondary: true,
       },
