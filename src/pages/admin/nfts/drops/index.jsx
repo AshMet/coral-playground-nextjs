@@ -22,36 +22,29 @@
 */
 
 // Chakra imports
-import {
-  Box,
-  Flex,
-  Grid,
-  Text,
-  useColorModeValue,
-  SimpleGrid,
-} from "@chakra-ui/react";
+import { Box, Flex, Grid } from "@chakra-ui/react";
 import { useState } from "react";
 
-import Avatar1 from "../../../../../public/img/avatars/avatar1.png";
-import Avatar2 from "../../../../../public/img/avatars/avatar2.png";
-import Avatar3 from "../../../../../public/img/avatars/avatar3.png";
-import Avatar4 from "../../../../../public/img/avatars/avatar4.png";
+// import Avatar1 from "../../../../../public/img/avatars/avatar1.png";
+// import Avatar2 from "../../../../../public/img/avatars/avatar2.png";
+// import Avatar3 from "../../../../../public/img/avatars/avatar3.png";
+// import Avatar4 from "../../../../../public/img/avatars/avatar4.png";
 import AvatarSimmmple from "../../../../../public/img/avatars/avatarSimmmple.png";
-import Nft2 from "../../../../../public/img/nfts/Nft2.png";
-import Nft4 from "../../../../../public/img/nfts/Nft4.png";
-import Nft5 from "../../../../../public/img/nfts/Nft5.png";
-import Nft6 from "../../../../../public/img/nfts/Nft6.png";
+// import Nft2 from "../../../../../public/img/nfts/Nft2.png";
+// import Nft4 from "../../../../../public/img/nfts/Nft4.png";
+// import Nft5 from "../../../../../public/img/nfts/Nft5.png";
+// import Nft6 from "../../../../../public/img/nfts/Nft6.png";
 import NftLarge1 from "../../../../../public/img/nfts/NftLarge1.png";
 import Card from "../../../../components/card/Card";
 import Banner from "../../../../components/pages/nftDrops/Banner";
 import Description from "../../../../components/pages/nftDrops/Description";
-import NFT from "components/card/NFT";
+// import NFT from "components/card/NFT";
 import ColorPicker from "components/pages/nftDrops/ColorPicker";
 // import TableLastOffer from "./components/TableLastOffer";
 import AdminLayout from "layouts/admin";
 
 export default function Drops() {
-  const textColor = useColorModeValue("secondaryGray.900", "white");
+  // const textColor = useColorModeValue("secondaryGray.900", "white");
   const [bodyBase, setBodyBase] = useState("#ffffff"); // default: #71c6c1
   const [bodyShading, setBodyShading] = useState("#ffffff");
   const [tentacles, setTentacles] = useState("#ffffff");

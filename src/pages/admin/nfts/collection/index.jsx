@@ -46,8 +46,7 @@ import Avatar1 from "../../../../../public/img/avatars/avatar1.png";
 import Avatar2 from "../../../../../public/img/avatars/avatar2.png";
 import Avatar3 from "../../../../../public/img/avatars/avatar3.png";
 import Avatar4 from "../../../../../public/img/avatars/avatar4.png";
-import NftBanner2 from "../../../../../public/img/nfts/NftBanner2.png";
-import NftProfile from "../../../../../public/img/nfts/NftProfile.png";
+import NftBanner1 from "../../../../../public/img/nfts/NftBanner1.jpg";
 import NFT from "../../../../components/card/NFT";
 import Banner from "../../../../components/pages/nftCollection/Banner";
 import SearchBar from "../../../../components/pages/nftCollection/Search";
@@ -94,7 +93,7 @@ export default function Collection() {
       <Box mb="20px" display={{ base: "block", lg: "grid" }}>
         <Flex flexDirection="column">
           <Banner
-            image={NftBanner2}
+            image={NftBanner1}
             profile="/img/home/octopus_bg.png"
             creator="ash.met"
             name="Agro Octo®"
