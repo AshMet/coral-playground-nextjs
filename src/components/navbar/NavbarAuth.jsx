@@ -85,7 +85,7 @@ export default function AuthNavbar(props) {
   // }
   const authObject = getLinks("Get Started");
   // const mainObject = getLinksCollapse("Main Pages");
-  const dashboardsObject = getLinks("Activities");
+  const dashboardsObject = getLinks("Explore");
   const nftsObject = getLinks("NFTs");
   // const logoColor = useColorModeValue("white", "white");
   // Chakra color mode
@@ -261,7 +261,7 @@ export default function AuthNavbar(props) {
         position="relative"
       >
         <Text fontSize="sm" color={mainText}>
-          Activities
+          Explore
         </Text>
         <Box>
           <Icon

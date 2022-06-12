@@ -38,7 +38,9 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 // Custom components
+import type { GetServerSideProps } from "next";
 import { useState } from "react";
+import Stripe from "stripe";
 
 import MiniCalendar from "components/calendar/MiniCalendar";
 import Card from "components/card/Card";
@@ -47,69 +49,53 @@ import Course from "components/card/Course";
 import { VSeparator } from "components/separator/Separator";
 import AdminLayout from "layouts/admin";
 
-export default function Courses() {
+interface IPrice extends Stripe.Price {
+  product: Stripe.Product;
+  metadata: Stripe.Metadata;
+}
+
+interface IProps {
+  prices: IPrice[];
+}
+
+export default function Courses({ prices }: IProps) {
   const [tabState, setTabState] = useState("all");
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const beginnerCourses = (
-    <SimpleGrid columns="1" gap="20px">
-      <Course
-        bgBox="linear-gradient(115.07deg, #29E9F5 -9.41%, #7A64FF 28.04%, #FF508B 71.85%, #FD6D53 112.49%, #FD6D53 112.49%)"
-        imageUrl="/svg/certifications/open_water_cert.svg"
-        title="Discover Scuba Diving"
-        desc={`Have you always wondered what it's like to breathe underwater?
-                If you want to try scuba diving, but aren't quite ready to take
-                the plunge into a certification course, Discover Scuba Diving is
-                for you. A quick and easy introduction into what it takes to
-                explore the underwater world. Although this is not a scuba
-                certification course, you'll learn all the steps it takes to be
-                a PADI certified diver.`}
-        agency="PADI®"
-        duration="3-4 days"
-        price="$150"
-        priceId="price_1KuKzvAvLPvC9h7xv48NXNwx"
-      />
-      <Course
-        bgBox="linear-gradient(292.37deg, #92FE9D 10.84%, #00C9FF 95.27%)"
-        imageUrl="/svg/certifications/open_water_cert.svg"
-        title="Open Water Diver"
-        desc={`This is the first scuba certification level. A highly-trained
-                PADI Instructor will teach you how to scuba dive in a relaxed,
-                supportive learning environment. By the end of the course,
-                you'll have the skills and knowledge to dive at home or abroad
-                and be an ambassador for the underwater world.`}
-        agency="PADI®"
-        duration="3-4 days"
-        price="$300"
-        priceId="price_1Ku8SWAvLPvC9h7xzfnsF4fi"
-      />
-      <Course
-        bgBox="linear-gradient(109.6deg, #FF9966 17.44%, #FF5E62 78.63%)"
-        imageUrl="/svg/certifications/advanced_diver_cert.svg"
-        title="Advanced Open Water Diver"
-        desc={`You'll practice navigation and buoyancy, try deep diving and
-                make three specialty dives of your choosing (it's like a
-                specialty sampler platter). For every specialty dive you
-                complete, you can earn credit toward PADI® specialty
-                certifications. Here are a few of the many options: Deep,
-                Digital Underwater Photography, Dive Against Debris, Dry Suit,
-                Enriched Air Nitrox, Fish Identification, Night, Peak
-                Performance Buoyancy, Search & Recovery, Underwater Naturalist,
-                Underwater Navigation, and Wreck Diver.`}
-        agency="PADI®"
-        duration="3-4 days"
-        price="$270"
-        priceId="price_1KuL2sAvLPvC9h7xhpASS4NB"
-      />
+    <SimpleGrid column="1" gap="20px">
+      {prices.map((price) => {
+        // console.log(JSON.stringify(price));
+        return (
+          <Course
+            key={price.id}
+            bgBox="linear-gradient(115.07deg, #29E9F5 -9.41%, #7A64FF 28.04%, #FF508B 71.85%, #FD6D53 112.49%, #FD6D53 112.49%)"
+            imageUrl="/svg/certifications/open_water_cert.svg"
+            // imageUrl={price.product.images[0]}
+            title={price.product.name}
+            description={`Have you always wondered what it's like to breathe underwater?
+                  If you want to try scuba diving, but aren't quite ready to take
+                  the plunge into a certification course, Discover Scuba Diving is
+                  for you. A quick and easy introduction into what it takes to
+                  explore the underwater world. Although this is not a scuba
+                  certification course, you'll learn all the steps it takes to be
+                  a PADI certified diver.`}
+            agency="PADI®"
+            duration="3-4 days"
+            price={((price.unit_amount as number) / 100).toFixed(2)}
+            priceId={price.id}
+          />
+        );
+      })}
     </SimpleGrid>
   );
   const proCourses = (
-    <SimpleGrid columns="1" gap="20px">
+    <SimpleGrid column="1" gap="20px">
       <Course
         bgBox="linear-gradient(109.6deg, #FF9966 17.44%, #FF5E62 78.63%)"
         imageUrl="/svg/certifications/dive_master_cert.svg"
         title="Master Scuba Diver"
-        desc={`Join the best of the best in recreational scuba diving and live
+        description={`Join the best of the best in recreational scuba diving and live
               the dive life as a PADI Master Scuba Diver. The Master Scuba
               Diver rating places you in an elite group of respected divers
               who have earned this rating through both significant experience
@@ -126,7 +112,7 @@ export default function Courses() {
         bgBox="linear-gradient(115.07deg, #29E9F5 -9.41%, #7A64FF 28.04%, #FF508B 71.85%, #FD6D53 112.49%, #FD6D53 112.49%)"
         imageUrl="/svg/certifications/advanced_diver_cert.svg"
         title="Nitrox Diver"
-        desc={`Enriched air, also known as nitrox or EANx, contains less
+        description={`Enriched air, also known as nitrox or EANx, contains less
               nitrogen than regular air. Breathing less nitrogen means you can
               enjoy longer dives and shorter surface intervals. No wonder
               Enriched Air Diver is the most popular PADI® specialty.`}
@@ -142,7 +128,7 @@ export default function Courses() {
       bgBox="linear-gradient(109.6deg, #FF9966 17.44%, #FF5E62 78.63%)"
       imageUrl="/svg/certifications/advanced_diver_cert.svg"
       title="Rescue Diver"
-      desc={`The PADI® Rescue Diver course will change the way you dive – in
+      description={`The PADI® Rescue Diver course will change the way you dive – in
               the best possible way. Learn to identify and fix minor issues
               before they become big problems, gain a lot of confidence and
               have serious fun along the way. Discover why countless divers
@@ -317,6 +303,21 @@ export default function Courses() {
   );
 }
 
-Courses.getLayout = function getLayout(page) {
+export const getServerSideProps: GetServerSideProps = async () => {
+  const stripeKey = process.env.STRIPE_SECRET_KEY || "ERROR!!! NO KEY";
+  const stripe = new Stripe(stripeKey, {
+    apiVersion: "2020-08-27",
+  });
+  const prices = await stripe.prices.list({
+    active: true,
+    limit: 10,
+    // query: "active:'true' AND metadata['category']:'recreational'",
+    expand: ["data.product"],
+  });
+
+  return { props: { prices: prices.data } };
+};
+
+Courses.getLayout = function getLayout(page: any) {
   return <AdminLayout>{page}</AdminLayout>;
 };

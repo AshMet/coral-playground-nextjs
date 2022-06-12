@@ -1,22 +1,83 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 // Chakra imports
 import { Box, Flex, Text, useColorModeValue, Button } from "@chakra-ui/react";
-// Assets
-// import OpenWaterCert from "../../assets/svg/open_water_cert.svg";
-// import AdvancedCert from "../../assets/svg/advanced_diver_cert.svg";
-// import MasterCert from "../../assets/svg/dive_master_cert.svg";
 // Custom components
-// import React from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
+
+// import { createCheckoutSession } from "next-stripe/client";
 
 import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
-// Assets
+import checkout from "components/pages/activities/checkout";
+
+// interface CourseProps {
+//   imageUrl: string;
+//   title: string;
+//   description: string;
+//   agency: string;
+//   price: string;
+//   duration: string;
+//   bgBox: string;
+//   priceId: string;
+// }
 
 export default function Course(props) {
-  const { imageUrl, title, desc, agency, price, duration, bgBox } = props;
+  const {
+    imageUrl,
+    title,
+    description,
+    agency,
+    price,
+    duration,
+    bgBox,
+    priceId,
+  } = props;
   const textColor = useColorModeValue("navy.700", "white");
   const textBrand = useColorModeValue("brand.500", "white");
   // const bgBadge = useColorModeValue("secondaryGray.300", "whiteAlpha.50");
+
+  const [isLoading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const lineItems = [
+    {
+      price: priceId, // eg: "price_1KuasdfaWasdfasdfasfnsF4fi",
+      quantity: 1,
+    },
+  ];
+
+  console.log(router.pathname);
+
+  const redirectToCheckout = async () => {
+    setLoading(true);
+    console.log("redirectToCheckout");
+    checkout({ lineItems });
+    setLoading(false);
+  };
+
+  // const onClick = async (priceId) => {
+  //   setLoading(true);
+  //   const session = await createCheckoutSession({
+  //     success_url: window.location.href,
+  //     cancel_url: window.location.href,
+  //     line_items: [{ price: priceId, quantity: 1 }],
+  //     payment_method_types: ["card"],
+  //     method: "payment",
+  //   });
+  //   console.log(session);
+  //   const stripePublicKey =
+  //     process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || "ERROR!!! NO KEY";
+  //   const stripe = await loadStripe(stripePublicKey);
+  //   if (stripe) {
+  //     stripe.redirectToCheckout({ sessionId: session.id });
+  //   }
+  //   setLoading(false);
+  // };
+
   return (
     <Card p="20px" h="max-content" minH={{ md: "450px", xl: "auto" }}>
       <Flex direction={{ base: "column", md: "column", xl: "row" }}>
@@ -40,10 +101,9 @@ export default function Course(props) {
             fontWeight="500"
             borderRadius="70px"
             mt="20px"
-            // onClick={redirectToCheckout}
-            // disabled={isLoading}
+            onClick={() => redirectToCheckout()}
+            isLoading={isLoading}
           >
-            {/* {isLoading ? "Loading..." : "Book Now"} */}
             Book Now
           </Button>
         </Flex>
@@ -77,7 +137,7 @@ export default function Course(props) {
                 me="14px"
                 mb="10px"
               >
-                {desc}
+                {description}
               </Text>
               <Flex justify="space-between" w="100%">
                 <Flex direction="column">
