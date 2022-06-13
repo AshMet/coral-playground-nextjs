@@ -46,6 +46,7 @@ import MiniCalendar from "components/calendar/MiniCalendar";
 import Card from "components/card/Card";
 // import Schedule from "views/admin/main/account/courses/components/Schedule";
 import Course from "components/card/Course";
+import BookingDetails from "components/pages/bookings/BookingDetails";
 import { VSeparator } from "components/separator/Separator";
 import AdminLayout from "layouts/admin";
 
@@ -60,11 +61,14 @@ interface IProps {
 
 export default function Courses({ prices }: IProps) {
   const [tabState, setTabState] = useState("all");
+  const [courseId, setCourseId] = useState();
+  const [courseName, setCourseName] = useState();
+  const [selectedDate, setSelectedDate] = useState();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const beginnerCourses = (
     <SimpleGrid column="1" gap="20px">
-      {prices.map((price) => {
+      {prices.slice(0, 6).map((price) => {
         // console.log(JSON.stringify(price));
         return (
           <Course
@@ -73,17 +77,14 @@ export default function Courses({ prices }: IProps) {
             imageUrl="/svg/certifications/open_water_cert.svg"
             // imageUrl={price.product.images[0]}
             title={price.product.name}
-            description={`Have you always wondered what it's like to breathe underwater?
-                  If you want to try scuba diving, but aren't quite ready to take
-                  the plunge into a certification course, Discover Scuba Diving is
-                  for you. A quick and easy introduction into what it takes to
-                  explore the underwater world. Although this is not a scuba
-                  certification course, you'll learn all the steps it takes to be
-                  a PADI certified diver.`}
+            description={price.product.description}
             agency="PADI®"
             duration="3-4 days"
-            price={((price.unit_amount as number) / 100).toFixed(2)}
+            price={((price.unit_amount as number) / 100).toFixed(0)}
             priceId={price.id}
+            setCourseId={setCourseId}
+            setCourseName={setCourseName}
+            selected={courseName === price.product.name}
           />
         );
       })}
@@ -288,15 +289,30 @@ export default function Courses({ prices }: IProps) {
           display={{ base: "block", "3xl": "grid" }}
           gridColumnGap="20px"
         >
+          <Flex align="center" mb="20px">
+            <Text
+              color={textColor}
+              fontSize="lg"
+              fontWeight="700"
+              lineHeight="100%"
+            >
+              Complete Your Booking
+            </Text>
+          </Flex>
           <MiniCalendar
             gridArea={{ md: "1 / 1 / 2 / 2;", lg: "1 / 1 / 2 / 2" }}
             selectRange={false}
             mb="20px"
+            setSelectedDate={setSelectedDate}
           />
-          {/* <Schedule
+          <BookingDetails
+            courseName={courseName}
+            courseId={courseId}
+            setSelectedDate={setSelectedDate}
+            diveDate={selectedDate}
             gridArea={{ md: "1 / 2 / 2 / 3", lg: "2 / 1 / 3 / 2" }}
             mb="20px"
-          /> */}
+          />
         </Grid>
       </Card>
     </Grid>
@@ -318,6 +334,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return { props: { prices: prices.data } };
 };
 
-Courses.getLayout = function getLayout(page: any) {
+Courses.getLayout = function getLayout(page: never) {
   return <AdminLayout>{page}</AdminLayout>;
 };

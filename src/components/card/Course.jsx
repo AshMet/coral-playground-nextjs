@@ -3,17 +3,20 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 // Chakra imports
-import { Box, Flex, Text, useColorModeValue, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  useColorModeValue,
+  Button,
+  Icon,
+} from "@chakra-ui/react";
 // Custom components
-import { useRouter } from "next/router";
-import { useState } from "react";
-
 // import { createCheckoutSession } from "next-stripe/client";
+import { BsArrowRight } from "react-icons/bs";
 
 import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
-import checkout from "components/pages/activities/checkout";
-
 // interface CourseProps {
 //   imageUrl: string;
 //   title: string;
@@ -35,29 +38,14 @@ export default function Course(props) {
     duration,
     bgBox,
     priceId,
+    setCourseId,
+    setCourseName,
+    selected,
   } = props;
   const textColor = useColorModeValue("navy.700", "white");
+  const selectedTextColor = "white";
   const textBrand = useColorModeValue("brand.500", "white");
   // const bgBadge = useColorModeValue("secondaryGray.300", "whiteAlpha.50");
-
-  const [isLoading, setLoading] = useState(false);
-  const router = useRouter();
-
-  const lineItems = [
-    {
-      price: priceId, // eg: "price_1KuasdfaWasdfasdfasfnsF4fi",
-      quantity: 1,
-    },
-  ];
-
-  console.log(router.pathname);
-
-  const redirectToCheckout = async () => {
-    setLoading(true);
-    console.log("redirectToCheckout");
-    checkout({ lineItems });
-    setLoading(false);
-  };
 
   // const onClick = async (priceId) => {
   //   setLoading(true);
@@ -79,7 +67,12 @@ export default function Course(props) {
   // };
 
   return (
-    <Card p="20px" h="max-content" minH={{ md: "450px", xl: "auto" }}>
+    <Card
+      p="20px"
+      h="max-content"
+      minH={{ md: "450px", xl: "auto" }}
+      bg={selected && "brand.500"}
+    >
       <Flex direction={{ base: "column", md: "column", xl: "row" }}>
         <Flex direction="column" pr="20px">
           <Box
@@ -94,18 +87,6 @@ export default function Course(props) {
           >
             <Image src={imageUrl} layout="fill" />
           </Box>
-          <Button
-            variant="darkBrand"
-            color="white"
-            fontSize="sm"
-            fontWeight="500"
-            borderRadius="70px"
-            mt="20px"
-            onClick={() => redirectToCheckout()}
-            isLoading={isLoading}
-          >
-            Book Now
-          </Button>
         </Flex>
         <Flex
           justify="space-between"
@@ -115,7 +96,45 @@ export default function Course(props) {
         >
           <Flex display={{ base: "block", xl: "flex" }}>
             <Box direction="column" w="100%" mb="5px">
-              <Text
+              <Flex align="center" mb="20px">
+                <Text
+                  color={selected ? selectedTextColor : textColor}
+                  fontSize="lg"
+                  fontWeight="700"
+                  lineHeight="100%"
+                >
+                  {title}
+                </Text>
+                <Button
+                  p="0px"
+                  ms="auto"
+                  variant="no-hover"
+                  bg="transparent"
+                  cursor="pointer"
+                  _hover={{ transform: "translate(4px)" }}
+                  onClick={() => {
+                    setCourseName(title);
+                    setCourseId(priceId);
+                  }}
+                >
+                  <Text
+                    fontSize="sm"
+                    color={selected ? selectedTextColor : textColor}
+                    fontWeight="bold"
+                  >
+                    Select This
+                  </Text>
+                  <Icon
+                    as={BsArrowRight}
+                    w="18px"
+                    h="18px"
+                    color={selected ? selectedTextColor : textColor}
+                    transition="all .3s ease"
+                    ms=".3rem"
+                  />
+                </Button>
+              </Flex>
+              {/* <Text
                 color={textColor}
                 fontSize={{
                   base: "xl",
@@ -127,7 +146,7 @@ export default function Course(props) {
                 fontWeight="700"
               >
                 {title}
-              </Text>
+              </Text> */}
               <Text
                 color="secondaryGray.600"
                 fontSize={{
@@ -143,39 +162,51 @@ export default function Course(props) {
                 <Flex direction="column">
                   <Text
                     fontSize="md"
-                    color={textColor}
+                    color={selected ? selectedTextColor : textColor}
                     fontWeight="bold"
                     mb="6px"
                   >
                     {agency}
                   </Text>
-                  <Text color={textBrand} fontSize="sm" fontWeight="normal">
+                  <Text
+                    color={selected ? selectedTextColor : textBrand}
+                    fontSize="sm"
+                    fontWeight="normal"
+                  >
                     Agency
                   </Text>
                 </Flex>
                 <Flex direction="column">
                   <Text
                     fontSize="md"
-                    color={textColor}
+                    color={selected ? selectedTextColor : textColor}
                     fontWeight="bold"
                     mb="6px"
                   >
                     {duration}
                   </Text>
-                  <Text color={textBrand} fontSize="sm" fontWeight="normal">
+                  <Text
+                    color={selected ? selectedTextColor : textBrand}
+                    fontSize="sm"
+                    fontWeight="normal"
+                  >
                     Duration
                   </Text>
                 </Flex>
                 <Flex direction="column">
                   <Text
                     fontSize="md"
-                    color={textColor}
+                    color={selected ? selectedTextColor : textColor}
                     fontWeight="bold"
                     mb="6px"
                   >
-                    {price}
+                    ${price}
                   </Text>
-                  <Text color={textBrand} fontSize="sm" fontWeight="normal">
+                  <Text
+                    color={selected ? selectedTextColor : textBrand}
+                    fontSize="sm"
+                    fontWeight="normal"
+                  >
                     Price
                   </Text>
                 </Flex>

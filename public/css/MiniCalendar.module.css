@@ -1,13 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
-body {
-  font-family: "DM Sans", sans-serif;
-}
-
-option {
-  color: black;
-}
-
-/* MiniCalendar component css - REMOVE FROM GLOBAL SCOPE */
 /* LIGHT MODE + GENERAL */
 
 .react-calendar {
@@ -50,8 +41,6 @@ option {
 .react-calendar__navigation__label {
   font-weight: 700 !important;
   font-size: 18px;
-  margin-right: 0.5em;
-  margin-left: 0.5em;
 }
 .react-calendar__navigation__label:hover,
 .react-calendar__navigation__label:focus {
@@ -71,17 +60,6 @@ option {
   background-color: #f4f7fe;
   border-radius: 10px;
   margin-bottom: 6px;
-  font-weight: 700;
-  text-align: center;
-  text-transform: uppercase;
-  text-decoration: none;
-  margin-top: 1em;
-  font-size: .75em;
-}
-.react-calendar__month-view__weekdays__weekday {
-  flex: 0 0 14.2857%;
-  overflow: hidden;
-  padding: 0.5em;
 }
 .react-calendar__tile--now,
 .react-calendar__tile--now:enabled:hover,
@@ -143,18 +121,7 @@ body.chakra-ui-dark .react-calendar__tile:enabled:focus {
   background-color: rgba(255, 255, 255, 0.1);
 }
 body.chakra-ui-dark .react-calendar__month-view__weekdays {
-  margin-top: 1em;
   background-color: rgba(255, 255, 255, 0.1);
-  font-size: .75em;
-  font-weight: 700;
-  text-align: center;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-body.chakra-ui-dark .react-calendar__month-view__weekdays__weekday {
-  flex: 0 0 14.2857%;
-  overflow: hidden;
-  padding: 0.5em;
 }
 body.chakra-ui-dark .react-calendar__tile--now,
 body.chakra-ui-dark .react-calendar__tile--now:enabled:hover,
