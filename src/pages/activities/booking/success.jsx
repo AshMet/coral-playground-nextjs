@@ -22,7 +22,7 @@
 */
 
 // Chakra imports
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 // Custom components
 // import { getServerSideProps } from "next";
 import Stripe from "stripe";
@@ -37,8 +37,13 @@ export default function Invoice({ session }) {
   return (
     <Card mt={{ base: "130px", md: "80px", xl: "80px" }} maxW="920px" mx="auto">
       <Flex direction="column" width="stretch">
+        <Text>{session.metadata.diver_name}</Text>
         <Banner sessionId={session.id} status={session.payment_status} />
         <Content
+          diverName={session.metadata.diver_name}
+          diveDate={session.metadata.dive_date}
+          diveTime={session.metadata.dive_time}
+          cert={session.metadata.cert}
           amountSubtotal={(session.amount_subtotal / 100).toFixed(2)}
           amountTotal={(session.amount_total / 100).toFixed(2)}
         />

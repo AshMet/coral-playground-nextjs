@@ -9,21 +9,22 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // import React from "react";
-import { BsArrowRight } from "react-icons/bs";
+import { BsX } from "react-icons/bs";
 // Assets
 import { IoMdTime } from "react-icons/io";
 
 export default function Default(props) {
-  const { current, day, weekday, hours, title, ...rest } = props;
+  const { confirmed, day, weekday, hours, title, id, removeDive, ...rest } =
+    props;
   // Chakra Color Mode
-  const miniCardCurrent = useColorModeValue("brand.900", "brand.400");
-  const miniCardNonCurrent = useColorModeValue("transparent", "navy.700");
-  const boxCurrent = useColorModeValue("#32278D", "navy.900");
-  const boxNonCurrent = useColorModeValue("secondaryGray.300", "navy.800");
-  const textCurrent = useColorModeValue("white", "white");
-  const textNonCurrent = useColorModeValue("secondaryGray.900", "white");
-  const textSecondaryCurrent = useColorModeValue("white", "white");
-  const textSecondaryNonCurrent = useColorModeValue(
+  const miniCardConfirmed = useColorModeValue("brand.900", "brand.400");
+  const miniCardNonConfirmed = useColorModeValue("transparent", "navy.700");
+  const boxConfirmed = useColorModeValue("#32278D", "navy.900");
+  const boxNonConfirmed = useColorModeValue("secondaryGray.300", "navy.800");
+  const textConfirmed = useColorModeValue("white", "white");
+  const textNonConfirmed = useColorModeValue("secondaryGray.900", "white");
+  const textSecondaryConfirmed = useColorModeValue("white", "white");
+  const textSecondaryNonConfirmed = useColorModeValue(
     "secondaryGray.600",
     "white"
   );
@@ -32,7 +33,7 @@ export default function Default(props) {
       align="center"
       p="6px"
       borderRadius="20px"
-      bg={current ? miniCardCurrent : miniCardNonCurrent}
+      bg={confirmed ? miniCardConfirmed : miniCardNonConfirmed}
       {...rest}
     >
       <Flex
@@ -43,13 +44,13 @@ export default function Default(props) {
         w="77px"
         h="77px"
         borderRadius="15px"
-        bg={current ? boxCurrent : boxNonCurrent}
+        bg={confirmed ? boxConfirmed : boxNonConfirmed}
       >
         <Text
           mb="2px"
           fontSize="md"
           fontWeight="500"
-          color={current ? textSecondaryCurrent : textSecondaryNonCurrent}
+          color={confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed}
         >
           {weekday}
         </Text>
@@ -57,7 +58,7 @@ export default function Default(props) {
           lineHeight="100%"
           fontSize="34px"
           fontWeight="700"
-          color={current ? textCurrent : textNonCurrent}
+          color={confirmed ? textConfirmed : textNonConfirmed}
         >
           {day}
         </Text>
@@ -66,7 +67,7 @@ export default function Default(props) {
         <Text
           fontSize="lg"
           fontWeight="700"
-          color={current ? textCurrent : textNonCurrent}
+          color={confirmed ? textConfirmed : textNonConfirmed}
         >
           {title}
         </Text>
@@ -76,25 +77,59 @@ export default function Default(props) {
             as={IoMdTime}
             w="16px"
             h="16px"
-            color={current ? textSecondaryCurrent : textSecondaryNonCurrent}
+            color={
+              confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
+            }
           />
           <Text
             fontSize="sm"
             fontWeight="500"
-            color={current ? textSecondaryCurrent : textSecondaryNonCurrent}
+            color={
+              confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
+            }
           >
             {hours}
           </Text>
         </Flex>
       </Box>
-      <Button mt="auto" variant="no-hover" bg="transparent" p="0px" ms="auto">
+      {confirmed && (
+        <Button
+          p="0px"
+          ms="auto"
+          variant="no-hover"
+          bg="transparent"
+          cursor="pointer"
+          color="white"
+          _hover={{ transform: "translate(4px)" }}
+          onClick={() => removeDive(id)}
+        >
+          <Text fontSize="sm" fontWeight="bold">
+            Remove
+          </Text>
+          <Icon
+            as={BsX}
+            w="18px"
+            h="18px"
+            transition="all .3s ease"
+            ms=".3rem"
+          />
+        </Button>
+      )}
+      {/* <Button
+        // mb="auto"
+        variant="no-hover"
+        bg="transparent"
+        p="0px"
+        ms="auto"
+        onClick={() => removeDive(id)}
+      >
         <Icon
-          as={BsArrowRight}
-          color={current ? textCurrent : textNonCurrent}
+          as={BsX}
+          color={confirmed ? textConfirmed : textNonConfirmed}
           w="20px"
           h="20px"
         />
-      </Button>
+      </Button> */}
     </Flex>
   );
 }

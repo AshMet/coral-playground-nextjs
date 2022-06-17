@@ -44,6 +44,10 @@ export default function Course(props) {
   } = props;
   const textColor = useColorModeValue("navy.700", "white");
   const selectedTextColor = "white";
+  const selectedBgColor = useColorModeValue(
+    "brand.500",
+    "linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
+  );
   const textBrand = useColorModeValue("brand.500", "white");
   // const bgBadge = useColorModeValue("secondaryGray.300", "whiteAlpha.50");
 
@@ -71,7 +75,7 @@ export default function Course(props) {
       p="20px"
       h="max-content"
       minH={{ md: "450px", xl: "auto" }}
-      bg={selected && "brand.500"}
+      bg={selected && selectedBgColor}
     >
       <Flex direction={{ base: "column", md: "column", xl: "row" }}>
         <Flex direction="column" pr="20px">

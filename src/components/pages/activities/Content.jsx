@@ -12,7 +12,14 @@ import InvoiceTable from "components/pages/activities/InvoiceTable";
 import { HSeparator } from "components/separator/Separator";
 
 export default function Content(props) {
-  const { amountTotal, amountSubtotal } = props;
+  const {
+    diverName,
+    diveDate,
+    diveTime,
+    certLevel,
+    amountTotal,
+    amountSubtotal,
+  } = props;
   const tableColumnsInvoice = [
     {
       Header: "Item",
@@ -52,7 +59,7 @@ export default function Content(props) {
   const paid = amountTotal;
   return (
     <Flex direction="column" p={{ base: "10px", md: "60px" }}>
-      {/* <Card
+      <Card
         backgroundRepeat="no-repeat"
         bg={bgCard}
         p="30px"
@@ -68,10 +75,10 @@ export default function Content(props) {
               color="secondaryGray.600"
               fontWeight="400"
             >
-              Invoice for:
+              Receipt for:
             </Text>
             <Text color={textColor} fontSize="xl" fontWeight="700">
-              Anthony Petterson
+              {diverName}
             </Text>
             <Text
               w="max-content"
@@ -81,8 +88,8 @@ export default function Content(props) {
               fontWeight="400"
               lineHeight="26px"
             >
-              37 Avenue, Boggstown,
-              <br /> Indiana, United States 84219
+              Address 1
+              <br /> Address 2
             </Text>
           </Flex>
           <Flex direction="column">
@@ -93,10 +100,10 @@ export default function Content(props) {
               color="secondaryGray.600"
               fontWeight="400"
             >
-              Amount due
+              Booking Date
             </Text>
             <Text color={textColor} fontSize="36px" fontWeight="700">
-              $395.00
+              {diveTime}
             </Text>
             <Text
               w="max-content"
@@ -108,11 +115,11 @@ export default function Content(props) {
               borderRadius="10px"
               fontWeight="700"
             >
-              Due on Sep 30, 2022
+              {diveDate}
             </Text>
           </Flex>
         </Flex>
-      </Card> */}
+      </Card>
       <InvoiceTable
         tableData={tableDataInvoice}
         columnsData={tableColumnsInvoice}

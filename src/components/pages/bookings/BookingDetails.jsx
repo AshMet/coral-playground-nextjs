@@ -19,7 +19,7 @@ import checkout from "components/pages/activities/checkout";
 // Assets
 
 export default function BookingDetails(props) {
-  const { courseId, courseName, diveDate, ...rest } = props;
+  const { courseId, courseName, diveDate, diveTime, ...rest } = props;
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -27,7 +27,7 @@ export default function BookingDetails(props) {
   // const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
 
   const [diverName, setDiverName] = useState();
-  const [diveTime, setDiveTime] = useState();
+  // const [diveTime, setDiveTime] = useState();
   const [certLevel, setCertLevel] = useState();
   const [isLoading, setLoading] = useState(false);
 
@@ -38,9 +38,16 @@ export default function BookingDetails(props) {
     },
   ];
 
+  const metadata = {
+    diver_name: diverName,
+    dive_date: diveDate,
+    dive_time: diveTime,
+    cert: certLevel,
+  };
+
   const redirectToCheckout = async () => {
     setLoading(true);
-    checkout({ lineItems });
+    checkout({ lineItems, metadata });
     setLoading(false);
   };
   return (
@@ -75,29 +82,13 @@ export default function BookingDetails(props) {
               })}
             </Text>
           </Flex>
-          <FormLabel
-            ms="10px"
-            htmlFor="currency"
-            fontSize="sm"
-            color={textColor}
-            fontWeight="bold"
-            _hover={{ cursor: "pointer" }}
-          >
-            Dive Time
-          </FormLabel>
-          <Select
-            value={diveTime}
-            fontSize="sm"
-            id="currency"
-            variant="main"
-            h="44px"
-            maxh="44px"
-            defaultValue="morning"
-            onChange={(e) => setDiveTime(e.target.value)}
-          >
-            <option value="morning">Morning (9:00 AM)</option>
-            <option value="afternoon">Afternoon (1:00 PM)</option>
-          </Select>
+          <Flex my={3}>
+            <Text ml={2} fontSize="sm" color={textColor} fontWeight="bold">
+              Dive Time:
+            </Text>
+            <Spacer />
+            <Text>{diveTime || "None Selected"}</Text>
+          </Flex>
         </Flex>
         <InputField
           value={diverName}

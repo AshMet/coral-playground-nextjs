@@ -64,6 +64,7 @@ export default function Courses({ prices }: IProps) {
   const [courseId, setCourseId] = useState();
   const [courseName, setCourseName] = useState();
   const [selectedDate, setSelectedDate] = useState();
+  const [diveTime, setDiveTime] = useState();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const beginnerCourses = (
@@ -304,12 +305,14 @@ export default function Courses({ prices }: IProps) {
             selectRange={false}
             mb="20px"
             setSelectedDate={setSelectedDate}
+            setDiveTime={setDiveTime}
           />
           <BookingDetails
             courseName={courseName}
             courseId={courseId}
             setSelectedDate={setSelectedDate}
             diveDate={selectedDate}
+            diveTime={diveTime}
             gridArea={{ md: "1 / 2 / 2 / 3", lg: "2 / 1 / 3 / 2" }}
             mb="20px"
           />

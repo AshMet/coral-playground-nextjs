@@ -18,6 +18,7 @@ import {
 } from "react-icons/md";
 
 // Admin Imports
+import Booking from "pages/activities/booking";
 import Explore from "pages/activities/explore";
 import Learn from "pages/activities/learn";
 // import DashboardsCarInterface from "pages/admin/dashboards/carInterface";
@@ -237,8 +238,24 @@ const routes = [
           <Icon as={GiGraduateCap} width="15px" height="20px" color="inherit" />
         ),
       },
+      {
+        name: "Booking",
+        layout: "",
+        path: "/activities/booking",
+        component: Booking,
+        icon: (
+          <Icon as={GiGraduateCap} width="15px" height="20px" color="inherit" />
+        ),
+      },
     ],
   },
+  // {
+  //   name: "Dive Site",
+  //   layout: "",
+  //   path: "/activities/dive_site",
+  //   component: DiveSite,
+  //   invisible: true,
+  // },
   // --- NFTs ---
   {
     name: "NFTs",

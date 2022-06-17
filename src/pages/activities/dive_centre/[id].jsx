@@ -201,7 +201,7 @@ export default function DiveCentreDetails() {
                       height="100%"
                       borderRadius="15px"
                       cursor="pointer"
-                      layout="responsive"
+                      layout="raw"
                     />
                   )}
                 </Box>
@@ -228,7 +228,7 @@ export default function DiveCentreDetails() {
                     height="100%"
                     borderRadius="15px"
                     cursor="pointer"
-                    layout="responsive"
+                    layout="raw"
                   />
                 </Box>
                 <Box
@@ -254,7 +254,7 @@ export default function DiveCentreDetails() {
                     height="100%"
                     borderRadius="15px"
                     cursor="pointer"
-                    layout="responsive"
+                    layout="raw"
                   />
                 </Box>
                 <Box
@@ -280,7 +280,7 @@ export default function DiveCentreDetails() {
                     height="100%"
                     borderRadius="15px"
                     cursor="pointer"
-                    layout="responsive"
+                    layout="raw"
                   />
                 </Box>
                 <Box
@@ -306,7 +306,7 @@ export default function DiveCentreDetails() {
                     height="100%"
                     borderRadius="15px"
                     cursor="pointer"
-                    layout="responsive"
+                    layout="raw"
                   />
                 </Box>
               </Stack>

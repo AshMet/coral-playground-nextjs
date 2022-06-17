@@ -33,7 +33,7 @@ export default function Dashboard({ children, ...props }) {
     );
   };
   const getActiveRoute = (routes) => {
-    const activeRoute = "Default Brand Text";
+    const activeRoute = "";
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
         const collapseActiveRoute = getActiveRoute(routes[i].items);
@@ -99,6 +99,11 @@ export default function Dashboard({ children, ...props }) {
     return activeNavbar;
   };
 
+  // console.log(routes.filter((route) => route.invisible === true));
+  // const sidebarLinks = (routes) => {
+  //   return [...routes].filter((route) => route.invisible === true);
+  // };
+
   // const getRoutes = (routes) => {
   //   return routes.map((prop, key) => {
   //     if (prop.layout === "/admin") {
@@ -148,7 +153,7 @@ export default function Dashboard({ children, ...props }) {
             <Box>
               <Navbar
                 onOpen={onOpen}
-                logoText="Horizon UI Dashboard PRO"
+                logoText="Coral Playground"
                 brandText={getActiveRoute(routes)}
                 secondary={getActiveNavbar(routes)}
                 message={getActiveNavbarText(routes)}
