@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import {
@@ -8,25 +9,30 @@ import {
   VStack,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 // Custom components
 import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
 import checkout from "components/pages/activities/checkout";
+import equipment from "lib/constants/equipment.json";
 
 export default function EquipmentSelection(props) {
   const { mediaTab, dives } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const equipment = [
-    "Air Tank",
-    "Camera",
-    "Drysuit",
-    "Fins",
-    "Flashlights",
-    "Snorkel",
-    "Long Wetsuit",
-    "Short Wetsuit",
-  ];
+  const priceColor = useColorModeValue("green.300", "green.500");
+  const iconColor = useColorModeValue(
+    "",
+    "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
+  );
+  const activeItemColor = useColorModeValue("purple.300", "brand.500");
+  const [equipmentList, setEquipmentList] = useState([]);
+
+  function toggleArrayItem(arr, item) {
+    arr.includes(item)
+      ? setEquipmentList(arr.filter((i) => i !== item)) // remove item
+      : setEquipmentList([...arr, item]); // add item
+  }
 
   const lineItems = dives.map((dive) => {
     return {
@@ -42,7 +48,7 @@ export default function EquipmentSelection(props) {
     cert: "certLevel",
   };
 
-  console.log(lineItems);
+  console.log(equipmentList);
 
   const redirectToCheckout = async () => {
     checkout({ lineItems, metadata });
@@ -55,27 +61,33 @@ export default function EquipmentSelection(props) {
       </Text>
       <Flex direction="column" w="100%">
         <Flex wrap="wrap">
-          <SimpleGrid columns={{ sm: 2, md: 4 }} spacing="40px" w="100%">
+          <SimpleGrid columns={{ sm: 2, md: 4 }} gap="20px" w="100%">
             {equipment?.map((item) => (
               <Button
-                colorScheme="purple"
+                key={item.name}
                 borderRadius="15px"
                 display="flex"
                 p={3}
                 mb={3}
                 justifyContent="center"
-                minH="100px"
+                minH="130px"
+                bgColor={equipmentList.includes(item) && activeItemColor}
+                onClick={() => toggleArrayItem(equipmentList, item)}
               >
                 <VStack>
                   <Image
-                    src={`/svg/equipment/${item
+                    src={`/svg/equipment/${item.name
                       .toLowerCase()
                       .replaceAll(" ", "_")}.svg`}
                     width="100%"
                     height="40px"
                     borderRadius="15px"
+                    filter={iconColor}
                   />
-                  <Text>{item}</Text>
+                  <Text mb={0}>{item.name}</Text>
+                  <Text mt="0px" color={priceColor}>
+                    +${item.price}
+                  </Text>
                 </VStack>
               </Button>
             ))}

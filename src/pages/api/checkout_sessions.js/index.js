@@ -9,7 +9,7 @@ export default async function handler(req, res) {
         mode: "payment",
         payment_method_types: ["card"],
         line_items: req?.body?.items ?? [],
-        metadata: req?.body?.metadata ?? {},
+        metadata: req?.body?.metadata ?? [],
         success_url: `${req.headers.origin}/activities/booking/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/activities/learn`,
       });

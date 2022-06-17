@@ -39,8 +39,8 @@ import { useMoralisCloudFunction } from "react-moralis";
 // Assets
 import Card from "components/card/Card";
 // import SearchBar from "components/navbar/searchBar/SearchBar";
-import MapCard from "components/pages/carInterface/MapCard";
-import { DarkMap, LightMap } from "components/pages/carInterface/MapStyles";
+import MapCard from "components/maps/MapCard";
+import { DarkMap, LightMap } from "components/maps/MapStyles";
 import AdminLayout from "layouts/admin";
 
 const mapApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;

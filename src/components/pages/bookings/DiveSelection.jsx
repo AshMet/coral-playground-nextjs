@@ -23,7 +23,7 @@ import { useMoralisCloudFunction } from "react-moralis";
 import MiniCalendar from "components/calendar/MiniCalendar";
 import Card from "components/card/Card";
 import TimelineItem from "components/dataDisplay/TimelineItem";
-import { DarkMap, LightMap } from "components/pages/carInterface/MapStyles";
+import { DarkMap, LightMap } from "components/maps/MapStyles";
 
 const mapApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 const center = { lat: 28.0132, lng: 34.4751 };
@@ -99,6 +99,19 @@ export default function DiveSelection(props) {
 
   return (
     <Card mb="20px">
+      <Box>
+        <Text fontSize="2xl" fontWeight="700" color={textColor}>
+          Select Dives
+        </Text>
+        <Text
+          fontSize="md"
+          fontWeight="500"
+          color="secondaryGray.600"
+          mb="30px"
+        >
+          Add your dives to get started
+        </Text>
+      </Box>
       <Flex direction={{ sm: "column", lg: "row" }}>
         <Card
           minH="400px"
