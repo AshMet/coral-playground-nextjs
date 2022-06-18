@@ -7,7 +7,7 @@ export default async function checkout({ lineItems, metadata }) {
   // Create Stripe checkout
   const {
     data: { id },
-  } = await axios.post("/api/checkout_sessions", {
+  } = await axios.post("https://coralplayground.com/api/checkout_sessions", {
     items: lineItems,
     metadata,
   });
