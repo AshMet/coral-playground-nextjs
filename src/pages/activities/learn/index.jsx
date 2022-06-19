@@ -38,7 +38,6 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 // Custom components
-import type { GetServerSideProps } from "next";
 import { useState } from "react";
 import Stripe from "stripe";
 
@@ -49,17 +48,9 @@ import Course from "components/card/Course";
 import BookingDetails from "components/pages/bookings/BookingDetails";
 import { VSeparator } from "components/separator/Separator";
 import AdminLayout from "layouts/admin";
+import courses from "lib/constants/courses.json";
 
-interface IPrice extends Stripe.Price {
-  product: Stripe.Product;
-  metadata: Stripe.Metadata;
-}
-
-interface IProps {
-  prices: IPrice[];
-}
-
-export default function Courses({ prices }: IProps) {
+export default function Courses() {
   const [tabState, setTabState] = useState("all");
   const [courseId, setCourseId] = useState();
   const [courseName, setCourseName] = useState();
@@ -67,81 +58,41 @@ export default function Courses({ prices }: IProps) {
   const [diveTime, setDiveTime] = useState();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const beginnerCourses = (
-    <SimpleGrid column="1" gap="20px">
-      {prices.slice(0, 6).map((price) => {
-        // console.log(JSON.stringify(price));
-        return (
-          <Course
-            key={price.id}
-            bgBox="linear-gradient(115.07deg, #29E9F5 -9.41%, #7A64FF 28.04%, #FF508B 71.85%, #FD6D53 112.49%, #FD6D53 112.49%)"
-            imageUrl="/svg/certifications/open_water_cert.svg"
-            // imageUrl={price.product.images[0]}
-            title={price.product.name}
-            description={price.product.description}
-            agency="PADI®"
-            duration="3-4 days"
-            price={((price.unit_amount as number) / 100).toFixed(0)}
-            priceId={price.id}
-            setCourseId={setCourseId}
-            setCourseName={setCourseName}
-            selected={courseName === price.product.name}
-          />
-        );
-      })}
-    </SimpleGrid>
+  const beginnerList = courses.filter(
+    (course) => course.category === "recreational"
   );
-  const proCourses = (
-    <SimpleGrid column="1" gap="20px">
-      <Course
-        bgBox="linear-gradient(109.6deg, #FF9966 17.44%, #FF5E62 78.63%)"
-        imageUrl="/svg/certifications/dive_master_cert.svg"
-        title="Master Scuba Diver"
-        description={`Join the best of the best in recreational scuba diving and live
-              the dive life as a PADI Master Scuba Diver. The Master Scuba
-              Diver rating places you in an elite group of respected divers
-              who have earned this rating through both significant experience
-              and scuba training. Fewer than two percent of divers ever
-              achieve this rating. When you flash your Master Scuba Diver
-              card, people know that you've spent time underwater in a variety
-              of environments and had your share of dive adventures.`}
-        agency="PADI®"
-        duration="3-4 days"
-        price="$900"
-        priceId="price_1KuL5bAvLPvC9h7xGzAUvk7Y"
-      />
-      <Course
-        bgBox="linear-gradient(115.07deg, #29E9F5 -9.41%, #7A64FF 28.04%, #FF508B 71.85%, #FD6D53 112.49%, #FD6D53 112.49%)"
-        imageUrl="/svg/certifications/advanced_diver_cert.svg"
-        title="Nitrox Diver"
-        description={`Enriched air, also known as nitrox or EANx, contains less
-              nitrogen than regular air. Breathing less nitrogen means you can
-              enjoy longer dives and shorter surface intervals. No wonder
-              Enriched Air Diver is the most popular PADI® specialty.`}
-        agency="PADI®"
-        duration="3-4 days"
-        price="$120"
-        priceId="price_1KuL8pAvLPvC9h7x68kesoC4"
-      />
-    </SimpleGrid>
-  );
-  const rescueCourses = (
-    <Course
-      bgBox="linear-gradient(109.6deg, #FF9966 17.44%, #FF5E62 78.63%)"
-      imageUrl="/svg/certifications/advanced_diver_cert.svg"
-      title="Rescue Diver"
-      description={`The PADI® Rescue Diver course will change the way you dive – in
-              the best possible way. Learn to identify and fix minor issues
-              before they become big problems, gain a lot of confidence and
-              have serious fun along the way. Discover why countless divers
-              say Rescue Diver is their favorite scuba course.`}
-      agency="PADI®"
-      duration="3-4 days"
-      price="$160"
-      priceId="price_1KuL7SAvLPvC9h7xvvM2KS3r"
-    />
-  );
-  // Chakra Color Mode
+
+  const CourseTab = (props) => {
+    const { category, bgBox } = props;
+    const courseList = courses.filter(
+      (course) => course.category === category
+    );
+    // console.log(`${category}: ${JSON.stringify(courseList)}`)
+    return (
+      <SimpleGrid column="1" gap="20px">
+        {courseList.map((course) => {
+          return(
+            <Course
+              key={course.id}
+              bgBox={course.bgBox}
+              imageUrl={course.imageUrl}
+              title={course.title}
+              description={course.description}
+              agency={course.agency}
+              duration={course.duration}
+              price={(course.price).toFixed(0)}
+              priceId={course.priceId}
+              setCourseId={setCourseId}
+              setCourseName={setCourseName}
+              selected={courseName === course.title}
+            />
+          )
+          
+        })}
+      </SimpleGrid>
+    );
+  };
+
   return (
     <Grid
       pt={{ base: "130px", md: "80px", xl: "80px" }}
@@ -277,9 +228,9 @@ export default function Courses({ prices }: IProps) {
             </Flex>
           </TabList>
           <TabPanels>
-            <TabPanel px="0px">{beginnerCourses}</TabPanel>
-            <TabPanel px="0px">{proCourses}</TabPanel>
-            <TabPanel px="0px">{rescueCourses}</TabPanel>
+            <TabPanel px="0px"><CourseTab category="recreational" /></TabPanel>
+            <TabPanel px="0px"><CourseTab category="professional" /></TabPanel>
+            <TabPanel px="0px"><CourseTab category="rescue" /></TabPanel>
           </TabPanels>
         </Tabs>
         <VSeparator mx="30px" h="100%" />
@@ -322,21 +273,21 @@ export default function Courses({ prices }: IProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const stripeKey = process.env.STRIPE_SECRET_KEY || "ERROR!!! NO KEY";
-  const stripe = new Stripe(stripeKey, {
-    apiVersion: "2020-08-27",
-  });
-  const prices = await stripe.prices.list({
-    active: true,
-    limit: 10,
-    // query: "active:'true' AND metadata['category']:'recreational'",
-    expand: ["data.product"],
-  });
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const stripeKey = process.env.STRIPE_SECRET_KEY || "ERROR!!! NO KEY";
+//   const stripe = new Stripe(stripeKey, {
+//     apiVersion: "2020-08-27",
+//   });
+//   const prices = await stripe.prices.list({
+//     active: true,
+//     limit: 10,
+//     // query: "active:'true' AND metadata['category']:'recreational'",
+//     expand: ["data.product"],
+//   });
 
-  return { props: { prices: prices.data } };
-};
+//   return { props: { prices: prices.data } };
+// };
 
-Courses.getLayout = function getLayout(page: never) {
+Courses.getLayout = function getLayout(page) {
   return <AdminLayout>{page}</AdminLayout>;
 };

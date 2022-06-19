@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable object-shorthand */
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
@@ -7,13 +9,10 @@ export default async function checkout({ lineItems, metadata }) {
   // Create Stripe checkout
   const {
     data: { id },
-  } = await axios.post(
-    "https://www.coralplayground.com/api/checkout_sessions",
-    {
-      items: lineItems,
-      metadata,
-    }
-  );
+  } = await axios.post(`${window.location.origin}/api/checkout_sessions`, {
+    items: lineItems,
+    metadata: metadata,
+  });
 
   const getStripe = () => {
     if (!stripePromise) {

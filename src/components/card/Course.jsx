@@ -10,6 +10,7 @@ import {
   useColorModeValue,
   Button,
   Icon,
+  Center,
 } from "@chakra-ui/react";
 // Custom components
 // import { createCheckoutSession } from "next-stripe/client";
@@ -44,10 +45,7 @@ export default function Course(props) {
   } = props;
   const textColor = useColorModeValue("navy.700", "white");
   const selectedTextColor = "white";
-  const selectedBgColor = useColorModeValue(
-    "brand.500",
-    "linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
-  );
+  const selectedBgColor = useColorModeValue("brand.500", "brand.400");
   const textBrand = useColorModeValue("brand.500", "white");
   // const bgBadge = useColorModeValue("secondaryGray.300", "whiteAlpha.50");
 
@@ -89,7 +87,9 @@ export default function Course(props) {
             height="100%"
             position="relative"
           >
-            <Image src={imageUrl} layout="fill" />
+            <Center>
+              <Image src={imageUrl} height="350px" width="270px" />
+            </Center>
           </Box>
         </Flex>
         <Flex

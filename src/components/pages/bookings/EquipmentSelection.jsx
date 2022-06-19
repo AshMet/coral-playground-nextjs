@@ -25,7 +25,7 @@ export default function EquipmentSelection(props) {
     "",
     "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
   );
-  const activeItemColor = useColorModeValue("purple.300", "brand.500");
+  const selectedBgColor = useColorModeValue("brand.500", "brand.400");
   const [equipmentList, setEquipmentList] = useState([]);
 
   function toggleArrayItem(arr, item) {
@@ -71,7 +71,7 @@ export default function EquipmentSelection(props) {
                 mb={3}
                 justifyContent="center"
                 minH="130px"
-                bgColor={equipmentList.includes(item) && activeItemColor}
+                bgColor={equipmentList.includes(item) && selectedBgColor}
                 onClick={() => toggleArrayItem(equipmentList, item)}
               >
                 <VStack>
