@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable func-names */
@@ -39,7 +41,6 @@ import {
 } from "@chakra-ui/react";
 // Custom components
 import { useState } from "react";
-import Stripe from "stripe";
 
 import MiniCalendar from "components/calendar/MiniCalendar";
 import Card from "components/card/Card";
@@ -58,20 +59,15 @@ export default function Courses() {
   const [diveTime, setDiveTime] = useState();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const beginnerList = courses.filter(
-    (course) => course.category === "recreational"
-  );
 
   const CourseTab = (props) => {
-    const { category, bgBox } = props;
-    const courseList = courses.filter(
-      (course) => course.category === category
-    );
+    const { category } = props;
+    const courseList = courses.filter((course) => course.category === category);
     // console.log(`${category}: ${JSON.stringify(courseList)}`)
     return (
       <SimpleGrid column="1" gap="20px">
         {courseList.map((course) => {
-          return(
+          return (
             <Course
               key={course.id}
               bgBox={course.bgBox}
@@ -80,14 +76,13 @@ export default function Courses() {
               description={course.description}
               agency={course.agency}
               duration={course.duration}
-              price={(course.price).toFixed(0)}
+              price={course.price.toFixed(0)}
               priceId={course.priceId}
               setCourseId={setCourseId}
               setCourseName={setCourseName}
               selected={courseName === course.title}
             />
-          )
-          
+          );
         })}
       </SimpleGrid>
     );
@@ -228,9 +223,15 @@ export default function Courses() {
             </Flex>
           </TabList>
           <TabPanels>
-            <TabPanel px="0px"><CourseTab category="recreational" /></TabPanel>
-            <TabPanel px="0px"><CourseTab category="professional" /></TabPanel>
-            <TabPanel px="0px"><CourseTab category="rescue" /></TabPanel>
+            <TabPanel px="0px">
+              <CourseTab category="recreational" />
+            </TabPanel>
+            <TabPanel px="0px">
+              <CourseTab category="professional" />
+            </TabPanel>
+            <TabPanel px="0px">
+              <CourseTab category="rescue" />
+            </TabPanel>
           </TabPanels>
         </Tabs>
         <VSeparator mx="30px" h="100%" />
