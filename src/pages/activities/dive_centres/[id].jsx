@@ -94,8 +94,9 @@ export default function DiveCentre({
 
 export async function getStaticPaths() {
   // Call an external API endpoint to get posts
-  const siteUrl = process.env.VERCEL_URL || "http://localhost:3000";
-  const res = await fetch(`${siteUrl}/api/dive_centres`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/dive_centres`
+  );
   const diveCentres = await res.json();
   // Get the paths we want to pre-render based on posts
   const paths = diveCentres.data.map((site) => ({
@@ -108,8 +109,9 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async ({ params }) => {
   // const { id } = context.params;
-  const siteUrl = process.env.VERCEL_URL || "http://localhost:3000";
-  const res = await fetch(`${siteUrl}/api/dive_centres/${params.id}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/dive_centres/${params.id}`
+  );
   const diveCentre = await res.json();
 
   return {
