@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-nested-ternary */
@@ -107,8 +108,8 @@ export default function Default() {
           <Flex
             direction="column"
             position={{ base: "unset", md: "absolute" }}
-            w="100%"
-            h={{ sm: "calc(100% - 40px)", md: "calc(100% - 40px)" }}
+            w={{ sm: "100%", md: "calc(100% - 40px)" }}
+            h={{ sm: "100%", md: "calc(100% - 40px)" }}
             zIndex="1"
           >
             {/* <SearchBar

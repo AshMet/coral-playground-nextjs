@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable import/no-cycle */
 /* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable no-undef */
@@ -139,6 +140,13 @@ export default function NewBooking() {
               >
                 Select Dives
               </Text>
+              <Text
+                color={activeBullets.product ? "white" : "gray.300"}
+                fontWeight={activeBullets.product ? "bold" : "normal"}
+                display={{ sm: "block", md: "none" }}
+              >
+                Step 1
+              </Text>
             </Flex>
           </Tab>
           <Tab
@@ -188,6 +196,13 @@ export default function NewBooking() {
               >
                 Diver Info
               </Text>
+              <Text
+                color={activeBullets.product ? "white" : "gray.300"}
+                fontWeight={activeBullets.product ? "bold" : "normal"}
+                display={{ sm: "block", md: "none" }}
+              >
+                Step 2
+              </Text>
             </Flex>
           </Tab>
           <Tab
@@ -224,6 +239,13 @@ export default function NewBooking() {
                 display={{ sm: "none", md: "block" }}
               >
                 Equipment
+              </Text>
+              <Text
+                color={activeBullets.product ? "white" : "gray.300"}
+                fontWeight={activeBullets.product ? "bold" : "normal"}
+                display={{ sm: "block", md: "none" }}
+              >
+                Step 3
               </Text>
             </Flex>
           </Tab>

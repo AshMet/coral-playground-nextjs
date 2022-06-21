@@ -49,8 +49,8 @@ export default function MapCard(props) {
     //   action: "View Site Details",
     // });
     mapLocation?.type === "dive_site"
-      ? router.push(`/activities/dive_site/${mapLocation?.location_id}`)
-      : router.push(`/activities/dive_centre/${mapLocation?.location_id}`);
+      ? router.push(`/activities/dive_sites/${mapLocation?.location_id}`)
+      : router.push(`/activities/dive_centres/${mapLocation?.location_id}`);
   };
 
   return (
