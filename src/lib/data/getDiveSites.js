@@ -1,12 +1,11 @@
 const Moralis = require("moralis/node");
 
-const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
-const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+export default async function getDiveSites() {
+  const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+  const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+  const masterKey = process.env.MORALIS_MASTER_KEY;
 
-Moralis.start({ serverUrl, appId });
-
-export async function getDiveSites() {
-  let status = 200;
+  Moralis.start({ serverUrl, appId, masterKey });
   let data = null;
 
   try {
@@ -35,13 +34,8 @@ export async function getDiveSites() {
       data = diveSites;
     }
   } catch (err) {
-    status = 500;
     data = err.message;
   }
-  return { data, status };
-}
-
-export default async function handler(req, res) {
-  const { data, status } = await getDiveSites();
-  res.status(status).json({ data });
+  return { data };
+  // res.status(status).json({ data });
 }

@@ -8,25 +8,27 @@ import DiveCentreSidebar from "components/pages/diveCentre/DiveCentreSidebar";
 import SiteInfo from "components/pages/diveCentre/SiteInfo";
 import AdminLayout from "layouts/admin";
 
-// import { useRouter } from "next/router";
-// import { useState, useEffect } from "react";
-// import Image from "components/actions/NextChakraImg";
+const Moralis = require("moralis/node");
 
-export default function DiveCentre({
-  name,
-  address,
-  description,
-  // latitude,
-  // longitude,
-  imageUrl,
-  languages,
-  memberships,
-  services,
-  equipment,
-  paymentMethods,
-  city,
-  country,
-}) {
+export default function DiveCentre({ data }) {
+  const parsedData = JSON.parse(data);
+
+  const diveCentre = {
+    name: parsedData.name,
+    address: parsedData.address,
+    description: parsedData.description,
+    longitude: parsedData.longitude,
+    latitude: parsedData.latitude,
+    imageUrl: parsedData.photo.url,
+    languages: parsedData.languages,
+    memberships: parsedData.memberships,
+    services: parsedData.services,
+    equipment: parsedData.equipment,
+    paymentMethods: parsedData.paymentMethods,
+    country: parsedData.country,
+    city: parsedData.city,
+  };
+
   return (
     <Box maxW="100%">
       <Grid
@@ -53,7 +55,7 @@ export default function DiveCentre({
               bgSize="cover"
               w=""
               minH={{ base: "310px", md: "100%" }}
-              bgImage={`url(${imageUrl})`}
+              bgImage={`url(${diveCentre.imageUrl})`}
             >
               <Button
                 variant="no-hover"
@@ -71,20 +73,20 @@ export default function DiveCentre({
             </Card>
           </AspectRatio>
           <SiteInfo
-            name={name}
-            description={description}
-            equipment={equipment}
-            services={services}
-            city={city}
-            country={country}
+            name={diveCentre.name}
+            description={diveCentre.description}
+            equipment={diveCentre.equipment}
+            services={diveCentre.services}
+            city={diveCentre.city}
+            country={diveCentre.country}
           />
         </Box>
         <Box gridArea="1 / 2 / 2 / 3">
           <DiveCentreSidebar
-            address={address}
-            paymentMethods={paymentMethods}
-            languages={languages}
-            memberships={memberships}
+            address={diveCentre.address}
+            paymentMethods={diveCentre.paymentMethods}
+            languages={diveCentre.languages}
+            memberships={diveCentre.memberships}
           />
         </Box>
       </Grid>
@@ -92,44 +94,61 @@ export default function DiveCentre({
   );
 }
 
-export async function getStaticPaths() {
-  // Call an external API endpoint to get posts
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/dive_centres`
-  );
-  const diveCentres = await res.json();
-  // Get the paths we want to pre-render based on posts
-  const paths = diveCentres.data.map((site) => ({
-    params: { id: site.objectId },
-  }));
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false };
-}
+// export async function getStaticPaths() {
+//   // Call an external API endpoint to get posts
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_SITE_URL}/api/dive_centres`
+//   );
+//   const diveCentres = await res.json();
+//   // Get the paths we want to pre-render based on posts
+//   const paths = diveCentres.data.map((site) => ({
+//     params: { id: site.objectId },
+//   }));
+//   // We'll pre-render only these paths at build time.
+//   // { fallback: false } means other routes should 404.
+//   return { paths, fallback: false };
+// }
 
-export const getStaticProps = async ({ params }) => {
-  // const { id } = context.params;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/dive_centres/${params.id}`
-  );
-  const diveCentre = await res.json();
+// export const getStaticProps = async ({ params }) => {
+//   // const { id } = context.params;
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_SITE_URL}/api/dive_centres/${params.id}`
+//   );
+//   const diveCentre = await res.json();
+
+//   return {
+//     props: {
+//       name: diveCentre.data.name,
+//       address: diveCentre.data.address,
+//       description: diveCentre.data.description,
+//       longitude: diveCentre.data.longitude,
+//       latitude: diveCentre.data.latitude,
+//       imageUrl: diveCentre.data.photo.url,
+//       languages: diveCentre.data.languages,
+//       memberships: diveCentre.data.memberships,
+//       services: diveCentre.data.services,
+//       equipment: diveCentre.data.equipment,
+//       city: diveCentre.data.city,
+//       country: diveCentre.data.country,
+//       paymentMethods: diveCentre.data.paymentMethods,
+//     },
+//   };
+// };
+
+export const getServerSideProps = async (context) => {
+  const { id } = context.query;
+  const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+  const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+  Moralis.initialize(appId);
+  Moralis.serverURL = serverUrl;
+  const DiveCentres = Moralis.Object.extend("DiveCentres");
+  const query = new Moralis.Query(DiveCentres);
+  query.equalTo("objectId", id);
+  const results = await query.find();
+  const data = JSON.stringify(results[0]);
 
   return {
-    props: {
-      name: diveCentre.data.name,
-      address: diveCentre.data.address,
-      description: diveCentre.data.description,
-      longitude: diveCentre.data.longitude,
-      latitude: diveCentre.data.latitude,
-      imageUrl: diveCentre.data.photo.url,
-      languages: diveCentre.data.languages,
-      memberships: diveCentre.data.memberships,
-      services: diveCentre.data.services,
-      equipment: diveCentre.data.equipment,
-      city: diveCentre.data.city,
-      country: diveCentre.data.country,
-      paymentMethods: diveCentre.data.paymentMethods,
-    },
+    props: { data },
   };
 };
 

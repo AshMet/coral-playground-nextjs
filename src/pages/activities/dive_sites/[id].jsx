@@ -8,24 +8,26 @@ import DiveSiteSidebar from "components/pages/diveSite/DiveSiteSidebar";
 import SiteInfo from "components/pages/diveSite/SiteInfo";
 import AdminLayout from "layouts/admin";
 
-// import { useRouter } from "next/router";
-// import { useState, useEffect } from "react";
-// import Image from "components/actions/NextChakraImg";
+const Moralis = require("moralis/node");
+// import getDiveSites from "lib/data/getDiveSites";
+export default function DiveSitePage({ data }) {
+  const parsedData = JSON.parse(data);
 
-export default function DiveSitePage({
-  name,
-  depth,
-  description,
-  imageUrl,
-  access,
-  certLevel,
-  diveTypes,
-  country,
-  city,
-  species,
-  // latitude,
-  // longitude,
-}) {
+  const diveSite = {
+    name: parsedData.name,
+    depth: parsedData.maxDepth,
+    description: parsedData.description,
+    longitude: parsedData.longitude,
+    latitude: parsedData.latitude,
+    imageUrl: parsedData.diveMap.url,
+    access: parsedData.access,
+    certLevel: parsedData.certLevel,
+    diveTypes: parsedData.divingTypes,
+    country: parsedData.country,
+    city: parsedData.city,
+    species: parsedData.species,
+  };
+
   return (
     <Box maxW="100%">
       <Grid
@@ -52,7 +54,7 @@ export default function DiveSitePage({
               bgSize="cover"
               w=""
               minH={{ base: "310px", md: "100%" }}
-              bgImage={`url(${imageUrl})`}
+              bgImage={`url(${diveSite.imageUrl})`}
             >
               <Button
                 variant="no-hover"
@@ -70,19 +72,19 @@ export default function DiveSitePage({
             </Card>
           </AspectRatio>
           <SiteInfo
-            name={name}
-            description={description}
-            species={species}
-            city={city}
-            country={country}
+            name={diveSite.name}
+            description={diveSite.description}
+            species={diveSite.species}
+            city={diveSite.city}
+            country={diveSite.country}
           />
         </Box>
         <Box gridArea="1 / 2 / 2 / 3">
           <DiveSiteSidebar
-            depth={depth}
-            access={access}
-            certLevel={certLevel}
-            diveTypes={diveTypes}
+            depth={diveSite.depth}
+            access={diveSite.access}
+            certLevel={diveSite.certLevel}
+            diveTypes={diveSite.diveTypes}
           />
         </Box>
       </Grid>
@@ -90,44 +92,61 @@ export default function DiveSitePage({
   );
 }
 
-export async function getStaticPaths() {
-  // Call an external API endpoint to get posts
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/dive_sites`);
-  const diveSites = await res.json();
-  // Get the paths we want to pre-render based on posts
-  const paths = diveSites.data.map((site) => ({
-    params: { id: site.objectId },
-  }));
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false };
-}
+// export async function getStaticPaths() {
+//   // Call an external API endpoint to get sites
+//   const { data, status } = await getDiveSites();
+//   console.log(data);
+//   const diveSites = JSON.stringify(data);
+//   // Get the paths we want to pre-render based on posts
+//   const diveSiteIds = diveSites.data.map((site) => site.objectId);
+//   const paths = diveSiteIds.map((id) => ({
+//     params: { id },
+//   }));
+//   // We'll pre-render only these paths at build time.
+//   // { fallback: false } means other routes should 404.
+//   return { paths, fallback: false };
+// }
 
-export const getStaticProps = async ({ params }) => {
-  // const { id } = context.params;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/dive_sites/${params.id}`
-  );
-  const diveSite = await res.json();
+// export const getStaticProps = async ({ params: { id } }) => {
+//   // const { id } = context.params;
+//   const { data } = (await getDiveSites()).default;
+//   const diveSites = JSON.stringify(data);
+//   const diveSite = diveSites.find((site) => site.id === id);
+
+//   return {
+//     props: {
+//       name: diveSite.data.name,
+//       depth: diveSite.data.maxDepth,
+//       description: diveSite.data.description,
+//       longitude: diveSite.data.longitude,
+//       latitude: diveSite.data.latitude,
+//       imageUrl: diveSite.data.diveMap.url,
+//       access: diveSite.data.access,
+//       certLevel: diveSite.data.certLevel,
+//       diveTypes: diveSite.data.divingTypes,
+//       country: diveSite.data.country,
+//       city: diveSite.data.city,
+//       species: diveSite.data.species,
+//     },
+//   };
+// };
+
+export const getServerSideProps = async (context) => {
+  const { id } = context.query;
+  const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+  const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+  Moralis.initialize(appId);
+  Moralis.serverURL = serverUrl;
+  const DiveSites = Moralis.Object.extend("DiveSite");
+  const query = new Moralis.Query(DiveSites);
+  query.equalTo("objectId", id);
+  const results = await query.find();
+  const data = JSON.stringify(results[0]);
 
   return {
-    props: {
-      name: diveSite.data.name,
-      depth: diveSite.data.maxDepth,
-      description: diveSite.data.description,
-      longitude: diveSite.data.longitude,
-      latitude: diveSite.data.latitude,
-      imageUrl: diveSite.data.diveMap.url,
-      access: diveSite.data.access,
-      certLevel: diveSite.data.certLevel,
-      diveTypes: diveSite.data.divingTypes,
-      country: diveSite.data.country,
-      city: diveSite.data.city,
-      species: diveSite.data.species,
-    },
+    props: { data },
   };
 };
-
 DiveSitePage.getLayout = function getLayout(page) {
   return <AdminLayout>{page}</AdminLayout>;
 };
