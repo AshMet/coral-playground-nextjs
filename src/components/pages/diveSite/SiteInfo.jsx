@@ -14,12 +14,10 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  Icon,
-  Spacer,
 } from "@chakra-ui/react";
 // Custom components
 import { useState } from "react";
-import { HiOutlineLocationMarker } from "react-icons/hi";
+// import { HiOutlineLocationMarker } from "react-icons/hi";
 
 import Card from "components/card/Card";
 
@@ -28,19 +26,19 @@ import DetailsTab from "./DetailsTab";
 // import Instructor from "./Instructor";
 // import Rating from "./Rating";
 
-export default function CourseInfo({
+export default function SiteInfo({
   name,
-  city,
-  country,
   description,
   species,
   depth,
+  visibility,
+  current,
   access,
   certLevel,
   diveTypes,
   ...rest
 }) {
-  const [tabState, setTabState] = useState("notes");
+  const [tabState, setTabState] = useState("info");
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -69,29 +67,6 @@ export default function CourseInfo({
         <Text color={textColor} fontSize="3xl" fontWeight="bold" mb="12px">
           {name}
         </Text>
-        {/* <Text
-          ms="auto"
-          color={textColorTertiary}
-          me="20px"
-          fontSize="lg"
-          fontWeight="500"
-        >
-          {`${city}, ${country}`}
-        </Text> */}
-        <Spacer />
-        <Flex mb="25px" align="center" cursor="pointer">
-          <Icon
-            as={HiOutlineLocationMarker}
-            ms="auto"
-            h="22px"
-            w="22px"
-            mr="10px"
-            color={textColorTertiary}
-          />
-          <Text fontWeight="bold" fontSize="lg" color={textColorTertiary}>
-            {`${city}, ${country}`}
-          </Text>
-        </Flex>
       </Flex>
       <Box w="100%" mb="40px">
         <Flex direction={{ base: "column", "3xl": "row" }}>
@@ -103,7 +78,40 @@ export default function CourseInfo({
                     pb="0px"
                     flexDirection="column"
                     onClick={function () {
-                      setTabState("notes");
+                      setTabState("info");
+                    }}
+                    bg="unset"
+                    _selected={{
+                      bg: "none",
+                    }}
+                    _focus={{ border: "none" }}
+                    minW="max-content"
+                  >
+                    <Flex align="center">
+                      <Text
+                        color={
+                          tabState === "info" ? textColor : textColorTertiary
+                        }
+                        fontSize="lg"
+                        fontWeight="500"
+                      >
+                        Information
+                      </Text>
+                    </Flex>
+                    <Box
+                      height="4px"
+                      w="100%"
+                      transition="0.1s linear"
+                      bg={tabState === "info" ? "brand.500" : "transparent"}
+                      mt="15px"
+                      borderRadius="30px"
+                    />
+                  </Tab>
+                  <Tab
+                    pb="0px"
+                    flexDirection="column"
+                    onClick={function () {
+                      setTabState("description");
                     }}
                     me="10px"
                     bg="unset"
@@ -116,7 +124,9 @@ export default function CourseInfo({
                     <Flex align="center">
                       <Text
                         color={
-                          tabState === "notes" ? textColor : textColorTertiary
+                          tabState === "description"
+                            ? textColor
+                            : textColorTertiary
                         }
                         fontSize="lg"
                         fontWeight="500"
@@ -128,14 +138,16 @@ export default function CourseInfo({
                       height="4px"
                       w="100%"
                       transition="0.1s linear"
-                      bg={tabState === "notes" ? "brand.500" : "transparent"}
+                      bg={
+                        tabState === "description" ? "brand.500" : "transparent"
+                      }
                       mt="15px"
                       borderRadius="30px"
                     />
                   </Tab>
                   <Tab
                     onClick={function () {
-                      setTabState("resources");
+                      setTabState("species");
                     }}
                     pb="0px"
                     me="10px"
@@ -150,9 +162,7 @@ export default function CourseInfo({
                     <Flex align="center">
                       <Text
                         color={
-                          tabState === "resources"
-                            ? textColor
-                            : textColorTertiary
+                          tabState === "species" ? textColor : textColorTertiary
                         }
                         fontSize="lg"
                         fontWeight="500"
@@ -164,42 +174,7 @@ export default function CourseInfo({
                       height="4px"
                       w="100%"
                       transition="0.1s linear"
-                      bg={
-                        tabState === "resources" ? "brand.500" : "transparent"
-                      }
-                      mt="15px"
-                      borderRadius="30px"
-                    />
-                  </Tab>
-                  <Tab
-                    pb="0px"
-                    flexDirection="column"
-                    onClick={function () {
-                      setTabState("quiz");
-                    }}
-                    bg="unset"
-                    _selected={{
-                      bg: "none",
-                    }}
-                    _focus={{ border: "none" }}
-                    minW="max-content"
-                  >
-                    <Flex align="center">
-                      <Text
-                        color={
-                          tabState === "quiz" ? textColor : textColorTertiary
-                        }
-                        fontSize="lg"
-                        fontWeight="500"
-                      >
-                        Info
-                      </Text>
-                    </Flex>
-                    <Box
-                      height="4px"
-                      w="100%"
-                      transition="0.1s linear"
-                      bg={tabState === "quiz" ? "brand.500" : "transparent"}
+                      bg={tabState === "species" ? "brand.500" : "transparent"}
                       mt="15px"
                       borderRadius="30px"
                     />
@@ -207,19 +182,21 @@ export default function CourseInfo({
                 </Flex>
               </TabList>
               <TabPanels pt="30px">
+                <TabPanel px="0px">
+                  <DetailsTab
+                    depth={depth}
+                    visibility={visibility}
+                    current={current}
+                    access={access}
+                    certLevel={certLevel}
+                    diveTypes={diveTypes}
+                  />
+                </TabPanel>
                 <TabPanel px="0px">{descTab()}</TabPanel>
                 <TabPanel px="0px">
                   <CollectionTab
                     collection={species}
                     folderUrl="/svg/species"
-                  />
-                </TabPanel>
-                <TabPanel px="0px">
-                  <DetailsTab
-                    depth={depth}
-                    access={access}
-                    certLevel={certLevel}
-                    diveTypes={diveTypes}
                   />
                 </TabPanel>
               </TabPanels>

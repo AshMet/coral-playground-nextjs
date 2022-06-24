@@ -53,7 +53,7 @@ export default function DiveSitePage({ data }) {
             <Card
               bgSize="cover"
               w=""
-              minH={{ base: "310px", md: "100%" }}
+              minH={{ base: "200px", md: "100%" }}
               bgImage={`url(${diveSite.imageUrl})`}
             >
               <Button
@@ -74,18 +74,17 @@ export default function DiveSitePage({ data }) {
           <SiteInfo
             name={diveSite.name}
             description={diveSite.description}
-            species={diveSite.species}
-            city={diveSite.city}
-            country={diveSite.country}
-          />
-        </Box>
-        <Box gridArea="1 / 2 / 2 / 3">
-          <DiveSiteSidebar
             depth={diveSite.depth}
+            visibility="30m+"
+            current="weak"
             access={diveSite.access}
             certLevel={diveSite.certLevel}
             diveTypes={diveSite.diveTypes}
+            species={diveSite.species}
           />
+        </Box>
+        <Box gridArea="1 / 2 / 2 / 3">
+          <DiveSiteSidebar city={diveSite.city} country={diveSite.country} />
         </Box>
       </Grid>
     </Box>

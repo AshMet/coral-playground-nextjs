@@ -244,7 +244,12 @@ const routes = [
         path: "/activities/booking",
         component: Booking,
         icon: (
-          <Icon as={GiGraduateCap} width="15px" height="20px" color="inherit" />
+          <Icon
+            as={MdOutlineShoppingCart}
+            width="15px"
+            height="20px"
+            color="inherit"
+          />
         ),
       },
     ],

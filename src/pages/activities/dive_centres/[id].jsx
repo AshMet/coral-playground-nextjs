@@ -54,7 +54,7 @@ export default function DiveCentre({ data }) {
             <Card
               bgSize="cover"
               w=""
-              minH={{ base: "310px", md: "100%" }}
+              minH={{ base: "200px", md: "100%" }}
               bgImage={`url(${diveCentre.imageUrl})`}
             >
               <Button
@@ -77,16 +77,16 @@ export default function DiveCentre({ data }) {
             description={diveCentre.description}
             equipment={diveCentre.equipment}
             services={diveCentre.services}
-            city={diveCentre.city}
-            country={diveCentre.country}
+            paymentMethods={diveCentre.paymentMethods}
+            languages={diveCentre.languages}
+            memberships={diveCentre.memberships}
           />
         </Box>
         <Box gridArea="1 / 2 / 2 / 3">
           <DiveCentreSidebar
             address={diveCentre.address}
-            paymentMethods={diveCentre.paymentMethods}
-            languages={diveCentre.languages}
-            memberships={diveCentre.memberships}
+            city={diveCentre.city}
+            country={diveCentre.country}
           />
         </Box>
       </Grid>

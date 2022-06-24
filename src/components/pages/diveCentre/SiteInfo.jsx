@@ -3,63 +3,43 @@
 /* eslint-disable react/jsx-no-bind */
 import {
   Box,
-  // Button,
   Flex,
-  // Icon,
   Text,
   useColorModeValue,
-  SimpleGrid,
   Tabs,
   TabList,
   TabPanels,
   Tab,
   TabPanel,
-  Icon,
-  Spacer,
 } from "@chakra-ui/react";
 // Custom components
 import { useState } from "react";
-import { HiOutlineLocationMarker } from "react-icons/hi";
 
 import CollectionTab from "../diveSite/CollectionTab";
 import Card from "components/card/Card";
+
+import DetailsTab from "./DetailsTab";
 
 // import DetailsTab from "./DetailsTab";
 // import Instructor from "./Instructor";
 // import Rating from "./Rating";
 
-export default function CourseInfo({
+export default function SiteInfo({
   name,
-  city,
-  country,
   description,
   equipment,
   languages,
   memberships,
   services,
-  ...rest
+  paymentMethods,
 }) {
   const [tabState, setTabState] = useState("notes");
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const textColorSecondary = useColorModeValue("secondaryGray.700", "white");
   const textColorTertiary = useColorModeValue(
     "secondaryGray.600",
     "secondaryGray.500"
-  );
-  const descTab = () => (
-    <SimpleGrid
-      columns="1"
-      gap="40px"
-      {...rest}
-      maxW="100%"
-      w={{ base: "100%", md: "unset" }}
-    >
-      <Text fontSize="lg" color={textColorSecondary} fontWeight="400">
-        {description}
-      </Text>
-    </SimpleGrid>
   );
 
   return (
@@ -68,29 +48,6 @@ export default function CourseInfo({
         <Text color={textColor} fontSize="3xl" fontWeight="bold" mb="12px">
           {name}
         </Text>
-        {/* <Text
-          ms="auto"
-          color={textColorTertiary}
-          me="20px"
-          fontSize="lg"
-          fontWeight="500"
-        >
-          {`${city}, ${country}`}
-        </Text> */}
-        <Spacer />
-        <Flex mb="25px" align="center" cursor="pointer">
-          <Icon
-            as={HiOutlineLocationMarker}
-            ms="auto"
-            h="22px"
-            w="22px"
-            mr="10px"
-            color={textColorTertiary}
-          />
-          <Text fontWeight="bold" fontSize="lg" color={textColorTertiary}>
-            {`${city}, ${country}`}
-          </Text>
-        </Flex>
       </Flex>
       <Box w="100%" mb="40px">
         <Flex direction={{ base: "column", "3xl": "row" }}>
@@ -206,7 +163,14 @@ export default function CourseInfo({
                 </Flex>
               </TabList>
               <TabPanels pt="30px">
-                <TabPanel px="0px">{descTab()}</TabPanel>
+                <TabPanel px="0px">
+                  <DetailsTab
+                    description={description}
+                    paymentMethods={paymentMethods}
+                    languages={languages}
+                    memberships={memberships}
+                  />
+                </TabPanel>
                 <TabPanel px="0px">
                   <CollectionTab
                     collection={services}
