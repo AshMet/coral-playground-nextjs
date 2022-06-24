@@ -19,12 +19,14 @@ export default function DiveSitePage({ data }) {
     description: parsedData.description,
     longitude: parsedData.longitude,
     latitude: parsedData.latitude,
-    imageUrl: parsedData.diveMap.url,
+    imageUrl: parsedData.diveMap?.url,
     access: parsedData.access,
     certLevel: parsedData.certLevel,
     diveTypes: parsedData.divingTypes,
     country: parsedData.country,
     city: parsedData.city,
+    visibility: parsedData.visibility,
+    current: parsedData.current,
     species: parsedData.species,
   };
 
@@ -52,9 +54,13 @@ export default function DiveSitePage({ data }) {
             /> */}
             <Card
               bgSize="cover"
-              w=""
               minH={{ base: "200px", md: "100%" }}
-              bgImage={`url(${diveSite.imageUrl})`}
+              bgImage={
+                diveSite.imageUrl
+                  ? `url(${diveSite.imageUrl})`
+                  : "/img/home/clown_fish.jpeg"
+              }
+              background="fill"
             >
               <Button
                 variant="no-hover"
@@ -75,8 +81,8 @@ export default function DiveSitePage({ data }) {
             name={diveSite.name}
             description={diveSite.description}
             depth={diveSite.depth}
-            visibility="30m+"
-            current="weak"
+            visibility={diveSite.visibility}
+            current={diveSite.current}
             access={diveSite.access}
             certLevel={diveSite.certLevel}
             diveTypes={diveSite.diveTypes}
@@ -136,7 +142,7 @@ export const getServerSideProps = async (context) => {
   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
   Moralis.initialize(appId);
   Moralis.serverURL = serverUrl;
-  const DiveSites = Moralis.Object.extend("DiveSite");
+  const DiveSites = Moralis.Object.extend("DiveSites");
   const query = new Moralis.Query(DiveSites);
   query.equalTo("objectId", id);
   const results = await query.find();

@@ -102,7 +102,7 @@ export default function SiteInfo({
                       height="4px"
                       w="100%"
                       transition="0.1s linear"
-                      bg={tabState === "info" ? "brand.500" : "transparent"}
+                      bg={tabState === "info" ? "brand.400" : "transparent"}
                       mt="15px"
                       borderRadius="30px"
                     />
@@ -139,7 +139,7 @@ export default function SiteInfo({
                       w="100%"
                       transition="0.1s linear"
                       bg={
-                        tabState === "description" ? "brand.500" : "transparent"
+                        tabState === "description" ? "brand.400" : "transparent"
                       }
                       mt="15px"
                       borderRadius="30px"
@@ -174,7 +174,7 @@ export default function SiteInfo({
                       height="4px"
                       w="100%"
                       transition="0.1s linear"
-                      bg={tabState === "species" ? "brand.500" : "transparent"}
+                      bg={tabState === "species" ? "brand.400" : "transparent"}
                       mt="15px"
                       borderRadius="30px"
                     />

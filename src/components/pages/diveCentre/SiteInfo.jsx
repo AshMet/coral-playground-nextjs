@@ -84,7 +84,7 @@ export default function SiteInfo({
                       height="4px"
                       w="100%"
                       transition="0.1s linear"
-                      bg={tabState === "notes" ? "brand.500" : "transparent"}
+                      bg={tabState === "notes" ? "brand.400" : "transparent"}
                       mt="15px"
                       borderRadius="30px"
                     />
@@ -121,7 +121,7 @@ export default function SiteInfo({
                       w="100%"
                       transition="0.1s linear"
                       bg={
-                        tabState === "resources" ? "brand.500" : "transparent"
+                        tabState === "resources" ? "brand.400" : "transparent"
                       }
                       mt="15px"
                       borderRadius="30px"
@@ -155,7 +155,7 @@ export default function SiteInfo({
                       height="4px"
                       w="100%"
                       transition="0.1s linear"
-                      bg={tabState === "quiz" ? "brand.500" : "transparent"}
+                      bg={tabState === "quiz" ? "brand.400" : "transparent"}
                       mt="15px"
                       borderRadius="30px"
                     />

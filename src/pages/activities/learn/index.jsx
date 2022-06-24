@@ -136,7 +136,7 @@ export default function Courses() {
                   height="4px"
                   w="100%"
                   transition="0.1s linear"
-                  bg={tabState === "all" ? "brand.500" : "transparent"}
+                  bg={tabState === "all" ? "brand.400" : "transparent"}
                   mt="15px"
                   borderRadius="30px"
                 />
@@ -176,7 +176,7 @@ export default function Courses() {
                   height="4px"
                   w="100%"
                   transition="0.1s linear"
-                  bg={tabState === "upcoming" ? "brand.500" : "transparent"}
+                  bg={tabState === "upcoming" ? "brand.400" : "transparent"}
                   mt="15px"
                   borderRadius="30px"
                 />
@@ -215,7 +215,7 @@ export default function Courses() {
                   height="4px"
                   w="100%"
                   transition="0.1s linear"
-                  bg={tabState === "active" ? "brand.500" : "transparent"}
+                  bg={tabState === "active" ? "brand.400" : "transparent"}
                   mt="15px"
                   borderRadius="30px"
                 />

@@ -49,16 +49,6 @@ export default function DiveSelection(props) {
   const { colorMode } = useColorMode();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const purpleIcon = useColorModeValue("brand.300", "brand.400");
-  const bgIconButton = useColorModeValue("white", "whiteAlpha.100");
-  const bgIconHover = useColorModeValue(
-    { bg: "brand.900" },
-    { bg: "brand.200" }
-  );
-  const bgIconFocus = useColorModeValue(
-    { bg: "grey.100" },
-    { bg: "whiteAlpha.100" }
-  );
   const shadow = useColorModeValue(
     "18px 17px 40px 4px rgba(112, 144, 176, 0.1)",
     "unset"
@@ -190,11 +180,7 @@ export default function DiveSelection(props) {
         <Flex direction="column" align="center">
           <IconButton
             borderRadius="50%"
-            bg={bgIconButton}
-            bgColor={purpleIcon}
-            _hover={bgIconHover}
-            _active={bgIconFocus}
-            _focus={bgIconFocus}
+            variant="darkBrand"
             w="56px"
             h="56px"
             mb="5px"

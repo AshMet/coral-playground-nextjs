@@ -25,7 +25,7 @@ export default function EquipmentSelection(props) {
     "",
     "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
   );
-  const selectedBgColor = useColorModeValue("brand.500", "brand.400");
+  const selectedBgColor = useColorModeValue("brand.400", "brand.400");
   const [equipmentList, setEquipmentList] = useState([]);
 
   function toggleArrayItem(arr, item) {

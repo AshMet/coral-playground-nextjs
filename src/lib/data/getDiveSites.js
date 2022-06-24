@@ -9,7 +9,7 @@ export default async function getDiveSites() {
   let data = null;
 
   try {
-    const DiveSite = Moralis.Object.extend("DiveSite");
+    const DiveSite = Moralis.Object.extend("DiveSites");
     const query = new Moralis.Query(DiveSite);
     query.select(
       "objectId",

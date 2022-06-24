@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   const { id } = req.query;
 
   try {
-    const DiveSite = Moralis.Object.extend("DiveSite");
+    const DiveSite = Moralis.Object.extend("DiveSites");
     const query = new Moralis.Query(DiveSite);
     query
       .equalTo("objectId", id) // change back to "id"

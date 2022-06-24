@@ -173,12 +173,11 @@ export default function MapCard(props) {
               borderRadius="50%"
               ms={{ base: "14px", md: "auto" }}
               my="auto"
-              bg="purple.400"
               w={{ base: "45px", md: "70px" }}
               h={{ base: "45px", md: "70px" }}
               minW={{ base: "45px", md: "70px" }}
               minH={{ base: "45px", md: "70px" }}
-              variant="no-hover"
+              variant="darkBrand"
               onClick={viewLocationDetails}
             >
               <Icon
