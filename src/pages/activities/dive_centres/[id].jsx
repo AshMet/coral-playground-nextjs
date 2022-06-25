@@ -19,7 +19,7 @@ export default function DiveCentre({ data }) {
     description: parsedData.description,
     longitude: parsedData.longitude,
     latitude: parsedData.latitude,
-    imageUrl: parsedData.photo.url,
+    imageUrl: parsedData.coverPhoto.url,
     languages: parsedData.languages,
     memberships: parsedData.memberships,
     services: parsedData.services,

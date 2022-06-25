@@ -16,7 +16,7 @@ export function SidebarBrand() {
   return (
     <Flex align="start" direction="column">
       {/* <HorizonLogo h="26px" w="175px" my="32px" color={logoColor} /> */}
-      <Box ml="30px">
+      <Box ml="30px" mb="20px">
         <Image src="/svg/coral-logo.svg" width="200px" height="45px" />
       </Box>
       <HSeparator mb="20px" />

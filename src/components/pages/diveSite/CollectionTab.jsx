@@ -18,10 +18,10 @@ export default function CollectionTab({ collection, folderUrl }) {
   const bgColor = useColorModeValue("", "navy.900");
   return (
     <Box gridArea="1 / 2 / 2 / 3">
-      <SimpleGrid mt="20px" columns={{ sm: 2, md: 3 }} gap="20px" mb="20px">
+      <SimpleGrid mt="20px" columns={{ sm: 2, md: 4 }} gap="20px" mb="20px">
         {collection?.map((item) => {
           return (
-            <Card p={{ base: "28px", md: "50px" }} bg={bgColor}>
+            <Card p={{ base: "14px", md: "25px" }} bg={bgColor}>
               <VStack>
                 <Image
                   src={`${folderUrl}/${item

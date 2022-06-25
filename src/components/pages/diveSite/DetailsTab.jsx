@@ -37,15 +37,15 @@ export default function DetailsTab({
           <Card p={{ base: "10px", md: "20px" }}>
             <CircularProgress
               title="Depth"
-              percentage="75"
-              text={`${depth}m`}
+              percentage={depth ? depth / 60 : 0}
+              text={depth ? `${depth}m` : "N/A"}
             />
           </Card>
           <Card p={{ base: "10px", md: "20px" }}>
             <CircularProgress
               title="Visibility"
-              percentage="60"
-              text={visibility}
+              percentage={50}
+              text={visibility || "N/A"}
             />
           </Card>
           <Card p={{ base: "10px", md: "20px" }}>

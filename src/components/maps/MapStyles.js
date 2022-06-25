@@ -1,22 +1,293 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 export const DarkMap = [
   {
     featureType: "all",
-    elementType: "all",
+    elementType: "labels.text.fill",
     stylers: [
       {
-        invert_lightness: true,
+        saturation: 36,
       },
       {
-        saturation: 10,
+        color: "#000000",
       },
       {
-        lightness: 30,
+        lightness: 40,
+      },
+    ],
+  },
+  {
+    featureType: "all",
+    elementType: "labels.text.stroke",
+    stylers: [
+      {
+        visibility: "on",
       },
       {
-        gamma: 0.5,
+        color: "#000000",
       },
       {
-        hue: "#435158",
+        lightness: 16,
+      },
+    ],
+  },
+  {
+    featureType: "all",
+    elementType: "labels.icon",
+    stylers: [
+      {
+        visibility: "off",
+      },
+    ],
+  },
+  {
+    featureType: "administrative",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        color: "#000000",
+      },
+      {
+        lightness: "55",
+      },
+    ],
+  },
+  {
+    featureType: "administrative",
+    elementType: "geometry.stroke",
+    stylers: [
+      {
+        lightness: 17,
+      },
+      {
+        weight: 1.2,
+      },
+      {
+        visibility: "on",
+      },
+      {
+        color: "#494949",
+      },
+    ],
+  },
+  {
+    featureType: "administrative",
+    elementType: "labels.text",
+    stylers: [
+      {
+        lightness: "35",
+      },
+      {
+        weight: "0.01",
+      },
+      {
+        color: "#9e9e9e",
+      },
+    ],
+  },
+  {
+    featureType: "landscape",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#000000",
+      },
+      {
+        lightness: 20,
+      },
+    ],
+  },
+  {
+    featureType: "landscape",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        color: "#422680",
+      },
+    ],
+  },
+  {
+    featureType: "landscape",
+    elementType: "labels.text",
+    stylers: [
+      {
+        lightness: "0",
+      },
+    ],
+  },
+  {
+    featureType: "landscape.natural.landcover",
+    elementType: "labels.text.fill",
+    stylers: [
+      {
+        lightness: "0",
+      },
+    ],
+  },
+  {
+    featureType: "landscape.natural.terrain",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        lightness: "47",
+      },
+      {
+        visibility: "on",
+      },
+      {
+        gamma: "0.92",
+      },
+      {
+        weight: "0.43",
+      },
+    ],
+  },
+  {
+    featureType: "landscape.natural.terrain",
+    elementType: "labels.text",
+    stylers: [
+      {
+        lightness: "0",
+      },
+    ],
+  },
+  {
+    featureType: "poi",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#000000",
+      },
+      {
+        lightness: 21,
+      },
+    ],
+  },
+  {
+    featureType: "poi",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        lightness: "0",
+      },
+      {
+        hue: "#ff0000",
+      },
+    ],
+  },
+  {
+    featureType: "poi",
+    elementType: "labels.text",
+    stylers: [
+      {
+        hue: "#ff0000",
+      },
+      {
+        lightness: "81",
+      },
+      {
+        weight: "0.01",
+      },
+    ],
+  },
+  {
+    featureType: "road.highway",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        color: "#660f56",
+      },
+      {
+        lightness: 17,
+      },
+    ],
+  },
+  {
+    featureType: "road.highway",
+    elementType: "geometry.stroke",
+    stylers: [
+      {
+        color: "#341671",
+      },
+      {
+        lightness: 29,
+      },
+      {
+        weight: 0.2,
+      },
+    ],
+  },
+  {
+    featureType: "road.arterial",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#000000",
+      },
+      {
+        lightness: 18,
+      },
+    ],
+  },
+  {
+    featureType: "road.arterial",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        lightness: "47",
+      },
+    ],
+  },
+  {
+    featureType: "road.local",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#000000",
+      },
+      {
+        lightness: 16,
+      },
+    ],
+  },
+  {
+    featureType: "road.local",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        lightness: "27",
+      },
+    ],
+  },
+  {
+    featureType: "transit",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#000000",
+      },
+      {
+        lightness: 19,
+      },
+    ],
+  },
+  {
+    featureType: "water",
+    elementType: "geometry",
+    stylers: [
+      {
+        color: "#000000",
+      },
+      {
+        lightness: 17,
+      },
+    ],
+  },
+  {
+    featureType: "water",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        color: "#0b1437",
       },
     ],
   },

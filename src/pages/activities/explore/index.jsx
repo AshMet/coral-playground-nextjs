@@ -24,7 +24,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { Box, Flex, useColorMode } from "@chakra-ui/react";
+import { Box, Flex, Grid, Text, useColorMode } from "@chakra-ui/react";
 import {
   GoogleMap,
   useLoadScript,
@@ -40,7 +40,7 @@ import { useMoralisCloudFunction } from "react-moralis";
 // Assets
 import Card from "components/card/Card";
 // import SearchBar from "components/navbar/searchBar/SearchBar";
-import MapCard from "components/maps/MapCard";
+import LocationSummary from "components/maps/LocationSummary";
 import { DarkMap, LightMap } from "components/maps/MapStyles";
 import AdminLayout from "layouts/admin";
 
@@ -85,92 +85,75 @@ export default function Default() {
   if (!isLoaded) return "Loading Map";
 
   return (
-    <Flex
-      mt={{ sm: "110px", md: "80px" }}
-      w="100%"
-      direction={{ base: "column", lg: "row" }}
+    <Grid
+      pt={{ base: "130px", md: "80px", xl: "80px" }}
+      gridTemplateColumns={{ md: "2.15fr 1fr", xl: "2.95fr 1fr" }}
+      display={{ base: "block", lg: "grid" }}
     >
-      <Box
-        position="relative"
-        w="100%"
-        height={{ sm: "calc(100vh - 250px)", md: "calc(100vh - 70px - 70px)" }}
-      >
+      <Flex gridArea="1 / 1 / 2 / 2" display={{ base: "block", lg: "flex" }}>
         <Card
-          justifyContent="center"
-          position="relative"
-          direction="column"
+          m={0}
+          p={0}
+          h={{ sm: "calc(100vh - 275px)", md: "calc(100vh - 130px)" }}
           w="100%"
-          h="100%"
-          p={{ sm: "0px", md: "20px" }}
-          zIndex="0"
-          minH={{ base: "calc(120% - 0px)", lg: "100%" }}
+          overflow="hidden"
         >
-          <Flex
-            direction="column"
-            position={{ base: "unset", md: "absolute" }}
-            w={{ sm: "100%", md: "calc(100% - 40px)" }}
-            h={{ sm: "100%", md: "calc(100% - 40px)" }}
-            zIndex="1"
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={4}
+            options={mapOptions}
+            mb="0px"
+            border="20px"
           >
-            {/* <SearchBar
-              w={{ base: "100%", md: "292px" }}
-              placeholder="Search your next destination"
-              background={inputBg}
-              mb="auto"
-            /> */}
-            <Box minH="calc(100vh - 275px)">
-              <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={center}
-                zoom={4}
-                options={mapOptions}
-                mb="0px"
-              >
-                {data && (
-                  <MarkerClusterer options={clusterOptions}>
-                    {(clusterer) =>
-                      data.map((location) => (
-                        <Marker
-                          key={createKey(location)}
-                          position={{ lat: location.lat, lng: location.lng }}
-                          clusterer={clusterer}
-                          onClick={() => setMapLocation(location)}
-                          icon={{
-                            url:
-                              location.type === "dive_site"
-                                ? colorMode === "light"
-                                  ? "/img/activities/dive_icon_dark.svg"
-                                  : "/img/activities/dive_icon_light.svg"
-                                : colorMode === "light"
-                                ? "/img/activities/centre_icon_dark.svg"
-                                : "/img/activities/centre_icon_light.svg",
-                            scaledSize:
-                              location.lat === mapLocation.lat
-                                ? new window.google.maps.Size(50, 50)
-                                : new window.google.maps.Size(34, 34),
-                          }}
-                        />
-                      ))
-                    }
-                  </MarkerClusterer>
-                )}
-              </GoogleMap>
-            </Box>
-            <MapCard mapLocation={mapLocation} />
-          </Flex>
-          {/* <Map
-        initialViewState={{
-          latitude: 37.692,
-          longitude: -122.435,
-          zoom: 13,
-        }}
-        style={{ borderRadius: "20px", width: "100%", minHeight: "600px" }}
-        mapStyle={mapStyles}
-        mapboxAccessToken={MAPBOX_TOKEN}
-      /> */}
+            {data && (
+              <MarkerClusterer options={clusterOptions}>
+                {(clusterer) =>
+                  data.map((location) => (
+                    <Marker
+                      key={createKey(location)}
+                      position={{ lat: location.lat, lng: location.lng }}
+                      clusterer={clusterer}
+                      onClick={() => setMapLocation(location)}
+                      icon={{
+                        url:
+                          location.locationType === "dive_site"
+                            ? colorMode === "light"
+                              ? "/img/activities/dive_icon_dark.svg"
+                              : "/img/activities/dive_icon_light.svg"
+                            : colorMode === "light"
+                            ? "/img/activities/centre_icon_dark.svg"
+                            : "/img/activities/centre_icon_light.svg",
+                        scaledSize:
+                          location.lat === mapLocation.lat
+                            ? new window.google.maps.Size(50, 50)
+                            : new window.google.maps.Size(34, 34),
+                      }}
+                    />
+                  ))
+                }
+              </MarkerClusterer>
+            )}
+          </GoogleMap>
         </Card>
-      </Box>
-    </Flex>
+      </Flex>
+      <Card
+        align="center"
+        direction="column"
+        gridArea="1 / 2 / 2 / 3"
+        w="100%"
+        ml={{ sm: 0, lg: "20px" }}
+        mt={{ sm: "20px", lg: 0 }}
+      >
+        <Grid
+          templateColumns={{ md: "repeat(2, 1fr)", lg: "1fr" }}
+          display={{ base: "block", "3xl": "grid" }}
+          gridColumnGap="20px"
+        >
+          <LocationSummary mapLocation={mapLocation} />
+        </Grid>
+      </Card>
+    </Grid>
   );
 }
 
