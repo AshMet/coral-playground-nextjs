@@ -34,7 +34,7 @@ module.exports = withPWA({
     domains: [
       'avatars.dicebear.com',
       'ipfs.moralis.io',
-      'iebxsikux8zn.usemoralis.com',
+      'rvlocxzrtjom.usemoralis.com',
       'localhost'
     ]
   }

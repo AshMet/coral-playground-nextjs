@@ -60,7 +60,6 @@ export function CircProgressMini(props) {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const stylesColorMode = useColorModeValue(
     {
-      rotation: 0.25,
       textSize: "0px",
       textColor: "transparent",
       pathTransitionDuration: 0.5,
@@ -69,7 +68,6 @@ export function CircProgressMini(props) {
       backgroundColor: "#3e98c7",
     },
     {
-      rotation: 0.25,
       textSize: "0px",
       pathTransitionDuration: 0.5,
       pathColor: `#01B574`,

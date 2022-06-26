@@ -61,7 +61,7 @@ export default function Footer() {
           }}
         >
           <Link fontWeight="500" color={textColor} href="/auth/home">
-            How It Works
+            Careers
           </Link>
         </ListItem>
         <ListItem

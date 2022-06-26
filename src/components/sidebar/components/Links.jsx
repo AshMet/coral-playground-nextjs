@@ -30,12 +30,12 @@ import NavLink from "components/navLinks/NavLink";
 export function SidebarLinks(props) {
   //   Chakra color mode
   const location = useRouter();
-  const activeColor = useColorModeValue("brand.400", "brand.400");
+  const activeColor = useColorModeValue("brand.100", "brand.100");
   const inactiveColor = useColorModeValue(
     "secondaryGray.600",
     "secondaryGray.600"
   );
-  const activeIcon = useColorModeValue("brand.400", "brand.400");
+  const activeIcon = useColorModeValue("brand.100", "brand.100");
 
   const { routes } = props;
 

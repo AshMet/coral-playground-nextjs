@@ -1,0 +1,156 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable consistent-return */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable sonarjs/no-duplicate-string */
+import {
+  chakra,
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Select,
+  SimpleGrid,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
+import { useEffect, useState } from "react";
+import { MdApps, MdDashboard } from "react-icons/md";
+import { useMoralisCloudFunction } from "react-moralis";
+
+// import { SearchBar } from "views/admin/nfts/profile/components/Search";
+import DiveSiteCard from "components/card/DiveSiteCard";
+import AdminLayout from "layouts/admin";
+
+const ChakraBox = chakra(motion.div, {
+  shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === "children",
+});
+
+export default function DiveSites() {
+  // const { image, name, address } = props;
+  // const name = "Dive Site";
+  // const address = "Hurghada, Egypt";
+  const { data } = useMoralisCloudFunction("getDiveSites");
+
+  const textColor = useColorModeValue("secondaryGray.900", "white");
+  const buttonBg = useColorModeValue("transparent", "navy.800");
+  const hoverButton = useColorModeValue(
+    { bg: "gray.100" },
+    { bg: "whiteAlpha.100" }
+  );
+  const activeButton = useColorModeValue(
+    { bg: "gray.200" },
+    { bg: "whiteAlpha.200" }
+  );
+
+  const [country, setCountry] = useState();
+  const [city, setCity] = useState(0);
+  const [filtered, setFiltered] = useState();
+
+  useEffect(() => {
+    if (!data) return null;
+    if (city === 0 || city === "All Cities") {
+      setFiltered(data);
+      return;
+    }
+    const cityFiltered = data.filter((site) => site.city === city);
+    setFiltered(cityFiltered);
+  }, [data, city, country]);
+
+  return (
+    <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+      <Flex w="100%">
+        {/* <SearchBar /> */}
+        <Select
+          value={country}
+          fontSize="sm"
+          id="edit_product"
+          variant="main"
+          h="44px"
+          maxh="44px"
+          me="20px"
+          // placeholder="Please select"
+          defaultValue="egypt"
+          onChange={(e) => setCountry(e.target.value)}
+        >
+          <option value="Egypt">Egypt</option>
+        </Select>
+        <Select
+          value={city}
+          fontSize="sm"
+          variant="main"
+          h="44px"
+          maxh="44px"
+          me="20px"
+          // placeholder="All Cities"
+          defaultValue="All Cities"
+          onChange={(e) => setCity(e.target.value)}
+        >
+          <option value="All Cities">All Cities</option>
+          <option value="Hurghada">Hurghada</option>
+          <option value="Marsa Alam">Marsa Alam</option>
+        </Select>
+        <Button
+          me="20px"
+          bg={buttonBg}
+          border="1px solid"
+          color="secondaryGray.600"
+          borderColor={useColorModeValue("secondaryGray.100", "whiteAlpha.100")}
+          borderRadius="16px"
+          _placeholder={{ color: "secondaryGray.600" }}
+          _hover={hoverButton}
+          _active={activeButton}
+          _focus={activeButton}
+        >
+          <Icon color={textColor} as={MdDashboard} />
+        </Button>
+        <Button
+          bg={buttonBg}
+          border="1px solid"
+          color="secondaryGray.600"
+          borderColor={useColorModeValue("secondaryGray.100", "whiteAlpha.100")}
+          borderRadius="16px"
+          _placeholder={{ color: "secondaryGray.600" }}
+          _hover={hoverButton}
+          _active={activeButton}
+          _focus={activeButton}
+        >
+          <Icon color={textColor} as={MdApps} />
+        </Button>
+      </Flex>
+      <Text
+        mt="25px"
+        mb="36px"
+        color={textColor}
+        fontSize="2xl"
+        ms="24px"
+        fontWeight="700"
+      >
+        {filtered?.length} Results
+      </Text>
+      <ChakraBox layout>
+        {/* <motion.div display="grid" displayTemplateColumns="repeat(autoFit, minmax(250px, 1fr)" gridColumnGap="1rem" gridRowGap="2rem"> */}
+        <AnimatePresence>
+          <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
+            {filtered &&
+              filtered.map((site) => {
+                return (
+                  <DiveSiteCard
+                    key={site.location_id}
+                    id={site.location_id}
+                    image={site.dive_map && site.dive_map?._url}
+                    name={site.name}
+                    // address={`${site.city}, ${site.country}`}
+                  />
+                );
+              })}
+          </SimpleGrid>
+        </AnimatePresence>
+      </ChakraBox>
+    </Box>
+  );
+}
+
+DiveSites.getLayout = function getLayout(page) {
+  return <AdminLayout>{page}</AdminLayout>;
+};

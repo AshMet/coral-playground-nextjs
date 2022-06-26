@@ -73,6 +73,10 @@ export default function Default() {
     styles: colorMode === "light" ? LightMap : DarkMap,
     disableDefaultUI: true,
     zoomControl: true,
+    mapTypeControlOptions: {
+      mapTypeIds: ["coordinate", "satellite"],
+      // style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+    },
   };
 
   const { isLoaded, loadError } = useLoadScript({

@@ -6,6 +6,7 @@ import {
   GiGraduateCap,
   GiOctopus,
   GiLockedChest,
+  GiDivingHelmet,
 } from "react-icons/gi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import {
@@ -28,6 +29,7 @@ import Learn from "pages/activities/learn";
 import NFTCollection from "pages/admin/nfts/collection";
 import NFTDrops from "pages/admin/nfts/drops";
 import NFTMarketplace from "pages/admin/nfts/marketplace";
+import DiveSites from "pages/dive_sites";
 // import NFTPage from "pages/admin/nfts/page";
 // import NFTProfile from "pages/admin/nfts/profile";
 // Main Imports
@@ -236,6 +238,20 @@ const routes = [
         component: Learn,
         icon: (
           <Icon as={GiGraduateCap} width="15px" height="20px" color="inherit" />
+        ),
+      },
+      {
+        name: "Dive Sites",
+        layout: "",
+        path: "/dive_sites",
+        component: DiveSites,
+        icon: (
+          <Icon
+            as={GiDivingHelmet}
+            width="15px"
+            height="20px"
+            color="inherit"
+          />
         ),
       },
       {

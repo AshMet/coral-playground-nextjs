@@ -35,8 +35,8 @@ export default function LocationSummary(props) {
     //   action: "View Site Details",
     // });
     mapLocation?.locationType === "dive_site"
-      ? router.push(`/activities/dive_sites/${mapLocation?.location_id}`)
-      : router.push(`/activities/dive_centres/${mapLocation?.location_id}`);
+      ? router.push(`/dive_sites/${mapLocation?.location_id}`)
+      : router.push(`/dive_centres/${mapLocation?.location_id}`);
   };
 
   return (
@@ -95,6 +95,7 @@ export default function LocationSummary(props) {
               <Text fontWeight="500" fontSize="md" me="5px">
                 {mapLocation.access} Access
               </Text>
+              <Spacer />
             </Flex>
           </Flex>
         )}

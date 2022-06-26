@@ -110,13 +110,12 @@ export default function DiveSelection(props) {
           pb={{ sm: "20px", lg: "0px" }}
         >
           <Box height="100%" minH="400px" position="relative">
-            <Box
-              position="absolute"
-              left="0"
-              right="0"
-              top="0"
-              bottom="0"
-              borderRadius={20}
+            <Card
+              m={0}
+              p={0}
+              h={{ sm: "425px", md: "425px" }}
+              w="100%"
+              overflow="hidden"
             >
               <GoogleMap
                 mapContainerStyle={containerStyle}
@@ -153,7 +152,7 @@ export default function DiveSelection(props) {
                   </MarkerClusterer>
                 )}
               </GoogleMap>
-            </Box>
+            </Card>
           </Box>
         </Card>
         <MiniCalendar

@@ -136,6 +136,40 @@ export default function DiveSitePage({ data }) {
 //   };
 // };
 
+// export async function getStaticPaths() {
+//   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+//   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+//   Moralis.initialize(appId);
+//   Moralis.serverURL = serverUrl;
+//   const DiveSites = Moralis.Object.extend("DiveSites");
+//   const query = new Moralis.Query(DiveSites);
+//   const results = await query.find();
+//   const diveSiteIds = results.map((site) => site.objectId);
+//   const data = JSON.stringify(diveSiteIds);
+//   const paths = data.map((id) => ({
+//     params: { id },
+//   }));
+
+//   return { paths, fallback: false };
+// }
+
+// export async function getStaticProps(context) {
+//   const { id } = context.query;
+//   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+//   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+//   Moralis.initialize(appId);
+//   Moralis.serverURL = serverUrl;
+//   const DiveSites = Moralis.Object.extend("DiveSites");
+//   const query = new Moralis.Query(DiveSites);
+//   query.equalTo("objectId", id);
+//   const results = await query.find();
+//   const data = JSON.stringify(results[0]);
+
+//   return {
+//     props: { data },
+//   };
+// }
+
 export const getServerSideProps = async (context) => {
   const { id } = context.query;
   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
@@ -152,6 +186,7 @@ export const getServerSideProps = async (context) => {
     props: { data },
   };
 };
+
 DiveSitePage.getLayout = function getLayout(page) {
   return <AdminLayout>{page}</AdminLayout>;
 };
