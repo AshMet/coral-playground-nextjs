@@ -3,15 +3,30 @@
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
-export default async function checkout({ lineItems, metadata }) {
+export default async function checkout({
+  lineItems,
+  diverName,
+  diverEmail,
+  custMetadata,
+  sessionMetadata,
+}) {
   let stripePromise = null;
 
+  // Create Stripe customer
+  const {
+    data: { id: custId },
+  } = await axios.post(`${window.location.origin}/api/stripe_customers`, {
+    name: diverName,
+    email: diverEmail,
+    metadata: custMetadata,
+  });
   // Create Stripe checkout
   const {
     data: { id },
   } = await axios.post(`${window.location.origin}/api/checkout_sessions`, {
     items: lineItems,
-    metadata: metadata,
+    metadata: sessionMetadata,
+    customer: custId,
   });
 
   const getStripe = () => {

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // Chakra imports
 import {
   Flex,
@@ -8,15 +9,25 @@ import {
   Select,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
 import TextField from "components/fields/TextField";
 
-export default function Settings() {
+export default function Settings(props) {
+  const { setDiverName, setDiverEmail, setDiverCert, setLastDive, setNotes } =
+    props;
+
+  const [diverName] = useState();
+  const [diverEmail] = useState();
+  const [diverCert] = useState();
+  const [lastDive] = useState();
+  const [notes] = useState();
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
+
   return (
     <FormControl>
       <Card mb={{ base: "0px", xl: "20px" }}>
@@ -37,19 +48,23 @@ export default function Settings() {
             me="30px"
             id="diverName"
             label="Diver Name"
+            value={diverName}
             placeholder="eg. John Smith"
+            onChange={(e) => setDiverName(e.target.value)}
           />
           <InputField
             mb="0px"
             id="email"
             label="Email"
+            value={diverEmail}
             placeholder="For Booking Confirmation"
+            onChange={(e) => setDiverEmail(e.target.value)}
           />
           <Flex direction="column">
             <Flex direction="column" mb="20px">
               <FormLabel
                 ms="10px"
-                htmlFor="currency"
+                htmlFor="diverCert"
                 fontSize="sm"
                 // color={textColor}
                 fontWeight="bold"
@@ -58,14 +73,14 @@ export default function Settings() {
                 Current Certification Level
               </FormLabel>
               <Select
-                // value={certLevel}
                 fontSize="sm"
-                id="currency"
+                id="diverCert"
                 variant="main"
                 h="44px"
                 maxh="44px"
                 defaultValue="open_water"
-                // onChange={(e) => setCertLevel(e.target.value)}
+                value={diverCert}
+                onChange={(e) => setDiverCert(e.target.value)}
               >
                 <option value="open_water">Open Water</option>
                 <option value="advanced">Advanced</option>
@@ -75,7 +90,7 @@ export default function Settings() {
             <Flex direction="column">
               <FormLabel
                 ms="10px"
-                htmlFor="currency"
+                htmlFor="lastDive"
                 fontSize="sm"
                 // color={textColor}
                 fontWeight="bold"
@@ -84,14 +99,14 @@ export default function Settings() {
                 Time since last dive
               </FormLabel>
               <Select
-                // value={certLevel}
                 fontSize="sm"
-                id="currency"
+                id="lastDive"
                 variant="main"
                 h="44px"
                 maxh="44px"
-                defaultValue="open_water"
-                // onChange={(e) => setCertLevel(e.target.value)}
+                value={lastDive}
+                defaultValue="6months"
+                onChange={(e) => setLastDive(e.target.value)}
               >
                 <option value="6months">{`< 6 months ago`}</option>
                 <option value="1year">6 months - 1 year ago</option>
@@ -105,7 +120,9 @@ export default function Settings() {
             label="Notes"
             mb="0px"
             h="100%"
+            value={notes}
             placeholder="Please provide any other important information before your dive (e.g. Medical conditions)"
+            onChange={(e) => setNotes(e.target.value)}
           />
         </SimpleGrid>
       </Card>

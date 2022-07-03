@@ -18,7 +18,8 @@ import checkout from "components/pages/activities/checkout";
 import equipment from "lib/constants/equipment.json";
 
 export default function EquipmentSelection(props) {
-  const { mediaTab, dives } = props;
+  const { mediaTab, dives, diverName, diverEmail, diverCert, lastDive, notes } =
+    props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const priceColor = useColorModeValue("green.300", "green.500");
   const iconColor = useColorModeValue(
@@ -41,17 +42,38 @@ export default function EquipmentSelection(props) {
     };
   });
 
-  const metadata = {
-    diver_name: "diverName",
-    dive_date: "diveDate",
-    dive_time: "diveTime",
-    cert: "certLevel",
+  const custMetadata = {
+    diverCert,
+    lastDive,
+    notes,
+  };
+
+  // const arrayToObject = (arr, key) => {
+  //   return arr.reduce((obj, item) => {
+  //     obj[item[key]] = item;
+  //     return obj;
+  //   }, {});
+  // };
+
+  // console.log(arrayToObject(dives, "id"));
+  // const sessionMetadata = arrayToObject(dives, "id");
+
+  const sessionMetadata = {
+    dive1: JSON.stringify(dives[0]),
+    dive2: JSON.stringify(dives[1]),
+    dive3: JSON.stringify(dives[2]),
   };
 
   console.log(equipmentList);
 
   const redirectToCheckout = async () => {
-    checkout({ lineItems, metadata });
+    checkout({
+      lineItems,
+      diverName,
+      diverEmail,
+      custMetadata,
+      sessionMetadata,
+    });
   };
 
   return (

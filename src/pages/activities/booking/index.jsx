@@ -48,6 +48,11 @@ import EquipmentSelection from "components/pages/bookings/EquipmentSelection";
 import AdminLayout from "layouts/admin";
 
 export default function NewBooking() {
+  const [diverName, setDiverName] = useState();
+  const [diverEmail, setDiverEmail] = useState();
+  const [diverCert, setDiverCert] = useState();
+  const [lastDive, setLastDive] = useState();
+  const [notes, setNotes] = useState();
   const [dives, setDives] = useState([]);
   const [activeBullets, setActiveBullets] = useState({
     product: true,
@@ -282,7 +287,14 @@ export default function NewBooking() {
             mx="auto"
           >
             <Card p="30px">
-              <DiverInfo mb="20px" />
+              <DiverInfo
+                mb="20px"
+                setDiverName={setDiverName}
+                setDiverEmail={setDiverEmail}
+                setLastDive={setLastDive}
+                setDiverCert={setDiverCert}
+                setNotes={setNotes}
+              />
               <Flex justify="space-between" mt="24px">
                 <Button
                   variant="light"
@@ -314,7 +326,15 @@ export default function NewBooking() {
             p="0px"
             mx="auto"
           >
-            <EquipmentSelection mediaTab={mediaTab} dives={dives} />
+            <EquipmentSelection
+              mediaTab={mediaTab}
+              dives={dives}
+              diverName={diverName}
+              diverEmail={diverEmail}
+              diverCert={diverCert}
+              lastDive={lastDive}
+              notes={notes}
+            />
             {/* <Card p="30px">
               <Text color={textColor} fontSize="2xl" fontWeight="700" mb="20px">
                 Equipment

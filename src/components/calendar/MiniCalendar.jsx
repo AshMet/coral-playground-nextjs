@@ -47,7 +47,7 @@ export default function MiniCalendar(props) {
       <Flex direction="column">
         <FormLabel
           ms="10px"
-          htmlFor="currency"
+          htmlFor="diveDate"
           fontSize="sm"
           color={textColor}
           fontWeight="bold"
@@ -68,7 +68,7 @@ export default function MiniCalendar(props) {
         <FormLabel
           mt="30px"
           ms="10px"
-          htmlFor="currency"
+          htmlFor="diveTime"
           fontSize="sm"
           color={textColor}
           fontWeight="bold"
@@ -79,7 +79,7 @@ export default function MiniCalendar(props) {
         <Select
           value={diveTime}
           fontSize="sm"
-          id="currency"
+          id="diveTime"
           variant="main"
           h="44px"
           maxh="44px"

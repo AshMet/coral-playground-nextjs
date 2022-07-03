@@ -30,6 +30,15 @@ export default function DetailsTab({
   const iconColor = useColorModeValue("purple", "white");
   const iconBoxBg = useColorModeValue("gray.300", "navy.700");
 
+  // let depthPercentage = 0;
+  // if (depth > 50) {
+  //   depthPercentage = 95;
+  // } else {
+  //   depthPercentage = (depth * 100) / 50;
+  // }
+
+  const depthPercentage = depth > 50 ? 95 : (depth * 100) / 50;
+
   return (
     <Flex direction="column" w="100%">
       <Box gridArea="1 / 2 / 2 / 3">
@@ -37,7 +46,7 @@ export default function DetailsTab({
           <Card p={{ base: "10px", md: "20px" }}>
             <CircularProgress
               title="Depth"
-              percentage={depth ? depth / 60 : 0}
+              percentage={depthPercentage}
               text={depth ? `${depth}m` : "N/A"}
             />
           </Card>

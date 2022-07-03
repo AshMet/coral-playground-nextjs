@@ -20,7 +20,6 @@ import {
 
 // Admin Imports
 import Booking from "pages/activities/booking";
-import Explore from "pages/activities/explore";
 import Learn from "pages/activities/learn";
 // import DashboardsCarInterface from "pages/admin/dashboards/carInterface";
 // import DashboardsDefault from "pages/admin/dashboards/default";
@@ -30,6 +29,7 @@ import NFTCollection from "pages/admin/nfts/collection";
 import NFTDrops from "pages/admin/nfts/drops";
 import NFTMarketplace from "pages/admin/nfts/marketplace";
 import DiveSites from "pages/dive_sites";
+import DiveMap from "pages/dive_sites/map";
 // import NFTPage from "pages/admin/nfts/page";
 // import NFTProfile from "pages/admin/nfts/profile";
 // Main Imports
@@ -212,16 +212,18 @@ const routes = [
   // },
   // --- Activities ---
   {
-    name: "Explore",
-    path: "/dashboards",
-    icon: <Icon as={GiScubaMask} width="20px" height="20px" color="inherit" />,
+    name: "Diving",
+    path: "/dive_sites",
+    icon: (
+      <Icon as={GiDivingHelmet} width="15px" height="20px" color="inherit" />
+    ),
     collapse: true,
     items: [
       {
         name: "Map",
         layout: "",
-        path: "/activities/explore",
-        component: Explore,
+        path: "/dive_sites/map",
+        component: DiveMap,
         icon: (
           <Icon
             as={HiOutlineLocationMarker}
@@ -247,7 +249,7 @@ const routes = [
         component: DiveSites,
         icon: (
           <Icon
-            as={GiDivingHelmet}
+            as={GiScubaMask}
             width="15px"
             height="20px"
             color="inherit"

@@ -22,6 +22,8 @@ import { useMoralisCloudFunction } from "react-moralis";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import AdminLayout from "layouts/admin";
 
+const Moralis = require("moralis/node");
+
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === "children",
 });
@@ -31,6 +33,7 @@ export default function DiveSites() {
   // const name = "Dive Site";
   // const address = "Hurghada, Egypt";
   const { data } = useMoralisCloudFunction("getDiveSites");
+
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const buttonBg = useColorModeValue("transparent", "navy.800");
@@ -59,6 +62,7 @@ export default function DiveSites() {
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+      {/* <Text>{JSON.stringify(data[0].diveMap)}</Text> */}
       <Flex w="100%">
         {/* <SearchBar /> */}
         <Select
@@ -89,6 +93,8 @@ export default function DiveSites() {
           <option value="All Cities">All Cities</option>
           <option value="Hurghada">Hurghada</option>
           <option value="Marsa Alam">Marsa Alam</option>
+          <option value="Sharm El Sheikh">Sharm El Sheikh</option>
+          <option value="Dahab">Dahab</option>
         </Select>
         <Button
           me="20px"
@@ -151,6 +157,21 @@ export default function DiveSites() {
   );
 }
 
+// This works with parsed data in the body. Not sure why images were not working
+export async function getStaticProps() {
+  const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+  const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+  Moralis.initialize(appId);
+  Moralis.serverURL = serverUrl;
+  const DiveSiteList = Moralis.Object.extend("DiveSites");
+  const query = new Moralis.Query(DiveSiteList);
+  const results = await query.find();
+  const data = JSON.stringify(results);
+
+  return {
+    props: { data },
+  };
+}
 DiveSites.getLayout = function getLayout(page) {
   return <AdminLayout>{page}</AdminLayout>;
 };

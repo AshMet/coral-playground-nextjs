@@ -7,6 +7,7 @@ import {
   Flex,
   Icon,
   SimpleGrid,
+  Spinner,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -28,7 +29,7 @@ const ChakraBox = chakra(motion.div, {
 // Assets
 
 export default function DiveSiteCard(props) {
-  const { id, image, name, address } = props;
+  const { id, image, name, address, isLoading } = props;
   const [like, setLike] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
 
@@ -51,12 +52,16 @@ export default function DiveSiteCard(props) {
           {id && (
             <Link href={`/dive_sites/${id}`}>
               <Box position="relative">
-                <Image
-                  src={image || Nft1}
-                  width="300"
-                  height="300"
-                  borderRadius="20px"
-                />
+                {isLoading ? (
+                  <Spinner />
+                ) : (
+                  <Image
+                    src={image || Nft1}
+                    width="300"
+                    height="300"
+                    borderRadius="20px"
+                  />
+                )}
                 <Button
                   position="absolute"
                   bg="white"
@@ -130,13 +135,13 @@ export default function DiveSiteCard(props) {
                 </Text>
                 <SimpleGrid columns={3} spacing="40px">
                   <Box w="35px">
-                    <CircProgressMini step="Dep" percentage={80} />
+                    <CircProgressMini step="DEP" percentage={80} />
                   </Box>
                   <Box w="35px">
-                    <CircProgressMini step="Vis" percentage={30} />
+                    <CircProgressMini step="VIS" percentage={30} />
                   </Box>
                   <Box w="35px">
-                    <CircProgressMini step="Cur" percentage={60} />
+                    <CircProgressMini step="CUR" percentage={60} />
                   </Box>
                 </SimpleGrid>
               </Flex>

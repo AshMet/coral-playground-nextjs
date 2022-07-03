@@ -100,7 +100,7 @@ export default function BookingDetails(props) {
         <Flex direction="column" mb="34px">
           <FormLabel
             ms="10px"
-            htmlFor="currency"
+            htmlFor="certLevel"
             fontSize="sm"
             color={textColor}
             fontWeight="bold"
@@ -111,7 +111,7 @@ export default function BookingDetails(props) {
           <Select
             value={certLevel}
             fontSize="sm"
-            id="currency"
+            id="certLevel"
             variant="main"
             h="44px"
             maxh="44px"
@@ -126,7 +126,7 @@ export default function BookingDetails(props) {
         <Flex direction="column" mb="34px">
           <FormLabel
             ms="10px"
-            htmlFor="currency"
+            htmlFor="diveCentre"
             fontSize="sm"
             color={textColor}
             fontWeight="bold"
@@ -136,7 +136,7 @@ export default function BookingDetails(props) {
           </FormLabel>
           <Select
             fontSize="sm"
-            id="currency"
+            id="diveCentre"
             variant="main"
             h="44px"
             maxh="44px"

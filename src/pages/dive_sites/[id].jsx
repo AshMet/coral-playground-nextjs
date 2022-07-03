@@ -53,14 +53,13 @@ export default function DiveSitePage({ data }) {
               allowFullScreen
             /> */}
             <Card
-              bgSize="cover"
+              bgSize="100% 100%"
               minH={{ base: "200px", md: "100%" }}
               bgImage={
                 diveSite.imageUrl
                   ? `url(${diveSite.imageUrl})`
                   : "/img/home/clown_fish.jpeg"
               }
-              background="fill"
             >
               <Button
                 variant="no-hover"
