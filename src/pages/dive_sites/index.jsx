@@ -34,7 +34,6 @@ export default function DiveSites() {
   // const address = "Hurghada, Egypt";
   const { data } = useMoralisCloudFunction("getDiveSites");
 
-
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const buttonBg = useColorModeValue("transparent", "navy.800");
   const hoverButton = useColorModeValue(

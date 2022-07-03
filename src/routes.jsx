@@ -248,12 +248,7 @@ const routes = [
         path: "/dive_sites",
         component: DiveSites,
         icon: (
-          <Icon
-            as={GiScubaMask}
-            width="15px"
-            height="20px"
-            color="inherit"
-          />
+          <Icon as={GiScubaMask} width="15px" height="20px" color="inherit" />
         ),
       },
       {
