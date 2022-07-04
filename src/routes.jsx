@@ -19,8 +19,6 @@ import {
 } from "react-icons/md";
 
 // Admin Imports
-import Booking from "pages/activities/booking";
-import Learn from "pages/activities/learn";
 // import DashboardsCarInterface from "pages/admin/dashboards/carInterface";
 // import DashboardsDefault from "pages/admin/dashboards/default";
 // import DashboardsSmartHome from "pages/admin/dashboards/smartHome";
@@ -28,8 +26,10 @@ import Learn from "pages/activities/learn";
 import NFTCollection from "pages/admin/nfts/collection";
 import NFTDrops from "pages/admin/nfts/drops";
 import NFTMarketplace from "pages/admin/nfts/marketplace";
-import DiveSites from "pages/dive_sites";
-import DiveMap from "pages/dive_sites/map";
+import Booking from "pages/diving/booking";
+import Certifications from "pages/diving/certifications";
+import DiveSites from "pages/diving/dive_sites";
+import DiveMap from "pages/diving/map";
 // import NFTPage from "pages/admin/nfts/page";
 // import NFTProfile from "pages/admin/nfts/profile";
 // Main Imports
@@ -210,10 +210,10 @@ const routes = [
   //     },
   //   ],
   // },
-  // --- Activities ---
+  // --- diving ---
   {
     name: "Diving",
-    path: "/dive_sites",
+    path: "/diving",
     icon: (
       <Icon as={GiDivingHelmet} width="15px" height="20px" color="inherit" />
     ),
@@ -222,7 +222,7 @@ const routes = [
       {
         name: "Map",
         layout: "",
-        path: "/dive_sites/map",
+        path: "/diving/map",
         component: DiveMap,
         icon: (
           <Icon
@@ -236,8 +236,8 @@ const routes = [
       {
         name: "Certifications",
         layout: "",
-        path: "/activities/learn",
-        component: Learn,
+        path: "/diving/certifications",
+        component: Certifications,
         icon: (
           <Icon as={GiGraduateCap} width="15px" height="20px" color="inherit" />
         ),
@@ -245,7 +245,7 @@ const routes = [
       {
         name: "Dive Sites",
         layout: "",
-        path: "/dive_sites",
+        path: "/diving/dive_sites",
         component: DiveSites,
         icon: (
           <Icon as={GiScubaMask} width="15px" height="20px" color="inherit" />
@@ -254,7 +254,7 @@ const routes = [
       {
         name: "Booking",
         layout: "",
-        path: "/activities/booking",
+        path: "/diving/booking",
         component: Booking,
         icon: (
           <Icon
@@ -270,7 +270,7 @@ const routes = [
   // {
   //   name: "Dive Site",
   //   layout: "",
-  //   path: "/activities/dive_site",
+  //   path: "/diving/dive_site",
   //   component: DiveSite,
   //   invisible: true,
   // },

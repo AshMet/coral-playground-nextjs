@@ -35,8 +35,8 @@ export default function LocationSummary(props) {
     //   action: "View Site Details",
     // });
     mapLocation?.locationType === "dive_site"
-      ? router.push(`/dive_sites/${mapLocation?.location_id}`)
-      : router.push(`/dive_centres/${mapLocation?.location_id}`);
+      ? router.push(`/diving/dive_sites/${mapLocation?.location_id}`)
+      : router.push(`/diving/dive_centres/${mapLocation?.location_id}`);
   };
 
   return (

@@ -139,8 +139,8 @@ export default function DiveSelection(props) {
                           icon={{
                             url:
                               colorMode === "light"
-                                ? "/img/activities/dive_icon_dark.svg"
-                                : "/img/activities/dive_icon_light.svg",
+                                ? "/img/diving/dive_icon_dark.svg"
+                                : "/img/diving/dive_icon_light.svg",
                             scaledSize:
                               location.lat === mapLocation.lat
                                 ? new window.google.maps.Size(50, 50)

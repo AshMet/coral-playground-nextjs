@@ -58,7 +58,7 @@ export default function TripTableRow(props) {
           fontSize="xs"
           fontWeight="bold"
           // onClick={() =>
-          //   navigate("/activities/create_booking", {
+          //   navigate("/diving/create_booking", {
           //     state: {
           //       diveSiteName,
           //       imgData: diveSiteImg,

@@ -22,30 +22,36 @@
 */
 
 // Chakra imports
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 // Custom components
 // import { getServerSideProps } from "next";
 import Stripe from "stripe";
 
 import Card from "components/card/Card";
-import Banner from "components/pages/activities/Banner";
-import Content from "components/pages/activities/Content";
+import Banner from "components/pages/diving/Banner";
+import Content from "components/pages/diving/Content";
 import AdminLayout from "layouts/admin";
 
-export default function Invoice({ session }) {
-  // Chakra Color Mode
+export default function Invoice({ session, lineItems }) {
+  // console.log(session);
+  // console.log(lineItems);
   return (
     <Card mt={{ base: "130px", md: "80px", xl: "80px" }} maxW="920px" mx="auto">
       <Flex direction="column" width="stretch">
-        <Text>{session.metadata.diver_name}</Text>
-        <Banner sessionId={session.id} status={session.payment_status} />
+        <Banner sessionId={session.id} />
         <Content
-          diverName={session.metadata.diver_name}
+          diverName={session.customer_details.name}
+          email={session.customer_details.email}
           diveDate={session.metadata.dive_date}
           diveTime={session.metadata.dive_time}
+          diverCert={session.customer.metadata.diverCert}
+          lastDive={session.customer.metadata.lastDive}
           cert={session.metadata.cert}
+          lineItems={lineItems.data}
+          currency={session.currency}
           amountSubtotal={(session.amount_subtotal / 100).toFixed(2)}
           amountTotal={(session.amount_total / 100).toFixed(2)}
+          status={session.payment_status}
         />
       </Flex>
     </Card>
@@ -58,15 +64,13 @@ export const getServerSideProps = async (context) => {
   const stripe = new Stripe(stripeKey, {
     apiVersion: "2020-08-27",
   });
-  const session = await stripe.checkout.sessions.retrieve(sessionId);
-  // const lineItems = await stripe.checkout.sessions.listLineItems(
-  //   'cs_test_a1F8XNLYfw8B2GFcBlL4fUiqmtL0agRxddGEL0tUcVlxj8olGfVoxXPBwF',
-  //   { limit: 5 },
-  //   function(err, lineItems) {
-  //     // asynchronously called
-  //   }
-  // );
-  return { props: { session } };
+  const session = await stripe.checkout.sessions.retrieve(sessionId, {
+    expand: ["customer"],
+  });
+  const lineItems = await stripe.checkout.sessions.listLineItems(sessionId, {
+    limit: 5,
+  });
+  return { props: { session, lineItems } };
 };
 
 Invoice.getLayout = function getLayout(page) {

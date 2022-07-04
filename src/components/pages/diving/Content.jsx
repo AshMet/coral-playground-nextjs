@@ -8,17 +8,23 @@ import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 
 // Custom components
 import Card from "components/card/Card";
-import InvoiceTable from "components/pages/activities/InvoiceTable";
+import InvoiceTable from "components/pages/diving/InvoiceTable";
 import { HSeparator } from "components/separator/Separator";
 
 export default function Content(props) {
   const {
     diverName,
+    email,
     diveDate,
     diveTime,
+    diverCert,
+    lastDive,
     certLevel,
+    lineItems,
+    currency,
     amountTotal,
     amountSubtotal,
+    status,
   } = props;
   const tableColumnsInvoice = [
     {
@@ -39,14 +45,24 @@ export default function Content(props) {
     },
   ];
 
-  const tableDataInvoice = [
-    {
-      item: "Diver Certification Course",
-      quantity: "1",
-      rate: amountTotal,
-      amount: amountSubtotal,
-    },
-  ];
+  const tableDataInvoice = lineItems.map((item) => {
+    return {
+      item: item.description,
+      quantity: item.quantity,
+      rate: item.amount_subtotal / 100,
+      amount: item.amount_total / 100,
+      currency: item.currency,
+    };
+  });
+
+  // const tableDataInvoice = [
+  //   {
+  //     item: "Diver Certification Course",
+  //     quantity: "1",
+  //     rate: amountSubtotal / 100,
+  //     amount: amountTotal / 100,
+  //   },
+  // ];
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -76,6 +92,7 @@ export default function Content(props) {
               fontWeight="400"
             >
               Receipt for:
+              {/* {lineItems[0].description} */}
             </Text>
             <Text color={textColor} fontSize="xl" fontWeight="700">
               {diverName}
@@ -88,19 +105,19 @@ export default function Content(props) {
               fontWeight="400"
               lineHeight="26px"
             >
-              Address 1
-              <br /> Address 2
+              {email}
+              {/* <br /> Address 2 */}
             </Text>
           </Flex>
           <Flex direction="column">
             <Text
               w="max-content"
-              mb="4px"
+              mb="10px"
               fontSize="md"
               color="secondaryGray.600"
               fontWeight="400"
             >
-              Booking Date
+              Booking Status
             </Text>
             <Text color={textColor} fontSize="36px" fontWeight="700">
               {diveTime}
@@ -115,7 +132,7 @@ export default function Content(props) {
               borderRadius="10px"
               fontWeight="700"
             >
-              {diveDate}
+              {status.toUpperCase()}
             </Text>
           </Flex>
         </Flex>
@@ -123,11 +140,12 @@ export default function Content(props) {
       <InvoiceTable
         tableData={tableDataInvoice}
         columnsData={tableColumnsInvoice}
+        currency={currency}
       />
       <Flex mt="70px" direction={{ base: "column", md: "row" }}>
         <Box me="auto" mb={{ base: "40px", md: "0px" }}>
           <Text fontSize="lg" fontWeight="700" color={textColor}>
-            Note
+            Notes
           </Text>
           <Text
             fontSize="md"
@@ -135,9 +153,8 @@ export default function Content(props) {
             color="secondaryGray.600"
             maxW="292px"
           >
-            Thank you very much for booking with Coral Playground. Note that all
-            bookings are 100% refunudable up to 48 hours prior to the booking
-            time. Any cancellations later than that will incur a 25% penalty.
+            {diverCert && `Current Certification: ${diverCert}`} <br />
+            {lastDive && `Last Dive: ${lastDive}`}
           </Text>
         </Box>
         <Box>
@@ -151,7 +168,7 @@ export default function Content(props) {
               Total
             </Text>
             <Text color={textColor} fontSize="lg" fontWeight="700" maxW="292px">
-              ${total}
+              {currency === "eur" ? "€" : "$"} {total}
             </Text>
           </Flex>
           <Flex align="center" justifyContent="space-between">
@@ -165,7 +182,7 @@ export default function Content(props) {
               Paid to date
             </Text>
             <Text color={textColor} fontSize="lg" fontWeight="700" maxW="292px">
-              ${paid}
+              {currency === "eur" ? "€" : "$"} {paid}
             </Text>
           </Flex>
           <HSeparator my="20px" />
@@ -180,11 +197,16 @@ export default function Content(props) {
               Amount to pay
             </Text>
             <Text color={textColor} fontSize="lg" fontWeight="700" maxW="292px">
-              ${total - paid}
+              {currency === "eur" ? "€" : "$"} {total - paid}
             </Text>
           </Flex>
         </Box>
       </Flex>
+      <Text mt="50px" fontSize="md" fontWeight="400" color="secondaryGray.600">
+        Thank you very much for booking with Coral Playground. Note that all
+        bookings are 100% refunudable up to 48 hours prior to the booking time.
+        Any cancellations later than that will incur a 25% penalty.
+      </Text>
     </Flex>
   );
 }

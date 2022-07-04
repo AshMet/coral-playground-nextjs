@@ -14,7 +14,7 @@ import { useState } from "react";
 // Custom components
 import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
-import checkout from "components/pages/activities/checkout";
+import checkout from "components/pages/diving/checkout";
 import equipment from "lib/constants/equipment.json";
 
 export default function EquipmentSelection(props) {

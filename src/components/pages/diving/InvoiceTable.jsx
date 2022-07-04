@@ -24,7 +24,7 @@ import {
 // Chakra imports
 
 function InvoiceTable(props) {
-  const { columnsData, tableData } = props;
+  const { columnsData, tableData, currency } = props;
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -96,13 +96,13 @@ function InvoiceTable(props) {
                   } else if (cell.column.Header === "Rate") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
-                        ${cell.value}
+                        {currency === "eur" ? "€" : "$"} {cell.value}
                       </Text>
                     );
                   } else if (cell.column.Header === "Amount") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
-                        ${cell.value}
+                        {currency === "eur" ? "€" : "$"} {cell.value}
                       </Text>
                     );
                   }

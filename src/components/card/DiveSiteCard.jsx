@@ -50,7 +50,7 @@ export default function DiveSiteCard(props) {
       >
         <Flex direction={{ base: "column" }} justify="center">
           {id && (
-            <Link href={`/dive_sites/${id}`}>
+            <Link href={`/diving/dive_sites/${id}`}>
               <Box position="relative">
                 {isLoading ? (
                   <Spinner />

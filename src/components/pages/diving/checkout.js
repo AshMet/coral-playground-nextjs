@@ -39,8 +39,8 @@ export default async function checkout({
   // const checkoutOptions = {
   //   lineItems,
   //   mode: "payment",
-  //   successUrl: `${window.location.origin}/activities/booking/success?session_id={CHECKOUT_SESSION_ID}`,
-  //   cancelUrl: `${window.location.origin}/activities/learn`,
+  //   successUrl: `${window.location.origin}/diving/booking/success?session_id={CHECKOUT_SESSION_ID}`,
+  //   cancelUrl: `${window.location.origin}/diving/learn`,
   // };
 
   // const stripe = await getStripe();

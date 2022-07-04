@@ -123,11 +123,11 @@ export default function Default() {
                         url:
                           location.locationType === "dive_site"
                             ? colorMode === "light"
-                              ? "/img/activities/dive_icon_dark.svg"
-                              : "/img/activities/dive_icon_light.svg"
+                              ? "/img/diving/dive_icon_dark.svg"
+                              : "/img/diving/dive_icon_light.svg"
                             : colorMode === "light"
-                            ? "/img/activities/centre_icon_dark.svg"
-                            : "/img/activities/centre_icon_light.svg",
+                            ? "/img/diving/centre_icon_dark.svg"
+                            : "/img/diving/centre_icon_light.svg",
                         scaledSize:
                           location.lat === mapLocation.lat
                             ? new window.google.maps.Size(50, 50)

@@ -15,7 +15,7 @@ import { useState } from "react";
 
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
-import checkout from "components/pages/activities/checkout";
+import checkout from "components/pages/diving/checkout";
 // Assets
 
 export default function BookingDetails(props) {
