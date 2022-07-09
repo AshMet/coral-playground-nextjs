@@ -35,6 +35,10 @@ export default function DiveSiteCard(props) {
     type === "dive_centre"
       ? "/img/diving/dive_centre_bg.jpg"
       : "/img/diving/dive_site_bg.png";
+  const siteUrl =
+    type === "dive_site"
+      ? `/diving/dive_sites/${id}`
+      : `/diving/dive_centres/${id}`;
 
   return (
     <ChakraBox
@@ -53,7 +57,7 @@ export default function DiveSiteCard(props) {
       >
         <Flex direction={{ base: "column" }} justify="center">
           {id && (
-            <Link href={`/diving/dive_sites/${id}`}>
+            <Link href={siteUrl}>
               <Box position="relative">
                 {isLoading ? (
                   <Spinner />
