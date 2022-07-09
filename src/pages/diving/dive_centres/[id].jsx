@@ -10,23 +10,26 @@ import AdminLayout from "layouts/admin";
 
 const Moralis = require("moralis/node");
 
-export default function DiveCentre({ data }) {
-  const parsedData = JSON.parse(data);
+export default function DiveCentre({ centreData, tripData }) {
+  const parsedCentre = JSON.parse(centreData);
+  const parsedTrips = JSON.parse(tripData);
 
   const diveCentre = {
-    name: parsedData.name,
-    address: parsedData.address,
-    description: parsedData.description,
-    longitude: parsedData.longitude,
-    latitude: parsedData.latitude,
-    imageUrl: parsedData.coverPhoto.url,
-    languages: parsedData.languages,
-    memberships: parsedData.memberships,
-    services: parsedData.services,
-    equipment: parsedData.equipment,
-    paymentMethods: parsedData.paymentMethods,
-    country: parsedData.country,
-    city: parsedData.city,
+    name: parsedCentre.name,
+    address: parsedCentre.address,
+    description: parsedCentre.description,
+    longitude: parsedCentre.longitude,
+    latitude: parsedCentre.latitude,
+    imageUrl: parsedCentre.coverPhoto
+      ? parsedCentre.coverPhoto.url
+      : "/img/diving/dive_centre_bg.jpg",
+    languages: parsedCentre.languages,
+    memberships: parsedCentre.memberships,
+    services: parsedCentre.services,
+    equipment: parsedCentre.equipment,
+    paymentMethods: parsedCentre.paymentMethods,
+    country: parsedCentre.country,
+    city: parsedCentre.city,
   };
 
   return (
@@ -55,7 +58,7 @@ export default function DiveCentre({ data }) {
               bgSize="cover"
               w=""
               minH={{ base: "200px", md: "100%" }}
-              bgImage={`url(${diveCentre.imageUrl})`}
+              bgImage={diveCentre.imageUrl}
             >
               <Button
                 variant="no-hover"
@@ -87,6 +90,7 @@ export default function DiveCentre({ data }) {
             address={diveCentre.address}
             city={diveCentre.city}
             country={diveCentre.country}
+            trips={parsedTrips}
           />
         </Box>
       </Grid>
@@ -145,10 +149,14 @@ export const getServerSideProps = async (context) => {
   const query = new Moralis.Query(DiveCentres);
   query.equalTo("objectId", id);
   const results = await query.find();
-  const data = JSON.stringify(results[0]);
+  const centreData = JSON.stringify(results[0]);
+  // Get upcoming dive trips
+  const params = { id };
+  const tripQuery = await Moralis.Cloud.run("getCentreTrips", params);
+  const tripData = JSON.stringify(tripQuery);
 
   return {
-    props: { data },
+    props: { centreData, tripData },
   };
 };
 

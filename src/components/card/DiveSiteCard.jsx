@@ -16,7 +16,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
-import Nft1 from "../../../public/img/home/clown_fish.jpeg";
 import Image from "../actions/NextChakraImg";
 // Custom components
 import { CircProgressMini } from "components/charts/CircularProgress";
@@ -29,9 +28,13 @@ const ChakraBox = chakra(motion.div, {
 // Assets
 
 export default function DiveSiteCard(props) {
-  const { id, image, name, address, isLoading } = props;
+  const { id, image, name, address, type, isLoading } = props;
   const [like, setLike] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
+  const bgImg =
+    type === "dive_centre"
+      ? "/img/diving/dive_centre_bg.jpg"
+      : "/img/diving/dive_site_bg.png";
 
   return (
     <ChakraBox
@@ -56,7 +59,7 @@ export default function DiveSiteCard(props) {
                   <Spinner />
                 ) : (
                   <Image
-                    src={image || Nft1}
+                    src={image || bgImg}
                     width="300"
                     height="300"
                     borderRadius="20px"
@@ -133,17 +136,19 @@ export default function DiveSiteCard(props) {
                 >
                   {address}
                 </Text>
-                <SimpleGrid columns={3} spacing="40px">
-                  <Box w="35px">
-                    <CircProgressMini step="DEP" percentage={80} />
-                  </Box>
-                  <Box w="35px">
-                    <CircProgressMini step="VIS" percentage={30} />
-                  </Box>
-                  <Box w="35px">
-                    <CircProgressMini step="CUR" percentage={60} />
-                  </Box>
-                </SimpleGrid>
+                {type === "dive_site" && (
+                  <SimpleGrid columns={3} spacing="40px">
+                    <Box w="35px">
+                      <CircProgressMini step="DEP" percentage={80} />
+                    </Box>
+                    <Box w="35px">
+                      <CircProgressMini step="VIS" percentage={30} />
+                    </Box>
+                    <Box w="35px">
+                      <CircProgressMini step="CUR" percentage={60} />
+                    </Box>
+                  </SimpleGrid>
+                )}
               </Flex>
             </Flex>
           </Flex>

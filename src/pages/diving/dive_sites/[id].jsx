@@ -10,24 +10,27 @@ import AdminLayout from "layouts/admin";
 
 const Moralis = require("moralis/node");
 // import getDiveSites from "lib/data/getDiveSites";
-export default function DiveSitePage({ data }) {
-  const parsedData = JSON.parse(data);
+export default function DiveSitePage({ siteData, tripData }) {
+  const parsedSite = JSON.parse(siteData);
+  const parsedTrips = JSON.parse(tripData);
 
   const diveSite = {
-    name: parsedData.name,
-    depth: parsedData.maxDepth,
-    description: parsedData.description,
-    longitude: parsedData.longitude,
-    latitude: parsedData.latitude,
-    imageUrl: parsedData.diveMap?.url,
-    access: parsedData.access,
-    certLevel: parsedData.certLevel,
-    diveTypes: parsedData.divingTypes,
-    country: parsedData.country,
-    city: parsedData.city,
-    visibility: parsedData.visibility,
-    current: parsedData.current,
-    species: parsedData.species,
+    name: parsedSite.name,
+    depth: parsedSite.maxDepth,
+    description: parsedSite.description,
+    longitude: parsedSite.longitude,
+    latitude: parsedSite.latitude,
+    imageUrl: parsedSite.diveMap
+      ? parsedSite.diveMap.url
+      : "/img/diving/dive_site_bg.png",
+    access: parsedSite.access,
+    certLevel: parsedSite.certLevel,
+    diveTypes: parsedSite.divingTypes,
+    country: parsedSite.country,
+    city: parsedSite.city,
+    visibility: parsedSite.visibility,
+    current: parsedSite.current,
+    species: parsedSite.species,
   };
 
   return (
@@ -36,7 +39,7 @@ export default function DiveSitePage({ data }) {
         maxW="100%"
         display={{ base: "block", lg: "grid" }}
         pt={{ base: "130px", md: "80px", xl: "80px" }}
-        gridTemplateColumns="2.95fr 1fr"
+        gridTemplateColumns="2.3fr 1fr"
       >
         <Box
           gridArea="1 / 1 / 2 / 2"
@@ -55,11 +58,7 @@ export default function DiveSitePage({ data }) {
             <Card
               bgSize="100% 100%"
               minH={{ base: "200px", md: "100%" }}
-              bgImage={
-                diveSite.imageUrl
-                  ? `url(${diveSite.imageUrl})`
-                  : "/img/home/clown_fish.jpeg"
-              }
+              bgImage={diveSite.imageUrl}
             >
               <Button
                 variant="no-hover"
@@ -89,7 +88,11 @@ export default function DiveSitePage({ data }) {
           />
         </Box>
         <Box gridArea="1 / 2 / 2 / 3">
-          <DiveSiteSidebar city={diveSite.city} country={diveSite.country} />
+          <DiveSiteSidebar
+            city={diveSite.city}
+            country={diveSite.country}
+            trips={parsedTrips}
+          />
         </Box>
       </Grid>
     </Box>
@@ -175,14 +178,24 @@ export const getServerSideProps = async (context) => {
   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
   Moralis.initialize(appId);
   Moralis.serverURL = serverUrl;
+  // Get dive site details
   const DiveSites = Moralis.Object.extend("DiveSites");
   const query = new Moralis.Query(DiveSites);
   query.equalTo("objectId", id);
   const results = await query.find();
-  const data = JSON.stringify(results[0]);
+  const siteData = JSON.stringify(results[0]);
+  // Get upcoming dive trips
+  // const DiveTrips = Moralis.Object.extend("DiveTrips");
+  // const query2 = new Moralis.Query(DiveTrips);
+  // query2.contains("diveSite", id);
+  // query2.include(["diveCentre"]); // use query2.select
+  // const results2 = await query2.find();
+  // const tripData = JSON.stringify(results2);
+  const tripQuery = await Moralis.Cloud.run("getSiteTrips");
+  const tripData = JSON.stringify(tripQuery);
 
   return {
-    props: { data },
+    props: { siteData, tripData },
   };
 };
 

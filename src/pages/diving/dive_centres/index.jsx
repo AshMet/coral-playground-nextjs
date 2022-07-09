@@ -144,9 +144,9 @@ export default function DiveSites({ data }) {
                   <DiveSiteCard
                     key={site.objectId}
                     id={site.objectId}
-                    image={site.diveMap?.url}
+                    image={site.coverPhoto && site.coverPhoto?.url}
                     name={site.name}
-                    type="dive_site"
+                    type="dive_centre"
                     // address={`${site.city}, ${site.country}`}
                   />
                 );
@@ -164,9 +164,9 @@ export async function getStaticProps() {
   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
   Moralis.initialize(appId);
   Moralis.serverURL = serverUrl;
-  const DiveSiteList = Moralis.Object.extend("DiveSites");
-  const query = new Moralis.Query(DiveSiteList);
-  const results = await query.find();
+  const DiveCentreList = Moralis.Object.extend("DiveCentres");
+  const query = new Moralis.Query(DiveCentreList);
+  const results = await query.ascending("name").find();
   const data = JSON.stringify(results);
 
   return {

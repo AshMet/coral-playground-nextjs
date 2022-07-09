@@ -9,6 +9,7 @@ import {
   GiDivingHelmet,
 } from "react-icons/gi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
+import { IoStorefrontOutline } from "react-icons/io5";
 import {
   // MdDashboard,
   MdHome,
@@ -28,6 +29,7 @@ import NFTDrops from "pages/admin/nfts/drops";
 import NFTMarketplace from "pages/admin/nfts/marketplace";
 import Booking from "pages/diving/booking";
 import Certifications from "pages/diving/certifications";
+import DiveCentres from "pages/diving/dive_centres";
 import DiveSites from "pages/diving/dive_sites";
 import DiveMap from "pages/diving/map";
 // import NFTPage from "pages/admin/nfts/page";
@@ -249,6 +251,20 @@ const routes = [
         component: DiveSites,
         icon: (
           <Icon as={GiScubaMask} width="15px" height="20px" color="inherit" />
+        ),
+      },
+      {
+        name: "Dive Centres",
+        layout: "",
+        path: "/diving/dive_centres",
+        component: DiveCentres,
+        icon: (
+          <Icon
+            as={IoStorefrontOutline}
+            width="15px"
+            height="20px"
+            color="inherit"
+          />
         ),
       },
       {

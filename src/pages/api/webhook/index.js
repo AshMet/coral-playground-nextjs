@@ -1,9 +1,16 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable default-case */
 /* eslint-disable no-console */
 import { buffer } from "micro";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const Moralis = require("moralis/node");
+
+const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+
+Moralis.start({ serverUrl, appId });
 
 export const config = {
   api: {
@@ -23,12 +30,41 @@ const createUser = (customerId) => {
   console.log("Customer Id", customerId);
 };
 
-const createBooking = (session) => {
+const createBooking = async (session) => {
   // create booking on moralis using metadata passed from session
   // Including sessionId
+  const customer = await stripe.customers.retrieve(session.customer);
 
   // Email customer confirmation
+  const Booking = Moralis.Object.extend("Bookings");
+  const booking = new Booking();
+
+  booking
+    .save({
+      diverName: session.customer_details.name || "unknown",
+      email: session.customer_details.email,
+      divingCert: customer.metadata?.diverCert,
+      lastDive: customer.metadata?.lastDive,
+      notes: customer.metadata?.notes,
+      dives: session.metadata,
+      orderAmount: parseFloat((session.amount_total / 100).toFixed(2)),
+      orderCurrency: session.currency,
+      orderStatus: session.payment_status,
+      stripeCustomerId: session.customer,
+      stripeSessionId: session.id,
+    })
+    .then(
+      (booking) => {
+        console.log(`Booking Saved: ${JSON.stringify(booking)}`);
+      },
+      (error) => {
+        // The save failed.
+        // error is a Moralis.Error with an error code and message.
+        console.log(`Booking Error: ${error}`);
+      }
+    );
   console.log("Creating order", session);
+  console.log("Created order", booking.toJSON());
 };
 
 const emailCustomerAboutFailedPayment = (session) => {
