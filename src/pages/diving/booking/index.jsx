@@ -268,6 +268,10 @@ export default function NewBooking() {
             <DiveList mb="20px" dives={dives} setDives={setDives} />
             <Flex justify="space-between" mt="24px">
               <Button
+                isLoading={dives.length === 0}
+                loadingText="Select a Dive"
+                spinnerPlacement="end"
+                // spinner={<BeatLoader size={8} color='white' />}
                 variant="darkBrand"
                 fontSize="sm"
                 borderRadius="16px"

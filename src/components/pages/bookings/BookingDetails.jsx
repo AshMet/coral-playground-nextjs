@@ -38,16 +38,33 @@ export default function BookingDetails(props) {
     },
   ];
 
-  const metadata = {
-    diver_name: diverName,
-    dive_date: diveDate,
-    dive_time: diveTime,
-    cert: certLevel,
+  const dive = {
+    id: courseId,
+    siteName: courseName,
+    diveDate,
+    diveTime,
+    priceId: courseId,
+  };
+
+  const sessionMetadata = {
+    dive1: JSON.stringify(dive),
+  };
+
+  const custMetadata = {
+    diverCert: certLevel,
+    lastDive: "N/A",
+    notes: "N/A",
   };
 
   const redirectToCheckout = async () => {
     setLoading(true);
-    checkout({ lineItems, metadata });
+    checkout({
+      lineItems,
+      diverName,
+      diverEmail: "test@email.com",
+      custMetadata,
+      sessionMetadata,
+    });
     setLoading(false);
   };
   return (

@@ -99,81 +99,23 @@ export default function DiveSitePage({ siteData, tripData }) {
   );
 }
 
-// export async function getStaticPaths() {
-//   // Call an external API endpoint to get sites
-//   const { data, status } = await getDiveSites();
-//   console.log(data);
-//   const diveSites = JSON.stringify(data);
-//   // Get the paths we want to pre-render based on posts
-//   const diveSiteIds = diveSites.data.map((site) => site.objectId);
-//   const paths = diveSiteIds.map((id) => ({
-//     params: { id },
-//   }));
-//   // We'll pre-render only these paths at build time.
-//   // { fallback: false } means other routes should 404.
-//   return { paths, fallback: false };
-// }
+export async function getStaticPaths() {
+  const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+  const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+  Moralis.initialize(appId);
+  Moralis.serverURL = serverUrl;
+  const DiveSites = Moralis.Object.extend("DiveSites");
+  const query = new Moralis.Query(DiveSites);
+  const results = await query.find();
+  const paths = results.map((site) => ({
+    params: { id: site.id },
+  }));
 
-// export const getStaticProps = async ({ params: { id } }) => {
-//   // const { id } = context.params;
-//   const { data } = (await getDiveSites()).default;
-//   const diveSites = JSON.stringify(data);
-//   const diveSite = diveSites.find((site) => site.id === id);
+  return { paths, fallback: false };
+}
 
-//   return {
-//     props: {
-//       name: diveSite.data.name,
-//       depth: diveSite.data.maxDepth,
-//       description: diveSite.data.description,
-//       longitude: diveSite.data.longitude,
-//       latitude: diveSite.data.latitude,
-//       imageUrl: diveSite.data.diveMap.url,
-//       access: diveSite.data.access,
-//       certLevel: diveSite.data.certLevel,
-//       diveTypes: diveSite.data.divingTypes,
-//       country: diveSite.data.country,
-//       city: diveSite.data.city,
-//       species: diveSite.data.species,
-//     },
-//   };
-// };
-
-// export async function getStaticPaths() {
-//   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
-//   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-//   Moralis.initialize(appId);
-//   Moralis.serverURL = serverUrl;
-//   const DiveSites = Moralis.Object.extend("DiveSites");
-//   const query = new Moralis.Query(DiveSites);
-//   const results = await query.find();
-//   const diveSiteIds = results.map((site) => site.objectId);
-//   const data = JSON.stringify(diveSiteIds);
-//   const paths = data.map((id) => ({
-//     params: { id },
-//   }));
-
-//   return { paths, fallback: false };
-// }
-
-// export async function getStaticProps(context) {
-//   const { id } = context.query;
-//   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
-//   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-//   Moralis.initialize(appId);
-//   Moralis.serverURL = serverUrl;
-//   const DiveSites = Moralis.Object.extend("DiveSites");
-//   const query = new Moralis.Query(DiveSites);
-//   query.equalTo("objectId", id);
-//   const results = await query.find();
-//   const data = JSON.stringify(results[0]);
-
-//   return {
-//     props: { data },
-//   };
-// }
-
-export const getServerSideProps = async (context) => {
-  const { id } = context.query;
+export const getStaticProps = async ({ params }) => {
+  const siteId = params.id;
   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
   Moralis.initialize(appId);
@@ -181,7 +123,7 @@ export const getServerSideProps = async (context) => {
   // Get dive site details
   const DiveSites = Moralis.Object.extend("DiveSites");
   const query = new Moralis.Query(DiveSites);
-  query.equalTo("objectId", id);
+  query.equalTo("objectId", siteId);
   const results = await query.find();
   const siteData = JSON.stringify(results[0]);
   // Get upcoming dive trips

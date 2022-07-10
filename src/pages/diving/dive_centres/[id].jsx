@@ -98,67 +98,62 @@ export default function DiveCentre({ centreData, tripData }) {
   );
 }
 
-// export async function getStaticPaths() {
-//   // Call an external API endpoint to get posts
-//   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_SITE_URL}/api/dive_centres`
-//   );
-//   const diveCentres = await res.json();
-//   // Get the paths we want to pre-render based on posts
-//   const paths = diveCentres.data.map((site) => ({
-//     params: { id: site.objectId },
-//   }));
-//   // We'll pre-render only these paths at build time.
-//   // { fallback: false } means other routes should 404.
-//   return { paths, fallback: false };
-// }
-
-// export const getStaticProps = async ({ params }) => {
-//   // const { id } = context.params;
-//   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_SITE_URL}/api/dive_centres/${params.id}`
-//   );
-//   const diveCentre = await res.json();
-
-//   return {
-//     props: {
-//       name: diveCentre.data.name,
-//       address: diveCentre.data.address,
-//       description: diveCentre.data.description,
-//       longitude: diveCentre.data.longitude,
-//       latitude: diveCentre.data.latitude,
-//       imageUrl: diveCentre.data.photo.url,
-//       languages: diveCentre.data.languages,
-//       memberships: diveCentre.data.memberships,
-//       services: diveCentre.data.services,
-//       equipment: diveCentre.data.equipment,
-//       city: diveCentre.data.city,
-//       country: diveCentre.data.country,
-//       paymentMethods: diveCentre.data.paymentMethods,
-//     },
-//   };
-// };
-
-export const getServerSideProps = async (context) => {
-  const { id } = context.query;
+export async function getStaticPaths() {
   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
   Moralis.initialize(appId);
   Moralis.serverURL = serverUrl;
   const DiveCentres = Moralis.Object.extend("DiveCentres");
   const query = new Moralis.Query(DiveCentres);
-  query.equalTo("objectId", id);
+  const results = await query.find();
+  const paths = results.map((centre) => ({
+    params: { id: centre.id },
+  }));
+
+  return { paths, fallback: false };
+}
+
+export const getStaticProps = async ({ params }) => {
+  const centreId = params.id;
+  const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+  const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+  Moralis.initialize(appId);
+  Moralis.serverURL = serverUrl;
+  // Get dive site details
+  const DiveCentres = Moralis.Object.extend("DiveCentres");
+  const query = new Moralis.Query(DiveCentres);
+  query.equalTo("objectId", centreId);
   const results = await query.find();
   const centreData = JSON.stringify(results[0]);
   // Get upcoming dive trips
-  const params = { id };
-  const tripQuery = await Moralis.Cloud.run("getCentreTrips", params);
+  const tripQuery = await Moralis.Cloud.run("getCentreTrips", { id: centreId });
   const tripData = JSON.stringify(tripQuery);
 
   return {
     props: { centreData, tripData },
   };
 };
+
+// export const getServerSideProps = async (context) => {
+//   const { id } = context.query;
+//   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+//   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+//   Moralis.initialize(appId);
+//   Moralis.serverURL = serverUrl;
+//   const DiveCentres = Moralis.Object.extend("DiveCentres");
+//   const query = new Moralis.Query(DiveCentres);
+//   query.equalTo("objectId", id);
+//   const results = await query.find();
+//   const centreData = JSON.stringify(results[0]);
+//   // Get upcoming dive trips
+//   const params = { id };
+//   const tripQuery = await Moralis.Cloud.run("getCentreTrips", params);
+//   const tripData = JSON.stringify(tripQuery);
+
+//   return {
+//     props: { centreData, tripData },
+//   };
+// };
 
 DiveCentre.getLayout = function getLayout(page) {
   return <AdminLayout>{page}</AdminLayout>;
