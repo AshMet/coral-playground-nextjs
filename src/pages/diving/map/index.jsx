@@ -26,7 +26,15 @@
 */
 import { Flex, Grid, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
-import Map, { Marker } from "react-map-gl";
+import { IoStorefrontOutline } from "react-icons/io5";
+import Map, {
+  Marker,
+  Popup,
+  NavigationControl,
+  FullscreenControl,
+  ScaleControl,
+  GeolocateControl,
+} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 // import { useMoralisCloudFunction } from "react-moralis";
 
@@ -35,7 +43,9 @@ import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
 // import SearchBar from "components/navbar/searchBar/SearchBar";
 import LocationSummary from "components/maps/LocationSummary";
+import PopupOverlay from "components/maps/PopupOverlay";
 import AdminLayout from "layouts/admin";
+// import Pin from "components/maps/pin";
 
 // import { IoPaperPlane } from "react-icons/io5";
 const Moralis = require("moralis/node");
@@ -55,6 +65,7 @@ export default function Default({ data }) {
     "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r",
     "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r"
   );
+  const [popupInfo, setPopupInfo] = useState(null);
 
   return (
     <Grid
@@ -70,7 +81,8 @@ export default function Default({ data }) {
           w="100%"
           p={{ sm: "0px", md: "10px" }}
           zIndex="0"
-          minH={{ sm: "calc(100vh - 275px)", md: "calc(100vh - 130px)" }}
+          h={{ sm: "calc(100vh - 275px)", md: "calc(100vh - 130px)" }}
+          overflow="hidden"
         >
           <Map
             initialViewState={{
@@ -84,6 +96,11 @@ export default function Default({ data }) {
             mapStyle={mapStyles}
             mapboxAccessToken={MAPBOX_TOKEN}
           >
+            <GeolocateControl position="top-left" />
+            <FullscreenControl position="top-left" />
+            <NavigationControl position="top-left" />
+            <ScaleControl />
+
             {parsedData?.map(
               (location) =>
                 location.lat &&
@@ -92,8 +109,16 @@ export default function Default({ data }) {
                     key={createKey(location)}
                     latitude={location.lat}
                     longitude={location.lng}
-                    color="red"
-                    onClick={() => setMapLocation(location)}
+                    anchor="bottom"
+                    onClick={(e) => {
+                      // If we let the click event propagates to the map, it will immediately close the popup
+                      // with `closeOnClick: true`
+                      e.originalEvent.stopPropagation();
+                      setMapLocation(location);
+                      setPopupInfo(location);
+                    }}
+                    // color="red"
+                    // onClick={() => setMapLocation(location)
                   >
                     <Image
                       src={
@@ -105,8 +130,27 @@ export default function Default({ data }) {
                       height={location.lat === mapLocation.lat ? 50 : 30}
                       width={location.lat === mapLocation.lat ? 50 : 30}
                     />
+                    {/* <Pin /> */}
                   </Marker>
                 )
+            )}
+            {popupInfo && (
+              <Popup
+                anchor="bottom"
+                offset={50}
+                longitude={Number(popupInfo.lng)}
+                latitude={Number(popupInfo.lat)}
+                onClose={() => setPopupInfo(null)}
+              >
+                <PopupOverlay
+                  name={popupInfo.name}
+                  city={popupInfo.city}
+                  country={popupInfo.country}
+                  icon={IoStorefrontOutline}
+                  locationId={popupInfo.location_id}
+                  locationType={popupInfo.locationType}
+                />
+              </Popup>
             )}
           </Map>
         </Card>
