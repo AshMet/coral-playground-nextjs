@@ -1,20 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable react/jsx-no-bind */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable react/prop-types */
 // Chakra imports
-import { Box, Button, Icon, Spacer, Text } from "@chakra-ui/react";
+import { Badge, Box, Button, Flex, Icon, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { MdChevronRight } from "react-icons/md";
+import { BsArrowRight } from "react-icons/bs";
 
-// Custom components
-import Card from "components/card/Card";
-import IconBox from "components/icons/IconBox";
-
-export default function Banner(props) {
-  const { name, city, country, icon, locationId, locationType } = props;
+export default function Default(props) {
+  const { name, icon, divingTypes, locationId, locationType } = props;
   const router = useRouter();
-  // Chakra Color Mode
-  const textColorSecondary = "gray.400";
 
   function viewLocationDetails() {
     // ReactGA.event({
@@ -25,57 +19,52 @@ export default function Banner(props) {
       ? router.push(`/diving/dive_sites/${locationId}`)
       : router.push(`/diving/dive_centres/${locationId}`);
   }
-
   return (
-    <Card mb={{ base: "0px", lg: "0px" }} align="center" bgColor="white">
-      <IconBox
-        mx="auto"
-        h="60px"
-        w="60px"
-        icon={<Icon as={icon} color="white" h="30px" w="30px" />}
-        bg="brand.400"
-      />
-      <Text
-        color="brand.500"
-        fontWeight="bold"
-        fontSize="xl"
-        mt="10px"
-        mb="5px"
-      >
-        {name}
-      </Text>
-      <Text
-        color={textColorSecondary}
-        fontSize="xs"
-        maxW={{ base: "100%", xl: "80%", "3xl": "60%" }}
-        mx="auto"
-      >
-        {`${city}, ${country}` || " "}
-      </Text>
-      <Box w="100%" mt="10px">
-        {name && (
-          <Button variant="darkBrand" onClick={viewLocationDetails} w="100%">
-            <Spacer />
-            View
-            <Spacer />
-            <Icon as={MdChevronRight} color="white" />
-          </Button>
-        )}
-        {/* <Flex w="100%" justify="space-between" mb="10px">
-          <Text color={textColorSecondary} fontSize="sm" maxW="40%">
-            {used} GB
-          </Text>
-          <Text color={textColorSecondary} fontSize="sm" maxW="40%">
-            {total} GB
-          </Text>
+    <Box>
+      <Flex align="center" mb="10px" mx="10px">
+        <Icon me="10px" as={icon} color="brand.300" h="30px" w="30px" />
+        <Text fontSize="lg" fontWeight="700" color="brand.300">
+          {name}
+        </Text>
+      </Flex>
+      <Flex align="center">
+        <Flex wrap="wrap" gap={1}>
+          {divingTypes?.map((type) => (
+            <Badge
+              colorScheme="purple"
+              borderRadius="15px"
+              display="flex"
+              px={1}
+              py={1}
+              justifyContent="center"
+              fontSize="0.8em"
+            >
+              {type}
+            </Badge>
+          ))}
         </Flex>
-        <Progress
-          align="start"
-          colorScheme="brandScheme"
-          value={(used / total) * 100}
-          w="100%"
-        /> */}
-      </Box>
-    </Card>
+        <Button
+          p="0px"
+          ms="auto"
+          variant="no-hover"
+          bg="transparent"
+          cursor="pointer"
+          color="brand.100"
+          _hover={{ transform: "translate(4px)" }}
+          onClick={viewLocationDetails}
+        >
+          <Text fontSize="sm" fontWeight="bold">
+            View
+          </Text>
+          <Icon
+            as={BsArrowRight}
+            w="18px"
+            h="18px"
+            transition="all .3s ease"
+            ms=".3rem"
+          />
+        </Button>
+      </Flex>
+    </Box>
   );
 }

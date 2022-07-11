@@ -24,7 +24,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { Flex, Grid, useColorModeValue } from "@chakra-ui/react";
+import { Flex, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
 import { IoStorefrontOutline } from "react-icons/io5";
 import Map, {
@@ -42,7 +42,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
 // import SearchBar from "components/navbar/searchBar/SearchBar";
-import LocationSummary from "components/maps/LocationSummary";
+// import LocationSummary from "components/maps/LocationSummary";
 import PopupOverlay from "components/maps/PopupOverlay";
 import AdminLayout from "layouts/admin";
 // import Pin from "components/maps/pin";
@@ -58,7 +58,6 @@ function createKey(location) {
 
 export default function Default({ data }) {
   const [mapLocation, setMapLocation] = useState("Select Location");
-  // const { data } = useMoralisCloudFunction("getMapLocations");
   const parsedData = JSON.parse(data);
 
   const mapStyles = useColorModeValue(
@@ -68,110 +67,90 @@ export default function Default({ data }) {
   const [popupInfo, setPopupInfo] = useState(null);
 
   return (
-    <Grid
+    <Flex
+      gridArea="1 / 1 / 1 / 1"
+      display={{ base: "block", lg: "flex" }}
       pt={{ base: "130px", md: "80px", xl: "80px" }}
-      gridTemplateColumns={{ md: "2.15fr 1fr", xl: "2.95fr 1fr" }}
-      display={{ base: "block", lg: "grid" }}
     >
-      <Flex gridArea="1 / 1 / 2 / 2" display={{ base: "block", lg: "flex" }}>
-        <Card
-          justifyContent="center"
-          position="relative"
-          direction="column"
-          w="100%"
-          p={{ sm: "0px", md: "10px" }}
-          zIndex="0"
-          h={{ sm: "calc(100vh - 275px)", md: "calc(100vh - 130px)" }}
-          overflow="hidden"
-        >
-          <Map
-            initialViewState={{
-              latitude: 28.0132,
-              longitude: 33.7751,
-              pitch: 85, // pitch in degrees
-              // bearing: -60, // bearing in degrees
-              zoom: 7,
-            }}
-            style={{ borderRadius: "20px", width: "100%", minHeight: "600px" }}
-            mapStyle={mapStyles}
-            mapboxAccessToken={MAPBOX_TOKEN}
-          >
-            <GeolocateControl position="top-left" />
-            <FullscreenControl position="top-left" />
-            <NavigationControl position="top-left" />
-            <ScaleControl />
-
-            {parsedData?.map(
-              (location) =>
-                location.lat &&
-                location.lng && (
-                  <Marker
-                    key={createKey(location)}
-                    latitude={location.lat}
-                    longitude={location.lng}
-                    anchor="bottom"
-                    onClick={(e) => {
-                      // If we let the click event propagates to the map, it will immediately close the popup
-                      // with `closeOnClick: true`
-                      e.originalEvent.stopPropagation();
-                      setMapLocation(location);
-                      setPopupInfo(location);
-                    }}
-                    // color="red"
-                    // onClick={() => setMapLocation(location)
-                  >
-                    <Image
-                      src={
-                        location.locationType === "dive_site"
-                          ? "/img/diving/dive_icon_dark.svg"
-                          : "/img/diving/centre_icon_dark.svg"
-                      }
-                      alt="map icon"
-                      height={location.lat === mapLocation.lat ? 50 : 30}
-                      width={location.lat === mapLocation.lat ? 50 : 30}
-                    />
-                    {/* <Pin /> */}
-                  </Marker>
-                )
-            )}
-            {popupInfo && (
-              <Popup
-                anchor="bottom"
-                offset={50}
-                longitude={Number(popupInfo.lng)}
-                latitude={Number(popupInfo.lat)}
-                onClose={() => setPopupInfo(null)}
-              >
-                <PopupOverlay
-                  name={popupInfo.name}
-                  city={popupInfo.city}
-                  country={popupInfo.country}
-                  icon={IoStorefrontOutline}
-                  locationId={popupInfo.location_id}
-                  locationType={popupInfo.locationType}
-                />
-              </Popup>
-            )}
-          </Map>
-        </Card>
-      </Flex>
       <Card
-        align="center"
+        justifyContent="center"
+        position="relative"
         direction="column"
-        gridArea="1 / 2 / 2 / 3"
         w="100%"
-        ml={{ sm: 0, lg: "20px" }}
-        mt={{ sm: "20px", lg: 0 }}
+        p={{ sm: "0px", md: "10px" }}
+        zIndex="0"
+        h={{ sm: "calc(100vh - 200px)", md: "calc(100vh - 130px)" }}
+        overflow="hidden"
       >
-        <Grid
-          templateColumns={{ md: "repeat(2, 1fr)", lg: "1fr" }}
-          display={{ base: "block", "3xl": "grid" }}
-          gridColumnGap="20px"
+        <Map
+          initialViewState={{
+            latitude: 28.0132,
+            longitude: 33.7751,
+            pitch: 85,
+            zoom: 7,
+          }}
+          style={{ borderRadius: "20px", width: "100%", height: "100%" }}
+          mapStyle={mapStyles}
+          mapboxAccessToken={MAPBOX_TOKEN}
         >
-          <LocationSummary mapLocation={mapLocation} />
-        </Grid>
+          <GeolocateControl position="top-left" />
+          <FullscreenControl position="top-left" />
+          <NavigationControl position="top-left" />
+          <ScaleControl />
+
+          {parsedData?.map(
+            (location) =>
+              location.lat &&
+              location.lng && (
+                <Marker
+                  key={createKey(location)}
+                  latitude={location.lat}
+                  longitude={location.lng}
+                  anchor="bottom"
+                  onClick={(e) => {
+                    // If we let the click event propagates to the map, it will immediately close the popup
+                    // with `closeOnClick: true`
+                    e.originalEvent.stopPropagation();
+                    setMapLocation(location);
+                    setPopupInfo(location);
+                  }}
+                >
+                  <Image
+                    src={
+                      location.locationType === "dive_site"
+                        ? "/img/diving/dive_icon_dark.svg"
+                        : "/img/diving/centre_icon_dark.svg"
+                    }
+                    alt="map icon"
+                    height={location.lat === mapLocation.lat ? 50 : 30}
+                    width={location.lat === mapLocation.lat ? 50 : 30}
+                  />
+                  {/* <Pin /> */}
+                </Marker>
+              )
+          )}
+          {popupInfo && (
+            <Popup
+              anchor="bottom"
+              offset={50}
+              longitude={Number(popupInfo.lng)}
+              latitude={Number(popupInfo.lat)}
+              onClose={() => setPopupInfo(null)}
+            >
+              <PopupOverlay
+                name={popupInfo.name}
+                city={popupInfo.city}
+                country={popupInfo.country}
+                icon={IoStorefrontOutline}
+                divingTypes={popupInfo.divingTypes}
+                locationId={popupInfo.location_id}
+                locationType={popupInfo.locationType}
+              />
+            </Popup>
+          )}
+        </Map>
       </Card>
-    </Grid>
+    </Flex>
   );
 }
 
