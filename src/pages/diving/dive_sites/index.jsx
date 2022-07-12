@@ -146,6 +146,10 @@ export default function DiveSites({ data }) {
                     id={site.objectId}
                     image={site.diveMap?.url}
                     name={site.name}
+                    tagList={site.divingTypes}
+                    depth={site.maxDepth}
+                    maxVisibility={site.maxVisibility}
+                    current={site.current}
                     type="dive_site"
                     // address={`${site.city}, ${site.country}`}
                   />

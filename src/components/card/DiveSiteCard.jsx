@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
 import {
+  Badge,
   Box,
   Button,
   chakra,
@@ -28,7 +29,18 @@ const ChakraBox = chakra(motion.div, {
 // Assets
 
 export default function DiveSiteCard(props) {
-  const { id, image, name, address, type, isLoading } = props;
+  const {
+    id,
+    image,
+    name,
+    address,
+    tagList,
+    maxVisibility,
+    current,
+    depth,
+    type,
+    isLoading,
+  } = props;
   const [like, setLike] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
   const bgImg =
@@ -141,17 +153,39 @@ export default function DiveSiteCard(props) {
                   {address}
                 </Text>
                 {type === "dive_site" && (
-                  <SimpleGrid columns={3} spacing="40px">
-                    <Box w="35px">
-                      <CircProgressMini step="DEP" percentage={80} />
-                    </Box>
-                    <Box w="35px">
-                      <CircProgressMini step="VIS" percentage={30} />
-                    </Box>
-                    <Box w="35px">
-                      <CircProgressMini step="CUR" percentage={60} />
-                    </Box>
-                  </SimpleGrid>
+                  <Box>
+                    <Flex wrap="wrap" gap={1}>
+                      {tagList?.map((tag) => (
+                        <Badge
+                          colorScheme="purple"
+                          borderRadius="15px"
+                          display="flex"
+                          px={1}
+                          py={1}
+                          justifyContent="center"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </Flex>
+                    <SimpleGrid columns={3} spacing="40px" mt="10px">
+                      {depth && (
+                        <Box w="35px">
+                          <CircProgressMini title="DEP" value={depth} />
+                        </Box>
+                      )}
+                      {maxVisibility && (
+                        <Box w="35px">
+                          <CircProgressMini title="VIS" value={maxVisibility} />
+                        </Box>
+                      )}
+                      {current && (
+                        <Box w="35px">
+                          <CircProgressMini title="CUR" value={current} />
+                        </Box>
+                      )}
+                    </SimpleGrid>
+                  </Box>
                 )}
               </Flex>
             </Flex>

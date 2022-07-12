@@ -28,7 +28,8 @@ export default function DiveSitePage({ siteData, tripData }) {
     diveTypes: parsedSite.divingTypes,
     country: parsedSite.country,
     city: parsedSite.city,
-    visibility: parsedSite.visibility,
+    minVisibility: parsedSite.minVisibility,
+    maxVisibility: parsedSite.maxVisibility,
     current: parsedSite.current,
     species: parsedSite.species,
   };
@@ -79,7 +80,8 @@ export default function DiveSitePage({ siteData, tripData }) {
             name={diveSite.name}
             description={diveSite.description}
             depth={diveSite.depth}
-            visibility={diveSite.visibility}
+            minVisibility={diveSite.minVisibility}
+            maxVisibility={diveSite.maxVisibility}
             current={diveSite.current}
             access={diveSite.access}
             certLevel={diveSite.certLevel}

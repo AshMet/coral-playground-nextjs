@@ -19,7 +19,8 @@ import IconBox from "components/icons/IconBox";
 
 export default function DetailsTab({
   depth,
-  visibility,
+  minVisibility,
+  maxVisibility,
   current,
   access,
   certLevel,
@@ -30,15 +31,6 @@ export default function DetailsTab({
   const iconColor = useColorModeValue("purple", "white");
   const iconBoxBg = useColorModeValue("gray.300", "navy.700");
 
-  // let depthPercentage = 0;
-  // if (depth > 50) {
-  //   depthPercentage = 95;
-  // } else {
-  //   depthPercentage = (depth * 100) / 50;
-  // }
-
-  const depthPercentage = depth > 50 ? 95 : (depth * 100) / 50;
-
   return (
     <Flex direction="column" w="100%">
       <Box gridArea="1 / 2 / 2 / 3">
@@ -46,19 +38,19 @@ export default function DetailsTab({
           <Card p={{ base: "10px", md: "20px" }}>
             <CircularProgress
               title="Depth"
-              percentage={depthPercentage}
+              value={depth}
               text={depth ? `${depth}m` : "N/A"}
             />
           </Card>
           <Card p={{ base: "10px", md: "20px" }}>
             <CircularProgress
               title="Visibility"
-              percentage={50}
-              text={visibility || "N/A"}
+              value={maxVisibility}
+              text={`${minVisibility || "N/A"} - ${maxVisibility || "N/A"}m`}
             />
           </Card>
           <Card p={{ base: "10px", md: "20px" }}>
-            <CircularProgress title="Current" percentage="15" text={current} />
+            <CircularProgress title="Current" value={current} text={current} />
           </Card>
         </SimpleGrid>
       </Box>

@@ -118,8 +118,8 @@ export default function Default({ data }) {
                   <Image
                     src={
                       location.locationType === "dive_site"
-                        ? "/img/diving/dive_icon_dark.svg"
-                        : "/img/diving/centre_icon_dark.svg"
+                        ? "/img/diving/dive_site_marker.svg"
+                        : "/img/diving/dive_centre_marker.svg"
                     }
                     alt="map icon"
                     height={location.lat === mapLocation.lat ? 50 : 30}

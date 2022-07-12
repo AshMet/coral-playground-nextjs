@@ -31,7 +31,8 @@ export default function SiteInfo({
   description,
   species,
   depth,
-  visibility,
+  minVisibility,
+  maxVisibility,
   current,
   access,
   certLevel,
@@ -185,7 +186,8 @@ export default function SiteInfo({
                 <TabPanel px="0px">
                   <DetailsTab
                     depth={depth}
-                    visibility={visibility}
+                    minVisibility={minVisibility}
+                    maxVisibility={maxVisibility}
                     current={current}
                     access={access}
                     certLevel={certLevel}

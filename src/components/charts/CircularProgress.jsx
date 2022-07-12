@@ -6,17 +6,51 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-export default function CircProgress(props) {
-  const { title, percentage, text } = props;
-  let indicatorColor = `#8318FF`;
+function getPercent(title, value) {
+  let percent = 0;
+  if (title === "Depth" || title === "DEP") {
+    percent = value > 50 ? 95 : (value * 100) / 50;
+  } else if (title === "Visibility" || title === "VIS") {
+    percent = value > 50 ? 95 : (value * 100) / 50;
+  } else if (title === "Current" || title === "CUR") {
+    switch (value) {
+      case "Low":
+        percent = 0.2;
+        break;
+      case "Medium":
+        percent = 0.4;
+        break;
+      case "High":
+        percent = 0.7;
+        break;
+      default:
+        break;
+    }
+  } else {
+    percent = 0.05;
+  }
+  return percent;
+}
 
+function getIndicatorColor(title, percentage) {
+  let indicatorColor = `#8318FF`;
   if (percentage < 33) {
-    indicatorColor = `#0a9396`;
+    indicatorColor =
+      title === "Visibility" || title === "VIS" ? `#9b2226` : `#0a9396`;
   } else if (percentage >= 33 && percentage < 66) {
     indicatorColor = `#ee9b00`;
   } else if (percentage >= 66 && percentage < 100) {
-    indicatorColor = `#9b2226`;
+    indicatorColor =
+      title === "Visibility" || title === "VIS" ? `#0a9396` : `#9b2226`;
   }
+  return indicatorColor;
+}
+
+export default function CircProgress(props) {
+  const { title, value, text } = props;
+  const percentage = getPercent(title, value);
+  const indicatorColor = getIndicatorColor(title, percentage);
+
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const stylesColorMode = useColorModeValue(
     {
@@ -56,17 +90,10 @@ export default function CircProgress(props) {
 }
 
 export function CircProgressMini(props) {
-  const { step, percentage } = props;
+  const { title, value } = props;
 
-  let indicatorColor = `#8318FF`;
-
-  if (percentage < 33) {
-    indicatorColor = `#0a9396`;
-  } else if (percentage >= 33 && percentage < 66) {
-    indicatorColor = `#ee9b00`;
-  } else if (percentage >= 66 && percentage < 100) {
-    indicatorColor = `#9b2226`;
-  }
+  const percentage = getPercent(title, value);
+  const indicatorColor = getIndicatorColor(title, percentage);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const stylesColorMode = useColorModeValue(
@@ -89,12 +116,12 @@ export function CircProgressMini(props) {
   return (
     <CircularProgressbarWithChildren
       value={percentage}
-      text={`${step}`}
+      text={`${title}`}
       styles={buildStyles(stylesColorMode)}
     >
       <Box>
         <Text fontSize="sm" color={textColor} fontWeight="700">
-          {step}
+          {title}
         </Text>
       </Box>
     </CircularProgressbarWithChildren>
