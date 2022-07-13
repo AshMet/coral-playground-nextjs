@@ -25,8 +25,7 @@
 
 */
 import { Flex, useColorModeValue } from "@chakra-ui/react";
-import { useState } from "react";
-import { IoStorefrontOutline } from "react-icons/io5";
+import { useState, useRef } from "react";
 import Map, {
   Marker,
   Popup,
@@ -36,18 +35,15 @@ import Map, {
   GeolocateControl,
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-// import { useMoralisCloudFunction } from "react-moralis";
 
 // Assets
 import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
 // import SearchBar from "components/navbar/searchBar/SearchBar";
 // import LocationSummary from "components/maps/LocationSummary";
-import PopupOverlay from "components/maps/PopupOverlay";
+import DiveSiteCard from "components/card/DiveSiteCard";
 import AdminLayout from "layouts/admin";
-// import Pin from "components/maps/pin";
 
-// import { IoPaperPlane } from "react-icons/io5";
 const Moralis = require("moralis/node");
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -57,8 +53,13 @@ function createKey(location) {
 }
 
 export default function Default({ data }) {
+  const mapRef = useRef();
   const [mapLocation, setMapLocation] = useState("Select Location");
   const parsedData = JSON.parse(data);
+
+  // const centerMap = useCallback(({ latitude, longitude }) => {
+  //   mapRef.current?.flyTo({ center: [longitude, latitude], duration: 2000 });
+  // }, []);
 
   const mapStyles = useColorModeValue(
     "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r",
@@ -83,6 +84,7 @@ export default function Default({ data }) {
         overflow="hidden"
       >
         <Map
+          ref={mapRef}
           initialViewState={{
             latitude: 28.0132,
             longitude: 33.7751,
@@ -113,6 +115,10 @@ export default function Default({ data }) {
                     e.originalEvent.stopPropagation();
                     setMapLocation(location);
                     setPopupInfo(location);
+                    mapRef.current?.flyTo({
+                      center: [location.lng, location.lat],
+                      duration: 2000,
+                    });
                   }}
                 >
                   <Image
@@ -125,26 +131,26 @@ export default function Default({ data }) {
                     height={location.lat === mapLocation.lat ? 50 : 30}
                     width={location.lat === mapLocation.lat ? 50 : 30}
                   />
-                  {/* <Pin /> */}
                 </Marker>
               )
           )}
           {popupInfo && (
             <Popup
               anchor="bottom"
-              offset={50}
+              offset={20}
+              closeButton={false}
               longitude={Number(popupInfo.lng)}
               latitude={Number(popupInfo.lat)}
               onClose={() => setPopupInfo(null)}
+              style={{ ".mapboxgl-popup-content": { background: "#345346" } }}
             >
-              <PopupOverlay
+              <DiveSiteCard
+                key={popupInfo.location_id}
+                id={popupInfo.location_id}
                 name={popupInfo.name}
-                city={popupInfo.city}
-                country={popupInfo.country}
-                icon={IoStorefrontOutline}
-                divingTypes={popupInfo.divingTypes}
-                locationId={popupInfo.location_id}
-                locationType={popupInfo.locationType}
+                tagList={popupInfo.divingTypes}
+                type={popupInfo.locationType}
+                image={popupInfo.itemImg?.url}
               />
             </Popup>
           )}

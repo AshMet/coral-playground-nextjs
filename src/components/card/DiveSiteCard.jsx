@@ -70,14 +70,14 @@ export default function DiveSiteCard(props) {
         <Flex direction={{ base: "column" }} justify="center">
           {id && (
             <Link href={siteUrl}>
-              <Box position="relative">
+              <Box position="relative" cursor="pointer">
                 {isLoading ? (
                   <Spinner />
                 ) : (
                   <Image
                     src={image || bgImg}
                     width="300"
-                    height="300"
+                    height="200"
                     borderRadius="20px"
                   />
                 )}
@@ -168,19 +168,19 @@ export default function DiveSiteCard(props) {
                         </Badge>
                       ))}
                     </Flex>
-                    <SimpleGrid columns={3} spacing="40px" mt="10px">
+                    <SimpleGrid columns={3} spacing="40px">
                       {depth && (
-                        <Box w="35px">
+                        <Box w="35px" mt="10px">
                           <CircProgressMini title="DEP" value={depth} />
                         </Box>
                       )}
                       {maxVisibility && (
-                        <Box w="35px">
+                        <Box w="35px" mt="10px">
                           <CircProgressMini title="VIS" value={maxVisibility} />
                         </Box>
                       )}
                       {current && (
-                        <Box w="35px">
+                        <Box w="35px" mt="10px">
                           <CircProgressMini title="CUR" value={current} />
                         </Box>
                       )}

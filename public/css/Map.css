@@ -1,0 +1,9 @@
+
+.mapboxgl-map .mapboxgl-popup-content{
+  background: #fff0;
+}
+
+.mapboxgl-map .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip{
+  background: #fff0;
+  border-top-color: #fff0;
+}
