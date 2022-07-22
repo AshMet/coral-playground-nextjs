@@ -103,47 +103,56 @@ export default function ColorPicker(props) {
   };
 
   const ensureMarketplaceIsApproved = async (tokenId, tokenAddress) => {
-    await Moralis.enableWeb3();
+    // Get a (ethers.js) web3Provider
+    const web3Provider = await Moralis.enableWeb3();
     // eslint-disable-next-line prefer-destructuring
-    const web3 = Moralis.web3;
-    const userAddress = user.get("ethAddress");
+    // const web3 = Moralis.web3;
+    const ethers = Moralis.web3Library;
+    // const userAddress = user.get("ethAddress");
+    const signer = web3Provider.getSigner();
     // const marketplaceContract = new web3.eth.Contract(
     //   marketplaceContractAbi,
     //   marketplaceContractAddress
     // );
-    const contract = new web3.eth.Contract(speciesContractAbi, tokenAddress);
-    const approvedAddress = await contract.methods
-      .getApproved(tokenId)
-      .call({ from: userAddress });
+    const contract = new ethers.Contract(
+      nftContractAddress,
+      speciesContractAbi,
+      signer
+    );
+    const approvedAddress = await contract.getApproved(tokenId);
+    // .call({ from: userAddress });
     if (approvedAddress !== marketplaceContractAddress) {
-      await contract.methods
-        .approve(marketplaceContractAddress, tokenId)
-        .send({ from: userAddress });
+      await contract.approve(marketplaceContractAddress, tokenId);
+      // .send({ from: userAddress });
     }
   };
 
   const MintNft = async (metadataUrl) => {
-    const web3 = await Moralis.enableWeb3();
+    // Get a (ethers.js) web3Provider
+    const web3Provider = await Moralis.enableWeb3();
+    const ethers = Moralis.web3Library;
+    const signer = web3Provider.getSigner();
     // const web3 = useMoralisWeb3Api();
     // debugger;
-    const tokenContract = new web3.eth.Contract(
+    const tokenContract = new ethers.Contract(
+      nftContractAddress,
       speciesContractAbi,
-      nftContractAddress
+      signer
     );
 
     const colorString = `${bodyBaseText}${bodyShadingText}${tentaclesText}${tentacleShadingText}${eyeColorText}${backgroundColorText}`;
 
-    const receipt = await tokenContract.methods
-      .createToken(metadataUrl, colorString)
-      .send({ from: user.attributes.ethAddress, value: 100000000000000000 });
+    const receipt = await tokenContract.createToken(metadataUrl, colorString, {
+      value: (100000000000000000).toString(),
+    });
     // .then((response) => console.log(response))
     // .catch((err) => AlertBox(err.message));
     console.log(receipt);
     await ensureMarketplaceIsApproved(
-      receipt.events.Transfer.returnValues.tokenId,
+      receipt.Transfer.returnValues.tokenId,
       nftContractAddress
     ); // Expecting tokenId to represent nftId
-    return receipt.events.Transfer.returnValues.tokenId;
+    return receipt.Transfer.returnValues.tokenId;
   };
 
   const handleSave = async (e) => {

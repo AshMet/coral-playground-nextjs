@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable import/no-cycle */
 /* eslint-disable func-names */
 /* eslint-disable sonarjs/no-identical-functions */
@@ -85,7 +86,7 @@ export default function AuthNavbar(props) {
   // }
   const authObject = getLinks("Get Started");
   // const mainObject = getLinksCollapse("Main Pages");
-  const dashboardsObject = getLinks("Explore");
+  const divingObject = getLinks("Diving");
   const nftsObject = getLinks("NFTs");
   // const logoColor = useColorModeValue("white", "white");
   // Chakra color mode
@@ -261,7 +262,7 @@ export default function AuthNavbar(props) {
         position="relative"
       >
         <Text fontSize="sm" color={mainText}>
-          Explore
+          Diving
         </Text>
         <Box>
           <Icon
@@ -286,10 +287,10 @@ export default function AuthNavbar(props) {
             display="flex"
           >
             <SimpleGrid columns="1" gap="8px" w="150px">
-              {createDashboardsLinks(dashboardsObject)}
+              {createDashboardsLinks(divingObject)}
             </SimpleGrid>
             <Image
-              width="110px"
+              width="160px"
               height="110px"
               borderRadius="16px"
               src="/img/home/diving-badge.png"
@@ -337,7 +338,7 @@ export default function AuthNavbar(props) {
               {createNftsLinks(nftsObject)}
             </SimpleGrid>
             <Image
-              width="150px"
+              width="120px"
               height="110px"
               borderRadius="16px"
               src="/img/home/octopus_bg.png"
@@ -433,7 +434,7 @@ export default function AuthNavbar(props) {
           >
             <SimpleGrid
               me="20px"
-              columns="2"
+              columns="1"
               align="start"
               minW="180px"
               gap="24px"
@@ -500,7 +501,7 @@ export default function AuthNavbar(props) {
             />
           </Box>
           {linksAuth}
-          <Link href="https://www.horizon-ui.com/pro">
+          <Link href="#">
             <Button
               bg={bgButton}
               color={colorButton}

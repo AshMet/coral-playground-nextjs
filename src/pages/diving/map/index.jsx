@@ -116,7 +116,8 @@ export default function Default({ data }) {
                     setMapLocation(location);
                     setPopupInfo(location);
                     mapRef.current?.flyTo({
-                      center: [location.lng, location.lat],
+                      center: [location.lng, location.lat + 0.02],
+                      zoom: 13,
                       duration: 2000,
                     });
                   }}
