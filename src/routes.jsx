@@ -16,7 +16,7 @@ import {
   MdLock,
   MdOutlineShoppingCart,
   MdOutlineLogin,
-  MdOutlineCollections,
+  // MdOutlineCollections,
 } from "react-icons/md";
 
 // Admin Imports
@@ -24,9 +24,9 @@ import {
 // import DashboardsDefault from "pages/admin/dashboards/default";
 // import DashboardsSmartHome from "pages/admin/dashboards/smartHome";
 // NFT Imports
-import NFTCollection from "pages/admin/nfts/collection";
+// import NFTCollection from "pages/admin/nfts/collection";
 import NFTDrops from "pages/admin/nfts/drops";
-import NFTMarketplace from "pages/admin/nfts/marketplace";
+// import NFTMarketplace from "pages/admin/nfts/marketplace";
 import Booking from "pages/diving/booking";
 import Certifications from "pages/diving/certifications";
 import DiveCentres from "pages/diving/dive_centres";
