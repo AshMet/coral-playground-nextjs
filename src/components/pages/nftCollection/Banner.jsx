@@ -151,6 +151,10 @@ export default function Banner(props) {
           </Flex>
         </Flex>
       </Card>
+      <Text fontSize="2xl" fontWeight="extrabold" color="green.300" mb="10">
+        {" "}
+        Minting has not started{" "}
+      </Text>
       <Text
         color={textColor}
         fontSize="lg"

@@ -101,10 +101,10 @@ export default function Collection() {
             this NFT will represent early adopters in our project and help us accelerate our delivery milestones.
             Additionally, as with all our drops, 10% of all profits will be set aside for marine preservation initiatives to be voted
             on by the coral DAO.`}
-            floor={0.56}
-            volume={33.8}
-            owners={4.6}
-            items={28}
+            floor="--"
+            volume="--"
+            owners="--"
+            items="--"
           />
         </Flex>
       </Box>

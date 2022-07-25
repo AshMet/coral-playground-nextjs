@@ -250,13 +250,13 @@ export default function Marketplace() {
             </Flex>
 
             <HistoryItem
-              name="Colorful Heaven"
-              author="By Mark Benjamin"
-              date="30s ago"
+              name="Agro Octo"
+              author="By Ash Met"
+              date="27 days ago"
               image={Nft5}
-              price="0.91 ETH"
+              price="0.1 ETH"
             />
-            <HistoryItem
+            {/* <HistoryItem
               name="Abstract Colors"
               author="By Esthera Jackson"
               date="58s ago"
@@ -290,7 +290,7 @@ export default function Marketplace() {
               date="3m ago"
               image={Nft6}
               price="0.91 ETH"
-            />
+            /> */}
           </Card>
         </Flex>
       </Grid>

@@ -297,36 +297,36 @@ const routes = [
     icon: <Icon as={FaEthereum} width="20px" height="20px" color="inherit" />,
     collapse: true,
     items: [
-      {
-        name: "Marketplace",
-        layout: "",
-        path: "/nfts/marketplace",
-        icon: (
-          <Icon
-            as={MdOutlineShoppingCart}
-            width="15px"
-            height="15px"
-            color="inherit"
-          />
-        ),
-        component: NFTMarketplace,
-        secondary: true,
-      },
-      {
-        name: "Collection",
-        layout: "/admin",
-        path: "/nfts/collection",
-        icon: (
-          <Icon
-            as={MdOutlineCollections}
-            width="15px"
-            height="15px"
-            color="inherit"
-          />
-        ),
-        component: NFTCollection,
-        secondary: true,
-      },
+      // {
+      //   name: "Marketplace",
+      //   layout: "",
+      //   path: "/nfts/marketplace",
+      //   icon: (
+      //     <Icon
+      //       as={MdOutlineShoppingCart}
+      //       width="15px"
+      //       height="15px"
+      //       color="inherit"
+      //     />
+      //   ),
+      //   component: NFTMarketplace,
+      //   secondary: true,
+      // },
+      // {
+      //   name: "Collection",
+      //   layout: "/admin",
+      //   path: "/nfts/collection",
+      //   icon: (
+      //     <Icon
+      //       as={MdOutlineCollections}
+      //       width="15px"
+      //       height="15px"
+      //       color="inherit"
+      //     />
+      //   ),
+      //   component: NFTCollection,
+      //   secondary: true,
+      // },
       // {
       //   name: "NFT Page",
       //   layout: "/admin",
