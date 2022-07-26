@@ -106,8 +106,8 @@ export default function DiveCentreSidebar({
           <Marker
             // key={createKey(trips[0].diveSite)}
             position={{
-              lat: trips[0].diveSite.latitude,
-              lng: trips[0].diveSite.longitude,
+              lat: trips[0]?.diveSite.latitude,
+              lng: trips[0]?.diveSite.longitude,
             }}
             // onClick={() => setMapLocation(location)}
             icon={{

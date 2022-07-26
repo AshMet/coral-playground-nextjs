@@ -197,7 +197,7 @@ export async function getStaticProps() {
       name: centreResults[i].attributes.name,
       lat: centreResults[i].attributes.latitude,
       lng: centreResults[i].attributes.longitude,
-      itemImg: centreResults[i].attributes.photo,
+      itemImg: centreResults[i].attributes.coverPhoto,
       memberships: centreResults[i].attributes.memberships,
       languages: centreResults[i].attributes.languages,
       city: centreResults[i].attributes.city,
