@@ -25,7 +25,7 @@ export default function DiveList(props) {
   return (
     <Card {...rest}>
       <Box>
-        <Text fontSize="2xl" fontWeight="700" color={textColor} mb="10px">
+        <Text fontSize="2xl" fontWeight="700" color={textColor} mb="15px">
           Selected Dives
         </Text>
         {/* <Text

@@ -266,7 +266,10 @@ function ShoppingCart() {
         bg={menuBg}
         border="none"
       >
-        <Flex w="100%" p="10px" mb="0px" borderBottom="1px solid gray">
+        <Flex flexDirection="column" p="10px" borderBottom="1px solid gray">
+          <DiveList />
+        </Flex>
+        <Flex w="100%" p="10px" mb="0px">
           <MenuItem
             _hover={{ bg: "none" }}
             _focus={{ bg: "none" }}
@@ -286,9 +289,6 @@ function ShoppingCart() {
               Checkout
             </Button>
           </MenuItem>
-        </Flex>
-        <Flex flexDirection="column" p="10px">
-          <DiveList />
         </Flex>
       </MenuList>
     </Menu>

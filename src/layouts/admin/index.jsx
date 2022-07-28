@@ -7,6 +7,7 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
 import { Portal, Box, useDisclosure } from "@chakra-ui/react";
+import AlertPopup from "components/alerts/AlertPopup";
 import React, { useState } from "react";
 
 import Footer from "../../components/footer/FooterAdmin";
@@ -171,6 +172,7 @@ export default function Dashboard({ children, ...props }) {
             minH="100vh"
             pt="50px"
           >
+            <AlertPopup />
             {/* <Switch>
                 {getRoutes(routes)}
                 <Redirect from='/' to='/admin/dashboards/default' />

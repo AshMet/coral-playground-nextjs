@@ -44,7 +44,7 @@ export default function DetailsTab({
               />
             </Card>
           )}
-          {minVisibility && maxVisibility && (
+          {maxVisibility && (
             <Card p={{ base: "10px", md: "20px" }}>
               <CircularProgress
                 title="Visibility"
@@ -72,29 +72,56 @@ export default function DetailsTab({
         mb="20px"
         pr={{ md: "0px", lg: "25px" }}
       >
-        <Flex align="center" w="100%">
-          <Flex align="center">
-            <IconBox
-              as="box"
-              h="40px"
-              minW="40px"
-              bg={iconBoxBg}
-              me="18px"
-              icon={<IoBoatOutline h="20px" w="20px" color={iconColor} />}
-            />
-            <Flex direction="column">
-              <Text fontSize="sm" fontWeight="bold" color={textColor}>
-                Access
-              </Text>
+        {access && (
+          <Flex align="center" w="100%">
+            <Flex align="center">
+              <IconBox
+                as="box"
+                h="40px"
+                minW="40px"
+                bg={iconBoxBg}
+                me="18px"
+                icon={<IoBoatOutline h="20px" w="20px" color={iconColor} />}
+              />
+              <Flex direction="column">
+                <Text fontSize="sm" fontWeight="bold" color={textColor}>
+                  Access
+                </Text>
+              </Flex>
             </Flex>
+            <Spacer />
+            <Text fontWeight="bold" color={valueColor} fontSize="lg">
+              {access}
+            </Text>
           </Flex>
-          <Spacer />
-          <Text fontWeight="bold" color={valueColor} fontSize="lg">
-            {access}
-          </Text>
-        </Flex>
-        <Flex align="center" w="100%">
-          <Flex align="center">
+        )}
+        {certLevel && (
+          <Flex align="center" w="100%">
+            <Flex align="center">
+              <IconBox
+                as="box"
+                h="40px"
+                minW="40px"
+                bg={iconBoxBg}
+                me="18px"
+                icon={<FaRegAddressCard h="20px" w="20px" color={iconColor} />}
+              />
+              <Flex direction="column">
+                <Text fontSize="sm" fontWeight="bold" color={textColor}>
+                  Certification Level
+                </Text>
+              </Flex>
+            </Flex>
+            <Spacer />
+            <Text fontWeight="bold" color={valueColor} fontSize="lg">
+              {certLevel?.map((level, index) => (index ? ", " : "") + level)}
+            </Text>
+          </Flex>
+        )}
+      </Stack>
+      {diveTypes && (
+        <Flex>
+          <Flex align="center" mb="10px">
             <IconBox
               as="box"
               h="40px"
@@ -105,46 +132,27 @@ export default function DetailsTab({
             />
             <Flex direction="column">
               <Text fontSize="sm" fontWeight="bold" color={textColor}>
-                Certification Level
+                Diving Types
               </Text>
             </Flex>
           </Flex>
           <Spacer />
-          <Text fontWeight="bold" color={valueColor} fontSize="lg">
-            {certLevel?.map((level, index) => (index ? ", " : "") + level)}
-          </Text>
+          <Flex wrap="wrap" gap={3} mb="25px">
+            {diveTypes?.map((type) => (
+              <Badge
+                colorScheme="teal"
+                borderRadius="15px"
+                display="flex"
+                px={4}
+                py={2}
+                justifyContent="center"
+              >
+                {type}
+              </Badge>
+            ))}
+          </Flex>
         </Flex>
-      </Stack>
-      <Flex align="center" mb="10px">
-        <IconBox
-          as="box"
-          h="40px"
-          minW="40px"
-          bg={iconBoxBg}
-          me="18px"
-          icon={<FaRegAddressCard h="20px" w="20px" color={iconColor} />}
-        />
-        <Flex direction="column">
-          <Text fontSize="sm" fontWeight="bold" color={textColor}>
-            Diving Types
-          </Text>
-        </Flex>
-      </Flex>
-      <Spacer />
-      <Flex wrap="wrap" gap={3} mb="25px">
-        {diveTypes?.map((type) => (
-          <Badge
-            colorScheme="teal"
-            borderRadius="15px"
-            display="flex"
-            px={4}
-            py={2}
-            justifyContent="center"
-          >
-            {type}
-          </Badge>
-        ))}
-      </Flex>
+      )}
     </Flex>
   );
 }

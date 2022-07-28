@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { MdAddCircle } from "react-icons/md";
 
 import { DivingContext } from "../../contexts/DivingContext";
+import useAlert from "components/hooks/useAlert";
 
 export default function Transaction(props) {
   const {
@@ -21,6 +22,7 @@ export default function Transaction(props) {
     ...rest
   } = props;
   const { dives, setDives } = useContext(DivingContext);
+  const { setAlert } = useAlert();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const iconBoxBg = useColorModeValue("secondaryGray.300", "navy.700");
@@ -40,6 +42,11 @@ export default function Transaction(props) {
 
     const newDiveList = [dive, ...dives];
     setDives(newDiveList);
+    setAlert(
+      "success",
+      "Dive Added",
+      "View Shopping Cart to complete your order"
+    );
   };
 
   // console.log(...dives);

@@ -13,6 +13,7 @@ import { DivingProvider } from "../contexts/DivingContext";
 import theme from "../theme/theme";
 import "../../public/css/App.css";
 import "../../public/css/Map.css";
+import { AlertProvider } from "contexts/AlertContext";
 // import AuthCentered from "layouts/auth/types/Centered";
 // import AdminLayout from "layouts/admin";
 
@@ -29,18 +30,20 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <ChakraProvider theme={theme}>
       <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
-        <CoralPgProvider>
-          <DivingProvider>
-            <Head>
-              <meta
-                name="viewport"
-                content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-              />
-            </Head>
-            <DefaultSeo {...defaultSEOConfig} />
-            {getLayout(<Component {...pageProps} />)}
-          </DivingProvider>
-        </CoralPgProvider>
+        <AlertProvider>
+          <CoralPgProvider>
+            <DivingProvider>
+              <Head>
+                <meta
+                  name="viewport"
+                  content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
+                />
+              </Head>
+              <DefaultSeo {...defaultSEOConfig} />
+              {getLayout(<Component {...pageProps} />)}
+            </DivingProvider>
+          </CoralPgProvider>
+        </AlertProvider>
       </MoralisProvider>
     </ChakraProvider>
   );
