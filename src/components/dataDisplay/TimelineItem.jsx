@@ -12,10 +12,20 @@ import {
 import { BsX } from "react-icons/bs";
 // Assets
 import { IoMdTime } from "react-icons/io";
+import { IoStorefrontOutline } from "react-icons/io5";
 
 export default function Default(props) {
-  const { confirmed, day, weekday, hours, title, id, removeDive, ...rest } =
-    props;
+  const {
+    confirmed,
+    day,
+    weekday,
+    hours,
+    title,
+    subtitle,
+    id,
+    removeDive,
+    ...rest
+  } = props;
   // Chakra Color Mode
   const miniCardConfirmed = useColorModeValue("brand.900", "brand.400");
   const miniCardNonConfirmed = useColorModeValue("transparent", "navy.700");
@@ -91,6 +101,26 @@ export default function Default(props) {
             {hours}
           </Text>
         </Flex>
+        <Flex align="center">
+          <Icon
+            me="8px"
+            as={IoStorefrontOutline}
+            w="16px"
+            h="16px"
+            color={
+              confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
+            }
+          />
+          <Text
+            fontSize="sm"
+            fontWeight="500"
+            color={
+              confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
+            }
+          >
+            {subtitle}
+          </Text>
+        </Flex>
       </Box>
       {confirmed && (
         <Button
@@ -100,12 +130,15 @@ export default function Default(props) {
           bg="transparent"
           cursor="pointer"
           color="white"
-          _hover={{ transform: "translate(4px)" }}
+          // transformOrigin="50% 50%"
+          _hover={{
+            transform: "scale(1.5) rotate(180deg)",
+          }}
           onClick={() => removeDive(id)}
         >
-          <Text fontSize="sm" fontWeight="bold">
+          {/* <Text fontSize="sm" fontWeight="bold">
             Remove
-          </Text>
+          </Text> */}
           <Icon
             as={BsX}
             w="18px"

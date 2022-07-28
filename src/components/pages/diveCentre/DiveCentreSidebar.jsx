@@ -13,9 +13,11 @@ import {
 // Custom components
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { HiOutlineLocationMarker } from "react-icons/hi";
+import { MdAddCircle } from "react-icons/md";
 
 import Card from "components/card/Card";
-import TimelineItem from "components/dataDisplay/TimelineItem";
+// import TimelineItem from "components/dataDisplay/TimelineItem";
+import Transaction from "components/dataDisplay/Transaction";
 import { DarkMap, LightMap } from "components/maps/MapStyles";
 
 const mapApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -31,6 +33,8 @@ function createKey(location) {
 }
 
 export default function DiveCentreSidebar({
+  centreId,
+  centreName,
   address,
   city,
   country,
@@ -140,23 +144,21 @@ export default function DiveCentreSidebar({
       </Flex>
       {trips.length > 0 ? (
         trips.map((trip) => (
-          <TimelineItem
-            key={trip.id}
-            id={trip.id}
-            mb="16px"
-            title={trip.diveSite.name}
-            day={new Date(trip.startTime?.iso).toLocaleDateString("en-US", {
-              day: "numeric",
-            })}
-            weekday={new Date(trip.startTime?.iso).toLocaleDateString("en-US", {
-              month: "short",
-            })}
-            hours={new Date(trip.startTime?.iso).toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-            // removeDive={removeDive}
-          />
+          <Flex justify="space-between" mb="25px" align="center">
+            <Transaction
+              key={trip.id}
+              id={trip.id}
+              siteId={trip.diveSite.id}
+              siteName={trip.diveSite.name}
+              centreName={centreName}
+              diveDate={trip.startTime}
+              price={trip.price / 100}
+              locationType="dive_centre"
+              icon={
+                <Icon as={MdAddCircle} color={textColor} w="20px" h="18px" />
+              }
+            />
+          </Flex>
         ))
       ) : (
         <Text fontSize="md" fontWeight="500" color="purple.500" mb="30px">

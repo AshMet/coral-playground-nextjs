@@ -15,6 +15,7 @@ export default function DiveSitePage({ siteData, tripData }) {
   const parsedTrips = JSON.parse(tripData);
 
   const diveSite = {
+    id: parsedSite.objectId,
     name: parsedSite.name,
     depth: parsedSite.maxDepth,
     description: parsedSite.description,
@@ -91,6 +92,8 @@ export default function DiveSitePage({ siteData, tripData }) {
         </Box>
         <Box gridArea="1 / 2 / 2 / 3">
           <DiveSiteSidebar
+            siteId={diveSite.id}
+            siteName={diveSite.name}
             city={diveSite.city}
             country={diveSite.country}
             trips={parsedTrips}

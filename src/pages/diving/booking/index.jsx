@@ -37,23 +37,32 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 
 // Custom components
+import { DivingContext } from "../../../contexts/DivingContext";
 import Card from "components/card/Card";
 import DiveList from "components/pages/bookings/DiveList";
 import DiverInfo from "components/pages/bookings/DiverInfo";
-import DiveSelection from "components/pages/bookings/DiveSelection";
+// import DiveSelection from "components/pages/bookings/DiveSelection";
 import EquipmentSelection from "components/pages/bookings/EquipmentSelection";
 import AdminLayout from "layouts/admin";
 
 export default function NewBooking() {
-  const [diverName, setDiverName] = useState();
-  const [diverEmail, setDiverEmail] = useState();
-  const [diverCert, setDiverCert] = useState();
-  const [lastDive, setLastDive] = useState();
-  const [notes, setNotes] = useState();
-  const [dives, setDives] = useState([]);
+  const {
+    diverName,
+    setDiverName,
+    diverEmail,
+    setDiverEmail,
+    diverCert,
+    setDiverCert,
+    lastDive,
+    setLastDive,
+    notes,
+    setNotes,
+    dives,
+    setDives,
+  } = useContext(DivingContext);
   const [activeBullets, setActiveBullets] = useState({
     product: true,
     media: false,
@@ -262,10 +271,10 @@ export default function NewBooking() {
             p="0px"
             mx="auto"
           >
-            {/* Row 1: Map  & Calendar */}
-            <DiveSelection dives={dives} setDives={setDives} />
-            {/* Row 2: List of Dives */}
+            {/* Row 1: List of Dives */}
             <DiveList mb="20px" dives={dives} setDives={setDives} />
+            {/* Row 2: Map  & Calendar */}
+            {/* <DiveSelection /> */}
             <Flex justify="space-between" mt="24px">
               <Button
                 isLoading={dives.length === 0}

@@ -35,23 +35,33 @@ export default function DetailsTab({
     <Flex direction="column" w="100%">
       <Box gridArea="1 / 2 / 2 / 3">
         <SimpleGrid mt="20px" columns={{ sm: 2, md: 3 }} gap="20px" mb="20px">
-          <Card p={{ base: "10px", md: "20px" }}>
-            <CircularProgress
-              title="Depth"
-              value={depth}
-              text={depth ? `${depth}m` : "N/A"}
-            />
-          </Card>
-          <Card p={{ base: "10px", md: "20px" }}>
-            <CircularProgress
-              title="Visibility"
-              value={maxVisibility}
-              text={`${minVisibility || "N/A"} - ${maxVisibility || "N/A"}m`}
-            />
-          </Card>
-          <Card p={{ base: "10px", md: "20px" }}>
-            <CircularProgress title="Current" value={current} text={current} />
-          </Card>
+          {depth && (
+            <Card p={{ base: "10px", md: "20px" }}>
+              <CircularProgress
+                title="Depth"
+                value={depth}
+                text={depth ? `${depth}m` : "N/A"}
+              />
+            </Card>
+          )}
+          {minVisibility && maxVisibility && (
+            <Card p={{ base: "10px", md: "20px" }}>
+              <CircularProgress
+                title="Visibility"
+                value={maxVisibility}
+                text={`${minVisibility || "N/A"} - ${maxVisibility || "N/A"}m`}
+              />
+            </Card>
+          )}
+          {current && (
+            <Card p={{ base: "10px", md: "20px" }}>
+              <CircularProgress
+                title="Current"
+                value={current}
+                text={current}
+              />
+            </Card>
+          )}
         </SimpleGrid>
       </Box>
 

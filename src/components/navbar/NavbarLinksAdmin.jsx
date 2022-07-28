@@ -25,6 +25,7 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 // Custom Components
+import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 // import React from "react";
 // Assets
@@ -32,7 +33,7 @@ import PropTypes from "prop-types";
 import { FaBitcoin, FaEthereum } from "react-icons/fa";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import { IoLogOutOutline, IoWalletOutline } from "react-icons/io5";
-import { MdInfoOutline } from "react-icons/md";
+import { MdInfoOutline, MdOutlineShoppingCart } from "react-icons/md";
 import { user, useMoralis } from "react-moralis";
 
 import routes from "../../routes";
@@ -41,6 +42,7 @@ import { ProfileIcon } from "components/icons/Icons";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Balance from "components/navbar/Balance";
 import SearchBar from "components/navbar/searchBar/SearchBar";
+import DiveList from "components/pages/bookings/DiveList";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
 
 function SignedOutMenuList() {
@@ -233,6 +235,66 @@ function SignedInMenuList() {
   );
 }
 
+function ShoppingCart() {
+  const menuBg = useColorModeValue("white", "navy.800");
+  const shadow = useColorModeValue(
+    "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
+    "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
+  );
+
+  const router = useRouter();
+  return (
+    <Menu>
+      <Tooltip label="Shopping Cart">
+        <MenuButton display="flex" alignItems="center" p="0px">
+          <Icon
+            mt="6px"
+            as={MdOutlineShoppingCart}
+            // color={navbarIcon}
+            w="18px"
+            h="18px"
+            me="10px"
+            // onClick={() => getFiat()}
+          />
+        </MenuButton>
+      </Tooltip>
+      <MenuList
+        boxShadow={shadow}
+        p="0px"
+        mt="10px"
+        borderRadius="20px"
+        bg={menuBg}
+        border="none"
+      >
+        <Flex w="100%" p="10px" mb="0px" borderBottom="1px solid gray">
+          <MenuItem
+            _hover={{ bg: "none" }}
+            _focus={{ bg: "none" }}
+            borderRadius="8px"
+            px="14px"
+          >
+            <Button
+              onClick={() => router.push("/diving/booking")}
+              variant="link"
+              colorScheme="purple"
+              size="sm"
+              mr={4}
+              leftIcon={
+                <MdOutlineShoppingCart w="22px" h="22px" me="0px" ml="5" />
+              }
+            >
+              Checkout
+            </Button>
+          </MenuItem>
+        </Flex>
+        <Flex flexDirection="column" p="10px">
+          <DiveList />
+        </Flex>
+      </MenuList>
+    </Menu>
+  );
+}
+
 export default function HeaderLinks(props) {
   const { secondary } = props;
   const { colorMode, toggleColorMode } = useColorMode();
@@ -322,6 +384,7 @@ export default function HeaderLinks(props) {
           </MenuButton>
         </Tooltip>
       </Menu>
+      <ShoppingCart />
 
       {/* <Menu>
         <MenuButton p="0px">

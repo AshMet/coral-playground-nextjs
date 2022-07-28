@@ -15,6 +15,7 @@ export default function DiveCentre({ centreData, tripData }) {
   const parsedTrips = JSON.parse(tripData);
 
   const diveCentre = {
+    id: parsedCentre.objectId,
     name: parsedCentre.name,
     address: parsedCentre.address,
     description: parsedCentre.description,
@@ -87,6 +88,8 @@ export default function DiveCentre({ centreData, tripData }) {
         </Box>
         <Box gridArea="1 / 2 / 2 / 3">
           <DiveCentreSidebar
+            centreId={diveCentre.id}
+            centreName={diveCentre.name}
             address={diveCentre.address}
             city={diveCentre.city}
             country={diveCentre.country}

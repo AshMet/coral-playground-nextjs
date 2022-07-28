@@ -16,10 +16,11 @@ import {
   Marker,
   MarkerClusterer,
 } from "@react-google-maps/api";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { MdAdd } from "react-icons/md";
 import { useMoralisCloudFunction } from "react-moralis";
 
+import { DivingContext } from "../../../contexts/DivingContext";
 import MiniCalendar from "components/calendar/MiniCalendar";
 import Card from "components/card/Card";
 import TimelineItem from "components/dataDisplay/TimelineItem";
@@ -40,8 +41,8 @@ const clusterOptions = {
 function createKey(location) {
   return location.lat + location.lng;
 }
-export default function DiveSelection(props) {
-  const { dives, setDives } = props;
+export default function DiveSelection() {
+  const { dives, setDives } = useContext(DivingContext);
   const [mapLocation, setMapLocation] = useState("Select Location");
   const [selectedDate, setSelectedDate] = useState();
   const [diveTime, setDiveTime] = useState();
