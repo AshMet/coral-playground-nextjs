@@ -7,7 +7,6 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
 import { Portal, Box, useDisclosure } from "@chakra-ui/react";
-import AlertPopup from "components/alerts/AlertPopup";
 import React, { useState } from "react";
 
 import Footer from "../../components/footer/FooterAdmin";
@@ -16,6 +15,7 @@ import Navbar from "../../components/navbar/NavbarAdmin";
 import Sidebar from "../../components/sidebar/Sidebar";
 import SidebarContext from "../../contexts/SidebarContext";
 import routes from "../../routes";
+import AlertPopup from "components/alerts/AlertPopup";
 
 // import { Redirect, Route, Switch } from "react-router-dom";
 // import "mapbox-gl/dist/mapbox-gl.css";

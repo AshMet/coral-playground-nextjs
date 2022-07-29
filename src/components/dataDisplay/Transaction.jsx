@@ -2,7 +2,7 @@
 // import React from "react";
 
 // Chakra imports
-import { Button, Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react";
+import { Button, Flex, Icon, Text, Tooltip, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import { useContext } from "react";
 import { MdAddCircle } from "react-icons/md";
@@ -54,24 +54,26 @@ export default function Transaction(props) {
   return (
     <Flex justifyContent="center" alignItems="center" w="100%" {...rest}>
       {/* <IconBox h="42px" w="42px" bg={iconBoxBg} me="20px" icon={icon} /> */}
-      <Button
-        align="center"
-        justifyContent="center"
-        bg={iconBoxBg}
-        // _hover={bgHover}
-        // _focus={bgFocus}
-        // _active={bgFocus}
-        w="37px"
-        h="37px"
-        mt="5px"
-        mr="10px"
-        lineHeight="100%"
-        borderRadius="10px"
-        onClick={addDive}
-        {...rest}
-      >
-        <Icon as={MdAddCircle} color={textColor} w="24px" h="24px" />
-      </Button>
+      <Tooltip label="Add to Cart">
+        <Button
+          align="center"
+          justifyContent="center"
+          bg={iconBoxBg}
+          // _hover={bgHover}
+          // _focus={bgFocus}
+          // _active={bgFocus}
+          w="37px"
+          h="37px"
+          mt="5px"
+          mr="10px"
+          lineHeight="100%"
+          borderRadius="10px"
+          onClick={addDive}
+          {...rest}
+        >
+          <Icon as={MdAddCircle} color={textColor} w="24px" h="24px" />
+        </Button>
+      </Tooltip>
       <Flex direction="column" align="start" me="auto">
         <Text color={textColor} fontSize="md" me="6px" fontWeight="700">
           {locationType === "dive_centre" ? siteName : centreName}

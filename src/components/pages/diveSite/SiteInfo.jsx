@@ -14,6 +14,7 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  Icon,
 } from "@chakra-ui/react";
 // Custom components
 import { useState } from "react";
@@ -23,12 +24,15 @@ import Card from "components/card/Card";
 
 import CollectionTab from "./CollectionTab";
 import DetailsTab from "./DetailsTab";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 // import Instructor from "./Instructor";
 // import Rating from "./Rating";
 
 export default function SiteInfo({
   name,
   description,
+  city,
+  country,
   species,
   depth,
   minVisibility,
@@ -65,8 +69,21 @@ export default function SiteInfo({
   return (
     <Card mt="20px" p={{ base: "20px", md: "20px 40px" }}>
       <Flex align="center" w="100%">
-        <Text color={textColor} fontSize="3xl" fontWeight="bold" mb="12px">
+        <Text color={textColor} fontSize="3xl" fontWeight="bold">
           {name}
+        </Text>
+      </Flex>
+      <Flex mb="15px" alignSelf="start" cursor="pointer">
+        <Icon
+          as={HiOutlineLocationMarker}
+          ms="auto"
+          h="22px"
+          w="22px"
+          mr="10px"
+          color={textColorTertiary}
+        />
+        <Text color={textColorTertiary} fontWeight="500" fontSize="md" me="5px">
+          {`${city}, ${country}`}
         </Text>
       </Flex>
       <Box w="100%" mb="40px">

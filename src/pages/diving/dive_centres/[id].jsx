@@ -39,7 +39,7 @@ export default function DiveCentre({ centreData, tripData }) {
         maxW="100%"
         display={{ base: "block", lg: "grid" }}
         pt={{ base: "130px", md: "80px", xl: "80px" }}
-        gridTemplateColumns="2.95fr 1fr"
+        gridTemplateColumns="2.3fr 1fr"
       >
         <Box
           gridArea="1 / 1 / 2 / 2"
@@ -79,6 +79,9 @@ export default function DiveCentre({ centreData, tripData }) {
           <SiteInfo
             name={diveCentre.name}
             description={diveCentre.description}
+            address={diveCentre.address}
+            city={diveCentre.city}
+            country={diveCentre.country}
             equipment={diveCentre.equipment}
             services={diveCentre.services}
             paymentMethods={diveCentre.paymentMethods}
@@ -90,9 +93,6 @@ export default function DiveCentre({ centreData, tripData }) {
           <DiveCentreSidebar
             centreId={diveCentre.id}
             centreName={diveCentre.name}
-            address={diveCentre.address}
-            city={diveCentre.city}
-            country={diveCentre.country}
             trips={parsedTrips}
           />
         </Box>

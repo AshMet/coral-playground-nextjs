@@ -80,6 +80,8 @@ export default function DiveSitePage({ siteData, tripData }) {
           <SiteInfo
             name={diveSite.name}
             description={diveSite.description}
+            city={diveSite.city}
+            country={diveSite.country}
             depth={diveSite.depth}
             minVisibility={diveSite.minVisibility}
             maxVisibility={diveSite.maxVisibility}
@@ -94,8 +96,6 @@ export default function DiveSitePage({ siteData, tripData }) {
           <DiveSiteSidebar
             siteId={diveSite.id}
             siteName={diveSite.name}
-            city={diveSite.city}
-            country={diveSite.country}
             trips={parsedTrips}
           />
         </Box>
@@ -138,7 +138,7 @@ export const getStaticProps = async ({ params }) => {
   // query2.include(["diveCentre"]); // use query2.select
   // const results2 = await query2.find();
   // const tripData = JSON.stringify(results2);
-  const tripQuery = await Moralis.Cloud.run("getSiteTrips");
+  const tripQuery = await Moralis.Cloud.run("getSiteTrips", { id: siteId });
   const tripData = JSON.stringify(tripQuery);
 
   return {

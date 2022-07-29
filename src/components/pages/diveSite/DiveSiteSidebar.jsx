@@ -7,12 +7,10 @@ import {
   Icon,
   useColorMode,
   useColorModeValue,
-  Spacer,
 } from "@chakra-ui/react";
 // Custom components
 // import React from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import { HiOutlineLocationMarker } from "react-icons/hi";
 import { MdAddCircle } from "react-icons/md";
 
 import Card from "components/card/Card";
@@ -35,17 +33,9 @@ function createKey(location) {
   return location.lat + location.lng;
 }
 
-export default function CourseInfo({
-  city,
-  country,
-  siteId,
-  siteName,
-  trips,
-  ...rest
-}) {
+export default function CourseInfo({ siteId, siteName, trips, ...rest }) {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const textColorTertiary = useColorModeValue("secondaryGray.600", "white");
   const bg = useColorModeValue("secondaryGray.300", "navy.700");
   const { colorMode } = useColorMode();
 
@@ -76,8 +66,7 @@ export default function CourseInfo({
         bg={bg}
         height="200px"
         maxW={{ base: "400px" }}
-        mb="20px"
-        m={0}
+        mb="30px"
         p={0}
         w="100%"
         overflow="hidden"
@@ -111,8 +100,8 @@ export default function CourseInfo({
           <Marker
             // key={createKey(trips[0].diveSite)}
             position={{
-              lat: trips[0].diveSite.latitude,
-              lng: trips[0].diveSite.longitude,
+              lat: trips[0]?.diveSite.latitude,
+              lng: trips[0]?.diveSite.longitude,
             }}
             // onClick={() => setMapLocation(location)}
             icon={{
@@ -125,26 +114,6 @@ export default function CourseInfo({
           />
         </GoogleMap>
       </Card>
-      <Flex mb="15px" align="center" cursor="pointer">
-        <Icon
-          as={HiOutlineLocationMarker}
-          ms="auto"
-          h="22px"
-          w="22px"
-          mr="10px"
-          color={textColorTertiary}
-        />
-        <Text color={textColorTertiary} fontWeight="500" fontSize="md" me="5px">
-          Address
-        </Text>
-        <Spacer />
-      </Flex>
-      <Flex wrap="wrap" gap={3} mb="25px">
-        {`${city}, ${country}`}
-      </Flex>
-      {/* {trips.map((trip) => {
-        return <Text> {trip.notes} </Text>;
-      })} */}
       {trips.length > 0 ? (
         trips.map((trip) => (
           <Flex justify="space-between" mb="25px" align="center">

@@ -14,8 +14,6 @@ import { IoLanguage } from "react-icons/io5";
 
 export default function DetailsTab({
   name,
-  city,
-  country,
   description,
   equipment,
   languages,
