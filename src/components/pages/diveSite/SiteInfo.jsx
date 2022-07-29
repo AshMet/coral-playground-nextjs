@@ -18,13 +18,12 @@ import {
 } from "@chakra-ui/react";
 // Custom components
 import { useState } from "react";
-// import { HiOutlineLocationMarker } from "react-icons/hi";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 
 import Card from "components/card/Card";
 
 import CollectionTab from "./CollectionTab";
 import DetailsTab from "./DetailsTab";
-import { HiOutlineLocationMarker } from "react-icons/hi";
 // import Instructor from "./Instructor";
 // import Rating from "./Rating";
 

@@ -2,7 +2,14 @@
 // import React from "react";
 
 // Chakra imports
-import { Button, Flex, Icon, Text, Tooltip, useColorModeValue } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Icon,
+  Text,
+  Tooltip,
+  useColorModeValue,
+} from "@chakra-ui/react";
 // Custom components
 import { useContext } from "react";
 import { MdAddCircle } from "react-icons/md";
