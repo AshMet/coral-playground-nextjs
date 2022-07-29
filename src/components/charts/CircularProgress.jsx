@@ -14,14 +14,14 @@ function getPercent(title, value) {
     percent = value > 50 ? 95 : (value * 100) / 50;
   } else if (title === "Current" || title === "CUR") {
     switch (value) {
-      case "Low":
-        percent = 0.2;
+      case "Weak":
+        percent = 20;
         break;
       case "Medium":
-        percent = 0.4;
+        percent = 50;
         break;
       case "High":
-        percent = 0.7;
+        percent = 80;
         break;
       default:
         break;

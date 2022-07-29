@@ -274,6 +274,7 @@ function ShoppingCart() {
             _hover={{ bg: "none" }}
             _focus={{ bg: "none" }}
             borderRadius="8px"
+            alignItems="end"
             px="14px"
           >
             <Button

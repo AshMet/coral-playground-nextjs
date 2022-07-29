@@ -14,7 +14,7 @@ import {
   // MdDashboard,
   MdHome,
   MdLock,
-  MdOutlineShoppingCart,
+  // MdOutlineShoppingCart,
   MdOutlineLogin,
   // MdOutlineCollections,
 } from "react-icons/md";
@@ -27,7 +27,7 @@ import {
 // import NFTCollection from "pages/admin/nfts/collection";
 import NFTDrops from "pages/admin/nfts/drops";
 // import NFTMarketplace from "pages/admin/nfts/marketplace";
-import Booking from "pages/diving/booking";
+// import Booking from "pages/diving/booking";
 import Certifications from "pages/diving/certifications";
 import DiveCentres from "pages/diving/dive_centres";
 import DiveSites from "pages/diving/dive_sites";
@@ -267,20 +267,20 @@ const routes = [
           />
         ),
       },
-      {
-        name: "Booking",
-        layout: "",
-        path: "/diving/booking",
-        component: Booking,
-        icon: (
-          <Icon
-            as={MdOutlineShoppingCart}
-            width="15px"
-            height="20px"
-            color="inherit"
-          />
-        ),
-      },
+      // {
+      //   name: "Booking",
+      //   layout: "",
+      //   path: "/diving/booking",
+      //   component: Booking,
+      //   icon: (
+      //     <Icon
+      //       as={MdOutlineShoppingCart}
+      //       width="15px"
+      //       height="20px"
+      //       color="inherit"
+      //     />
+      //   ),
+      // },
     ],
   },
   // {

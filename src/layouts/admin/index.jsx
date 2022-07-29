@@ -15,7 +15,6 @@ import Navbar from "../../components/navbar/NavbarAdmin";
 import Sidebar from "../../components/sidebar/Sidebar";
 import SidebarContext from "../../contexts/SidebarContext";
 import routes from "../../routes";
-import AlertPopup from "components/alerts/AlertPopup";
 
 // import { Redirect, Route, Switch } from "react-router-dom";
 // import "mapbox-gl/dist/mapbox-gl.css";
@@ -172,7 +171,6 @@ export default function Dashboard({ children, ...props }) {
             minH="100vh"
             pt="50px"
           >
-            <AlertPopup />
             {/* <Switch>
                 {getRoutes(routes)}
                 <Redirect from='/' to='/admin/dashboards/default' />

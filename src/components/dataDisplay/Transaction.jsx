@@ -8,6 +8,7 @@ import {
   Icon,
   Text,
   Tooltip,
+  useToast,
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
@@ -15,7 +16,7 @@ import { useContext } from "react";
 import { MdAddCircle } from "react-icons/md";
 
 import { DivingContext } from "../../contexts/DivingContext";
-import useAlert from "components/hooks/useAlert";
+import AlertPopup from "components/alerts/AlertPopup";
 
 export default function Transaction(props) {
   const {
@@ -29,7 +30,7 @@ export default function Transaction(props) {
     ...rest
   } = props;
   const { dives, setDives } = useContext(DivingContext);
-  const { setAlert } = useAlert();
+  const toast = useToast();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const iconBoxBg = useColorModeValue("secondaryGray.300", "navy.700");
@@ -49,11 +50,23 @@ export default function Transaction(props) {
 
     const newDiveList = [dive, ...dives];
     setDives(newDiveList);
-    setAlert(
-      "success",
-      "Dive Added",
-      "View Shopping Cart to complete your order"
-    );
+    toast({
+      position: "top-right",
+      render: () => (
+        <AlertPopup
+          type="success"
+          text="Dive Added."
+          subtext="View Shopping Cart to complete your order."
+        />
+      ),
+    });
+    // toast({
+    //   title: "Dive Added.",
+    //   description: "View Shopping Cart to complete your order.",
+    //   status: "success",
+    //   duration: 9000,
+    //   isClosable: true,
+    // });
   };
 
   // console.log(...dives);
