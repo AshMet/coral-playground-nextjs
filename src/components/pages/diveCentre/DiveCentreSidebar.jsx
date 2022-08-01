@@ -130,6 +130,7 @@ export default function DiveCentreSidebar({
               id={trip.id}
               siteId={trip.diveSite.id}
               siteName={trip.diveSite.name}
+              siteList={trip.diveSites}
               centreName={centreName}
               diveDate={trip.startTime}
               price={trip.price / 100}

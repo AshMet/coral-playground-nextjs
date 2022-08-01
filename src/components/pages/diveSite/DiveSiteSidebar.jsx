@@ -122,6 +122,7 @@ export default function CourseInfo({ siteId, siteName, trips, ...rest }) {
               id={trip.id}
               siteId={siteId}
               siteName={siteName}
+              siteList={trip.diveSites}
               centreName={trip.diveCentre.name}
               diveDate={trip.startTime}
               price={trip.price / 100}

@@ -12,11 +12,17 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import DatePicker from "react-date-picker/dist/entry.nostyle";
 import { MdAddCircle } from "react-icons/md";
 
 import { DivingContext } from "../../contexts/DivingContext";
 import AlertPopup from "components/alerts/AlertPopup";
+
+import "../../../public/css/MiniCalendar.module.css";
+// import "react-calendar/dist/Calendar.css";
+// import "react-datetime-picker/dist/DateTimePicker.css";
+// import "react-clock/dist/Clock.css";
 
 export default function Transaction(props) {
   const {
@@ -24,6 +30,7 @@ export default function Transaction(props) {
     price,
     icon,
     siteName,
+    siteList,
     siteId,
     centreName,
     locationType,
@@ -35,15 +42,32 @@ export default function Transaction(props) {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const iconBoxBg = useColorModeValue("secondaryGray.300", "navy.700");
 
+  const [value, onChange] = useState();
+
+  const siteNames = siteList?.map((site) => JSON.parse(site));
+
   const addDive = () => {
-    if (!siteName || !diveDate) {
+    if (!siteName) {
+      return;
+    }
+    if (!diveDate && !value) {
+      toast({
+        position: "top-right",
+        render: () => (
+          <AlertPopup
+            type="warning"
+            text="No Date Provided"
+            subtext="Please select a date before adding your dive"
+          />
+        ),
+      });
       return;
     }
     const dive = {
       id: siteId,
       siteName,
       centreName,
-      diveDate: new Date(diveDate.iso),
+      diveDate: diveDate ? new Date(diveDate.iso) : new Date(value),
       diveTime: "morning",
       priceId: "price_1LBLSVAvLPvC9h7xk0HEvL3f", // mapLocation.stripePriceId,
     };
@@ -55,22 +79,13 @@ export default function Transaction(props) {
       render: () => (
         <AlertPopup
           type="success"
-          text="Dive Added."
-          subtext="View Shopping Cart to complete your order."
+          text="Dive Added"
+          subtext="View Shopping Cart to complete your order"
         />
       ),
     });
-    // toast({
-    //   title: "Dive Added.",
-    //   description: "View Shopping Cart to complete your order.",
-    //   status: "success",
-    //   duration: 9000,
-    //   isClosable: true,
-    // });
   };
 
-  // console.log(...dives);
-  // console.log(diveDate);
   return (
     <Flex justifyContent="center" alignItems="center" w="100%" {...rest}>
       {/* <IconBox h="42px" w="42px" bg={iconBoxBg} me="20px" icon={icon} /> */}
@@ -94,26 +109,43 @@ export default function Transaction(props) {
           <Icon as={MdAddCircle} color={textColor} w="24px" h="24px" />
         </Button>
       </Tooltip>
-      <Flex direction="column" align="start" me="auto">
-        <Text color={textColor} fontSize="md" me="6px" fontWeight="700">
-          {locationType === "dive_centre" ? siteName : centreName}
-        </Text>
-        <Text color="secondaryGray.600" fontSize="sm" fontWeight="500">
-          {new Date(diveDate?.iso).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })}
-          {" @ "}
-          {new Date(diveDate?.iso).toLocaleTimeString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </Text>
+      <Flex direction="column" align="start" me="auto" w="100%">
+        <Flex direction="row" align="stretch" me="auto">
+          {/* <Text color={textColor} fontSize="md" me="6px" fontWeight="700">
+            {locationType === "dive_centre" ? siteName : centreName}
+          </Text> */}
+          <Text color={textColor} fontSize="md" me="6px" fontWeight="700">
+            {locationType === "dive_centre"
+              ? siteNames.map((site) => site.siteName).join(" + ")
+              : centreName}
+          </Text>
+          <Text
+            ms="auto"
+            color="green.500"
+            fontSize="sm"
+            me="6px"
+            fontWeight="700"
+          >
+            €{price}
+          </Text>
+        </Flex>
+        {diveDate ? (
+          <Text color="secondaryGray.600" fontSize="sm" fontWeight="500">
+            {new Date(diveDate?.iso).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+            {" @ "}
+            {new Date(diveDate?.iso).toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </Text>
+        ) : (
+          <DatePicker onChange={onChange} value={value} />
+        )}
       </Flex>
-      <Text ms="auto" color="green.500" fontSize="sm" me="6px" fontWeight="700">
-        €{price}
-      </Text>
     </Flex>
   );
 }
