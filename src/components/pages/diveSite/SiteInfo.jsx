@@ -214,7 +214,7 @@ export default function SiteInfo({
                 <TabPanel px="0px">
                   <CollectionTab
                     collection={species}
-                    folderUrl="/svg/species"
+                    folderUrl="/img/species"
                   />
                 </TabPanel>
               </TabPanels>
