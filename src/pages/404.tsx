@@ -7,12 +7,13 @@ import {
   useColorMode,
   Flex,
 } from "@chakra-ui/react";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 import MotionBox from "lib/components/motion/Box";
 
 const Page404 = () => {
   const { colorMode } = useColorMode();
+  const router = useRouter();
 
   return (
     <Flex minHeight="70vh" direction="column" justifyContent="center">
@@ -22,10 +23,7 @@ const Page404 = () => {
         width={["100%", "70%", "60%", "60%"]}
         margin="0 auto"
       >
-        <Image
-          src="/404 Error-pana.svg"
-          alt="Error 404 not found Illustration"
-        />
+        <Image src="/404-error.png" alt="Error 404 not found Illustration" />
       </MotionBox>
 
       <Box marginY={4}>
@@ -33,13 +31,12 @@ const Page404 = () => {
 
         <Box textAlign="center" marginTop={4}>
           <Text>It&apos;s Okay!</Text>
-          <Link href="/auth/home" passHref>
-            <Button
-              backgroundColor={colorMode === "light" ? "gray.300" : "teal.500"}
-            >
-              Let&apos;s Head Back
-            </Button>
-          </Link>
+          <Button
+            backgroundColor={colorMode === "light" ? "gray.300" : "teal.500"}
+            onClick={() => router.back()}
+          >
+            Let&apos;s Head Back
+          </Button>
         </Box>
       </Box>
     </Flex>

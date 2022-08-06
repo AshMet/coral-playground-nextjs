@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable react/prop-types */
 import {
   Text,
@@ -11,10 +12,10 @@ import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
 
 export default function CollectionTab({ collection, folderUrl, ...rest }) {
-  const iconColor = useColorModeValue(
-    "",
-    "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
-  );
+  // const iconColor = useColorModeValue(
+  //   "",
+  //   "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
+  // );
   const bgColor = useColorModeValue("white", "navy.900");
 
   const titleCase = (str) => {

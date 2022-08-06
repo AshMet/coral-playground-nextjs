@@ -170,7 +170,11 @@ export async function getStaticProps() {
   Moralis.serverURL = serverUrl;
   const DiveSiteList = Moralis.Object.extend("DiveSites");
   const query = new Moralis.Query(DiveSiteList);
-  const results = await query.ascending("name").find();
+  const results = await query
+    .ascending("name")
+    .exists("latitude")
+    .exists("diveMap")
+    .find();
   const data = JSON.stringify(results);
 
   return {
