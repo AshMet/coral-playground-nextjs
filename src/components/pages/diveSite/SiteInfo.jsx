@@ -112,7 +112,7 @@ export default function SiteInfo({
                         fontSize="lg"
                         fontWeight="500"
                       >
-                        Information
+                        Species
                       </Text>
                     </Flex>
                     <Box
@@ -148,7 +148,7 @@ export default function SiteInfo({
                         fontSize="lg"
                         fontWeight="500"
                       >
-                        Description
+                        Details
                       </Text>
                     </Flex>
                     <Box
@@ -184,7 +184,7 @@ export default function SiteInfo({
                         fontSize="lg"
                         fontWeight="500"
                       >
-                        Species
+                        Description
                       </Text>
                     </Flex>
                     <Box
@@ -200,6 +200,12 @@ export default function SiteInfo({
               </TabList>
               <TabPanels pt="30px">
                 <TabPanel px="0px">
+                  <CollectionTab
+                    collection={species}
+                    folderUrl="/img/species"
+                  />
+                </TabPanel>
+                <TabPanel px="0px">
                   <DetailsTab
                     depth={depth}
                     minVisibility={minVisibility}
@@ -211,12 +217,6 @@ export default function SiteInfo({
                   />
                 </TabPanel>
                 <TabPanel px="0px">{descTab()}</TabPanel>
-                <TabPanel px="0px">
-                  <CollectionTab
-                    collection={species}
-                    folderUrl="/img/species"
-                  />
-                </TabPanel>
               </TabPanels>
             </Tabs>
             {/* <Flex direction={{ base: "column", md: "row" }} align="center">
