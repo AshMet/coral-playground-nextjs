@@ -4,8 +4,8 @@ import { AspectRatio, Box, Button, Grid } from "@chakra-ui/react";
 
 // Custom components
 import Card from "components/card/Card";
-import DiveSiteSidebar from "components/pages/diveSite/DiveSiteSidebar";
 import SiteInfo from "components/pages/diveSite/SiteInfo";
+import TripsSidebar from "components/sidebar/TripsSidebar";
 import AdminLayout from "layouts/admin";
 
 const Moralis = require("moralis/node");
@@ -93,11 +93,7 @@ export default function DiveSitePage({ siteData, tripData }) {
           />
         </Box>
         <Box gridArea="1 / 2 / 2 / 3">
-          <DiveSiteSidebar
-            siteId={diveSite.id}
-            siteName={diveSite.name}
-            trips={parsedTrips}
-          />
+          <TripsSidebar trips={parsedTrips} />
         </Box>
       </Grid>
     </Box>

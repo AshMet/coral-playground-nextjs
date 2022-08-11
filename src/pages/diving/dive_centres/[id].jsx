@@ -4,8 +4,8 @@ import { AspectRatio, Box, Button, Grid } from "@chakra-ui/react";
 
 // Custom components
 import Card from "components/card/Card";
-import DiveCentreSidebar from "components/pages/diveCentre/DiveCentreSidebar";
 import SiteInfo from "components/pages/diveCentre/SiteInfo";
+import TripsSidebar from "components/sidebar/TripsSidebar";
 import AdminLayout from "layouts/admin";
 
 const Moralis = require("moralis/node");
@@ -90,11 +90,7 @@ export default function DiveCentre({ centreData, tripData }) {
           />
         </Box>
         <Box gridArea="1 / 2 / 2 / 3">
-          <DiveCentreSidebar
-            centreId={diveCentre.id}
-            centreName={diveCentre.name}
-            trips={parsedTrips}
-          />
+          <TripsSidebar trips={parsedTrips} />
         </Box>
       </Grid>
     </Box>
@@ -129,7 +125,9 @@ export const getStaticProps = async ({ params }) => {
   const results = await query.find();
   const centreData = JSON.stringify(results[0]);
   // Get upcoming dive trips
-  const tripQuery = await Moralis.Cloud.run("getCentreTrips", { id: centreId });
+  const tripQuery = await Moralis.Cloud.run("getCentreTrips", {
+    id: centreId,
+  });
   const tripData = JSON.stringify(tripQuery);
 
   return {

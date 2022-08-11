@@ -293,7 +293,8 @@ body.chakra-ui-dark .react-calendar__tile--rangeEnd:enabled:focus {
 .react-date-picker__calendar .react-calendar {
   border-width: thin;
   padding: 20px;
-  background-color:#b0bbd5
+  background-color:#FAFCFE;
+  border-radius: 20px;
 }
 /* .react-date-picker__clock {
   width: 200px;
@@ -408,7 +409,8 @@ body.chakra-ui-dark .react-date-picker__calendar {
 }
 body.chakra-ui-dark .react-date-picker__calendar .react-calendar {
   border-width: thin;
-  background-color:#1b2559
+  background-color:#1b2559;
+  border-radius: 20px;
 }
 /* body.chakra-ui-dark .react-date-picker__clock {
   width: 200px;

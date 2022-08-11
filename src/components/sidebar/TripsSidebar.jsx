@@ -19,26 +19,13 @@ import Transaction from "components/dataDisplay/Transaction";
 import { DarkMap, LightMap } from "components/maps/MapStyles";
 
 const mapApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-const center = { lat: 28.0132, lng: 34.4751 };
 const libraries = ["places"];
 const containerStyle = {
   width: "100%",
   height: "100%", // { sm: "calc(100vh + 50px)", xl: "calc(100vh - 75px - 275px)" }
 };
 
-function createKey(location) {
-  return location.lat + location.lng;
-}
-
-export default function DiveCentreSidebar({
-  centreId,
-  centreName,
-  address,
-  city,
-  country,
-  trips,
-  ...rest
-}) {
+export default function DiveCentreSidebar({ trips, ...rest }) {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   // const textColorTertiary = useColorModeValue("secondaryGray.600", "white");
@@ -81,45 +68,45 @@ export default function DiveCentreSidebar({
       >
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={center}
-          zoom={7}
+          center={{
+            lat: trips[0].centreLat,
+            lng: trips[0].centreLng,
+          }}
+          zoom={8}
           options={mapOptions}
           mb="0px"
           border="20px"
         >
           {trips &&
+            trips.map((trip) =>
+              trip.siteList.map((site) => (
+                <Marker
+                  key={site.latitude + trip.longitude}
+                  position={{
+                    lat: site.latitude,
+                    lng: site.longitude,
+                  }}
+                  // onClick={() => setMapLocation(location)}
+                  icon={{
+                    url: "/img/diving/dive_site_marker.svg",
+                    scaledSize: new window.google.maps.Size(34, 34),
+                  }}
+                />
+              ))
+            )}
+          {trips &&
             trips.map((trip) => (
               <Marker
-                key={createKey(trip.diveCentre)}
                 position={{
-                  lat: trip.diveCentre.latitude,
-                  lng: trip.diveCentre.longitude,
+                  lat: trip.centreLat,
+                  lng: trip.centreLng,
                 }}
-                // onClick={() => setMapLocation(location)}
                 icon={{
-                  url:
-                    colorMode === "light"
-                      ? "/img/diving/centre_icon_dark.svg"
-                      : "/img/diving/centre_icon_light.svg",
+                  url: "/img/diving/dive_centre_marker.svg",
                   scaledSize: new window.google.maps.Size(34, 34),
                 }}
               />
             ))}
-          <Marker
-            // key={createKey(trips[0].diveSite)}
-            position={{
-              lat: trips[0]?.diveSite.latitude,
-              lng: trips[0]?.diveSite.longitude,
-            }}
-            // onClick={() => setMapLocation(location)}
-            icon={{
-              url:
-                colorMode === "light"
-                  ? "/img/diving/dive_icon_dark.svg"
-                  : "/img/diving/dive_icon_light.svg",
-              scaledSize: new window.google.maps.Size(34, 34),
-            }}
-          />
         </GoogleMap>
       </Card>
       {trips.length > 0 ? (
@@ -127,11 +114,9 @@ export default function DiveCentreSidebar({
           <Flex justify="space-between" mb="25px" align="center">
             <Transaction
               key={trip.id}
-              id={trip.id}
-              siteId={trip.diveSite.id}
-              siteName={trip.diveSite.name}
-              siteList={trip.diveSites}
-              centreName={centreName}
+              tripId={trip.id}
+              siteList={trip.siteList}
+              centreName={trip.centreName}
               diveDate={trip.startTime}
               price={trip.price / 100}
               locationType="dive_centre"

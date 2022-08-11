@@ -25,17 +25,8 @@ import "../../../public/css/MiniCalendar.module.css";
 // import "react-clock/dist/Clock.css";
 
 export default function Transaction(props) {
-  const {
-    diveDate,
-    price,
-    icon,
-    siteName,
-    siteList,
-    siteId,
-    centreName,
-    locationType,
-    ...rest
-  } = props;
+  const { diveDate, price, icon, siteList, tripId, centreName, ...rest } =
+    props;
   const { dives, setDives } = useContext(DivingContext);
   const toast = useToast();
 
@@ -44,12 +35,9 @@ export default function Transaction(props) {
 
   const [value, onChange] = useState();
 
-  const siteNames = siteList?.map((site) => JSON.parse(site));
+  const siteNames = siteList?.map((site) => site.name).join(" + ");
 
   const addDive = () => {
-    if (!siteName) {
-      return;
-    }
     if (!diveDate && !value) {
       toast({
         position: "top-right",
@@ -64,10 +52,10 @@ export default function Transaction(props) {
       return;
     }
     const dive = {
-      id: siteId,
-      siteName,
+      id: tripId,
+      siteName: siteNames,
       centreName,
-      diveDate: diveDate ? new Date(diveDate.iso) : new Date(value),
+      diveDate: diveDate ? new Date(diveDate) : new Date(value),
       diveTime: "morning",
       priceId: "price_1LBLSVAvLPvC9h7xk0HEvL3f", // mapLocation.stripePriceId,
     };
@@ -111,13 +99,8 @@ export default function Transaction(props) {
       </Tooltip>
       <Flex direction="column" align="start" me="auto" w="100%">
         <Flex direction="row" align="stretch" me="auto">
-          {/* <Text color={textColor} fontSize="md" me="6px" fontWeight="700">
-            {locationType === "dive_centre" ? siteName : centreName}
-          </Text> */}
           <Text color={textColor} fontSize="md" me="6px" fontWeight="700">
-            {locationType === "dive_centre"
-              ? siteNames.map((site) => site.siteName).join(" + ")
-              : centreName}
+            {siteList.map((site) => site.name).join(" + ")}
           </Text>
           <Text
             ms="auto"
@@ -129,15 +112,18 @@ export default function Transaction(props) {
             €{price}
           </Text>
         </Flex>
+        <Text color={textColor} fontSize="md" me="6px" fontWeight="500">
+          {centreName}
+        </Text>
         {diveDate ? (
           <Text color="secondaryGray.600" fontSize="sm" fontWeight="500">
-            {new Date(diveDate?.iso).toLocaleDateString("en-US", {
+            {new Date(diveDate).toLocaleDateString("en-US", {
               year: "numeric",
               month: "short",
               day: "numeric",
             })}
             {" @ "}
-            {new Date(diveDate?.iso).toLocaleTimeString("en-US", {
+            {new Date(diveDate).toLocaleTimeString("en-US", {
               hour: "2-digit",
               minute: "2-digit",
             })}
