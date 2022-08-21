@@ -238,7 +238,7 @@ function SignedInMenuList() {
 function ShoppingCart() {
   const menuBg = useColorModeValue("white", "navy.800");
   const shadow = useColorModeValue(
-    "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
+    "40px 17px 40px 4px rgba(112, 144, 176, 0.38)",
     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
   );
 
@@ -259,14 +259,19 @@ function ShoppingCart() {
         </MenuButton>
       </Tooltip>
       <MenuList
-        boxShadow={shadow}
+        boxShadow="dark-lg"
         p="0px"
         mt="10px"
         borderRadius="20px"
         bg={menuBg}
         border="none"
       >
-        <Flex flexDirection="column" p="10px" borderBottom="1px solid gray">
+        <Flex
+          flexDirection="column"
+          maxW={{ sm: "sm", md: "lg" }}
+          p="10px"
+          borderBottom="1px solid gray"
+        >
           <DiveList />
         </Flex>
         <Flex w="100%" p="10px" mb="0px">

@@ -29,6 +29,23 @@ export default function EquipmentSelection(props) {
   const selectedBgColor = useColorModeValue("brand.400", "brand.400");
   const [equipmentList, setEquipmentList] = useState([]);
 
+  const getProductId = (n) => {
+    // if (n = 1) {
+    //   return "prod_Lt7hO6IqEZT5Fb";
+    // } else {
+    // }
+    switch (n) {
+      case 1:
+        return "prod_Lt7hO6IqEZT5Fb";
+      case 2:
+        return "prod_Lt7cRX9OGqgQDz";
+      case 3:
+        return "prod_MHU0OAktSpIMur";
+      default:
+        return "prod_Lt7hO6IqEZT5Fb";
+    }
+  };
+
   function toggleArrayItem(arr, item) {
     arr.includes(item)
       ? setEquipmentList(arr.filter((i) => i !== item)) // remove item
@@ -37,7 +54,12 @@ export default function EquipmentSelection(props) {
 
   const lineItems = dives.map((dive) => {
     return {
-      price: dive.priceId, // eg: "price_1KuasdfaWasdfasdfasfnsF4fi",
+      // price: dive.priceId, // eg: "price_1KuasdfaWasdfasdfasfnsF4fi",
+      price_data: {
+        unit_amount: dive.price,
+        currency: "usd",
+        product: getProductId(dive.siteCount),
+      },
       quantity: 1,
     };
   });
@@ -65,6 +87,7 @@ export default function EquipmentSelection(props) {
   };
 
   console.log(equipmentList);
+  console.log(dives);
 
   const redirectToCheckout = async () => {
     checkout({

@@ -69,8 +69,8 @@ export default function DiveCentreSidebar({ trips, ...rest }) {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={{
-            lat: trips[0].centreLat,
-            lng: trips[0].centreLng,
+            lat: trips[0]?.centreLat || 28,
+            lng: trips[0]?.centreLng || 35,
           }}
           zoom={8}
           options={mapOptions}
@@ -118,7 +118,7 @@ export default function DiveCentreSidebar({ trips, ...rest }) {
               siteList={trip.siteList}
               centreName={trip.centreName}
               diveDate={trip.startTime}
-              price={trip.price / 100}
+              price={trip.price}
               locationType="dive_centre"
               icon={
                 <Icon as={MdAddCircle} color={textColor} w="20px" h="18px" />
@@ -128,7 +128,8 @@ export default function DiveCentreSidebar({ trips, ...rest }) {
         ))
       ) : (
         <Text fontSize="md" fontWeight="500" color="purple.500" mb="30px">
-          No Dive currently scheduled. New dives are getting added all the time
+          No Dives scheduled. Check again soon, new dives are getting added all
+          the time
         </Text>
       )}
     </Card>
