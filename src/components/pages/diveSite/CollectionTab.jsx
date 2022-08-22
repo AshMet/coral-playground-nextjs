@@ -11,7 +11,12 @@ import {
 import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
 
-export default function CollectionTab({ collection, folderUrl, ...rest }) {
+export default function CollectionTab({
+  collection,
+  folderUrl,
+  extension,
+  ...rest
+}) {
   const iconColor = useColorModeValue(
     "",
     "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
@@ -47,11 +52,11 @@ export default function CollectionTab({ collection, folderUrl, ...rest }) {
                 <Image
                   src={`${folderUrl}/${item
                     .toLowerCase()
-                    .replaceAll([" "], "-")}.svg`}
+                    .replaceAll(" ", "-")}.${extension || "svg"}`}
                   width="100%"
                   height="50px"
                   borderRadius="15px"
-                  filter={iconColor}
+                  filter={extension === "svg" ? iconColor : ""}
                 />
                 <Text>{titleCase(item)}</Text>
               </VStack>

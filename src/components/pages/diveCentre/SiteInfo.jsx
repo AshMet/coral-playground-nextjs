@@ -193,12 +193,14 @@ export default function SiteInfo({
                   <CollectionTab
                     collection={services}
                     folderUrl="/svg/services"
+                    extension="svg"
                   />
                 </TabPanel>
                 <TabPanel px="0px">
                   <CollectionTab
                     collection={equipment}
                     folderUrl="/svg/equipment"
+                    extension="svg"
                   />
                 </TabPanel>
               </TabPanels>

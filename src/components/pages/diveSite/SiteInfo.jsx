@@ -203,6 +203,7 @@ export default function SiteInfo({
                   <CollectionTab
                     collection={species}
                     folderUrl="/img/species"
+                    extension="png"
                   />
                 </TabPanel>
                 <TabPanel px="0px">
