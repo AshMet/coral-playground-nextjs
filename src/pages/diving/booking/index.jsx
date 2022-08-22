@@ -37,6 +37,7 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
+import { NextSeo } from "next-seo";
 import { useRef, useState, useContext } from "react";
 
 // Custom components
@@ -75,280 +76,285 @@ export default function NewBooking() {
   // const brand = useColorModeValue("brand.500", "brand.400");
 
   return (
-    <Flex
-      direction="column"
-      minH="100vh"
-      align="center"
-      pt={{ sm: "125px", lg: "75px" }}
-      position="relative"
-    >
-      <Box
-        h="25vh"
-        bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
-        position="absolute"
-        w="100%"
-        borderRadius="30px"
+    <>
+      <NextSeo
+        title="Dive Booking"
+        description="Complete your booking details and proceed to payment"
       />
-
-      <Tabs
-        variant="unstyled"
-        mt={{ base: "60px", md: "65px" }}
-        zIndex="0"
-        display="flex"
-        flexDirection="column"
+      <Flex
+        direction="column"
+        minH="100vh"
+        align="center"
+        pt={{ sm: "125px", lg: "75px" }}
+        position="relative"
       >
-        {/* Tab Selection */}
-        <TabList
+        <Box
+          h="25vh"
+          bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
+          position="absolute"
+          w="100%"
+          borderRadius="30px"
+        />
+
+        <Tabs
+          variant="unstyled"
+          mt={{ base: "60px", md: "65px" }}
+          zIndex="0"
           display="flex"
-          align="center"
-          alignSelf="center"
-          justifySelf="center"
+          flexDirection="column"
         >
-          <Tab
-            ref={productTab}
-            _focus="none"
-            w={{ sm: "120px", md: "250px", lg: "300px" }}
-            onClick={() =>
-              setActiveBullets({
-                product: true,
-                media: false,
-                pricing: false,
-              })
-            }
+          {/* Tab Selection */}
+          <TabList
+            display="flex"
+            align="center"
+            alignSelf="center"
+            justifySelf="center"
           >
-            <Flex
-              direction="column"
-              justify="center"
-              align="center"
-              position="relative"
-              _before={{
-                content: "''",
-                width: { sm: "120px", md: "250px", lg: "300px" },
-                height: "3px",
-                bg: activeBullets.media ? "white" : "#8476FF",
-                left: { sm: "12px", md: "40px" },
-                top: {
-                  sm: activeBullets.product ? "6px" : "4px",
-                  md: null,
-                },
-                position: "absolute",
-                bottom: activeBullets.product ? "40px" : "38px",
+            <Tab
+              ref={productTab}
+              _focus="none"
+              w={{ sm: "120px", md: "250px", lg: "300px" }}
+              onClick={() =>
+                setActiveBullets({
+                  product: true,
+                  media: false,
+                  pricing: false,
+                })
+              }
+            >
+              <Flex
+                direction="column"
+                justify="center"
+                align="center"
+                position="relative"
+                _before={{
+                  content: "''",
+                  width: { sm: "120px", md: "250px", lg: "300px" },
+                  height: "3px",
+                  bg: activeBullets.media ? "white" : "#8476FF",
+                  left: { sm: "12px", md: "40px" },
+                  top: {
+                    sm: activeBullets.product ? "6px" : "4px",
+                    md: null,
+                  },
+                  position: "absolute",
+                  bottom: activeBullets.product ? "40px" : "38px",
 
-                transition: "all .3s ease",
-              }}
+                  transition: "all .3s ease",
+                }}
+              >
+                <Box
+                  zIndex="1"
+                  border="2px solid"
+                  borderColor={activeBullets.product ? "white" : "#8476FF"}
+                  bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
+                  w="16px"
+                  h="16px"
+                  mb="8px"
+                  borderRadius="50%"
+                />
+                <Text
+                  color={activeBullets.product ? "white" : "gray.300"}
+                  fontWeight={activeBullets.product ? "bold" : "normal"}
+                  display={{ sm: "none", md: "block" }}
+                >
+                  Select Dives
+                </Text>
+                <Text
+                  color={activeBullets.product ? "white" : "gray.300"}
+                  fontWeight={activeBullets.product ? "bold" : "normal"}
+                  display={{ sm: "block", md: "none" }}
+                >
+                  Step 1
+                </Text>
+              </Flex>
+            </Tab>
+            <Tab
+              ref={mediaTab}
+              _focus="none"
+              w={{ sm: "120px", md: "250px", lg: "300px" }}
+              onClick={() =>
+                setActiveBullets({
+                  product: true,
+                  media: true,
+                  pricing: false,
+                })
+              }
             >
-              <Box
-                zIndex="1"
-                border="2px solid"
-                borderColor={activeBullets.product ? "white" : "#8476FF"}
-                bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
-                w="16px"
-                h="16px"
-                mb="8px"
-                borderRadius="50%"
-              />
-              <Text
-                color={activeBullets.product ? "white" : "gray.300"}
-                fontWeight={activeBullets.product ? "bold" : "normal"}
-                display={{ sm: "none", md: "block" }}
-              >
-                Select Dives
-              </Text>
-              <Text
-                color={activeBullets.product ? "white" : "gray.300"}
-                fontWeight={activeBullets.product ? "bold" : "normal"}
-                display={{ sm: "block", md: "none" }}
-              >
-                Step 1
-              </Text>
-            </Flex>
-          </Tab>
-          <Tab
-            ref={mediaTab}
-            _focus="none"
-            w={{ sm: "120px", md: "250px", lg: "300px" }}
-            onClick={() =>
-              setActiveBullets({
-                product: true,
-                media: true,
-                pricing: false,
-              })
-            }
-          >
-            <Flex
-              direction="column"
-              justify="center"
-              align="center"
-              position="relative"
-              _before={{
-                content: "''",
-                width: { sm: "120px", md: "250px", lg: "300px" },
-                height: "3px",
-                bg: activeBullets.pricing ? "white" : "#8476FF",
-                left: { sm: "12px", md: "28px" },
-                top: "6px",
-                position: "absolute",
-                bottom: activeBullets.media ? "40px" : "38px",
+              <Flex
+                direction="column"
+                justify="center"
+                align="center"
+                position="relative"
+                _before={{
+                  content: "''",
+                  width: { sm: "120px", md: "250px", lg: "300px" },
+                  height: "3px",
+                  bg: activeBullets.pricing ? "white" : "#8476FF",
+                  left: { sm: "12px", md: "28px" },
+                  top: "6px",
+                  position: "absolute",
+                  bottom: activeBullets.media ? "40px" : "38px",
 
-                transition: "all .3s ease",
-              }}
+                  transition: "all .3s ease",
+                }}
+              >
+                <Box
+                  zIndex="1"
+                  border="2px solid"
+                  borderColor={activeBullets.media ? "white" : "#8476FF"}
+                  bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
+                  w="16px"
+                  h="16px"
+                  mb="8px"
+                  borderRadius="50%"
+                />
+                <Text
+                  color={activeBullets.media ? "white" : "gray.300"}
+                  fontWeight={activeBullets.media ? "bold" : "normal"}
+                  display={{ sm: "none", md: "block" }}
+                >
+                  Diver Info
+                </Text>
+                <Text
+                  color={activeBullets.product ? "white" : "gray.300"}
+                  fontWeight={activeBullets.product ? "bold" : "normal"}
+                  display={{ sm: "block", md: "none" }}
+                >
+                  Step 2
+                </Text>
+              </Flex>
+            </Tab>
+            <Tab
+              ref={pricingTab}
+              _focus="none"
+              w={{ sm: "120px", md: "250px", lg: "300px" }}
+              onClick={() =>
+                setActiveBullets({
+                  product: true,
+                  media: true,
+                  pricing: true,
+                })
+              }
             >
-              <Box
-                zIndex="1"
-                border="2px solid"
-                borderColor={activeBullets.media ? "white" : "#8476FF"}
-                bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
-                w="16px"
-                h="16px"
-                mb="8px"
-                borderRadius="50%"
-              />
-              <Text
-                color={activeBullets.media ? "white" : "gray.300"}
-                fontWeight={activeBullets.media ? "bold" : "normal"}
-                display={{ sm: "none", md: "block" }}
+              <Flex
+                direction="column"
+                justify="center"
+                align="center"
+                position="relative"
               >
-                Diver Info
-              </Text>
-              <Text
-                color={activeBullets.product ? "white" : "gray.300"}
-                fontWeight={activeBullets.product ? "bold" : "normal"}
-                display={{ sm: "block", md: "none" }}
-              >
-                Step 2
-              </Text>
-            </Flex>
-          </Tab>
-          <Tab
-            ref={pricingTab}
-            _focus="none"
-            w={{ sm: "120px", md: "250px", lg: "300px" }}
-            onClick={() =>
-              setActiveBullets({
-                product: true,
-                media: true,
-                pricing: true,
-              })
-            }
-          >
-            <Flex
-              direction="column"
-              justify="center"
-              align="center"
-              position="relative"
+                <Box
+                  zIndex="1"
+                  border="2px solid"
+                  borderColor={activeBullets.pricing ? "white" : "#8476FF"}
+                  bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
+                  w="16px"
+                  h="16px"
+                  mb="8px"
+                  borderRadius="50%"
+                />
+                <Text
+                  color={activeBullets.pricing ? "white" : "gray.300"}
+                  fontWeight={activeBullets.pricing ? "bold" : "normal"}
+                  display={{ sm: "none", md: "block" }}
+                >
+                  Equipment
+                </Text>
+                <Text
+                  color={activeBullets.product ? "white" : "gray.300"}
+                  fontWeight={activeBullets.product ? "bold" : "normal"}
+                  display={{ sm: "block", md: "none" }}
+                >
+                  Step 3
+                </Text>
+              </Flex>
+            </Tab>
+          </TabList>
+          <TabPanels mt="24px" maxW={{ md: "90%", lg: "100%" }} mx="auto">
+            {/* Panel 1: Dive Selection */}
+            <TabPanel
+              w={{ sm: "330px", md: "700px", lg: "850px" }}
+              p="0px"
+              mx="auto"
             >
-              <Box
-                zIndex="1"
-                border="2px solid"
-                borderColor={activeBullets.pricing ? "white" : "#8476FF"}
-                bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
-                w="16px"
-                h="16px"
-                mb="8px"
-                borderRadius="50%"
-              />
-              <Text
-                color={activeBullets.pricing ? "white" : "gray.300"}
-                fontWeight={activeBullets.pricing ? "bold" : "normal"}
-                display={{ sm: "none", md: "block" }}
-              >
-                Equipment
-              </Text>
-              <Text
-                color={activeBullets.product ? "white" : "gray.300"}
-                fontWeight={activeBullets.product ? "bold" : "normal"}
-                display={{ sm: "block", md: "none" }}
-              >
-                Step 3
-              </Text>
-            </Flex>
-          </Tab>
-        </TabList>
-        <TabPanels mt="24px" maxW={{ md: "90%", lg: "100%" }} mx="auto">
-          {/* Panel 1: Dive Selection */}
-          <TabPanel
-            w={{ sm: "330px", md: "700px", lg: "850px" }}
-            p="0px"
-            mx="auto"
-          >
-            {/* Row 1: List of Dives */}
-            <DiveList mb="20px" dives={dives} setDives={setDives} />
-            {/* Row 2: Map  & Calendar */}
-            {/* <DiveSelection /> */}
-            <Flex justify="space-between" mt="24px">
-              <Button
-                isLoading={dives.length === 0}
-                loadingText="Select a Dive"
-                spinnerPlacement="end"
-                // spinner={<BeatLoader size={8} color='white' />}
-                variant="darkBrand"
-                fontSize="sm"
-                borderRadius="16px"
-                w={{ base: "128px", md: "148px" }}
-                h="46px"
-                ms="auto"
-                onClick={() => mediaTab.current.click()}
-              >
-                Next
-              </Button>
-            </Flex>
-          </TabPanel>
-          {/* Panel 2: Diver Info */}
-          <TabPanel
-            w={{ sm: "330px", md: "700px", lg: "850px" }}
-            p="0px"
-            mx="auto"
-          >
-            <Card p="30px">
-              <DiverInfo
-                mb="20px"
-                setDiverName={setDiverName}
-                setDiverEmail={setDiverEmail}
-                setLastDive={setLastDive}
-                setDiverCert={setDiverCert}
-                setNotes={setNotes}
-              />
+              {/* Row 1: List of Dives */}
+              <DiveList mb="20px" dives={dives} setDives={setDives} />
+              {/* Row 2: Map  & Calendar */}
+              {/* <DiveSelection /> */}
               <Flex justify="space-between" mt="24px">
                 <Button
-                  variant="light"
-                  fontSize="sm"
-                  borderRadius="16px"
-                  w={{ base: "128px", md: "148px" }}
-                  h="46px"
-                  onClick={() => productTab.current.click()}
-                >
-                  Prev
-                </Button>
-                <Button
+                  isLoading={dives.length === 0}
+                  loadingText="Select a Dive"
+                  spinnerPlacement="end"
+                  // spinner={<BeatLoader size={8} color='white' />}
                   variant="darkBrand"
                   fontSize="sm"
                   borderRadius="16px"
                   w={{ base: "128px", md: "148px" }}
                   h="46px"
-                  isActive={dives.length > 0}
-                  onClick={() => pricingTab.current.click()}
+                  ms="auto"
+                  onClick={() => mediaTab.current.click()}
                 >
                   Next
                 </Button>
               </Flex>
-            </Card>
-          </TabPanel>
-          {/* Panel 3: Pricing */}
-          <TabPanel
-            w={{ sm: "330px", md: "700px", lg: "850px" }}
-            p="0px"
-            mx="auto"
-          >
-            <EquipmentSelection
-              mediaTab={mediaTab}
-              dives={dives}
-              diverName={diverName}
-              diverEmail={diverEmail}
-              diverCert={diverCert}
-              lastDive={lastDive}
-              notes={notes}
-            />
-            {/* <Card p="30px">
+            </TabPanel>
+            {/* Panel 2: Diver Info */}
+            <TabPanel
+              w={{ sm: "330px", md: "700px", lg: "850px" }}
+              p="0px"
+              mx="auto"
+            >
+              <Card p="30px">
+                <DiverInfo
+                  mb="20px"
+                  setDiverName={setDiverName}
+                  setDiverEmail={setDiverEmail}
+                  setLastDive={setLastDive}
+                  setDiverCert={setDiverCert}
+                  setNotes={setNotes}
+                />
+                <Flex justify="space-between" mt="24px">
+                  <Button
+                    variant="light"
+                    fontSize="sm"
+                    borderRadius="16px"
+                    w={{ base: "128px", md: "148px" }}
+                    h="46px"
+                    onClick={() => productTab.current.click()}
+                  >
+                    Prev
+                  </Button>
+                  <Button
+                    variant="darkBrand"
+                    fontSize="sm"
+                    borderRadius="16px"
+                    w={{ base: "128px", md: "148px" }}
+                    h="46px"
+                    isActive={dives.length > 0}
+                    onClick={() => pricingTab.current.click()}
+                  >
+                    Next
+                  </Button>
+                </Flex>
+              </Card>
+            </TabPanel>
+            {/* Panel 3: Pricing */}
+            <TabPanel
+              w={{ sm: "330px", md: "700px", lg: "850px" }}
+              p="0px"
+              mx="auto"
+            >
+              <EquipmentSelection
+                mediaTab={mediaTab}
+                dives={dives}
+                diverName={diverName}
+                diverEmail={diverEmail}
+                diverCert={diverCert}
+                lastDive={lastDive}
+                notes={notes}
+              />
+              {/* <Card p="30px">
               <Text color={textColor} fontSize="2xl" fontWeight="700" mb="20px">
                 Equipment
               </Text>
@@ -408,10 +414,11 @@ export default function NewBooking() {
                 </Flex>
               </Flex>
             </Card> */}
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </Flex>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Flex>
+    </>
   );
 }
 

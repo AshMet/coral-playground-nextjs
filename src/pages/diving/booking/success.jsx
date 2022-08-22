@@ -25,6 +25,7 @@
 import { Flex } from "@chakra-ui/react";
 // Custom components
 // import { getServerSideProps } from "next";
+import { NextSeo } from "next-seo";
 import Stripe from "stripe";
 
 import Card from "components/card/Card";
@@ -36,25 +37,35 @@ export default function Invoice({ session, lineItems }) {
   // console.log(session);
   // console.log(lineItems);
   return (
-    <Card mt={{ base: "130px", md: "80px", xl: "80px" }} maxW="920px" mx="auto">
-      <Flex direction="column" width="stretch">
-        <Banner sessionId={session.id} />
-        <Content
-          diverName={session.customer_details.name}
-          email={session.customer_details.email}
-          diveDate={session.metadata.dive_date}
-          diveTime={session.metadata.dive_time}
-          diverCert={session.customer.metadata.diverCert}
-          lastDive={session.customer.metadata.lastDive}
-          cert={session.metadata.cert}
-          lineItems={lineItems.data}
-          currency={session.currency}
-          amountSubtotal={(session.amount_subtotal / 100).toFixed(2)}
-          amountTotal={(session.amount_total / 100).toFixed(2)}
-          status={session.payment_status}
-        />
-      </Flex>
-    </Card>
+    <>
+      <NextSeo
+        title="Booking Success"
+        description="Your dive booking has completed successfully"
+      />
+      <Card
+        mt={{ base: "130px", md: "80px", xl: "80px" }}
+        maxW="920px"
+        mx="auto"
+      >
+        <Flex direction="column" width="stretch">
+          <Banner sessionId={session.id} />
+          <Content
+            diverName={session.customer_details.name}
+            email={session.customer_details.email}
+            diveDate={session.metadata.dive_date}
+            diveTime={session.metadata.dive_time}
+            diverCert={session.customer.metadata.diverCert}
+            lastDive={session.customer.metadata.lastDive}
+            cert={session.metadata.cert}
+            lineItems={lineItems.data}
+            currency={session.currency}
+            amountSubtotal={(session.amount_subtotal / 100).toFixed(2)}
+            amountTotal={(session.amount_total / 100).toFixed(2)}
+            status={session.payment_status}
+          />
+        </Flex>
+      </Card>
+    </>
   );
 }
 

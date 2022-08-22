@@ -16,6 +16,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
+import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 import { MdApps, MdDashboard } from "react-icons/md";
 
@@ -61,104 +62,116 @@ export default function DiveSites({ data }) {
   }, [data, city, country]);
 
   return (
-    <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-      {/* <Text>{JSON.stringify(data[0].diveMap)}</Text> */}
-      <Flex w="100%">
-        {/* <SearchBar /> */}
-        <Select
-          value={country}
-          fontSize="sm"
-          id="edit_product"
-          variant="main"
-          h="44px"
-          maxh="44px"
-          me="20px"
-          // placeholder="Please select"
-          defaultValue="egypt"
-          onChange={(e) => setCountry(e.target.value)}
+    <>
+      <NextSeo
+        title="Dive Sites"
+        description="A list of all availble dive sites"
+      />
+      <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+        {/* <Text>{JSON.stringify(data[0].diveMap)}</Text> */}
+        <Flex w="100%">
+          {/* <SearchBar /> */}
+          <Select
+            value={country}
+            fontSize="sm"
+            id="edit_product"
+            variant="main"
+            h="44px"
+            maxh="44px"
+            me="20px"
+            // placeholder="Please select"
+            defaultValue="egypt"
+            onChange={(e) => setCountry(e.target.value)}
+          >
+            <option value="Egypt">Egypt</option>
+          </Select>
+          <Select
+            value={city}
+            fontSize="sm"
+            variant="main"
+            h="44px"
+            maxh="44px"
+            me="20px"
+            // placeholder="All Cities"
+            defaultValue="All Cities"
+            onChange={(e) => setCity(e.target.value)}
+          >
+            <option value="All Cities">All Cities</option>
+            <option value="Hurghada">Hurghada</option>
+            <option value="Marsa Alam">Marsa Alam</option>
+            <option value="Sharm El Sheikh">Sharm El Sheikh</option>
+            <option value="Dahab">Dahab</option>
+          </Select>
+          <Button
+            me="20px"
+            bg={buttonBg}
+            border="1px solid"
+            color="secondaryGray.600"
+            borderColor={useColorModeValue(
+              "secondaryGray.100",
+              "whiteAlpha.100"
+            )}
+            borderRadius="16px"
+            _placeholder={{ color: "secondaryGray.600" }}
+            _hover={hoverButton}
+            _active={activeButton}
+            _focus={activeButton}
+          >
+            <Icon color={textColor} as={MdDashboard} />
+          </Button>
+          <Button
+            bg={buttonBg}
+            border="1px solid"
+            color="secondaryGray.600"
+            borderColor={useColorModeValue(
+              "secondaryGray.100",
+              "whiteAlpha.100"
+            )}
+            borderRadius="16px"
+            _placeholder={{ color: "secondaryGray.600" }}
+            _hover={hoverButton}
+            _active={activeButton}
+            _focus={activeButton}
+          >
+            <Icon color={textColor} as={MdApps} />
+          </Button>
+        </Flex>
+        <Text
+          mt="25px"
+          mb="36px"
+          color={textColor}
+          fontSize="2xl"
+          ms="24px"
+          fontWeight="700"
         >
-          <option value="Egypt">Egypt</option>
-        </Select>
-        <Select
-          value={city}
-          fontSize="sm"
-          variant="main"
-          h="44px"
-          maxh="44px"
-          me="20px"
-          // placeholder="All Cities"
-          defaultValue="All Cities"
-          onChange={(e) => setCity(e.target.value)}
-        >
-          <option value="All Cities">All Cities</option>
-          <option value="Hurghada">Hurghada</option>
-          <option value="Marsa Alam">Marsa Alam</option>
-          <option value="Sharm El Sheikh">Sharm El Sheikh</option>
-          <option value="Dahab">Dahab</option>
-        </Select>
-        <Button
-          me="20px"
-          bg={buttonBg}
-          border="1px solid"
-          color="secondaryGray.600"
-          borderColor={useColorModeValue("secondaryGray.100", "whiteAlpha.100")}
-          borderRadius="16px"
-          _placeholder={{ color: "secondaryGray.600" }}
-          _hover={hoverButton}
-          _active={activeButton}
-          _focus={activeButton}
-        >
-          <Icon color={textColor} as={MdDashboard} />
-        </Button>
-        <Button
-          bg={buttonBg}
-          border="1px solid"
-          color="secondaryGray.600"
-          borderColor={useColorModeValue("secondaryGray.100", "whiteAlpha.100")}
-          borderRadius="16px"
-          _placeholder={{ color: "secondaryGray.600" }}
-          _hover={hoverButton}
-          _active={activeButton}
-          _focus={activeButton}
-        >
-          <Icon color={textColor} as={MdApps} />
-        </Button>
-      </Flex>
-      <Text
-        mt="25px"
-        mb="36px"
-        color={textColor}
-        fontSize="2xl"
-        ms="24px"
-        fontWeight="700"
-      >
-        {filtered?.length} Results
-      </Text>
-      <ChakraBox layout>
-        {/* <motion.div display="grid" displayTemplateColumns="repeat(autoFit, minmax(250px, 1fr)" gridColumnGap="1rem" gridRowGap="2rem"> */}
-        <AnimatePresence>
-          <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
-            {filtered &&
-              filtered.map((site) => {
-                return (
-                  <DiveSiteCard
-                    key={site.objectId}
-                    id={site.objectId}
-                    image={site.diveMap?.url}
-                    name={site.name}
-                    tagList={site.divingTypes}
-                    depth={site.maxDepth}
-                    maxVisibility={site.maxVisibility}
-                    current={site.current}
-                    type="dive_site"
-                    // address={`${site.city}, ${site.country}`}
-                  />
-                );
-              })}
-          </SimpleGrid>
-        </AnimatePresence>
-      </ChakraBox>
-    </Box>
+          {filtered?.length} Results
+        </Text>
+        <ChakraBox layout>
+          {/* <motion.div display="grid" displayTemplateColumns="repeat(autoFit, minmax(250px, 1fr)" gridColumnGap="1rem" gridRowGap="2rem"> */}
+          <AnimatePresence>
+            <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
+              {filtered &&
+                filtered.map((site) => {
+                  return (
+                    <DiveSiteCard
+                      key={site.objectId}
+                      id={site.objectId}
+                      image={site.diveMap?.url}
+                      name={site.name}
+                      tagList={site.divingTypes}
+                      depth={site.maxDepth}
+                      maxVisibility={site.maxVisibility}
+                      current={site.current}
+                      type="dive_site"
+                      // address={`${site.city}, ${site.country}`}
+                    />
+                  );
+                })}
+            </SimpleGrid>
+          </AnimatePresence>
+        </ChakraBox>
+      </Box>
+    </>
   );
 }
 

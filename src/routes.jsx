@@ -25,13 +25,13 @@ import {
 // import DashboardsSmartHome from "pages/admin/dashboards/smartHome";
 // NFT Imports
 // import NFTCollection from "pages/admin/nfts/collection";
-import NFTDrops from "pages/admin/nfts/drops";
 // import NFTMarketplace from "pages/admin/nfts/marketplace";
 // import Booking from "pages/diving/booking";
 import Certifications from "pages/diving/certifications";
 import DiveCentres from "pages/diving/dive_centres";
 import DiveSites from "pages/diving/dive_sites";
 import DiveMap from "pages/diving/map";
+import NFTDrops from "pages/nfts/drops";
 // import NFTPage from "pages/admin/nfts/page";
 // import NFTProfile from "pages/admin/nfts/profile";
 // Main Imports
@@ -343,8 +343,8 @@ const routes = [
       // },
       {
         name: "Drops",
-        layout: "/admin",
-        path: "/nfts/drops",
+        layout: "/nfts",
+        path: "/drops",
         icon: (
           <Icon as={GiLockedChest} width="15px" height="15px" color="inherit" />
         ),

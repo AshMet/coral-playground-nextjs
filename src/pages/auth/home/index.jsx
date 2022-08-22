@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 // import { useMoralis } from "react-moralis";
 // import { useNavigate } from "react-router-dom";
+import { NextSeo } from "next-seo";
 import { ParallaxProvider } from "react-scroll-parallax";
 
 // import gradientBg from "../../assets/svg/gradient-bg.svg";
@@ -23,21 +24,24 @@ export default function Home() {
   // const navigate = useNavigate();
 
   return (
-    <ParallaxProvider>
-      <Box
-      // bgImage={gradientBg}
-      // bgRepeat="no-repeat"
-      // bgSize="cover"
-      >
-        <HomeHero />
-        <HomeBenefits />
-        <HomeJellyfish />
-        <HomeCollectibles />
-        <HomeTimeline />
-        <HomeFAQ />
-        <HomeFooter />
-      </Box>
-    </ParallaxProvider>
+    <>
+      <NextSeo title="Home" description="Coral Playground Home Page" />
+      <ParallaxProvider>
+        <Box
+        // bgImage={gradientBg}
+        // bgRepeat="no-repeat"
+        // bgSize="cover"
+        >
+          <HomeHero />
+          <HomeBenefits />
+          <HomeJellyfish />
+          <HomeCollectibles />
+          <HomeTimeline />
+          <HomeFAQ />
+          <HomeFooter />
+        </Box>
+      </ParallaxProvider>
+    </>
   );
 }
 

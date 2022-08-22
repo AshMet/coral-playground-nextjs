@@ -37,6 +37,7 @@ import {
 // import Image from "next/image";
 // import React from "react";
 // Custom components
+import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { MdDashboard, MdApps } from "react-icons/md";
@@ -96,102 +97,121 @@ export default function Collection() {
   }, [data, contractAddress, router.isReady]);
 
   return (
-    <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-      {/* Main Fields */}
-      <Box mb="20px" display={{ base: "block", lg: "grid" }}>
-        <Flex flexDirection="column">
-          <Banner
-            image={NftBanner2}
-            profile={NftProfile}
-            creator="ash.met"
-            name="Agro Octo®"
-            desc="The Abstractus® project is an online art show and the First Art NFTs on Ethereum, launched on May 9, 2017. Abstractus® features 28 unique series of cards from 7 different artists. Abstractus® are referenced with CryptoAbstractus® and Crypto in the original ERC-721 Non-Fungible Token Standard, and pre-dates them both. Join the Abstractus® Discord and check out theAbstractus® Docs to find out more."
-            floor={0.56}
-            volume={33.8}
-            owners={4.6}
-            items={28}
-          />
+    <>
+      <NextSeo
+        title={`NFT Collection  - ${contractAddress}`}
+        description="View different NFTs within the same collection"
+      />
+      <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+        {/* Main Fields */}
+        <Box mb="20px" display={{ base: "block", lg: "grid" }}>
+          <Flex flexDirection="column">
+            <Banner
+              image={NftBanner2}
+              profile={NftProfile}
+              creator="ash.met"
+              name="Agro Octo®"
+              desc="The Abstractus® project is an online art show and the First Art NFTs on Ethereum, launched on May 9, 2017. Abstractus® features 28 unique series of cards from 7 different artists. Abstractus® are referenced with CryptoAbstractus® and Crypto in the original ERC-721 Non-Fungible Token Standard, and pre-dates them both. Join the Abstractus® Discord and check out theAbstractus® Docs to find out more."
+              floor={0.56}
+              volume={33.8}
+              owners={4.6}
+              items={28}
+            />
+          </Flex>
+        </Box>
+        <Flex w="100%">
+          <SearchBar />
+          <Select
+            fontSize="sm"
+            id="edit_product"
+            variant="main"
+            h="44px"
+            maxh="44px"
+            me={{ base: "10px", md: "20px" }}
+          >
+            <option value="single">Single Items</option>
+            <option value="multiple">Multiple Items</option>
+          </Select>
+          <Select
+            fontSize="sm"
+            variant="main"
+            h="44px"
+            maxh="44px"
+            me={{ base: "10px", md: "20px" }}
+          >
+            <option value="low_to_high">Low to high</option>
+            <option value="high_to_low">High to low</option>
+          </Select>
+          <Button
+            me={{ base: "10px", md: "20px" }}
+            bg={buttonBg}
+            border="1px solid"
+            color="secondaryGray.600"
+            borderColor={useColorModeValue(
+              "secondaryGray.100",
+              "whiteAlpha.100"
+            )}
+            borderRadius="16px"
+            _placeholder={{ color: "secondaryGray.600" }}
+            _hover={hoverButton}
+            _active={activeButton}
+            _focus={activeButton}
+          >
+            <Icon color={textColor} as={MdDashboard} />
+          </Button>
+          <Button
+            bg={buttonBg}
+            border="1px solid"
+            color="secondaryGray.600"
+            borderColor={useColorModeValue(
+              "secondaryGray.100",
+              "whiteAlpha.100"
+            )}
+            borderRadius="16px"
+            _placeholder={{ color: "secondaryGray.600" }}
+            _hover={hoverButton}
+            _active={activeButton}
+            _focus={activeButton}
+          >
+            <Icon color={textColor} as={MdApps} />
+          </Button>
         </Flex>
-      </Box>
-      <Flex w="100%">
-        <SearchBar />
-        <Select
-          fontSize="sm"
-          id="edit_product"
-          variant="main"
-          h="44px"
-          maxh="44px"
-          me={{ base: "10px", md: "20px" }}
+        <Text
+          mt="25px"
+          mb="36px"
+          color={textColor}
+          fontSize="2xl"
+          ms="24px"
+          fontWeight="700"
         >
-          <option value="single">Single Items</option>
-          <option value="multiple">Multiple Items</option>
-        </Select>
-        <Select
-          fontSize="sm"
-          variant="main"
-          h="44px"
-          maxh="44px"
-          me={{ base: "10px", md: "20px" }}
-        >
-          <option value="low_to_high">Low to high</option>
-          <option value="high_to_low">High to low</option>
-        </Select>
-        <Button
-          me={{ base: "10px", md: "20px" }}
-          bg={buttonBg}
-          border="1px solid"
-          color="secondaryGray.600"
-          borderColor={useColorModeValue("secondaryGray.100", "whiteAlpha.100")}
-          borderRadius="16px"
-          _placeholder={{ color: "secondaryGray.600" }}
-          _hover={hoverButton}
-          _active={activeButton}
-          _focus={activeButton}
-        >
-          <Icon color={textColor} as={MdDashboard} />
-        </Button>
-        <Button
-          bg={buttonBg}
-          border="1px solid"
-          color="secondaryGray.600"
-          borderColor={useColorModeValue("secondaryGray.100", "whiteAlpha.100")}
-          borderRadius="16px"
-          _placeholder={{ color: "secondaryGray.600" }}
-          _hover={hoverButton}
-          _active={activeButton}
-          _focus={activeButton}
-        >
-          <Icon color={textColor} as={MdApps} />
-        </Button>
-      </Flex>
-      <Text
-        mt="25px"
-        mb="36px"
-        color={textColor}
-        fontSize="2xl"
-        ms="24px"
-        fontWeight="700"
-      >
-        More from this Collection
-      </Text>
-      <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
-        {ownedNFTs?.length > 0 &&
-          ownedNFTs
-            .map((nft) => (
-              <NFT
-                name={nft.attributes.name}
-                author={nft.attributes.user?.attributes?.nickname}
-                bidders={[Avatar1, Avatar2, Avatar3, Avatar4, Avatar1, Avatar2]}
-                image={nft.attributes.nftFilePath}
-                currentBid={nft.attributes.priceInWei / 1000000000000000000}
-                download="#"
-              />
-            ))
-            .reverse()}
-      </SimpleGrid>
+          More from this Collection
+        </Text>
+        <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
+          {ownedNFTs?.length > 0 &&
+            ownedNFTs
+              .map((nft) => (
+                <NFT
+                  name={nft.attributes.name}
+                  author={nft.attributes.user?.attributes?.nickname}
+                  bidders={[
+                    Avatar1,
+                    Avatar2,
+                    Avatar3,
+                    Avatar4,
+                    Avatar1,
+                    Avatar2,
+                  ]}
+                  image={nft.attributes.nftFilePath}
+                  currentBid={nft.attributes.priceInWei / 1000000000000000000}
+                  download="#"
+                />
+              ))
+              .reverse()}
+        </SimpleGrid>
 
-      {/* Delete Product */}
-    </Box>
+        {/* Delete Product */}
+      </Box>
+    </>
   );
 }
 

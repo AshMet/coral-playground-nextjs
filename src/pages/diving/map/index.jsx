@@ -43,6 +43,7 @@ import Card from "components/card/Card";
 // import LocationSummary from "components/maps/LocationSummary";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import AdminLayout from "layouts/admin";
+import { NextSeo } from "next-seo";
 
 const Moralis = require("moralis/node");
 
@@ -68,96 +69,102 @@ export default function Default({ data }) {
   const [popupInfo, setPopupInfo] = useState(null);
 
   return (
-    <Flex
-      gridArea="1 / 1 / 1 / 1"
-      display={{ base: "block", lg: "flex" }}
-      pt={{ base: "130px", md: "80px", xl: "80px" }}
-    >
-      <Card
-        justifyContent="center"
-        position="relative"
-        direction="column"
-        w="100%"
-        p={{ sm: "0px", md: "10px" }}
-        zIndex="0"
-        h={{ sm: "calc(100vh - 200px)", md: "calc(100vh - 130px)" }}
-        overflow="hidden"
+    <>
+      <NextSeo
+        title="Dive Map"
+        description="Explore dive sites and centres on our interactive map"
+      />
+      <Flex
+        gridArea="1 / 1 / 1 / 1"
+        display={{ base: "block", lg: "flex" }}
+        pt={{ base: "130px", md: "80px", xl: "80px" }}
       >
-        <Map
-          ref={mapRef}
-          initialViewState={{
-            latitude: 28.0132,
-            longitude: 33.7751,
-            pitch: 85,
-            zoom: 7,
-          }}
-          style={{ borderRadius: "20px", width: "100%", height: "100%" }}
-          mapStyle={mapStyles}
-          mapboxAccessToken={MAPBOX_TOKEN}
+        <Card
+          justifyContent="center"
+          position="relative"
+          direction="column"
+          w="100%"
+          p={{ sm: "0px", md: "10px" }}
+          zIndex="0"
+          h={{ sm: "calc(100vh - 200px)", md: "calc(100vh - 130px)" }}
+          overflow="hidden"
         >
-          <GeolocateControl position="top-left" />
-          <FullscreenControl position="top-left" />
-          <NavigationControl position="top-left" />
-          <ScaleControl />
+          <Map
+            ref={mapRef}
+            initialViewState={{
+              latitude: 28.0132,
+              longitude: 33.7751,
+              pitch: 85,
+              zoom: 7,
+            }}
+            style={{ borderRadius: "20px", width: "100%", height: "100%" }}
+            mapStyle={mapStyles}
+            mapboxAccessToken={MAPBOX_TOKEN}
+          >
+            <GeolocateControl position="top-left" />
+            <FullscreenControl position="top-left" />
+            <NavigationControl position="top-left" />
+            <ScaleControl />
 
-          {parsedData?.map(
-            (location) =>
-              location.lat &&
-              location.lng && (
-                <Marker
-                  key={createKey(location)}
-                  latitude={location.lat}
-                  longitude={location.lng}
-                  anchor="bottom"
-                  onClick={(e) => {
-                    // If we let the click event propagates to the map, it will immediately close the popup
-                    // with `closeOnClick: true`
-                    e.originalEvent.stopPropagation();
-                    setMapLocation(location);
-                    setPopupInfo(location);
-                    mapRef.current?.flyTo({
-                      center: [location.lng, location.lat + 0.02],
-                      zoom: 13,
-                      duration: 2000,
-                    });
-                  }}
-                >
-                  <Image
-                    src={
-                      location.locationType === "dive_site"
-                        ? "/img/diving/dive_site_marker.svg"
-                        : "/img/diving/dive_centre_marker.svg"
-                    }
-                    alt="map icon"
-                    height={location.lat === mapLocation.lat ? 50 : 30}
-                    width={location.lat === mapLocation.lat ? 50 : 30}
-                  />
-                </Marker>
-              )
-          )}
-          {popupInfo && (
-            <Popup
-              anchor="bottom"
-              offset={20}
-              closeButton={false}
-              longitude={Number(popupInfo.lng)}
-              latitude={Number(popupInfo.lat)}
-              onClose={() => setPopupInfo(null)}
-              style={{ ".mapboxgl-popup-content": { background: "#345346" } }}
-            >
-              <DiveSiteCard
-                key={popupInfo.location_id}
-                id={popupInfo.location_id}
-                name={popupInfo.name}
-                tagList={popupInfo.divingTypes}
-                type={popupInfo.locationType}
-                image={popupInfo.itemImg?.url}
-              />
-            </Popup>
-          )}
-        </Map>
-      </Card>
-    </Flex>
+            {parsedData?.map(
+              (location) =>
+                location.lat &&
+                location.lng && (
+                  <Marker
+                    key={createKey(location)}
+                    latitude={location.lat}
+                    longitude={location.lng}
+                    anchor="bottom"
+                    onClick={(e) => {
+                      // If we let the click event propagates to the map, it will immediately close the popup
+                      // with `closeOnClick: true`
+                      e.originalEvent.stopPropagation();
+                      setMapLocation(location);
+                      setPopupInfo(location);
+                      mapRef.current?.flyTo({
+                        center: [location.lng, location.lat + 0.02],
+                        zoom: 13,
+                        duration: 2000,
+                      });
+                    }}
+                  >
+                    <Image
+                      src={
+                        location.locationType === "dive_site"
+                          ? "/img/diving/dive_site_marker.svg"
+                          : "/img/diving/dive_centre_marker.svg"
+                      }
+                      alt="map icon"
+                      height={location.lat === mapLocation.lat ? 50 : 30}
+                      width={location.lat === mapLocation.lat ? 50 : 30}
+                    />
+                  </Marker>
+                )
+            )}
+            {popupInfo && (
+              <Popup
+                anchor="bottom"
+                offset={20}
+                closeButton={false}
+                longitude={Number(popupInfo.lng)}
+                latitude={Number(popupInfo.lat)}
+                onClose={() => setPopupInfo(null)}
+                style={{ ".mapboxgl-popup-content": { background: "#345346" } }}
+              >
+                <DiveSiteCard
+                  key={popupInfo.location_id}
+                  id={popupInfo.location_id}
+                  name={popupInfo.name}
+                  tagList={popupInfo.divingTypes}
+                  type={popupInfo.locationType}
+                  image={popupInfo.itemImg?.url}
+                />
+              </Popup>
+            )}
+          </Map>
+        </Card>
+      </Flex>
+    </>
   );
 }
 

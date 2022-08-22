@@ -23,21 +23,22 @@
 
 // Chakra imports
 import { Box, Flex, Grid } from "@chakra-ui/react";
+import { NextSeo } from "next-seo";
 import { useState } from "react";
 
-// import Avatar1 from "../../../../../public/img/avatars/avatar1.png";
-// import Avatar2 from "../../../../../public/img/avatars/avatar2.png";
-// import Avatar3 from "../../../../../public/img/avatars/avatar3.png";
-// import Avatar4 from "../../../../../public/img/avatars/avatar4.png";
-import AvatarSimmmple from "../../../../../public/img/avatars/avatarSimmmple.png";
-// import Nft2 from "../../../../../public/img/nfts/Nft2.png";
-// import Nft4 from "../../../../../public/img/nfts/Nft4.png";
-// import Nft5 from "../../../../../public/img/nfts/Nft5.png";
-// import Nft6 from "../../../../../public/img/nfts/Nft6.png";
-import NftLarge1 from "../../../../../public/img/nfts/NftLarge1.png";
-import Card from "../../../../components/card/Card";
-import Banner from "../../../../components/pages/nftDrops/Banner";
-import Description from "../../../../components/pages/nftDrops/Description";
+// import Avatar1 from "../../../../public/img/avatars/avatar1.png";
+// import Avatar2 from "../../../../public/img/avatars/avatar2.png";
+// import Avatar3 from "../../../../public/img/avatars/avatar3.png";
+// import Avatar4 from "../../../../public/img/avatars/avatar4.png";
+import AvatarSimmmple from "../../../../public/img/avatars/avatarSimmmple.png";
+// import Nft2 from "../../../../public/img/nfts/Nft2.png";
+// import Nft4 from "../../../../public/img/nfts/Nft4.png";
+// import Nft5 from "../../../../public/img/nfts/Nft5.png";
+// import Nft6 from "../../../../public/img/nfts/Nft6.png";
+import NftLarge1 from "../../../../public/img/nfts/NftLarge1.png";
+import Card from "../../../components/card/Card";
+import Banner from "../../../components/pages/nftDrops/Banner";
+import Description from "../../../components/pages/nftDrops/Description";
 // import NFT from "components/card/NFT";
 import ColorPicker from "components/pages/nftDrops/ColorPicker";
 // import TableLastOffer from "./components/TableLastOffer";
@@ -53,73 +54,75 @@ export default function Drops() {
   const [backgroundColor, setBackgroundColor] = useState("#ffffff");
 
   return (
-    <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-      {/* Main Fields */}
-      <Grid
-        mb="20px"
-        maxW="100%"
-        gridTemplateColumns={{
-          base: "1fr",
-          lg: "2fr 1fr",
-          "2xl": "1fr 0.95fr",
-        }}
-        gap={{ base: "20px", xl: "20px" }}
-        display={{ base: "block", lg: "grid" }}
-      >
-        <Flex flexDirection="column" gridArea="1 / 1 / 2 / 2">
-          <Banner
-            bodyBase={bodyBase}
-            bodyShading={bodyShading}
-            tentacles={tentacles}
-            tentacleShading={tentacleShading}
-            eyeColor={eyeColor}
-            backgroundColor={backgroundColor}
-            image={NftLarge1}
-          />
-          <Description
-            desc={`Octo is the genesis character in the coral playground and the first of many to come. With a limited mint quantity of 1000, 
+    <>
+      <NextSeo title="NFT Drops" description="Buy the latest NFT drops" />
+      <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+        {/* Main Fields */}
+        <Grid
+          mb="20px"
+          maxW="100%"
+          gridTemplateColumns={{
+            base: "1fr",
+            lg: "2fr 1fr",
+            "2xl": "1fr 0.95fr",
+          }}
+          gap={{ base: "20px", xl: "20px" }}
+          display={{ base: "block", lg: "grid" }}
+        >
+          <Flex flexDirection="column" gridArea="1 / 1 / 2 / 2">
+            <Banner
+              bodyBase={bodyBase}
+              bodyShading={bodyShading}
+              tentacles={tentacles}
+              tentacleShading={tentacleShading}
+              eyeColor={eyeColor}
+              backgroundColor={backgroundColor}
+              image={NftLarge1}
+            />
+            <Description
+              desc={`Octo is the genesis character in the coral playground and the first of many to come. With a limited mint quantity of 1000, 
             this NFT will represent early adopters in our project and help us accelerate our delivery milestones.
             Additionally, as with all our drops, 10% of all profits will be set aside for marine preservation initiatives to be voted
             on by the coral DAO.`}
-            creator="ash.met"
-          />
-        </Flex>
-        <Flex flexDirection="column" gridArea="1 / 2 / 2 / 3" pt="60px">
-          <ColorPicker
-            creator="#FFFFFF"
-            creatorAvatar={AvatarSimmmple}
-            price="#000000"
-            mintPrice={0.1}
-            setBodyBase={setBodyBase}
-            setBodyShading={setBodyShading}
-            setTentacles={setTentacles}
-            setTentacleShading={setTentacleShading}
-            setEyeColor={setEyeColor}
-            setBackgroundColor={setBackgroundColor}
-          />
-          <Flex
-            direction="column"
-            w="100%"
-            overflowX={{ sm: "scroll", lg: "hidden" }}
-          >
-            <Flex
-              align="center"
-              justify="space-between"
-              w="100%"
-              px="22px"
-              pb="8px"
-              boxShadow="0px 40px 58px -20px rgba(112, 144, 176, 0.12)"
+              creator="ash.met"
             />
           </Flex>
-          <Card px="0px" mb="20px" mt="66px">
-            {/* <TableLastOffer
+          <Flex flexDirection="column" gridArea="1 / 2 / 2 / 3" pt="60px">
+            <ColorPicker
+              creator="#FFFFFF"
+              creatorAvatar={AvatarSimmmple}
+              price="#000000"
+              mintPrice={0.1}
+              setBodyBase={setBodyBase}
+              setBodyShading={setBodyShading}
+              setTentacles={setTentacles}
+              setTentacleShading={setTentacleShading}
+              setEyeColor={setEyeColor}
+              setBackgroundColor={setBackgroundColor}
+            />
+            <Flex
+              direction="column"
+              w="100%"
+              overflowX={{ sm: "scroll", lg: "hidden" }}
+            >
+              <Flex
+                align="center"
+                justify="space-between"
+                w="100%"
+                px="22px"
+                pb="8px"
+                boxShadow="0px 40px 58px -20px rgba(112, 144, 176, 0.12)"
+              />
+            </Flex>
+            <Card px="0px" mb="20px" mt="66px">
+              {/* <TableLastOffer
               tableData={tableDataLastOffer}
               columnsData={tableColumnsLastOffer}
             /> */}
-          </Card>
-        </Flex>
-      </Grid>
-      {/* <Text
+            </Card>
+          </Flex>
+        </Grid>
+        {/* <Text
         mt="25px"
         mb="36px"
         color={textColor}
@@ -129,7 +132,7 @@ export default function Drops() {
       >
         More from this Collection
       </Text> */}
-      {/* <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
+        {/* <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
         <NFT
           name="Swipe Circles"
           author="By Peter Will"
@@ -200,8 +203,9 @@ export default function Drops() {
         />
       </SimpleGrid> */}
 
-      {/* Delete Product */}
-    </Box>
+        {/* Delete Product */}
+      </Box>
+    </>
   );
 }
 
