@@ -1,8 +1,19 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
-import { AspectRatio, Box, Button, Grid } from "@chakra-ui/react";
-
+import {
+  AspectRatio,
+  Box,
+  Button,
+  Center,
+  Grid,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 // Custom components
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useMoralisCloudFunction } from "react-moralis";
+
 import Card from "components/card/Card";
 import SiteInfo from "components/pages/diveCentre/SiteInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
@@ -10,9 +21,12 @@ import AdminLayout from "layouts/admin";
 
 const Moralis = require("moralis/node");
 
-export default function DiveCentre({ centreData, tripData }) {
+export default function DiveCentre({ centreData }) {
   const parsedCentre = JSON.parse(centreData);
-  const parsedTrips = JSON.parse(tripData);
+  const router = useRouter();
+  const { id } = router.query;
+
+  const [trips, setTrips] = useState([]);
 
   const diveCentre = {
     id: parsedCentre.objectId,
@@ -32,6 +46,16 @@ export default function DiveCentre({ centreData, tripData }) {
     country: parsedCentre.country,
     city: parsedCentre.city,
   };
+
+  const {
+    data: tripData,
+    error: tripDataError,
+    isLoading: tripDataIsLoading,
+  } = useMoralisCloudFunction("getCentreTrips", { id });
+
+  useEffect(() => {
+    setTrips(tripData);
+  }, [tripData]);
 
   return (
     <Box maxW="100%">
@@ -89,9 +113,25 @@ export default function DiveCentre({ centreData, tripData }) {
             memberships={diveCentre.memberships}
           />
         </Box>
-        <Box gridArea="1 / 2 / 2 / 3">
-          <TripsSidebar trips={parsedTrips} />
-        </Box>
+        {/* Trip sidebar Load states */}
+        <Center>
+          {tripDataError && (
+            <Text fontSize="md" fontWeight="500" color="purple.500" mb="30px">
+              Sorry, there was a problem loading our trips. Please reload the
+              page or try again later.
+            </Text>
+          )}
+          {tripDataIsLoading && (
+            <Box>
+              <Spinner />
+            </Box>
+          )}
+        </Center>
+        {tripData && (
+          <Box gridArea="1 / 2 / 2 / 3">
+            <TripsSidebar trips={trips} />
+          </Box>
+        )}
       </Grid>
     </Box>
   );
@@ -124,14 +164,9 @@ export const getStaticProps = async ({ params }) => {
   query.equalTo("objectId", centreId);
   const results = await query.find();
   const centreData = JSON.stringify(results[0]);
-  // Get upcoming dive trips
-  const tripQuery = await Moralis.Cloud.run("getCentreTrips", {
-    id: centreId,
-  });
-  const tripData = JSON.stringify(tripQuery);
 
   return {
-    props: { centreData, tripData },
+    props: { centreData },
   };
 };
 

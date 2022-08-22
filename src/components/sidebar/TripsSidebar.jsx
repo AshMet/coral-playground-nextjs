@@ -8,6 +8,7 @@ import {
   // Link,
   useColorMode,
   useColorModeValue,
+  Divider,
 } from "@chakra-ui/react";
 // Custom components
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
@@ -83,8 +84,8 @@ export default function DiveCentreSidebar({ trips, ...rest }) {
                 <Marker
                   key={site.latitude + trip.longitude}
                   position={{
-                    lat: site.latitude,
-                    lng: site.longitude,
+                    lat: site.attributes.latitude,
+                    lng: site.attributes.longitude,
                   }}
                   // onClick={() => setMapLocation(location)}
                   icon={{
@@ -111,7 +112,7 @@ export default function DiveCentreSidebar({ trips, ...rest }) {
       </Card>
       {trips.length > 0 ? (
         trips.map((trip) => (
-          <Flex justify="space-between" mb="25px" align="center">
+          <Flex direction="column" justify="space-between" align="center">
             <Transaction
               key={trip.id}
               tripId={trip.id}
@@ -124,6 +125,7 @@ export default function DiveCentreSidebar({ trips, ...rest }) {
                 <Icon as={MdAddCircle} color={textColor} w="20px" h="18px" />
               }
             />
+            <Divider my="25px" />
           </Flex>
         ))
       ) : (

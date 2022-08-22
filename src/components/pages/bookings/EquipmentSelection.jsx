@@ -123,7 +123,7 @@ export default function EquipmentSelection(props) {
                   <Image
                     src={`/svg/equipment/${item.name
                       .toLowerCase()
-                      .replaceAll(" ", "_")}.svg`}
+                      .replaceAll(" ", "-")}.svg`}
                     width="100%"
                     height="40px"
                     borderRadius="15px"

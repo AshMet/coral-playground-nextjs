@@ -12,9 +12,12 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import DatePicker from "react-date-picker/dist/entry.nostyle";
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import { IoMdTime } from "react-icons/io";
+import { IoStorefrontOutline } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
 
 import { DivingContext } from "../../contexts/DivingContext";
@@ -35,9 +38,9 @@ export default function Transaction(props) {
   const iconBoxBg = useColorModeValue("secondaryGray.300", "navy.700");
 
   const [value, onChange] = useState();
-  const router = useRouter();
+  // const router = useRouter();
 
-  const siteNames = siteList?.map((site) => site.name).join(" + ");
+  const siteNames = siteList?.map((site) => site.attributes.name).join(" + ");
 
   const addDive = () => {
     if (!diveDate && !value) {
@@ -81,66 +84,84 @@ export default function Transaction(props) {
   return (
     <Flex justifyContent="center" alignItems="center" w="100%" {...rest}>
       {/* <IconBox h="42px" w="42px" bg={iconBoxBg} me="20px" icon={icon} /> */}
-      <Tooltip label="Add to Cart">
-        <Button
-          align="center"
-          justifyContent="center"
-          bg={iconBoxBg}
-          // _hover={bgHover}
-          // _focus={bgFocus}
-          // _active={bgFocus}
-          w="37px"
-          h="37px"
-          mt="5px"
-          mr="10px"
-          lineHeight="100%"
-          borderRadius="10px"
-          onClick={addDive}
-          {...rest}
-        >
-          <Icon as={MdAddCircle} color={textColor} w="24px" h="24px" />
-        </Button>
-      </Tooltip>
       <Flex direction="column" align="start" me="auto" w="100%">
         <Flex direction="row" align="stretch" me="auto">
-          <Text
-            color={textColor}
-            fontSize="md"
-            me="6px"
-            fontWeight="700"
-            onClick={() => router.push("/diving/booking")} // Not Working
-          >
-            {siteList.map((site) => site.name).join(" + ")}
-          </Text>
-          <Text
-            ms="auto"
-            color="green.500"
-            fontSize="sm"
-            me="6px"
-            fontWeight="700"
-          >
-            €{price / 100}
+          <Flex align="center">
+            <Icon me="8px" as={HiOutlineLocationMarker} w="16px" h="16px" />
+            <Text
+              color={textColor}
+              fontSize="md"
+              me="6px"
+              fontWeight="700"
+              // onClick={() => router.push("/diving/booking")} // Not Working
+            >
+              {siteList.map((site) => site.attributes.name).join(" + ")}
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex align="center">
+          <Icon me="8px" as={IoStorefrontOutline} w="16px" h="16px" />
+          <Text color={textColor} fontSize="md" me="6px" fontWeight="500">
+            {centreName}
           </Text>
         </Flex>
-        <Text color={textColor} fontSize="md" me="6px" fontWeight="500">
-          {centreName}
-        </Text>
         {diveDate ? (
-          <Text color="secondaryGray.600" fontSize="sm" fontWeight="500">
-            {new Date(diveDate).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
-            {" @ "}
-            {new Date(diveDate).toLocaleTimeString("en-US", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </Text>
+          <Flex align="center">
+            <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
+            <Text color="secondaryGray.600" fontSize="sm" fontWeight="500">
+              {new Date(diveDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+              {" @ "}
+              {new Date(diveDate).toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </Text>
+          </Flex>
         ) : (
-          <DatePicker onChange={onChange} value={value} />
+          <Tooltip label="Select Date before adding to cart">
+            <Flex align="center">
+              <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
+              <DatePicker onChange={onChange} value={value} />
+            </Flex>
+          </Tooltip>
         )}
+      </Flex>
+      <Flex direction="column">
+        <Text
+          ms="auto"
+          color="green.500"
+          fontSize="sm"
+          me="6px"
+          fontWeight="700"
+        >
+          €
+          <Text as="span" fontSize="lg">
+            {price / 100}
+          </Text>
+        </Text>
+        <Tooltip label="Add to Cart">
+          <Button
+            align="center"
+            justifyContent="center"
+            bg={iconBoxBg}
+            // _hover={bgHover}
+            // _focus={bgFocus}
+            // _active={bgFocus}
+            w="37px"
+            h="37px"
+            mt="10px"
+            lineHeight="100%"
+            borderRadius="10px"
+            onClick={addDive}
+            {...rest}
+          >
+            <Icon as={MdAddCircle} color={textColor} w="24px" h="24px" />
+          </Button>
+        </Tooltip>
       </Flex>
     </Flex>
   );

@@ -12,21 +12,18 @@ import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
 
 export default function CollectionTab({ collection, folderUrl, ...rest }) {
-  // const iconColor = useColorModeValue(
-  //   "",
-  //   "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
-  // );
+  const iconColor = useColorModeValue(
+    "",
+    "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
+  );
   const bgColor = useColorModeValue("white", "navy.900");
 
   const titleCase = (str) => {
     const splitStr = str.toLowerCase().split(" ");
     for (let i = 0; i < splitStr.length; i++) {
-      // You do not need to check if i is larger than splitStr length, as your for does that for you
-      // Assign it back to the array
       splitStr[i] =
         splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
     }
-    // Directly return the joined string
     return splitStr.join(" ");
   };
 
@@ -50,11 +47,11 @@ export default function CollectionTab({ collection, folderUrl, ...rest }) {
                 <Image
                   src={`${folderUrl}/${item
                     .toLowerCase()
-                    .replaceAll([" "], "-")}.png`}
+                    .replaceAll([" "], "-")}.svg`}
                   width="100%"
                   height="50px"
                   borderRadius="15px"
-                  // filter={iconColor}
+                  filter={iconColor}
                 />
                 <Text>{titleCase(item)}</Text>
               </VStack>

@@ -1,8 +1,19 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
-import { AspectRatio, Box, Button, Grid } from "@chakra-ui/react";
-
+import {
+  AspectRatio,
+  Box,
+  Button,
+  Center,
+  Grid,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 // Custom components
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useMoralisCloudFunction } from "react-moralis";
+
 import Card from "components/card/Card";
 import SiteInfo from "components/pages/diveSite/SiteInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
@@ -10,9 +21,13 @@ import AdminLayout from "layouts/admin";
 
 const Moralis = require("moralis/node");
 // import getDiveSites from "lib/data/getDiveSites";
-export default function DiveSitePage({ siteData, tripData }) {
+export default function DiveSitePage({ siteData }) {
   const parsedSite = JSON.parse(siteData);
-  const parsedTrips = JSON.parse(tripData);
+
+  const router = useRouter();
+  const { id } = router.query;
+
+  const [trips, setTrips] = useState([]);
 
   const diveSite = {
     id: parsedSite.objectId,
@@ -35,6 +50,16 @@ export default function DiveSitePage({ siteData, tripData }) {
     species: parsedSite.species,
   };
 
+  const {
+    data: tripData,
+    error: tripDataError,
+    isLoading: tripDataIsLoading,
+  } = useMoralisCloudFunction("getSiteTrips", { id });
+
+  useEffect(() => {
+    setTrips(tripData);
+  }, [tripData]);
+
   return (
     <Box maxW="100%">
       <Grid
@@ -49,14 +74,6 @@ export default function DiveSitePage({ siteData, tripData }) {
           mb={{ base: "20px", lg: "0px" }}
         >
           <AspectRatio w="100%" maxW="100%" ratio={1130 / 636}>
-            {/* <iframe
-              style={{ borderRadius: "30px" }}
-              src="https://www.youtube.com/embed/VNChunf5RKQ"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            /> */}
             <Card
               bgSize="100% 100%"
               minH={{ base: "200px", md: "100%" }}
@@ -92,9 +109,25 @@ export default function DiveSitePage({ siteData, tripData }) {
             species={diveSite.species}
           />
         </Box>
-        <Box gridArea="1 / 2 / 2 / 3">
-          <TripsSidebar trips={parsedTrips} />
-        </Box>
+        {/* Trip sidebar Load states */}
+        <Center>
+          {tripDataError && (
+            <Text fontSize="md" fontWeight="500" color="purple.500" mb="30px">
+              Sorry, there was a problem loading our trips. Please reload the
+              page or try again later.
+            </Text>
+          )}
+          {tripDataIsLoading && (
+            <Box>
+              <Spinner />
+            </Box>
+          )}
+        </Center>
+        {tripData && (
+          <Box gridArea="1 / 2 / 2 / 3">
+            <TripsSidebar trips={trips} />
+          </Box>
+        )}
       </Grid>
     </Box>
   );
@@ -127,18 +160,9 @@ export const getStaticProps = async ({ params }) => {
   query.equalTo("objectId", siteId);
   const results = await query.find();
   const siteData = JSON.stringify(results[0]);
-  // Get upcoming dive trips
-  // const DiveTrips = Moralis.Object.extend("DiveTrips");
-  // const query2 = new Moralis.Query(DiveTrips);
-  // query2.contains("diveSite", id);
-  // query2.include(["diveCentre"]); // use query2.select
-  // const results2 = await query2.find();
-  // const tripData = JSON.stringify(results2);
-  const tripQuery = await Moralis.Cloud.run("getSiteTrips", { id: siteId });
-  const tripData = JSON.stringify(tripQuery);
 
   return {
-    props: { siteData, tripData },
+    props: { siteData },
   };
 };
 
