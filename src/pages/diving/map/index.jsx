@@ -25,6 +25,7 @@
 
 */
 import { Flex, useColorModeValue } from "@chakra-ui/react";
+import { NextSeo } from "next-seo";
 import { useState, useRef } from "react";
 import Map, {
   Marker,
@@ -43,7 +44,6 @@ import Card from "components/card/Card";
 // import LocationSummary from "components/maps/LocationSummary";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import AdminLayout from "layouts/admin";
-import { NextSeo } from "next-seo";
 
 const Moralis = require("moralis/node");
 

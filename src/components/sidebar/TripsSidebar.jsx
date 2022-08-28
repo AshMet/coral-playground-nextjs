@@ -9,9 +9,11 @@ import {
   useColorMode,
   useColorModeValue,
   Divider,
+  Button,
 } from "@chakra-ui/react";
 // Custom components
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import Link from "next/link";
 import { MdAddCircle } from "react-icons/md";
 
 import Card from "components/card/Card";
@@ -26,7 +28,7 @@ const containerStyle = {
   height: "100%", // { sm: "calc(100vh + 50px)", xl: "calc(100vh - 75px - 275px)" }
 };
 
-export default function DiveCentreSidebar({ trips, ...rest }) {
+export default function DiveCentreSidebar({ trips, diveCentreId, ...rest }) {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   // const textColorTertiary = useColorModeValue("secondaryGray.600", "white");
@@ -133,6 +135,16 @@ export default function DiveCentreSidebar({ trips, ...rest }) {
           No Dives scheduled. Check again soon, new dives are getting added all
           the time
         </Text>
+      )}
+      {diveCentreId && (
+        <Link
+          href={{
+            pathname: "/diving/dive_trips/new",
+            query: { diveCentreId },
+          }}
+        >
+          <Button>New Trip</Button>
+        </Link>
       )}
     </Card>
   );

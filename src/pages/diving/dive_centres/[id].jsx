@@ -135,7 +135,7 @@ export default function DiveCentre({ centreData }) {
           </Center>
           {tripData && (
             <Box gridArea="1 / 2 / 2 / 3">
-              <TripsSidebar trips={trips} />
+              <TripsSidebar trips={trips} diveCentreId={id} />
             </Box>
           )}
         </Grid>

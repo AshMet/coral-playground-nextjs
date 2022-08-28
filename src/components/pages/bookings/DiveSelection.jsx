@@ -16,11 +16,10 @@ import {
   Marker,
   MarkerClusterer,
 } from "@react-google-maps/api";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { MdAdd } from "react-icons/md";
 import { useMoralisCloudFunction } from "react-moralis";
 
-import { DivingContext } from "../../../contexts/DivingContext";
 import MiniCalendar from "components/calendar/MiniCalendar";
 import Card from "components/card/Card";
 import TimelineItem from "components/dataDisplay/TimelineItem";
@@ -41,11 +40,13 @@ const clusterOptions = {
 function createKey(location) {
   return location.lat + location.lng;
 }
-export default function DiveSelection() {
-  const { dives, setDives } = useContext(DivingContext);
+export default function DiveSelection(props) {
+  const { tripDives, setTripDives } = props;
+
   const [mapLocation, setMapLocation] = useState("Select Location");
   const [selectedDate, setSelectedDate] = useState();
   const [diveTime, setDiveTime] = useState();
+
   const { data } = useMoralisCloudFunction("getDiveSites");
   const { colorMode } = useColorMode();
 
@@ -67,6 +68,10 @@ export default function DiveSelection() {
     libraries,
   });
 
+  // useEffect(() => {
+  //   const siteNames = tripDives?.map((site) => site.name).join(" + ");
+  // }, [tripDives]);
+
   if (loadError) return "Error Loading Maps";
   if (!isLoaded) return "Loading Map";
 
@@ -74,17 +79,17 @@ export default function DiveSelection() {
     if (!mapLocation.name || !selectedDate || !diveTime) {
       return;
     }
-    const dive = {
-      id: mapLocation.location_id,
-      siteName: mapLocation.name,
-      diveDate: selectedDate,
-      diveTime,
-      priceId: mapLocation.stripePriceId,
-    };
+    // const dive = {
+    //   id: mapLocation.location_id,
+    //   siteName: mapLocation.name,
+    //   diveDate: selectedDate,
+    //   diveTime,
+    //   priceId: mapLocation.stripePriceId,
+    // };
 
-    const newDiveList = [dive, ...dives];
-    setDives(newDiveList);
-    console.log(...dives);
+    const newDiveList = [mapLocation, ...tripDives];
+    setTripDives(newDiveList);
+    console.log(tripDives[0]);
     console.log(mapLocation);
   };
 
@@ -138,10 +143,7 @@ export default function DiveSelection() {
                           clusterer={clusterer}
                           onClick={() => setMapLocation(location)}
                           icon={{
-                            url:
-                              colorMode === "light"
-                                ? "/img/diving/dive_icon_dark.svg"
-                                : "/img/diving/dive_icon_light.svg",
+                            url: "/img/diving/dive_site_marker.svg",
                             scaledSize:
                               location.lat === mapLocation.lat
                                 ? new window.google.maps.Size(50, 50)
@@ -168,7 +170,11 @@ export default function DiveSelection() {
         <TimelineItem
           width="100%"
           mr="20px"
-          title={mapLocation?.name || "Select Dive Site"}
+          title={
+            tripDives
+              ? tripDives?.map((site) => site.name).join(" + ")
+              : "Select Dive Site"
+          }
           day={selectedDate?.toLocaleDateString("en-US", {
             day: "numeric",
           })}
