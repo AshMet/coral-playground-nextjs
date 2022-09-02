@@ -44,7 +44,7 @@ export default function NewTrip() {
 
     diveTrip
       .save({
-        price,
+        price: price * 100,
         minCert,
         notes,
         orderStatus: active,

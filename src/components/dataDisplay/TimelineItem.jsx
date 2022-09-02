@@ -23,6 +23,7 @@ export default function Default(props) {
     title,
     subtitle,
     id,
+    diveCentre,
     removeDive,
     ...rest
   } = props;
@@ -101,26 +102,28 @@ export default function Default(props) {
             {hours}
           </Text>
         </Flex>
-        <Flex align="center">
-          <Icon
-            me="8px"
-            as={IoStorefrontOutline}
-            w="16px"
-            h="16px"
-            color={
-              confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
-            }
-          />
-          <Text
-            fontSize="sm"
-            fontWeight="500"
-            color={
-              confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
-            }
-          >
-            {subtitle}
-          </Text>
-        </Flex>
+        {diveCentre && (
+          <Flex align="center">
+            <Icon
+              me="8px"
+              as={IoStorefrontOutline}
+              w="16px"
+              h="16px"
+              color={
+                confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
+              }
+            />
+            <Text
+              fontSize="sm"
+              fontWeight="500"
+              color={
+                confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
+              }
+            >
+              {subtitle}
+            </Text>
+          </Flex>
+        )}
       </Box>
       {confirmed && (
         <Button

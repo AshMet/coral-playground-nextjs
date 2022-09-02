@@ -3,6 +3,7 @@
 /* eslint-disable no-console */
 import {
   Box,
+  Button,
   Flex,
   Icon,
   IconButton,
@@ -15,6 +16,7 @@ import {
   useLoadScript,
   Marker,
   MarkerClusterer,
+  InfoWindow,
 } from "@react-google-maps/api";
 import { useState } from "react";
 import { MdAdd } from "react-icons/md";
@@ -46,6 +48,9 @@ export default function DiveSelection(props) {
   const [mapLocation, setMapLocation] = useState("Select Location");
   const [selectedDate, setSelectedDate] = useState();
   const [diveTime, setDiveTime] = useState();
+  const [zoom, setZoom] = useState(5);
+  const [infoOpen, setInfoOpen] = useState(false);
+  // const [selectedPlace, setSelectedPlace] = useState(null);
 
   const { data } = useMoralisCloudFunction("getDiveSites");
   const { colorMode } = useColorMode();
@@ -76,7 +81,7 @@ export default function DiveSelection(props) {
   if (!isLoaded) return "Loading Map";
 
   const addDive = () => {
-    if (!mapLocation.name || !selectedDate || !diveTime) {
+    if (!mapLocation.name) {
       return;
     }
     // const dive = {
@@ -91,6 +96,26 @@ export default function DiveSelection(props) {
     setTripDives(newDiveList);
     console.log(tripDives[0]);
     console.log(mapLocation);
+  };
+
+  const markerClickHandler = (event, place) => {
+    // Remember which place was clicked
+    setMapLocation(place);
+
+    // Required so clicking a 2nd marker works as expected
+    if (infoOpen) {
+      setInfoOpen(false);
+    }
+
+    setInfoOpen(true);
+
+    // If you want to zoom in a little on marker click
+    if (zoom < 13) {
+      setZoom(13);
+    }
+
+    // if you want to center the selected Marker
+    //  setCenter(place.pos)
   };
 
   return (
@@ -119,7 +144,7 @@ export default function DiveSelection(props) {
             <Card
               m={0}
               p={0}
-              h={{ sm: "425px", md: "425px" }}
+              h={{ sm: "425px", md: "550px" }}
               w="100%"
               overflow="hidden"
             >
@@ -141,7 +166,10 @@ export default function DiveSelection(props) {
                             lng: location.lng,
                           }}
                           clusterer={clusterer}
-                          onClick={() => setMapLocation(location)}
+                          onClick={(event) =>
+                            markerClickHandler(event, location)
+                          }
+                          // onClick={(() => setMapLocation(location), onOpen)}
                           icon={{
                             url: "/img/diving/dive_site_marker.svg",
                             scaledSize:
@@ -149,7 +177,45 @@ export default function DiveSelection(props) {
                                 ? new window.google.maps.Size(50, 50)
                                 : new window.google.maps.Size(34, 34),
                           }}
-                        />
+                        >
+                          {infoOpen && location.lat === mapLocation.lat && (
+                            <InfoWindow
+                              onCloseClick={() => setInfoOpen(false)}
+                              position={{
+                                lat: location.lat,
+                                lng: location.lng,
+                              }}
+                            >
+                              <Flex align="center" w="100%">
+                                <Text
+                                  ms="auto"
+                                  color="gray.500"
+                                  me="20px"
+                                  fontSize="lg"
+                                  fontWeight="500"
+                                >
+                                  {location.name}
+                                </Text>
+                                <Button
+                                  _hover={{ bg: "brand.500" }}
+                                  me="10px"
+                                  variant="brand"
+                                  borderRadius="50%"
+                                  h="38px"
+                                  w="38px"
+                                  onClick={addDive}
+                                >
+                                  <Icon
+                                    as={MdAdd}
+                                    color="white"
+                                    h="24px"
+                                    w="24px"
+                                  />
+                                </Button>
+                              </Flex>
+                            </InfoWindow>
+                          )}
+                        </Marker>
                       ))
                     }
                   </MarkerClusterer>
@@ -158,45 +224,31 @@ export default function DiveSelection(props) {
             </Card>
           </Box>
         </Card>
-        <MiniCalendar
-          // gridArea={{ md: "1 / 1 / 2 / 2;", lg: "1 / 1 / 2 / 2" }}
-          selectRange={false}
-          mb="20px"
-          setSelectedDate={setSelectedDate}
-          setDiveTime={setDiveTime}
-        />
-      </Flex>
-      <Flex direcion="row" w="100%" mt="20px">
-        <TimelineItem
-          width="100%"
-          mr="20px"
-          title={
-            tripDives
-              ? tripDives?.map((site) => site.name).join(" + ")
-              : "Select Dive Site"
-          }
-          day={selectedDate?.toLocaleDateString("en-US", {
-            day: "numeric",
-          })}
-          weekday={selectedDate?.toLocaleDateString("en-US", {
-            month: "short",
-          })}
-          hours={diveTime}
-        />
-        <Flex direction="column" align="center">
-          <IconButton
-            borderRadius="50%"
-            variant="darkBrand"
-            w="56px"
-            h="56px"
-            mb="5px"
-            boxShadow={shadow}
-            icon={<Icon as={MdAdd} color="white" w="24px" h="24px" />}
-            onClick={addDive}
+        <Flex direction="column">
+          <TimelineItem
+            width="100%"
+            mr="20px"
+            title={
+              tripDives
+                ? tripDives?.map((site) => site.name).join(" + ")
+                : "Select Dive Site"
+            }
+            day={selectedDate?.toLocaleDateString("en-US", {
+              day: "numeric",
+            })}
+            weekday={selectedDate?.toLocaleDateString("en-US", {
+              month: "short",
+            })}
+            hours={diveTime}
+            mb="20px"
           />
-          <Text fontSize="sm" fontWeight="500" color={textColor}>
-            Add Dive
-          </Text>
+          <MiniCalendar
+            // gridArea={{ md: "1 / 1 / 2 / 2;", lg: "1 / 1 / 2 / 2" }}
+            selectRange={false}
+            mb="20px"
+            setSelectedDate={setSelectedDate}
+            setDiveTime={setDiveTime}
+          />
         </Flex>
       </Flex>
     </Card>

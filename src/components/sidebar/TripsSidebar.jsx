@@ -28,6 +28,8 @@ const containerStyle = {
   height: "100%", // { sm: "calc(100vh + 50px)", xl: "calc(100vh - 75px - 275px)" }
 };
 
+// const userQuery = await new Moralis.Query(Moralis.Role).equalTo("users", user).find();
+
 export default function DiveCentreSidebar({ trips, diveCentreId, ...rest }) {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
