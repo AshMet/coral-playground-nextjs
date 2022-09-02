@@ -6,7 +6,6 @@ import {
   Button,
   Flex,
   Icon,
-  IconButton,
   Text,
   useColorMode,
   useColorModeValue,
@@ -56,10 +55,6 @@ export default function DiveSelection(props) {
   const { colorMode } = useColorMode();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const shadow = useColorModeValue(
-    "18px 17px 40px 4px rgba(112, 144, 176, 0.1)",
-    "unset"
-  );
 
   const mapOptions = {
     styles: colorMode === "light" ? LightMap : DarkMap,
