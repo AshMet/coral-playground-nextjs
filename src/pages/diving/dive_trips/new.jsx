@@ -1,9 +1,11 @@
 /* eslint-disable no-plusplus */
 import { Box, Button, Flex, useToast } from "@chakra-ui/react";
-import Moralis from "moralis";
+// import Moralis from "moralis";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
+import { CoralPgContext } from "../../../contexts/CoralPgContext";
+// import data from "../../../lib/data/get_user_role";
 import AlertPopup from "components/alerts/AlertPopup";
 import DiveSelection from "components/pages/bookings/DiveSelection";
 import TripDetails from "components/pages/diveTrips/TripDetails";
@@ -22,6 +24,29 @@ export default function NewTrip() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     query: { diveCentreId },
   } = router;
+
+  const { user } = useContext(CoralPgContext);
+  // const roleQuery = new Moralis.Query(Moralis.Role)
+  //   .equalTo("name", "centre_admin")
+  //   .first();
+  // console.log("role outside", JSON.stringify(roleQuery));
+
+  // useEffect(() => {
+  //   if (!Moralis) {
+  //     return;
+  //   }
+
+  //   const roleQuery = new Moralis.Query(Moralis.Role)
+  //     .equalTo("name", "centre_admin")
+  //     .find({
+  //       success(object) {
+  //         console.log("success", object);
+  //       },
+  //     });
+
+  //   console.log("role", JSON.stringify(roleQuery));
+  // }, [user, Moralis]);
+  // console.log("data", JSON.stringify(data));
 
   const saveDiveTrip = async () => {
     const DiveTrip = Moralis.Object.extend("DiveTrips");
@@ -76,6 +101,9 @@ export default function NewTrip() {
       );
   };
 
+  // if (roleQuery) {
+
+  // }
   return (
     <Box p="0px" mx="auto" mt="100px">
       {/* Row 1: Map  & Calendar */}
@@ -110,6 +138,22 @@ export default function NewTrip() {
     </Box>
   );
 }
+
+// export const getServerSideProps = async (context) => {
+//   // const { id } = context.query;
+//   const Moralis = require("moralis/node");
+//   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+//   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+//   Moralis.initialize(appId);
+//   Moralis.serverURL = serverUrl;
+//   const roleQuery = new Moralis.Query(Moralis.Role);
+//   roleQuery.equalTo("name", "centre_admin");
+//   const data = await roleQuery.first();
+
+//   return {
+//     props: { data },
+//   };
+// };
 
 NewTrip.getLayout = function getLayout(page) {
   return <AdminLayout>{page}</AdminLayout>;

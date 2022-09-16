@@ -127,6 +127,23 @@ export default function DiveSelection(props) {
         >
           Add your dives to get started
         </Text>
+        <TimelineItem
+          width="100%"
+          mr="20px"
+          title={
+            tripDives
+              ? tripDives?.map((site) => site.name).join(" + ")
+              : "Select Dive Site"
+          }
+          day={selectedDate?.toLocaleDateString("en-US", {
+            day: "numeric",
+          })}
+          weekday={selectedDate?.toLocaleDateString("en-US", {
+            month: "short",
+          })}
+          hours={diveTime}
+          mb="20px"
+        />
       </Box>
       <Flex direction={{ sm: "column", lg: "row" }}>
         <Card
@@ -139,7 +156,7 @@ export default function DiveSelection(props) {
             <Card
               m={0}
               p={0}
-              h={{ sm: "425px", md: "550px" }}
+              h={{ sm: "425px", md: "425px" }}
               w="100%"
               overflow="hidden"
             >
@@ -220,27 +237,9 @@ export default function DiveSelection(props) {
           </Box>
         </Card>
         <Flex direction="column">
-          <TimelineItem
-            width="100%"
-            mr="20px"
-            title={
-              tripDives
-                ? tripDives?.map((site) => site.name).join(" + ")
-                : "Select Dive Site"
-            }
-            day={selectedDate?.toLocaleDateString("en-US", {
-              day: "numeric",
-            })}
-            weekday={selectedDate?.toLocaleDateString("en-US", {
-              month: "short",
-            })}
-            hours={diveTime}
-            mb="20px"
-          />
           <MiniCalendar
             // gridArea={{ md: "1 / 1 / 2 / 2;", lg: "1 / 1 / 2 / 2" }}
             selectRange={false}
-            mb="20px"
             setSelectedDate={setSelectedDate}
             setDiveTime={setDiveTime}
           />
