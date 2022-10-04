@@ -115,7 +115,9 @@ export default function DiveSitePage({ data }) {
 
 export async function getStaticPaths() {
   try {
-    const result = await axios.get("https://coral-playground-api.herokuapp.com/api/v1/dive_sites");
+    const result = await axios.get(
+      "https://coral-playground-api.herokuapp.com/api/v1/dive_sites"
+    );
     const { data } = result;
 
     const paths = data.map((site) => ({

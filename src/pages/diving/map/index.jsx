@@ -27,6 +27,7 @@
 
 */
 import { Flex, useColorModeValue } from "@chakra-ui/react";
+import axios from "axios";
 import { NextSeo } from "next-seo";
 import { useState, useRef } from "react";
 import Map, {
@@ -46,9 +47,6 @@ import Card from "components/card/Card";
 // import LocationSummary from "components/maps/LocationSummary";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import AdminLayout from "layouts/admin";
-
-import axios from "axios";
-
 // const Moralis = require("moralis/node");
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;

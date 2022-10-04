@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 const Moralis = require("moralis/node");
 
 const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
