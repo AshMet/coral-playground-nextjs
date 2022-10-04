@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/no-cycle */
@@ -15,6 +16,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
@@ -24,7 +26,7 @@ import { MdApps, MdDashboard } from "react-icons/md";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import AdminLayout from "layouts/admin";
 
-const Moralis = require("moralis/node");
+// const Moralis = require("moralis/node");
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === "children",
@@ -34,7 +36,7 @@ export default function DiveSites({ data }) {
   // const { image, name, address } = props;
   // const name = "Dive Site";
   // const address = "Hurghada, Egypt";
-  const parsedData = JSON.parse(data);
+  // const parsedData = JSON.parse(data);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const buttonBg = useColorModeValue("transparent", "navy.800");
@@ -54,10 +56,11 @@ export default function DiveSites({ data }) {
   useEffect(() => {
     if (!data) return null;
     if (city === 0 || city === "All Cities") {
-      setFiltered(parsedData);
+      setFiltered(data);
       return;
     }
-    const cityFiltered = parsedData.filter((site) => site.city === city);
+    console.log("centres", data);
+    const cityFiltered = data.filter((site) => site.city === city);
     setFiltered(cityFiltered);
   }, [data, city, country]);
 
@@ -151,13 +154,15 @@ export default function DiveSites({ data }) {
           <AnimatePresence>
             <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
               {filtered &&
-                filtered.map((site) => {
+                filtered.map((centre) => {
                   return (
                     <DiveSiteCard
-                      key={site.objectId}
-                      id={site.objectId}
-                      image={site.coverPhoto && site.coverPhoto?.url}
-                      name={site.name}
+                      key={centre.id}
+                      id={centre.id}
+                      image={
+                        centre.cover_photo || "/img/diving/dive_centre_bg.jpg"
+                      }
+                      name={centre.name}
                       type="dive_centre"
                       // address={`${site.city}, ${site.country}`}
                     />
@@ -172,19 +177,33 @@ export default function DiveSites({ data }) {
 }
 
 // This works with parsed data in the body. Not sure why images were not working
-export async function getStaticProps() {
-  const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
-  const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-  Moralis.initialize(appId);
-  Moralis.serverURL = serverUrl;
-  const DiveCentreList = Moralis.Object.extend("DiveCentres");
-  const query = new Moralis.Query(DiveCentreList);
-  const results = await query.ascending("name").find();
-  const data = JSON.stringify(results);
+// export async function getStaticProps() {
+//   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+//   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+//   Moralis.initialize(appId);
+//   Moralis.serverURL = serverUrl;
+//   const DiveCentreList = Moralis.Object.extend("DiveCentres");
+//   const query = new Moralis.Query(DiveCentreList);
+//   const results = await query.ascending("name").find();
+//   const data = JSON.stringify(results);
 
-  return {
-    props: { data },
-  };
+//   return {
+//     props: { data },
+//   };
+// }
+
+export async function getStaticProps() {
+  try {
+    const results = await axios.get(
+      "https://coral-playground-api.herokuapp.com/api/v1/dive_centres"
+    );
+    const { data } = results;
+    return {
+      props: { data },
+    };
+  } catch (error) {
+    console.error(error);
+  }
 }
 DiveSites.getLayout = function getLayout(page) {
   return <AdminLayout>{page}</AdminLayout>;

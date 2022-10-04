@@ -1,11 +1,11 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-plusplus */
 import { Box, Button, Flex, useToast } from "@chakra-ui/react";
 // import Moralis from "moralis";
+import axios from "axios";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 
-import { CoralPgContext } from "../../../contexts/CoralPgContext";
-// import data from "../../../lib/data/get_user_role";
 import AlertPopup from "components/alerts/AlertPopup";
 import DiveSelection from "components/pages/bookings/DiveSelection";
 import TripDetails from "components/pages/diveTrips/TripDetails";
@@ -25,66 +25,30 @@ export default function NewTrip() {
     query: { diveCentreId },
   } = router;
 
-  const { user } = useContext(CoralPgContext);
-  // const roleQuery = new Moralis.Query(Moralis.Role)
-  //   .equalTo("name", "centre_admin")
-  //   .first();
-  // console.log("role outside", JSON.stringify(roleQuery));
+  const API_URL =
+    "https://coral-playground-api.herokuapp.com/api/v1/dive_trips";
 
-  // useEffect(() => {
-  //   if (!Moralis) {
-  //     return;
-  //   }
-
-  //   const roleQuery = new Moralis.Query(Moralis.Role)
-  //     .equalTo("name", "centre_admin")
-  //     .find({
-  //       success(object) {
-  //         console.log("success", object);
-  //       },
-  //     });
-
-  //   console.log("role", JSON.stringify(roleQuery));
-  // }, [user, Moralis]);
-  // console.log("data", JSON.stringify(data));
-
-  const saveDiveTrip = async () => {
-    const DiveTrip = Moralis.Object.extend("DiveTrips");
-    const diveTrip = new DiveTrip();
-
-    const DiveSites = Moralis.Object.extend("DiveSites");
-    const diveSiteQuery = new Moralis.Query(DiveSites);
-    const siteIds = tripDives.map((dive) => dive.location_id);
-    const siteResults = await diveSiteQuery
-      .containedIn("objectId", siteIds)
-      .find();
-    const DiveCentrePointer = {
-      __type: "Pointer",
-      className: "DiveCentres",
-      objectId: router.query.diveCentreId,
-    };
-
-    const tripSites = diveTrip.relation("diveSites");
-    tripSites.add(siteResults);
-
-    diveTrip
-      .save({
-        price: price * 100,
-        minCert,
-        notes,
-        orderStatus: active,
-        diveCentre: DiveCentrePointer,
-        // diveSites: diveSitesPointers,
+  function saveDiveTrip() {
+    return axios
+      .post(API_URL, {
+        dive_trip: {
+          price,
+          min_cert: minCert,
+          status: active,
+          notes,
+          dive_centre_id: 1,
+          dive_site_ids: [1, 2],
+        },
       })
       .then(
-        () => {
+        (res) => {
           toast({
             position: "top",
             render: () => (
               <AlertPopup
                 type="info"
                 text="Dive Trip Saved"
-                // subtext={JSON.stringify(tripSites)}
+                subtext={res.data.name} // Not Working
               />
             ),
           });
@@ -99,11 +63,8 @@ export default function NewTrip() {
           });
         }
       );
-  };
+  }
 
-  // if (roleQuery) {
-
-  // }
   return (
     <Box p="0px" mx="auto" mt="100px">
       {/* Row 1: Map  & Calendar */}

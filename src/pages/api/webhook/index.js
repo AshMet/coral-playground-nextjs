@@ -1,16 +1,11 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable default-case */
 /* eslint-disable no-console */
+import axios from "axios";
 import { buffer } from "micro";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const Moralis = require("moralis/node");
-
-const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
-const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-
-Moralis.start({ serverUrl, appId });
 
 export const config = {
   api: {
@@ -36,26 +31,36 @@ const createBooking = async (session) => {
   const customer = await stripe.customers.retrieve(session.customer);
 
   // Email customer confirmation
-  const Booking = Moralis.Object.extend("Bookings");
-  const booking = new Booking();
 
-  booking
-    .save({
-      diverName: session.customer_details.name || "unknown",
-      email: session.customer_details.email,
-      divingCert: customer.metadata?.diverCert,
-      lastDive: customer.metadata?.lastDive,
-      notes: customer.metadata?.notes,
-      dives: session.metadata,
-      orderAmount: parseFloat((session.amount_total / 100).toFixed(2)),
-      orderCurrency: session.currency,
-      orderStatus: session.payment_status,
-      stripeCustomerId: session.customer,
-      stripeSessionId: session.id,
+  const getLineItems = () => {
+    const dives = Object.values(session.metadata);
+    const lineItems = dives.map((dive) => JSON.parse(dive));
+    return lineItems.map((item) => ({
+      dive_trip_id: item.id,
+      user_selected_time: item.diveDate,
+      quantity: 1,
+    }));
+  };
+
+  axios
+    .post("https://coral-playground-api.herokuapp.com/api/v1/orders", {
+      order: {
+        diver_name: session.customer_details.name || "unknown",
+        email: session.customer_details.email,
+        diving_cert: customer.metadata?.diverCert,
+        last_dive: customer.metadata?.lastDive,
+        notes: customer.metadata?.notes,
+        total_price: parseFloat(session.amount_total),
+        currency: session.currency,
+        status: session.payment_status,
+        stripe_cust_id: session.customer,
+        stripe_session_id: session.id,
+        line_items_attributes: getLineItems(),
+      },
     })
     .then(
-      (booking) => {
-        console.log(`Booking Saved: ${JSON.stringify(booking)}`);
+      (order) => {
+        console.log(`Booking Saved: ${JSON.stringify(order)}`);
       },
       (error) => {
         // The save failed.
@@ -64,7 +69,6 @@ const createBooking = async (session) => {
       }
     );
   console.log("Creating order", session);
-  console.log("Created order", booking.toJSON());
 };
 
 const emailCustomerAboutFailedPayment = (session) => {

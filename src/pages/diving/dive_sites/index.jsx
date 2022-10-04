@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/no-cycle */
@@ -15,26 +16,52 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 import { MdApps, MdDashboard } from "react-icons/md";
+// import { useMoralisQuery } from "react-moralis";
 
 // import { SearchBar } from "views/admin/nfts/profile/components/Search";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import AdminLayout from "layouts/admin";
-
-const Moralis = require("moralis/node");
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === "children",
 });
 
 export default function DiveSites({ data }) {
-  // const { image, name, address } = props;
-  // const name = "Dive Site";
-  // const address = "Hurghada, Egypt";
-  const parsedData = JSON.parse(data);
+  // const { data: tripData } = useMoralisQuery("DiveTrips", (query) =>
+  //   query.include("diveCentre")
+  // );
+
+  // useEffect(async () => {
+  //   console.log("Moralis Trips", tripData);
+  //   try {
+  //     const results = [];
+  //     for (const trip of tripData) {
+  //       const tripSitesRelation = trip.relation("diveSites");
+  //       const siteList = await tripSitesRelation.query().find();
+
+  //       results.push({
+  //         id: trip.id,
+  //         diver_cert: trip.attributes.diverCert,
+  //         price: trip.attributes.price,
+  //         notes: trip.attributes.notes,
+  //         start_time: trip.attributes.startTime,
+  //         end_time: trip.attributes.endTime,
+  //         dive_centre: trip.attributes.diveCentre.attributes.name,
+  //         dive_sites: siteList.map((site) => site.attributes.name),
+  //         stripe_price_id: "price_1LBLSVAvLPvC9h7xk0HEvL3f",
+  //       });
+  //     }
+  //     console.log("Moralis Trip relations", results);
+  //   } catch (error) {
+  //     console.error("Error!", error);
+  //     return false;
+  //   }
+  // }, [tripData]);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const buttonBg = useColorModeValue("transparent", "navy.800");
@@ -54,11 +81,12 @@ export default function DiveSites({ data }) {
   useEffect(() => {
     if (!data) return null;
     if (city === 0 || city === "All Cities") {
-      setFiltered(parsedData);
+      setFiltered(data);
       return;
     }
-    const cityFiltered = parsedData.filter((site) => site.city === city);
+    const cityFiltered = data.filter((site) => site.city.name === city);
     setFiltered(cityFiltered);
+    console.log("site data", data);
   }, [data, city, country]);
 
   return (
@@ -68,7 +96,6 @@ export default function DiveSites({ data }) {
         description="A list of all availble dive sites"
       />
       <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-        {/* <Text>{JSON.stringify(data[0].diveMap)}</Text> */}
         <Flex w="100%">
           {/* <SearchBar /> */}
           <Select
@@ -154,13 +181,13 @@ export default function DiveSites({ data }) {
                 filtered.map((site) => {
                   return (
                     <DiveSiteCard
-                      key={site.objectId}
-                      id={site.objectId}
-                      image={site.diveMap?.url}
+                      key={site.id}
+                      id={site.id}
+                      image={site.dive_map || "/img/diving/dive_site_bg.png"}
                       name={site.name}
-                      tagList={site.divingTypes}
-                      depth={site.maxDepth}
-                      maxVisibility={site.maxVisibility}
+                      tagList={site.tags}
+                      depth={site.depth}
+                      maxVisibility={site.max_visibility}
                       current={site.current}
                       type="dive_site"
                       // address={`${site.city}, ${site.country}`}
@@ -175,24 +202,18 @@ export default function DiveSites({ data }) {
   );
 }
 
-// This works with parsed data in the body. Not sure why images were not working
 export async function getStaticProps() {
-  const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
-  const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-  Moralis.initialize(appId);
-  Moralis.serverURL = serverUrl;
-  const DiveSiteList = Moralis.Object.extend("DiveSites");
-  const query = new Moralis.Query(DiveSiteList);
-  const results = await query
-    .ascending("name")
-    .exists("latitude")
-    .exists("diveMap")
-    .find();
-  const data = JSON.stringify(results);
-
-  return {
-    props: { data },
-  };
+  try {
+    const results = await axios.get(
+      "https://coral-playground-api.herokuapp.com/api/v1/dive_sites"
+    );
+    const { data } = results;
+    return {
+      props: { data },
+    };
+  } catch (error) {
+    console.error(error);
+  }
 }
 DiveSites.getLayout = function getLayout(page) {
   return <AdminLayout>{page}</AdminLayout>;

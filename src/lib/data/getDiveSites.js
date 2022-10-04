@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 const Moralis = require("moralis/node");
 
 export default async function getDiveSites() {

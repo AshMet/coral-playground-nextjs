@@ -29,8 +29,16 @@ import "../../../public/css/MiniCalendar.module.css";
 // import "react-clock/dist/Clock.css";
 
 export default function Transaction(props) {
-  const { diveDate, price, icon, siteList, tripId, centreName, ...rest } =
-    props;
+  const {
+    diveDate,
+    price,
+    icon,
+    siteList,
+    tripId,
+    centreName,
+    priceId,
+    ...rest
+  } = props;
   const { dives, setDives } = useContext(DivingContext);
   const toast = useToast();
 
@@ -40,7 +48,7 @@ export default function Transaction(props) {
   const [value, onChange] = useState();
   // const router = useRouter();
 
-  const siteNames = siteList?.map((site) => site.attributes.name).join(" + ");
+  const siteNames = siteList?.map((site) => site.name).join(" + ");
 
   const addDive = () => {
     if (!diveDate && !value) {
@@ -64,8 +72,19 @@ export default function Transaction(props) {
       diveDate: diveDate ? new Date(diveDate) : new Date(value),
       diveTime: "morning",
       price,
-      priceId: "price_1LBLSVAvLPvC9h7xk0HEvL3f", // mapLocation.stripePriceId,
+      priceId: "price_1LBLSVAvLPvC9h7xk0HEvL3f",
     };
+    // const line_item = {
+    //   trip_id: tripId,
+    //   user_selected_time: diveDate ? new Date(diveDate) : new Date(value),
+    //   diveTime: "morning",
+    //   quantity: 1,
+    //   siteName: siteNames,
+    //   siteCount: siteList.length,
+    //   centreName,
+    //   price,
+    //   priceId: "price_1LBLSVAvLPvC9h7xk0HEvL3f", // mapLocation.stripePriceId,
+    // };
 
     const newDiveList = [dive, ...dives];
     setDives(newDiveList);
@@ -95,7 +114,7 @@ export default function Transaction(props) {
               fontWeight="700"
               // onClick={() => router.push("/diving/booking")} // Not Working
             >
-              {siteList.map((site) => site.attributes.name).join(" + ")}
+              {siteList.map((site) => site.name).join(" + ")}
             </Text>
           </Flex>
         </Flex>

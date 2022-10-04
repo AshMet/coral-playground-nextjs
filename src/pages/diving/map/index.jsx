@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-plusplus */
 /* eslint-disable sonarjs/no-duplicate-string */
@@ -45,7 +47,9 @@ import Card from "components/card/Card";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import AdminLayout from "layouts/admin";
 
-const Moralis = require("moralis/node");
+import axios from "axios";
+
+// const Moralis = require("moralis/node");
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -168,56 +172,110 @@ export default function Default({ data }) {
   );
 }
 
-// This works with parsed data in the body. Not sure why images were not working
 export async function getStaticProps() {
-  const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
-  const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-  Moralis.initialize(appId);
-  Moralis.serverURL = serverUrl;
-  const siteQuery = new Moralis.Query("DiveSites");
-  const centreQuery = new Moralis.Query("DiveCentres");
+  try {
+    const siteQuery = await axios.get(
+      "https://coral-playground-api.herokuapp.com/api/v1/dive_sites"
+    );
+    const centreQuery = await axios.get(
+      "https://coral-playground-api.herokuapp.com/api/v1/dive_centres"
+    );
+    const { data: siteResults } = siteQuery;
+    const { data: centreResults } = centreQuery;
+    const results = [];
 
-  const siteResults = await siteQuery.find();
-  const centreResults = await centreQuery.find();
-  const results = [];
+    for (let i = 0; i < siteResults.length; ++i) {
+      results.push({
+        location_id: siteResults[i].id,
+        name: siteResults[i].name,
+        lat: siteResults[i].latitude,
+        lng: siteResults[i].longitude,
+        itemImg: siteResults[i].dive_map,
+        maxDepth: siteResults[i].depth,
+        certLevel: siteResults[i].cert_level,
+        access: siteResults[i].access,
+        divingTypes: siteResults[i].tags,
+        city: siteResults[i].city,
+        country: siteResults[i].country,
+        locationType: "dive_site",
+      });
+    }
 
-  for (let i = 0; i < siteResults.length; ++i) {
-    results.push({
-      location_id: siteResults[i].id,
-      name: siteResults[i].attributes.name,
-      lat: siteResults[i].attributes.latitude,
-      lng: siteResults[i].attributes.longitude,
-      itemImg: siteResults[i].attributes.diveMap,
-      maxDepth: siteResults[i].attributes.maxDepth,
-      certLevel: siteResults[i].attributes.certLevel,
-      access: siteResults[i].attributes.access,
-      divingTypes: siteResults[i].attributes.divingTypes,
-      city: siteResults[i].attributes.city,
-      country: siteResults[i].attributes.country,
-      locationType: "dive_site",
-    });
+    for (let i = 0; i < centreResults.length; ++i) {
+      results.push({
+        location_id: centreResults[i].id,
+        name: centreResults[i].name,
+        lat: centreResults[i].latitude,
+        lng: centreResults[i].longitude,
+        itemImg: centreResults[i].cover_photo,
+        memberships: centreResults[i].memberships,
+        languages: centreResults[i].languages,
+        city: centreResults[i].city,
+        country: centreResults[i].country,
+        locationType: "dive_centre",
+      });
+    }
+
+    const data = JSON.stringify(results);
+
+    return {
+      props: { data },
+    };
+  } catch (error) {
+    console.error(error);
   }
-
-  for (let i = 0; i < centreResults.length; ++i) {
-    results.push({
-      location_id: centreResults[i].id,
-      name: centreResults[i].attributes.name,
-      lat: centreResults[i].attributes.latitude,
-      lng: centreResults[i].attributes.longitude,
-      itemImg: centreResults[i].attributes.coverPhoto,
-      memberships: centreResults[i].attributes.memberships,
-      languages: centreResults[i].attributes.languages,
-      city: centreResults[i].attributes.city,
-      country: centreResults[i].attributes.country,
-      locationType: "dive_centre",
-    });
-  }
-  const data = JSON.stringify(results);
-
-  return {
-    props: { data },
-  };
 }
+
+// This works with parsed data in the body. Not sure why images were not working
+// export async function getStaticProps() {
+//   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+//   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+//   Moralis.initialize(appId);
+//   Moralis.serverURL = serverUrl;
+//   const siteQuery = new Moralis.Query("DiveSites");
+//   const centreQuery = new Moralis.Query("DiveCentres");
+
+//   const siteResults = await siteQuery.find();
+//   const centreResults = await centreQuery.find();
+//   const results = [];
+
+//   for (let i = 0; i < siteResults.length; ++i) {
+//     results.push({
+//       location_id: siteResults[i].id,
+//       name: siteResults[i].attributes.name,
+//       lat: siteResults[i].attributes.latitude,
+//       lng: siteResults[i].attributes.longitude,
+//       itemImg: siteResults[i].attributes.diveMap,
+//       maxDepth: siteResults[i].attributes.maxDepth,
+//       certLevel: siteResults[i].attributes.certLevel,
+//       access: siteResults[i].attributes.access,
+//       divingTypes: siteResults[i].attributes.divingTypes,
+//       city: siteResults[i].attributes.city,
+//       country: siteResults[i].attributes.country,
+//       locationType: "dive_site",
+//     });
+//   }
+
+//   for (let i = 0; i < centreResults.length; ++i) {
+//     results.push({
+//       location_id: centreResults[i].id,
+//       name: centreResults[i].attributes.name,
+//       lat: centreResults[i].attributes.latitude,
+//       lng: centreResults[i].attributes.longitude,
+//       itemImg: centreResults[i].attributes.coverPhoto,
+//       memberships: centreResults[i].attributes.memberships,
+//       languages: centreResults[i].attributes.languages,
+//       city: centreResults[i].attributes.city,
+//       country: centreResults[i].attributes.country,
+//       locationType: "dive_centre",
+//     });
+//   }
+//   const data = JSON.stringify(results);
+
+//   return {
+//     props: { data },
+//   };
+// }
 
 Default.getLayout = function getLayout(page) {
   return <AdminLayout>{page}</AdminLayout>;

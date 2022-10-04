@@ -9,17 +9,16 @@ import {
   VStack,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext } from "react";
 
-// Custom components
+import { DivingContext } from "../../../contexts/DivingContext";
 import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
-import checkout from "components/pages/diving/checkout";
+// import checkout from "components/pages/diving/checkout";
 import equipment from "lib/constants/equipment.json";
 
 export default function EquipmentSelection(props) {
-  const { mediaTab, dives, diverName, diverEmail, diverCert, lastDive, notes } =
-    props;
+  const { mediaTab } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const priceColor = useColorModeValue("green.300", "green.500");
   const iconColor = useColorModeValue(
@@ -27,77 +26,29 @@ export default function EquipmentSelection(props) {
     "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
   );
   const selectedBgColor = useColorModeValue("brand.400", "brand.400");
-  const [equipmentList, setEquipmentList] = useState([]);
+  // const [equipmentList, setEquipmentList] = useState([]);
 
-  const getProductId = (n) => {
-    // if (n = 1) {
-    //   return "prod_Lt7hO6IqEZT5Fb";
-    // } else {
-    // }
-    switch (n) {
-      case 1:
-        return "prod_Lt7hO6IqEZT5Fb";
-      case 2:
-        return "prod_Lt7cRX9OGqgQDz";
-      case 3:
-        return "prod_MHU0OAktSpIMur";
-      default:
-        return "prod_Lt7hO6IqEZT5Fb";
-    }
-  };
+  const { equipmentList, setEquipmentList, redirectToCheckout } =
+    useContext(DivingContext);
+
+  // const getProductId = (n) => {
+  //   switch (n) {
+  //     case 1:
+  //       return "prod_Lt7hO6IqEZT5Fb";
+  //     case 2:
+  //       return "prod_Lt7cRX9OGqgQDz";
+  //     case 3:
+  //       return "prod_MHU0OAktSpIMur";
+  //     default:
+  //       return "prod_Lt7hO6IqEZT5Fb";
+  //   }
+  // };
 
   function toggleArrayItem(arr, item) {
     arr.includes(item)
       ? setEquipmentList(arr.filter((i) => i !== item)) // remove item
       : setEquipmentList([...arr, item]); // add item
   }
-
-  const lineItems = dives.map((dive) => {
-    return {
-      // price: dive.priceId, // eg: "price_1KuasdfaWasdfasdfasfnsF4fi",
-      price_data: {
-        unit_amount: dive.price,
-        currency: "usd",
-        product: getProductId(dive.siteCount),
-      },
-      quantity: 1,
-    };
-  });
-
-  const custMetadata = {
-    diverCert,
-    lastDive,
-    notes,
-  };
-
-  // const arrayToObject = (arr, key) => {
-  //   return arr.reduce((obj, item) => {
-  //     obj[item[key]] = item;
-  //     return obj;
-  //   }, {});
-  // };
-
-  // console.log(arrayToObject(dives, "id"));
-  // const sessionMetadata = arrayToObject(dives, "id");
-
-  const sessionMetadata = {
-    dive1: JSON.stringify(dives[0]),
-    dive2: JSON.stringify(dives[1]),
-    dive3: JSON.stringify(dives[2]),
-  };
-
-  console.log(equipmentList);
-  console.log(dives);
-
-  const redirectToCheckout = async () => {
-    checkout({
-      lineItems,
-      diverName,
-      diverEmail,
-      custMetadata,
-      sessionMetadata,
-    });
-  };
 
   return (
     <Card p="30px">

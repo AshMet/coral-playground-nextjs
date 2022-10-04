@@ -74,8 +74,8 @@ export default function DiveCentreSidebar({ trips, diveCentreId, ...rest }) {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={{
-            lat: trips[0]?.centreLat || 28,
-            lng: trips[0]?.centreLng || 35,
+            lat: trips[0]?.dive_centre.latitude || 28,
+            lng: trips[0]?.dive_centre.longitude || 35,
           }}
           zoom={8}
           options={mapOptions}
@@ -84,12 +84,12 @@ export default function DiveCentreSidebar({ trips, diveCentreId, ...rest }) {
         >
           {trips &&
             trips.map((trip) =>
-              trip.siteList.map((site) => (
+              trip.dive_sites.map((site) => (
                 <Marker
-                  key={site.latitude + trip.longitude}
+                  key={`${trip.id}-${site.id}`}
                   position={{
-                    lat: site.attributes.latitude,
-                    lng: site.attributes.longitude,
+                    lat: site.latitude,
+                    lng: site.longitude,
                   }}
                   // onClick={() => setMapLocation(location)}
                   icon={{
@@ -102,9 +102,10 @@ export default function DiveCentreSidebar({ trips, diveCentreId, ...rest }) {
           {trips &&
             trips.map((trip) => (
               <Marker
+                key={trip.dive_centre.id}
                 position={{
-                  lat: trip.centreLat,
-                  lng: trip.centreLng,
+                  lat: trip.dive_centre.latitude,
+                  lng: trip.dive_centre.longitude,
                 }}
                 icon={{
                   url: "/img/diving/dive_centre_marker.svg",
@@ -120,10 +121,11 @@ export default function DiveCentreSidebar({ trips, diveCentreId, ...rest }) {
             <Transaction
               key={trip.id}
               tripId={trip.id}
-              siteList={trip.siteList}
-              centreName={trip.centreName}
-              diveDate={trip.startTime}
+              siteList={trip.dive_sites}
+              centreName={trip.dive_centre.name}
+              diveDate={trip.start_time}
               price={trip.price}
+              priceId={trip.stripe_price_id}
               locationType="dive_centre"
               icon={
                 <Icon as={MdAddCircle} color={textColor} w="20px" h="18px" />

@@ -114,7 +114,7 @@ export default function DetailsTab({
             </Flex>
             <Spacer />
             <Text fontWeight="bold" color={valueColor} fontSize="lg">
-              {certLevel?.map((level, index) => (index ? ", " : "") + level)}
+              {certLevel}
             </Text>
           </Flex>
         )}

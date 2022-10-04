@@ -17,10 +17,11 @@ import {
   MarkerClusterer,
   InfoWindow,
 } from "@react-google-maps/api";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { MdAdd } from "react-icons/md";
-import { useMoralisCloudFunction } from "react-moralis";
 
+import AlertPopup from "components/alerts/AlertPopup";
 import MiniCalendar from "components/calendar/MiniCalendar";
 import Card from "components/card/Card";
 import TimelineItem from "components/dataDisplay/TimelineItem";
@@ -39,7 +40,7 @@ const clusterOptions = {
 };
 
 function createKey(location) {
-  return location.lat + location.lng;
+  return location.latitude + location.longitude;
 }
 export default function DiveSelection(props) {
   const { tripDives, setTripDives } = props;
@@ -49,11 +50,35 @@ export default function DiveSelection(props) {
   const [diveTime, setDiveTime] = useState();
   const [zoom, setZoom] = useState(5);
   const [infoOpen, setInfoOpen] = useState(false);
+  // const [data, setData] = useState();
   // const [selectedPlace, setSelectedPlace] = useState(null);
 
-  const { data } = useMoralisCloudFunction("getDiveSites");
-  const { colorMode } = useColorMode();
+  // const { data } = useMoralisCloudFunction("getDiveSites");
 
+  const API_URL =
+    "https://coral-playground-api.herokuapp.com/api/v1/dive_sites";
+
+  useEffect(() => {
+    axios
+      .get(API_URL)
+      .then((res) => {
+        setData(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        toast({
+          position: "top",
+          render: () => (
+            <AlertPopup type="error" text="Booking Error" subtext={error} />
+          ),
+        });
+      });
+    console.log(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log(data);
+  const { colorMode } = useColorMode();
   const textColor = useColorModeValue("secondaryGray.900", "white");
 
   const mapOptions = {
@@ -174,8 +199,8 @@ export default function DiveSelection(props) {
                         <Marker
                           key={createKey(location)}
                           position={{
-                            lat: location.lat,
-                            lng: location.lng,
+                            lat: location.latitude,
+                            lng: location.longitude,
                           }}
                           clusterer={clusterer}
                           onClick={(event) =>
@@ -185,48 +210,49 @@ export default function DiveSelection(props) {
                           icon={{
                             url: "/img/diving/dive_site_marker.svg",
                             scaledSize:
-                              location.lat === mapLocation.lat
+                              location.latitude === mapLocation.latitude
                                 ? new window.google.maps.Size(50, 50)
                                 : new window.google.maps.Size(34, 34),
                           }}
                         >
-                          {infoOpen && location.lat === mapLocation.lat && (
-                            <InfoWindow
-                              onCloseClick={() => setInfoOpen(false)}
-                              position={{
-                                lat: location.lat,
-                                lng: location.lng,
-                              }}
-                            >
-                              <Flex align="center" w="100%">
-                                <Text
-                                  ms="auto"
-                                  color="gray.500"
-                                  me="20px"
-                                  fontSize="lg"
-                                  fontWeight="500"
-                                >
-                                  {location.name}
-                                </Text>
-                                <Button
-                                  _hover={{ bg: "brand.500" }}
-                                  me="10px"
-                                  variant="brand"
-                                  borderRadius="50%"
-                                  h="38px"
-                                  w="38px"
-                                  onClick={addDive}
-                                >
-                                  <Icon
-                                    as={MdAdd}
-                                    color="white"
-                                    h="24px"
-                                    w="24px"
-                                  />
-                                </Button>
-                              </Flex>
-                            </InfoWindow>
-                          )}
+                          {infoOpen &&
+                            location.latitude === mapLocation.latitude && (
+                              <InfoWindow
+                                onCloseClick={() => setInfoOpen(false)}
+                                position={{
+                                  lat: location.latitude,
+                                  lng: location.longitude,
+                                }}
+                              >
+                                <Flex align="center" w="100%">
+                                  <Text
+                                    ms="auto"
+                                    color="gray.500"
+                                    me="20px"
+                                    fontSize="lg"
+                                    fontWeight="500"
+                                  >
+                                    {location.name}
+                                  </Text>
+                                  <Button
+                                    _hover={{ bg: "brand.500" }}
+                                    me="10px"
+                                    variant="brand"
+                                    borderRadius="50%"
+                                    h="38px"
+                                    w="38px"
+                                    onClick={addDive}
+                                  >
+                                    <Icon
+                                      as={MdAdd}
+                                      color="white"
+                                      h="24px"
+                                      w="24px"
+                                    />
+                                  </Button>
+                                </Flex>
+                              </InfoWindow>
+                            )}
                         </Marker>
                       ))
                     }
