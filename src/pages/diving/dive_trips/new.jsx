@@ -7,12 +7,12 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
-import DiveSelection from "components/pages/bookings/DiveSelection";
+// import DiveSelection from "components/pages/bookings/DiveSelection";
 import TripDetails from "components/pages/diveTrips/TripDetails";
 import AdminLayout from "layouts/admin";
 
 export default function NewTrip() {
-  const [tripDives, setTripDives] = useState([]);
+  // const [tripDives, setTripDives] = useState([]);
   const [price, setPrice] = useState();
   const [minCert, setMinCert] = useState();
   const [active, setActive] = useState();
@@ -68,7 +68,10 @@ export default function NewTrip() {
   return (
     <Box p="0px" mx="auto" mt="100px">
       {/* Row 1: Map  & Calendar */}
-      <DiveSelection tripDives={tripDives} setTripDives={setTripDives} />
+
+      {/* Need to bring this line back in once I've deployed */}
+      {/* <DiveSelection tripDives={tripDives} setTripDives={setTripDives} /> */}
+
       {/* Row 2: List of Dives */}
       <TripDetails
         mb="20px"
@@ -81,7 +84,7 @@ export default function NewTrip() {
       <Flex justify="space-between" mt="24px">
         <Button
           // isLoading={tripDives.length === 0}
-          isDisabled={tripDives.length === 0}
+          // isDisabled={tripDives.length === 0}
           loadingText="Select a Dive"
           spinnerPlacement="end"
           // spinner={<BeatLoader size={8} color='white' />}
