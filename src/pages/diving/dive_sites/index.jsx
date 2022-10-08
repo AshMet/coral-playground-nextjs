@@ -183,7 +183,7 @@ export default function DiveSites({ data }) {
                     <DiveSiteCard
                       key={site.id}
                       id={site.id}
-                      image={site.dive_map || "/img/diving/dive_site_bg.png"}
+                      image={site.dive_map_s3 || "/img/diving/dive_site_bg.png"}
                       name={site.name}
                       tagList={site.tags}
                       depth={site.depth}
@@ -203,6 +203,10 @@ export default function DiveSites({ data }) {
 }
 
 export async function getStaticProps() {
+  // const baseUrl =
+  //   process.env.VERCEL_ENV === "production"
+  //     ? "https://coral-playground-api.herokuapp.com/api/v1"
+  //     : "http://localhost:5000/api/v1";
   try {
     const results = await axios.get(
       "https://coral-playground-api.herokuapp.com/api/v1/dive_sites"

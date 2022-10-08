@@ -42,7 +42,8 @@ module.exports = {  //withPWA(
       'avatars.dicebear.com',
       'ipfs.moralis.io',
       'rvlocxzrtjom.usemoralis.com',
-      'localhost'
+      'localhost',
+      's3.eu-west-3.amazonaws.com'
     ]
   }
 };

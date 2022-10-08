@@ -52,7 +52,7 @@ export default function Settings() {
       .then((response) => response.json())
       .then((data) => {
         setDiveSite(data);
-        setDiveMapUrl(data.dive_map);
+        setDiveMapUrl(data.dive_map_s3);
         console.log("inside", data);
       })
       .catch((error) => console.error(error));
@@ -75,9 +75,7 @@ export default function Settings() {
       // .then((response) => setDiveSite(response.json()))
       .then((data) => {
         setDiveSite(data);
-        setDiveMapUrl(
-          `https://coral-playground-api.herokuapp.com${data.dive_map}`
-        );
+        setDiveMapUrl(data.dive_map_s3);
       })
       .catch((error) => console.error(error));
   }
