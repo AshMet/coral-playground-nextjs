@@ -43,7 +43,7 @@ module.exports = {  //withPWA(
       'ipfs.moralis.io',
       'rvlocxzrtjom.usemoralis.com',
       'localhost',
-      's3.eu-west-3.amazonaws.com'
+      'https://s3.eu-west-3.amazonaws.com/media.coralplayground.com'
     ]
   }
 };
