@@ -56,7 +56,7 @@ export default function DiveSitePage({ data }) {
               <Card
                 bgSize="100% 100%"
                 minH={{ base: "200px", md: "100%" }}
-                bgImage={data.dive_map_s3 || "/img/diving/dive_site_bg.png"}
+                bgImage={data.dive_map_url || "/img/diving/dive_site_bg.png"}
               >
                 <Button
                   variant="no-hover"
