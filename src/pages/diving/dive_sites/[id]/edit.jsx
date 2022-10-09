@@ -52,7 +52,7 @@ export default function Settings() {
       .then((response) => response.json())
       .then((data) => {
         setDiveSite(data);
-        setDiveMapUrl(data.dive_map_s3);
+        setDiveMapUrl(data.dive_map_url);
         console.log("inside", data);
       })
       .catch((error) => console.error(error));
@@ -75,7 +75,7 @@ export default function Settings() {
       // .then((response) => setDiveSite(response.json()))
       .then((data) => {
         setDiveSite(data);
-        setDiveMapUrl(data.dive_map_s3);
+        setDiveMapUrl(data.dive_map_url);
       })
       .catch((error) => console.error(error));
   }

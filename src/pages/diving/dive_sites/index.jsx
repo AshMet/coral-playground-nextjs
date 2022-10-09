@@ -183,7 +183,9 @@ export default function DiveSites({ data }) {
                     <DiveSiteCard
                       key={site.id}
                       id={site.id}
-                      image={site.dive_map_s3 || "/img/diving/dive_site_bg.png"}
+                      image={
+                        site.dive_map_url || "/img/diving/dive_site_bg.png"
+                      }
                       name={site.name}
                       tagList={site.tags}
                       depth={site.depth}
