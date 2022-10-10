@@ -85,7 +85,7 @@ export default function DiveSitePage({ data }) {
               access={data.access}
               certLevel={data.cert_level}
               diveTypes={data.tags}
-              // species={data.species}
+              species={data.species}
             />
           </Box>
           {/* Trip sidebar Load states */}

@@ -22,8 +22,8 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 
 import Card from "components/card/Card";
 
-import CollectionTab from "./CollectionTab";
 import DetailsTab from "./DetailsTab";
+import SpeciesTab from "./SpeciesTab";
 // import Instructor from "./Instructor";
 // import Rating from "./Rating";
 
@@ -200,11 +200,7 @@ export default function SiteInfo({
               </TabList>
               <TabPanels pt="30px">
                 <TabPanel px="0px">
-                  <CollectionTab
-                    collection={species}
-                    folderUrl="/img/species"
-                    extension="png"
-                  />
+                  <SpeciesTab collection={species} />
                 </TabPanel>
                 <TabPanel px="0px">
                   <DetailsTab

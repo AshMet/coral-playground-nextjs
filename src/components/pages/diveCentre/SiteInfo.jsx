@@ -17,9 +17,9 @@ import {
 import { useState } from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 
-import CollectionTab from "../diveSite/CollectionTab";
 import Card from "components/card/Card";
 
+import CollectionTab from "./CollectionTab";
 import DetailsTab from "./DetailsTab";
 
 // import DetailsTab from "./DetailsTab";
