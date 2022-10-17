@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { refreshAccessToken } from "./sessionSlice";
 import type { RootState } from "./store";
 
-function PersistLogin({ children }) {
+function PersistLogin() {
   const loading = useSelector((state: RootState) => state.session.loading);
   const accessToken = useSelector(
     (state: RootState) => state.session.accessToken
@@ -34,7 +34,7 @@ function PersistLogin({ children }) {
     }
   }, [accessToken, refreshToken]);
 
-  return <>{loading ? <p>Loading...</p> : { children }}</>;
+  // return <>{loading ? <p>Loading...</p> : { children }}</>;
 }
 
 export default PersistLogin;
