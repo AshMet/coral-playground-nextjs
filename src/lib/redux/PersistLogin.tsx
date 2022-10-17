@@ -23,7 +23,8 @@ function PersistLogin({ children }) {
   useEffect(() => {
     function verifyRefreshToken() {
       try {
-        dispatch(refreshAccessToken(refreshToken));
+        // This line needs to be fixed due to type mismatch
+        // dispatch(refreshAccessToken(refreshToken));
       } catch (error) {
         console.log(error);
       }
