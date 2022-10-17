@@ -211,7 +211,7 @@ export async function getStaticProps() {
   //     : "http://localhost:5000/api/v1";
   try {
     const results = await axios.get(
-      "https://coral-playground-api.herokuapp.com/api/v1/dive_sites"
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites`
     );
     const { data } = results;
     return {

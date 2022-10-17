@@ -195,7 +195,7 @@ export default function DiveSites({ data }) {
 export async function getStaticProps() {
   try {
     const results = await axios.get(
-      "https://coral-playground-api.herokuapp.com/api/v1/dive_centres"
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_centres`
     );
     const { data } = results;
     return {

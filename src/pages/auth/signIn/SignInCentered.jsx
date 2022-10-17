@@ -1,3 +1,8 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable consistent-return */
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable no-console */
 /* eslint-disable import/no-cycle */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
@@ -35,18 +40,25 @@ import {
   InputRightElement,
   useColorModeValue,
   Text,
+  Alert,
+  AlertIcon,
+  AlertTitle,
 } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
-import React from "react";
 // import { NavLink } from "react-router-dom";
 // Chakra imports
 // Assets
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
 
-// Custom components
 import NavLink from "../../../components/navLinks/NavLink";
+// import PublicOnlyRoute from "../../../lib/redux/PublicOnlyRoute";
+import { loginUser, resetErrorState } from "../../../lib/redux/sessionSlice";
+// import { RootState } from "../../../lib/redux/store";
 import { HSeparator } from "components/separator/Separator";
 import CenteredAuth from "layouts/auth/types/Centered";
 
@@ -68,8 +80,53 @@ function SignIn() {
     { bg: "whiteAlpha.200" }
   );
 
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+
+  // Login Logic using Redux
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const errorMessages = useSelector((state) => state.session.errorMessages);
+  const [errors, setErrors] = useState([]);
+  const loading = false;
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  useEffect(() => {
+    emailRef?.current?.focus();
+    if (errorMessages.length > 0) {
+      setErrors(errorMessages);
+      dispatch(resetErrorState());
+    }
+  }, []);
+
+  async function handleSubmit(event) {
+    console.log("start login email", emailRef);
+    console.log("start login password", passwordRef);
+    event.preventDefault();
+    setErrors([]);
+    if (
+      emailRef?.current === undefined ||
+      emailRef.current.value === "" ||
+      passwordRef?.current === undefined ||
+      passwordRef.current.value === ""
+    ) {
+      return setErrors(["Please fill out all fields"]);
+    }
+    const payload = {
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    };
+    const response = await dispatch(loginUser(payload));
+    console.log(response);
+    if (errorMessages.length === 0) {
+      router.push("/");
+    } else {
+      return setErrors(errorMessages);
+    }
+  }
+
   return (
     <>
       <NextSeo
@@ -140,6 +197,20 @@ function SignIn() {
               </Text>
               <HSeparator />
             </Flex>
+            {errors.length > 0 ? (
+              <Alert status="error" mb={5}>
+                {errors.map((error, index) => {
+                  return (
+                    <Box key={`alert-${index}`}>
+                      <AlertIcon />
+                      <AlertTitle>{error}</AlertTitle>
+                    </Box>
+                  );
+                })}
+              </Alert>
+            ) : (
+              <> </>
+            )}
             <FormControl>
               <FormLabel
                 display="flex"
@@ -161,6 +232,7 @@ function SignIn() {
                 mb="24px"
                 fontWeight="500"
                 size="lg"
+                ref={emailRef}
               />
               <FormLabel
                 ms="4px"
@@ -182,6 +254,7 @@ function SignIn() {
                   size="lg"
                   type={show ? "text" : "password"}
                   variant="auth"
+                  ref={passwordRef}
                 />
                 <InputRightElement display="flex" alignItems="center" mt="4px">
                   <Icon
@@ -227,6 +300,8 @@ function SignIn() {
                 w="100%"
                 h="50"
                 mb="24px"
+                onClick={handleSubmit}
+                disabled={loading}
               >
                 Sign In
               </Button>

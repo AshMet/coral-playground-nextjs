@@ -140,6 +140,7 @@ export default function DetailsTab({
           <Flex wrap="wrap" gap={3} mb="25px">
             {diveTypes?.map((type) => (
               <Badge
+                key={type}
                 colorScheme="teal"
                 borderRadius="15px"
                 display="flex"

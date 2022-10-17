@@ -48,7 +48,7 @@ export default function Settings() {
   const { id } = router.query;
 
   useEffect(() => {
-    fetch(`https://coral-playground-api.herokuapp.com/api/v1/dive_sites/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setDiveSite(data);
@@ -63,13 +63,10 @@ export default function Settings() {
   }, [diveSite]);
 
   function submitToApi(data) {
-    fetch(
-      `https://coral-playground-api.herokuapp.com/api/v1/dive_sites/${id}`,
-      {
-        method: "PATCH",
-        body: data,
-      }
-    )
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites/${id}`, {
+      method: "PATCH",
+      body: data,
+    })
       .then((response) => response.json())
       // .then((data) => console.log("response", data))
       // .then((response) => setDiveSite(response.json()))

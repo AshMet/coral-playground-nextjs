@@ -52,7 +52,7 @@ export default function DiveCentre({ data }) {
   useEffect(() => {
     async function fetchData() {
       const result = await axios.get(
-        `https://coral-playground-api.herokuapp.com/api/v1/dive_centres/${id}/centre_trips`
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_centres/${id}/centre_trips`
       );
       setTrips(result.data);
       console.log("trips", trips);
@@ -150,7 +150,7 @@ export default function DiveCentre({ data }) {
 export async function getStaticPaths() {
   try {
     const result = await axios.get(
-      "https://coral-playground-api.herokuapp.com/api/v1/dive_centres"
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_centres`
     );
     const { data } = result;
 
@@ -167,7 +167,7 @@ export const getStaticProps = async ({ params }) => {
   const centreId = params.id;
   try {
     const result = await axios.get(
-      `https://coral-playground-api.herokuapp.com/api/v1/dive_centres/${centreId}`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_centres/${centreId}`
     );
     const { data } = result;
     return {

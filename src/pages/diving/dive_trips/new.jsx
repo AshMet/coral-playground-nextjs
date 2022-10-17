@@ -25,8 +25,7 @@ export default function NewTrip() {
     query: { diveCentreId },
   } = router;
 
-  const API_URL =
-    "https://coral-playground-api.herokuapp.com/api/v1/dive_trips";
+  const API_URL = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_trips`;
 
   function saveDiveTrip() {
     return axios

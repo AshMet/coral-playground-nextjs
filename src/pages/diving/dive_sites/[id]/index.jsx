@@ -25,7 +25,7 @@ export default function DiveSitePage({ data }) {
   useEffect(() => {
     async function fetchData() {
       const result = await axios.get(
-        `https://coral-playground-api.herokuapp.com/api/v1/dive_sites/${id}/site_trips`
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites/${id}/site_trips`
       );
       setTrips(result.data);
       console.log("trips", trips);
@@ -116,7 +116,7 @@ export default function DiveSitePage({ data }) {
 export async function getStaticPaths() {
   try {
     const result = await axios.get(
-      "https://coral-playground-api.herokuapp.com/api/v1/dive_sites"
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites`
     );
     const { data } = result;
 
@@ -133,7 +133,7 @@ export const getStaticProps = async ({ params }) => {
   const siteId = params.id;
   try {
     const result = await axios.get(
-      `https://coral-playground-api.herokuapp.com/api/v1/dive_sites/${siteId}`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites/${siteId}`
     );
     const { data } = result;
     return {

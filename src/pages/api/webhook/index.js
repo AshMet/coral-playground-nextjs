@@ -43,7 +43,7 @@ const createBooking = async (session) => {
   };
 
   axios
-    .post("https://coral-playground-api.herokuapp.com/api/v1/orders", {
+    .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/orders`, {
       order: {
         diver_name: session.customer_details.name || "unknown",
         email: session.customer_details.email,

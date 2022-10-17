@@ -173,10 +173,10 @@ export default function Default({ data }) {
 export async function getStaticProps() {
   try {
     const siteQuery = await axios.get(
-      "https://coral-playground-api.herokuapp.com/api/v1/dive_sites"
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites`
     );
     const centreQuery = await axios.get(
-      "https://coral-playground-api.herokuapp.com/api/v1/dive_centres"
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_centres`
     );
     const { data: siteResults } = siteQuery;
     const { data: centreResults } = centreQuery;
