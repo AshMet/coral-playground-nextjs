@@ -41,9 +41,9 @@ import { NextSeo } from "next-seo";
 import { useRef, useState, useContext } from "react";
 
 // Custom components
+import SummaryTable from "../../../components/pages/bookings/SummaryTable";
 import { DivingContext } from "../../../contexts/DivingContext";
 import Card from "components/card/Card";
-import DiveList from "components/pages/bookings/DiveList";
 import DiverInfo from "components/pages/bookings/DiverInfo";
 // import DiveSelection from "components/pages/bookings/DiveSelection";
 import EquipmentSelection from "components/pages/bookings/EquipmentSelection";
@@ -62,7 +62,7 @@ export default function NewBooking() {
     notes,
     setNotes,
     dives,
-    setDives,
+    // setDives,
   } = useContext(DivingContext);
   const [activeBullets, setActiveBullets] = useState({
     product: true,
@@ -278,7 +278,8 @@ export default function NewBooking() {
               mx="auto"
             >
               {/* Row 1: List of Dives */}
-              <DiveList mb="20px" dives={dives} setDives={setDives} />
+              {/* <DiveList mb="20px" dives={dives} setDives={setDives} /> */}
+              <SummaryTable />
               {/* Row 2: Map  & Calendar */}
               {/* <DiveSelection /> */}
               <Flex justify="space-between" mt="24px">

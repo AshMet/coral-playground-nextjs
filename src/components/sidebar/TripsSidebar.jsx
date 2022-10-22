@@ -56,6 +56,8 @@ export default function DiveCentreSidebar({ trips, diveCentreId, ...rest }) {
   if (loadError) return "Error Loading Maps";
   if (!isLoaded) return "Loading Map";
 
+  // console.log("sidebar trips", trips);
+
   return (
     <Card {...rest} maxH="max-content">
       <Text color={textColor} fontSize="xl" fontWeight="700" mb="16px">

@@ -15,6 +15,7 @@ export default function Content(props) {
   const {
     diverName,
     email,
+    siteName,
     diveDate,
     diveTime,
     diverCert,
@@ -22,6 +23,7 @@ export default function Content(props) {
     certLevel,
     lineItems,
     currency,
+    metadata,
     amountTotal,
     amountSubtotal,
     status,
@@ -35,44 +37,50 @@ export default function Content(props) {
       Header: "Quantity",
       accessor: "quantity",
     },
+    // {
+    //   Header: "Per Unit",
+    //   accessor: "perUnit",
+    // },
     {
-      Header: "Rate",
-      accessor: "rate",
+      Header: "Total Cost",
+      accessor: "totalCost",
     },
     {
-      Header: "Amount",
-      accessor: "amount",
+      Header: "Paid",
+      accessor: "paid",
+    },
+    {
+      Header: "Pay to Dive Centre",
+      accessor: "remaining",
     },
   ];
 
-  const tableDataInvoice = lineItems.map((item) => {
+  const tableDataInvoice = lineItems.map((item, index) => {
     return {
-      item: item.description,
+      // item: item.description,
+      item: metadata[index].siteName,
       quantity: item.quantity,
-      rate: item.amount_subtotal / 100,
-      amount: item.amount_total / 100,
+      // perUnit: item.amount_subtotal / 100,
+      paid: item.amount_total / 100,
       currency: item.currency,
+      totalCost: metadata[index].price / 100,
+      remaining: (metadata[index].price - item.amount_total) / 100,
     };
   });
-
-  // const tableDataInvoice = [
-  //   {
-  //     item: "Diver Certification Course",
-  //     quantity: "1",
-  //     rate: amountSubtotal / 100,
-  //     amount: amountTotal / 100,
-  //   },
-  // ];
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const bgCard = useColorModeValue("white", "navy.700");
-  // let total = 0;
+  // let paid = 0;
   // for (let i = 0; i < tableDataInvoice.length; i++) {
-  //   total += tableDataInvoice[i].amount;
+  //   paid += tableDataInvoice[i].deposit;
   // }
-  const total = amountTotal;
   const paid = amountTotal;
+  const total =
+    metadata
+      .map((item) => item.price)
+      .reduce((partialSum, a) => partialSum + a, 0) / 100;
+
   return (
     <Flex direction="column" p={{ base: "10px", md: "60px" }}>
       <Card
@@ -168,7 +176,7 @@ export default function Content(props) {
               Total
             </Text>
             <Text color={textColor} fontSize="lg" fontWeight="700" maxW="292px">
-              {currency === "eur" ? "€" : "$"} {total}
+              {currency === "eur" ? "€" : "$"} {total.toFixed(2)}
             </Text>
           </Flex>
           <Flex align="center" justifyContent="space-between">
@@ -191,13 +199,13 @@ export default function Content(props) {
               me="70px"
               fontWeight="400"
               textAlign="end"
-              color={textColor}
+              color="green.500"
               fontSize="lg"
             >
               Amount to pay
             </Text>
-            <Text color={textColor} fontSize="lg" fontWeight="700" maxW="292px">
-              {currency === "eur" ? "€" : "$"} {total - paid}
+            <Text color="green.500" fontSize="lg" fontWeight="700" maxW="292px">
+              {currency === "eur" ? "€" : "$"} {(total - paid).toFixed(2)}
             </Text>
           </Flex>
         </Box>

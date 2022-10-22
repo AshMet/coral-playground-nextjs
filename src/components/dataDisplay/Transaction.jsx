@@ -72,7 +72,7 @@ export default function Transaction(props) {
       diveDate: diveDate ? new Date(diveDate) : new Date(value),
       diveTime: "morning",
       price,
-      priceId: "price_1LBLSVAvLPvC9h7xk0HEvL3f",
+      priceId,
     };
     // const line_item = {
     //   trip_id: tripId,

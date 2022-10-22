@@ -93,15 +93,21 @@ function InvoiceTable(props) {
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "Rate") {
+                  } else if (cell.column.Header === "Paid") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
                         {currency === "eur" ? "€" : "$"} {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "Amount") {
+                  } else if (cell.column.Header === "Total Cost") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
+                        {currency === "eur" ? "€" : "$"} {cell.value}
+                      </Text>
+                    );
+                  } else if (cell.column.Header === "Pay to Dive Centre") {
+                    data = (
+                      <Text color="green.500" fontSize="md" fontWeight="500">
                         {currency === "eur" ? "€" : "$"} {cell.value}
                       </Text>
                     );

@@ -34,8 +34,11 @@ import Content from "components/pages/diving/Content";
 import AdminLayout from "layouts/admin";
 
 export default function Invoice({ session, lineItems }) {
-  // console.log(session);
-  // console.log(lineItems);
+  // console.log("session", session);
+  // console.log("line items", lineItems);
+
+  const tripMetadata = Object.values(session.metadata);
+  const trips = tripMetadata.map((trip) => JSON.parse(trip));
   return (
     <>
       <NextSeo
@@ -52,6 +55,7 @@ export default function Invoice({ session, lineItems }) {
           <Content
             diverName={session.customer_details.name}
             email={session.customer_details.email}
+            siteName={session.metadata.siteName}
             diveDate={session.metadata.dive_date}
             diveTime={session.metadata.dive_time}
             diverCert={session.customer.metadata.diverCert}
@@ -59,6 +63,7 @@ export default function Invoice({ session, lineItems }) {
             cert={session.metadata.cert}
             lineItems={lineItems.data}
             currency={session.currency}
+            metadata={trips}
             amountSubtotal={(session.amount_subtotal / 100).toFixed(2)}
             amountTotal={(session.amount_total / 100).toFixed(2)}
             status={session.payment_status}
@@ -79,7 +84,7 @@ export const getServerSideProps = async (context) => {
     expand: ["customer"],
   });
   const lineItems = await stripe.checkout.sessions.listLineItems(sessionId, {
-    limit: 5,
+    limit: 10,
   });
   return { props: { session, lineItems } };
 };

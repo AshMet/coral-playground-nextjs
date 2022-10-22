@@ -55,15 +55,19 @@ export const DivingProvider = ({ children }) => {
   // });
 
   const lineItems = dives.map((dive) => {
+    console.log("line item", dive);
     return {
-      price: "price_1LBLSVAvLPvC9h7xk0HEvL3f", // eg:, dive.priceId,
-      // price_data: {
-      //   unit_amount: dive.price,
-      //   currency: "usd",
-      //   // product: getProductId(dive.siteCount),
-      //   product: dive.priceId,
-      // },
+      price: dive.priceId,
       quantity: 1,
+      // metadata: {
+      //   trip_id: dive.id,
+      // trip_name: dive.siteName,
+      // number_of_dives: dive.siteCount,
+      // dive_centre: dive.centreName,
+      // dive_date: dive.diveDate,
+      // dive_time: "8:00 am",
+      // centre_cost: dive.price,
+      // },
     };
   });
 
