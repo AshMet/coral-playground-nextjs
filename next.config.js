@@ -30,7 +30,7 @@ module.exports = {  //withPWA(
     return [
       {
         source: '/',
-        destination: '/auth/home',
+        destination: '/diving/map',
         permanent: true,
       },
     ]

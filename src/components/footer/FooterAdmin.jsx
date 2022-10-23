@@ -50,7 +50,7 @@ export default function Footer() {
             md: "44px",
           }}
         >
-          <Link fontWeight="500" color={textColor} href="/auth/home">
+          <Link fontWeight="500" color={textColor} href="/">
             About Us
           </Link>
         </ListItem>
@@ -60,7 +60,7 @@ export default function Footer() {
             md: "44px",
           }}
         >
-          <Link fontWeight="500" color={textColor} href="/auth/home">
+          <Link fontWeight="500" color={textColor} href="/">
             Careers
           </Link>
         </ListItem>
@@ -70,12 +70,12 @@ export default function Footer() {
             md: "44px",
           }}
         >
-          <Link fontWeight="500" color={textColor} href="/auth/home">
+          <Link fontWeight="500" color={textColor} href="/">
             Timeline
           </Link>
         </ListItem>
         <ListItem>
-          <Link fontWeight="500" color={textColor} href="/auth/home">
+          <Link fontWeight="500" color={textColor} href="/">
             Mission
           </Link>
         </ListItem>

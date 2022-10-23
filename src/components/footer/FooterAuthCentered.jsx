@@ -42,7 +42,7 @@ export default function Footer() {
           <Link
             mx="3px"
             color={textColor}
-            href="auth/home"
+            href="/"
             target="_blank"
             fontWeight="700"
           >
@@ -58,7 +58,7 @@ export default function Footer() {
             md: "44px",
           }}
         >
-          <Link fontWeight="500" color={textColor} href="auth/home">
+          <Link fontWeight="500" color={textColor} href="/">
             About Us
           </Link>
         </ListItem>
@@ -68,7 +68,7 @@ export default function Footer() {
             md: "44px",
           }}
         >
-          <Link fontWeight="500" color={textColor} href="auth/home">
+          <Link fontWeight="500" color={textColor} href="/">
             How It Works
           </Link>
         </ListItem>
@@ -78,12 +78,12 @@ export default function Footer() {
             md: "44px",
           }}
         >
-          <Link fontWeight="500" color={textColor} href="auth/home">
+          <Link fontWeight="500" color={textColor} href="/">
             Timeline
           </Link>
         </ListItem>
         <ListItem>
-          <Link fontWeight="500" color={textColor} href="auth/home/">
+          <Link fontWeight="500" color={textColor} href="/">
             Mission
           </Link>
         </ListItem>
