@@ -151,3 +151,12 @@ export async function getDiveSites(accessToken: string) {
       return error.response.data;
     });
 }
+
+// function getStaticProps() {
+//   return {
+//     props: {
+//       clientId: process.env.SERVER_CLIENT_ID,
+//       clientSecret: process.env.SERVER_CLIENT_SECRET,
+//     },
+//   };
+// }

@@ -92,7 +92,9 @@ export default function DiveCentre({ data }) {
                 bgSize="cover"
                 w=""
                 minH={{ base: "200px", md: "100%" }}
-                bgImage={data.cover_photo || "/img/diving/dive_centre_bg.jpg"}
+                bgImage={
+                  data.cover_photo_url || "/img/diving/dive_centre_bg.jpg"
+                }
               >
                 <Button
                   variant="no-hover"

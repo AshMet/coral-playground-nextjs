@@ -160,7 +160,8 @@ export default function DiveSites({ data }) {
                       key={centre.id}
                       id={centre.id}
                       image={
-                        centre.cover_photo || "/img/diving/dive_centre_bg.jpg"
+                        centre.cover_photo_url ||
+                        "/img/diving/dive_centre_bg.jpg"
                       }
                       name={centre.name}
                       type="dive_centre"

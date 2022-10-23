@@ -7,7 +7,7 @@ import {
   chakra,
   Flex,
   Icon,
-  SimpleGrid,
+  // SimpleGrid,
   Spinner,
   Text,
   useColorModeValue,
@@ -19,7 +19,7 @@ import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 import Image from "../actions/NextChakraImg";
 // Custom components
-import { CircProgressMini } from "components/charts/CircularProgress";
+// import { CircProgressMini } from "components/charts/CircularProgress";
 
 import Card from "./Card";
 
@@ -35,9 +35,9 @@ export default function DiveSiteCard(props) {
     name,
     address,
     tagList,
-    maxVisibility,
-    current,
-    depth,
+    // maxVisibility,
+    // current,
+    // depth,
     type,
     isLoading,
   } = props;
@@ -168,7 +168,7 @@ export default function DiveSiteCard(props) {
                         </Badge>
                       ))}
                     </Flex>
-                    <SimpleGrid columns={3} spacing="40px">
+                    {/* <SimpleGrid columns={3} spacing="40px">
                       {depth && (
                         <Box w="35px" mt="10px">
                           <CircProgressMini title="DEP" value={depth} />
@@ -184,7 +184,7 @@ export default function DiveSiteCard(props) {
                           <CircProgressMini title="CUR" value={current} />
                         </Box>
                       )}
-                    </SimpleGrid>
+                    </SimpleGrid> */}
                   </Box>
                 )}
               </Flex>
