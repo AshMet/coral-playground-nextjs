@@ -30,8 +30,7 @@ const createBooking = async (session) => {
   // Including sessionId
   const customer = await stripe.customers.retrieve(session.customer);
 
-  // Email customer confirmation
-
+  // Add Email customer confirmation
   const getLineItems = () => {
     const dives = Object.values(session.metadata);
     const lineItems = dives.map((dive) => JSON.parse(dive));
@@ -60,7 +59,7 @@ const createBooking = async (session) => {
     })
     .then(
       (order) => {
-        console.log(`Booking Saved: ${JSON.stringify(order)}`);
+        console.log(`Booking Saved: ${order}`);
       },
       (error) => {
         // The save failed.
@@ -68,7 +67,7 @@ const createBooking = async (session) => {
         console.log(`Booking Error: ${error}`);
       }
     );
-  console.log("Creating order", session);
+  console.log("Creating order session", session);
 };
 
 const emailCustomerAboutFailedPayment = (session) => {
