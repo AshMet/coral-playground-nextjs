@@ -42,7 +42,7 @@ const createBooking = async (session) => {
   };
 
   axios
-    .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/orders`, {
+    .post("https://coral-playground-api.herokuapp.com/api/v1/orders", {
       order: {
         diver_name: session.customer_details.name || "unknown",
         email: session.customer_details.email,
@@ -78,6 +78,10 @@ const emailCustomerAboutFailedPayment = (session) => {
 export default async function handler(req, res) {
   if (req.method === "POST") {
     let event;
+
+    // const parsedBody = req.isBase64Encoded
+    //   ? Buffer.from(req.body, "base64").toString("utf-8")
+    //   : req.body;
 
     try {
       // 1. Retrieve the event by verifying the signature using the raw body and secret
