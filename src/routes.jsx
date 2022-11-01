@@ -30,6 +30,7 @@ import {
 import Certifications from "pages/diving/certifications";
 import DiveCentres from "pages/diving/dive_centres";
 import DiveSites from "pages/diving/dive_sites";
+import DivingHome from "pages/diving/home";
 import DiveMap from "pages/diving/map";
 import NFTDrops from "pages/nfts/drops";
 // import NFTPage from "pages/admin/nfts/page";
@@ -216,9 +217,9 @@ const routes = [
     collapse: true,
     items: [
       {
-        name: "Map",
+        name: "Home",
         layout: "",
-        path: "/diving/map",
+        path: "/diving/home",
         component: DiveMap,
         icon: (
           <Icon
@@ -228,6 +229,13 @@ const routes = [
             color="inherit"
           />
         ),
+      },
+      {
+        name: "Map",
+        layout: "",
+        path: "/diving/map",
+        component: DivingHome,
+        icon: <Icon as={MdHome} width="15px" height="20px" color="inherit" />,
       },
       {
         name: "Certifications",
@@ -294,7 +302,7 @@ const routes = [
       {
         name: "Home",
         layout: "/nfts",
-        path: "/nfts/home",
+        path: "/home",
         icon: <Icon as={MdHome} width="15px" height="20px" color="inherit" />,
       },
       // {
