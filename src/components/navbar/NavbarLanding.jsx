@@ -127,25 +127,25 @@ export default function AdminNavbar(props) {
         <Flex ms="auto">
           <Link
             display={{ base: "none", lg: "block" }}
-            href="/"
+            href="/diving/home"
             color={textColor}
             fontSize="md"
             fontWeight="600"
             me="30px"
             my="auto"
           >
-            Components
+            Diving
           </Link>
           <Link
             display={{ base: "none", lg: "block" }}
-            href="/"
+            href="/nfts/home"
             color={textColor}
             fontSize="md"
             fontWeight="600"
             me="30px"
             my="auto"
           >
-            Documentation
+            NFTs
           </Link>
           <VSeparator
             me="14px"
@@ -204,14 +204,31 @@ export default function AdminNavbar(props) {
                   px="14px"
                 >
                   <Link
-                    href="/"
+                    href="/diving/home"
                     color={textColor}
                     fontSize="md"
                     fontWeight="500"
                     me="30px"
                     my="auto"
                   >
-                    Components
+                    Diving
+                  </Link>
+                </MenuItem>
+                <MenuItem
+                  _hover={{ bg: "none" }}
+                  _focus={{ bg: "none" }}
+                  borderRadius="8px"
+                  px="14px"
+                >
+                  <Link
+                    href="/nfts/home"
+                    color={textColor}
+                    fontSize="md"
+                    fontWeight="500"
+                    me="30px"
+                    my="auto"
+                  >
+                    NFTs
                   </Link>
                 </MenuItem>
                 <MenuItem

@@ -25,8 +25,8 @@ const HomeHero = () => {
       bgRepeat="no-repeat"
       px={8}
       py={24}
-      mx={{ base: "-10px", md: "-50px" }}
-      mt="-50px"
+      // mx={{ base: "-10px", md: "-50px" }}
+      // mt="-50px"
       w="auto"
       justifyContent="center"
       alignItems="center"

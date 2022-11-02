@@ -139,7 +139,7 @@ export default function DiveSiteBenefits() {
                     w={{ base: "335px", md: "210px" }}
                     h="54px"
                   >
-                    Get started for Free
+                    View Dive Sites
                     <Icon
                       as={MdChevronRight}
                       ms="5px"
@@ -162,7 +162,7 @@ export default function DiveSiteBenefits() {
                     w={{ base: "335px", md: "180px" }}
                     h="54px"
                   >
-                    See live preview
+                    See Live Preview
                   </Button>
                 </Link>
               </Flex>

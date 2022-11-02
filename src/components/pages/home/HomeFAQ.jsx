@@ -67,7 +67,7 @@ export default function HomeFAQ() {
               {faqs.map((faq) => (
                 <AccordionItem>
                   <AccordionButton>
-                    <Box
+                    <Flex
                       flex="1"
                       textAlign="left"
                       justifyItems="center"
@@ -85,7 +85,7 @@ export default function HomeFAQ() {
                         />
                       </List>
                       <Text as="span">{faq.question}</Text>
-                    </Box>
+                    </Flex>
                     <AccordionIcon />
                   </AccordionButton>
                   <AccordionPanel pb={4}>{faq.answer}</AccordionPanel>

@@ -26,7 +26,7 @@ import { Flex } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 
 import BookingBenefits from "../../../components/pages/divingHome/BookingBenefits";
-import AuthCentered from "../../../layouts/home/Landing";
+import LandingLayout from "../../../layouts/home/Landing";
 // Custom components
 import Benefits from "components/pages/divingHome/Benefits";
 import DiveCentreBenefits from "components/pages/divingHome/DiveCentreBenefits";
@@ -59,5 +59,5 @@ export default function DivingHome() {
 }
 
 DivingHome.getLayout = function getLayout(page) {
-  return <AuthCentered>{page}</AuthCentered>;
+  return <LandingLayout>{page}</LandingLayout>;
 };

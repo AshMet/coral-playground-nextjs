@@ -126,7 +126,7 @@ export default function DiveCentreBenefits() {
                     w={{ base: "335px", md: "210px" }}
                     h="54px"
                   >
-                    Get started for Free
+                    View Dive Centres
                     <Icon
                       as={MdChevronRight}
                       ms="5px"
@@ -149,7 +149,7 @@ export default function DiveCentreBenefits() {
                     w={{ base: "335px", md: "180px" }}
                     h="54px"
                   >
-                    See Figma version
+                    See Live Preview
                   </Button>
                 </Link>
               </Flex>

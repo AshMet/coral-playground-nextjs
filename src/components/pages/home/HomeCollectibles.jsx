@@ -25,14 +25,14 @@ export default function HomeBenefits() {
       <Box py={20} rounded="xl">
         <Box maxW="7xl" mx="auto" px={{ base: 4, lg: 8 }} py="100px">
           <Box textAlign={{ lg: "center" }}>
-            <chakra.h2
-              color={useColorModeValue("brand.600")}
+            <Text
+              color={useColorModeValue("gray.900")}
               fontWeight="semibold"
               letterSpacing="wide"
             >
               NFTs
-            </chakra.h2>
-            <chakra.p
+            </Text>
+            <Text
               mt={2}
               fontSize={{ base: "3xl", sm: "4xl" }}
               lineHeight="8"
@@ -41,7 +41,7 @@ export default function HomeBenefits() {
               color={useColorModeValue("gray.900")}
             >
               Digital Collectibles, Real-World Impact
-            </chakra.p>
+            </Text>
             <chakra.p
               mt={4}
               maxW="4xl"
@@ -97,7 +97,7 @@ export default function HomeBenefits() {
                   <Flex direction="column">
                     <Text
                       fontSize="xl"
-                      color={useColorModeValue("brand.600")}
+                      color={useColorModeValue("gray.900")}
                       fontWeight="bold"
                       mb="10px"
                     >
@@ -105,7 +105,7 @@ export default function HomeBenefits() {
                     </Text>
                     <Text
                       fontSize="md"
-                      color={useColorModeValue("brand.600")}
+                      color={useColorModeValue("gray.900")}
                       fontWeight="400"
                       mb="20px"
                     >
@@ -134,7 +134,7 @@ export default function HomeBenefits() {
                   <Flex direction="column">
                     <Text
                       fontSize="xl"
-                      color={useColorModeValue("brand.600")}
+                      color={useColorModeValue("gray.900")}
                       fontWeight="bold"
                       mb="10px"
                     >
@@ -142,7 +142,7 @@ export default function HomeBenefits() {
                     </Text>
                     <Text
                       fontSize="md"
-                      color={useColorModeValue("brand.600")}
+                      color={useColorModeValue("gray.900")}
                       fontWeight="400"
                       mb="20px"
                     >
@@ -168,7 +168,7 @@ export default function HomeBenefits() {
                   <Flex direction="column">
                     <Text
                       fontSize="xl"
-                      color={useColorModeValue("brand.600")}
+                      color={useColorModeValue("gray.900")}
                       fontWeight="bold"
                       mb="10px"
                     >
@@ -176,7 +176,7 @@ export default function HomeBenefits() {
                     </Text>
                     <Text
                       fontSize="md"
-                      color={useColorModeValue("brand.600")}
+                      color={useColorModeValue("gray.900")}
                       fontWeight="400"
                       mb="20px"
                     >
