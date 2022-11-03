@@ -24,6 +24,7 @@
 // Chakra imports
 import { Flex } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 import BookingBenefits from "../../../components/pages/divingHome/BookingBenefits";
 import LandingLayout from "../../../layouts/home/Landing";
@@ -43,17 +44,19 @@ export default function DivingHome() {
   return (
     <>
       <NextSeo title="Home" description="Coral Playground Home Page" />
-      <Flex direction={{ base: "column" }}>
-        <Hero />
-        <Mission />
-        <HowItWorks />
-        <Benefits />
-        <DiveSiteBenefits />
-        <DiveCentreBenefits />
-        <BookingBenefits />
-        {/* <Numbers />
+      <ParallaxProvider>
+        <Flex direction={{ base: "column" }}>
+          <Hero />
+          <Mission />
+          <HowItWorks />
+          <Benefits />
+          <DiveSiteBenefits />
+          <DiveCentreBenefits />
+          <BookingBenefits />
+          {/* <Numbers />
         <Upgrade /> */}
-      </Flex>
+        </Flex>
+      </ParallaxProvider>
     </>
   );
 }

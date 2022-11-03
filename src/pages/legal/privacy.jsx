@@ -103,7 +103,7 @@ export default function PrivacyPolicy() {
             borderColor="#E9EDF7"
             borderRadius="30px"
             flexDirection="column"
-            w="774px"
+            w="1004px"
             px={{ base: "16px", md: "50px" }}
             mx="auto"
             pt="80px"

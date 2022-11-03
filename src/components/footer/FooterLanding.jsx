@@ -184,14 +184,6 @@ export default function Footer() {
                 </Badge>
               </Link>
             </Flex>
-            <Link
-              href="/"
-              fontSize="md"
-              color={textColorSecondary}
-              fontWeight="400"
-            >
-              Blog
-            </Link>
           </Flex>
           <Flex
             direction="column"
@@ -202,7 +194,7 @@ export default function Footer() {
               Help & Support
             </Text>
             <Link
-              href="mailto:info@coralplayground.com"
+              href="/faq/divers"
               fontSize="md"
               color={textColorSecondary}
               fontWeight="400"
@@ -211,7 +203,7 @@ export default function Footer() {
               FAQs
             </Link>
             <Link
-              href="mailto:info@coralplayground.com"
+              href="/faq/contact"
               fontSize="md"
               color={textColorSecondary}
               fontWeight="400"
@@ -270,7 +262,7 @@ export default function Footer() {
               Legal Resources
             </Text>
             <Link
-              href="/"
+              href="/legal/terms"
               fontSize="md"
               color={textColorSecondary}
               fontWeight="400"
@@ -279,30 +271,13 @@ export default function Footer() {
               Terms & Conditions
             </Link>
             <Link
-              href="/"
+              href="/legal/privacy"
               fontSize="md"
               color={textColorSecondary}
               fontWeight="400"
               mb="20px"
             >
               Privacy Policy
-            </Link>
-            <Link
-              href="/"
-              fontSize="md"
-              color={textColorSecondary}
-              fontWeight="400"
-              mb="20px"
-            >
-              License
-            </Link>
-            <Link
-              href="/"
-              fontSize="md"
-              color={textColorSecondary}
-              fontWeight="400"
-            >
-              EULA
             </Link>
           </Flex>
         </Flex>

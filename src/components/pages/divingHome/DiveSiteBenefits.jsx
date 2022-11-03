@@ -194,7 +194,7 @@ export default function DiveSiteBenefits() {
             src="/img/diving/coral_reef_3d.png"
             // w={{ base: "100%", md: "100%", lg: "400px", xl: "565px" }}
             width="1200px"
-            height="400px"
+            height="900px"
             mt={{ base: "40px", md: "40px", lg: "0px" }}
           />{" "}
         </Flex>

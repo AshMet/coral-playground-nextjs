@@ -28,20 +28,14 @@ import {
   Text,
   Link,
   useColorModeValue,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
-// Assets
-
-// import image1 from "assets/img/free/overview/image-1.png";
-// import image2 from "assets/img/free/overview/image-2.png";
-// import image3 from "assets/img/free/overview/image-3.png";
-// import image4 from "assets/img/free/overview/image-4.png";
-// import image5 from "assets/img/free/overview/image-5.png";
-// import image6 from "assets/img/free/overview/image-6.png";
-// import image from "assets/img/free/overview/image.png";
-
 // Custom components
 // import PageCard from "components/pages/divingHome/PageCard";
 // import Image from "components/actions/NextChakraImg";
+import { Parallax } from "react-scroll-parallax";
+
 import Image from "../../actions/NextChakraImg";
 import InnerContent from "layouts/InnerContent";
 
@@ -107,11 +101,58 @@ export default function Mission() {
         <Flex
           mb="90px"
           justify="center"
+          direction="column"
           // w={{ base: "72%", md: "90%" }}
           // flexWrap="wrap"
         >
+          {/* <Box>
+            <Image
+              src="/img/diving/dive_site_marker.svg"
+              width="100px"
+              height="50px"
+              ml="500px"
+            />
+          </Box> */}
+          <Grid templateColumns="repeat(20, 1fr)" gap={0} zIndex="20">
+            {/* <GridItem colStart={8} colSpan={1}>
+              <Parallax translateY={[0, 190, "easeOutExpo"]} endScroll={200}>
+                <Image
+                  src="/img/diving/dive_site_marker.svg"
+                  width="100px"
+                  height="150px"
+                />
+              </Parallax>
+            </GridItem> */}
+            <GridItem colStart={7} colSpan={1}>
+              <Parallax translateY={[0, 130, "easeOutExpo"]} endScroll={150}>
+                <Image
+                  src="/img/diving/dive_site_marker.svg"
+                  width="100px"
+                  height="150px"
+                />
+              </Parallax>
+            </GridItem>
+            <GridItem colStart={8} colSpan={1}>
+              <Parallax translateY={[0, 170, "easeOutExpo"]} endScroll={150}>
+                <Image
+                  src="/img/diving/dive_site_marker.svg"
+                  width="100px"
+                  height="150px"
+                />
+              </Parallax>
+            </GridItem>
+            <GridItem colStart={9} colSpan={1}>
+              <Parallax translateY={[0, 200, "easeOutExpo"]} endScroll={200}>
+                <Image
+                  src="/img/diving/dive_centre_marker.svg"
+                  width="100px"
+                  height="150px"
+                />
+              </Parallax>
+            </GridItem>
+          </Grid>
           <Image
-            src="/img/diving/egypt_dive_map2.jpg"
+            src="/img/diving/egypt_dive_map.png"
             // layout="fill"
             width="1000"
             height="500"
