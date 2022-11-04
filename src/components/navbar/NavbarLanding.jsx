@@ -51,6 +51,7 @@ export default function AdminNavbar(props) {
   const paddingX = "15px";
   const gap = "0px";
   const menuBg = useColorModeValue("white", "navy.800");
+  const menuTextColor = useColorModeValue("navy.800", "white");
   const shadow = useColorModeValue(
     "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
@@ -205,7 +206,7 @@ export default function AdminNavbar(props) {
                 >
                   <Link
                     href="/diving/home"
-                    color={textColor}
+                    color={menuTextColor}
                     fontSize="md"
                     fontWeight="500"
                     me="30px"
@@ -222,7 +223,7 @@ export default function AdminNavbar(props) {
                 >
                   <Link
                     href="/nfts/home"
-                    color={textColor}
+                    color={menuTextColor}
                     fontSize="md"
                     fontWeight="500"
                     me="30px"
@@ -240,8 +241,8 @@ export default function AdminNavbar(props) {
                     <Button
                       variant="no-hover"
                       border="1px solid"
-                      borderColor={textColor}
-                      color={textColor}
+                      borderColor={menuTextColor}
+                      color={menuTextColor}
                       fontSize="md"
                       borderRadius="12px"
                       bg="transparent"

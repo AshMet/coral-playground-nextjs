@@ -33,6 +33,7 @@ import {
 } from "@chakra-ui/react";
 // Custom components
 import { MdChevronRight } from "react-icons/md";
+import { Parallax } from "react-scroll-parallax";
 
 import Image from "../../actions/NextChakraImg";
 import InnerContent from "layouts/InnerContent";
@@ -60,48 +61,50 @@ export default function DiveSiteBenefits() {
             direction="column"
             width="stretch"
           >
-            <Box my="auto">
-              <Text
-                fontWeight="700"
-                letterSpacing="2px"
-                bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
-                bgClip="text"
-                fontSize="sm"
-                textAlign={{ base: "center", lg: "left" }}
-                w="100%"
-                mb="10px"
-              >
-                DIVE SITES
-              </Text>
-              <Text
-                fontWeight="800"
-                color={textColor}
-                fontSize={{ base: "28px", md: "48px" }}
-                lineHeight={{ base: "38px", md: "58px" }}
-                mb="20px"
-                textAlign={{ base: "center", lg: "left" }}
-                maxW={{ base: "100%", md: "unset" }}
-              >
-                All Site Info in One Place
-              </Text>
-              <Text
-                textAlign={{ base: "center", lg: "left" }}
-                color={textColorSecondary}
-                fontSize="lg"
-                w={{ base: "100%", md: "100%" }}
-                mb="30px"
-              >
-                Know everything you need to about your dive ahead of time so you
-                can choose the right sites for your interest and experience
-                levels. Coral Playground provides detailed information including
-                maps, descriptions, conditions and species
-              </Text>
-              <Flex
-                align="center"
-                mb="30px"
-                justifyContent={{ base: "center", lg: "unset" }}
-              >
-                {/* <Flex me={{ base: "20px", md: "50px" }} direction="column">
+            <Parallax opacity={[0, 1.5, "easeOutQuad"]}>
+              <Box my="auto">
+                <Text
+                  fontWeight="700"
+                  letterSpacing="2px"
+                  bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
+                  bgClip="text"
+                  fontSize="sm"
+                  textAlign={{ base: "center", lg: "left" }}
+                  w="100%"
+                  mb="10px"
+                >
+                  DIVE SITES
+                </Text>
+                <Text
+                  fontWeight="800"
+                  color={textColor}
+                  fontSize={{ base: "28px", md: "48px" }}
+                  lineHeight={{ base: "38px", md: "58px" }}
+                  mb="20px"
+                  textAlign={{ base: "center", lg: "left" }}
+                  maxW={{ base: "100%", md: "unset" }}
+                >
+                  All Site Info in One Place
+                </Text>
+                <Text
+                  textAlign={{ base: "center", lg: "left" }}
+                  color={textColorSecondary}
+                  fontSize="lg"
+                  w={{ base: "100%", md: "100%" }}
+                  mb="30px"
+                >
+                  Know everything you need to about your dive ahead of time so
+                  you can choose the right sites for your interest and
+                  experience levels. Coral Playground provides detailed
+                  information including maps, descriptions, conditions and
+                  species
+                </Text>
+                <Flex
+                  align="center"
+                  mb="30px"
+                  justifyContent={{ base: "center", lg: "unset" }}
+                >
+                  {/* <Flex me={{ base: "20px", md: "50px" }} direction="column">
                   <Text
                     color={textColor}
                     fontWeight="800"
@@ -120,53 +123,54 @@ export default function DiveSiteBenefits() {
                     DIVE SITES
                   </Text>
                 </Flex> */}
-              </Flex>
-              <Flex
-                align="center"
-                justifyContent={{ base: "center", lg: "unset" }}
-                direction={{ base: "column", md: "row" }}
-                mb="30px"
-              >
-                <Link href="/diving/dive_sites">
-                  <Button
-                    py="20px"
-                    px="16px"
-                    fontSize="sm"
-                    variant="brand"
-                    borderRadius="12px"
-                    me={{ base: "0px", md: "20px" }}
-                    mb={{ base: "20px", md: "0px" }}
-                    w={{ base: "335px", md: "210px" }}
-                    h="54px"
-                  >
-                    View Dive Sites
-                    <Icon
-                      as={MdChevronRight}
-                      ms="5px"
-                      mt="2px"
-                      h="16px"
-                      w="16px"
-                    />
-                  </Button>
-                </Link>
-                <Link href="/">
-                  <Button
-                    variant="no-hover"
-                    border="1px solid"
-                    borderColor={textColorSecondary}
-                    color={textColor}
-                    fontSize="md"
-                    borderRadius="12px"
-                    bg="transparent"
-                    my="auto"
-                    w={{ base: "335px", md: "180px" }}
-                    h="54px"
-                  >
-                    See Live Preview
-                  </Button>
-                </Link>
-              </Flex>
-            </Box>
+                </Flex>
+                <Flex
+                  align="center"
+                  justifyContent={{ base: "center", lg: "unset" }}
+                  direction={{ base: "column", md: "row" }}
+                  mb="30px"
+                >
+                  <Link href="/diving/dive_sites">
+                    <Button
+                      py="20px"
+                      px="16px"
+                      fontSize="sm"
+                      variant="brand"
+                      borderRadius="12px"
+                      me={{ base: "0px", md: "20px" }}
+                      mb={{ base: "20px", md: "0px" }}
+                      w={{ base: "335px", md: "210px" }}
+                      h="54px"
+                    >
+                      View Dive Sites
+                      <Icon
+                        as={MdChevronRight}
+                        ms="5px"
+                        mt="2px"
+                        h="16px"
+                        w="16px"
+                      />
+                    </Button>
+                  </Link>
+                  <Link href="/">
+                    <Button
+                      variant="no-hover"
+                      border="1px solid"
+                      borderColor={textColorSecondary}
+                      color={textColor}
+                      fontSize="md"
+                      borderRadius="12px"
+                      bg="transparent"
+                      my="auto"
+                      w={{ base: "335px", md: "180px" }}
+                      h="54px"
+                    >
+                      See Live Preview
+                    </Button>
+                  </Link>
+                </Flex>
+              </Box>
+            </Parallax>
             <Grid
               mb="20px"
               gridTemplateColumns={{
@@ -190,13 +194,15 @@ export default function DiveSiteBenefits() {
               />
             </Grid>
           </Flex>
-          <Image
-            src="/img/diving/coral_reef_3d.png"
-            // w={{ base: "100%", md: "100%", lg: "400px", xl: "565px" }}
-            width="1200px"
-            height="900px"
-            mt={{ base: "40px", md: "40px", lg: "0px" }}
-          />{" "}
+          <Parallax speed={-10}>
+            <Image
+              src="/img/diving/coral_reef_3d.png"
+              // w={{ base: "100%", md: "100%", lg: "400px", xl: "565px" }}
+              width="1200px"
+              height="900px"
+              mt={{ base: "40px", md: "40px", lg: "0px" }}
+            />
+          </Parallax>
         </Flex>
       </InnerContent>
     </Flex>

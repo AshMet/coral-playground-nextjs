@@ -51,7 +51,7 @@ export default function Benefits() {
       // pt={{ base: "80px", md: "120px", xl: "140px" }}
       // pb={{ base: "80px", lg: "120px", xl: "140px" }}
       overflow="hidden"
-      bgSize="cover"
+      // bgSize="cover"
       position="relative"
     >
       <InnerContent>
