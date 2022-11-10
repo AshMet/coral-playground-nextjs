@@ -9,11 +9,11 @@ import {
   useColorMode,
   useColorModeValue,
   Divider,
-  Button,
+  // Button,
 } from "@chakra-ui/react";
 // Custom components
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import Link from "next/link";
+// import Link from "next/link";
 import { MdAddCircle } from "react-icons/md";
 
 import Card from "components/card/Card";
@@ -30,7 +30,7 @@ const containerStyle = {
 
 // const userQuery = await new Moralis.Query(Moralis.Role).equalTo("users", user).find();
 
-export default function DiveCentreSidebar({ trips, diveCentreId, ...rest }) {
+export default function TripSidebar({ trips, diveCentreId, ...rest }) {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   // const textColorTertiary = useColorModeValue("secondaryGray.600", "white");
@@ -119,9 +119,13 @@ export default function DiveCentreSidebar({ trips, diveCentreId, ...rest }) {
       </Card>
       {trips.length > 0 ? (
         trips.map((trip) => (
-          <Flex direction="column" justify="space-between" align="center">
+          <Flex
+            key={trip.id}
+            direction="column"
+            justify="space-between"
+            align="center"
+          >
             <Transaction
-              key={trip.id}
               tripId={trip.id}
               siteList={trip.dive_sites}
               centreName={trip.dive_centre.name}
@@ -142,7 +146,8 @@ export default function DiveCentreSidebar({ trips, diveCentreId, ...rest }) {
           the time
         </Text>
       )}
-      {diveCentreId && (
+      {/* Need to add logic to authorize only allowed users to create a new trip */}
+      {/* {diveCentreId && (
         <Link
           href={{
             pathname: "/diving/dive_trips/new",
@@ -151,7 +156,7 @@ export default function DiveCentreSidebar({ trips, diveCentreId, ...rest }) {
         >
           <Button>New Trip</Button>
         </Link>
-      )}
+      )} */}
     </Card>
   );
 }

@@ -87,7 +87,7 @@ export default function Footer() {
               </Text>
             </Box>
           </Flex>
-          <Link href="/">
+          <Link href="https://instagram.com/coral.playground/">
             <Button
               ms={{ base: "0px", lg: "auto" }}
               bg="white"
@@ -248,14 +248,14 @@ export default function Footer() {
               Facebook
             </Link>
 
-            <Link
+            {/* <Link
               href="https://twitter.com/coral.playground"
               fontSize="md"
               color={textColorSecondary}
               fontWeight="400"
             >
               Twitter
-            </Link>
+            </Link> */}
           </Flex>
           <Flex direction="column" mt={{ base: "30px", md: "40px", lg: "0px" }}>
             <Text mb="20px" fontSize="lg" color={textFooter} fontWeight="700">

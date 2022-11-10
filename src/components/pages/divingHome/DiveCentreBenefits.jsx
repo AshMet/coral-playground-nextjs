@@ -141,7 +141,7 @@ export default function DiveCentreBenefits() {
                       />
                     </Button>
                   </Link>
-                  <Link href="/">
+                  {/* <Link href="/">
                     <Button
                       variant="no-hover"
                       border="1px solid"
@@ -156,7 +156,7 @@ export default function DiveCentreBenefits() {
                     >
                       See Live Preview
                     </Button>
-                  </Link>
+                  </Link> */}
                 </Flex>
               </Box>
             </Parallax>

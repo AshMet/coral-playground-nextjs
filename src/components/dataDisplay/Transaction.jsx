@@ -8,7 +8,6 @@ import {
   Icon,
   Text,
   Tooltip,
-  useToast,
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
@@ -21,7 +20,6 @@ import { IoStorefrontOutline } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
 
 import { DivingContext } from "../../contexts/DivingContext";
-import AlertPopup from "components/alerts/AlertPopup";
 
 import "../../../public/css/MiniCalendar.module.css";
 // import "react-calendar/dist/Calendar.css";
@@ -39,8 +37,7 @@ export default function Transaction(props) {
     priceId,
     ...rest
   } = props;
-  const { dives, setDives } = useContext(DivingContext);
-  const toast = useToast();
+  const { addToCart } = useContext(DivingContext);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const iconBoxBg = useColorModeValue("secondaryGray.300", "navy.700");
@@ -49,56 +46,6 @@ export default function Transaction(props) {
   // const router = useRouter();
 
   const siteNames = siteList?.map((site) => site.name).join(" + ");
-
-  const addDive = () => {
-    if (!diveDate && !value) {
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup
-            type="warning"
-            text="No Date Provided"
-            subtext="Please select a date before adding your dive"
-          />
-        ),
-      });
-      return;
-    }
-    const dive = {
-      id: tripId,
-      siteName: siteNames,
-      siteCount: siteList.length,
-      centreName,
-      diveDate: diveDate ? new Date(diveDate) : new Date(value),
-      diveTime: "morning",
-      price,
-      priceId,
-    };
-    // const line_item = {
-    //   trip_id: tripId,
-    //   user_selected_time: diveDate ? new Date(diveDate) : new Date(value),
-    //   diveTime: "morning",
-    //   quantity: 1,
-    //   siteName: siteNames,
-    //   siteCount: siteList.length,
-    //   centreName,
-    //   price,
-    //   priceId: "price_1LBLSVAvLPvC9h7xk0HEvL3f", // mapLocation.stripePriceId,
-    // };
-
-    const newDiveList = [dive, ...dives];
-    setDives(newDiveList);
-    toast({
-      position: "top",
-      render: () => (
-        <AlertPopup
-          type="success"
-          text="Dive Added"
-          subtext="View Shopping Cart to complete your order"
-        />
-      ),
-    });
-  };
 
   return (
     <Flex justifyContent="center" alignItems="center" w="100%" {...rest}>
@@ -175,7 +122,18 @@ export default function Transaction(props) {
             mt="10px"
             lineHeight="100%"
             borderRadius="10px"
-            onClick={addDive}
+            onClick={() =>
+              addToCart({
+                id: tripId,
+                siteName: siteNames,
+                siteCount: siteList.length,
+                centreName,
+                diveDate: diveDate ? new Date(diveDate) : new Date(value),
+                diveTime: "morning",
+                price,
+                priceId,
+              })
+            }
             {...rest}
           >
             <Icon as={MdAddCircle} color={textColor} w="24px" h="24px" />

@@ -237,7 +237,7 @@ export default function AdminNavbar(props) {
                   _focus={{ bg: "none" }}
                   borderRadius="8px"
                 >
-                  <Link href="#version">
+                  <Link href="/diving/map">
                     <Button
                       variant="no-hover"
                       border="1px solid"
@@ -263,7 +263,7 @@ export default function AdminNavbar(props) {
             </MenuList>
           </Menu>
 
-          <Link href="#version" display={{ base: "none", lg: "block" }}>
+          <Link href="/diving/map" display={{ base: "none", lg: "block" }}>
             <Button
               variant="no-hover"
               border="1px solid"

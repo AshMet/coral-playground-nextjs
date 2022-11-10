@@ -11,16 +11,11 @@ import TimelineItem from "components/dataDisplay/TimelineItem";
 
 export default function DiveList(props) {
   const { ...rest } = props;
-  const { dives, setDives } = useContext(DivingContext);
+  const { cartItems } = useContext(DivingContext);
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const purpleColor = useColorModeValue("purple.800", "purple.300");
-
-  const removeDive = (id) => {
-    const removedDive = [...dives].filter((dive) => dive.id !== id);
-    setDives(removedDive);
-  };
 
   return (
     <Card {...rest}>
@@ -37,23 +32,24 @@ export default function DiveList(props) {
           Complete your itinerary then continue to payment
         </Text> */}
       </Box>
-      {dives.length > 0 ? (
-        dives.map((dive) => (
+      {cartItems.length > 0 ? (
+        cartItems.map((dive) => (
           <TimelineItem
             key={dive.id}
             id={dive.id}
             mb="16px"
             title={dive.siteName}
             subtitle={dive.centreName}
-            day={dive.diveDate?.toLocaleDateString("en-US", { day: "numeric" })}
-            weekday={dive.diveDate?.toLocaleDateString("en-US", {
+            day={new Date(dive.diveDate).toLocaleDateString("en-US", {
+              day: "numeric",
+            })}
+            weekday={new Date(dive.diveDate).toLocaleDateString("en-US", {
               month: "short",
             })}
-            hours={dive.diveDate?.toLocaleTimeString("en-US", {
+            hours={new Date(dive.diveDate).toLocaleTimeString("en-US", {
               hour: "2-digit",
               minute: "2-digit",
             })}
-            removeDive={removeDive}
             confirmed
           />
         ))

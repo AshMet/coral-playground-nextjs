@@ -18,7 +18,7 @@ import Card from "../../card/Card";
 import TripSummary from "../../dataDisplay/TripSummary";
 
 export default function SummaryTable() {
-  const { dives } = useContext(DivingContext);
+  const { cartItems } = useContext(DivingContext);
   return (
     <Card>
       <Box>
@@ -35,19 +35,19 @@ export default function SummaryTable() {
               </Tr>
             </Thead>
             <Tbody>
-              {dives.length > 0 ? (
-                dives.map((dive, index) => (
+              {cartItems.length > 0 ? (
+                cartItems.map((item, index) => (
                   <Tr>
                     <Td>{index + 1}</Td>
                     <Td>
                       <TripSummary
-                        siteName={dive.siteName}
-                        centreName={dive.centreName}
-                        diveDate={dive.diveDate}
+                        siteName={item.siteName}
+                        centreName={item.centreName}
+                        diveDate={item.diveDate}
                       />
                     </Td>
                     <Td>1</Td>
-                    <Td isNumeric>€{dive.price / 100}</Td>
+                    <Td isNumeric>€{item.price / 100}</Td>
                     <Td isNumeric>€15</Td>
                   </Tr>
                 ))

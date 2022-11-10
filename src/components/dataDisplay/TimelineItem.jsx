@@ -9,12 +9,17 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // import React from "react";
+import { useContext } from "react";
 import { BsX } from "react-icons/bs";
 // Assets
 import { IoMdTime } from "react-icons/io";
 import { IoStorefrontOutline } from "react-icons/io5";
 
+import { DivingContext } from "contexts/DivingContext";
+
 export default function Default(props) {
+  const { removeFromCart } = useContext(DivingContext);
+
   const {
     confirmed,
     day,
@@ -24,7 +29,6 @@ export default function Default(props) {
     subtitle,
     id,
     diveCentre,
-    removeDive,
     ...rest
   } = props;
   // Chakra Color Mode
@@ -133,15 +137,12 @@ export default function Default(props) {
           bg="transparent"
           cursor="pointer"
           color="white"
-          // transformOrigin="50% 50%"
           _hover={{
             transform: "scale(1.5) rotate(180deg)",
+            transformOrigin: "center center",
           }}
-          onClick={() => removeDive(id)}
+          onClick={() => removeFromCart(id)}
         >
-          {/* <Text fontSize="sm" fontWeight="bold">
-            Remove
-          </Text> */}
           <Icon
             as={BsX}
             w="18px"
@@ -151,21 +152,6 @@ export default function Default(props) {
           />
         </Button>
       )}
-      {/* <Button
-        // mb="auto"
-        variant="no-hover"
-        bg="transparent"
-        p="0px"
-        ms="auto"
-        onClick={() => removeDive(id)}
-      >
-        <Icon
-          as={BsX}
-          color={confirmed ? textConfirmed : textNonConfirmed}
-          w="20px"
-          h="20px"
-        />
-      </Button> */}
     </Flex>
   );
 }

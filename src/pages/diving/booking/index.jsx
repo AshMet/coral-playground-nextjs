@@ -61,8 +61,7 @@ export default function NewBooking() {
     setLastDive,
     notes,
     setNotes,
-    dives,
-    // setDives,
+    cartItems,
   } = useContext(DivingContext);
   const [activeBullets, setActiveBullets] = useState({
     product: true,
@@ -284,7 +283,7 @@ export default function NewBooking() {
               {/* <DiveSelection /> */}
               <Flex justify="space-between" mt="24px">
                 <Button
-                  isLoading={dives.length === 0}
+                  isLoading={cartItems.length === 0}
                   loadingText="Select a Dive"
                   spinnerPlacement="end"
                   // spinner={<BeatLoader size={8} color='white' />}
@@ -332,7 +331,7 @@ export default function NewBooking() {
                     borderRadius="16px"
                     w={{ base: "128px", md: "148px" }}
                     h="46px"
-                    isActive={dives.length > 0}
+                    isActive={cartItems.length > 0}
                     onClick={() => pricingTab.current.click()}
                   >
                     Next
@@ -348,7 +347,7 @@ export default function NewBooking() {
             >
               <EquipmentSelection
                 mediaTab={mediaTab}
-                dives={dives}
+                dives={cartItems}
                 diverName={diverName}
                 diverEmail={diverEmail}
                 diverCert={diverCert}

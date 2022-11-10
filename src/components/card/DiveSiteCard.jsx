@@ -45,7 +45,7 @@ export default function DiveSiteCard(props) {
   const textColor = useColorModeValue("navy.700", "white");
   const bgImg =
     type === "dive_site"
-      ? "/img/diving/dive_site_bg.png"
+      ? "/img/diving/dive_site_bg.jpg"
       : "/img/diving/dive_centre_bg.jpg";
   const siteUrl =
     type === "dive_site"

@@ -184,7 +184,7 @@ export default function DiveSites({ data }) {
                       key={site.id}
                       id={site.id}
                       image={
-                        site.dive_map_url || "/img/diving/dive_site_bg.png"
+                        site.dive_map_url || "/img/diving/dive_site_bg.jpg"
                       }
                       name={site.name}
                       tagList={site.tags}

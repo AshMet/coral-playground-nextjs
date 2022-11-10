@@ -7,10 +7,10 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ethers } from "ethers";
+import { Tooltip, useToast } from "@chakra-ui/react";
 import { createContext, useState, useEffect } from "react";
-// import { useMoralis, useMoralisQuery, useMoralisWeb3Api } from "react-moralis";
 
+import AlertPopup from "../components/alerts/AlertPopup";
 import checkout from "components/pages/diving/checkout";
 import equipment from "lib/constants/equipment.json";
 
@@ -22,52 +22,72 @@ export const DivingProvider = ({ children }) => {
   const [diverCert, setDiverCert] = useState();
   const [lastDive, setLastDive] = useState();
   const [notes, setNotes] = useState();
-  const [dives, setDives] = useState([]);
+  const initialState = [];
   const [equipmentList, setEquipmentList] = useState([]);
+  const [cartItems, setCartItems] = useState(initialState);
 
-  // function toggleArrayItem(arr, item) {
-  //   arr.includes(item)
-  //     ? setEquipmentList(arr.filter((i) => i !== item)) // remove item
-  //     : setEquipmentList([...arr, item]); // add item
-  // }
+  const toast = useToast();
 
-  // function addDive(mapLocation, selectedDate, diveTime) {
-  //   // if (!mapLocation.name || !selectedDate || !diveTime) {
-  //   //   return;
-  //   // }
-  //   const dive = {
-  //     id: mapLocation.location_id,
-  //     siteName: mapLocation.name,
-  //     diveDate: selectedDate,
-  //     diveTime,
-  //     priceId: mapLocation.stripePriceId,
-  //   };
+  // Local Storage: setting & getting data
+  useEffect(() => {
+    const cartData = JSON.parse(localStorage.getItem("cartItems"));
+    console.log("localStorage1", localStorage);
+    console.log("cartData", cartData);
 
-  //   const newDiveList = [dive, ...dives];
-  //   setDives(newDiveList);
-  // }
+    if (cartData) {
+      setCartItems(cartData);
+    }
+  }, []);
 
-  // const lineItems = dives.map((dive) => {
-  //   return {
-  //     price: dive.priceId, // eg: "price_1KuasdfaWasdfasdfasfnsF4fi",
-  //     quantity: 1,
-  //   };
-  // });
+  useEffect(() => {
+    if (cartItems !== initialState) {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
+  }, [cartItems]);
 
-  const lineItems = dives.map((dive) => {
-    console.log("line item", dive);
+  function addToCart(newItem) {
+    if (!newItem.diveDate) {
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="warning"
+            text="No Date Provided"
+            subtext="Please select a date before adding your dive"
+          />
+        ),
+      });
+      return;
+    }
+
+    // Add condition for already existing item
+
+    setCartItems((prevItems) => [...prevItems, newItem]);
+    toast({
+      position: "top",
+      render: () => (
+        <AlertPopup
+          type="success"
+          text="Dive Added"
+          subtext="View Shopping Cart to complete your order"
+        />
+      ),
+    });
+  }
+
+  function removeFromCart(id) {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    toast({
+      position: "top",
+      render: () => <AlertPopup type="success" text="Dive Removed" />,
+    });
+  }
+
+  const lineItems = cartItems.map((item) => {
+    console.log("line item", item);
     return {
-      price: dive.priceId,
+      price: item.priceId,
       quantity: 1,
-      // metadata: {
-      //   trip_id: dive.id,
-      // trip_name: dive.siteName,
-      // number_of_dives: dive.siteCount,
-      // dive_centre: dive.centreName,
-      // dive_date: dive.diveDate,
-      // dive_time: "8:00 am",
-      // centre_cost: dive.price,
-      // },
     };
   });
 
@@ -77,19 +97,14 @@ export const DivingProvider = ({ children }) => {
     notes,
   };
 
-  // Convert dives array of objects into an object of objects, eg:
-  // dive1: JSON.stringify(dives[0]),
-  const sessionMetadata = dives.reduce(
+  const sessionMetadata = cartItems.reduce(
     (a, v) => ({ ...a, [`dive_${v.id}`]: JSON.stringify(v) }),
     {}
   );
 
   // console.log(equipmentList);
-  // console.log(dives);
-
-  console.log(equipmentList);
-  console.log("context dives", { ...dives });
-  console.log("context sessionMetadata", sessionMetadata);
+  // console.log("context dives", { ...cartItems });
+  // console.log("context sessionMetadata", sessionMetadata);
 
   const redirectToCheckout = async () => {
     checkout({
@@ -114,12 +129,13 @@ export const DivingProvider = ({ children }) => {
         setLastDive,
         notes,
         setNotes,
-        dives,
-        setDives,
-        // addDive,
         equipmentList,
         setEquipmentList,
         redirectToCheckout,
+        cartItems,
+        setCartItems,
+        addToCart,
+        removeFromCart,
       }}
     >
       {children}

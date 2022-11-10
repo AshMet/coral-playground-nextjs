@@ -152,7 +152,7 @@ export default function DiveSiteBenefits() {
                       />
                     </Button>
                   </Link>
-                  <Link href="/">
+                  {/* <Link href="/">
                     <Button
                       variant="no-hover"
                       border="1px solid"
@@ -167,7 +167,7 @@ export default function DiveSiteBenefits() {
                     >
                       See Live Preview
                     </Button>
-                  </Link>
+                  </Link> */}
                 </Flex>
               </Box>
             </Parallax>

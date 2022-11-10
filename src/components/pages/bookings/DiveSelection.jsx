@@ -43,17 +43,13 @@ function createKey(location) {
   return location.latitude + location.longitude;
 }
 export default function DiveSelection(props) {
-  const { tripDives, setTripDives } = props;
+  const { tripDives } = props;
 
   const [mapLocation, setMapLocation] = useState("Select Location");
   const [selectedDate, setSelectedDate] = useState();
   const [diveTime, setDiveTime] = useState();
   const [zoom, setZoom] = useState(5);
   const [infoOpen, setInfoOpen] = useState(false);
-  // const [data, setData] = useState();
-  // const [selectedPlace, setSelectedPlace] = useState(null);
-
-  // const { data } = useMoralisCloudFunction("getDiveSites");
 
   const API_URL = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites`;
 
@@ -62,7 +58,7 @@ export default function DiveSelection(props) {
       .get(API_URL)
       .then((res) => {
         setData(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((error) => {
         toast({
@@ -72,7 +68,6 @@ export default function DiveSelection(props) {
           ),
         });
       });
-    console.log(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -92,30 +87,8 @@ export default function DiveSelection(props) {
     libraries,
   });
 
-  // useEffect(() => {
-  //   const siteNames = tripDives?.map((site) => site.name).join(" + ");
-  // }, [tripDives]);
-
   if (loadError) return "Error Loading Maps";
   if (!isLoaded) return "Loading Map";
-
-  const addDive = () => {
-    if (!mapLocation.name) {
-      return;
-    }
-    // const dive = {
-    //   id: mapLocation.location_id,
-    //   siteName: mapLocation.name,
-    //   diveDate: selectedDate,
-    //   diveTime,
-    //   priceId: mapLocation.stripePriceId,
-    // };
-
-    const newDiveList = [mapLocation, ...tripDives];
-    setTripDives(newDiveList);
-    console.log(tripDives[0]);
-    console.log(mapLocation);
-  };
 
   const markerClickHandler = (event, place) => {
     // Remember which place was clicked
