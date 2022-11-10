@@ -110,7 +110,7 @@ const HomeHero = () => {
             w="full"
             src="/img/home/parallax/landing-orca.png"
             opacity={0.99}
-            startScroll={500}
+            startscroll={500}
           />
         </Parallax>
       </Box>

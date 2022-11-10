@@ -74,8 +74,6 @@ export const DivingProvider = ({ children }) => {
       return;
     }
 
-    // Add condition for already existing item
-
     setCartItems((prevItems) => [...prevItems, newItem]);
     toast({
       position: "top",

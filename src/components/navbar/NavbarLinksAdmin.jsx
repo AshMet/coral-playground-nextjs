@@ -23,6 +23,8 @@ import {
   useColorModeValue,
   useColorMode,
   Tooltip,
+  IconButton,
+  AvatarBadge,
 } from "@chakra-ui/react";
 // Custom Components
 import { useRouter } from "next/router";
@@ -30,19 +32,21 @@ import PropTypes from "prop-types";
 // import React from "react";
 // Assets
 // import navImage from "assets/img/layout/Navbar.png";
-import { FaBitcoin, FaEthereum } from "react-icons/fa";
+import { useContext } from "react";
+import { FaBitcoin, FaEthereum, FaShoppingCart } from "react-icons/fa";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import { IoLogOutOutline, IoWalletOutline } from "react-icons/io5";
 import { MdInfoOutline, MdOutlineShoppingCart } from "react-icons/md";
 import { user, useMoralis } from "react-moralis";
 
+import { DivingContext } from "../../contexts/DivingContext";
 import routes from "../../routes";
 // import ItemContent from "../menu/ItemContent";
+import ShoppingCart from "../pages/bookings/ShoppingCart";
 import { ProfileIcon } from "components/icons/Icons";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Balance from "components/navbar/Balance";
 import SearchBar from "components/navbar/searchBar/SearchBar";
-import DiveList from "components/pages/bookings/DiveList";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
 
 function SignedOutMenuList() {
@@ -235,71 +239,90 @@ function SignedInMenuList() {
   );
 }
 
-function ShoppingCart() {
-  const menuBg = useColorModeValue("white", "navy.800");
-  const shadow = useColorModeValue(
-    "40px 17px 40px 4px rgba(112, 144, 176, 0.38)",
-    "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
-  );
+// function ShoppingCart() {
+//   const menuBg = useColorModeValue("white", "navy.800");
+//   const shadow = useColorModeValue(
+//     "40px 17px 40px 4px rgba(112, 144, 176, 0.38)",
+//     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
+//   );
+//   const { cartItems } = useContext(DivingContext);
+//   console.log("navbar cartItems", cartItems);
 
-  const router = useRouter();
-  return (
-    <Menu>
-      <Tooltip label="Shopping Cart">
-        <MenuButton display="flex" alignItems="center" p="0px">
-          <Icon
-            mt="6px"
-            as={MdOutlineShoppingCart}
-            // color={navbarIcon}
-            w="18px"
-            h="18px"
-            me="10px"
-            // onClick={() => getFiat()}
-          />
-        </MenuButton>
-      </Tooltip>
-      <MenuList
-        boxShadow="dark-lg"
-        p="0px"
-        mt="10px"
-        borderRadius="20px"
-        bg={menuBg}
-        border="none"
-      >
-        <Flex
-          flexDirection="column"
-          maxW={{ sm: "sm", md: "lg" }}
-          p="10px"
-          borderBottom="1px solid gray"
-        >
-          <DiveList />
-        </Flex>
-        <Flex w="100%" p="10px" mb="0px">
-          <MenuItem
-            _hover={{ bg: "none" }}
-            _focus={{ bg: "none" }}
-            borderRadius="8px"
-            alignItems="end"
-            px="14px"
-          >
-            <Button
-              onClick={() => router.push("/diving/booking")}
-              variant="link"
-              colorScheme="purple"
-              size="sm"
-              mr={4}
-              leftIcon={
-                <MdOutlineShoppingCart w="22px" h="22px" me="0px" ml="5" />
-              }
-            >
-              Checkout
-            </Button>
-          </MenuItem>
-        </Flex>
-      </MenuList>
-    </Menu>
-  );
-}
+//   const router = useRouter();
+//   return (
+//     <Menu>
+//       <Tooltip label="Shopping Cart">
+//         <MenuButton display="flex" alignItems="center" p="0px">
+//           {cartItems.length === 0 ? (
+//             <Icon
+//               mt="6px"
+//               as={MdOutlineShoppingCart}
+//               w="18px"
+//               h="18px"
+//               me="10px"
+//             />
+//           ) : (
+//             <IconButton
+//               size="sm"
+//               variant="unstyled"
+//               aria-label="open menu"
+//               mr="10px"
+//               icon={
+//                 <Avatar
+//                   icon={<MdOutlineShoppingCart />}
+//                   size="sm"
+//                   color="white"
+//                   bg="rgba(12, 144, 6, 0.38)"
+//                 >
+//                   <AvatarBadge boxSize="1em" bg="green.500" />
+//                 </Avatar>
+//               }
+//             />
+//           )}
+//         </MenuButton>
+//       </Tooltip>
+//       <MenuList
+//         boxShadow="dark-lg"
+//         p="0px"
+//         mt="10px"
+//         borderRadius="20px"
+//         bg={menuBg}
+//         border="none"
+//       >
+//         <Flex
+//           flexDirection="column"
+//           maxW={{ sm: "sm", md: "lg" }}
+//           p="10px"
+//           borderBottom="1px solid gray"
+//         >
+//           <DiveList />
+//         </Flex>
+//         <Flex w="100%" p="10px" mb="0px">
+//           <MenuItem
+//             _hover={{ bg: "none" }}
+//             _focus={{ bg: "none" }}
+//             borderRadius="8px"
+//             alignItems="end"
+//             px="14px"
+//           >
+//             <Button
+//               onClick={() => router.push("/diving/booking")}
+//               variant="link"
+//               colorScheme="purple"
+//               size="sm"
+//               mr={4}
+//               leftIcon={
+//                 <MdOutlineShoppingCart w="22px" h="22px" me="0px" ml="5" />
+//               }
+//             >
+//               Checkout
+//             </Button>
+//           </MenuItem>
+//         </Flex>
+//       </MenuList>
+//     </Menu>
+//   );
+// }
 
 export default function HeaderLinks(props) {
   const { secondary } = props;
@@ -326,15 +349,15 @@ export default function HeaderLinks(props) {
   );
   const borderButton = useColorModeValue("secondaryGray.500", "whiteAlpha.200");
 
-  const getFiat = async function () {
-    Moralis.initPlugins();
-    await Moralis.Plugins.fiat.buy(
-      {},
-      {
-        disableTriggers: true,
-      }
-    );
-  };
+  // const getFiat = async function () {
+  //   Moralis.initPlugins();
+  //   await Moralis.Plugins.fiat.buy(
+  //     {},
+  //     {
+  //       disableTriggers: true,
+  //     }
+  //   );
+  // };
 
   return (
     <Flex
@@ -375,7 +398,7 @@ export default function HeaderLinks(props) {
         <Balance user={user} />
       </Flex>
       <SidebarResponsive routes={routes} />
-      <Menu>
+      {/* <Menu>
         <Tooltip label="Buy Crypto">
           <MenuButton display="flex" alignItems="center" p="0px">
             <Icon
@@ -389,7 +412,7 @@ export default function HeaderLinks(props) {
             />
           </MenuButton>
         </Tooltip>
-      </Menu>
+      </Menu> */}
       <ShoppingCart />
 
       {/* <Menu>
