@@ -12,10 +12,10 @@ import { useEffect, useState } from "react";
 import Card from "components/card/Card";
 import SiteInfo from "components/pages/diveSite/SiteInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 export default function DiveSitePage({ data }) {
-  console.log("siteData", data);
+  // console.log("siteData", data);
 
   const router = useRouter();
   const { id } = router.query;
@@ -28,7 +28,7 @@ export default function DiveSitePage({ data }) {
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites/${id}/site_trips`
       );
       setTrips(result.data);
-      console.log("trips", trips);
+      // console.log("trips", trips);
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -145,5 +145,5 @@ export const getStaticProps = async ({ params }) => {
 };
 
 DiveSitePage.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

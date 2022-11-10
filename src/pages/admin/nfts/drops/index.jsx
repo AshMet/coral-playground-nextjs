@@ -41,7 +41,7 @@ import Description from "../../../../components/pages/nftDrops/Description";
 // import NFT from "components/card/NFT";
 import ColorPicker from "components/pages/nftDrops/ColorPicker";
 // import TableLastOffer from "./components/TableLastOffer";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 export default function Drops() {
   // const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -206,5 +206,5 @@ export default function Drops() {
 }
 
 Drops.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

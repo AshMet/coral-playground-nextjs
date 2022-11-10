@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import Card from "components/card/Card";
 import SiteInfo from "components/pages/diveCentre/SiteInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 // const Moralis = require("moralis/node");
 
@@ -55,7 +55,7 @@ export default function DiveCentre({ data }) {
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_centres/${id}/centre_trips`
       );
       setTrips(result.data);
-      console.log("trips", trips);
+      // console.log("trips", trips);
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -235,5 +235,5 @@ export const getStaticProps = async ({ params }) => {
 // };
 
 DiveCentre.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

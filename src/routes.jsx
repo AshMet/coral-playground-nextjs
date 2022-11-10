@@ -1,11 +1,11 @@
 /* eslint-disable import/no-cycle */
 import { Icon } from "@chakra-ui/react";
-import { FaEthereum } from "react-icons/fa";
+// import { FaEthereum } from "react-icons/fa";
 import {
   GiScubaMask,
   GiGraduateCap,
   // GiOctopus,
-  GiLockedChest,
+  // GiLockedChest,
   GiDivingHelmet,
 } from "react-icons/gi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -32,7 +32,7 @@ import DiveCentres from "pages/diving/dive_centres";
 import DiveSites from "pages/diving/dive_sites";
 import DivingHome from "pages/diving/home";
 import DiveMap from "pages/diving/map";
-import NFTDrops from "pages/nfts/drops";
+// import NFTDrops from "pages/nfts/drops";
 // import NFTPage from "pages/admin/nfts/page";
 // import NFTProfile from "pages/admin/nfts/profile";
 // Main Imports
@@ -293,74 +293,74 @@ const routes = [
   //   invisible: true,
   // },
   // --- NFTs ---
-  {
-    name: "NFTs",
-    path: "/nfts",
-    icon: <Icon as={FaEthereum} width="20px" height="20px" color="inherit" />,
-    collapse: true,
-    items: [
-      {
-        name: "Home",
-        layout: "/nfts",
-        path: "/home",
-        icon: <Icon as={MdHome} width="15px" height="20px" color="inherit" />,
-      },
-      // {
-      //   name: "Marketplace",
-      //   layout: "",
-      //   path: "/nfts/marketplace",
-      //   icon: (
-      //     <Icon
-      //       as={MdOutlineShoppingCart}
-      //       width="15px"
-      //       height="15px"
-      //       color="inherit"
-      //     />
-      //   ),
-      //   component: NFTMarketplace,
-      //   secondary: true,
-      // },
-      // {
-      //   name: "Collection",
-      //   layout: "/admin",
-      //   path: "/nfts/collection",
-      //   icon: (
-      //     <Icon
-      //       as={MdOutlineCollections}
-      //       width="15px"
-      //       height="15px"
-      //       color="inherit"
-      //     />
-      //   ),
-      //   component: NFTCollection,
-      //   secondary: true,
-      // },
-      // {
-      //   name: "NFT Page",
-      //   layout: "/admin",
-      //   path: "/nfts/page",
-      //   component: NFTPage,
-      //   secondary: true,
-      // },
-      // {
-      //   name: "Profile",
-      //   layout: "/admin",
-      //   path: "/nfts/profile",
-      //   component: NFTProfile,
-      //   secondary: true,
-      // },
-      {
-        name: "Drops",
-        layout: "/nfts",
-        path: "/drops",
-        icon: (
-          <Icon as={GiLockedChest} width="15px" height="15px" color="inherit" />
-        ),
-        component: NFTDrops,
-        secondary: true,
-      },
-    ],
-  },
+  // {
+  //   name: "NFTs",
+  //   path: "/nfts",
+  //   icon: <Icon as={FaEthereum} width="20px" height="20px" color="inherit" />,
+  //   collapse: true,
+  //   items: [
+  //     {
+  //       name: "Home",
+  //       layout: "/nfts",
+  //       path: "/home",
+  //       icon: <Icon as={MdHome} width="15px" height="20px" color="inherit" />,
+  //     },
+  // {
+  //   name: "Marketplace",
+  //   layout: "",
+  //   path: "/nfts/marketplace",
+  //   icon: (
+  //     <Icon
+  //       as={MdOutlineShoppingCart}
+  //       width="15px"
+  //       height="15px"
+  //       color="inherit"
+  //     />
+  //   ),
+  //   component: NFTMarketplace,
+  //   secondary: true,
+  // },
+  // {
+  //   name: "Collection",
+  //   layout: "/admin",
+  //   path: "/nfts/collection",
+  //   icon: (
+  //     <Icon
+  //       as={MdOutlineCollections}
+  //       width="15px"
+  //       height="15px"
+  //       color="inherit"
+  //     />
+  //   ),
+  //   component: NFTCollection,
+  //   secondary: true,
+  // },
+  // {
+  //   name: "NFT Page",
+  //   layout: "/admin",
+  //   path: "/nfts/page",
+  //   component: NFTPage,
+  //   secondary: true,
+  // },
+  // {
+  //   name: "Profile",
+  //   layout: "/admin",
+  //   path: "/nfts/profile",
+  //   component: NFTProfile,
+  //   secondary: true,
+  // },
+  //     {
+  //       name: "Drops",
+  //       layout: "/nfts",
+  //       path: "/drops",
+  //       icon: (
+  //         <Icon as={GiLockedChest} width="15px" height="15px" color="inherit" />
+  //       ),
+  //       component: NFTDrops,
+  //       secondary: true,
+  //     },
+  //   ],
+  // },
   // --- Main pages ---
   // {
   //   name: "Main Pages",

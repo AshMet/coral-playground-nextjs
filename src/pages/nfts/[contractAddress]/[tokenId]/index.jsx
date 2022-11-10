@@ -51,7 +51,7 @@ import Banner from "../../../../components/pages/nftPage/Banner";
 import Details from "../../../../components/pages/nftPage/Details";
 import NFT from "components/card/NFT";
 // import useTokenUriDetails from "components/hooks/useTokenUriDetails";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 export default function Page() {
   const router = useRouter();
@@ -108,7 +108,7 @@ export default function Page() {
         setImageUrl(responseJson.image);
         setMetaAttributes(responseJson.attributes);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
     getNFTurl();
@@ -254,5 +254,5 @@ export default function Page() {
 }
 
 Page.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

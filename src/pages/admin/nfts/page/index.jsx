@@ -53,7 +53,7 @@ import TableLastOffer from "../../../../components/pages/nftPage/TableLastOffer"
 import { tableColumnsLastOffer } from "../../../../variables/nftPage/tableColumnsLastOffer";
 import tableDataLastOffer from "../../../../variables/nftPage/tableDataLastOffer.json";
 import NFT from "components/card/NFT";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 export default function Page() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -182,5 +182,5 @@ export default function Page() {
 }
 
 Page.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

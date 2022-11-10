@@ -9,7 +9,7 @@ import { useState } from "react";
 import AlertPopup from "components/alerts/AlertPopup";
 // import DiveSelection from "components/pages/bookings/DiveSelection";
 import TripDetails from "components/pages/diveTrips/TripDetails";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 export default function NewTrip() {
   // const [tripDives, setTripDives] = useState([]);
@@ -119,5 +119,5 @@ export default function NewTrip() {
 // };
 
 NewTrip.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

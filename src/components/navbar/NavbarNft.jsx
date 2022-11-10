@@ -23,7 +23,7 @@ import { useState, useEffect } from "react";
 
 import AdminNavbarLinks from "components/navbar/NavbarLinksAdmin";
 
-export default function AdminNavbar(props) {
+export default function NavbarNft(props) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -158,7 +158,7 @@ export default function AdminNavbar(props) {
   );
 }
 
-AdminNavbar.propTypes = {
+NavbarNft.propTypes = {
   brandText: PropTypes.string,
   variant: PropTypes.string,
   secondary: PropTypes.bool,

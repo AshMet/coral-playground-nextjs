@@ -31,7 +31,7 @@ import Stripe from "stripe";
 import Card from "components/card/Card";
 import Banner from "components/pages/diving/Banner";
 import Content from "components/pages/diving/Content";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 export default function Invoice({ session, lineItems }) {
   // console.log("session", session);
@@ -90,5 +90,5 @@ export const getServerSideProps = async (context) => {
 };
 
 Invoice.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

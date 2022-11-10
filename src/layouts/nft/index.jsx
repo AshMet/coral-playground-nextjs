@@ -8,20 +8,25 @@
 // Chakra imports
 import { Portal, Box, useDisclosure } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { MoralisProvider } from "react-moralis";
 
-import Footer from "../../components/footer/FooterAdmin";
-// Layout components
-import Navbar from "../../components/navbar/NavbarAdmin";
-import Sidebar from "../../components/sidebar/Sidebar";
-import SidebarContext from "../../contexts/SidebarContext";
 import routes from "../../routes";
+import Footer from "components/footer/FooterAdmin";
+// Layout components
+import Navbar from "components/navbar/NavbarNft";
+import Sidebar from "components/sidebar/Sidebar";
+import { CoralPgProvider } from "contexts/CoralPgContext";
+import SidebarContext from "contexts/SidebarContext";
 
 // import { Redirect, Route, Switch } from "react-router-dom";
 // import "mapbox-gl/dist/mapbox-gl.css";
 
 // Custom Chakra theme
-export default function Dashboard({ children, ...props }) {
+export default function NftLayout({ children, ...props }) {
   const { ...rest } = props;
+
+  const APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+  const SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
   // states and functions
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -128,61 +133,65 @@ export default function Dashboard({ children, ...props }) {
   const { onOpen } = useDisclosure();
   return (
     <Box>
-      <SidebarContext.Provider
-        value={{
-          toggleSidebar,
-          setToggleSidebar,
-        }}
-      >
-        <Sidebar routes={routes} display="none" {...rest} />
-        <Box
-          float="right"
-          minHeight="100vh"
-          height="100%"
-          overflow="auto"
-          position="relative"
-          maxHeight="100%"
-          w={{ base: "100%", xl: "calc( 100% - 290px )" }}
-          maxWidth={{ base: "100%", xl: "calc( 100% - 290px )" }}
-          transition="all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1)"
-          transitionDuration=".2s, .2s, .35s"
-          transitionProperty="top, bottom, width"
-          transitionTimingFunction="linear, linear, ease"
-        >
-          <Portal>
-            <Box>
-              <Navbar
-                onOpen={onOpen}
-                logoText="Coral Playground"
-                brandText={getActiveRoute(routes)}
-                secondary={getActiveNavbar(routes)}
-                message={getActiveNavbarText(routes)}
-                fixed={fixed}
-                {...rest}
-              />
-            </Box>
-          </Portal>
-
-          {/* {getRoute() ? ( */}
-          <Box
-            mx="auto"
-            p={{ base: "20px", md: "30px" }}
-            pe="20px"
-            minH="100vh"
-            pt="50px"
+      <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
+        <CoralPgProvider>
+          <SidebarContext.Provider
+            value={{
+              toggleSidebar,
+              setToggleSidebar,
+            }}
           >
-            {/* <Switch>
+            <Sidebar routes={routes} display="none" {...rest} />
+            <Box
+              float="right"
+              minHeight="100vh"
+              height="100%"
+              overflow="auto"
+              position="relative"
+              maxHeight="100%"
+              w={{ base: "100%", xl: "calc( 100% - 290px )" }}
+              maxWidth={{ base: "100%", xl: "calc( 100% - 290px )" }}
+              transition="all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1)"
+              transitionDuration=".2s, .2s, .35s"
+              transitionProperty="top, bottom, width"
+              transitionTimingFunction="linear, linear, ease"
+            >
+              <Portal>
+                <Box>
+                  <Navbar
+                    onOpen={onOpen}
+                    logoText="Coral Playground"
+                    brandText={getActiveRoute(routes)}
+                    secondary={getActiveNavbar(routes)}
+                    message={getActiveNavbarText(routes)}
+                    fixed={fixed}
+                    {...rest}
+                  />
+                </Box>
+              </Portal>
+
+              {/* {getRoute() ? ( */}
+              <Box
+                mx="auto"
+                p={{ base: "20px", md: "30px" }}
+                pe="20px"
+                minH="100vh"
+                pt="50px"
+              >
+                {/* <Switch>
                 {getRoutes(routes)}
                 <Redirect from='/' to='/admin/dashboards/default' />
               </Switch> */}
-            {children}
-          </Box>
-          {/* ) : null} */}
-          <Box>
-            <Footer />
-          </Box>
-        </Box>
-      </SidebarContext.Provider>
+                {children}
+              </Box>
+              {/* ) : null} */}
+              <Box>
+                <Footer />
+              </Box>
+            </Box>
+          </SidebarContext.Provider>
+        </CoralPgProvider>
+      </MoralisProvider>
     </Box>
   );
 }

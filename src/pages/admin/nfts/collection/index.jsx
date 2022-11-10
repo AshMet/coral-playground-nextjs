@@ -50,7 +50,7 @@ import NftBanner1 from "../../../../../public/img/nfts/NftBanner1.jpg";
 import NFT from "../../../../components/card/NFT";
 import Banner from "../../../../components/pages/nftCollection/Banner";
 import SearchBar from "../../../../components/pages/nftCollection/Search";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 export default function Collection() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -191,5 +191,5 @@ export default function Collection() {
 }
 
 Collection.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

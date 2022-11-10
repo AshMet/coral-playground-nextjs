@@ -25,7 +25,7 @@ import { MdApps, MdDashboard } from "react-icons/md";
 
 // import { SearchBar } from "views/admin/nfts/profile/components/Search";
 import DiveSiteCard from "components/card/DiveSiteCard";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === "children",
@@ -86,7 +86,7 @@ export default function DiveSites({ data }) {
     }
     const cityFiltered = data.filter((site) => site.city === city);
     setFiltered(cityFiltered);
-    console.log("site data", data);
+    // console.log("site data", data);
   }, [data, city, country]);
 
   return (
@@ -222,5 +222,5 @@ export async function getStaticProps() {
   }
 }
 DiveSites.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

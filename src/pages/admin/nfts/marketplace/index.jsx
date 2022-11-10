@@ -56,7 +56,7 @@ import HistoryItem from "../../../../components/pages/nftMarketplace/HistoryItem
 import TableTopCreators from "../../../../components/pages/nftMarketplace/TableTopCreators";
 import tableColumnsTopCreators from "../../../../variables/nftMarketplace/tableColumnsTopCreators";
 import tableDataTopCreators from "../../../../variables/nftMarketplace/tableDataTopCreators.json";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 export default function Marketplace() {
   // Chakra Color Mode
@@ -300,5 +300,5 @@ export default function Marketplace() {
 }
 
 Marketplace.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

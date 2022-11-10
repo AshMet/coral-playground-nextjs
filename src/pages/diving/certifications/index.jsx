@@ -49,7 +49,7 @@ import Card from "components/card/Card";
 import Course from "components/card/Course";
 import BookingDetails from "components/pages/bookings/BookingDetails";
 import { VSeparator } from "components/separator/Separator";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 import courses from "lib/constants/courses.json";
 
 export default function Courses() {
@@ -302,5 +302,5 @@ export default function Courses() {
 // };
 
 Courses.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

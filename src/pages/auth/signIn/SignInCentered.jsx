@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable consistent-return */
@@ -102,8 +103,8 @@ function SignIn() {
   }, []);
 
   async function handleSubmit(event) {
-    console.log("start login email", emailRef);
-    console.log("start login password", passwordRef);
+    // console.log("start login email", emailRef);
+    // console.log("start login password", passwordRef);
     event.preventDefault();
     setErrors([]);
     if (
@@ -119,7 +120,7 @@ function SignIn() {
       password: passwordRef.current.value,
     };
     const response = await dispatch(loginUser(payload));
-    console.log(response);
+    // console.log(response);
     if (errorMessages.length === 0) {
       router.push("/");
     } else {

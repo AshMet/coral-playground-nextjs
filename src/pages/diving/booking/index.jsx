@@ -47,7 +47,7 @@ import Card from "components/card/Card";
 import DiverInfo from "components/pages/bookings/DiverInfo";
 // import DiveSelection from "components/pages/bookings/DiveSelection";
 import EquipmentSelection from "components/pages/bookings/EquipmentSelection";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 export default function NewBooking() {
   const {
@@ -423,5 +423,5 @@ export default function NewBooking() {
 }
 
 NewBooking.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

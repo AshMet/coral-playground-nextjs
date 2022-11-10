@@ -24,7 +24,7 @@ import { MdApps, MdDashboard } from "react-icons/md";
 
 // import { SearchBar } from "views/admin/nfts/profile/components/Search";
 import DiveSiteCard from "components/card/DiveSiteCard";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 // const Moralis = require("moralis/node");
 
@@ -59,7 +59,7 @@ export default function DiveSites({ data }) {
       setFiltered(data);
       return;
     }
-    console.log("centres", data);
+    // console.log("centres", data);
     const cityFiltered = data.filter((site) => site.city === city);
     setFiltered(cityFiltered);
   }, [data, city, country]);
@@ -207,5 +207,5 @@ export async function getStaticProps() {
   }
 }
 DiveSites.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

@@ -69,7 +69,7 @@ import SearchBar from "../../../../components/pages/nftProfile/Search";
 import CollectionCard from "components/card/CollectionCard";
 import NFT from "components/card/NFT";
 import { HSeparator } from "components/separator/Separator";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 
 export default function Collection() {
   const [tabState, setTabState] = useState("collected");
@@ -499,5 +499,5 @@ export default function Collection() {
 }
 
 Collection.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

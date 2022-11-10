@@ -46,7 +46,7 @@ import Card from "components/card/Card";
 // import SearchBar from "components/navbar/searchBar/SearchBar";
 // import LocationSummary from "components/maps/LocationSummary";
 import DiveSiteCard from "components/card/DiveSiteCard";
-import AdminLayout from "layouts/admin";
+import NftLayout from "layouts/nft";
 // const Moralis = require("moralis/node");
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -276,5 +276,5 @@ export async function getStaticProps() {
 // }
 
 Default.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <NftLayout>{page}</NftLayout>;
 };

@@ -31,8 +31,8 @@ export const DivingProvider = ({ children }) => {
   // Local Storage: setting & getting data
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem("cartItems"));
-    console.log("localStorage1", localStorage);
-    console.log("cartData", cartData);
+    // console.log("localStorage1", localStorage);
+    // console.log("cartData", cartData);
 
     if (cartData) {
       setCartItems(cartData);
@@ -46,6 +46,20 @@ export const DivingProvider = ({ children }) => {
   }, [cartItems]);
 
   function addToCart(newItem) {
+    const alreadyInCart = cartItems.some((item) => item.id === newItem.id);
+    if (alreadyInCart) {
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="warning"
+            text="Item was already added"
+            subtext="Select a different dive"
+          />
+        ),
+      });
+      return;
+    }
     if (!newItem.diveDate) {
       toast({
         position: "top",
@@ -84,7 +98,7 @@ export const DivingProvider = ({ children }) => {
   }
 
   const lineItems = cartItems.map((item) => {
-    console.log("line item", item);
+    // console.log("line item", item);
     return {
       price: item.priceId,
       quantity: 1,

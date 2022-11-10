@@ -59,7 +59,7 @@ export const CoralPgProvider = ({ children }) => {
   } = useMoralisQuery("DivePhoto");
 
   useEffect(async () => {
-    console.log(assetsData);
+    // console.log(assetsData);
     await enableWeb3();
     await getAssets();
     // await getOwnedAssets();
@@ -112,7 +112,7 @@ export const CoralPgProvider = ({ children }) => {
     const price = ethers.BigNumber.from("100000000000000");
     const calcPrice = amount.mul(price);
 
-    console.log(coralOctoAddress);
+    // console.log(coralOctoAddress);
 
     const options = {
       contractAddress: coralOctoAddress,
@@ -126,7 +126,7 @@ export const CoralPgProvider = ({ children }) => {
     const transaction = await Moralis.executeFunction(options);
     const receipt = await transaction.wait();
     setIsLoading(false);
-    console.log(receipt);
+    // console.log(receipt);
     setEtherscanLink(
       `https://rinkeby.etherscan.io/tx/${receipt.transactionHash}`
     );
@@ -139,10 +139,10 @@ export const CoralPgProvider = ({ children }) => {
         user.save();
         setNickname("");
       } else {
-        console.log("Can't set empty nickname");
+        // console.log("Can't set empty nickname");
       }
     } else {
-      console.log("No user");
+      // console.log("No user");
     }
   };
 
@@ -178,7 +178,7 @@ export const CoralPgProvider = ({ children }) => {
 
       if (isWeb3Enabled) {
         const response = await Web3Api.account.getNativeBalance(options);
-        console.log(response.toString());
+        // console.log(response.toString());
         if (response?.balance) {
           const ethBalanceValue = Web3Api.Moralis.Units.FromWei(
             response.balance
@@ -187,16 +187,16 @@ export const CoralPgProvider = ({ children }) => {
         }
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
   const buyAsset = async (price, asset) => {
     try {
       if (!isAuthenticated) return;
-      console.log("price: ", price);
-      console.log("asset: ", asset.name);
-      console.log(userData);
+      // console.log("price: ", price);
+      // console.log("asset: ", asset.name);
+      // console.log(userData);
 
       const options = {
         type: "erc20",
@@ -224,7 +224,7 @@ export const CoralPgProvider = ({ children }) => {
         });
       }
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
     }
   };
 
@@ -235,7 +235,7 @@ export const CoralPgProvider = ({ children }) => {
       // const results = await query.find();
       setAssets(assetsData);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -243,8 +243,8 @@ export const CoralPgProvider = ({ children }) => {
     const query = new Moralis.Query("EthTransactions");
     const subscription = await query.subscribe();
     subscription.on("update", async (object) => {
-      console.log("New Transactions");
-      console.log(object);
+      // console.log("New Transactions");
+      // console.log(object);
       setRecentTransactions([object]);
     });
   };
@@ -261,7 +261,7 @@ export const CoralPgProvider = ({ children }) => {
         ]);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
