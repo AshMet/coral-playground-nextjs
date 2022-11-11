@@ -18,7 +18,7 @@ import { MdAddCircle } from "react-icons/md";
 
 import Card from "components/card/Card";
 // import TimelineItem from "components/dataDisplay/TimelineItem";
-import Transaction from "components/dataDisplay/Transaction";
+import TripLineItem from "components/dataDisplay/TripLineItem";
 import { DarkMap, LightMap } from "components/maps/MapStyles";
 
 const mapApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -33,7 +33,10 @@ const containerStyle = {
 export default function TripSidebar({ trips, diveCentreId, ...rest }) {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  // const textColorTertiary = useColorModeValue("secondaryGray.600", "white");
+  const textColorTertiary = useColorModeValue(
+    "secondaryGray.700",
+    "secondaryGray.500"
+  );
   const bg = useColorModeValue("secondaryGray.300", "navy.700");
   const { colorMode } = useColorMode();
 
@@ -41,6 +44,7 @@ export default function TripSidebar({ trips, diveCentreId, ...rest }) {
     styles: colorMode === "light" ? LightMap : DarkMap,
     disableDefaultUI: true,
     zoomControl: true,
+    mapTypeId: "satellite",
     mapTypeControlOptions: {
       mapTypeIds: ["coordinate", "satellite"],
       // style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
@@ -62,6 +66,10 @@ export default function TripSidebar({ trips, diveCentreId, ...rest }) {
     <Card {...rest} maxH="max-content">
       <Text color={textColor} fontSize="xl" fontWeight="700" mb="16px">
         Upcoming Dive Trips
+      </Text>
+      <Text color={textColorTertiary} fontSize="md" mb="16px">
+        Add a dive to your cart by selecting your preferred date and clicking
+        the <Icon as={MdAddCircle} color="brand.100" w="16px" h="16px" /> button
       </Text>
       <Card
         bg={bg}
@@ -125,7 +133,7 @@ export default function TripSidebar({ trips, diveCentreId, ...rest }) {
             justify="space-between"
             align="center"
           >
-            <Transaction
+            <TripLineItem
               tripId={trip.id}
               siteList={trip.dive_sites}
               centreName={trip.dive_centre.name}

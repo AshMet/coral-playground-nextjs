@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
-// Chakra imports
 import {
   Text,
   Box,
@@ -16,18 +15,19 @@ import {
   Tooltip,
   IconButton,
   AvatarBadge,
+  Spacer,
 } from "@chakra-ui/react";
-// Custom Components
 import { useRouter } from "next/router";
-// Custom components
 import { useContext } from "react";
+import { IoMdTrash } from "react-icons/io";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
-import { DivingContext } from "../../../contexts/DivingContext";
 import Card from "components/card/Card";
 import TimelineItem from "components/dataDisplay/TimelineItem";
+import { DivingContext } from "contexts/DivingContext";
+import * as gtag from "lib/data/gtag";
 
-function DiveList(props) {
+function CartList(props) {
   const { ...rest } = props;
   const { cartItems } = useContext(DivingContext);
 
@@ -77,6 +77,17 @@ export default function ShoppingCart() {
   const { cartItems } = useContext(DivingContext);
   const router = useRouter();
   // console.log("navbar cartItems", cartItems);
+  const { clearCart } = useContext(DivingContext);
+
+  const cartCheckout = () => {
+    gtag.event({
+      action: "start-cart-checkout",
+      category: "button",
+      label: "Start Cart Checkout",
+      // value:
+    });
+    router.push("/diving/booking");
+  };
 
   return (
     <Menu>
@@ -118,36 +129,44 @@ export default function ShoppingCart() {
         bg={menuBg}
         border="none"
       >
-        <Flex
-          flexDirection="column"
-          maxW={{ sm: "sm", md: "lg" }}
-          p="10px"
-          borderBottom="1px solid gray"
-        >
-          <DiveList />
+        <Flex flexDirection="column" maxW={{ sm: "sm", md: "lg" }} p="10px">
+          <CartList />
         </Flex>
-        <Flex w="100%" p="10px" mb="0px">
-          <MenuItem
-            _hover={{ bg: "none" }}
-            _focus={{ bg: "none" }}
-            borderRadius="8px"
-            alignItems="end"
-            px="14px"
-          >
-            <Button
-              onClick={() => router.push("/diving/booking")}
-              variant="link"
-              colorScheme="purple"
-              size="sm"
-              mr={4}
-              leftIcon={
-                <MdOutlineShoppingCart w="22px" h="22px" me="0px" ml="5" />
-              }
+        {cartItems.length !== 0 && (
+          <Flex w="100%" p="10px" mb="0px" borderTop="1px solid gray">
+            <MenuItem
+              _hover={{ bg: "none" }}
+              _focus={{ bg: "none" }}
+              borderRadius="8px"
+              alignItems="end"
+              px="14px"
             >
-              Checkout
-            </Button>
-          </MenuItem>
-        </Flex>
+              <Button
+                onClick={() => clearCart()}
+                variant="link"
+                colorScheme="red"
+                size="sm"
+                mr={4}
+                leftIcon={<IoMdTrash w="22px" h="22px" me="0px" ml="5" />}
+              >
+                Clear Cart
+              </Button>
+              <Spacer />
+              <Button
+                onClick={() => cartCheckout()}
+                variant="link"
+                colorScheme="green"
+                size="sm"
+                mr={4}
+                leftIcon={
+                  <MdOutlineShoppingCart w="22px" h="22px" me="0px" ml="5" />
+                }
+              >
+                Checkout
+              </Button>
+            </MenuItem>
+          </Flex>
+        )}
       </MenuList>
     </Menu>
   );

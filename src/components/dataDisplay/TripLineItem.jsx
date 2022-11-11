@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types */
-// import React from "react";
-
 // Chakra imports
 import {
   Button,
@@ -11,7 +9,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
-// import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import DatePicker from "react-date-picker/dist/entry.nostyle";
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -19,14 +16,13 @@ import { IoMdTime } from "react-icons/io";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
 
-import { DivingContext } from "../../contexts/DivingContext";
-
+import { DivingContext } from "contexts/DivingContext";
 import "../../../public/css/MiniCalendar.module.css";
 // import "react-calendar/dist/Calendar.css";
 // import "react-datetime-picker/dist/DateTimePicker.css";
 // import "react-clock/dist/Clock.css";
 
-export default function Transaction(props) {
+export default function TripLineItem(props) {
   const {
     diveDate,
     price,
@@ -40,28 +36,21 @@ export default function Transaction(props) {
   const { addToCart } = useContext(DivingContext);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const iconBoxBg = useColorModeValue("secondaryGray.300", "navy.700");
+  // const bgHover = useColorModeValue("brand.100", "brand.100");
+  // const bgFocus = useColorModeValue("brand.200", "brand.200");
 
   const [value, onChange] = useState();
-  // const router = useRouter();
 
   const siteNames = siteList?.map((site) => site.name).join(" + ");
 
   return (
     <Flex justifyContent="center" alignItems="center" w="100%" {...rest}>
-      {/* <IconBox h="42px" w="42px" bg={iconBoxBg} me="20px" icon={icon} /> */}
       <Flex direction="column" align="start" me="auto" w="100%">
         <Flex direction="row" align="stretch" me="auto">
           <Flex align="center">
             <Icon me="8px" as={HiOutlineLocationMarker} w="16px" h="16px" />
-            <Text
-              color={textColor}
-              fontSize="md"
-              me="6px"
-              fontWeight="700"
-              // onClick={() => router.push("/diving/booking")} // Not Working
-            >
-              {siteList.map((site) => site.name).join(" + ")}
+            <Text color={textColor} fontSize="md" me="6px" fontWeight="700">
+              {siteNames}
             </Text>
           </Flex>
         </Flex>
@@ -113,10 +102,7 @@ export default function Transaction(props) {
           <Button
             align="center"
             justifyContent="center"
-            bg={iconBoxBg}
-            // _hover={bgHover}
-            // _focus={bgFocus}
-            // _active={bgFocus}
+            bg="brand.100"
             w="37px"
             h="37px"
             mt="10px"
@@ -136,7 +122,7 @@ export default function Transaction(props) {
             }
             {...rest}
           >
-            <Icon as={MdAddCircle} color={textColor} w="24px" h="24px" />
+            <Icon as={MdAddCircle} color="white" w="24px" h="24px" />
           </Button>
         </Tooltip>
       </Flex>

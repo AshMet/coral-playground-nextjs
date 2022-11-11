@@ -141,7 +141,7 @@ export default function Default(props) {
             transform: "scale(1.5) rotate(180deg)",
             transformOrigin: "center center",
           }}
-          onClick={() => removeFromCart(id)}
+          onClick={() => removeFromCart(id, title)}
         >
           <Icon
             as={BsX}

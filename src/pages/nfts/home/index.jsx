@@ -25,7 +25,10 @@ export default function Home() {
 
   return (
     <>
-      <NextSeo title="Home" description="Coral Playground Home Page" />
+      <NextSeo
+        title="NFT Lnading Page"
+        description="Coral Playground NFT Landing Page"
+      />
       <ParallaxProvider>
         <Box
         // bgImage={gradientBg}

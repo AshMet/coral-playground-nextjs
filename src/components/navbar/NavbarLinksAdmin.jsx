@@ -1,20 +1,14 @@
-/* eslint-disable func-names */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable import/no-cycle */
-/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable import/no-extraneous-dependencies */
+
 // Chakra Imports
 import {
   Avatar,
   Button,
   Flex,
   Icon,
-  // Image,
-  Link,
   Menu,
   MenuButton,
   MenuItem,
@@ -23,23 +17,16 @@ import {
   useColorModeValue,
   useColorMode,
   Tooltip,
-  IconButton,
-  AvatarBadge,
 } from "@chakra-ui/react";
 // Custom Components
-import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 // import React from "react";
 // Assets
-// import navImage from "assets/img/layout/Navbar.png";
-import { useContext } from "react";
-import { FaBitcoin, FaEthereum, FaShoppingCart } from "react-icons/fa";
+import { FaEthereum } from "react-icons/fa";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import { IoLogOutOutline, IoWalletOutline } from "react-icons/io5";
-import { MdInfoOutline, MdOutlineShoppingCart } from "react-icons/md";
-import { user, useMoralis } from "react-moralis";
+import { useMoralis } from "react-moralis";
 
-import { DivingContext } from "../../contexts/DivingContext";
 import routes from "../../routes";
 // import ItemContent from "../menu/ItemContent";
 import ShoppingCart from "../pages/bookings/ShoppingCart";
@@ -329,7 +316,7 @@ export default function HeaderLinks(props) {
   const { colorMode, toggleColorMode } = useColorMode();
   const {
     isAuthenticated,
-    Moralis,
+    // Moralis,
     // logout,
     user,
     // isAuthUndefined,
@@ -339,7 +326,7 @@ export default function HeaderLinks(props) {
   // Chakra Color Mode
   const navbarIcon = useColorModeValue("gray.400", "white");
   const menuBg = useColorModeValue("white", "navy.800");
-  const textColor = useColorModeValue("secondaryGray.900", "white");
+  // const textColor = useColorModeValue("secondaryGray.900", "white");
   const ethColor = useColorModeValue("gray.700", "white");
   const ethBg = useColorModeValue("secondaryGray.300", "navy.900");
   const ethBox = useColorModeValue("white", "navy.800");
@@ -347,7 +334,7 @@ export default function HeaderLinks(props) {
     "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
   );
-  const borderButton = useColorModeValue("secondaryGray.500", "whiteAlpha.200");
+  // const borderButton = useColorModeValue("secondaryGray.500", "whiteAlpha.200");
 
   // const getFiat = async function () {
   //   Moralis.initPlugins();
@@ -507,8 +494,8 @@ export default function HeaderLinks(props) {
 }
 
 HeaderLinks.propTypes = {
-  variant: PropTypes.string,
-  fixed: PropTypes.bool,
+  // variant: PropTypes.string,
+  // fixed: PropTypes.bool,
   secondary: PropTypes.bool,
-  onOpen: PropTypes.func,
+  // onOpen: PropTypes.func,
 };

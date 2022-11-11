@@ -12,8 +12,6 @@ import {
   Icon,
   Center,
 } from "@chakra-ui/react";
-// Custom components
-// import { createCheckoutSession } from "next-stripe/client";
 import { BsArrowRight } from "react-icons/bs";
 
 import Image from "components/actions/NextChakraImg";
@@ -31,14 +29,17 @@ import Card from "components/card/Card";
 
 export default function Course(props) {
   const {
+    id,
     imageUrl,
     title,
     description,
     agency,
-    price,
     duration,
     bgBox,
+    price,
     priceId,
+    setPrice,
+    setPriceId,
     setCourseId,
     setCourseName,
     selected,
@@ -47,26 +48,6 @@ export default function Course(props) {
   const selectedTextColor = "white";
   const selectedBgColor = useColorModeValue("brand.500", "brand.400");
   const textBrand = useColorModeValue("brand.500", "white");
-  // const bgBadge = useColorModeValue("secondaryGray.300", "whiteAlpha.50");
-
-  // const onClick = async (priceId) => {
-  //   setLoading(true);
-  //   const session = await createCheckoutSession({
-  //     success_url: window.location.href,
-  //     cancel_url: window.location.href,
-  //     line_items: [{ price: priceId, quantity: 1 }],
-  //     payment_method_types: ["card"],
-  //     method: "payment",
-  //   });
-  //   console.log(session);
-  //   const stripePublicKey =
-  //     process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || "ERROR!!! NO KEY";
-  //   const stripe = await loadStripe(stripePublicKey);
-  //   if (stripe) {
-  //     stripe.redirectToCheckout({ sessionId: session.id });
-  //   }
-  //   setLoading(false);
-  // };
 
   return (
     <Card
@@ -118,7 +99,9 @@ export default function Course(props) {
                   _hover={{ transform: "translate(4px)" }}
                   onClick={() => {
                     setCourseName(title);
-                    setCourseId(priceId);
+                    setCourseId(id);
+                    setPrice(price);
+                    setPriceId(priceId);
                   }}
                 >
                   <Text
@@ -138,19 +121,6 @@ export default function Course(props) {
                   />
                 </Button>
               </Flex>
-              {/* <Text
-                color={textColor}
-                fontSize={{
-                  base: "xl",
-                  md: "xl",
-                  xl: "xl",
-                  "2xl": "28px",
-                }}
-                mb="10px"
-                fontWeight="700"
-              >
-                {title}
-              </Text> */}
               <Text
                 color="secondaryGray.600"
                 fontSize={{
@@ -177,7 +147,7 @@ export default function Course(props) {
                     fontSize="sm"
                     fontWeight="normal"
                   >
-                    Agency
+                    Association
                   </Text>
                 </Flex>
                 <Flex direction="column">
@@ -204,7 +174,7 @@ export default function Course(props) {
                     fontWeight="bold"
                     mb="6px"
                   >
-                    ${price}
+                    €{(price / 100).toFixed(0)}
                   </Text>
                   <Text
                     color={selected ? selectedTextColor : textBrand}

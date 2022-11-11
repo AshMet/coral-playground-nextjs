@@ -55,11 +55,17 @@ import courses from "lib/constants/courses.json";
 export default function Courses() {
   const [tabState, setTabState] = useState("all");
   const [courseId, setCourseId] = useState();
+  const [price, setPrice] = useState();
+  const [priceId, setPriceId] = useState();
   const [courseName, setCourseName] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [diveTime, setDiveTime] = useState();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
+  const textColorSecondary = useColorModeValue(
+    "secondaryGray.700",
+    "secondaryGray.300"
+  );
 
   const CourseTab = (props) => {
     const { category } = props;
@@ -71,6 +77,7 @@ export default function Courses() {
           return (
             <Course
               key={course.id}
+              id={course.id}
               bgBox={course.bgBox}
               imageUrl={course.imageUrl}
               title={course.title}
@@ -81,6 +88,8 @@ export default function Courses() {
               priceId={course.priceId}
               setCourseId={setCourseId}
               setCourseName={setCourseName}
+              setPrice={setPrice}
+              setPriceId={setPriceId}
               selected={courseName === course.title}
             />
           );
@@ -97,7 +106,7 @@ export default function Courses() {
       />
       <Grid
         pt={{ base: "130px", md: "80px", xl: "80px" }}
-        gridTemplateColumns={{ md: "2.15fr 1fr", xl: "2.95fr 1fr" }}
+        gridTemplateColumns={{ md: "2.15fr 1fr", xl: "2.5fr 1fr" }}
         display={{ base: "block", lg: "grid" }}
       >
         <Flex gridArea="1 / 1 / 2 / 2" display={{ base: "block", lg: "flex" }}>
@@ -253,7 +262,7 @@ export default function Courses() {
             display={{ base: "block", "3xl": "grid" }}
             gridColumnGap="20px"
           >
-            <Flex align="center" mb="20px">
+            <Flex direction="column" mb="20px">
               <Text
                 color={textColor}
                 fontSize="lg"
@@ -261,6 +270,10 @@ export default function Courses() {
                 lineHeight="100%"
               >
                 Complete Your Booking
+              </Text>
+              <Text color={textColorSecondary} fontSize="sm" mt="10px">
+                Select the certification, date and dive centre, then add to your
+                cart for checkout
               </Text>
             </Flex>
             <MiniCalendar
@@ -273,6 +286,8 @@ export default function Courses() {
             <BookingDetails
               courseName={courseName}
               courseId={courseId}
+              price={price}
+              priceId={priceId}
               setSelectedDate={setSelectedDate}
               diveDate={selectedDate}
               diveTime={diveTime}
@@ -285,21 +300,6 @@ export default function Courses() {
     </>
   );
 }
-
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const stripeKey = process.env.STRIPE_SECRET_KEY || "ERROR!!! NO KEY";
-//   const stripe = new Stripe(stripeKey, {
-//     apiVersion: "2020-08-27",
-//   });
-//   const prices = await stripe.prices.list({
-//     active: true,
-//     limit: 10,
-//     // query: "active:'true' AND metadata['category']:'recreational'",
-//     expand: ["data.product"],
-//   });
-
-//   return { props: { prices: prices.data } };
-// };
 
 Courses.getLayout = function getLayout(page) {
   return <NftLayout>{page}</NftLayout>;

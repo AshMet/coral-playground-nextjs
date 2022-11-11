@@ -10,63 +10,25 @@ import {
   Spacer,
   Button,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 // Custom components
 
 import Card from "components/card/Card";
-import InputField from "components/fields/InputField";
-import checkout from "components/pages/diving/checkout";
+// import InputField from "components/fields/InputField";
+// import checkout from "components/pages/diving/checkout";
+import { DivingContext } from "contexts/DivingContext";
 // Assets
 
 export default function BookingDetails(props) {
-  const { courseId, courseName, diveDate, diveTime, ...rest } = props;
+  const { courseId, courseName, diveDate, diveTime, price, priceId, ...rest } =
+    props;
+  const { addToCart } = useContext(DivingContext);
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("transparent", "whiteAlpha.100");
-  // const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
+  const [diveCentre, setDiveCentre] = useState();
 
-  const [diverName, setDiverName] = useState();
-  // const [diveTime, setDiveTime] = useState();
-  const [certLevel, setCertLevel] = useState();
-  const [isLoading, setLoading] = useState(false);
-
-  const lineItems = [
-    {
-      price: courseId, // eg: "price_1KuasdfaWasdfasdfasfnsF4fi",
-      quantity: 1,
-    },
-  ];
-
-  const dive = {
-    id: courseId,
-    siteName: courseName,
-    diveDate,
-    diveTime,
-    priceId: courseId,
-  };
-
-  const sessionMetadata = {
-    dive1: JSON.stringify(dive),
-  };
-
-  const custMetadata = {
-    diverCert: certLevel,
-    lastDive: "N/A",
-    notes: "N/A",
-  };
-
-  const redirectToCheckout = async () => {
-    setLoading(true);
-    checkout({
-      lineItems,
-      diverName,
-      diverEmail: "test@email.com",
-      custMetadata,
-      sessionMetadata,
-    });
-    setLoading(false);
-  };
   return (
     <Card
       border="1px solid"
@@ -99,46 +61,13 @@ export default function BookingDetails(props) {
               })}
             </Text>
           </Flex>
-          <Flex my={3}>
+          {/* <Flex my={3}>
             <Text ml={2} fontSize="sm" color={textColor} fontWeight="bold">
               Dive Time:
             </Text>
             <Spacer />
             <Text>{diveTime || "None Selected"}</Text>
-          </Flex>
-        </Flex>
-        <InputField
-          value={diverName}
-          id="name"
-          placeholder="eg. John Smith"
-          label="Diver Name"
-          onChange={(e) => setDiverName(e.target.value)}
-        />
-        <Flex direction="column" mb="34px">
-          <FormLabel
-            ms="10px"
-            htmlFor="certLevel"
-            fontSize="sm"
-            color={textColor}
-            fontWeight="bold"
-            _hover={{ cursor: "pointer" }}
-          >
-            Current Certification Level
-          </FormLabel>
-          <Select
-            value={certLevel}
-            fontSize="sm"
-            id="certLevel"
-            variant="main"
-            h="44px"
-            maxh="44px"
-            defaultValue="open_water"
-            onChange={(e) => setCertLevel(e.target.value)}
-          >
-            <option value="open_water">Open Water</option>
-            <option value="advanced">Advanced</option>
-            <option value="dive_master">Dive Master</option>
-          </Select>
+          </Flex> */}
         </Flex>
         <Flex direction="column" mb="34px">
           <FormLabel
@@ -157,11 +86,12 @@ export default function BookingDetails(props) {
             variant="main"
             h="44px"
             maxh="44px"
-            defaultValue="sinai"
+            defaultValue="Select Option"
+            onChange={(e) => setDiveCentre(e.target.value)}
           >
-            <option value="sinai">Sinai Divers</option>
-            <option value="blue_hole">Blue Hole Divers</option>
-            <option value="hurghada">Dive Hurghada</option>
+            <option value="Sinai Divers">Sinai Divers</option>
+            <option value="Blue Hole Divers">Blue Hole Divers</option>
+            <option value="Dive Hurghada">Dive Hurghada</option>
           </Select>
         </Flex>
         <Flex direction="column" mb="34px">
@@ -172,10 +102,20 @@ export default function BookingDetails(props) {
             fontWeight="500"
             borderRadius="70px"
             mt="20px"
-            onClick={() => redirectToCheckout()}
-            isLoading={isLoading}
+            onClick={() =>
+              addToCart({
+                id: courseId,
+                siteName: courseName,
+                siteCount: 1,
+                centreName: diveCentre,
+                diveDate,
+                diveTime: "morning",
+                price,
+                priceId,
+              })
+            }
           >
-            Book Now
+            Add to Cart
           </Button>
         </Flex>
       </SimpleGrid>

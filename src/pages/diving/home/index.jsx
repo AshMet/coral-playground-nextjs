@@ -43,7 +43,10 @@ import Mission from "components/pages/divingHome/Mission";
 export default function DivingHome() {
   return (
     <>
-      <NextSeo title="Home" description="Coral Playground Home Page" />
+      <NextSeo
+        title="Diving Landing"
+        description="Coral Playground Diving Home Page"
+      />
       <ParallaxProvider>
         <Flex direction={{ base: "column" }}>
           <Hero />
