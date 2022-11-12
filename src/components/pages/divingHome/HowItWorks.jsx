@@ -82,6 +82,18 @@ export default function Tools() {
             >
               Book your Dream Dive Trip in 3 Easy Steps
             </Text>
+            <Text
+              textAlign="center"
+              color="secondaryGray.600"
+              fontSize="md"
+              fontWeight="400"
+            >
+              Bookings are confirmed with a fully refnudable 25% deposit on your
+              selected dives, with the rest owing directly to the dive centre
+              upon arrival. This process will also provide your dive centre with
+              all the info they need to prepare for your dive including diver
+              details, safety info and any additional equipment needed.
+            </Text>
           </Flex>
         </Flex>
         <Steps

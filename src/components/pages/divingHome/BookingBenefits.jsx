@@ -73,7 +73,7 @@ export default function BookingBenefits() {
                   w="100%"
                   mb="10px"
                 >
-                  BOOKING
+                  CERTIFICATIONS
                 </Text>
                 <Text
                   fontWeight="800"
@@ -93,12 +93,11 @@ export default function BookingBenefits() {
                   w={{ base: "100%", md: "100%" }}
                   mb="30px"
                 >
-                  Bookings are confirmed with a fully refnudable 25% deposit on
-                  your selected dives, with the rest owing directly to the dive
-                  centre upon arrival. This process will also provide your dive
-                  centre with all the info they need to prepare for your dive
-                  including diver details, safety info and any additional
-                  equipment needed.
+                  Whether you&apos;re looking to take your first plunge into a
+                  new world, expand your skillsets to complete more specialized
+                  dives, or become a divving professional, we have you covered.
+                  Just select your desired date and dive centre, and we will
+                  take care of everything else
                 </Text>
                 <Flex
                   align="center"
@@ -106,7 +105,7 @@ export default function BookingBenefits() {
                   direction={{ base: "column", md: "row" }}
                   mb="30px"
                 >
-                  <Link href="/diving/map">
+                  <Link href="/diving/certifications">
                     <Button
                       py="20px"
                       px="16px"
@@ -118,7 +117,7 @@ export default function BookingBenefits() {
                       w={{ base: "335px", md: "210px" }}
                       h="54px"
                     >
-                      Start Planning your Trip
+                      Book a Course
                       <Icon
                         as={MdChevronRight}
                         ms="5px"

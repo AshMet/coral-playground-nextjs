@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable import/no-cycle */
@@ -39,9 +40,10 @@ import {
   Tab,
   TabPanel,
 } from "@chakra-ui/react";
+import axios from "axios";
 // Custom components
 import { NextSeo } from "next-seo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import MiniCalendar from "components/calendar/MiniCalendar";
 import Card from "components/card/Card";
@@ -50,9 +52,9 @@ import Course from "components/card/Course";
 import BookingDetails from "components/pages/bookings/BookingDetails";
 import { VSeparator } from "components/separator/Separator";
 import NftLayout from "layouts/nft";
-import courses from "lib/constants/courses.json";
+// import courses from "lib/constants/courses.json";
 
-export default function Courses() {
+export default function Courses({ data }) {
   const [tabState, setTabState] = useState("all");
   const [courseId, setCourseId] = useState();
   const [price, setPrice] = useState();
@@ -60,6 +62,7 @@ export default function Courses() {
   const [courseName, setCourseName] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [diveTime, setDiveTime] = useState();
+  const [courses, setCourses] = useState();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = useColorModeValue(
@@ -67,30 +70,37 @@ export default function Courses() {
     "secondaryGray.300"
   );
 
+  useEffect(() => {
+    if (!data) return null;
+    setCourses(data);
+  }, [data]);
+
   const CourseTab = (props) => {
     const { category } = props;
-    const courseList = courses.filter((course) => course.category === category);
+    const courseList = courses?.filter(
+      (course) => course.category === category
+    );
     // console.log(`${category}: ${JSON.stringify(courseList)}`)
     return (
       <SimpleGrid column="1" gap="20px">
-        {courseList.map((course) => {
+        {courseList?.map((course) => {
           return (
             <Course
               key={course.id}
               id={course.id}
-              bgBox={course.bgBox}
               imageUrl={course.imageUrl}
-              title={course.title}
+              title={course.name}
               description={course.description}
               agency={course.agency}
               duration={course.duration}
+              category={course.category}
               price={course.price.toFixed(0)}
               priceId={course.priceId}
               setCourseId={setCourseId}
               setCourseName={setCourseName}
               setPrice={setPrice}
               setPriceId={setPriceId}
-              selected={courseName === course.title}
+              selected={courseName === course.name}
             />
           );
         })}
@@ -299,6 +309,20 @@ export default function Courses() {
       </Grid>
     </>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const results = await axios.get(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/certifications`
+    );
+    const { data } = results;
+    return {
+      props: { data },
+    };
+  } catch (error) {
+    // console.error(error);
+  }
 }
 
 Courses.getLayout = function getLayout(page) {

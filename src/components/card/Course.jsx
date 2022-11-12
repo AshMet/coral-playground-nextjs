@@ -35,7 +35,7 @@ export default function Course(props) {
     description,
     agency,
     duration,
-    bgBox,
+    category,
     price,
     priceId,
     setPrice,
@@ -49,6 +49,16 @@ export default function Course(props) {
   const selectedBgColor = useColorModeValue("brand.500", "brand.400");
   const textBrand = useColorModeValue("brand.500", "white");
 
+  function getBgColor(cat) {
+    if (cat === "recreational") {
+      return "linear-gradient(109.6deg, #FF9966 17.44%, #FF5E62 78.63%)";
+    }
+    if (cat === "professional") {
+      return "linear-gradient(115.07deg, #29E9F5 -9.41%, #7A64FF 28.04%, #FF508B 71.85%, #FD6D53 112.49%, #FD6D53 112.49%)";
+    }
+    return "linear-gradient(292.37deg, #92FE9D 10.84%, #00C9FF 95.27%)";
+  }
+
   return (
     <Card
       p="20px"
@@ -59,7 +69,7 @@ export default function Course(props) {
       <Flex direction={{ base: "column", md: "column", xl: "row" }}>
         <Flex direction="column" pr="20px">
           <Box
-            bg={bgBox}
+            bg={getBgColor(category)}
             minW={{ base: "100%", xl: "270px" }}
             minH={{ base: "200px", xl: "270px" }}
             borderRadius="20px"
@@ -69,7 +79,11 @@ export default function Course(props) {
             position="relative"
           >
             <Center>
-              <Image src={imageUrl} height="350px" width="270px" />
+              <Image
+                src={imageUrl || "/svg/certifications/open_water_cert.svg"}
+                height="350px"
+                width="270px"
+              />
             </Center>
           </Box>
         </Flex>
