@@ -95,7 +95,7 @@ export default function Courses({ data }) {
               duration={course.duration}
               category={course.category}
               price={course.price.toFixed(0)}
-              priceId={course.priceId}
+              priceId={course.price_id}
               setCourseId={setCourseId}
               setCourseName={setCourseName}
               setPrice={setPrice}
