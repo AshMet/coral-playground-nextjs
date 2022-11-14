@@ -111,7 +111,7 @@ export default function TripLineItem(props) {
             onClick={() =>
               addToCart({
                 id: tripId,
-                siteName: siteNames,
+                title: siteNames,
                 siteCount: siteList.length,
                 centreName,
                 diveDate: diveDate ? new Date(diveDate) : new Date(value),

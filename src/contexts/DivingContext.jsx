@@ -42,10 +42,13 @@ export const DivingProvider = ({ children }) => {
 
   useEffect(() => {
     if (cartItems !== initialState) {
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      typeof window !== "undefined"
+        ? localStorage.setItem("cartItems", JSON.stringify(cartItems))
+        : null;
     }
   }, [cartItems]);
 
+  // Add items to cart
   function addToCart(newItem) {
     const alreadyInCart = cartItems.some((item) => item.id === newItem.id);
     console.log("newItem", newItem);
@@ -75,7 +78,7 @@ export const DivingProvider = ({ children }) => {
       });
       return;
     }
-    if (!newItem.siteName) {
+    if (!newItem.title) {
       toast({
         position: "top",
         render: () => (
@@ -108,13 +111,14 @@ export const DivingProvider = ({ children }) => {
       render: () => (
         <AlertPopup
           type="success"
-          text={`Dive Added: ${newItem.siteName}`}
+          text={`Dive Added: ${newItem.title}`}
           subtext="View Shopping Cart to complete your order"
         />
       ),
     });
   }
 
+  // Remove from Cart
   function removeFromCart(id, name) {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
     toast({
@@ -125,15 +129,19 @@ export const DivingProvider = ({ children }) => {
     });
   }
 
+  // Clear Cart
   function clearCart() {
     setCartItems(initialState);
-    localStorage.setItem("cartItems", "[]");
+    typeof window !== "undefined"
+      ? localStorage.setItem("cartItems", "[]")
+      : null;
     toast({
       position: "top",
       render: () => <AlertPopup type="success" text="Cart Cleared" />,
     });
   }
 
+  // Create Stripe line items
   const lineItems = cartItems.map((item) => {
     // console.log("line item", item);
     return {
@@ -156,10 +164,17 @@ export const DivingProvider = ({ children }) => {
     notes,
   };
 
-  const sessionMetadata = cartItems.reduce(
+  const cartMetadata = cartItems.reduce(
     (a, v) => ({ ...a, [`dive_${v.id}`]: JSON.stringify(v) }),
     {}
   );
+
+  const equipmentMetadata = equipmentList.reduce(
+    (a, v) => ({ ...a, [`equipment_${v.id}`]: JSON.stringify(v) }),
+    {}
+  );
+
+  const sessionMetadata = { ...cartMetadata, ...equipmentMetadata };
 
   // console.log(equipmentList);
   // console.log("context dives", { ...cartItems });
@@ -174,6 +189,7 @@ export const DivingProvider = ({ children }) => {
     });
     checkout({
       lineItems,
+      equipmentList,
       diverName,
       diverEmail,
       custMetadata,

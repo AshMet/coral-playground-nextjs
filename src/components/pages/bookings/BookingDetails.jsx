@@ -105,7 +105,7 @@ export default function BookingDetails(props) {
             onClick={() =>
               addToCart({
                 id: courseId,
-                siteName: courseName,
+                title: courseName,
                 siteCount: 1,
                 centreName: diveCentre,
                 diveDate,

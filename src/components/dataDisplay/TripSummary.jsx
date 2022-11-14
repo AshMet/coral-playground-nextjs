@@ -13,7 +13,7 @@ import "../../../public/css/MiniCalendar.module.css";
 // import "react-clock/dist/Clock.css";
 
 export default function TripSummary(props) {
-  const { siteName, centreName, diveDate } = props; // , diveTime
+  const { title, centreName, diveDate } = props; // , diveTime
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
 
@@ -31,7 +31,7 @@ export default function TripSummary(props) {
               fontWeight="700"
               // onClick={() => router.push("/diving/booking")} // Not Working
             >
-              {siteName}
+              {title}
             </Text>
           </Flex>
         </Flex>

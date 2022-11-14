@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
@@ -26,11 +27,13 @@ import { Flex } from "@chakra-ui/react";
 // Custom components
 // import { getServerSideProps } from "next";
 import { NextSeo } from "next-seo";
+import { useContext, useEffect } from "react";
 import Stripe from "stripe";
 
 import Card from "components/card/Card";
 import Banner from "components/pages/diving/Banner";
 import Content from "components/pages/diving/Content";
+import { DivingContext } from "contexts/DivingContext";
 import NftLayout from "layouts/nft";
 
 export default function Invoice({ session, lineItems }) {
@@ -39,6 +42,15 @@ export default function Invoice({ session, lineItems }) {
 
   const tripMetadata = Object.values(session.metadata);
   const trips = tripMetadata.map((trip) => JSON.parse(trip));
+  trips.sort((a, b) => a.priceId.localeCompare(b.priceId));
+  const stripeLineItems = lineItems.data;
+  stripeLineItems.sort((a, b) => a.price.id.localeCompare(b.price.id));
+  const { clearCart } = useContext(DivingContext);
+
+  useEffect(() => {
+    clearCart();
+  }, []);
+
   return (
     <>
       <NextSeo
@@ -55,13 +67,13 @@ export default function Invoice({ session, lineItems }) {
           <Content
             diverName={session.customer_details.name}
             email={session.customer_details.email}
-            siteName={session.metadata.siteName}
+            title={session.metadata.title}
             diveDate={session.metadata.dive_date}
             diveTime={session.metadata.dive_time}
             diverCert={session.customer.metadata.diverCert}
             lastDive={session.customer.metadata.lastDive}
             cert={session.metadata.cert}
-            lineItems={lineItems.data}
+            lineItems={stripeLineItems}
             currency={session.currency}
             metadata={trips}
             amountSubtotal={(session.amount_subtotal / 100).toFixed(2)}

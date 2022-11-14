@@ -15,7 +15,7 @@ export default function Content(props) {
   const {
     diverName,
     email,
-    siteName,
+    title,
     diveDate,
     diveTime,
     diverCert,
@@ -58,7 +58,7 @@ export default function Content(props) {
   const tableDataInvoice = lineItems.map((item, index) => {
     return {
       // item: item.description,
-      item: metadata[index].siteName,
+      item: metadata[index].title,
       quantity: item.quantity,
       // perUnit: item.amount_subtotal / 100,
       paid: item.amount_total / 100,
@@ -76,10 +76,9 @@ export default function Content(props) {
   //   paid += tableDataInvoice[i].deposit;
   // }
   const paid = amountTotal;
-  const total =
-    metadata
-      .map((item) => item.price)
-      .reduce((partialSum, a) => partialSum + a, 0) / 100;
+  const total = metadata
+    .map((item) => item.price / 100)
+    .reduce((partialSum, a) => partialSum + a, 0);
 
   return (
     <Flex direction="column" p={{ base: "10px", md: "60px" }}>
@@ -135,8 +134,8 @@ export default function Content(props) {
               mb="10px"
               fontSize="md"
               p="6px 12px"
-              bg="linear-gradient(108.54deg, #FF416C 6.56%, #FF4B2B 95.2%)"
-              color="white"
+              bg="linear-gradient(108.54deg, #08a743 6.56%, #08c999 95.2%)"
+              color="black"
               borderRadius="10px"
               fontWeight="700"
             >

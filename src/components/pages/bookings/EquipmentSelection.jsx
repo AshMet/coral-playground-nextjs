@@ -44,11 +44,24 @@ export default function EquipmentSelection(props) {
   //   }
   // };
 
+  const equipLineItems = equipment?.map((item) => ({
+    id: item.id,
+    title: item.name,
+    siteCount: 1,
+    centreName: "",
+    diveDate: "",
+    diveTime: "",
+    price: item.price,
+    priceId: item.priceId,
+  }));
+
   function toggleArrayItem(arr, item) {
     arr.includes(item)
       ? setEquipmentList(arr.filter((i) => i !== item)) // remove item
       : setEquipmentList([...arr, item]); // add item
   }
+  console.log(equipLineItems);
+  console.log(equipmentList);
 
   return (
     <Card p="30px">
@@ -58,21 +71,25 @@ export default function EquipmentSelection(props) {
       <Flex direction="column" w="100%">
         <Flex wrap="wrap">
           <SimpleGrid columns={{ sm: 2, md: 4 }} gap="20px" w="100%">
-            {equipment?.map((item) => (
+            {equipLineItems?.map((item) => (
               <Button
-                key={item.name}
+                key={item.title}
                 borderRadius="15px"
                 display="flex"
                 p={3}
                 mb={3}
                 justifyContent="center"
                 minH="130px"
-                bgColor={equipmentList.includes(item) && selectedBgColor}
+                _hover={{ background: "brand.300" }}
+                bgColor={
+                  equipmentList.map((a) => a.id).includes(item.id) &&
+                  selectedBgColor
+                }
                 onClick={() => toggleArrayItem(equipmentList, item)}
               >
                 <VStack>
                   <Image
-                    src={`/svg/equipment/${item.name
+                    src={`/svg/equipment/${item.title
                       .toLowerCase()
                       .replaceAll(" ", "-")}.svg`}
                     width="100%"
@@ -80,9 +97,9 @@ export default function EquipmentSelection(props) {
                     borderRadius="15px"
                     filter={iconColor}
                   />
-                  <Text mb={0}>{item.name}</Text>
+                  <Text mb={0}>{item.title}</Text>
                   <Text mt="0px" color={priceColor}>
-                    +${item.price}
+                    +€{item.price / 100}
                   </Text>
                 </VStack>
               </Button>

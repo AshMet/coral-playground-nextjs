@@ -48,7 +48,7 @@ function CartList(props) {
             key={dive.id}
             id={dive.id}
             mb="16px"
-            title={dive.siteName}
+            title={dive.title}
             subtitle={dive.centreName}
             day={new Date(dive.diveDate).toLocaleDateString("en-US", {
               day: "numeric",

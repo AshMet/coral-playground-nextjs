@@ -41,7 +41,7 @@ export default function SummaryTable() {
                     <Td>{index + 1}</Td>
                     <Td>
                       <TripSummary
-                        siteName={item.siteName}
+                        title={item.title}
                         centreName={item.centreName}
                         diveDate={item.diveDate}
                       />
