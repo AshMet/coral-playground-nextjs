@@ -138,7 +138,7 @@ export default function AdminNavbar(props) {
           >
             Diving
           </Link>
-          <Link
+          {/* <Link
             display={{ base: "none", lg: "block" }}
             href="/nfts/home"
             color={textColor}
@@ -148,7 +148,7 @@ export default function AdminNavbar(props) {
             my="auto"
           >
             NFTs
-          </Link>
+          </Link> */}
           <VSeparator
             me="14px"
             bg={textColor}
@@ -222,7 +222,7 @@ export default function AdminNavbar(props) {
                     Diving
                   </Link>
                 </MenuItem>
-                <MenuItem
+                {/* <MenuItem
                   _hover={{ bg: "none" }}
                   _focus={{ bg: "none" }}
                   borderRadius="8px"
@@ -238,7 +238,7 @@ export default function AdminNavbar(props) {
                   >
                     NFTs
                   </Link>
-                </MenuItem>
+                </MenuItem> */}
                 <MenuItem
                   _hover={{ bg: "none" }}
                   _focus={{ bg: "none" }}

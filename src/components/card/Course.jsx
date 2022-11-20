@@ -65,6 +65,12 @@ export default function Course(props) {
       h="max-content"
       minH={{ md: "450px", xl: "auto" }}
       bg={selected && selectedBgColor}
+      onClick={() => {
+        setCourseName(title);
+        setCourseId(id);
+        setPrice(price);
+        setPriceId(priceId);
+      }}
     >
       <Flex direction={{ base: "column", md: "column", xl: "row" }}>
         <Flex direction="column" pr="20px">
@@ -111,12 +117,6 @@ export default function Course(props) {
                   bg="transparent"
                   cursor="pointer"
                   _hover={{ transform: "translate(4px)" }}
-                  onClick={() => {
-                    setCourseName(title);
-                    setCourseId(id);
-                    setPrice(price);
-                    setPriceId(priceId);
-                  }}
                 >
                   <Text
                     fontSize="sm"
