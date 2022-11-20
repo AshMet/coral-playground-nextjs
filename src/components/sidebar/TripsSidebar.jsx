@@ -134,12 +134,7 @@ export default function TripSidebar({ trips, diveCentreId, ...rest }) {
             align="center"
           >
             <TripLineItem
-              tripId={trip.id}
-              siteList={trip.dive_sites}
-              centreName={trip.dive_centre.name}
-              diveDate={trip.start_time}
-              price={trip.price}
-              priceId={trip.stripe_price_id}
+              trip={trip}
               locationType="dive_centre"
               icon={
                 <Icon as={MdAddCircle} color={textColor} w="20px" h="18px" />

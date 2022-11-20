@@ -44,7 +44,10 @@ export default function EquipmentSelection(props) {
   //   }
   // };
 
-  const equipLineItems = equipment?.map((item) => ({
+  const freeEquipment = equipment.filter((item) => item.price === 0);
+  const PaidEquipment = equipment.filter((item) => item.price !== 0);
+
+  const equipLineItems = PaidEquipment?.map((item) => ({
     id: item.id,
     title: item.name,
     siteCount: 1,
@@ -62,15 +65,19 @@ export default function EquipmentSelection(props) {
   }
   console.log(equipLineItems);
   console.log(equipmentList);
+  console.log("freeEquipment", freeEquipment);
 
   return (
     <Card p="30px">
       <Text color={textColor} fontSize="2xl" fontWeight="700" mb="20px">
         Equipment
       </Text>
+      <Text color="grey.500" fontSize="md" fontWeight="500" mb="20px">
+        Select any specialized eqiupment you would like to add to your trip
+      </Text>
       <Flex direction="column" w="100%">
         <Flex wrap="wrap">
-          <SimpleGrid columns={{ sm: 2, md: 4 }} gap="20px" w="100%">
+          <SimpleGrid columns={{ sm: 2, md: 5 }} gap="20px" w="100%">
             {equipLineItems?.map((item) => (
               <Button
                 key={item.title}
@@ -80,7 +87,11 @@ export default function EquipmentSelection(props) {
                 mb={3}
                 justifyContent="center"
                 minH="130px"
-                _hover={{ background: "brand.300" }}
+                _hover={{
+                  background: "brand.300",
+                  color: "white",
+                  filter: iconColor,
+                }}
                 bgColor={
                   equipmentList.map((a) => a.id).includes(item.id) &&
                   selectedBgColor
@@ -99,12 +110,34 @@ export default function EquipmentSelection(props) {
                   />
                   <Text mb={0}>{item.title}</Text>
                   <Text mt="0px" color={priceColor}>
-                    +€{item.price / 100}
+                    {item.price === 0 ? "FREE" : `+€${item.price / 100}`}
                   </Text>
                 </VStack>
               </Button>
             ))}
           </SimpleGrid>
+          <Card background="grey.500">
+            <Text color="green.500" fontSize="md" fontWeight="500" mb="20px">
+              Note that the following equipment is included for free on every
+              dive trip as needed
+            </Text>
+            <SimpleGrid columns={{ sm: 3, md: 5 }} gap="20px" w="100%">
+              {freeEquipment?.map((item) => (
+                <VStack>
+                  <Image
+                    src={`/svg/equipment/${item.name
+                      .toLowerCase()
+                      .replaceAll(" ", "-")}.svg`}
+                    width="100%"
+                    height="40px"
+                    borderRadius="15px"
+                    filter={iconColor}
+                  />
+                  <Text mb={0}>{item.name}</Text>
+                </VStack>
+              ))}
+            </SimpleGrid>
+          </Card>
         </Flex>
         <Flex justify="space-between" mt="24px">
           <Button

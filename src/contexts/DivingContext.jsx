@@ -50,7 +50,9 @@ export const DivingProvider = ({ children }) => {
 
   // Add items to cart
   function addToCart(newItem) {
-    const alreadyInCart = cartItems.some((item) => item.id === newItem.id);
+    const alreadyInCart = cartItems.some(
+      (item) => item.name + item.id === newItem.name + newItem.id
+    );
     console.log("newItem", newItem);
     if (alreadyInCart) {
       toast({
@@ -115,6 +117,12 @@ export const DivingProvider = ({ children }) => {
           subtext="View Shopping Cart to complete your order"
         />
       ),
+    });
+    gtag.event({
+      action: "add-to-cart",
+      category: "button",
+      label: "Add item to cart",
+      value: newItem.title,
     });
   }
 

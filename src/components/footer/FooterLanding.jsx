@@ -12,6 +12,7 @@ import { FaInstagram } from "react-icons/fa";
 
 import Image from "../actions/NextChakraImg";
 import { HSeparator } from "components/separator/Separator";
+// import * as gtag from "lib/data/gtag";
 
 export default function Footer() {
   // const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -98,6 +99,12 @@ export default function Footer() {
               borderRadius="12px"
               w="276px"
               h="54px"
+              // onClick={gtag.event({
+              //   action: "follow-instagram",
+              //   category: "button",
+              //   label: "Follow us on Instagram",
+              //   // value: ,
+              // })}
             >
               Follow on Instagram
             </Button>
@@ -235,6 +242,12 @@ export default function Footer() {
               color={textColorSecondary}
               fontWeight="400"
               mb="20px"
+              // onClick={gtag.event({
+              //   action: "follow-instagram",
+              //   category: "button",
+              //   label: "Follow us on Instagram",
+              //   // value: ,
+              // })}
             >
               Instagram
             </Link>
@@ -244,6 +257,12 @@ export default function Footer() {
               color={textColorSecondary}
               fontWeight="400"
               mb="20px"
+              // onClick={gtag.event({
+              //   action: "follow-facebook",
+              //   category: "button",
+              //   label: "Follow us on Facebook",
+              //   // value: ,
+              // })}
             >
               Facebook
             </Link>

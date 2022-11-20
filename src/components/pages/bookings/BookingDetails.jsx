@@ -89,9 +89,21 @@ export default function BookingDetails(props) {
             defaultValue="Select Option"
             onChange={(e) => setDiveCentre(e.target.value)}
           >
-            <option value="Sinai Divers">Sinai Divers</option>
-            <option value="Blue Hole Divers">Blue Hole Divers</option>
-            <option value="Dive Hurghada">Dive Hurghada</option>
+            {[
+              "Pro Master Diving Club",
+              "Blue Water Dive Resort",
+              "Dive Hurghada",
+              "Crazy Dolphin Dive Center",
+              "Crazy Waves Diving - Sahl Hashish",
+              "Divers Lodge",
+              "Funny Divers",
+              "Cave Divers",
+              "White Whale Divers",
+            ]
+              .sort()
+              .map((centre) => (
+                <option value={centre}>{centre}</option>
+              ))}
           </Select>
         </Flex>
         <Flex direction="column" mb="34px">

@@ -88,14 +88,14 @@ export default function Courses({ data }) {
             <Course
               key={course.id}
               id={course.id}
-              imageUrl={course.imageUrl}
+              imageUrl={course.cover_photo_url}
               title={course.name}
               description={course.description}
               agency={course.agency}
               duration={course.duration}
               category={course.category}
               price={course.price.toFixed(0)}
-              priceId={course.price_id}
+              priceId={course.stripe_price_id}
               setCourseId={setCourseId}
               setCourseName={setCourseName}
               setPrice={setPrice}

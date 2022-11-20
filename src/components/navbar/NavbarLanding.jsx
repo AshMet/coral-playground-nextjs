@@ -24,6 +24,7 @@ import { IoLogoInstagram, IoMenuOutline } from "react-icons/io5";
 import { MdChevronRight } from "react-icons/md";
 
 import { VSeparator } from "components/separator/Separator";
+// import * as gtag from "lib/data/gtag";
 
 export default function AdminNavbar(props) {
   const [scrolled, setScrolled] = useState(false);
@@ -164,6 +165,12 @@ export default function AdminNavbar(props) {
               w="max-content"
               bg="transparent"
               my="auto"
+              // onClick={gtag.event({
+              //   action: "follow-instagram",
+              //   category: "button",
+              //   label: "Follow us on Instagram",
+              //   // value: ,
+              // })}
             >
               <Icon as={IoLogoInstagram} color={textColor} w="18px" h="18px" />
             </Button>

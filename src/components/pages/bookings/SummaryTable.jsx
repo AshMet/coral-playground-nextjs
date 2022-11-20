@@ -19,6 +19,7 @@ import TripSummary from "../../dataDisplay/TripSummary";
 
 export default function SummaryTable() {
   const { cartItems } = useContext(DivingContext);
+  // console.log(cartItems);
   return (
     <Card>
       <Box>
@@ -37,7 +38,7 @@ export default function SummaryTable() {
             <Tbody>
               {cartItems.length > 0 ? (
                 cartItems.map((item, index) => (
-                  <Tr>
+                  <Tr key={item.title}>
                     <Td>{index + 1}</Td>
                     <Td>
                       <TripSummary
@@ -48,7 +49,7 @@ export default function SummaryTable() {
                     </Td>
                     <Td>1</Td>
                     <Td isNumeric>€{item.price / 100}</Td>
-                    <Td isNumeric>€15</Td>
+                    <Td isNumeric>€{item.payNow / 100}</Td>
                   </Tr>
                 ))
               ) : (

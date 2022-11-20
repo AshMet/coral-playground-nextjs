@@ -23,7 +23,7 @@
 */
 
 // Chakra imports
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 // Custom components
 // import { getServerSideProps } from "next";
 import { NextSeo } from "next-seo";
@@ -57,11 +57,24 @@ export default function Invoice({ session, lineItems }) {
         title="Booking Success"
         description="Your dive booking has completed successfully"
       />
-      <Card
+      <Box
         mt={{ base: "130px", md: "80px", xl: "80px" }}
-        maxW="920px"
-        mx="auto"
+        textAlign="center"
+        pb={10}
+        px={6}
       >
+        <Heading as="h2" size="xl" mt={6} mb={2}>
+          Congrats, you&apos;re going diving!
+        </Heading>
+        <Text>
+          Your payment has been processed, and you will be receiving an email
+          directly from the dive centre / guide once your booking is confirmed.
+          Your deposit is fully refundable / transferrable for up to 48 hours
+          prior to your first dive date. For any changes to your dive schedule,
+          please contact your guide directly.
+        </Text>
+      </Box>
+      <Card maxW="920px" mx="auto">
         <Flex direction="column" width="stretch">
           <Banner sessionId={session.id} />
           <Content

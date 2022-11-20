@@ -23,16 +23,7 @@ import "../../../public/css/MiniCalendar.module.css";
 // import "react-clock/dist/Clock.css";
 
 export default function TripLineItem(props) {
-  const {
-    diveDate,
-    price,
-    icon,
-    siteList,
-    tripId,
-    centreName,
-    priceId,
-    ...rest
-  } = props;
+  const { trip, icon, ...rest } = props;
   const { addToCart } = useContext(DivingContext);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -41,8 +32,10 @@ export default function TripLineItem(props) {
 
   const [value, onChange] = useState();
 
-  const siteNames = siteList?.map((site) => site.name).join(" + ");
+  const siteNames = trip.dive_sites?.map((site) => site.name).join(" + ");
+  const diveDate = trip.start_time;
 
+  // console.log("TripLineItem trip", trip);
   return (
     <Flex justifyContent="center" alignItems="center" w="100%" {...rest}>
       <Flex direction="column" align="start" me="auto" w="100%">
@@ -57,7 +50,7 @@ export default function TripLineItem(props) {
         <Flex align="center">
           <Icon me="8px" as={IoStorefrontOutline} w="16px" h="16px" />
           <Text color={textColor} fontSize="md" me="6px" fontWeight="500">
-            {centreName}
+            {trip.dive_centre.name}
           </Text>
         </Flex>
         {diveDate ? (
@@ -95,7 +88,7 @@ export default function TripLineItem(props) {
         >
           €
           <Text as="span" fontSize="lg">
-            {price / 100}
+            {trip.price / 100}
           </Text>
         </Text>
         <Tooltip label="Add to Cart">
@@ -110,14 +103,15 @@ export default function TripLineItem(props) {
             borderRadius="10px"
             onClick={() =>
               addToCart({
-                id: tripId,
+                id: trip.id,
                 title: siteNames,
-                siteCount: siteList.length,
-                centreName,
+                siteCount: trip.dive_sites?.length,
+                centreName: trip.dive_centre.name,
                 diveDate: diveDate ? new Date(diveDate) : new Date(value),
                 diveTime: "morning",
-                price,
-                priceId,
+                price: trip.price,
+                priceId: trip.stripe_price_id,
+                payNow: trip.pay_now,
               })
             }
             {...rest}
