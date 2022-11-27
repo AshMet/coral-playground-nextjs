@@ -201,7 +201,7 @@ export default function Content(props) {
               color="green.500"
               fontSize="lg"
             >
-              Amount to pay
+              Pay to Dive Centre
             </Text>
             <Text color="green.500" fontSize="lg" fontWeight="700" maxW="292px">
               {currency === "eur" ? "€" : "$"} {(total - paid).toFixed(2)}

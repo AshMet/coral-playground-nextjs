@@ -33,7 +33,16 @@ export default function TripLineItem(props) {
   const [value, onChange] = useState();
 
   const siteNames = trip.dive_sites?.map((site) => site.name).join(" + ");
-  const diveDate = trip.start_time;
+  const diveDate = trip.fixed_start_date;
+  const diveTime = trip.fixed_start_time;
+
+  // function setDateTime() {
+  //   const newDate = c;
+  //   diveTime
+  //     ? newDate.setHours(diveTime.split(":")[0], diveTime.split(":")[1])
+  //     : newDate.setHours(0, 0);
+  //   return newDate.toLocaleString("en-US", { timeZone: "Africa/Cairo" });
+  // }
 
   // console.log("TripLineItem trip", trip);
   return (
@@ -47,37 +56,39 @@ export default function TripLineItem(props) {
             </Text>
           </Flex>
         </Flex>
+
         <Flex align="center">
           <Icon me="8px" as={IoStorefrontOutline} w="16px" h="16px" />
           <Text color={textColor} fontSize="md" me="6px" fontWeight="500">
             {trip.dive_centre.name}
           </Text>
         </Flex>
-        {diveDate ? (
-          <Flex align="center">
-            <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
-            <Text color="secondaryGray.600" fontSize="sm" fontWeight="500">
-              {new Date(diveDate).toLocaleDateString("en-US", {
+
+        <Flex align="center">
+          <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
+          <Text color="brand.400" fontSize="sm" fontWeight="500">
+            {diveDate ? (
+              new Date(diveDate).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "short",
                 day: "numeric",
-              })}
-              {" @ "}
-              {new Date(diveDate).toLocaleTimeString("en-US", {
+              })
+            ) : (
+              <Tooltip label="Select Date before adding to cart">
+                <Flex align="center">
+                  <DatePicker onChange={onChange} value={value} />
+                </Flex>
+              </Tooltip>
+            )}
+            {diveTime &&
+              ` @ ${new Date(diveTime).toLocaleTimeString("en-US", {
                 hour: "2-digit",
                 minute: "2-digit",
-              })}
-            </Text>
-          </Flex>
-        ) : (
-          <Tooltip label="Select Date before adding to cart">
-            <Flex align="center">
-              <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
-              <DatePicker onChange={onChange} value={value} />
-            </Flex>
-          </Tooltip>
-        )}
+              })}`}
+          </Text>
+        </Flex>
       </Flex>
+
       <Flex direction="column">
         <Text
           ms="auto"
@@ -95,7 +106,7 @@ export default function TripLineItem(props) {
           <Button
             align="center"
             justifyContent="center"
-            bg="brand.100"
+            bg="brand.400"
             w="37px"
             h="37px"
             mt="10px"
@@ -108,7 +119,7 @@ export default function TripLineItem(props) {
                 siteCount: trip.dive_sites?.length,
                 centreName: trip.dive_centre.name,
                 diveDate: diveDate ? new Date(diveDate) : new Date(value),
-                diveTime: "morning",
+                diveTime,
                 price: trip.price,
                 priceId: trip.stripe_price_id,
                 payNow: trip.pay_now,

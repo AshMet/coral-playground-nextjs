@@ -69,7 +69,7 @@ export default function TripSidebar({ trips, diveCentreId, ...rest }) {
       </Text>
       <Text color={textColorTertiary} fontSize="md" mb="16px">
         Add a dive to your cart by selecting your preferred date and clicking
-        the <Icon as={MdAddCircle} color="brand.100" w="16px" h="16px" /> button
+        the <Icon as={MdAddCircle} color="brand.400" w="16px" h="16px" /> button
       </Text>
       <Card
         bg={bg}
@@ -144,7 +144,7 @@ export default function TripSidebar({ trips, diveCentreId, ...rest }) {
           </Flex>
         ))
       ) : (
-        <Text fontSize="md" fontWeight="500" color="purple.500" mb="30px">
+        <Text fontSize="md" fontWeight="500" color="brand.400" mb="30px">
           No Dives scheduled. Check again soon, new dives are getting added all
           the time
         </Text>

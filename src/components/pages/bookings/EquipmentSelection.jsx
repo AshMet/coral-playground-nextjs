@@ -131,7 +131,7 @@ export default function EquipmentSelection(props) {
                     width="100%"
                     height="40px"
                     borderRadius="15px"
-                    filter={iconColor}
+                    filter="invert(100%) sepia(0%) saturate(7500%) hue-rotate(70deg) brightness(99%) contrast(107%)"
                   />
                   <Text mb={0}>{item.name}</Text>
                 </VStack>

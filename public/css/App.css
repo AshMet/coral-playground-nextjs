@@ -219,12 +219,12 @@ body.chakra-ui-dark .react-calendar__tile--rangeEnd:enabled:focus {
   padding: 0 2px;
 }
 .react-date-picker__inputGroup input {
-  color:#a3aed0;
+  color:#7551ff;
 }
 .react-date-picker__inputGroup__divider {
   padding: 1px 0;
   white-space: pre;
-  color:#a3aed0;
+  color:#7551ff;
 }
 .react-date-picker__inputGroup__input {
   min-width: 0.54em;
@@ -250,12 +250,12 @@ body.chakra-ui-dark .react-calendar__tile--rangeEnd:enabled:focus {
   padding-left: calc(1px +  0.54em);
 }
 .react-date-picker__inputGroup__leadingZero{
-  color:#a3aed0;
+  color:#7551ff;
 }
 .react-date-picker__inputGroup__amPm {
   font: inherit;
   -moz-appearance: menulist;
-  color:#a3aed0;
+  color:#7551ff;
 }
 .react-date-picker__button {
   border: 0;
@@ -270,10 +270,11 @@ body.chakra-ui-dark .react-calendar__tile--rangeEnd:enabled:focus {
   stroke: #7551ff;
 }
 .react-date-picker__button:disabled .react-date-picker__button__icon {
-  stroke: #6d6d6d;
+  stroke: #7551ff;
 }
 .react-date-picker__button svg {
   display: inherit;
+  stroke: #7551ff;
 }
 .react-date-picker__calendar,
 .react-date-picker__clock {
@@ -335,7 +336,7 @@ body.chakra-ui-dark .react-date-picker__inputGroup {
   padding: 0 2px;
 }
 body.chakra-ui-dark .react-date-picker__inputGroup input {
-  color:white;
+  color:#7551ff;
 }
 body.chakra-ui-dark .react-date-picker__inputGroup__divider {
   padding: 1px 0;
@@ -390,7 +391,7 @@ body.chakra-ui-dark .react-date-picker__button:disabled .react-date-picker__butt
 }
 body.chakra-ui-dark .react-date-picker__button svg {
   display: inherit;
-  stroke: #6d6d6d;
+  stroke: #7551ff;
 }
 body.chakra-ui-dark .react-date-picker__calendar,
 body.chakra-ui-dark .react-date-picker__clock {

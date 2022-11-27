@@ -13,7 +13,7 @@ import "../../../public/css/MiniCalendar.module.css";
 // import "react-clock/dist/Clock.css";
 
 export default function TripSummary(props) {
-  const { title, centreName, diveDate } = props; // , diveTime
+  const { title, centreName, diveDate, diveTime } = props; // , diveTime
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
 
@@ -50,7 +50,7 @@ export default function TripSummary(props) {
               day: "numeric",
             })}
             {" @ "}
-            {new Date(diveDate).toLocaleTimeString("en-US", {
+            {new Date(diveTime).toLocaleTimeString("en-US", {
               hour: "2-digit",
               minute: "2-digit",
             })}

@@ -12,7 +12,8 @@ import {
 import { useContext } from "react";
 import { BsX } from "react-icons/bs";
 // Assets
-import { IoMdTime } from "react-icons/io";
+// import { IoMdTime } from "react-icons/io";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoStorefrontOutline } from "react-icons/io5";
 
 import { DivingContext } from "contexts/DivingContext";
@@ -79,14 +80,54 @@ export default function Default(props) {
         </Text>
       </Flex>
       <Box>
-        <Text
+        {/* <Text
           fontSize="lg"
-          fontWeight="700"
+          fontWeight="900"
           color={confirmed ? textConfirmed : textNonConfirmed}
         >
           {title}
-        </Text>
+        </Text> */}
         <Flex align="center">
+          <Icon
+            me="8px"
+            as={HiOutlineLocationMarker}
+            w="16px"
+            h="16px"
+            color={
+              confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
+            }
+          />
+          <Text
+            fontSize="lg"
+            fontWeight="500"
+            color={
+              confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
+            }
+          >
+            {title}
+          </Text>
+        </Flex>
+        <Flex align="center">
+          <Icon
+            me="8px"
+            as={IoStorefrontOutline}
+            w="16px"
+            h="16px"
+            color={
+              confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
+            }
+          />
+          <Text
+            fontSize="sm"
+            fontWeight="500"
+            color={
+              confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
+            }
+          >
+            {diveCentre}
+          </Text>
+        </Flex>
+        {/* <Flex align="center">
           <Icon
             me="8px"
             as={IoMdTime}
@@ -105,29 +146,7 @@ export default function Default(props) {
           >
             {hours}
           </Text>
-        </Flex>
-        {diveCentre && (
-          <Flex align="center">
-            <Icon
-              me="8px"
-              as={IoStorefrontOutline}
-              w="16px"
-              h="16px"
-              color={
-                confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
-              }
-            />
-            <Text
-              fontSize="sm"
-              fontWeight="500"
-              color={
-                confirmed ? textSecondaryConfirmed : textSecondaryNonConfirmed
-              }
-            >
-              {subtitle}
-            </Text>
-          </Flex>
-        )}
+        </Flex> */}
       </Box>
       {confirmed && (
         <Button

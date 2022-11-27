@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "Nitrox", "price": 2000, "pay_now": 300, "priceId": "price_1M64qpAvLPvC9h7xquW4EMpa" },
+  { "id": 2, "name": "Camera", "price": 5000, "pay_now": 700, "priceId": "price_1M63wRAvLPvC9h7x5yB1GSjp"},
+  { "id": 3, "name": "Drysuit", "price": 7000, "pay_now": 1000, "priceId": "price_1M64snAvLPvC9h7xSUOKdrjl" },
+  { "id": 4, "name": "Fins", "price": 0, "pay_now": 500 },
+  { "id": 5, "name": "Flashlight", "price": 1000, "pay_now": 200, "priceId": "price_1M64uKAvLPvC9h7x8q0dYC62" },
+  { "id": 6, "name": "Snorkel", "price": 0, "pay_now": 0 },
+  { "id": 7, "name": "Wetsuit", "price": 0, "pay_now": 0 },
+  { "id": 8, "name": "Dive Computer", "price": 4000, "pay_now": 600, "priceId": "price_1M64v3AvLPvC9h7x25mMRbrs" },
+  { "id": 9, "name": "Air Tank", "price": 0, "pay_now": 0 },
+  { "id": 10, "name": "BCD", "price": 0, "pay_now": 0 }
+]

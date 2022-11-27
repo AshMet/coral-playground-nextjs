@@ -37,6 +37,10 @@ const createBooking = async (session) => {
     return lineItems.map((item) => ({
       dive_trip_id: item.id,
       user_selected_time: item.diveDate,
+      // .setHours(
+      //   item.diveTime.split(":")[0],
+      //   item.diveTime.split(":")[1]
+      // ),
       quantity: 1,
     }));
   };

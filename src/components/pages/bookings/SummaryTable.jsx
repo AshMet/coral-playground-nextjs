@@ -45,6 +45,7 @@ export default function SummaryTable() {
                         title={item.title}
                         centreName={item.centreName}
                         diveDate={item.diveDate}
+                        diveTime={item.diveTime}
                       />
                     </Td>
                     <Td>1</Td>

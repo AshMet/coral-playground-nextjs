@@ -49,14 +49,14 @@ function CartList(props) {
             id={dive.id}
             mb="16px"
             title={dive.title}
-            subtitle={dive.centreName}
+            diveCentre={dive.centreName}
             day={new Date(dive.diveDate).toLocaleDateString("en-US", {
               day: "numeric",
             })}
             weekday={new Date(dive.diveDate).toLocaleDateString("en-US", {
               month: "short",
             })}
-            hours={new Date(dive.diveDate).toLocaleTimeString("en-US", {
+            hours={new Date(dive.diveTime).toLocaleTimeString("en-US", {
               hour: "2-digit",
               minute: "2-digit",
             })}
