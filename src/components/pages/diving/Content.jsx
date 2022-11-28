@@ -7,6 +7,7 @@
 import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 
 // Custom components
+import SummaryTable from "../bookings/SummaryTable";
 import Card from "components/card/Card";
 import InvoiceTable from "components/pages/diving/InvoiceTable";
 import { HSeparator } from "components/separator/Separator";
@@ -144,11 +145,12 @@ export default function Content(props) {
           </Flex>
         </Flex>
       </Card>
-      <InvoiceTable
+      {/* <InvoiceTable
         tableData={tableDataInvoice}
         columnsData={tableColumnsInvoice}
         currency={currency}
-      />
+      /> */}
+      <SummaryTable cartItems={metadata} />
       <Flex mt="70px" direction={{ base: "column", md: "row" }}>
         <Box me="auto" mb={{ base: "40px", md: "0px" }}>
           <Text fontSize="lg" fontWeight="700" color={textColor}>

@@ -278,7 +278,7 @@ export default function NewBooking() {
             >
               {/* Row 1: List of Dives */}
               {/* <DiveList mb="20px" dives={dives} setDives={setDives} /> */}
-              <SummaryTable />
+              <SummaryTable cartItems={cartItems} />
               {/* Row 2: Map  & Calendar */}
               {/* <DiveSelection /> */}
               <Flex justify="space-between" mt="24px">

@@ -29,11 +29,15 @@ const createBooking = async (session) => {
   // create booking on moralis using metadata passed from session
   // Including sessionId
   const customer = await stripe.customers.retrieve(session.customer);
+  console.log("webhook customer", customer);
+  console.log("webhook session", session);
 
   // Add Email customer confirmation
   const getLineItems = () => {
     const dives = Object.values(session.metadata);
     const lineItems = dives.map((dive) => JSON.parse(dive));
+    console.log("webhook dives", dives);
+    console.log("webhook lineitems", lineItems);
     return lineItems.map((item) => ({
       dive_trip_id: item.id,
       user_selected_time: item.diveDate,
@@ -46,7 +50,7 @@ const createBooking = async (session) => {
   };
 
   axios
-    .post("https://coral-playground-api.herokuapp.com/api/v1/orders", {
+    .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/orders`, {
       order: {
         diver_name: session.customer_details.name || "unknown",
         email: session.customer_details.email,

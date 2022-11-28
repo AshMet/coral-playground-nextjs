@@ -31,6 +31,7 @@ import { useContext, useEffect } from "react";
 import Stripe from "stripe";
 
 import Card from "components/card/Card";
+// import SummaryTable from "components/pages/bookings/SummaryTable";
 import Banner from "components/pages/diving/Banner";
 import Content from "components/pages/diving/Content";
 import { DivingContext } from "contexts/DivingContext";
@@ -45,6 +46,8 @@ export default function Invoice({ session, lineItems }) {
   trips.sort((a, b) => a.priceId.localeCompare(b.priceId));
   const stripeLineItems = lineItems.data;
   stripeLineItems.sort((a, b) => a.price.id.localeCompare(b.price.id));
+  // console.log("stripeLineItems", stripeLineItems);
+  // console.log("session metadata", session.metadata);
   const { clearCart } = useContext(DivingContext);
 
   useEffect(() => {
@@ -77,6 +80,7 @@ export default function Invoice({ session, lineItems }) {
       <Card maxW="920px" mx="auto">
         <Flex direction="column" width="stretch">
           <Banner sessionId={session.id} />
+          {/* <SummaryTable cartItems={trips} /> */}
           <Content
             diverName={session.customer_details.name}
             email={session.customer_details.email}

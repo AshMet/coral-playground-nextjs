@@ -11,14 +11,11 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { useContext } from "react";
 
-import { DivingContext } from "../../../contexts/DivingContext";
 import Card from "../../card/Card";
 import TripSummary from "../../dataDisplay/TripSummary";
 
-export default function SummaryTable() {
-  const { cartItems } = useContext(DivingContext);
+export default function SummaryTable({ cartItems }) {
   // console.log(cartItems);
   return (
     <Card>

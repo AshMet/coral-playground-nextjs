@@ -42,6 +42,8 @@ export default function Course(props) {
     setPriceId,
     setCourseId,
     setCourseName,
+    payNow,
+    setPayNow,
     selected,
   } = props;
   const textColor = useColorModeValue("navy.700", "white");
@@ -70,6 +72,7 @@ export default function Course(props) {
         setCourseId(id);
         setPrice(price);
         setPriceId(priceId);
+        setPayNow(payNow);
       }}
     >
       <Flex direction={{ base: "column", md: "column", xl: "row" }}>

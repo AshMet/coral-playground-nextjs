@@ -56,6 +56,7 @@ export default function EquipmentSelection(props) {
     diveTime: "",
     price: item.price,
     priceId: item.priceId,
+    payNow: item.pay_now,
   }));
 
   function toggleArrayItem(arr, item) {

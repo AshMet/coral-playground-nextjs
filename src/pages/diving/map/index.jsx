@@ -159,7 +159,7 @@ export default function Default({ data }) {
                   name={popupInfo.name}
                   tagList={popupInfo.divingTypes}
                   type={popupInfo.locationType}
-                  image={popupInfo.itemImg?.url}
+                  image={popupInfo.itemImg}
                 />
               </Popup>
             )}

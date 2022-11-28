@@ -35,27 +35,31 @@ export default function TripSummary(props) {
             </Text>
           </Flex>
         </Flex>
-        <Flex align="center">
-          <Icon me="8px" as={IoStorefrontOutline} w="16px" h="16px" />
-          <Text color={textColor} fontSize="md" me="6px" fontWeight="500">
-            {centreName}
-          </Text>
-        </Flex>
-        <Flex align="center">
-          <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
-          <Text color="secondaryGray.600" fontSize="sm" fontWeight="500">
-            {new Date(diveDate).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
-            {" @ "}
-            {new Date(diveTime).toLocaleTimeString("en-US", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </Text>
-        </Flex>
+        {centreName && (
+          <Flex align="center">
+            <Icon me="8px" as={IoStorefrontOutline} w="16px" h="16px" />
+            <Text color={textColor} fontSize="md" me="6px" fontWeight="500">
+              {centreName}
+            </Text>
+          </Flex>
+        )}
+        {diveDate && (
+          <Flex align="center">
+            <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
+            <Text color="secondaryGray.600" fontSize="sm" fontWeight="500">
+              {new Date(diveDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+              {" @ "}
+              {new Date(diveTime).toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </Text>
+          </Flex>
+        )}
       </Flex>
     </Flex>
   );

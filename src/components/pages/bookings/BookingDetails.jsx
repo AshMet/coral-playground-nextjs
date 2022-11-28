@@ -20,8 +20,16 @@ import { DivingContext } from "contexts/DivingContext";
 // Assets
 
 export default function BookingDetails(props) {
-  const { courseId, courseName, diveDate, diveTime, price, priceId, ...rest } =
-    props;
+  const {
+    courseId,
+    courseName,
+    diveDate,
+    diveTime,
+    price,
+    priceId,
+    payNow,
+    ...rest
+  } = props;
   const { addToCart } = useContext(DivingContext);
 
   // Chakra Color Mode
@@ -121,9 +129,10 @@ export default function BookingDetails(props) {
                 siteCount: 1,
                 centreName: diveCentre,
                 diveDate,
-                diveTime: "morning",
+                diveTime: "12:00:00",
                 price,
                 priceId,
+                payNow,
               })
             }
           >

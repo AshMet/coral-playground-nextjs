@@ -88,7 +88,7 @@ export default function Footer() {
               </Text>
             </Box>
           </Flex>
-          <Link href="https://instagram.com/coral.playground/">
+          <Link href="https://instagram.com/coralplayground/">
             <Button
               ms={{ base: "0px", lg: "auto" }}
               bg="white"
@@ -237,7 +237,7 @@ export default function Footer() {
               Social Media
             </Text>
             <Link
-              href="https://instagram.com/coral.playground/"
+              href="https://instagram.com/coralplayground/"
               fontSize="md"
               color={textColorSecondary}
               fontWeight="400"

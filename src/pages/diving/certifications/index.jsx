@@ -63,6 +63,7 @@ export default function Courses({ data }) {
   const [selectedDate, setSelectedDate] = useState();
   const [diveTime, setDiveTime] = useState();
   const [courses, setCourses] = useState();
+  const [payNow, setPayNow] = useState();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = useColorModeValue(
@@ -96,10 +97,12 @@ export default function Courses({ data }) {
               category={course.category}
               price={course.price.toFixed(0)}
               priceId={course.stripe_price_id}
+              payNow={course.pay_now}
               setCourseId={setCourseId}
               setCourseName={setCourseName}
               setPrice={setPrice}
               setPriceId={setPriceId}
+              setPayNow={setPayNow}
               selected={courseName === course.name}
             />
           );
@@ -301,6 +304,7 @@ export default function Courses({ data }) {
               setSelectedDate={setSelectedDate}
               diveDate={selectedDate}
               diveTime={diveTime}
+              payNow={payNow}
               gridArea={{ md: "1 / 2 / 2 / 3", lg: "2 / 1 / 3 / 2" }}
               mb="20px"
             />

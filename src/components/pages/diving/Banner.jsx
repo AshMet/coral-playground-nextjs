@@ -63,7 +63,7 @@ export default function Banner(props) {
             mt={{ base: "10px", md: "10px" }}
             fontWeight="regular"
           >
-            2845 Sherry Street
+            Red Sea Touristic Promenade
           </Text>
           <Text fontSize={{ base: "md", md: "xl" }} fontWeight="regular">
             Hurghada, Egypt
