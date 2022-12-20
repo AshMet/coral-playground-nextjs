@@ -155,8 +155,7 @@ export async function getStaticProps({ params }) {
         city: cities (name),
         country: cities (countries (name)),
         species: site_species!dive_site_id (
-          specie: species_id (id, name, cover_photo))
-      `
+          specie: species_id (id, name, cover_photo))`
     )
     .filter("id", "eq", id)
     .single();
