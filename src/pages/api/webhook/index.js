@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable default-case */
 /* eslint-disable no-console */
-import axios from "axios";
 import { buffer } from "micro";
 import Stripe from "stripe";
+
+import { supabase } from "..";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -32,50 +33,58 @@ const createBooking = async (session) => {
   console.log("webhook customer", customer);
   console.log("webhook session", session);
 
-  // Add Email customer confirmation
-  const getLineItems = () => {
-    const dives = Object.values(session.metadata);
-    const lineItems = dives.map((dive) => JSON.parse(dive));
-    console.log("webhook dives", dives);
-    console.log("webhook lineitems", lineItems);
-    return lineItems.map((item) => ({
-      dive_trip_id: item.id,
-      user_selected_time: item.diveDate,
-      // .setHours(
-      //   item.diveTime.split(":")[0],
-      //   item.diveTime.split(":")[1]
-      // ),
-      quantity: 1,
-    }));
-  };
-
-  axios
-    .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/orders`, {
-      order: {
+  // Create Order
+  const { data: order, error } = await supabase
+    .from("orders")
+    .insert([
+      {
         diver_name: session.customer_details.name || "unknown",
         email: session.customer_details.email,
         diving_cert: customer.metadata?.diverCert,
         last_dive: customer.metadata?.lastDive,
         notes: customer.metadata?.notes,
-        total_price: parseFloat(session.amount_total),
+        amount_paid: parseFloat(session.amount_total),
+        // amount_total: parseFloat(session.amount_total),
         currency: session.currency,
         status: session.payment_status,
-        stripe_cust_id: session.customer,
+        stripe_customer_id: session.customer,
         stripe_session_id: session.id,
-        line_items_attributes: getLineItems(),
       },
-    })
-    .then(
-      (order) => {
-        console.log(`Booking Saved: ${order}`);
-      },
-      (error) => {
-        // The save failed.
-        // error is a Moralis.Error with an error code and message.
-        console.log(`Booking Error: ${error}`);
-      }
-    );
-  console.log("Creating order session", session);
+    ])
+    .select()
+    .single();
+  const newOrder = JSON.stringify(order.id);
+  console.log(`Booking Saved: ${newOrder}`);
+  // console.log(`BookingId Saved: ${newOrder.id}`);
+  if (error) {
+    console.log(`Booking Save Failed: ${JSON.stringify(error)}`);
+  }
+
+  // Create Line Items
+  const dives = Object.values(session.metadata);
+  const lineItems = dives.map((dive) => JSON.parse(dive));
+
+  console.log("webhook lineitems", lineItems);
+
+  const insertData = lineItems.map((item) => ({
+    // eslint-disable-next-line prettier/prettier
+    order_id: newOrder.replace(/["]/g, ''),
+    dive_trip_id: item.id,
+    user_selected_time: item.diveDate,
+    quantity: 1,
+  }));
+
+  // Need to format insert Data as array only for multiple items
+  const { data: newLineItems, error: lineItemError } = await supabase
+    .from("line_items")
+    .insert(insertData.length === 1 ? insertData[0] : insertData)
+    .select();
+
+  console.log("insertData", insertData);
+  console.log("line_items", newLineItems);
+  if (error) {
+    console.log(`Line Item Save Failed: ${JSON.stringify(lineItemError)}`);
+  }
 };
 
 const emailCustomerAboutFailedPayment = (session) => {

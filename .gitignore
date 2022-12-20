@@ -43,3 +43,8 @@ sitemap*.xml
 
 # TS
 *.tsbuildinfo
+
+# database dump
+heroku_dump.sql
+supabase_dump.sql
+supabase_dev_dump.sql

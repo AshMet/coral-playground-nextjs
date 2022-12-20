@@ -31,7 +31,6 @@ import { useEffect, useState } from "react";
 // Assets
 // import banner from "assets/img/auth/banner.png";
 // import profile from "assets/img/crm/vbz.png";
-// import axios from "axios";
 // import React from "react";
 // // Custom components
 // import Info from "views/admin/main/profile/settings/components/Info";
@@ -59,7 +58,7 @@ export default function Settings() {
   }, [id]);
 
   useEffect(() => {
-    setDiveMapUrl(diveSite?.dive_map);
+    setDiveMapUrl(diveSite?.diveMap);
   }, [diveSite]);
 
   function submitToApi(data) {

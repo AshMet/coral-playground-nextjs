@@ -40,15 +40,15 @@ export default function SpeciesTab({ collection, ...rest }) {
               {...rest}
             >
               <VStack>
-                {item.avatar && (
+                {item.specie.cover_photo && (
                   <Image
-                    src={item.avatar}
+                    src={item.specie.cover_photo}
                     width="100%"
                     height="50px"
                     borderRadius="15px"
                   />
                 )}
-                <Text>{titleCase(item.name)}</Text>
+                <Text>{titleCase(item.specie.name)}</Text>
               </VStack>
             </Card>
           );

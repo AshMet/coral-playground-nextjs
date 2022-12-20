@@ -26,7 +26,7 @@ import { MdChevronRight } from "react-icons/md";
 import { VSeparator } from "components/separator/Separator";
 // import * as gtag from "lib/data/gtag";
 
-export default function AdminNavbar(props) {
+export default function LandingNavbar(props) {
   const [scrolled, setScrolled] = useState(false);
   // const { colorMode, toggleColorMode } = useColorMode();
 
@@ -136,7 +136,18 @@ export default function AdminNavbar(props) {
             me="30px"
             my="auto"
           >
-            Diving
+            Divers
+          </Link>
+          <Link
+            display={{ base: "none", lg: "block" }}
+            href="/dive_centres/home"
+            color={textColor}
+            fontSize="md"
+            fontWeight="600"
+            me="30px"
+            my="auto"
+          >
+            Businesses
           </Link>
           {/* <Link
             display={{ base: "none", lg: "block" }}
@@ -157,7 +168,7 @@ export default function AdminNavbar(props) {
           <Link
             me="10px"
             my="auto"
-            href="https://instagram.com/coral.playground/"
+            href="https://instagram.com/coralplayground/"
           >
             <Button
               variant="no-hover"
@@ -219,7 +230,24 @@ export default function AdminNavbar(props) {
                     me="30px"
                     my="auto"
                   >
-                    Diving
+                    Divers
+                  </Link>
+                </MenuItem>
+                <MenuItem
+                  _hover={{ bg: "none" }}
+                  _focus={{ bg: "none" }}
+                  borderRadius="8px"
+                  px="14px"
+                >
+                  <Link
+                    href="/dive_centres/home"
+                    color={menuTextColor}
+                    fontSize="md"
+                    fontWeight="500"
+                    me="30px"
+                    my="auto"
+                  >
+                    Businesses
                   </Link>
                 </MenuItem>
                 {/* <MenuItem
@@ -292,7 +320,7 @@ export default function AdminNavbar(props) {
   );
 }
 
-AdminNavbar.propTypes = {
+LandingNavbar.propTypes = {
   brandText: PropTypes.string,
   variant: PropTypes.string,
   secondary: PropTypes.bool,

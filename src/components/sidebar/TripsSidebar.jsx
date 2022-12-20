@@ -28,9 +28,7 @@ const containerStyle = {
   height: "100%", // { sm: "calc(100vh + 50px)", xl: "calc(100vh - 75px - 275px)" }
 };
 
-// const userQuery = await new Moralis.Query(Moralis.Role).equalTo("users", user).find();
-
-export default function TripSidebar({ trips, diveCentreId, ...rest }) {
+export default function TripSidebar({ trips, diveSite, diveCentre, ...rest }) {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorTertiary = useColorModeValue(
@@ -84,22 +82,39 @@ export default function TripSidebar({ trips, diveCentreId, ...rest }) {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={{
-            lat: trips[0]?.dive_centre.latitude || 28,
-            lng: trips[0]?.dive_centre.longitude || 35,
+            lat: diveSite ? diveSite.latitude : diveCentre.latitude, // || 28
+            lng: diveSite ? diveSite.longitude : diveCentre.longitude, // || 35
           }}
           zoom={8}
           options={mapOptions}
           mb="0px"
           border="20px"
         >
-          {trips &&
-            trips.map((trip) =>
+          {/* Home Marker */}
+          <Marker
+            key={diveSite ? diveSite.id : diveCentre.id}
+            position={{
+              lat: diveSite ? diveSite.latitude : diveCentre.latitude,
+              lng: diveSite ? diveSite.longitude : diveCentre.longitude,
+            }}
+            // onClick={() => setMapLocation(location)}
+            icon={{
+              url: diveSite
+                ? "/img/diving/dive_site_marker.svg"
+                : "/img/diving/dive_centre_marker.svg",
+              scaledSize: new window.google.maps.Size(34, 34),
+            }}
+          />
+
+          {/* Show all dive sites with trips from given diveCentre */}
+          {diveCentre &&
+            trips?.map((trip) =>
               trip.dive_sites.map((site) => (
                 <Marker
                   key={`${trip.id}-${site.id}`}
                   position={{
-                    lat: site.latitude,
-                    lng: site.longitude,
+                    lat: site.dive_site.latitude,
+                    lng: site.dive_site.longitude,
                   }}
                   // onClick={() => setMapLocation(location)}
                   icon={{
@@ -109,13 +124,15 @@ export default function TripSidebar({ trips, diveCentreId, ...rest }) {
                 />
               ))
             )}
-          {trips &&
-            trips.map((trip) => (
+
+          {/* Show all dive centres with trips to given diveSite */}
+          {diveSite &&
+            trips?.map((trip) => (
               <Marker
-                key={trip.dive_centre.id}
+                key={trip.dive_trip.dive_centre.id}
                 position={{
-                  lat: trip.dive_centre.latitude,
-                  lng: trip.dive_centre.longitude,
+                  lat: trip.dive_trip.dive_centre.latitude,
+                  lng: trip.dive_trip.dive_centre.longitude,
                 }}
                 icon={{
                   url: "/img/diving/dive_centre_marker.svg",
@@ -134,8 +151,7 @@ export default function TripSidebar({ trips, diveCentreId, ...rest }) {
             align="center"
           >
             <TripLineItem
-              trip={trip}
-              locationType="dive_centre"
+              trip={diveSite ? trip.dive_trip : trip}
               icon={
                 <Icon as={MdAddCircle} color={textColor} w="20px" h="18px" />
               }
@@ -145,8 +161,7 @@ export default function TripSidebar({ trips, diveCentreId, ...rest }) {
         ))
       ) : (
         <Text fontSize="md" fontWeight="500" color="brand.400" mb="30px">
-          No Dives scheduled. Check again soon, new dives are getting added all
-          the time
+          No Dives scheduled. Check back soon, new dives are added regularly
         </Text>
       )}
       {/* Need to add logic to authorize only allowed users to create a new trip */}

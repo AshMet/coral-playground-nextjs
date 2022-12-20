@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable complexity */
 /* eslint-disable import/no-cycle */
 /* eslint-disable sonarjs/cognitive-complexity */
-/* eslint-disable no-undef */
 /* eslint-disable no-nested-ternary */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
@@ -43,13 +43,14 @@ import { useRef, useState, useContext } from "react";
 // Custom components
 import SummaryTable from "../../../components/pages/bookings/SummaryTable";
 import { DivingContext } from "../../../contexts/DivingContext";
+import { supabase } from "../../api";
 import Card from "components/card/Card";
 import DiverInfo from "components/pages/bookings/DiverInfo";
 // import DiveSelection from "components/pages/bookings/DiveSelection";
 import EquipmentSelection from "components/pages/bookings/EquipmentSelection";
-import NftLayout from "layouts/nft";
+import DivingLayout from "layouts/DivingLayout";
 
-export default function NewBooking() {
+export default function NewBooking({ equipment }) {
   const {
     diverName,
     setDiverName,
@@ -347,6 +348,7 @@ export default function NewBooking() {
             >
               <EquipmentSelection
                 mediaTab={mediaTab}
+                equipment={equipment}
                 dives={cartItems}
                 diverName={diverName}
                 diverEmail={diverEmail}
@@ -362,6 +364,15 @@ export default function NewBooking() {
   );
 }
 
+export async function getStaticProps() {
+  const { data: equipment } = await supabase
+    .from("equipment")
+    .select("id, name, price, pay_now, stripe_price_id");
+  return {
+    props: { equipment },
+  };
+}
+
 NewBooking.getLayout = function getLayout(page) {
-  return <NftLayout>{page}</NftLayout>;
+  return <DivingLayout>{page}</DivingLayout>;
 };

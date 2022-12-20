@@ -1,13 +1,11 @@
 // Chakra imports
 import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
-// Custom components
-import { GiDivingHelmet } from "react-icons/gi";
+import { GiShop } from "react-icons/gi";
 import { IoBoatOutline } from "react-icons/io5";
 import { MdCheckCircle } from "react-icons/md";
 
 import { DashCurveDown, DashCurveUp } from "components/icons/Icons";
 import IconStep from "components/icons/IconStep";
-// Assets
 
 export default function Conversion(props) {
   const { ...rest } = props;
@@ -22,10 +20,9 @@ export default function Conversion(props) {
         justifyContent="space-around"
       >
         <IconStep
-          icon={GiDivingHelmet}
-          title="Explore"
-          subtitle="Browse our list of Dive Sites and Dive Centres to find upcoming
-            trips"
+          icon={GiShop}
+          title="Promote"
+          subtitle="Add your diving calendar to help customers discover and book from your upcoming dive trips"
         />
         <DashCurveUp
           mt="10px"
@@ -35,10 +32,9 @@ export default function Conversion(props) {
           h="22px"
         />
         <IconStep
-          icon={IoBoatOutline}
-          title="Select"
-          subtitle="Pick the dive trips and dates you wish to dive, and we will take
-            care of the rest"
+          icon={MdCheckCircle}
+          title="Confirm"
+          subtitle="Customers will reserve their desired dives and dates with a small deposit. Once payment is complete, you will both receieve an automated confirmation email with the complete itinerary"
           // mx="60px"
         />
         <DashCurveDown
@@ -49,9 +45,9 @@ export default function Conversion(props) {
           h="22px"
         />
         <IconStep
-          icon={MdCheckCircle}
-          title="Checkout"
-          subtitle="BProvide your basic details and pay a refundable deposit"
+          icon={IoBoatOutline}
+          title="Dive"
+          subtitle="Customers will be given an option to complete a pre-dive check-in to speed up onboarding and will pay any outstanding fees directly to the dive centre"
         />
       </Flex>
     </Box>

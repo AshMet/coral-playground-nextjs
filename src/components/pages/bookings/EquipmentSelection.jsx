@@ -14,11 +14,9 @@ import { useContext } from "react";
 import { DivingContext } from "../../../contexts/DivingContext";
 import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
-// import checkout from "components/pages/diving/checkout";
-import equipment from "lib/constants/equipment.json";
 
 export default function EquipmentSelection(props) {
-  const { mediaTab } = props;
+  const { equipment, mediaTab } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const priceColor = useColorModeValue("green.300", "green.500");
   const iconColor = useColorModeValue(
@@ -55,18 +53,21 @@ export default function EquipmentSelection(props) {
     diveDate: "",
     diveTime: "",
     price: item.price,
-    priceId: item.priceId,
+    priceId: item.stripe_price_id,
     payNow: item.pay_now,
   }));
 
   function toggleArrayItem(arr, item) {
-    arr.includes(item)
-      ? setEquipmentList(arr.filter((i) => i !== item)) // remove item
+    console.log("toggle item", item);
+    console.log("toggle arr", arr);
+    arr.map((a) => a.id).includes(item.id)
+      ? setEquipmentList(arr.filter((i) => i.id !== item.id)) // remove item
       : setEquipmentList([...arr, item]); // add item
   }
-  console.log(equipLineItems);
-  console.log(equipmentList);
+  console.log("equipLineItems", equipLineItems);
+  console.log("equipment list", equipmentList);
   console.log("freeEquipment", freeEquipment);
+  console.log("Equipment", equipment);
 
   return (
     <Card p="30px">

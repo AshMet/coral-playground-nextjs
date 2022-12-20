@@ -3,17 +3,17 @@
 import {
   Box,
   Flex,
-  Avatar,
-  Text,
-  useColorModeValue,
+  // Avatar,
+  // Text,
+  // useColorModeValue,
   Stack,
-  Input,
-  Button,
+  // Input,
+  // Button,
 } from "@chakra-ui/react";
 //   Custom components
-import { useContext } from "react";
+// import { useContext } from "react";
 
-import { CoralPgContext } from "../../../contexts/CoralPgContext";
+// import { CoralPgContext } from "../../../contexts/CoralPgContext";
 import Brand from "components/sidebar/components/Brand";
 import Links from "components/sidebar/components/Links";
 // import SidebarCard from "components/sidebar/components/SidebarCard";
@@ -23,16 +23,16 @@ import Links from "components/sidebar/components/Links";
 function SidebarContent(props) {
   const { routes } = props;
 
-  const {
-    isAuthenticated,
-    nickname,
-    setNickname,
-    username,
-    handleSetUsername,
-  } = useContext(CoralPgContext);
+  // const {
+  //   isAuthenticated,
+  //   nickname,
+  //   setNickname,
+  //   username,
+  //   handleSetUsername,
+  // } = useContext(CoralPgContext);
 
-  const textColor = useColorModeValue("navy.700", "white");
-  const avatar4 = `https://avatars.dicebear.com/api/miniavs/${username}.svg`;
+  // const textColor = useColorModeValue("navy.700", "white");
+  // const avatar4 = `https://avatars.dicebear.com/api/miniavs/${username}.svg`;
   // SIDEBAR
   return (
     <Flex
@@ -57,7 +57,7 @@ function SidebarContent(props) {
           >
             <SidebarCard />
           </Box> */}
-      {isAuthenticated && (
+      {/* {isAuthenticated && (
         <Flex mt="75px" mb="56px" justifyContent="center" alignItems="center">
           <Avatar h="48px" w="48px" src={avatar4} me="20px" />
           <Box>
@@ -93,7 +93,7 @@ function SidebarContent(props) {
             )}
           </Box>
         </Flex>
-      )}
+      )} */}
     </Flex>
   );
 }

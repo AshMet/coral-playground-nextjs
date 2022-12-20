@@ -12,12 +12,10 @@ import { MdChevronRight } from "react-icons/md";
 
 import InnerContent from "../../../layouts/InnerContent";
 
-// import heroVideo from "../../../../public/img/diving/HeroVideo.mp4";
-
 const Hero = () => {
   // Chakra Color Mode
   const textColor = useColorModeValue("white", "white");
-  const textColorSecondary = useColorModeValue("secondaryGray.700", "white");
+  // const textColorSecondary = useColorModeValue("secondaryGray.700", "white");
 
   return (
     <Center pos="relative" w="100%" h="100vh">
@@ -86,7 +84,7 @@ const Hero = () => {
                   mb="30px"
                   fontWeight="600"
                 >
-                  Explore the Ocean
+                  Manage & Grow Your Business
                   <br />
                   <Text as="span" fontWeight="800">
                     Like{" "}
@@ -123,7 +121,7 @@ const Hero = () => {
                       w="210px"
                       h="54px"
                     >
-                      Start Exploring
+                      Become a Trusted Partner
                       <Icon
                         as={MdChevronRight}
                         ms="5px"
@@ -133,7 +131,7 @@ const Hero = () => {
                       />
                     </Button>
                   </Link>
-                  <Link href="/">
+                  {/* <Link href="/">
                     <Button
                       variant="no-hover"
                       border="1px solid"
@@ -146,9 +144,9 @@ const Hero = () => {
                       w={{ base: "210px", md: "180px" }}
                       h="54px"
                     >
-                      Partner with Us
+                      See live preview
                     </Button>
-                  </Link>
+                  </Link> */}
                 </Flex>
               </Flex>
             </Flex>

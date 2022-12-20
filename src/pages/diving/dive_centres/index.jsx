@@ -16,15 +16,15 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 import { MdApps, MdDashboard } from "react-icons/md";
 
 // import { SearchBar } from "views/admin/nfts/profile/components/Search";
+import { supabase } from "../../api/index";
 import DiveSiteCard from "components/card/DiveSiteCard";
-import NftLayout from "layouts/nft";
+import DivingLayout from "layouts/DivingLayout";
 
 // const Moralis = require("moralis/node");
 
@@ -60,8 +60,9 @@ export default function DiveSites({ data }) {
       return;
     }
     // console.log("centres", data);
-    const cityFiltered = data.filter((site) => site.city === city);
+    const cityFiltered = data.filter((centre) => centre.city === city);
     setFiltered(cityFiltered);
+    console.log("centres", data);
   }, [data, city, country]);
 
   return (
@@ -160,8 +161,7 @@ export default function DiveSites({ data }) {
                       key={centre.id}
                       id={centre.id}
                       image={
-                        centre.cover_photo_url ||
-                        "/img/diving/dive_centre_bg.jpg"
+                        centre.cover_photo || "/img/diving/dive_centre_bg.jpg"
                       }
                       name={centre.name}
                       type="dive_centre"
@@ -177,35 +177,15 @@ export default function DiveSites({ data }) {
   );
 }
 
-// This works with parsed data in the body. Not sure why images were not working
-// export async function getStaticProps() {
-//   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
-//   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-//   Moralis.initialize(appId);
-//   Moralis.serverURL = serverUrl;
-//   const DiveCentreList = Moralis.Object.extend("DiveCentres");
-//   const query = new Moralis.Query(DiveCentreList);
-//   const results = await query.ascending("name").find();
-//   const data = JSON.stringify(results);
-
-//   return {
-//     props: { data },
-//   };
-// }
-
 export async function getStaticProps() {
-  try {
-    const results = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_centres`
-    );
-    const { data } = results;
-    return {
-      props: { data },
-    };
-  } catch (error) {
-    console.error(error);
-  }
+  const { data } = await supabase.from("dive_centres").select(`
+    id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships,
+    cover_photo, city: cities (name)
+  `);
+  return {
+    props: { data },
+  };
 }
 DiveSites.getLayout = function getLayout(page) {
-  return <NftLayout>{page}</NftLayout>;
+  return <DivingLayout>{page}</DivingLayout>;
 };

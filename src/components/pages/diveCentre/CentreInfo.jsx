@@ -26,7 +26,7 @@ import DetailsTab from "./DetailsTab";
 // import Instructor from "./Instructor";
 // import Rating from "./Rating";
 
-export default function SiteInfo({
+export default function CentreInfo({
   name,
   description,
   address,

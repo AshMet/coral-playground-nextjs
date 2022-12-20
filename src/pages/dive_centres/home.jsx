@@ -21,31 +21,27 @@
 
 */
 
-// Chakra imports
+// Core imports
 import { Flex } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 import { ParallaxProvider } from "react-scroll-parallax";
 
-// Custom components
-import Benefits from "components/pages/divingHome/Benefits";
-import BookingBenefits from "components/pages/divingHome/BookingBenefits";
-import DiveCentreBenefits from "components/pages/divingHome/DiveCentreBenefits";
-import DiveSiteBenefits from "components/pages/divingHome/DiveSiteBenefits";
-import Hero from "components/pages/divingHome/Hero";
-import HowItWorks from "components/pages/divingHome/HowItWorks";
-import Mission from "components/pages/divingHome/Mission";
+// Components
+import Benefits from "components/pages/diveCentresHome/Benefits";
+import Hero from "components/pages/diveCentresHome/Hero";
+import HowItWorks from "components/pages/diveCentresHome/HowItWorks";
+import ManageBenefits from "components/pages/diveCentresHome/ManageBenefits";
+import Mission from "components/pages/diveCentresHome/Mission";
+import OperateBenefits from "components/pages/diveCentresHome/OperateBenefits";
+import PromoteBenefits from "components/pages/diveCentresHome/PromoteBenefits";
 import LandingLayout from "layouts/home/Landing";
-// import Numbers from "components/pages/divingHome/Numbers";
-// import Upgrade from "components/pages/divingHome/Upgrade";
 
-// import HomeHero from "components/pages/divingHome/VideoHero";
-
-export default function DivingHome() {
+export default function diveCentresHome() {
   return (
     <>
       <NextSeo
-        title="Diving Landing"
-        description="Coral Playground Diving Home Page"
+        title="Dive Centres Landing"
+        description="Coral Playground Dive Centres Home Page"
       />
       <ParallaxProvider>
         <Flex direction={{ base: "column" }}>
@@ -53,9 +49,9 @@ export default function DivingHome() {
           <Mission />
           <HowItWorks />
           <Benefits />
-          <DiveSiteBenefits />
-          <DiveCentreBenefits />
-          <BookingBenefits />
+          <PromoteBenefits />
+          <ManageBenefits />
+          <OperateBenefits />
           {/* <Numbers />
         <Upgrade /> */}
         </Flex>
@@ -64,6 +60,6 @@ export default function DivingHome() {
   );
 }
 
-DivingHome.getLayout = function getLayout(page) {
+diveCentresHome.getLayout = function getLayout(page) {
   return <LandingLayout>{page}</LandingLayout>;
 };

@@ -4,25 +4,26 @@
 // Chakra imports
 import { AspectRatio, Box, Button, Grid } from "@chakra-ui/react";
 // Custom components
-import axios from "axios";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 // import { useMoralisCloudFunction } from "react-moralis";
 
+import { supabase } from "../../../api/index";
 import Card from "components/card/Card";
-import SiteInfo from "components/pages/diveCentre/SiteInfo";
+import CentreInfo from "components/pages/diveCentre/CentreInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
-import NftLayout from "layouts/nft";
+import DivingLayout from "layouts/DivingLayout";
 
 // const Moralis = require("moralis/node");
 
-export default function DiveCentre({ data }) {
+export default function DiveCentre({ diveCentre }) {
   // const parsedCentre = JSON.parse(data);
   const router = useRouter();
   const { id } = router.query;
 
   const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // const diveCentre = {
   //   id: parsedCentre.objectId,
@@ -49,23 +50,39 @@ export default function DiveCentre({ data }) {
   //   isLoading: tripDataIsLoading,
   // } = useMoralisCloudFunction("getCentreTrips", { id });
 
+  // id, name, latitude, longitude, dive_trips:dive_trips(*, diveSites:trip_sites!diveSiteId(diveSiteId(*)))
+
+  async function fetchCentreTrips() {
+    const { data } = await supabase
+      .from("dive_centres")
+      .select(
+        `
+          id,
+          dive_trips:dive_trips(id, name, description, notes, min_cert, status, price, pay_now,
+            stripe_price_id, fixed_start_date, fixed_start_time, check_in,
+            dive_sites:trip_sites!dive_trip_id(
+              dive_site:dive_site_id(id, name, latitude, longitude)),
+            dive_centre: dive_centres(id, name, latitude, longitude)
+          )
+        `
+      )
+      .eq("id", id)
+      .single();
+    setTrips(data.dive_trips);
+    setLoading(false);
+    console.log("centreTripData", data);
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_centres/${id}/centre_trips`
-      );
-      setTrips(result.data);
-      // console.log("trips", trips);
-    }
-    fetchData();
+    fetchCentreTrips();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <NextSeo
-        title={`Dive Centre - ${data.name}`}
-        description={`Dive Centre - ${data.name}, ${data.city}, ${data.country}`}
+        title={`Dive Centre - ${diveCentre.name}`}
+        description={`Dive Centre - ${diveCentre.name}, ${diveCentre.city}, ${diveCentre.country}`}
       />
       <Box maxW="100%">
         <Grid
@@ -93,7 +110,7 @@ export default function DiveCentre({ data }) {
                 w=""
                 minH={{ base: "200px", md: "100%" }}
                 bgImage={
-                  data.cover_photo_url || "/img/diving/dive_centre_bg.jpg"
+                  diveCentre.cover_photo || "/img/diving/dive_centre_bg.jpg"
                 }
               >
                 <Button
@@ -111,17 +128,17 @@ export default function DiveCentre({ data }) {
                 </Button>
               </Card>
             </AspectRatio>
-            <SiteInfo
-              name={data.name}
-              description={data.description}
-              address={data.address}
-              city={data.city}
-              country={data.country}
-              equipment={data.equipment}
-              services={data.services}
-              paymentMethods={data.paymentMethods}
-              languages={data.languages}
-              memberships={data.memberships}
+            <CentreInfo
+              name={diveCentre.name}
+              description={diveCentre.description}
+              address={diveCentre.address}
+              city={diveCentre.city.name}
+              country={diveCentre.country.countries.name}
+              equipment={diveCentre.equipment}
+              services={diveCentre.services}
+              payment_methods={diveCentre.payment_methods}
+              languages={diveCentre.languages}
+              memberships={diveCentre.memberships}
             />
           </Box>
           {/* Trip sidebar Load states */}
@@ -140,7 +157,11 @@ export default function DiveCentre({ data }) {
           </Center> */}
           {trips && (
             <Box gridArea="1 / 2 / 2 / 3">
-              <TripsSidebar trips={trips} diveCentreId={id} />
+              <TripsSidebar
+                trips={trips}
+                diveCentre={diveCentre}
+                loading={loading}
+              />
             </Box>
           )}
         </Grid>
@@ -150,90 +171,36 @@ export default function DiveCentre({ data }) {
 }
 
 export async function getStaticPaths() {
-  try {
-    const result = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_centres`
-    );
-    const { data } = result;
-
-    const paths = data.map((centre) => ({
-      params: { id: centre.id.toString() },
-    }));
-    return { paths, fallback: false };
-  } catch (error) {
-    console.error(error);
-  }
+  const { data } = await supabase.from("dive_centres").select("id");
+  const paths = data.map((centre) => ({
+    params: { id: centre.id },
+  }));
+  return {
+    paths,
+    fallback: true,
+  };
 }
 
-export const getStaticProps = async ({ params }) => {
-  const centreId = params.id;
-  try {
-    const result = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_centres/${centreId}`
-    );
-    const { data } = result;
-    return {
-      props: { data },
-    };
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-// export async function getStaticPaths() {
-//   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
-//   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-//   Moralis.initialize(appId);
-//   Moralis.serverURL = serverUrl;
-//   const DiveCentres = Moralis.Object.extend("DiveCentres");
-//   const query = new Moralis.Query(DiveCentres);
-//   const results = await query.find();
-//   const paths = results.map((centre) => ({
-//     params: { id: centre.id },
-//   }));
-
-//   return { paths, fallback: false };
-// }
-
-// export const getStaticProps = async ({ params }) => {
-//   const centreId = params.id;
-//   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
-//   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-//   Moralis.initialize(appId);
-//   Moralis.serverURL = serverUrl;
-//   // Get dive site details
-//   const DiveCentres = Moralis.Object.extend("DiveCentres");
-//   const query = new Moralis.Query(DiveCentres);
-//   query.equalTo("objectId", centreId);
-//   const results = await query.find();
-//   const data = JSON.stringify(results[0]);
-
-//   return {
-//     props: { data },
-//   };
-// };
-
-// export const getServerSideProps = async (context) => {
-//   const { id } = context.query;
-//   const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
-//   const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-//   Moralis.initialize(appId);
-//   Moralis.serverURL = serverUrl;
-//   const DiveCentres = Moralis.Object.extend("DiveCentres");
-//   const query = new Moralis.Query(DiveCentres);
-//   query.equalTo("objectId", id);
-//   const results = await query.find();
-//   const data = JSON.stringify(results[0]);
-//   // Get upcoming dive trips
-//   const params = { id };
-//   const tripQuery = await Moralis.Cloud.run("getCentreTrips", params);
-//   const tripData = JSON.stringify(tripQuery);
-
-//   return {
-//     props: { data, tripData },
-//   };
-// };
+export async function getStaticProps({ params }) {
+  const { id } = params;
+  const { data } = await supabase
+    .from("dive_centres")
+    .select(
+      `
+      id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships,
+      cover_photo, city: cities (name), country: cities (countries (name))
+      `
+    )
+    .filter("id", "eq", id)
+    .single();
+  console.log("centres", data);
+  return {
+    props: {
+      diveCentre: data,
+    },
+  };
+}
 
 DiveCentre.getLayout = function getLayout(page) {
-  return <NftLayout>{page}</NftLayout>;
+  return <DivingLayout>{page}</DivingLayout>;
 };

@@ -40,21 +40,21 @@ import {
   Tab,
   TabPanel,
 } from "@chakra-ui/react";
-import axios from "axios";
 // Custom components
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 
+import { supabase } from "../../api";
 import MiniCalendar from "components/calendar/MiniCalendar";
 import Card from "components/card/Card";
 // import Schedule from "views/admin/main/account/courses/components/Schedule";
 import Course from "components/card/Course";
 import BookingDetails from "components/pages/bookings/BookingDetails";
 import { VSeparator } from "components/separator/Separator";
-import NftLayout from "layouts/nft";
+import DivingLayout from "layouts/DivingLayout";
 // import courses from "lib/constants/courses.json";
 
-export default function Courses({ data }) {
+export default function Courses({ certifications }) {
   const [tabState, setTabState] = useState("all");
   const [courseId, setCourseId] = useState();
   const [price, setPrice] = useState();
@@ -72,9 +72,9 @@ export default function Courses({ data }) {
   );
 
   useEffect(() => {
-    if (!data) return null;
-    setCourses(data);
-  }, [data]);
+    if (!certifications) return null;
+    setCourses(certifications);
+  }, [certifications]);
 
   const CourseTab = (props) => {
     const { category } = props;
@@ -89,7 +89,7 @@ export default function Courses({ data }) {
             <Course
               key={course.id}
               id={course.id}
-              imageUrl={course.cover_photo_url}
+              imageUrl={course.cover_photo}
               title={course.name}
               description={course.description}
               agency={course.agency}
@@ -316,19 +316,16 @@ export default function Courses({ data }) {
 }
 
 export async function getStaticProps() {
-  try {
-    const results = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/certifications`
+  const { data: certifications } = await supabase
+    .from("certifications")
+    .select(
+      "id, name, description, agency, duration, category, price, pay_now, stripe_price_id, cover_photo"
     );
-    const { data } = results;
-    return {
-      props: { data },
-    };
-  } catch (error) {
-    // console.error(error);
-  }
+  return {
+    props: { certifications },
+  };
 }
 
 Courses.getLayout = function getLayout(page) {
-  return <NftLayout>{page}</NftLayout>;
+  return <DivingLayout>{page}</DivingLayout>;
 };

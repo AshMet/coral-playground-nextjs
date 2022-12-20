@@ -35,7 +35,7 @@ import Card from "components/card/Card";
 import Banner from "components/pages/diving/Banner";
 import Content from "components/pages/diving/Content";
 import { DivingContext } from "contexts/DivingContext";
-import NftLayout from "layouts/nft";
+import DivingLayout from "layouts/DivingLayout";
 
 export default function Invoice({ session, lineItems }) {
   // console.log("session", session);
@@ -119,5 +119,5 @@ export const getServerSideProps = async (context) => {
 };
 
 Invoice.getLayout = function getLayout(page) {
-  return <NftLayout>{page}</NftLayout>;
+  return <DivingLayout>{page}</DivingLayout>;
 };

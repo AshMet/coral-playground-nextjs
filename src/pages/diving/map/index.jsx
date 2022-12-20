@@ -27,7 +27,6 @@
 
 */
 import { Flex, useColorModeValue } from "@chakra-ui/react";
-import axios from "axios";
 import { NextSeo } from "next-seo";
 import { useState, useRef } from "react";
 import Map, {
@@ -41,12 +40,13 @@ import Map, {
 import "mapbox-gl/dist/mapbox-gl.css";
 
 // Assets
+import { supabase } from "../../api";
 import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
 // import SearchBar from "components/navbar/searchBar/SearchBar";
 // import LocationSummary from "components/maps/LocationSummary";
 import DiveSiteCard from "components/card/DiveSiteCard";
-import NftLayout from "layouts/nft";
+import DivingLayout from "layouts/DivingLayout";
 // const Moralis = require("moralis/node");
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -58,7 +58,7 @@ function createKey(location) {
 export default function Default({ data }) {
   const mapRef = useRef();
   const [mapLocation, setMapLocation] = useState("Select Location");
-  const parsedData = JSON.parse(data);
+  // const parsedData = JSON.parse(data);
 
   // const centerMap = useCallback(({ latitude, longitude }) => {
   //   mapRef.current?.flyTo({ center: [longitude, latitude], duration: 2000 });
@@ -108,7 +108,7 @@ export default function Default({ data }) {
             <NavigationControl position="top-left" />
             <ScaleControl />
 
-            {parsedData?.map(
+            {data?.map(
               (location) =>
                 location.lat &&
                 location.lng && (
@@ -172,49 +172,49 @@ export default function Default({ data }) {
 
 export async function getStaticProps() {
   try {
-    const siteQuery = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites`
+    const { data: siteResults } = await supabase.from("dive_sites").select(
+      `id, name, description, latitude, longitude, min_visibility, max_visibility, depth, current, cert_level,
+        tags, access, dive_map, city: cities (name), country: cities (countries (name))`
     );
-    const centreQuery = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_centres`
+    const { data: centreResults } = await supabase.from("dive_centres").select(
+      `id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships,
+      cover_photo, city: cities (name), country: cities (countries (name))`
     );
-    const { data: siteResults } = siteQuery;
-    const { data: centreResults } = centreQuery;
-    const results = [];
+    const data = [];
 
     for (let i = 0; i < siteResults.length; ++i) {
-      results.push({
+      data.push({
         location_id: siteResults[i].id,
         name: siteResults[i].name,
         lat: siteResults[i].latitude,
         lng: siteResults[i].longitude,
-        itemImg: siteResults[i].dive_map_url,
+        itemImg: siteResults[i].dive_map,
         maxDepth: siteResults[i].depth,
-        certLevel: siteResults[i].cert_level,
+        cert_level: siteResults[i].cert_level,
         access: siteResults[i].access,
         divingTypes: siteResults[i].tags,
-        city: siteResults[i].city,
-        country: siteResults[i].country,
+        city: siteResults[i].city.name,
+        country: siteResults[i].country.countries.name,
         locationType: "dive_site",
       });
     }
 
     for (let i = 0; i < centreResults.length; ++i) {
-      results.push({
+      data.push({
         location_id: centreResults[i].id,
         name: centreResults[i].name,
         lat: centreResults[i].latitude,
         lng: centreResults[i].longitude,
-        itemImg: centreResults[i].cover_photo_url,
+        itemImg: centreResults[i].cover_photo,
         memberships: centreResults[i].memberships,
         languages: centreResults[i].languages,
-        city: centreResults[i].city,
-        country: centreResults[i].country,
+        city: centreResults[i].city.name,
+        country: centreResults[i].country.countries.name,
         locationType: "dive_centre",
       });
     }
 
-    const data = JSON.stringify(results);
+    // const data = JSON.stringify(results);
 
     return {
       props: { data },
@@ -225,5 +225,5 @@ export async function getStaticProps() {
 }
 
 Default.getLayout = function getLayout(page) {
-  return <NftLayout>{page}</NftLayout>;
+  return <DivingLayout>{page}</DivingLayout>;
 };

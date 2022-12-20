@@ -9,7 +9,7 @@ import { useState } from "react";
 import AlertPopup from "components/alerts/AlertPopup";
 // import DiveSelection from "components/pages/bookings/DiveSelection";
 import TripDetails from "components/pages/diveTrips/TripDetails";
-import NftLayout from "layouts/nft";
+import DivingLayout from "layouts/DivingLayout";
 
 export default function NewTrip() {
   // const [tripDives, setTripDives] = useState([]);
@@ -25,17 +25,17 @@ export default function NewTrip() {
     query: { diveCentreId },
   } = router;
 
-  const API_URL = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_trips`;
+  const API_URL = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/diveTrips`;
 
   function saveDiveTrip() {
     return axios
       .post(API_URL, {
-        dive_trip: {
+        diveTrip: {
           price,
-          min_cert: minCert,
+          minCert,
           status: active,
           notes,
-          dive_centre_id: 1,
+          diveCentreId: 1,
           dive_site_ids: [1, 2],
         },
       })
@@ -119,5 +119,5 @@ export default function NewTrip() {
 // };
 
 NewTrip.getLayout = function getLayout(page) {
-  return <NftLayout>{page}</NftLayout>;
+  return <DivingLayout>{page}</DivingLayout>;
 };

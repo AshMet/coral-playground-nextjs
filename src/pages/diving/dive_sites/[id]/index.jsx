@@ -4,41 +4,58 @@
 // Chakra imports
 import { AspectRatio, Box, Button, Grid } from "@chakra-ui/react";
 // Custom components
-import axios from "axios";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
+import { supabase } from "../../../api/index";
 import Card from "components/card/Card";
 import SiteInfo from "components/pages/diveSite/SiteInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
-import NftLayout from "layouts/nft";
+import DivingLayout from "layouts/DivingLayout";
 
-export default function DiveSitePage({ data }) {
-  // console.log("siteData", data);
+export default function DiveSitePage({ diveSite }) {
+  console.log("siteData", diveSite);
 
   const router = useRouter();
   const { id } = router.query;
 
   const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  async function fetchSiteTrips() {
+    const { data } = await supabase
+      .from("dive_sites")
+      .select(
+        `
+          id, 
+          dive_trips: trip_sites!dive_site_id(
+            dive_trip: dive_trip_id (id, name, description, notes, min_cert, status, price, pay_now,
+              stripe_price_id, fixed_start_date, fixed_start_time, check_in, 
+              dive_sites: trip_sites!dive_trip_id(
+                dive_site:dive_site_id(id, name, latitude, longitude)),
+              dive_centre: dive_centres (id, name, latitude, longitude))
+            )
+          )
+        `
+      )
+      .eq("id", id)
+      .single();
+    console.log("siteTripData", data);
+    setTrips(data.dive_trips);
+    setLoading(false);
+  }
 
   useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites/${id}/site_trips`
-      );
-      setTrips(result.data);
-      // console.log("trips", trips);
-    }
-    fetchData();
+    fetchSiteTrips();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <NextSeo
-        title={`Dive Site - ${data.name}`}
-        description={`Dive Site - ${data.name}, ${data.city}, ${data.country}`}
+        title={`Dive Site - ${diveSite.name}`}
+        description={`Dive Site - ${diveSite.name}, ${diveSite.city.name}, ${diveSite.country.countries.name}`}
       />
       <Box maxW="100%">
         <Grid
@@ -56,7 +73,7 @@ export default function DiveSitePage({ data }) {
               <Card
                 bgSize="100% 100%"
                 minH={{ base: "200px", md: "100%" }}
-                bgImage={data.dive_map_url || "/img/diving/dive_site_bg.jpg"}
+                bgImage={diveSite.dive_map || "/img/diving/dive_site_bg.jpg"}
               >
                 <Button
                   variant="no-hover"
@@ -74,18 +91,18 @@ export default function DiveSitePage({ data }) {
               </Card>
             </AspectRatio>
             <SiteInfo
-              name={data.name}
-              description={data.description}
-              city={data.city}
-              country={data.country}
-              depth={data.depth}
-              minVisibility={data.min_visibility}
-              maxVisibility={data.max_visibility}
-              current={data.current}
-              access={data.access}
-              certLevel={data.cert_level}
-              diveTypes={data.tags}
-              species={data.species}
+              name={diveSite.name}
+              description={diveSite.description}
+              city={diveSite.city.name}
+              country={diveSite.country.countries.name}
+              depth={diveSite.depth}
+              min_visibility={diveSite.min_visibility}
+              max_visibility={diveSite.max_visibility}
+              current={diveSite.current}
+              access={diveSite.access}
+              cert_level={diveSite.cert_level}
+              diveTypes={diveSite.tags}
+              species={diveSite.species}
             />
           </Box>
           {/* Trip sidebar Load states */}
@@ -104,7 +121,11 @@ export default function DiveSitePage({ data }) {
           </Center> */}
           {trips && (
             <Box gridArea="1 / 2 / 2 / 3">
-              <TripsSidebar trips={trips} />
+              <TripsSidebar
+                trips={trips}
+                diveSite={diveSite}
+                loading={loading}
+              />
             </Box>
           )}
         </Grid>
@@ -114,36 +135,38 @@ export default function DiveSitePage({ data }) {
 }
 
 export async function getStaticPaths() {
-  try {
-    const result = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites`
-    );
-    const { data } = result;
-
-    const paths = data.map((site) => ({
-      params: { id: site.id.toString() },
-    }));
-    return { paths, fallback: false };
-  } catch (error) {
-    console.error(error);
-  }
+  const { data } = await supabase.from("dive_sites").select("id");
+  const paths = data.map((site) => ({
+    params: { id: JSON.stringify(site.id) },
+  }));
+  return {
+    paths,
+    fallback: true,
+  };
 }
 
-export const getStaticProps = async ({ params }) => {
-  const siteId = params.id;
-  try {
-    const result = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/dive_sites/${siteId}`
-    );
-    const { data } = result;
-    return {
-      props: { data },
-    };
-  } catch (error) {
-    console.error(error);
-  }
-};
+export async function getStaticProps({ params }) {
+  const { id } = params;
+  const { data } = await supabase
+    .from("dive_sites")
+    .select(
+      `id, name, description, latitude, longitude, min_visibility, max_visibility, depth, 
+      current, cert_level, tags, access, dive_map, 
+        city: cities (name),
+        country: cities (countries (name)),
+        species: site_species!dive_site_id (
+          specie: species_id (id, name, cover_photo))
+      `
+    )
+    .filter("id", "eq", id)
+    .single();
+  return {
+    props: {
+      diveSite: data,
+    },
+  };
+}
 
 DiveSitePage.getLayout = function getLayout(page) {
-  return <NftLayout>{page}</NftLayout>;
+  return <DivingLayout>{page}</DivingLayout>;
 };

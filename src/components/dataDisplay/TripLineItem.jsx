@@ -32,7 +32,9 @@ export default function TripLineItem(props) {
 
   const [value, onChange] = useState();
 
-  const siteNames = trip.dive_sites?.map((site) => site.name).join(" + ");
+  const siteNames =
+    trip.name || trip.dive_sites?.map((site) => site.name).join(" + ");
+  // const siteNames = trip.dive_sites?.map((site) => site.name).join(" + ");
   const diveDate = trip.fixed_start_date;
   const diveTime = trip.fixed_start_time;
 

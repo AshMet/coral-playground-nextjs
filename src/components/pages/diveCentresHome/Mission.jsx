@@ -84,16 +84,19 @@ export default function Mission() {
               lineHeight={{ base: "38px", md: "50px", lg: "58px" }}
               mb="20px"
             >
-              Improve your Diving Experience
+              Help Drive Your Business Forward
             </Text>
             <Text color={textColor} fontSize="lg" w="100%" mb="20px">
-              Coral Playground is your gateway to the largest collection of
-              dives in Egypt, operated by a network of the highest quality dive
-              centres, guides and instructors.{" "}
+              Coral Playground is your gateway to a growing community of scuba
+              divers from all over the world looking to book their next diving
+              trip. By becoming a business partner, you will join our network of
+              high-quality trusted business, giving you instant visibility and
+              allowing you to more effectively market and grow your busniess.{" "}
               <Text color={textColor} as="span" fontWeight="700">
-                Our goal is to make sure you can book the best dive vacation of
-                your life as quickly and easily as possible with complete peace
-                of mind.
+                Our goal is to make sure you can manage your customers and
+                upcoming dive trips as quickly and easily as possible with
+                complete peace of mind. Let us take care of the bookings so you
+                can focus on the diving.
               </Text>
             </Text>
           </Flex>
