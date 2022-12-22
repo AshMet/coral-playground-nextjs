@@ -48,3 +48,4 @@ sitemap*.xml
 heroku_dump.sql
 supabase_dump.sql
 supabase_dev_dump.sql
+supabase_dev_dump_no_storage.sql

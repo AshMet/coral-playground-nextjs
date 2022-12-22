@@ -54,7 +54,7 @@ export default function DiveSites({ data }) {
     }
     const cityFiltered = data.filter((site) => site.city.name === city);
     setFiltered(cityFiltered);
-    console.log("site data", data);
+    // console.log("site data", data);
   }, [data, city, country]);
 
   return (

@@ -70,7 +70,7 @@ export default function DiveCentre({ diveCentre }) {
       .single();
     setTrips(data.dive_trips);
     setLoading(false);
-    console.log("centreTripData", data);
+    // console.log("centreTripData", data);
   }
 
   useEffect(() => {
@@ -193,7 +193,7 @@ export async function getStaticProps({ params }) {
     )
     .filter("id", "eq", id)
     .single();
-  console.log("centres", data);
+  // console.log("centres", data);
   return {
     props: {
       diveCentre: data,

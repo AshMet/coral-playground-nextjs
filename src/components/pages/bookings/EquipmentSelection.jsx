@@ -58,16 +58,16 @@ export default function EquipmentSelection(props) {
   }));
 
   function toggleArrayItem(arr, item) {
-    console.log("toggle item", item);
-    console.log("toggle arr", arr);
+    // console.log("toggle item", item);
+    // console.log("toggle arr", arr);
     arr.map((a) => a.id).includes(item.id)
       ? setEquipmentList(arr.filter((i) => i.id !== item.id)) // remove item
       : setEquipmentList([...arr, item]); // add item
   }
-  console.log("equipLineItems", equipLineItems);
-  console.log("equipment list", equipmentList);
-  console.log("freeEquipment", freeEquipment);
-  console.log("Equipment", equipment);
+  // console.log("equipLineItems", equipLineItems);
+  // console.log("equipment list", equipmentList);
+  // console.log("freeEquipment", freeEquipment);
+  // console.log("Equipment", equipment);
 
   return (
     <Card p="30px">

@@ -15,7 +15,7 @@ import TripsSidebar from "components/sidebar/TripsSidebar";
 import DivingLayout from "layouts/DivingLayout";
 
 export default function DiveSitePage({ diveSite }) {
-  console.log("siteData", diveSite);
+  // console.log("siteData", diveSite);
 
   const router = useRouter();
   const { id } = router.query;
@@ -41,7 +41,7 @@ export default function DiveSitePage({ diveSite }) {
       )
       .eq("id", id)
       .single();
-    console.log("siteTripData", data);
+    // console.log("siteTripData", data);
     setTrips(data.dive_trips);
     setLoading(false);
   }

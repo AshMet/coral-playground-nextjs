@@ -53,7 +53,7 @@ export const DivingProvider = ({ children }) => {
     const alreadyInCart = cartItems.some(
       (item) => item.name + item.id === newItem.name + newItem.id
     );
-    console.log("newItem", newItem);
+    // console.log("newItem", newItem);
     if (alreadyInCart) {
       toast({
         position: "top",

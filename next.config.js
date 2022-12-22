@@ -43,6 +43,7 @@ module.exports = {  //withPWA(
       'ipfs.moralis.io',
       'rvlocxzrtjom.usemoralis.com',
       "vlqxftdcfuokmxeeffud.supabase.co",
+      "stzgaygfnnszcvhmnbqy.supabase.co",
       'localhost',
       'https://s3.eu-west-3.amazonaws.com/media.coralplayground.com',
       'coral-playground-api.herokuapp.com'
