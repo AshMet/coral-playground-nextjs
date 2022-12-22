@@ -40,6 +40,7 @@ export default function Banner(props) {
             fontWeight="bold"
           >
             {`Booking Ref: ${sessionId
+              .toString()
               .substr(sessionId.length - 12)
               .toUpperCase()}`}
           </Text>
