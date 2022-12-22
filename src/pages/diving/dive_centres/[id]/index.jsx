@@ -170,36 +170,40 @@ export default function DiveCentre({ diveCentre }) {
   );
 }
 
-export async function getStaticPaths() {
-  const { data } = await supabase.from("dive_centres").select("id");
-  const paths = data.map((centre) => ({
-    params: { id: centre.id },
+export const getStaticPaths = async () => {
+  const { data: diveCentres } = await supabase
+    .from("dive_centres")
+    .select("id");
+
+  const paths = diveCentres.map(({ id }) => ({
+    params: {
+      id,
+    },
   }));
+
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
-}
+};
 
-export async function getStaticProps({ params }) {
-  const { id } = params;
-  const { data } = await supabase
+export const getStaticProps = async ({ params: { id } }) => {
+  const { data: diveCentre } = await supabase
     .from("dive_centres")
     .select(
-      `
-      id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships,
-      cover_photo, city: cities (name), country: cities (countries (name))
-      `
+      `id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships,
+      cover_photo, city: cities (name), country: cities (countries (name))`
     )
-    .filter("id", "eq", id)
+    .match({ id })
     .single();
-  // console.log("centres", data);
+
   return {
     props: {
-      diveCentre: data,
+      diveCentre,
     },
+    revalidate: 86400,
   };
-}
+};
 
 DiveCentre.getLayout = function getLayout(page) {
   return <DivingLayout>{page}</DivingLayout>;
