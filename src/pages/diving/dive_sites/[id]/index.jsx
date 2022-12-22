@@ -139,7 +139,7 @@ export const getStaticPaths = async () => {
 
   const paths = diveSites.map(({ id }) => ({
     params: {
-      id,
+      id: id.toString(),
     },
   }));
 
