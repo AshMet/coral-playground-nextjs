@@ -134,20 +134,23 @@ export default function DiveSitePage({ diveSite }) {
   );
 }
 
-export async function getStaticPaths() {
-  const { data } = await supabase.from("dive_sites").select("id");
-  const paths = data.map((site) => ({
-    params: { id: JSON.stringify(site.id) },
+export const getStaticPaths = async () => {
+  const { data: diveSites } = await supabase.from("dive_sites").select("id");
+
+  const paths = diveSites.map(({ id }) => ({
+    params: {
+      id,
+    },
   }));
+
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
-}
+};
 
-export async function getStaticProps({ params }) {
-  const { id } = params;
-  const { data } = await supabase
+export const getStaticProps = async ({ params: { id } }) => {
+  const { data: diveSite } = await supabase
     .from("dive_sites")
     .select(
       `id, name, description, latitude, longitude, min_visibility, max_visibility, depth, 
@@ -157,14 +160,16 @@ export async function getStaticProps({ params }) {
         species: site_species!dive_site_id (
           specie: species_id (id, name, cover_photo))`
     )
-    .filter("id", "eq", id)
+    .match({ id })
     .single();
+
   return {
     props: {
-      diveSite: data,
+      diveSite,
     },
+    revalidate: 86400,
   };
-}
+};
 
 DiveSitePage.getLayout = function getLayout(page) {
   return <DivingLayout>{page}</DivingLayout>;
