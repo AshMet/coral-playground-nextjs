@@ -34,7 +34,6 @@ import { GoChevronDown } from "react-icons/go";
 
 import SidebarContext from "../../contexts/SidebarContext";
 import routes from "../../routes";
-// import { NavLink } from "react-router-dom";
 import NavLink from "../navLinks/NavLink";
 import { SidebarResponsive } from "../sidebar/Sidebar";
 import Image from "components/actions/NextChakraImg";

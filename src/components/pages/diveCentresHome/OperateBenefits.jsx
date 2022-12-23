@@ -195,7 +195,7 @@ export default function OperateBenefits() {
           </Flex>
           <Parallax speed={-10}>
             <Image
-              src="/img/home/dive_centre/yaught.png"
+              src="/img/home/dive_centre/laptop.png"
               // w={{ base: "100%", md: "100%", lg: "400px", xl: "565px" }}
               width="1200px"
               height="900px"

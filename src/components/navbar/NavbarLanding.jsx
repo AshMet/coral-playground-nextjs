@@ -42,6 +42,7 @@ export default function LandingNavbar(props) {
 
   // Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
   let textColor = useColorModeValue("secondaryGray.900", "white");
+  const hoverColor = "brand.100";
   const navbarPosition = "fixed";
   const navbarFilter = "none";
   let navbarBackdrop = "blur(20px)";
@@ -135,31 +136,58 @@ export default function LandingNavbar(props) {
             fontWeight="600"
             me="30px"
             my="auto"
+            _hover={{ color: hoverColor, cursor: "pointer" }}
           >
-            Divers
+            Home
           </Link>
           <Link
             display={{ base: "none", lg: "block" }}
-            href="/dive_centres/home"
+            href="/diving/map"
             color={textColor}
             fontSize="md"
             fontWeight="600"
             me="30px"
             my="auto"
+            _hover={{ color: hoverColor, cursor: "pointer" }}
           >
-            Businesses
+            Map
           </Link>
-          {/* <Link
+          <Link
             display={{ base: "none", lg: "block" }}
-            href="/nfts/home"
+            href="/diving/certifications"
             color={textColor}
             fontSize="md"
             fontWeight="600"
             me="30px"
             my="auto"
+            _hover={{ color: hoverColor, cursor: "pointer" }}
           >
-            NFTs
-          </Link> */}
+            Certifications
+          </Link>
+          <Link
+            display={{ base: "none", lg: "block" }}
+            href="/diving/dive_sites"
+            color={textColor}
+            fontSize="md"
+            fontWeight="600"
+            me="30px"
+            my="auto"
+            _hover={{ color: hoverColor, cursor: "pointer" }}
+          >
+            Dive Sites
+          </Link>
+          <Link
+            display={{ base: "none", lg: "block" }}
+            href="/diving/dive_centres"
+            color={textColor}
+            fontSize="md"
+            fontWeight="600"
+            me="30px"
+            my="auto"
+            _hover={{ color: hoverColor, cursor: "pointer" }}
+          >
+            Dive Centres
+          </Link>
           <VSeparator
             me="14px"
             bg={textColor}
@@ -229,8 +257,9 @@ export default function LandingNavbar(props) {
                     fontWeight="500"
                     me="30px"
                     my="auto"
+                    _hover={{ color: hoverColor, cursor: "pointer" }}
                   >
-                    Divers
+                    Home
                   </Link>
                 </MenuItem>
                 <MenuItem
@@ -240,50 +269,88 @@ export default function LandingNavbar(props) {
                   px="14px"
                 >
                   <Link
-                    href="/dive_centres/home"
+                    href="/diving/map"
                     color={menuTextColor}
                     fontSize="md"
                     fontWeight="500"
                     me="30px"
                     my="auto"
+                    _hover={{ color: hoverColor, cursor: "pointer" }}
                   >
-                    Businesses
+                    Map
                   </Link>
                 </MenuItem>
-                {/* <MenuItem
+                <MenuItem
                   _hover={{ bg: "none" }}
                   _focus={{ bg: "none" }}
                   borderRadius="8px"
                   px="14px"
                 >
                   <Link
-                    href="/nfts/home"
+                    href="/diving/certifications"
                     color={menuTextColor}
                     fontSize="md"
                     fontWeight="500"
                     me="30px"
                     my="auto"
+                    _hover={{ color: hoverColor, cursor: "pointer" }}
                   >
-                    NFTs
+                    Certifications
                   </Link>
-                </MenuItem> */}
+                </MenuItem>
                 <MenuItem
                   _hover={{ bg: "none" }}
                   _focus={{ bg: "none" }}
                   borderRadius="8px"
+                  px="14px"
                 >
-                  <Link href="/diving/map">
+                  <Link
+                    href="/diving/dive_sites"
+                    color={menuTextColor}
+                    fontSize="md"
+                    fontWeight="500"
+                    me="30px"
+                    my="auto"
+                    _hover={{ color: hoverColor, cursor: "pointer" }}
+                  >
+                    Dive Sites
+                  </Link>
+                </MenuItem>
+                <MenuItem
+                  _hover={{ bg: "none" }}
+                  _focus={{ bg: "none" }}
+                  borderRadius="8px"
+                  px="14px"
+                >
+                  <Link
+                    href="/diving/dive_centres"
+                    color={menuTextColor}
+                    fontSize="md"
+                    fontWeight="500"
+                    me="30px"
+                    my="auto"
+                    _hover={{ color: hoverColor, cursor: "pointer" }}
+                  >
+                    Dive Centres
+                  </Link>
+                </MenuItem>
+                <MenuItem
+                  _hover={{ bg: "none", cursor: "pointer" }}
+                  _focus={{ bg: "none" }}
+                  borderRadius="8px"
+                >
+                  <Link href="/dive_centres/home">
                     <Button
-                      variant="no-hover"
+                      variant="outline"
                       border="1px solid"
                       borderColor={menuTextColor}
                       color={menuTextColor}
                       fontSize="md"
                       borderRadius="12px"
-                      bg="transparent"
                       my="auto"
+                      _hover={{ bg: "brand.100", cursor: "pointer" }}
                     >
-                      Start Exploring for Free
+                      Become a Business Partner
                       <Icon
                         as={MdChevronRight}
                         ms="5px"
@@ -298,18 +365,22 @@ export default function LandingNavbar(props) {
             </MenuList>
           </Menu>
 
-          <Link href="/diving/map" display={{ base: "none", lg: "block" }}>
+          <Link
+            href="/dive_centres/home"
+            display={{ base: "none", lg: "block" }}
+          >
             <Button
-              variant="no-hover"
+              variant="outline"
               border="1px solid"
               borderColor={textColor}
               color={textColor}
               fontSize="md"
               borderRadius="12px"
-              bg="transparent"
+              // bg="transparent"
               my="auto"
+              _hover={{ bg: "brand.100", cursor: "pointer" }}
             >
-              Start Exploring for Free
+              Become a Business Partner
               <Icon as={MdChevronRight} ms="5px" mt="2px" h="16px" w="16px" />
             </Button>
           </Link>
