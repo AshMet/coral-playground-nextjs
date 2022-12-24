@@ -175,7 +175,7 @@ export const DivingProvider = ({ children }) => {
   const cartMetadata = cartItems.reduce(
     (a, v) => ({
       ...a,
-      [`dive_${v.id.toString().substr(7)}`]: JSON.stringify(v),
+      [`dive_${v.id.toString().substr(0, 10)}`]: JSON.stringify(v),
     }),
     {}
   );

@@ -45,7 +45,7 @@ sitemap*.xml
 *.tsbuildinfo
 
 # database dump
-heroku_dump.sql
-supabase_dump.sql
-supabase_dev_dump.sql
-supabase_dev_dump_no_storage.sql
+migrations/
+# **/migrations/heroku_dump.sql
+# **/migrations/01_first_seed.sql
+# **/migrations/02_split_line_items.sql

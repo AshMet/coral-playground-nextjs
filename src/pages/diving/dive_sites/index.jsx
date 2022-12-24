@@ -171,10 +171,15 @@ export default function DiveSites({ data }) {
 }
 
 export async function getStaticProps() {
-  const { data } = await supabase.from("dive_sites").select(`
+  const { data } = await supabase
+    .from("dive_sites")
+    .select(
+      `
     id, name, description, latitude, longitude, min_visibility, max_visibility, depth, current, cert_level, tags, access, dive_map,
     city: cities (name)
-  `);
+  `
+    )
+    .order("name", { ascending: true });
   return {
     props: { data },
   };

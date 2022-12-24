@@ -48,7 +48,7 @@ export default function EquipmentSelection(props) {
   const equipLineItems = PaidEquipment?.map((item) => ({
     id: item.id,
     title: item.name,
-    siteCount: 1,
+    itemType: "equipment",
     centreName: "",
     diveDate: "",
     diveTime: "",

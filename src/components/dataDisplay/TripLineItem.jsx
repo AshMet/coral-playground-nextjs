@@ -34,7 +34,6 @@ export default function TripLineItem(props) {
 
   const siteNames =
     trip.name || trip.dive_sites?.map((site) => site.name).join(" + ");
-  // const siteNames = trip.dive_sites?.map((site) => site.name).join(" + ");
   const diveDate = trip.fixed_start_date;
   const diveTime = trip.fixed_start_time;
 
@@ -118,7 +117,7 @@ export default function TripLineItem(props) {
               addToCart({
                 id: trip.id,
                 title: siteNames,
-                siteCount: trip.dive_sites?.length,
+                itemType: "diveTrip",
                 centreName: trip.dive_centre.name,
                 diveDate: diveDate ? new Date(diveDate) : new Date(value),
                 diveTime,

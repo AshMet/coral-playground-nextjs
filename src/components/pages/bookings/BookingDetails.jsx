@@ -49,6 +49,45 @@ export default function BookingDetails(props) {
     >
       <SimpleGrid columns="1" gap={{ base: "0px", md: "20px" }}>
         <Flex direction="column" mb="34px">
+          <Flex direction="column" mb="34px">
+            {/* Dive Centre Selection */}
+            <FormLabel
+              ms="10px"
+              htmlFor="diveCentre"
+              fontSize="sm"
+              color={textColor}
+              fontWeight="bold"
+              _hover={{ cursor: "pointer" }}
+            >
+              Dive Centre
+            </FormLabel>
+            <Select
+              fontSize="sm"
+              id="diveCentre"
+              variant="main"
+              h="44px"
+              maxh="44px"
+              defaultValue="Select Option"
+              onChange={(e) => setDiveCentre(e.target.value)}
+            >
+              {[
+                "Pro Master Diving Club",
+                "Blue Water Dive Resort",
+                "Dive Hurghada",
+                "Crazy Dolphin Dive Center",
+                "Crazy Waves Diving - Sahl Hashish",
+                "Divers Lodge",
+                "Funny Divers",
+                "Cave Divers",
+                "White Whale Divers",
+              ]
+                .sort()
+                .map((centre) => (
+                  <option value={centre}>{centre}</option>
+                ))}
+            </Select>
+          </Flex>
+          {/* Display selected course and date */}
           <Flex my={3}>
             <Text ml={2} fontSize="sm" color={textColor} fontWeight="bold">
               Course:
@@ -77,43 +116,7 @@ export default function BookingDetails(props) {
             <Text>{diveTime || "None Selected"}</Text>
           </Flex> */}
         </Flex>
-        <Flex direction="column" mb="34px">
-          <FormLabel
-            ms="10px"
-            htmlFor="diveCentre"
-            fontSize="sm"
-            color={textColor}
-            fontWeight="bold"
-            _hover={{ cursor: "pointer" }}
-          >
-            Dive Centre
-          </FormLabel>
-          <Select
-            fontSize="sm"
-            id="diveCentre"
-            variant="main"
-            h="44px"
-            maxh="44px"
-            defaultValue="Select Option"
-            onChange={(e) => setDiveCentre(e.target.value)}
-          >
-            {[
-              "Pro Master Diving Club",
-              "Blue Water Dive Resort",
-              "Dive Hurghada",
-              "Crazy Dolphin Dive Center",
-              "Crazy Waves Diving - Sahl Hashish",
-              "Divers Lodge",
-              "Funny Divers",
-              "Cave Divers",
-              "White Whale Divers",
-            ]
-              .sort()
-              .map((centre) => (
-                <option value={centre}>{centre}</option>
-              ))}
-          </Select>
-        </Flex>
+
         <Flex direction="column" mb="34px">
           <Button
             variant="darkBrand"
@@ -126,7 +129,7 @@ export default function BookingDetails(props) {
               addToCart({
                 id: courseId,
                 title: courseName,
-                siteCount: 1,
+                itemType: "certification",
                 centreName: diveCentre,
                 diveDate,
                 diveTime: "12:00:00",
