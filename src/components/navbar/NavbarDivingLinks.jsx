@@ -93,7 +93,7 @@ function SignedOutMenuList() {
               size="sm"
               color="teal"
               leftIcon={<ProfileIcon />}
-              onClick={() => router.push("/")}
+              onClick={() => router.push("/auth/login")}
             >
               Sign In
             </Button>
@@ -111,7 +111,7 @@ function SignedOutMenuList() {
               mt={1}
               mr={4}
               leftIcon={<IoWalletOutline />}
-              onClick={() => router.push("/")}
+              onClick={() => router.push("/auth/login")}
             >
               Sign Up
             </Button>

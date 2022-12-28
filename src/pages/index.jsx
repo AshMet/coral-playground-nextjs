@@ -1,52 +1,27 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
+import { useSession } from "@supabase/auth-helpers-react";
 import { NextSeo } from "next-seo";
+import { ParallaxProvider } from "react-scroll-parallax";
 
+import Benefits from "components/pages/divingHome/Benefits";
+import BookingBenefits from "components/pages/divingHome/BookingBenefits";
+import DiveCentreBenefits from "components/pages/divingHome/DiveCentreBenefits";
+import DiveSiteBenefits from "components/pages/divingHome/DiveSiteBenefits";
+import Hero from "components/pages/divingHome/Hero";
+import HowItWorks from "components/pages/divingHome/HowItWorks";
+import Mission from "components/pages/divingHome/Mission";
 import Profile from "components/pages/profile/Profile";
-import CenteredAuth from "layouts/auth/types/Centered";
 import DivingLayout from "layouts/DivingLayout";
+import LandingLayout from "layouts/home/Landing";
 
 export default function Home() {
   const session = useSession();
-  const supabase = useSupabaseClient();
 
   // console.log(session);
 
   return (
     <Box>
-      {!session ? (
-        <>
-          <NextSeo
-            title="Sign In"
-            description="Log in to start enjoying all the features of Coral Playground"
-          />
-          <CenteredAuth
-            image="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
-            cardTop={{ base: "180px", md: "25vh" }}
-            cardBottom={{ base: "50px", lg: "auto" }}
-            mx="0px"
-            padding={{ sm: "50px 50px 100px 50px" }} // Need to confirm this should stay for login
-          >
-            <Flex
-              maxW={{ base: "100%", md: "max-content" }}
-              w="100%"
-              minW="400px"
-              mx={{ base: "auto", lg: "0px" }}
-              me="auto"
-              justifyContent="center"
-              px={{ base: "20px", md: "0px" }}
-              flexDirection="column"
-            >
-              <Auth
-                supabaseClient={supabase}
-                appearance={{ theme: ThemeSupa }}
-                theme="dark"
-              />
-            </Flex>
-          </CenteredAuth>
-        </>
-      ) : (
+      {session ? (
         <>
           <NextSeo
             title="User Account"
@@ -55,6 +30,28 @@ export default function Home() {
           <DivingLayout>
             <Profile session={session} />
           </DivingLayout>
+        </>
+      ) : (
+        <>
+          <NextSeo
+            title="Diving Landing"
+            description="Coral Playground Diving Home Page"
+          />
+          <LandingLayout>
+            <ParallaxProvider>
+              <Flex direction={{ base: "column" }}>
+                <Hero />
+                <Mission />
+                <HowItWorks />
+                <Benefits />
+                <DiveSiteBenefits />
+                <DiveCentreBenefits />
+                <BookingBenefits />
+                {/* <Numbers />
+                <Upgrade /> */}
+              </Flex>
+            </ParallaxProvider>
+          </LandingLayout>
         </>
       )}
     </Box>

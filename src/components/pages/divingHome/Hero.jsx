@@ -133,7 +133,7 @@ const Hero = () => {
                       />
                     </Button>
                   </Link>
-                  <Link href="/">
+                  <Link href="/dive_centres/home">
                     <Button
                       variant="no-hover"
                       border="1px solid"

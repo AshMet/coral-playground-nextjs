@@ -46,6 +46,7 @@ import {
   AlertTitle,
 } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { NextSeo } from "next-seo";
 // import { useRouter } from "next/router";
 import { useRouter } from "next/router";
@@ -150,7 +151,14 @@ function SignIn() {
             px={{ base: "20px", md: "0px" }}
             flexDirection="column"
           >
-            <Box me="auto">
+            {/* Using built-in supabase auth form */}
+            <Auth
+              supabaseClient={supabase}
+              appearance={{ theme: ThemeSupa }}
+              theme="dark"
+            />
+            {/* Following sectiion is for manual auth form */}
+            {/* <Box me="auto">
               <Heading color={textColor} fontSize="36px" mb="10px">
                 Sign In
               </Heading>
@@ -333,7 +341,7 @@ function SignIn() {
                   </NavLink>
                 </Text>
               </Flex>
-            </Flex>
+            </Flex> */}
           </Flex>
         </CenteredAuth>
       </>
