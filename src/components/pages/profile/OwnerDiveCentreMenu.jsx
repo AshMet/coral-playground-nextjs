@@ -13,6 +13,7 @@ import {
   Icon,
   Text,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 // Assets
 import {
   MdOutlinePerson,
@@ -22,7 +23,7 @@ import {
 } from "react-icons/md";
 
 export default function Banner(props) {
-  const { icon, ...rest } = props;
+  const { icon, diveCentreId, ...rest } = props;
 
   // Ellipsis modals
   const {
@@ -43,6 +44,7 @@ export default function Banner(props) {
     "14px 17px 40px 4px rgba(112, 144, 176, 0.08)",
     "unset"
   );
+  const router = useRouter();
 
   return (
     <Menu isOpen={isOpen1} onClose={onClose1}>
@@ -73,11 +75,12 @@ export default function Banner(props) {
             bg: "transparent",
           }}
           mb="10px"
+          onClick={() => router.push(`/diving/dive_centres/${diveCentreId}`)}
         >
           <Flex align="center">
             <Icon as={MdOutlinePerson} h="16px" w="16px" me="8px" />
             <Text fontSize="sm" fontWeight="400">
-              Panel 1
+              View
             </Text>
           </Flex>
         </MenuItem>
@@ -98,7 +101,7 @@ export default function Banner(props) {
           <Flex align="center">
             <Icon as={MdOutlineCardTravel} h="16px" w="16px" me="8px" />
             <Text fontSize="sm" fontWeight="400">
-              Panel 2
+              Edit
             </Text>
           </Flex>
         </MenuItem>
@@ -119,7 +122,7 @@ export default function Banner(props) {
           <Flex align="center">
             <Icon as={MdOutlineLightbulb} h="16px" w="16px" me="8px" />
             <Text fontSize="sm" fontWeight="400">
-              Panel 3
+              Add Images
             </Text>
           </Flex>
         </MenuItem>
@@ -139,7 +142,7 @@ export default function Banner(props) {
           <Flex align="center">
             <Icon as={MdOutlineSettings} h="16px" w="16px" me="8px" />
             <Text fontSize="sm" fontWeight="400">
-              Panel 4
+              Add Dive Trips
             </Text>
           </Flex>
         </MenuItem>

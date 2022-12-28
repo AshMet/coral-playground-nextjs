@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import { ChakraProvider } from "@chakra-ui/react";
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { DefaultSeo } from "next-seo";
 // import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import defaultSEOConfig from "../../next-seo.config";
@@ -14,6 +16,7 @@ import defaultSEOConfig from "../../next-seo.config";
 import * as gtag from "../lib/data/gtag";
 import { store } from "../lib/redux/store";
 import theme from "../theme/theme";
+
 import "../../public/css/App.css";
 import "../../public/css/Map.css";
 // import AuthCentered from "layouts/auth/types/Centered";
@@ -27,6 +30,7 @@ import "../../public/css/Map.css";
 
 const MyApp = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || ((page) => page);
+  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
 
   const router = useRouter();
   useEffect(() => {
@@ -59,18 +63,23 @@ const MyApp = ({ Component, pageProps }) => {
           `,
         }}
       />
-      <ChakraProvider theme={theme}>
-        <Provider store={store}>
-          <Head>
-            <meta
-              name="viewport"
-              content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-            />
-          </Head>
-          <DefaultSeo {...defaultSEOConfig} />
-          {getLayout(<Component {...pageProps} />)}
-        </Provider>
-      </ChakraProvider>
+      <SessionContextProvider
+        supabaseClient={supabaseClient}
+        initialSession={pageProps.initialSession}
+      >
+        <ChakraProvider theme={theme}>
+          <Provider store={store}>
+            <Head>
+              <meta
+                name="viewport"
+                content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
+              />
+            </Head>
+            <DefaultSeo {...defaultSEOConfig} />
+            {getLayout(<Component {...pageProps} />)}
+          </Provider>
+        </ChakraProvider>
+      </SessionContextProvider>
     </>
   );
 };

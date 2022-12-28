@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 import Card from "../../../components/card/Card";
 import FixedPlugin from "../../../components/fixedPlugin/FixedPlugin";
 import Footer from "../../../components/footer/FooterAuthCentered";
-import Navbar from "../../../components/navbar/NavbarAuth";
+import Navbar from "../../../components/navbar/NavbarLanding";
 // import SidebarContext from "../../../contexts/SidebarContext";
 // import React from "react";
 

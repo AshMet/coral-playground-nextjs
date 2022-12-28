@@ -23,7 +23,7 @@ import { useState, useEffect } from "react";
 
 import NavbarDivingLinks from "./NavbarDivingLinks";
 
-export default function NavbarNft(props) {
+export default function NavbarDiving(props) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -158,7 +158,7 @@ export default function NavbarNft(props) {
   );
 }
 
-NavbarNft.propTypes = {
+NavbarDiving.propTypes = {
   brandText: PropTypes.string,
   variant: PropTypes.string,
   secondary: PropTypes.bool,

@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 import { Icon } from "@chakra-ui/react";
 // import { FaEthereum } from "react-icons/fa";
+// import { FaRegUserCircle } from "react-icons/fa";
 import {
   GiScubaMask,
   GiGraduateCap,
@@ -27,6 +28,7 @@ import {
 // import NFTCollection from "pages/admin/nfts/collection";
 // import NFTMarketplace from "pages/admin/nfts/marketplace";
 // import Booking from "pages/diving/booking";
+// import Profile from "pages";
 import Certifications from "pages/diving/certifications";
 import DiveCentres from "pages/diving/dive_centres";
 import DiveSites from "pages/diving/dive_sites";
@@ -207,6 +209,53 @@ const routes = [
   //     },
   //   ],
   // },
+  // --- Login / Profile Home ---
+  // {
+  //   name: "My Account",
+  //   path: "",
+  //   icon: (
+  //     <Icon as={FaRegUserCircle} width="15px" height="20px" color="inherit" />
+  //   ),
+  //   collapse: true,
+  //   items: [
+  //     {
+  //       name: "Profile",
+  //       layout: "",
+  //       path: "/",
+  //       component: Profile,
+  //       icon: (
+  //         <Icon
+  //           as={FaRegUserCircle}
+  //           width="15px"
+  //           height="20px"
+  //           color="inherit"
+  //         />
+  //       ),
+  //     },
+  //     {
+  //       name: "My Dive Centre",
+  //       layout: "/diving",
+  //       path: "/dive_centres",
+  //       component: DiveCentres,
+  //       icon: (
+  //         <Icon
+  //           as={IoStorefrontOutline}
+  //           width="15px"
+  //           height="20px"
+  //           color="inherit"
+  //         />
+  //       ),
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "My Account",
+  //   path: "/",
+  //   icon: (
+  //     <Icon as={FaRegUserCircle} width="15px" height="20px" color="inherit" />
+  //   ),
+  //   collapse: false,
+  // },
   // --- diving ---
   {
     name: "Diving",
@@ -221,6 +270,13 @@ const routes = [
         layout: "",
         path: "/diving/home",
         component: DiveMap,
+        icon: <Icon as={MdHome} width="15px" height="20px" color="inherit" />,
+      },
+      {
+        name: "Map",
+        layout: "",
+        path: "/diving/map",
+        component: DivingHome,
         icon: (
           <Icon
             as={HiOutlineLocationMarker}
@@ -229,13 +285,6 @@ const routes = [
             color="inherit"
           />
         ),
-      },
-      {
-        name: "Map",
-        layout: "",
-        path: "/diving/map",
-        component: DivingHome,
-        icon: <Icon as={MdHome} width="15px" height="20px" color="inherit" />,
       },
       {
         name: "Certifications",

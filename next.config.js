@@ -26,15 +26,15 @@ module.exports = {  //withPWA(
     dirs: ["src"],
   },
   pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/diving/home',
-        permanent: true,
-      },
-    ]
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/',
+  //       destination: '/diving/home',
+  //       permanent: true,
+  //     },
+  //   ]
+  // },
   images: {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -42,7 +42,7 @@ module.exports = {  //withPWA(
       'avatars.dicebear.com',
       'ipfs.moralis.io',
       'rvlocxzrtjom.usemoralis.com',
-      "vlqxftdcfuokmxeeffud.supabase.co",
+      "tfpamgcqwydaqamjcxpu.supabase.co",
       "stzgaygfnnszcvhmnbqy.supabase.co",
       'localhost',
       'https://s3.eu-west-3.amazonaws.com/media.coralplayground.com',

@@ -1,10 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-underscore-dangle */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable import/no-cycle */
-/* eslint-disable import/no-extraneous-dependencies */
-
-// Chakra Imports
 import {
   Avatar,
   Button,
@@ -20,18 +16,20 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 // Custom Components
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { FaEthereum } from "react-icons/fa";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import { IoLogOutOutline, IoWalletOutline } from "react-icons/io5";
 
-import routes from "../../routes";
 // import ItemContent from "../menu/ItemContent";
 import ShoppingCart from "../pages/bookings/ShoppingCart";
 import { ProfileIcon } from "components/icons/Icons";
-import Balance from "components/navbar/Balance";
+// import Balance from "components/navbar/Balance";
 import SearchBar from "components/navbar/searchBar/SearchBar";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
+import routes from "routes";
 
 function SignedOutMenuList() {
   const menuBg = useColorModeValue("white", "navy.800");
@@ -39,7 +37,8 @@ function SignedOutMenuList() {
     "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
   );
-  // const { isAuthenticating, authenticate } = useMoralis();
+  const router = useRouter();
+
   return (
     <Menu>
       <MenuButton p="0px">
@@ -90,12 +89,11 @@ function SignedOutMenuList() {
             px="14px"
           >
             <Button
-              // isLoading={isAuthenticating}
-              // onClick={() => navigate("/auth/signin")}
               variant="link"
               size="sm"
               color="teal"
               leftIcon={<ProfileIcon />}
+              onClick={() => router.push("/")}
             >
               Sign In
             </Button>
@@ -108,13 +106,12 @@ function SignedOutMenuList() {
             px="14px"
           >
             <Button
-              // isLoading={isAuthenticating}
-              // onClick={() => navigate("/auth/signup")}
               variant="link"
               size="sm"
               mt={1}
               mr={4}
               leftIcon={<IoWalletOutline />}
+              onClick={() => router.push("/")}
             >
               Sign Up
             </Button>
@@ -134,14 +131,16 @@ function SignedInMenuList() {
     "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
   );
-  // const { user, isAuthenticating, logout } = useMoralis();
+  const supabase = useSupabaseClient();
+  const user = useUser();
+  const router = useRouter();
   return (
     <Menu>
       <MenuButton p="0px">
         <Avatar
           _hover={{ cursor: "pointer" }}
           color="white"
-          // name={user.attributes.username}
+          name={user.email}
           // src={user.attributes?.avatar?._url}
           bg="#11047A"
           size="sm"
@@ -182,11 +181,11 @@ function SignedInMenuList() {
             px="14px"
           >
             <Button
-              // onClick={() => navigate("/admin/edit_profile")}
               variant="link"
               size="sm"
               mr={4}
               leftIcon={<ProfileIcon />}
+              onClick={() => router.push("/")}
             >
               Profile
             </Button>
@@ -200,7 +199,7 @@ function SignedInMenuList() {
           >
             <Button
               // isLoading={isAuthenticating}
-              // onClick={() => logout()}
+              onClick={() => supabase.auth.signOut()}
               variant="link"
               colorScheme="red"
               size="sm"
@@ -227,6 +226,7 @@ function SignedInMenuList() {
 export default function NavbarDivingLinks(props) {
   const { secondary } = props;
   const { colorMode, toggleColorMode } = useColorMode();
+  const user = useUser();
   // const {
   //   isAuthenticated,
   //   Moralis,
@@ -401,7 +401,7 @@ export default function NavbarDivingLinks(props) {
           />
         </Button>
       </Tooltip>
-      {/* {!isAuthenticated ? <SignedOutMenuList /> : <SignedInMenuList />} */}
+      {user ? <SignedInMenuList /> : <SignedOutMenuList />}
     </Flex>
   );
 }
