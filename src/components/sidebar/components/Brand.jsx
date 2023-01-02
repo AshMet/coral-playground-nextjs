@@ -5,6 +5,7 @@ import { Flex, Box, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 // import { HorizonLogo } from "components/icons/Icons";
 import Image from "next/image";
+import Link from "next/link";
 
 import { HSeparator } from "components/separator/Separator";
 // import Image from "../../actions/NextChakraImg";
@@ -15,10 +16,11 @@ export function SidebarBrand() {
 
   return (
     <Flex align="start" direction="column">
-      {/* <HorizonLogo h="26px" w="175px" my="32px" color={logoColor} /> */}
-      <Box ml="30px" mb="20px">
-        <Image src="/svg/coral-logo.svg" width="200px" height="45px" />
-      </Box>
+      <Link href="/">
+        <Box ml="30px" mb="20px" _hover={{ cursor: "pointer" }}>
+          <Image src="/svg/coral-logo.svg" width="200px" height="45px" />
+        </Box>
+      </Link>
       <HSeparator mb="20px" />
     </Flex>
   );

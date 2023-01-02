@@ -60,6 +60,7 @@ export default function Settings({ session }) {
       if (data) {
         setUsername(data.username);
         setAvatarUrl(data.avatar_url);
+        // setAvatarUrl(`${data.avatar_url}?token=${session.access_token}`);
       }
     } catch (error) {
       toast({
@@ -80,7 +81,7 @@ export default function Settings({ session }) {
       const updates = {
         id: user.id,
         username,
-        avatar_url: avatarUrl,
+        avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarUrl}`,
         updated_at: new Date().toISOString(),
       };
 
@@ -147,7 +148,7 @@ export default function Settings({ session }) {
             size={150}
             onUpload={(avatarUrl) => {
               setAvatarUrl(avatarUrl);
-              updateProfile({ username, avatar_url: avatarUrl });
+              updateProfile({ username, avatarUrl });
             }}
           />
           <Info

@@ -34,6 +34,7 @@ export default function Settings(props) {
       const { data, error } = await supabase.storage
         .from("avatars")
         .download(path);
+      // .getPublicUrl(path);
       if (error) {
         throw error;
       }
@@ -56,6 +57,7 @@ export default function Settings(props) {
       const fileExt = file.name.split(".").pop();
       const fileName = `${uid}.${fileExt}`;
       const filePath = `${fileName}`;
+      // const filePath = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/sign/avatars/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
         .from("avatars")
@@ -64,6 +66,9 @@ export default function Settings(props) {
       if (uploadError) {
         throw uploadError;
       }
+
+      // console.log("fileName", fileName);
+      // console.log("filePath", filePath);
 
       onUpload(filePath);
     } catch (error) {

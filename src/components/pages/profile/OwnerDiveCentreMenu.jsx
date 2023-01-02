@@ -107,6 +107,29 @@ export default function Banner(props) {
         </MenuItem>
         <MenuItem
           transition="0.2s linear"
+          color={textColor}
+          _hover={textHover}
+          p="0px"
+          borderRadius="8px"
+          _active={{
+            bg: "transparent",
+          }}
+          _focus={{
+            bg: "transparent",
+          }}
+          onClick={() =>
+            router.push(`/diving/dive_centres/${diveCentreId}/dive_trips/new`)
+          }
+        >
+          <Flex align="center">
+            <Icon as={MdOutlineSettings} h="16px" w="16px" me="8px" />
+            <Text fontSize="sm" fontWeight="400">
+              Add Dive Trips
+            </Text>
+          </Flex>
+        </MenuItem>
+        <MenuItem
+          transition="0.2s linear"
           p="0px"
           borderRadius="8px"
           color={textColor}
@@ -126,27 +149,7 @@ export default function Banner(props) {
             </Text>
           </Flex>
         </MenuItem>
-        <MenuItem
-          transition="0.2s linear"
-          color={textColor}
-          _hover={textHover}
-          p="0px"
-          borderRadius="8px"
-          _active={{
-            bg: "transparent",
-          }}
-          _focus={{
-            bg: "transparent",
-          }}
-        >
-          <Flex align="center">
-            <Icon as={MdOutlineSettings} h="16px" w="16px" me="8px" />
-            <Text fontSize="sm" fontWeight="400">
-              Add Dive Trips
-            </Text>
-          </Flex>
-        </MenuItem>
-      </MenuList>{" "}
+      </MenuList>
     </Menu>
   );
 }

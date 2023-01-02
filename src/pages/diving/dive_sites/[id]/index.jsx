@@ -8,11 +8,11 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-import { supabase } from "../../../api/index";
 import Card from "components/card/Card";
 import SiteInfo from "components/pages/diveSite/SiteInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
 import DivingLayout from "layouts/DivingLayout";
+import { supabase } from "pages/api/index";
 
 export default function DiveSitePage({ diveSite }) {
   // console.log("siteData", diveSite);

@@ -36,6 +36,7 @@ export default function TripLineItem(props) {
     trip.name || trip.dive_sites?.map((site) => site.name).join(" + ");
   const diveDate = trip.fixed_start_date;
   const diveTime = trip.fixed_start_time;
+  const selectedDate = diveDate ? new Date(diveDate) : new Date(value);
 
   // function setDateTime() {
   //   const newDate = c;
@@ -44,6 +45,14 @@ export default function TripLineItem(props) {
   //     : newDate.setHours(0, 0);
   //   return newDate.toLocaleString("en-US", { timeZone: "Africa/Cairo" });
   // }
+
+  function combineDateAndTime(date, time) {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // Jan is 0, dec is 11
+    const day = date.getDate();
+    const dateString = `${year}-${month}-${day}`;
+    return new Date(`${dateString} ${time}`);
+  }
 
   // console.log("TripLineItem trip", trip);
   return (
@@ -81,11 +90,12 @@ export default function TripLineItem(props) {
                 </Flex>
               </Tooltip>
             )}
-            {diveTime &&
+            {`@ ${diveTime?.split(":")[0]}:${diveTime?.split(":")[1]}`}
+            {/* {diveTime &&
               ` @ ${new Date(diveTime).toLocaleTimeString("en-US", {
                 hour: "2-digit",
                 minute: "2-digit",
-              })}`}
+              })}`} */}
           </Text>
         </Flex>
       </Flex>
@@ -119,7 +129,8 @@ export default function TripLineItem(props) {
                 title: siteNames,
                 itemType: "diveTrip",
                 centreName: trip.dive_centre.name,
-                diveDate: diveDate ? new Date(diveDate) : new Date(value),
+                // diveDate: diveDate ? new Date(diveDate) : new Date(value),
+                diveDate: combineDateAndTime(selectedDate, diveTime),
                 diveTime,
                 price: trip.price,
                 priceId: trip.stripe_price_id,

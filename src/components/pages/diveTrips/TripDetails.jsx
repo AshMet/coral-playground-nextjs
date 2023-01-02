@@ -16,12 +16,24 @@ import InputField from "components/fields/InputField";
 import TextField from "components/fields/TextField";
 
 export default function Settings(props) {
-  const { setPrice, setMinCert, setActive, setNotes } = props;
+  const {
+    defaultName,
+    setName,
+    setDuration,
+    setDescription,
+    setCheckIn,
+    setPrice,
+    setMinCert,
+    setStatus,
+  } = props;
 
   const [price] = useState();
   const [minCert] = useState("open_water");
-  const [active] = useState("active");
-  const [notes] = useState();
+  const [status] = useState("active");
+  const [name] = useState();
+  const [description] = useState();
+  const [checkIn] = useState();
+  const [duration] = useState();
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
@@ -43,28 +55,57 @@ export default function Settings(props) {
         >
           <InputField
             mb="0px"
+            id="name"
+            label="Name"
+            value={name || defaultName}
+            placeholder="Defaults to names of dive sites"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <InputField
+            mb="0px"
             id="price"
             label="Price"
             value={price}
-            placeholder="For Booking Confirmation"
+            placeholder="Total Price including commission"
             onChange={(e) => setPrice(Number(e.target.value))}
           />
-          {/* <InputGroup>
-            <InputLeftElement
-              pointerEvents="none"
-              color="gray.300"
-              fontSize="1.2em"
-              children="$"
-            />
-            <Input
-              id="price"
-              label="Price"
-              value={price}
-              placeholder="Enter amount"
-              onChange={(e) => setPrice(e.target.value)}
-            />
-            <InputRightElement children={<CheckIcon color="green.500" />} />
-          </InputGroup> */}
+          <InputField
+            mb="0px"
+            id="duration"
+            label="Duration"
+            value={duration}
+            placeholder="Total length of the dive trip"
+            onChange={(e) => setDuration(e.target.value)}
+          />
+          <Flex direction="column">
+            <Flex direction="column" mb="20px">
+              <FormLabel
+                ms="10px"
+                htmlFor="checkIn"
+                fontSize="sm"
+                // color={textColor}
+                fontWeight="bold"
+                _hover={{ cursor: "pointer" }}
+              >
+                Check In
+              </FormLabel>
+              <Select
+                fontSize="sm"
+                id="checkIn"
+                variant="main"
+                h="44px"
+                maxh="44px"
+                placeholder="How long before the dive should the user arrive?"
+                defaultValue="open_water"
+                value={checkIn}
+                onChange={(e) => setCheckIn(e.target.value)}
+              >
+                <option value="open_water">30 minutes before</option>
+                <option value="advanced">1 hour before</option>
+                <option value="dive_master">2 hours before</option>
+              </Select>
+            </Flex>
+          </Flex>
           <Flex direction="column">
             <Flex direction="column" mb="20px">
               <FormLabel
@@ -95,7 +136,7 @@ export default function Settings(props) {
             <Flex direction="column">
               <FormLabel
                 ms="10px"
-                htmlFor="active"
+                htmlFor="status"
                 fontSize="sm"
                 // color={textColor}
                 fontWeight="bold"
@@ -105,13 +146,13 @@ export default function Settings(props) {
               </FormLabel>
               <Select
                 fontSize="sm"
-                id="active"
+                id="status"
                 variant="main"
                 h="44px"
                 maxh="44px"
-                value={active}
+                value={status}
                 defaultValue="active"
-                onChange={(e) => setActive(e.target.value)}
+                onChange={(e) => setStatus(e.target.value)}
               >
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
@@ -119,13 +160,13 @@ export default function Settings(props) {
             </Flex>
           </Flex>
           <TextField
-            id="notes"
-            label="Notes"
+            id="description"
+            label="Description"
             mb="0px"
             h="100%"
-            value={notes}
-            placeholder="Please provide any other important information before your dive (e.g. Medical conditions)"
-            onChange={(e) => setNotes(e.target.value)}
+            value={description}
+            placeholder="Additional Information about the trip"
+            onChange={(e) => setDescription(e.target.value)}
           />
         </SimpleGrid>
       </Card>

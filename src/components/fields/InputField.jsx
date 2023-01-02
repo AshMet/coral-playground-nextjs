@@ -13,6 +13,10 @@ export default function Default(props) {
   const { id, label, extra, placeholder, type, mb, ...rest } = props;
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
+  const borderPrimary = useColorModeValue(
+    "secondaryGray.100",
+    "whiteAlpha.100"
+  );
 
   return (
     <Flex direction="column" mb={mb || "30px"}>
@@ -40,6 +44,7 @@ export default function Default(props) {
         _placeholder={{ fontWeight: "400", color: "secondaryGray.600" }}
         h="44px"
         maxh="44px"
+        borderColor={borderPrimary}
       />
     </Flex>
   );

@@ -29,19 +29,6 @@ export default function EquipmentSelection(props) {
   const { equipmentList, setEquipmentList, redirectToCheckout } =
     useContext(DivingContext);
 
-  // const getProductId = (n) => {
-  //   switch (n) {
-  //     case 1:
-  //       return "prod_Lt7hO6IqEZT5Fb";
-  //     case 2:
-  //       return "prod_Lt7cRX9OGqgQDz";
-  //     case 3:
-  //       return "prod_MHU0OAktSpIMur";
-  //     default:
-  //       return "prod_Lt7hO6IqEZT5Fb";
-  //   }
-  // };
-
   const freeEquipment = equipment.filter((item) => item.price === 0);
   const PaidEquipment = equipment.filter((item) => item.price !== 0);
 

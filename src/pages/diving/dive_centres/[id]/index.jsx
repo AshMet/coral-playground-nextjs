@@ -2,55 +2,23 @@
 /* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
 // Chakra imports
-import { AspectRatio, Box, Button, Grid } from "@chakra-ui/react";
-// Custom components
+import { Box, Grid } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-// import { useMoralisCloudFunction } from "react-moralis";
 
 import { supabase } from "../../../api/index";
-import Card from "components/card/Card";
 import CentreInfo from "components/pages/diveCentre/CentreInfo";
+import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import TripsSidebar from "components/sidebar/TripsSidebar";
 import DivingLayout from "layouts/DivingLayout";
 
-// const Moralis = require("moralis/node");
-
 export default function DiveCentre({ diveCentre }) {
-  // const parsedCentre = JSON.parse(data);
   const router = useRouter();
   const { id } = router.query;
 
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // const diveCentre = {
-  //   id: parsedCentre.objectId,
-  //   name: parsedCentre.name,
-  //   address: parsedCentre.address,
-  //   description: parsedCentre.description,
-  //   longitude: parsedCentre.longitude,
-  //   latitude: parsedCentre.latitude,
-  //   imageUrl: parsedCentre.coverPhoto
-  //     ? parsedCentre.coverPhoto.url
-  //     : "/img/diving/dive_centre_bg.jpg",
-  //   languages: parsedCentre.languages,
-  //   memberships: parsedCentre.memberships,
-  //   services: parsedCentre.services,
-  //   equipment: parsedCentre.equipment,
-  //   paymentMethods: parsedCentre.paymentMethods,
-  //   country: parsedCentre.country,
-  //   city: parsedCentre.city,
-  // };
-
-  // const {
-  //   data: tripData,
-  //   error: tripDataError,
-  //   isLoading: tripDataIsLoading,
-  // } = useMoralisCloudFunction("getCentreTrips", { id });
-
-  // id, name, latitude, longitude, dive_trips:dive_trips(*, diveSites:trip_sites!diveSiteId(diveSiteId(*)))
 
   async function fetchCentreTrips() {
     const { data } = await supabase
@@ -96,38 +64,10 @@ export default function DiveCentre({ diveCentre }) {
             me={{ lg: "20px" }}
             mb={{ base: "20px", lg: "0px" }}
           >
-            <AspectRatio w="100%" maxW="100%" ratio={1130 / 636}>
-              {/* <iframe
-              style={{ borderRadius: "30px" }}
-              src="https://www.youtube.com/embed/VNChunf5RKQ"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            /> */}
-              <Card
-                bgSize="cover"
-                w=""
-                minH={{ base: "200px", md: "100%" }}
-                bgImage={
-                  diveCentre.cover_photo || "/img/diving/dive_centre_bg.jpg"
-                }
-              >
-                <Button
-                  variant="no-hover"
-                  w="max-content"
-                  backdropFilter="blur(11px)"
-                  borderRadius="70px"
-                  mt="auto"
-                  fontSize="sm"
-                  bg="linear-gradient(112.83deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0) 110.84%)"
-                  color="white"
-                  fontWeight="bold"
-                >
-                  More photos
-                </Button>
-              </Card>
-            </AspectRatio>
+            <ImageUploader
+              diveCentreId={diveCentre.id}
+              coverPhoto={diveCentre.cover_photo}
+            />
             <CentreInfo
               name={diveCentre.name}
               description={diveCentre.description}

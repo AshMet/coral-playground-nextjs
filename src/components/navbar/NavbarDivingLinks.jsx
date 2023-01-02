@@ -141,8 +141,7 @@ function SignedInMenuList() {
           _hover={{ cursor: "pointer" }}
           color="white"
           name={user.email}
-          // src={user.attributes?.avatar?._url}
-          bg="#11047A"
+          src={`https://avatars.dicebear.com/api/miniavs/${user.email}.svg`}
           size="sm"
           w="40px"
           h="40px"
@@ -171,6 +170,7 @@ function SignedInMenuList() {
           >
             {/* {user.attributes.accounts[0].substring(0, 7)} {` ...... `}
             {user.attributes.accounts[0].slice(-7)} */}
+            {user.email}
           </Text>
         </Flex>
         <Flex flexDirection="column" p="10px">

@@ -44,6 +44,7 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  useToast,
 } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
@@ -57,6 +58,7 @@ import { RiEyeCloseLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 
 import NavLink from "../../components/navLinks/NavLink";
+import AlertPopup from "components/alerts/AlertPopup";
 import { HSeparator } from "components/separator/Separator";
 import CenteredAuth from "layouts/auth/types/Centered";
 
@@ -90,6 +92,7 @@ function SignIn() {
   const errorMessages = useSelector((state) => state.session.errorMessages);
   const [errors, setErrors] = useState([]);
   const loading = false;
+  const toast = useToast();
   // const dispatch = useDispatch();
   // const router = useRouter();
 
@@ -128,8 +131,15 @@ function SignIn() {
     // }
   }
 
-  if (user) router.push("/diving/home");
-  else
+  if (user) {
+    toast({
+      position: "top",
+      render: () => (
+        <AlertPopup type="warning" text="User is already logged in" />
+      ),
+    });
+    router.push("/");
+  } else
     return (
       <>
         <NextSeo

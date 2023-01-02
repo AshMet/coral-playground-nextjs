@@ -16,12 +16,12 @@ import LandingLayout from "layouts/home/Landing";
 
 export default function Home() {
   const session = useSession();
-
-  // console.log(session);
+  // console.log("session", session);
 
   return (
     <Box>
       {session ? (
+        // Profile Page
         <>
           <NextSeo
             title="User Account"
@@ -32,6 +32,7 @@ export default function Home() {
           </DivingLayout>
         </>
       ) : (
+        // Landing Page
         <>
           <NextSeo
             title="Diving Landing"

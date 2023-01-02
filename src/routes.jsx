@@ -11,14 +11,14 @@ import {
 } from "react-icons/gi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoStorefrontOutline } from "react-icons/io5";
-import {
-  // MdDashboard,
-  MdHome,
-  // MdLock,
-  // MdOutlineShoppingCart,
-  // MdOutlineLogin,
-  // MdOutlineCollections,
-} from "react-icons/md";
+// import {
+// MdDashboard,
+// MdHome,
+// MdLock,
+// MdOutlineShoppingCart,
+// MdOutlineLogin,
+// MdOutlineCollections,
+// } from "react-icons/md";
 
 // Admin Imports
 // import DashboardsCarInterface from "pages/admin/dashboards/carInterface";
@@ -32,8 +32,8 @@ import {
 import Certifications from "pages/diving/certifications";
 import DiveCentres from "pages/diving/dive_centres";
 import DiveSites from "pages/diving/dive_sites";
-import DivingHome from "pages/diving/home";
 import DiveMap from "pages/diving/map";
+// import Home from "pages/index";
 // import NFTDrops from "pages/nfts/drops";
 // import NFTPage from "pages/admin/nfts/page";
 // import NFTProfile from "pages/admin/nfts/profile";
@@ -265,18 +265,18 @@ const routes = [
     ),
     collapse: true,
     items: [
-      {
-        name: "Home",
-        layout: "",
-        path: "/diving/home",
-        component: DiveMap,
-        icon: <Icon as={MdHome} width="15px" height="20px" color="inherit" />,
-      },
+      // {
+      //   name: "Home",
+      //   layout: "",
+      //   path: "/",
+      //   component: Home,
+      //   icon: <Icon as={MdHome} width="15px" height="20px" color="inherit" />,
+      // },
       {
         name: "Map",
         layout: "",
         path: "/diving/map",
-        component: DivingHome,
+        component: DiveMap,
         icon: (
           <Icon
             as={HiOutlineLocationMarker}

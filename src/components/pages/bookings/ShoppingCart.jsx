@@ -112,7 +112,7 @@ export default function ShoppingCart() {
                   icon={<MdOutlineShoppingCart />}
                   size="sm"
                   color="white"
-                  bg="rgba(12, 144, 6, 0.38)"
+                  bg="green.600"
                 >
                   <AvatarBadge boxSize="1em" bg="green.500" />
                 </Avatar>
