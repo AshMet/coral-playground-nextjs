@@ -40,6 +40,7 @@ export default function DiveSiteCard(props) {
     // depth,
     type,
     isLoading,
+    ...rest
   } = props;
   const [like, setLike] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
@@ -66,6 +67,7 @@ export default function DiveSiteCard(props) {
           boxShadow: "0.1em 0.1em 3em rgba(0,0,0,0.3)",
           transform: "scale(1.01)",
         }}
+        {...rest}
       >
         <Flex direction={{ base: "column" }} justify="center">
           {id && (
@@ -126,32 +128,36 @@ export default function DiveSiteCard(props) {
               mb="auto"
             >
               <Flex direction="column">
-                <Text
-                  color={textColor}
-                  fontSize={{
-                    base: "xl",
-                    md: "lg",
-                    lg: "lg",
-                    xl: "lg",
-                    "2xl": "md",
-                    "3xl": "lg",
-                  }}
-                  mb="5px"
-                  fontWeight="bold"
-                  me="14px"
-                >
-                  {name}
-                </Text>
-                <Text
-                  color="secondaryGray.600"
-                  fontSize={{
-                    base: "sm",
-                  }}
-                  fontWeight="400"
-                  me="14px"
-                >
-                  {address}
-                </Text>
+                {name && (
+                  <Text
+                    color={textColor}
+                    fontSize={{
+                      base: "xl",
+                      md: "lg",
+                      lg: "lg",
+                      xl: "lg",
+                      "2xl": "md",
+                      "3xl": "lg",
+                    }}
+                    mb="5px"
+                    fontWeight="bold"
+                    me="14px"
+                  >
+                    {name}
+                  </Text>
+                )}
+                {address && (
+                  <Text
+                    color="secondaryGray.600"
+                    fontSize={{
+                      base: "sm",
+                    }}
+                    fontWeight="400"
+                    me="14px"
+                  >
+                    {address}
+                  </Text>
+                )}
                 {type === "dive_site" && (
                   <Box>
                     <Flex wrap="wrap" gap={1}>

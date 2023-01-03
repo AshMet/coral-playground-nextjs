@@ -4,7 +4,6 @@ import {
   Text,
   Box,
   useColorModeValue,
-  Avatar,
   Button,
   Flex,
   Icon,
@@ -14,7 +13,6 @@ import {
   MenuList,
   Tooltip,
   IconButton,
-  AvatarBadge,
   Spacer,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -78,6 +76,7 @@ export default function ShoppingCart() {
   const router = useRouter();
   // console.log("navbar cartItems", cartItems);
   const { clearCart } = useContext(DivingContext);
+  const iconBgColor = useColorModeValue("green.200", "green.700");
 
   const cartCheckout = () => {
     gtag.event({
@@ -103,19 +102,32 @@ export default function ShoppingCart() {
             />
           ) : (
             <IconButton
-              size="sm"
-              variant="unstyled"
-              aria-label="open menu"
-              mr="10px"
+              aria-label="label"
+              isRound
+              size="md"
+              mr={3}
+              bg={iconBgColor}
               icon={
-                <Avatar
-                  icon={<MdOutlineShoppingCart />}
-                  size="sm"
-                  color="white"
-                  bg="green.600"
-                >
-                  <AvatarBadge boxSize="1em" bg="green.500" />
-                </Avatar>
+                <>
+                  <MdOutlineShoppingCart />
+                  <Box
+                    as="span"
+                    pos="absolute"
+                    top="-1px"
+                    right="-1px"
+                    px={2}
+                    py={1}
+                    fontSize="xs"
+                    fontWeight="bold"
+                    lineHeight="none"
+                    color="red.100"
+                    transform="translate(50%,-50%)"
+                    bg="brand.100"
+                    rounded="full"
+                  >
+                    {cartItems.length}
+                  </Box>
+                </>
               }
             />
           )}

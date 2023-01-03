@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 24.5 24.6" style="enable-background:new 0 0 24.5 24.6;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{display:inline;fill:#E5332A;}
+	.st2{display:inline;}
+	.st3{clip-path:url(#SVGID_00000098925865432684711840000001837022499794580098_);}
+	.st4{fill:#ECECEC;}
+	.st5{fill:#EDEDED;}
+	.st6{fill:#EEEEEE;}
+	.st7{fill:#EFEFEF;}
+	.st8{fill:#F0F0F0;}
+	.st9{fill:#F1F1F1;}
+	.st10{fill:#F2F2F2;}
+	.st11{fill:#F3F3F3;}
+	.st12{fill:#F4F4F4;}
+	.st13{fill:#F5F5F5;}
+	.st14{fill:#F6F6F6;}
+	.st15{fill:#F7F7F7;}
+	.st16{fill:#F8F8F8;}
+	.st17{fill:#F9F9F9;}
+	.st18{fill:#FAFAFA;}
+	.st19{fill:#FBFBFB;}
+	.st20{fill:#FCFCFC;}
+	.st21{fill:#FDFDFD;}
+	.st22{fill:#FFFFFF;}
+	.st23{fill:#FFFFFF;stroke:#E92700;stroke-width:3;stroke-miterlimit:10;}
+	.st24{fill:#E5332A;}
+</style>
+<g class="st0">
+	<path class="st1" d="M24.5,12.3C24.5,5.5,19,0,12.3,0S0.3,5.2,0,11.8l0,0c0,0.2,0,0.4,0,0.5c0,3,1.1,5.8,2.9,7.9
+		c3.6,6.1,9.4,11.2,9.4,11.2c0.3-0.3,5.6-5.1,9.1-10.9C23.3,18.3,24.5,15.4,24.5,12.3L24.5,12.3z"/>
+	<g class="st2">
+		<defs>
+			<path id="SVGID_1_" d="M21,12.3c0,4.8-3.9,8.7-8.7,8.7s-8.7-3.9-8.7-8.7s3.9-8.7,8.7-8.7S21,7.5,21,12.3L21,12.3z"/>
+		</defs>
+		<clipPath id="SVGID_00000099663517519305816080000015354709187766693784_">
+			<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000099663517519305816080000015354709187766693784_);">
+			<rect x="3.6" y="3.6" class="st4" width="17.4" height="17.4"/>
+			<circle class="st4" cx="12.3" cy="12.3" r="8.7"/>
+			<circle class="st5" cx="12.3" cy="12.3" r="8.3"/>
+			<circle class="st5" cx="12.3" cy="12.3" r="8"/>
+			<circle class="st6" cx="12.3" cy="12.3" r="7.6"/>
+			<circle class="st7" cx="12.3" cy="12.3" r="7.3"/>
+			<circle class="st8" cx="12.3" cy="12.3" r="7"/>
+			<circle class="st8" cx="12.3" cy="12.3" r="6.6"/>
+			<circle class="st9" cx="12.3" cy="12.3" r="6.2"/>
+			<circle class="st10" cx="12.3" cy="12.3" r="5.9"/>
+			<circle class="st11" cx="12.3" cy="12.3" r="5.6"/>
+			<circle class="st12" cx="12.3" cy="12.3" r="5.2"/>
+			<circle class="st13" cx="12.3" cy="12.3" r="4.9"/>
+			<circle class="st13" cx="12.3" cy="12.3" r="4.5"/>
+			<circle class="st14" cx="12.3" cy="12.3" r="4.2"/>
+			<circle class="st15" cx="12.3" cy="12.3" r="3.8"/>
+			<circle class="st16" cx="12.3" cy="12.3" r="3.5"/>
+			<circle class="st16" cx="12.3" cy="12.3" r="3.1"/>
+			<circle class="st17" cx="12.3" cy="12.3" r="2.8"/>
+			<circle class="st18" cx="12.3" cy="12.3" r="2.4"/>
+			<circle class="st19" cx="12.3" cy="12.3" r="2.1"/>
+			<circle class="st19" cx="12.3" cy="12.3" r="1.7"/>
+			<circle class="st20" cx="12.3" cy="12.3" r="1.4"/>
+			<circle class="st21" cx="12.3" cy="12.3" r="1"/>
+			<circle class="st21" cx="12.3" cy="12.3" r="0.7"/>
+			<path class="st22" d="M12.6,12.3c0,0.2-0.2,0.4-0.4,0.4s-0.4-0.2-0.4-0.4s0.2-0.4,0.4-0.4S12.6,12.1,12.6,12.3z"/>
+		</g>
+	</g>
+</g>
+<circle class="st23" cx="12.3" cy="12.3" r="10.7"/>
+<rect x="7" y="8.3" class="st24" width="11" height="8"/>
+<polygon class="st20" points="18,14.7 18,16.3 16.8,16.3 7,9.4 7,8.3 9,8.3 "/>
+</svg>

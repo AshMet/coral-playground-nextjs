@@ -28,7 +28,7 @@ import * as gtag from "lib/data/gtag";
 
 export default function DiveCentreCover({ diveCentreId, coverPhoto }) {
   const [uploading, setUploading] = useState(null);
-  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [coverPhotoUrl, setCoverPhotoUrl] = useState(null);
   // const [imageUrl, setImageUrl] = useState(null);
   const toast = useToast();
   const inputRef = useRef(null);
@@ -45,11 +45,11 @@ export default function DiveCentreCover({ diveCentreId, coverPhoto }) {
   // const supabase = useSupabaseClient();
   // const user = useUser();
 
-  async function updateProfile(url) {
+  async function updateDiveCentre(newCoverPhotoUrl) {
     try {
       const updates = {
         // id: diveCentreId,
-        cover_photo: url,
+        cover_photo: newCoverPhotoUrl,
         updated_at: new Date().toISOString(),
       };
 
@@ -64,13 +64,15 @@ export default function DiveCentreCover({ diveCentreId, coverPhoto }) {
         throw new Error(error);
       }
 
+      if (newCoverPhotoUrl) setCoverPhotoUrl(newCoverPhotoUrl);
+
       toast({
         position: "top",
         render: () => (
           <AlertPopup
             type="success"
             text="Cover Photo Updated!"
-            subtext={url}
+            subtext={newCoverPhotoUrl}
           />
         ),
       });
@@ -112,13 +114,13 @@ export default function DiveCentreCover({ diveCentreId, coverPhoto }) {
   //       throw error;
   //     }
   //     const url = URL.createObjectURL(data);
-  //     setAvatarUrl(url);
+  //     setCoverPhotoUrl(url);
   //   } catch (error) {
   //    console.log("Error downloading image: ", error);
   //   }
   // }
 
-  const uploadAvatar = async (event) => {
+  const uploadCoverPhoto = async (event) => {
     try {
       if (!event.target.files || event.target.files.length === 0) {
         throw new Error("You must select an image to upload.");
@@ -129,6 +131,7 @@ export default function DiveCentreCover({ diveCentreId, coverPhoto }) {
       const fileName = `${diveCentreId}.${fileExt}`;
       // const filePath = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cover-photos/dive-centres/${fileName}`;
       const filePath = `dive-centres/${fileName}`;
+      const newCoverPhotoUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cover-photos/${filePath}`;
       // https://tfpamgcqwydaqamjcxpu.supabase.co/storage/v1/object/sign/avatars/b374e3e9-b7a0-4f07-937a-a7698bf159e1.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzL2IzNzRlM2U5LWI3YTAtNGYwNy05MzdhLWE3Njk4YmYxNTllMS5qcGVnIiwidHJhbnNmb3JtYXRpb25zIjoiIiwiaWF0IjoxNjcyNDY4OTU2LCJleHAiOjE5ODc4Mjg5NTZ9.Z2cbltrf8oRlyqNwHGJEnGwPNjM5m1E6AHL-TyMzUOU
 
       const { error: uploadError } = await supabase.storage
@@ -142,10 +145,9 @@ export default function DiveCentreCover({ diveCentreId, coverPhoto }) {
 
       // console.log("filePath", filePath);
       // setImageUrl(filePath);
-      const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cover-photos/dive-centres/${fileName}`;
       // console.log("url", url);
-      updateProfile(url);
-      setAvatarUrl(url);
+      updateDiveCentre(newCoverPhotoUrl);
+      // setCoverPhotoUrl(url);
     } finally {
       setUploading(false);
     }
@@ -158,7 +160,9 @@ export default function DiveCentreCover({ diveCentreId, coverPhoto }) {
         w=""
         minH={{ base: "200px", md: "100%" }}
         h="400px"
-        bgImage={coverPhoto || avatarUrl || "/img/diving/dive_centre_bg.jpg"}
+        bgImage={
+          coverPhoto || coverPhotoUrl || "/img/diving/dive_centre_bg.jpg"
+        }
       >
         <Box mt="auto">
           <Button
@@ -195,7 +199,7 @@ export default function DiveCentreCover({ diveCentreId, coverPhoto }) {
             type="file"
             ref={inputRef}
             accept="image/*"
-            onChange={uploadAvatar}
+            onChange={uploadCoverPhoto}
             disabled={uploading}
           />
         </Box>

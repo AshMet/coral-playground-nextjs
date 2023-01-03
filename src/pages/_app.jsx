@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-props-no-spreading */
 import { ChakraProvider } from "@chakra-ui/react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
@@ -16,17 +15,9 @@ import defaultSEOConfig from "../../next-seo.config";
 import * as gtag from "../lib/data/gtag";
 import { store } from "../lib/redux/store";
 import theme from "../theme/theme";
-
 import "../../public/css/App.css";
 import "../../public/css/Map.css";
-// import AuthCentered from "layouts/auth/types/Centered";
-// import AdminLayout from "layouts/admin";
-
-// type ComponentWithPageLayout = AppProps & {
-//   Component: AppProps["Component"] & {
-//     PageLayout?: React.ComponentType;
-//   };
-// };
+import { ProfileProvider } from "contexts/ProfileContext";
 
 const MyApp = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || ((page) => page);
@@ -68,16 +59,18 @@ const MyApp = ({ Component, pageProps }) => {
         initialSession={pageProps.initialSession}
       >
         <ChakraProvider theme={theme}>
-          <Provider store={store}>
-            <Head>
-              <meta
-                name="viewport"
-                content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-              />
-            </Head>
-            <DefaultSeo {...defaultSEOConfig} />
-            {getLayout(<Component {...pageProps} />)}
-          </Provider>
+          <ProfileProvider>
+            <Provider store={store}>
+              <Head>
+                <meta
+                  name="viewport"
+                  content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
+                />
+              </Head>
+              <DefaultSeo {...defaultSEOConfig} />
+              {getLayout(<Component {...pageProps} />)}
+            </Provider>
+          </ProfileProvider>
         </ChakraProvider>
       </SessionContextProvider>
     </>

@@ -25,110 +25,119 @@
 
 */
 
-import { Box, Flex, useToast, SimpleGrid } from "@chakra-ui/react";
-import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useEffect, useState } from "react";
+import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
+import { useContext } from "react";
 
-import AlertPopup from "components/alerts/AlertPopup";
+// import AlertPopup from "components/alerts/AlertPopup";
 import Banner from "components/pages/profile/Banner";
 import DiveCentreHub from "components/pages/profile/DiveCentreHub";
 import Info from "components/pages/profile/Info";
-import * as gtag from "lib/data/gtag";
+import { ProfileContext } from "contexts/ProfileContext";
+// import * as gtag from "lib/data/gtag";
 
-export default function Settings({ session }) {
-  const supabase = useSupabaseClient();
-  const user = useUser();
-  const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState(null);
-  const [avatarUrl, setAvatarUrl] = useState(null);
-  const toast = useToast();
+export default function Profile({ session }) {
+  // const supabase = useSupabaseClient();
+  // const [loading, setLoading] = useState(true);
+  // const [username, setUsername] = useState(null);
+  // const [avatarUrl, setAvatarUrl] = useState(null);
+  // const toast = useToast();
+  const {
+    username,
+    setUsername,
+    // avatarUrl,
+    // setAvatarUrl,
+    updateProfile,
+    profileLoading,
+  } = useContext(ProfileContext);
 
-  async function getProfile() {
-    try {
-      setLoading(true);
+  // async function getProfile() {
+  //   try {
+  //     setLoading(true);
 
-      const { data, error, status } = await supabase
-        .from("profiles")
-        .select(`username, avatar_url`)
-        .eq("id", user.id)
-        .single();
+  //     const { data, error, status } = await supabase
+  //       .from("profiles")
+  //       .select(`username, avatar_url`)
+  //       .eq("id", user.id)
+  //       .single();
 
-      if (error && status !== 406) {
-        throw error;
-      }
+  //     if (error && status !== 406) {
+  //       throw error;
+  //     }
 
-      if (data) {
-        setUsername(data.username);
-        setAvatarUrl(data.avatar_url);
-        // setAvatarUrl(`${data.avatar_url}?token=${session.access_token}`);
-      }
-    } catch (error) {
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup type="danger" text="Error loading user data!" />
-        ),
-      });
-    } finally {
-      setLoading(false);
-    }
-  }
+  //     if (data) {
+  //       setUsername(data.username);
+  //       setAvatarUrl(data.avatar_url);
+  //       // setAvatarUrl(`${data.avatar_url}?token=${session.access_token}`);
+  //     }
+  //   } catch (error) {
+  //     toast({
+  //       position: "top",
+  //       render: () => (
+  //         <AlertPopup type="danger" text="Error loading user data!" />
+  //       ),
+  //     });
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
-  async function updateProfile({ username, avatarUrl }) {
-    try {
-      setLoading(true);
+  // async function updateProfile({ username, avatarUrl }) {
+  //   try {
+  //     setLoading(true);
 
-      const updates = {
-        id: user.id,
-        username,
-        avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarUrl}`,
-        updated_at: new Date().toISOString(),
-      };
+  //     const updates = {
+  //       id: user.id,
+  //       username,
+  //       avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarUrl}`,
+  //       updated_at: new Date().toISOString(),
+  //     };
 
-      const { error } = await supabase.from("profiles").upsert(updates);
-      if (error) throw error;
+  //     const { error } = await supabase.from("profiles").upsert(updates);
+  //     if (error) throw error;
 
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup
-            type="success"
-            text="Profile Updated!"
-            // subtext="View Shopping Cart to complete your order"
-          />
-        ),
-      });
-      gtag.event({
-        action: "update-profile",
-        category: "button",
-        label: "Profile",
-        // value: newItem.title,
-      });
-    } catch (error) {
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup
-            type="danger"
-            text="Profile Update Failed!"
-            // subtext="View Shopping Cart to complete your order"
-          />
-        ),
-      });
-      gtag.event({
-        action: "update-profile",
-        category: "button",
-        label: "Profile",
-        // value: newItem.title,
-      });
-    } finally {
-      setLoading(false);
-    }
-  }
+  //     toast({
+  //       position: "top",
+  //       render: () => (
+  //         <AlertPopup
+  //           type="success"
+  //           text="Profile Updated!"
+  //           // subtext="View Shopping Cart to complete your order"
+  //         />
+  //       ),
+  //     });
+  //     gtag.event({
+  //       action: "update-profile",
+  //       category: "button",
+  //       label: "Profile",
+  //       // value: newItem.title,
+  //     });
+  //   } catch (error) {
+  //     toast({
+  //       position: "top",
+  //       render: () => (
+  //         <AlertPopup
+  //           type="danger"
+  //           text="Profile Update Failed!"
+  //           // subtext="View Shopping Cart to complete your order"
+  //         />
+  //       ),
+  //     });
+  //     gtag.event({
+  //       action: "update-profile",
+  //       category: "button",
+  //       label: "Profile",
+  //       // value: newItem.title,
+  //     });
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
-  useEffect(() => {
-    getProfile();
-  }, [session]);
+  // useEffect(() => {
+  //   getProfile();
+  // }, [session]);
+
+  // console.log(session);
 
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
@@ -139,36 +148,18 @@ export default function Settings({ session }) {
       >
         {/* Column Left */}
         <Flex direction="column">
-          <Banner
-            name="Dive Centre Owner"
-            banner="/img/nfts/NftBanner1.jpg"
-            uid={user.id} // uid={user!.id}
-            avatarUrl={avatarUrl}
-            // url={avatarUrl}
-            size={150}
-            onUpload={(avatarUrl) => {
-              setAvatarUrl(avatarUrl);
-              updateProfile({ username, avatarUrl });
-            }}
-          />
+          <Banner uid={session.user.id} />
+          {/* uid={user!.id} */}
           <Info
             username={username}
             setUsername={setUsername}
             updateProfile={updateProfile}
-            loading={loading}
+            loading={profileLoading}
           />
         </Flex>
         {/* Column Right */}
         <Flex direction="column">
-          <DiveCentreHub
-            trips="7"
-            galleryImages="34"
-            userId={user.id}
-            username="@esthera.william"
-            shares="156"
-            saves="20"
-            you="/img/avatars/avatar1.png"
-          />
+          <DiveCentreHub />
           {/* <Socials />
           <Password /> */}
         </Flex>

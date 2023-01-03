@@ -22,7 +22,7 @@ import {
   MdOutlineSettings,
 } from "react-icons/md";
 
-export default function Banner(props) {
+export default function OwnerDiveCentreMenu(props) {
   const { icon, diveCentreId, ...rest } = props;
 
   // Ellipsis modals

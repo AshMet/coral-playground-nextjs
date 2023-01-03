@@ -26,12 +26,17 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { Flex, useColorModeValue } from "@chakra-ui/react";
+import {
+  Avatar,
+  Flex,
+  Tag,
+  TagLabel,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 import { useState, useRef } from "react";
 import Map, {
   Marker,
-  Popup,
   NavigationControl,
   FullscreenControl,
   ScaleControl,
@@ -41,7 +46,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 // Assets
 import { supabase } from "../../api";
-import Image from "components/actions/NextChakraImg";
+// import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
 // import SearchBar from "components/navbar/searchBar/SearchBar";
 // import LocationSummary from "components/maps/LocationSummary";
@@ -68,7 +73,6 @@ export default function Default({ data }) {
     "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r",
     "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r"
   );
-  const [popupInfo, setPopupInfo] = useState(null);
 
   return (
     <>
@@ -102,6 +106,7 @@ export default function Default({ data }) {
             style={{ borderRadius: "20px", width: "100%", height: "100%" }}
             mapStyle={mapStyles}
             mapboxAccessToken={MAPBOX_TOKEN}
+            onClick={() => setMapLocation("Select Location")}
           >
             <GeolocateControl position="top-left" />
             <FullscreenControl position="top-left" />
@@ -122,7 +127,6 @@ export default function Default({ data }) {
                       // with `closeOnClick: true`
                       e.originalEvent.stopPropagation();
                       setMapLocation(location);
-                      setPopupInfo(location);
                       mapRef.current?.flyTo({
                         center: [location.lng, location.lat + 0.02],
                         zoom: 13,
@@ -130,38 +134,39 @@ export default function Default({ data }) {
                       });
                     }}
                   >
-                    <Image
-                      src={
-                        location.locationType === "dive_site"
-                          ? "/img/diving/dive_site_marker.svg"
-                          : "/img/diving/dive_centre_marker.svg"
-                      }
-                      alt="map icon"
-                      height={location.lat === mapLocation.lat ? 50 : 30}
-                      width={location.lat === mapLocation.lat ? 50 : 30}
-                    />
+                    {location.lat !== mapLocation.lat ? (
+                      <Tag
+                        size="sm"
+                        bgColor="#0b050575"
+                        color="white"
+                        borderRadius="full"
+                      >
+                        <Avatar
+                          src={
+                            location.locationType === "dive_site"
+                              ? "/img/diving/dive_site_icon.svg"
+                              : "/img/diving/dive_centre_icon.svg"
+                          }
+                          size={location.lat === mapLocation.lat ? "sm" : "xs"}
+                          // name={location.name}
+                          ml={-1}
+                          mr={2}
+                        />
+                        <TagLabel>{location.name}</TagLabel>
+                      </Tag>
+                    ) : (
+                      <DiveSiteCard
+                        key={location.location_id}
+                        id={location.location_id}
+                        name={location.name}
+                        tagList={location.divingTypes}
+                        type={location.locationType}
+                        image={location.itemImg}
+                        zIndex={3}
+                      />
+                    )}
                   </Marker>
                 )
-            )}
-            {popupInfo && (
-              <Popup
-                anchor="bottom"
-                offset={20}
-                closeButton={false}
-                longitude={Number(popupInfo.lng)}
-                latitude={Number(popupInfo.lat)}
-                onClose={() => setPopupInfo(null)}
-                style={{ ".mapboxgl-popup-content": { background: "#345346" } }}
-              >
-                <DiveSiteCard
-                  key={popupInfo.location_id}
-                  id={popupInfo.location_id}
-                  name={popupInfo.name}
-                  tagList={popupInfo.divingTypes}
-                  type={popupInfo.locationType}
-                  image={popupInfo.itemImg}
-                />
-              </Popup>
             )}
           </Map>
         </Card>

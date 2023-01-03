@@ -14,36 +14,38 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
+import { ProfileContext } from "contexts/ProfileContext";
 import * as gtag from "lib/data/gtag";
 
 export default function Settings(props) {
-  const { name, avatarUrl, setAvatarUrl, banner, uid, size, onUpload } = props;
+  const { uid } = props;
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
   const supabase = useSupabaseClient();
   const [uploading, setUploading] = useState(false);
   const inputRef = useRef(null);
   const toast = useToast();
+  const { username, avatarUrl, updateProfile } = useContext(ProfileContext);
 
-  async function downloadImage(path) {
-    try {
-      const { data, error } = await supabase.storage
-        .from("avatars")
-        .download(path);
-      // .getPublicUrl(path);
-      if (error) {
-        throw error;
-      }
-      const url = URL.createObjectURL(data);
-      setAvatarUrl(url);
-    } catch (error) {
-      // console.log("Error downloading image: ", error);
-    }
-  }
+  // async function downloadImage(path) {
+  //   try {
+  //     const { data, error } = await supabase.storage
+  //       .from("avatars")
+  //       .download(path);
+  //     // .getPublicUrl(path);
+  //     if (error) {
+  //       throw error;
+  //     }
+  //     const url = URL.createObjectURL(data);
+  //     setAvatarUrl(url);
+  //   } catch (error) {
+  //     // console.log("Error downloading image: ", error);
+  //   }
+  // }
 
   const uploadAvatar = async (event) => {
     try {
@@ -57,7 +59,7 @@ export default function Settings(props) {
       const fileExt = file.name.split(".").pop();
       const fileName = `${uid}.${fileExt}`;
       const filePath = `${fileName}`;
-      // const filePath = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/sign/avatars/${fileName}`;
+      const newAvatarUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${filePath}`;
 
       const { error: uploadError } = await supabase.storage
         .from("avatars")
@@ -69,8 +71,9 @@ export default function Settings(props) {
 
       // console.log("fileName", fileName);
       // console.log("filePath", filePath);
-
-      onUpload(filePath);
+      // onUpload(filePath);
+      // setAvatarUrl(newAvatarUrl);
+      updateProfile(username, newAvatarUrl);
     } catch (error) {
       toast({
         position: "top",
@@ -93,13 +96,13 @@ export default function Settings(props) {
     }
   };
 
-  useEffect(() => {
-    if (avatarUrl) downloadImage(avatarUrl);
-  }, [avatarUrl]);
+  // useEffect(() => {
+  //   if (avatarUrl) downloadImage(avatarUrl);
+  // }, [avatarUrl]);
 
   return (
     <Card mb="20px" align="center">
-      <Image src={banner} borderRadius="16px" />
+      <Image src="/img/nfts/NftBanner1.jpg" borderRadius="16px" />
       <Avatar
         mx="auto"
         src={avatarUrl}
@@ -109,7 +112,7 @@ export default function Settings(props) {
         mb="15px"
       />
       <Text fontSize="2xl" textColor={textColorPrimary} fontWeight="700">
-        {name}
+        {username}
       </Text>
       <Flex align="center" mx="auto" px="15px">
         <Text
@@ -135,7 +138,7 @@ export default function Settings(props) {
           <option value="Member">Member</option>
         </Select>
       </Flex>
-      <Box width={size}>
+      <Box width={150}>
         {/* <label className="button primary block" htmlFor="single">
           {uploading ? "Uploading ..." : "Upload"}
         </label> */}

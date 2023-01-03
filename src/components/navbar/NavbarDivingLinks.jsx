@@ -19,6 +19,7 @@ import {
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
+import { useContext } from "react";
 import { FaEthereum } from "react-icons/fa";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import { IoLogOutOutline, IoWalletOutline } from "react-icons/io5";
@@ -29,6 +30,7 @@ import { ProfileIcon } from "components/icons/Icons";
 // import Balance from "components/navbar/Balance";
 import SearchBar from "components/navbar/searchBar/SearchBar";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
+import { ProfileContext } from "contexts/ProfileContext";
 import routes from "routes";
 
 function SignedOutMenuList() {
@@ -134,6 +136,8 @@ function SignedInMenuList() {
   const supabase = useSupabaseClient();
   const user = useUser();
   const router = useRouter();
+  const { username, avatarUrl } = useContext(ProfileContext);
+
   return (
     <Menu>
       <MenuButton p="0px">
@@ -141,7 +145,10 @@ function SignedInMenuList() {
           _hover={{ cursor: "pointer" }}
           color="white"
           name={user.email}
-          src={`https://avatars.dicebear.com/api/miniavs/${user.email}.svg`}
+          src={
+            avatarUrl ||
+            `https://avatars.dicebear.com/api/miniavs/${user.email}.svg`
+          }
           size="sm"
           w="40px"
           h="40px"
@@ -170,7 +177,7 @@ function SignedInMenuList() {
           >
             {/* {user.attributes.accounts[0].substring(0, 7)} {` ...... `}
             {user.attributes.accounts[0].slice(-7)} */}
-            {user.email}
+            {username || user.email}
           </Text>
         </Flex>
         <Flex flexDirection="column" p="10px">
@@ -227,16 +234,6 @@ export default function NavbarDivingLinks(props) {
   const { secondary } = props;
   const { colorMode, toggleColorMode } = useColorMode();
   const user = useUser();
-  // const {
-  //   isAuthenticated,
-  //   Moralis,
-  //   logout,
-  //   user,
-  //   isAuthUndefined,
-  //   isAuthenticating,
-  //   authenticate,
-  // } = useMoralis();
-  // Chakra Color Mode
   const navbarIcon = useColorModeValue("gray.400", "white");
   const menuBg = useColorModeValue("white", "navy.800");
   // const textColor = useColorModeValue("secondaryGray.900", "white");
