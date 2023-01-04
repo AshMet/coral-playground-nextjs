@@ -32,11 +32,11 @@ const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === "children",
 });
 
-export default function DiveSites({ data }) {
+export default function DiveSites({ diveCentres }) {
   // const { image, name, address } = props;
   // const name = "Dive Site";
   // const address = "Hurghada, Egypt";
-  // const parsedData = JSON.parse(data);
+  // const parsedData = JSON.parse(diveCentres);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const buttonBg = useColorModeValue("transparent", "navy.800");
@@ -54,16 +54,16 @@ export default function DiveSites({ data }) {
   const [filtered, setFiltered] = useState();
 
   useEffect(() => {
-    if (!data) return null;
+    if (!diveCentres) return null;
     if (city === 0 || city === "All Cities") {
-      setFiltered(data);
+      setFiltered(diveCentres);
       return;
     }
-    // console.log("centres", data);
-    const cityFiltered = data.filter((centre) => centre.city === city);
+    // console.log("centres", diveCentres);
+    const cityFiltered = diveCentres.filter((centre) => centre.city === city);
     setFiltered(cityFiltered);
-    // console.log("centres", data);
-  }, [data, city, country]);
+    // console.log("centres", diveCentres);
+  }, [diveCentres, city, country]);
 
   return (
     <>
@@ -72,7 +72,7 @@ export default function DiveSites({ data }) {
         description="A list of all partner dive centres."
       />
       <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-        {/* <Text>{JSON.stringify(data[0].diveMap)}</Text> */}
+        {/* <Text>{JSON.stringify(diveCentres[0].diveMap)}</Text> */}
         <Flex w="100%">
           {/* <SearchBar /> */}
           <Select
@@ -178,7 +178,7 @@ export default function DiveSites({ data }) {
 }
 
 export async function getStaticProps() {
-  const { data } = await supabase
+  const { data: diveCentres } = await supabase
     .from("dive_centres")
     .select(
       `
@@ -188,7 +188,8 @@ export async function getStaticProps() {
     )
     .order("name", { ascending: true });
   return {
-    props: { data },
+    props: { diveCentres },
+    revalidate: 86400,
   };
 }
 DiveSites.getLayout = function getLayout(page) {

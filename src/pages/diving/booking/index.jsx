@@ -370,6 +370,7 @@ export async function getStaticProps() {
     .select("id, name, price, pay_now, stripe_price_id");
   return {
     props: { equipment },
+    revalidate: 86400,
   };
 }
 

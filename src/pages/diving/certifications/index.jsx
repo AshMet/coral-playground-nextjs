@@ -323,6 +323,7 @@ export async function getStaticProps() {
     );
   return {
     props: { certifications },
+    revalidate: 86400,
   };
 }
 

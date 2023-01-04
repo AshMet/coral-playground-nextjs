@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import { supabase } from "../../../api/index";
+// import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import CentreInfo from "components/pages/diveCentre/CentreInfo";
 import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import TripsSidebar from "components/sidebar/TripsSidebar";

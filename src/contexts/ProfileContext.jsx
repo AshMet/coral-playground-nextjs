@@ -4,7 +4,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useToast } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useMemo } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import * as gtag from "lib/data/gtag";
@@ -146,31 +146,22 @@ export const ProfileProvider = ({ children }) => {
   // }, [avatarUrl]);
 
   // Need to figure out how to use useMemo for this
-  // const profileValue = useMemo(
-  //   () => ({
-  //     username,
-  //     setUsername,
-  //     avatarUrl,
-  //     setAvatarUrl,
-  //     updateProfile,
-  //     profileLoading,
-  //   }),
-  //   []
-  // );
+  const profileValue = useMemo(
+    () => ({
+      username,
+      setUsername,
+      avatarUrl,
+      setAvatarUrl,
+      updateProfile,
+      profileLoading,
+      diveCentreLoading,
+      ownerDiveCentre,
+    }),
+    [user]
+  );
 
   return (
-    <ProfileContext.Provider
-      value={{
-        username,
-        setUsername,
-        avatarUrl,
-        setAvatarUrl,
-        updateProfile,
-        profileLoading,
-        diveCentreLoading,
-        ownerDiveCentre,
-      }}
-    >
+    <ProfileContext.Provider value={profileValue}>
       {children}
     </ProfileContext.Provider>
   );

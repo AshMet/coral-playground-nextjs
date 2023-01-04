@@ -115,7 +115,7 @@ export const getServerSideProps = async (context) => {
   const lineItems = await stripe.checkout.sessions.listLineItems(sessionId, {
     limit: 10,
   });
-  return { props: { session, lineItems } };
+  return { props: { session, lineItems }, revalidate: 86400 };
 };
 
 Invoice.getLayout = function getLayout(page) {

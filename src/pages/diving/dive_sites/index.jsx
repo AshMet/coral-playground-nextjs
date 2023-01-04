@@ -30,7 +30,7 @@ const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === "children",
 });
 
-export default function DiveSites({ data }) {
+export default function DiveSites({ diveSites }) {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const buttonBg = useColorModeValue("transparent", "navy.800");
   const hoverButton = useColorModeValue(
@@ -47,15 +47,15 @@ export default function DiveSites({ data }) {
   const [filtered, setFiltered] = useState();
 
   useEffect(() => {
-    if (!data) return null;
+    if (!diveSites) return null;
     if (city === 0 || city === "All Cities") {
-      setFiltered(data);
+      setFiltered(diveSites);
       return;
     }
-    const cityFiltered = data.filter((site) => site.city.name === city);
+    const cityFiltered = diveSites.filter((site) => site.city.name === city);
     setFiltered(cityFiltered);
     // console.log("site data", data);
-  }, [data, city, country]);
+  }, [diveSites, city, country]);
 
   return (
     <>
@@ -171,7 +171,7 @@ export default function DiveSites({ data }) {
 }
 
 export async function getStaticProps() {
-  const { data } = await supabase
+  const { data: diveSites } = await supabase
     .from("dive_sites")
     .select(
       `
@@ -181,7 +181,8 @@ export async function getStaticProps() {
     )
     .order("name", { ascending: true });
   return {
-    props: { data },
+    props: { diveSites },
+    revalidate: 86400,
   };
 }
 DiveSites.getLayout = function getLayout(page) {

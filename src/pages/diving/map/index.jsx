@@ -221,9 +221,7 @@ export async function getStaticProps() {
 
     // const data = JSON.stringify(results);
 
-    return {
-      props: { data },
-    };
+    return { props: { data }, revalidate: 86400 };
   } catch (error) {
     console.error(error);
   }
