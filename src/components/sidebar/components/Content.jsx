@@ -1,21 +1,12 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable react/prop-types */
 // chakra imports
-import {
-  Box,
-  Flex,
-  // Avatar,
-  // Text,
-  // useColorModeValue,
-  Stack,
-  // Input,
-  // Button,
-} from "@chakra-ui/react";
-//   Custom components
-// import { useContext } from "react";
+import { Box, Flex, Stack } from "@chakra-ui/react";
 
-// import { CoralPgContext } from "../../../contexts/CoralPgContext";
 import Brand from "components/sidebar/components/Brand";
 import Links from "components/sidebar/components/Links";
+
+// import AdminLinks from "./AdminLinks";
 // import SidebarCard from "components/sidebar/components/SidebarCard";
 
 // FUNCTIONS
@@ -46,6 +37,7 @@ function SidebarContent(props) {
       <Stack direction="column" mb="auto" mt="8px">
         <Box ps="20px" pe={{ md: "16px", "2xl": "1px" }}>
           <Links routes={routes} />
+          {/* <AdminLinks /> */}
         </Box>
       </Stack>
 

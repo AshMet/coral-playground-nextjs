@@ -7,27 +7,36 @@ import {
   Button,
   Flex,
   FormControl,
+  FormLabel,
+  Select,
   SimpleGrid,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useContext } from "react";
 
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
 import TextField from "components/fields/TextField";
+import { ProfileContext } from "contexts/ProfileContext";
 
-export default function Info({
-  username,
-  setUsername,
-  updateProfile,
-  loading,
-}) {
+export default function Info() {
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
   const supabase = useSupabaseClient();
   const user = useUser();
+
+  const { profile, setProfile, updateProfile, profileLoading } =
+    useContext(ProfileContext);
+
+  const handleProfileChange = (e) => {
+    setProfile({
+      ...profile,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <FormControl>
@@ -47,15 +56,15 @@ export default function Info({
           <InputField
             mb="25px"
             me="30px"
-            id="username"
+            name="username"
             label="Username"
             placeholder="@username"
-            value={username || ""}
-            onChange={(e) => setUsername(e.target.value)}
+            value={profile?.username}
+            onChange={handleProfileChange}
           />
           <InputField
             mb="25px"
-            id="email"
+            name="email"
             label="Email Address"
             placeholder="example@email.com"
             value={user.email}
@@ -64,27 +73,70 @@ export default function Info({
           <InputField
             mb="25px"
             me="30px"
-            id="first_name"
+            name="firstName"
             label="First Name"
-            placeholder="John"
+            // placeholder="John"
+            value={profile?.firstName}
+            onChange={handleProfileChange}
           />
           <InputField
             mb="25px"
-            id="last_name"
             label="Last Name"
-            placeholder="Doe"
+            name="lastName"
+            // placeholder="John"
+            value={profile?.lastName}
+            onChange={handleProfileChange}
           />
         </SimpleGrid>
-        <InputField
+        {/* <InputField
           id="certification"
           label="Current Certification Level"
-          placeholder="Open Water Certification"
-        />
+          placeholder="Open Water"
+          name="certLevel"
+          value={profile?.certLevel}
+          onChange={handleProfileChange}
+        /> */}
+        <Flex direction="column" mb="40px">
+          <FormLabel
+            ms="10px"
+            htmlFor="checkIn"
+            fontSize="sm"
+            fontWeight="bold"
+            _placeholder={{ color: "secondaryGray.600" }}
+            _hover={{ cursor: "pointer" }}
+          >
+            Current Certification Level
+          </FormLabel>
+          <Select
+            fontSize="sm"
+            name="certLevel"
+            variant="main"
+            h="44px"
+            maxh="44px"
+            placeholder="Select..."
+            borderColor={useColorModeValue(
+              "secondaryGray.100",
+              "whiteAlpha.100"
+            )}
+            // defaultValue={2}
+            value={profile?.certLevel}
+            onChange={handleProfileChange}
+          >
+            <option value="Open Water">Open Water</option>
+            <option value="Advanced Diver">Advanced Diver</option>
+            <option value="Rescue Diver">Rescue Diver</option>
+            <option value="Dive Master">Dive Master</option>
+            <option value="Unlicenced">Unlicenced</option>
+          </Select>
+        </Flex>
         <TextField
           id="about"
           label="About Me"
           h="100px"
           placeholder="Tell something about yourself in 150 characters!"
+          name="bio"
+          value={profile?.bio}
+          onChange={handleProfileChange}
         />
         <SimpleGrid
           columns={{ sm: 1, md: 2 }}
@@ -98,10 +150,10 @@ export default function Info({
             fontWeight="500"
             ms="auto"
             _hover={{ bgColor: "brand.300" }}
-            onClick={() => updateProfile({ username })}
-            disabled={loading}
+            onClick={updateProfile}
+            disabled={profileLoading}
           >
-            {loading ? "Loading ..." : "Update"}
+            {profileLoading ? "Loading ..." : "Update"}
           </Button>
           <Button
             variant="outline"

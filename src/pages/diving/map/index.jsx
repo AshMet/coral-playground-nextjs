@@ -83,7 +83,7 @@ export default function Default({ data }) {
       <Flex
         gridArea="1 / 1 / 1 / 1"
         display={{ base: "block", lg: "flex" }}
-        pt={{ base: "130px", md: "80px", xl: "80px" }}
+        pt="80px"
       >
         <Card
           justifyContent="center"
@@ -92,7 +92,7 @@ export default function Default({ data }) {
           w="100%"
           p={{ sm: "0px", md: "10px" }}
           zIndex="0"
-          h={{ sm: "calc(100vh - 200px)", md: "calc(100vh - 130px)" }}
+          h={{ sm: "calc(100vh - 150px)", md: "calc(100vh - 150px)" }}
           overflow="hidden"
         >
           <Map

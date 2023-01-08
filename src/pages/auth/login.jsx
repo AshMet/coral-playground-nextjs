@@ -132,12 +132,12 @@ function SignIn() {
   }
 
   if (user) {
-    toast({
-      position: "top",
-      render: () => (
-        <AlertPopup type="warning" text="User is already logged in" />
-      ),
-    });
+    // toast({
+    //   position: "top",
+    //   render: () => (
+    //     <AlertPopup type="warning" text="User is already logged in" />
+    //   ),
+    // });
     router.push("/");
   } else
     return (

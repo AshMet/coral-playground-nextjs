@@ -2,11 +2,12 @@
 /* eslint-disable no-plusplus */
 import { Box, Button, Flex, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import DiveSelection from "components/pages/bookings/DiveSelection";
 import TripDetails from "components/pages/diveTrips/TripDetails";
+import { ProfileContext } from "contexts/ProfileContext";
 import DivingLayout from "layouts/DivingLayout";
 import { supabase } from "pages/api/index";
 
@@ -22,6 +23,7 @@ export default function CreateCentreTrip() {
   const [diveTime, setDiveTime] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const toast = useToast();
+  const { ownerDiveCentre } = useContext(ProfileContext);
 
   const getStripePriceId = (n) => {
     switch (n) {
@@ -56,7 +58,7 @@ export default function CreateCentreTrip() {
   } = router;
 
   async function saveDiveTrip() {
-    const { data: diveTrip, error: diveTripError } = await supabase
+    const { error: diveTripError } = await supabase
       .from("dive_trips")
       .insert([
         {
@@ -71,7 +73,7 @@ export default function CreateCentreTrip() {
           price,
           stripe_price_id: getStripePriceId(selectedSites.length),
           pay_now: getPayNow(selectedSites.length),
-          dive_centre_id: "f3fd78b6-99b3-41f3-95fc-1af82e557350",
+          dive_centre_id: diveCentreId,
         },
       ])
       .select()
@@ -83,10 +85,12 @@ export default function CreateCentreTrip() {
         <AlertPopup
           type="info"
           text="Dive Trip Saved"
-          subtext={diveTrip.name} // Not Working
+          // subtext={diveTrip.name} // Not Working
         />
       ),
     });
+
+    router.push(`/diving/dive_centres/${ownerDiveCentre.id}`);
 
     if (diveTripError) {
       toast({

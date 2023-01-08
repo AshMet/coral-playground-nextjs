@@ -26,13 +26,13 @@
 */
 
 import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
-import { useContext } from "react";
+// import { useContext } from "react";
 
 // import AlertPopup from "components/alerts/AlertPopup";
 import Banner from "components/pages/profile/Banner";
 import DiveCentreHub from "components/pages/profile/DiveCentreHub";
 import Info from "components/pages/profile/Info";
-import { ProfileContext } from "contexts/ProfileContext";
+// import { ProfileContext } from "contexts/ProfileContext";
 // import * as gtag from "lib/data/gtag";
 
 export default function Profile({ session }) {
@@ -41,14 +41,14 @@ export default function Profile({ session }) {
   // const [username, setUsername] = useState(null);
   // const [avatarUrl, setAvatarUrl] = useState(null);
   // const toast = useToast();
-  const {
-    username,
-    setUsername,
-    // avatarUrl,
-    // setAvatarUrl,
-    updateProfile,
-    profileLoading,
-  } = useContext(ProfileContext);
+  // const {
+  // username,
+  // setUsername,
+  // avatarUrl,
+  // setAvatarUrl,
+  //   updateProfile,
+  //   profileLoading,
+  // } = useContext(ProfileContext);
 
   // async function getProfile() {
   //   try {
@@ -151,10 +151,10 @@ export default function Profile({ session }) {
           <Banner uid={session.user.id} />
           {/* uid={user!.id} */}
           <Info
-            username={username}
-            setUsername={setUsername}
-            updateProfile={updateProfile}
-            loading={profileLoading}
+          // username={username}
+          // setUsername={setUsername}
+          // updateProfile={updateProfile}
+          // loading={profileLoading}
           />
         </Flex>
         {/* Column Right */}

@@ -161,7 +161,7 @@ export default function DiveSites({ diveCentres }) {
                       key={centre.id}
                       id={centre.id}
                       image={
-                        centre.cover_photo || "/img/diving/dive_centre_bg.jpg"
+                        centre.coverPhotoUrl || "/img/diving/dive_centre_bg.jpg"
                       }
                       name={centre.name}
                       type="dive_centre"
@@ -179,11 +179,10 @@ export default function DiveSites({ diveCentres }) {
 
 export async function getStaticProps() {
   const { data: diveCentres } = await supabase
-    .from("dive_centres")
+    .from("dive_centre_view")
     .select(
       `
-      id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships,
-      cover_photo, city: cities (name)
+      id, name, description, address, coverPhotoUrl, city, country
     `
     )
     .order("name", { ascending: true });

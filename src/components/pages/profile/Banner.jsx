@@ -29,7 +29,7 @@ export default function Settings(props) {
   const [uploading, setUploading] = useState(false);
   const inputRef = useRef(null);
   const toast = useToast();
-  const { username, avatarUrl, updateProfile } = useContext(ProfileContext);
+  const { profile, setProfile, updateProfile } = useContext(ProfileContext);
 
   // async function downloadImage(path) {
   //   try {
@@ -47,15 +47,15 @@ export default function Settings(props) {
   //   }
   // }
 
-  const uploadAvatar = async (event) => {
+  const uploadAvatar = async (e) => {
     try {
       setUploading(true);
 
-      if (!event.target.files || event.target.files.length === 0) {
+      if (!e.target.files || e.target.files.length === 0) {
         throw new Error("You must select an image to upload.");
       }
 
-      const file = event.target.files[0];
+      const file = e.target.files[0];
       const fileExt = file.name.split(".").pop();
       const fileName = `${uid}.${fileExt}`;
       const filePath = `${fileName}`;
@@ -68,12 +68,11 @@ export default function Settings(props) {
       if (uploadError) {
         throw uploadError;
       }
-
-      // console.log("fileName", fileName);
-      // console.log("filePath", filePath);
-      // onUpload(filePath);
-      // setAvatarUrl(newAvatarUrl);
-      updateProfile(username, newAvatarUrl);
+      setProfile({
+        ...profile,
+        avatar_url: newAvatarUrl,
+      });
+      updateProfile();
     } catch (error) {
       toast({
         position: "top",
@@ -104,15 +103,16 @@ export default function Settings(props) {
     <Card mb="20px" align="center">
       <Image src="/img/nfts/NftBanner1.jpg" borderRadius="16px" />
       <Avatar
+        key={new Date().toUTCString}
         mx="auto"
-        src={avatarUrl}
+        src={profile.avatar_url}
         h="87px"
         w="87px"
         mt="-43px"
         mb="15px"
       />
       <Text fontSize="2xl" textColor={textColorPrimary} fontWeight="700">
-        {username}
+        {profile.username}
       </Text>
       <Flex align="center" mx="auto" px="15px">
         <Text
@@ -132,10 +132,10 @@ export default function Settings(props) {
           textColor={textColorPrimary}
           color={textColorPrimary}
           alignItems="center"
-          defaultValue="Administrator"
+          defaultValue="Dive Centre Owner"
         >
-          <option value="Administrator">Administrator</option>
-          <option value="Member">Member</option>
+          <option value="Dive Centre Owner">Dive Centre Owner</option>
+          <option value="Diver">Diver</option>
         </Select>
       </Flex>
       <Box width={150}>
@@ -145,12 +145,16 @@ export default function Settings(props) {
         <Button onClick={() => inputRef.current.click()}>
           {uploading ? "Uploading ..." : "Upload"}
         </Button>
+      </Box>
+      <Box>
         <input
           style={{
             visibility: "hidden",
             position: "absolute",
           }}
           type="file"
+          width={0}
+          name="avatarUrl"
           ref={inputRef}
           accept="image/*"
           onChange={uploadAvatar}

@@ -14,6 +14,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Flex,
+  Hide,
   Link,
   Text,
   useColorModeValue,
@@ -108,41 +109,43 @@ export default function NavbarDiving(props) {
         alignItems={{ xl: "center" }}
         mb={gap}
       >
-        <Box mb={{ sm: "8px", md: "0px" }}>
-          <Breadcrumb>
-            <BreadcrumbItem color={secondaryText} fontSize="sm" mb="5px">
-              <BreadcrumbLink href="#" color={secondaryText}>
-                Pages
-              </BreadcrumbLink>
-            </BreadcrumbItem>
+        <Hide below="md">
+          <Box mb={{ sm: "8px", md: "0px" }}>
+            <Breadcrumb>
+              <BreadcrumbItem color={secondaryText} fontSize="sm" mb="5px">
+                <BreadcrumbLink href="#" color={secondaryText}>
+                  Pages
+                </BreadcrumbLink>
+              </BreadcrumbItem>
 
-            <BreadcrumbItem color={secondaryText} fontSize="sm">
-              <BreadcrumbLink href="#" color={secondaryText}>
-                {brandText}
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-          {/* Here we create navbar brand, based on route name */}
-          <Link
-            color={mainText}
-            href="#"
-            bg="inherit"
-            borderRadius="inherit"
-            fontWeight="bold"
-            fontSize="34px"
-            _hover={{ color: { mainText } }}
-            _active={{
-              bg: "inherit",
-              transform: "none",
-              borderColor: "transparent",
-            }}
-            _focus={{
-              boxShadow: "none",
-            }}
-          >
-            {brandText}
-          </Link>
-        </Box>
+              <BreadcrumbItem color={secondaryText} fontSize="sm">
+                <BreadcrumbLink href="#" color={secondaryText}>
+                  {brandText}
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            </Breadcrumb>
+            {/* Here we create navbar brand, based on route name */}
+            <Link
+              color={mainText}
+              href="#"
+              bg="inherit"
+              borderRadius="inherit"
+              fontWeight="bold"
+              fontSize="34px"
+              _hover={{ color: { mainText } }}
+              _active={{
+                bg: "inherit",
+                transform: "none",
+                borderColor: "transparent",
+              }}
+              _focus={{
+                boxShadow: "none",
+              }}
+            >
+              {brandText}
+            </Link>
+          </Box>
+        </Hide>
         <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
           <NavbarDivingLinks
             onOpen={props.onOpen}

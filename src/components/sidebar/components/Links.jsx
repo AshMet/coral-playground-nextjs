@@ -19,13 +19,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-// import React from "react";
-// import { NavLink, useLocation } from "react-router-dom";
 import { FaCircle } from "react-icons/fa";
 
 import NavLink from "components/navLinks/NavLink";
-// chakra imports
-// Assets
 
 export function SidebarLinks(props) {
   //   Chakra color mode

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-plusplus */
 import {
@@ -12,34 +13,19 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
-import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
+import { supabase } from "../../../api/index";
 import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
 import TextField from "components/fields/TextField";
-// import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import DivingLayout from "layouts/DivingLayout";
 import * as gtag from "lib/data/gtag";
 
-export default function CreateDiveCentre() {
-  const initialState = {
-    name: "",
-    description: "",
-    address: "",
-    latitude: "",
-    longitude: "",
-    paymentMethods: [],
-    equipment: [],
-    memberships: [],
-    languages: [],
-    services: [],
-    cityId: "",
-  };
-
+export default function UpdateDiveCentre({ diveCentreData }) {
   const toast = useToast();
 
   const placeholderColor = "secondaryGray.600";
@@ -50,13 +36,12 @@ export default function CreateDiveCentre() {
     "whiteAlpha.100"
   );
   const router = useRouter();
-  const supabase = useSupabaseClient();
-  const user = useUser();
 
-  const [diveCentre, setDiveCentre] = useState(initialState);
+  const [diveCentre, setDiveCentre] = useState(diveCentreData);
   const [loading, setLoading] = useState(false);
 
   const {
+    id,
     name,
     description,
     address,
@@ -81,16 +66,19 @@ export default function CreateDiveCentre() {
     { value: "paypal", label: "Paypal" },
   ];
   const [paymentPickerItems] = useState(paymentOptions);
-  const [selectedPaymentItems, setSelectedPaymentItems] = useState([]);
+  const [selectedPaymentItems, setSelectedPaymentItems] = useState(
+    paymentPickerItems.filter((i) => paymentMethods?.includes(i.value))
+  );
   const handlePaymentItemsChange = (selectedItems) => {
     if (selectedItems) {
       setSelectedPaymentItems(selectedItems);
       setDiveCentre({
         ...diveCentre,
-        payment_methods: selectedPaymentItems?.map((item) => item.value),
+        paymentMethods: selectedPaymentItems?.map((item) => item.value),
       });
     }
   };
+
   // Equipment
   const equipmentOptions = [
     { value: "air tank", label: "Air Tank" },
@@ -102,7 +90,9 @@ export default function CreateDiveCentre() {
     { value: "snorkel", label: "Snorkel" },
   ];
   const [equipmentPickerItems] = useState(equipmentOptions);
-  const [selectedEquipmentItems, setSelectedEquipmentItems] = useState([]);
+  const [selectedEquipmentItems, setSelectedEquipmentItems] = useState(
+    equipmentOptions.filter((i) => equipment.includes(i.value))
+  );
   const handleEquipmentItemsChange = (selectedItems) => {
     if (selectedItems) {
       setSelectedEquipmentItems(selectedItems);
@@ -112,6 +102,7 @@ export default function CreateDiveCentre() {
       });
     }
   };
+
   // Languages
   const languagesOptions = [
     { value: "english", label: "English" },
@@ -126,7 +117,9 @@ export default function CreateDiveCentre() {
     { value: "chinese", label: "Chinese" },
   ];
   const [languagePickerItems] = useState(languagesOptions);
-  const [selectedLanguageItems, setSelectedLanguageItems] = useState([]);
+  const [selectedLanguageItems, setSelectedLanguageItems] = useState(
+    languagesOptions.filter((i) => languages.includes(i.value))
+  );
   const handleLanguageItemsChange = (selectedItems) => {
     if (selectedItems) {
       setSelectedLanguageItems(selectedItems);
@@ -136,13 +129,16 @@ export default function CreateDiveCentre() {
       });
     }
   };
+
   // Memberships
   const membershipOptions = [
     { value: "padi", label: "PADI" },
     { value: "ssi", label: "SSI" },
   ];
   const [membershipPickerItems] = useState(membershipOptions);
-  const [selectedMembershipItems, setSelectedMembershipItems] = useState([]);
+  const [selectedMembershipItems, setSelectedMembershipItems] = useState(
+    membershipOptions.filter((i) => memberships.includes(i.value))
+  );
   const handleMembershipItemsChange = (selectedItems) => {
     if (selectedItems) {
       setSelectedMembershipItems(selectedItems);
@@ -152,6 +148,7 @@ export default function CreateDiveCentre() {
       });
     }
   };
+
   // Services
   const servicesOptions = [
     { value: "air compressor", label: "Air Compressor" },
@@ -166,7 +163,9 @@ export default function CreateDiveCentre() {
     { value: "wifi", label: "Wifi" },
   ];
   const [servicePickerItems] = useState(servicesOptions);
-  const [selectedServiceItems, setSelectedServiceItems] = useState([]);
+  const [selectedServiceItems, setSelectedServiceItems] = useState(
+    servicesOptions.filter((i) => services.includes(i.value))
+  );
   const handleServiceItemsChange = (selectedItems) => {
     if (selectedItems) {
       setSelectedServiceItems(selectedItems);
@@ -177,11 +176,11 @@ export default function CreateDiveCentre() {
     }
   };
 
-  const createDiveCentre = async () => {
+  const updateDiveCentre = async () => {
     setLoading(true);
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("dive_centres")
-      .insert({
+      .update({
         name,
         description,
         address,
@@ -193,19 +192,13 @@ export default function CreateDiveCentre() {
         memberships,
         services,
         city_id: cityId,
-        owner_id: user.id,
       })
-      .select()
-      .single();
+      .eq("id", id);
     // Success Alert
     toast({
       position: "top",
       render: () => (
-        <AlertPopup
-          type="success"
-          text="Dive Centre Created!"
-          // subtext="View Shopping Cart to complete your order"
-        />
+        <AlertPopup type="success" text="Dive Centre Updated!" subtext={name} />
       ),
     });
     // Success Analytics Tag
@@ -213,7 +206,7 @@ export default function CreateDiveCentre() {
       action: "create-dive-centre-success",
       category: "button",
       label: "Dive Centre",
-      // value: newItem.title,
+      value: name,
     });
     // Alert & Analytics for failed load
     if (error) {
@@ -228,15 +221,15 @@ export default function CreateDiveCentre() {
         ),
       });
       gtag.event({
-        action: "update-profile-failed",
+        action: "update-dive-centre-failed",
         category: "button",
-        label: "Profile",
-        // value: newItem.title,
+        label: "Dive Centre",
+        value: name,
       });
     }
 
     setLoading(false);
-    router.push(`/diving/dive_centres/${data.id}`);
+    router.push(`/diving/dive_centres/${id}`);
   };
 
   return (
@@ -252,7 +245,6 @@ export default function CreateDiveCentre() {
               and book diving trips
             </Text>
           </Flex>
-          {/* <ImageUploader avatarUrl={avatarUrl} setAvatarUrl={setAvatarUrl} /> */}
           <SimpleGrid
             columns={{ sm: 1, md: 2 }}
             spacing={{ base: "20px", xl: "20px" }}
@@ -471,7 +463,7 @@ export default function CreateDiveCentre() {
                 maxh="44px"
                 placeholder="Select City"
                 borderColor={borderPrimary}
-                // value={cityId}
+                value={cityId}
                 onChange={handleChange}
               >
                 <option value="4">Dahab</option>
@@ -502,16 +494,34 @@ export default function CreateDiveCentre() {
           fontWeight="500"
           ms="auto"
           _hover={{ bgColor: "brand.300" }}
-          onClick={createDiveCentre}
+          onClick={updateDiveCentre}
           disabled={loading}
         >
-          {loading ? "Loading ..." : "Create Dive Centre"}
+          {loading ? "Loading ..." : "Update"}
         </Button>
       </Flex>
     </Box>
   );
 }
 
-CreateDiveCentre.getLayout = function getLayout(page) {
+export async function getServerSideProps(context) {
+  const { id } = context.query;
+  const { data: diveCentreData } = await supabase
+    .from("dive_centre_view")
+    .select(
+      `id, name, description, address, latitude, longitude, paymentMethods, equipment, services, languages, memberships,
+      coverPhotoUrl, city, cityId, country`
+    )
+    .match({ id })
+    .single();
+
+  return {
+    props: {
+      diveCentreData,
+    },
+  };
+}
+
+UpdateDiveCentre.getLayout = function getLayout(page) {
   return <DivingLayout>{page}</DivingLayout>;
 };

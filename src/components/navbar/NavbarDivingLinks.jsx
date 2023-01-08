@@ -47,7 +47,6 @@ function SignedOutMenuList() {
         <Avatar
           _hover={{ cursor: "pointer" }}
           color="white"
-          name="Adela Parkson"
           bg="#11047A"
           size="sm"
           w="40px"
@@ -136,7 +135,7 @@ function SignedInMenuList() {
   const supabase = useSupabaseClient();
   const user = useUser();
   const router = useRouter();
-  const { username, avatarUrl } = useContext(ProfileContext);
+  const { profile } = useContext(ProfileContext);
 
   return (
     <Menu>
@@ -146,7 +145,7 @@ function SignedInMenuList() {
           color="white"
           name={user.email}
           src={
-            avatarUrl ||
+            profile.avatar_url ||
             `https://avatars.dicebear.com/api/miniavs/${user.email}.svg`
           }
           size="sm"
@@ -177,7 +176,7 @@ function SignedInMenuList() {
           >
             {/* {user.attributes.accounts[0].substring(0, 7)} {` ...... `}
             {user.attributes.accounts[0].slice(-7)} */}
-            {username || user.email}
+            {profile.username || user.email}
           </Text>
         </Flex>
         <Flex flexDirection="column" p="10px">

@@ -14,12 +14,18 @@ import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import TripsSidebar from "components/sidebar/TripsSidebar";
 import DivingLayout from "layouts/DivingLayout";
 
-export default function DiveCentre({ diveCentre }) {
+export default function DiveCentre({ diveCentreData }) {
   const router = useRouter();
   const { id } = router.query;
 
   const [trips, setTrips] = useState([]);
+  const [diveCentre, setDiveCentre] = useState(true);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setDiveCentre(diveCentreData);
+    console.log("diveCentre", diveCentreData);
+  }, [diveCentreData]);
 
   async function fetchCentreTrips() {
     const { data } = await supabase
@@ -65,19 +71,16 @@ export default function DiveCentre({ diveCentre }) {
             me={{ lg: "20px" }}
             mb={{ base: "20px", lg: "0px" }}
           >
-            <ImageUploader
-              diveCentreId={diveCentre.id}
-              coverPhoto={diveCentre.cover_photo}
-            />
+            <ImageUploader diveCentre={diveCentre} />
             <CentreInfo
               name={diveCentre.name}
               description={diveCentre.description}
               address={diveCentre.address}
-              city={diveCentre.city.name}
-              country={diveCentre.country.countries.name}
+              city={diveCentre.city}
+              country={diveCentre.country}
               equipment={diveCentre.equipment}
               services={diveCentre.services}
-              payment_methods={diveCentre.payment_methods}
+              paymentMethods={diveCentre.paymentMethods}
               languages={diveCentre.languages}
               memberships={diveCentre.memberships}
             />
@@ -111,40 +114,57 @@ export default function DiveCentre({ diveCentre }) {
   );
 }
 
-export const getStaticPaths = async () => {
-  const { data: diveCentres } = await supabase
-    .from("dive_centres")
-    .select("id");
-
-  const paths = diveCentres.map(({ id }) => ({
-    params: {
-      id,
-    },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps = async ({ params: { id } }) => {
-  const { data: diveCentre } = await supabase
-    .from("dive_centres")
+export async function getServerSideProps(context) {
+  const { id } = context.query;
+  const { data: diveCentreData } = await supabase
+    .from("dive_centre_view")
     .select(
-      `id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships,
-      cover_photo, city: cities (name), country: cities (countries (name))`
+      `id, name, description, address, latitude, longitude, paymentMethods, equipment, services, languages, memberships,
+      coverPhotoUrl, city, country`
+      // `id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships, cover_photo, city: cities (name), country: cities (countries (name))`
     )
     .match({ id })
     .single();
 
   return {
     props: {
-      diveCentre,
+      diveCentreData,
     },
-    revalidate: 86400,
   };
-};
+}
+
+// export const getStaticPaths = async () => {
+//   const { data: diveCentres } = await supabase
+//     .from("dive_centres")
+//     .select("id");
+//   const paths = diveCentres.map(({ id }) => ({
+//     params: {
+//       id,
+//     },
+//   }));
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// };
+
+// export const getStaticProps = async ({ params: { id } }) => {
+//   const { data: diveCentre } = await supabase
+//     .from("dive_centres")
+//     .select(
+//       `id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships,
+//       cover_photo, city: cities (name), country: cities (countries (name))`
+//     )
+//     .match({ id })
+//     .single();
+
+//   return {
+//     props: {
+//       diveCentre,
+//     },
+//     revalidate: 86400,
+//   };
+// };
 
 DiveCentre.getLayout = function getLayout(page) {
   return <DivingLayout>{page}</DivingLayout>;
