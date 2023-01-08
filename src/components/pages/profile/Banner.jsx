@@ -105,14 +105,14 @@ export default function Settings(props) {
       <Avatar
         key={new Date().toUTCString}
         mx="auto"
-        src={profile.avatar_url}
+        src={profile?.avatar_url}
         h="87px"
         w="87px"
         mt="-43px"
         mb="15px"
       />
       <Text fontSize="2xl" textColor={textColorPrimary} fontWeight="700">
-        {profile.username}
+        {profile?.username}
       </Text>
       <Flex align="center" mx="auto" px="15px">
         <Text
