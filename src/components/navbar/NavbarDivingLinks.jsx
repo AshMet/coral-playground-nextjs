@@ -176,7 +176,7 @@ function SignedInMenuList() {
           >
             {/* {user.attributes.accounts[0].substring(0, 7)} {` ...... `}
             {user.attributes.accounts[0].slice(-7)} */}
-            {profile.username || user.email}
+            {profile?.username || user.email}
           </Text>
         </Flex>
         <Flex flexDirection="column" p="10px">
