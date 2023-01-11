@@ -17,8 +17,7 @@ import TextField from "components/fields/TextField";
 
 export default function Settings(props) {
   const {
-    defaultName,
-    setName,
+    name,
     setDuration,
     setDescription,
     setCheckIn,
@@ -30,7 +29,7 @@ export default function Settings(props) {
   const [price] = useState();
   const [minCert] = useState("open_water");
   const [status] = useState("active");
-  const [name] = useState();
+  // const [name] = useState();
   const [description] = useState();
   const [checkIn] = useState();
   const [duration] = useState();
@@ -57,9 +56,11 @@ export default function Settings(props) {
             mb="0px"
             id="name"
             label="Name"
-            value={name || defaultName}
+            value={name}
+            isRequired
+            isDisabled
             placeholder="Defaults to names of dive sites"
-            onChange={(e) => setName(e.target.value)}
+            // onChange={(e) => setName(e.target.value)}
           />
           <InputField
             mb="0px"

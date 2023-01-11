@@ -145,7 +145,7 @@ function SignedInMenuList() {
           color="white"
           name={user.email}
           src={
-            profile.avatar_url ||
+            profile.avatarUrl ||
             `https://avatars.dicebear.com/api/miniavs/${user.email}.svg`
           }
           size="sm"

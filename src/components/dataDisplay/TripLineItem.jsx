@@ -34,8 +34,8 @@ export default function TripLineItem(props) {
 
   const siteNames =
     trip.name || trip.dive_sites?.map((site) => site.name).join(" + ");
-  const diveDate = trip.fixed_start_date;
-  const diveTime = trip.fixed_start_time;
+  const diveDate = trip.start_date;
+  const diveTime = trip.start_time;
   const selectedDate = diveDate ? new Date(diveDate) : new Date(value);
 
   // function setDateTime() {

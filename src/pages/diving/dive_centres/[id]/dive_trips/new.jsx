@@ -2,12 +2,11 @@
 /* eslint-disable no-plusplus */
 import { Box, Button, Flex, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import DiveSelection from "components/pages/bookings/DiveSelection";
 import TripDetails from "components/pages/diveTrips/TripDetails";
-import { ProfileContext } from "contexts/ProfileContext";
 import DivingLayout from "layouts/DivingLayout";
 import { supabase } from "pages/api/index";
 
@@ -23,7 +22,6 @@ export default function CreateCentreTrip() {
   const [diveTime, setDiveTime] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const toast = useToast();
-  const { ownerDiveCentre } = useContext(ProfileContext);
 
   const getStripePriceId = (n) => {
     switch (n) {
@@ -54,45 +52,60 @@ export default function CreateCentreTrip() {
   const router = useRouter();
   const {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    query: { diveCentreId },
+    query: { id: diveCentreId },
   } = router;
 
   async function saveDiveTrip() {
-    const { error: diveTripError } = await supabase
+    const { data, error: diveTripError } = await supabase
       .from("dive_trips")
-      .insert([
-        {
-          name,
-          description,
-          check_in: checkIn,
-          fixed_start_date: selectedDate,
-          fixed_start_time: "01:02:03",
-          duration,
-          min_cert: minCert,
-          status,
-          price,
-          stripe_price_id: getStripePriceId(selectedSites.length),
-          pay_now: getPayNow(selectedSites.length),
-          dive_centre_id: diveCentreId,
-        },
-      ])
+      .insert({
+        name,
+        description,
+        check_in: checkIn,
+        start_date: selectedDate,
+        start_time: "01:02:03",
+        duration,
+        min_cert: minCert,
+        status,
+        price,
+        stripe_price_id: getStripePriceId(selectedSites.length),
+        pay_now: getPayNow(selectedSites.length),
+        dive_centre_id: diveCentreId,
+      })
       .select()
       .single();
+
+    // Handle Trip Data
+    const insertTripSites = selectedSites.map((site) => ({
+      dive_site_id: site.id,
+      dive_trip_id: data.id,
+    }));
+    // Format insert Data as array only for multiple items
+    // const { data: tripSites, error: tripLSitesError } =
+    await supabase
+      .from("trip_sites")
+      .insert(
+        insertTripSites.length === 1 ? insertTripSites[0] : insertTripSites
+      )
+      .select();
+
+    // console.log("new trip", data);
 
     toast({
       position: "top",
       render: () => (
         <AlertPopup
-          type="info"
+          type="success"
           text="Dive Trip Saved"
-          // subtext={diveTrip.name} // Not Working
+          subtext={data} // Not Working
         />
       ),
     });
 
-    router.push(`/diving/dive_centres/${ownerDiveCentre.id}`);
+    router.push(`/diving/dive_centres/${diveCentreId}`);
 
     if (diveTripError) {
+      // console.log("new trip error", diveTripError);
       toast({
         position: "top",
         render: () => (
@@ -110,6 +123,8 @@ export default function CreateCentreTrip() {
     <Box p="0px" mx="auto" mt="100px">
       {/* Row 1: Map  & Calendar */}
       <DiveSelection
+        name={name}
+        setName={setName}
         selectedSites={selectedSites}
         setSelectedSites={setSelectedSites}
         diveTime={diveTime}
@@ -121,11 +136,10 @@ export default function CreateCentreTrip() {
       {/* Row 2: List of Dives */}
       <TripDetails
         mb="20px"
-        defaultName={selectedSites?.map((site) => site.name).join(" + ")}
+        name={name}
         setPrice={setPrice}
         setStatus={setStatus}
         setMinCert={setMinCert}
-        setName={setName}
         setDescription={setDescription}
         setCheckIn={setCheckIn}
         setDuration={setDuration}

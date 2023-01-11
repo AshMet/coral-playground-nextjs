@@ -31,7 +31,7 @@ export default function DiveSitePage({ diveSite }) {
           id, 
           dive_trips: trip_sites!dive_site_id(
             dive_trip: dive_trip_id (id, name, description, notes, min_cert, status, price, pay_now,
-              stripe_price_id, fixed_start_date, fixed_start_time, check_in, 
+              stripe_price_id, start_date, start_time, check_in, 
               dive_sites: trip_sites!dive_trip_id(
                 dive_site:dive_site_id(id, name, latitude, longitude)),
               dive_centre: dive_centres (id, name, latitude, longitude))

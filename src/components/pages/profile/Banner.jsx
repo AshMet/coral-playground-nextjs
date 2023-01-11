@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-// Chakra imports
 import {
   Avatar,
-  Box,
   Button,
   Flex,
   Image,
@@ -43,7 +41,6 @@ export default function Settings(props) {
   //     const url = URL.createObjectURL(data);
   //     setAvatarUrl(url);
   //   } catch (error) {
-  //     // console.log("Error downloading image: ", error);
   //   }
   // }
 
@@ -68,9 +65,9 @@ export default function Settings(props) {
       if (uploadError) {
         throw uploadError;
       }
-      setProfile({
+      await setProfile({
         ...profile,
-        avatar_url: newAvatarUrl,
+        avatarUrl: newAvatarUrl,
       });
       updateProfile();
     } catch (error) {
@@ -96,6 +93,10 @@ export default function Settings(props) {
   };
 
   // useEffect(() => {
+  //   updateProfile();
+  // }, [profile]);
+
+  // useEffect(() => {
   //   if (avatarUrl) downloadImage(avatarUrl);
   // }, [avatarUrl]);
 
@@ -105,7 +106,7 @@ export default function Settings(props) {
       <Avatar
         key={new Date().toUTCString}
         mx="auto"
-        src={profile?.avatar_url}
+        src={profile?.avatarUrl}
         h="87px"
         w="87px"
         mt="-43px"
@@ -138,29 +139,27 @@ export default function Settings(props) {
           <option value="Diver">Diver</option>
         </Select>
       </Flex>
-      <Box width={150}>
+      <Flex width={150} direction="column" mx="auto">
         {/* <label className="button primary block" htmlFor="single">
           {uploading ? "Uploading ..." : "Upload"}
         </label> */}
         <Button onClick={() => inputRef.current.click()}>
-          {uploading ? "Uploading ..." : "Upload"}
+          {uploading ? "Uploading ..." : "Upload Avatar"}
         </Button>
-      </Box>
-      <Box>
         <input
+          name="avatarUrl"
           style={{
             visibility: "hidden",
             position: "absolute",
           }}
           type="file"
           width={0}
-          name="avatarUrl"
           ref={inputRef}
           accept="image/*"
           onChange={uploadAvatar}
           disabled={uploading}
         />
-      </Box>
+      </Flex>
     </Card>
   );
 }

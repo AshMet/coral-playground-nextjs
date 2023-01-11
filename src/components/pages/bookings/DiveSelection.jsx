@@ -48,7 +48,7 @@ function createKey(site) {
 }
 
 export default function DiveSelection(props) {
-  const { selectedSites, setSelectedSites } = props;
+  const { name, setName, selectedSites, setSelectedSites } = props;
 
   const [mapLocation, setMapLocation] = useState("Select Location");
   const [selectedDate, setSelectedDate] = useState();
@@ -73,6 +73,11 @@ export default function DiveSelection(props) {
     fetchSites();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    setName(selectedSites?.map((site) => site.name).join(" + "));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSites]);
 
   // Add items to cart
   function addSite(newItem) {
@@ -177,11 +182,7 @@ export default function DiveSelection(props) {
               <TimelineItem
                 width="100%"
                 mr="20px"
-                title={
-                  selectedSites
-                    ? selectedSites?.map((site) => site.name).join(" + ")
-                    : "Select Dive Site"
-                }
+                title={selectedSites ? name : "Select Dive Site"}
                 day={selectedDate?.toLocaleDateString("en-US", {
                   day: "numeric",
                 })}
@@ -196,6 +197,7 @@ export default function DiveSelection(props) {
                 size="sm"
                 bgColor="brand.300"
                 _hover={{ bg: "brand.400" }}
+                onClick={() => setSelectedSites([])}
               >
                 Clear Sites
               </Button>

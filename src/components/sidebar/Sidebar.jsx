@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable react/forbid-prop-types */
@@ -26,8 +27,6 @@ import { renderThumb, renderTrack, renderView } from "../scrollbar/Scrollbar";
 
 import Content from "./components/Content";
 
-// FUNCTIONS
-
 function Sidebar(props) {
   const { routes } = props;
 
@@ -42,9 +41,6 @@ function Sidebar(props) {
   const sidebarRadius = "30px";
   const sidebarMargins = "0px";
 
-  // let isWindows = navigator.platform.startsWith("Win");
-
-  // SIDEBAR
   return (
     <Box display={{ sm: "none", xl: "block" }} position="fixed" minH="100%">
       <Box
@@ -86,8 +82,6 @@ export function SidebarResponsive(props) {
   const btnRef = React.useRef();
 
   const { routes } = props;
-  // let isWindows = navigator.platform.startsWith("Win");
-  //  BRAND
 
   return (
     <Flex display={{ sm: "flex", xl: "none" }} alignItems="center">
@@ -142,7 +136,6 @@ export function SidebarResponsive(props) {
     </Flex>
   );
 }
-// PROPS
 
 Sidebar.propTypes = {
   logoText: PropTypes.string,

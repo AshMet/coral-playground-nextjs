@@ -59,7 +59,7 @@ export default function Info() {
             name="username"
             label="Username"
             placeholder="@username"
-            value={profile?.username}
+            value={profile?.username || ""}
             onChange={handleProfileChange}
           />
           <InputField
@@ -109,7 +109,7 @@ export default function Info() {
           </FormLabel>
           <Select
             fontSize="sm"
-            name="certLevel"
+            name="divingCert"
             variant="main"
             h="44px"
             maxh="44px"
@@ -119,7 +119,7 @@ export default function Info() {
               "whiteAlpha.100"
             )}
             // defaultValue={2}
-            value={profile?.certLevel}
+            value={profile?.divingCert}
             onChange={handleProfileChange}
           >
             <option value="Open Water">Open Water</option>

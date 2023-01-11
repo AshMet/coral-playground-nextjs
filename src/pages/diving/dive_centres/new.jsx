@@ -87,7 +87,7 @@ export default function CreateDiveCentre() {
       setSelectedPaymentItems(selectedItems);
       setDiveCentre({
         ...diveCentre,
-        payment_methods: selectedPaymentItems?.map((item) => item.value),
+        paymentMethods: selectedPaymentItems?.map((item) => item.value),
       });
     }
   };

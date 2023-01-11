@@ -22,6 +22,7 @@ export const ProfileProvider = ({ children }) => {
   const [ownerDiveCentre, setOwnerDiveCentre] = useState(null);
   const [profile, setProfile] = useState("");
   const toast = useToast();
+  const { username, avatarUrl, firstName, lastName, divingCert, bio } = profile;
 
   async function getOwnerDiveCentre() {
     try {
@@ -55,7 +56,7 @@ export const ProfileProvider = ({ children }) => {
     const getProfile = async () => {
       setProfileLoading(true);
       const { data } = await supabase
-        .from("profiles")
+        .from("profile_view")
         .select("*")
         .eq("id", user.id)
         .single();
@@ -66,7 +67,6 @@ export const ProfileProvider = ({ children }) => {
     getOwnerDiveCentre();
   }, [user]);
 
-  const { username, avatarUrl, firstName, lastName, certLevel, bio } = profile;
   const updateProfile = async () => {
     // Start Spinner
     setProfileLoading(true);
@@ -79,7 +79,7 @@ export const ProfileProvider = ({ children }) => {
       avatar_url: avatarUrl,
       first_name: firstName,
       last_name: lastName,
-      certification: certLevel,
+      certification: divingCert,
       // avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarUrl}`,
       updated_at: new Date().toISOString(),
     });
