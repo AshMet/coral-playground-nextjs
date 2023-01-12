@@ -3854,6 +3854,11 @@ clone@^1.0.2:
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==
 
+clsx@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
+  integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
+
 color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
@@ -7194,6 +7199,16 @@ react-clock@^3.1.0:
     merge-class-names "^1.1.1"
     prop-types "^15.6.0"
 
+react-clock@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-clock/-/react-clock-4.0.0.tgz#29d087159154d789c6c93048ae47534b7a7b3fbb"
+  integrity sha512-CBevN5B40TDUegSWzXk6bSwXhYzyerL9JGTme8GMAY0zO4FiEhVTGN1uzgC0rn/oSAMJw3M5wSf/OJpp9vcN2Q==
+  dependencies:
+    "@wojtekmaj/date-utils" "^1.0.0"
+    clsx "^1.2.1"
+    get-user-locale "^1.4.0"
+    prop-types "^15.6.0"
+
 react-color@^2.19.3:
   version "2.19.3"
   resolved "https://registry.yarnpkg.com/react-color/-/react-color-2.19.3.tgz#ec6c6b4568312a3c6a18420ab0472e146aa5683d"
@@ -7381,6 +7396,20 @@ react-table@^7.7.0:
   version "7.8.0"
   resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.8.0.tgz#07858c01c1718c09f7f1aed7034fcfd7bda907d2"
   integrity sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==
+
+react-time-picker@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-time-picker/-/react-time-picker-5.1.0.tgz#9295ff90b7dcd187dd7516775568ad184870f6bc"
+  integrity sha512-NGpy5FM8WYdgCKXE/a85mhf0TunOk+N8ZG6rXBahD0mXeQZ/aBM+iVuKN4ell+QFH8/7F8dhT200ZKatBIphnA==
+  dependencies:
+    "@wojtekmaj/date-utils" "^1.0.0"
+    clsx "^1.2.1"
+    get-user-locale "^1.2.0"
+    make-event-props "^1.1.0"
+    prop-types "^15.6.0"
+    react-clock "^4.0.0"
+    react-fit "^1.4.0"
+    update-input-width "^1.2.2"
 
 react-universal-interface@^0.6.2:
   version "0.6.2"

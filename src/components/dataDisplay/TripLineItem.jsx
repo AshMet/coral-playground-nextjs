@@ -76,7 +76,7 @@ export default function TripLineItem(props) {
 
         <Flex align="center">
           <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
-          <Text color="brand.400" fontSize="sm" fontWeight="500">
+          <Text color={textColor} fontSize="sm" fontWeight="500">
             {diveDate ? (
               new Date(diveDate).toLocaleDateString("en-US", {
                 year: "numeric",

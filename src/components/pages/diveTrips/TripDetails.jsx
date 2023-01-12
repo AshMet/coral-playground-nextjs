@@ -8,8 +8,8 @@ import {
   FormLabel,
   Select,
   useColorModeValue,
+  Switch,
 } from "@chakra-ui/react";
-import { useState } from "react";
 
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
@@ -18,24 +18,25 @@ import TextField from "components/fields/TextField";
 export default function Settings(props) {
   const {
     name,
+    price,
+    // status,
+    minCert,
+    description,
+    checkIn,
+    duration,
+    visible,
+    setVisible,
     setDuration,
     setDescription,
     setCheckIn,
     setPrice,
     setMinCert,
-    setStatus,
+    // setStatus,
   } = props;
 
-  const [price] = useState();
-  const [minCert] = useState("open_water");
-  const [status] = useState("active");
-  // const [name] = useState();
-  const [description] = useState();
-  const [checkIn] = useState();
-  const [duration] = useState();
-  // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
+  const borderColor = useColorModeValue("secondaryGray.100", "whiteAlpha.100");
 
   return (
     <FormControl>
@@ -82,10 +83,10 @@ export default function Settings(props) {
             <Flex direction="column" mb="20px">
               <FormLabel
                 ms="10px"
-                htmlFor="checkIn"
+                htmlFor="minCert"
                 fontSize="sm"
-                // color={textColor}
                 fontWeight="bold"
+                _placeholder={{ color: textColorSecondary }}
                 _hover={{ cursor: "pointer" }}
               >
                 Check In
@@ -96,14 +97,16 @@ export default function Settings(props) {
                 variant="main"
                 h="44px"
                 maxh="44px"
-                placeholder="How long before the dive should the user arrive?"
-                defaultValue="open_water"
+                placeholder="Select..."
+                borderColor={borderColor}
+                // placeholder="How long before the dive should the user arrive?"
                 value={checkIn}
                 onChange={(e) => setCheckIn(e.target.value)}
               >
-                <option value="open_water">30 minutes before</option>
-                <option value="advanced">1 hour before</option>
-                <option value="dive_master">2 hours before</option>
+                <option value="30_minutes">30 minutes before</option>
+                <option value="1_hour">1 hour before</option>
+                <option value="1.5_hours">1.5 hours before</option>
+                <option value="2_hours">2 hours before</option>
               </Select>
             </Flex>
           </Flex>
@@ -113,8 +116,8 @@ export default function Settings(props) {
                 ms="10px"
                 htmlFor="minCert"
                 fontSize="sm"
-                // color={textColor}
                 fontWeight="bold"
+                _placeholder={{ color: textColorSecondary }}
                 _hover={{ cursor: "pointer" }}
               >
                 Minimum Certification Level
@@ -125,7 +128,8 @@ export default function Settings(props) {
                 variant="main"
                 h="44px"
                 maxh="44px"
-                defaultValue="open_water"
+                placeholder="Select..."
+                borderColor={borderColor}
                 value={minCert}
                 onChange={(e) => setMinCert(e.target.value)}
               >
@@ -134,16 +138,16 @@ export default function Settings(props) {
                 <option value="dive_master">Dive Master</option>
               </Select>
             </Flex>
-            <Flex direction="column">
+            {/* <Flex direction="column">
               <FormLabel
                 ms="10px"
-                htmlFor="status"
+                htmlFor="minCert"
                 fontSize="sm"
-                // color={textColor}
                 fontWeight="bold"
+                _placeholder={{ color: textColorSecondary }}
                 _hover={{ cursor: "pointer" }}
               >
-                Active?
+                Status
               </FormLabel>
               <Select
                 fontSize="sm"
@@ -151,13 +155,35 @@ export default function Settings(props) {
                 variant="main"
                 h="44px"
                 maxh="44px"
+                placeholder="Select..."
+                borderColor={borderColor}
                 value={status}
-                defaultValue="active"
                 onChange={(e) => setStatus(e.target.value)}
               >
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
               </Select>
+            </Flex> */}
+            <Flex>
+              <Switch
+                colorScheme="teal"
+                value={visible}
+                defaultChecked
+                onChange={() => setVisible(!visible)}
+                id="visible"
+              />
+              <FormLabel
+                ms="10px"
+                htmlFor="visible"
+                fontSize="sm"
+                fontWeight="bold"
+                _placeholder={{ color: textColorSecondary }}
+                _hover={{ cursor: "pointer" }}
+              >
+                {visible
+                  ? "Active: Publicly visible on your dive centre page"
+                  : "Inactive: Trip is hidden from customers"}
+              </FormLabel>
             </Flex>
           </Flex>
           <TextField

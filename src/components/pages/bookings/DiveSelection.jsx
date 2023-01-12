@@ -48,11 +48,18 @@ function createKey(site) {
 }
 
 export default function DiveSelection(props) {
-  const { name, setName, selectedSites, setSelectedSites } = props;
+  const {
+    name,
+    setName,
+    selectedSites,
+    setSelectedSites,
+    diveDate,
+    setDiveDate,
+    diveTime,
+    setDiveTime,
+  } = props;
 
   const [mapLocation, setMapLocation] = useState("Select Location");
-  const [selectedDate, setSelectedDate] = useState();
-  const [diveTime, setDiveTime] = useState();
   const [diveSites, setDiveSites] = useState();
   const [loading, setLoading] = useState();
   const [zoom, setZoom] = useState(5);
@@ -183,12 +190,16 @@ export default function DiveSelection(props) {
                 width="100%"
                 mr="20px"
                 title={selectedSites ? name : "Select Dive Site"}
-                day={selectedDate?.toLocaleDateString("en-US", {
+                day={diveDate?.toLocaleDateString("en-US", {
                   day: "numeric",
                 })}
-                weekday={selectedDate?.toLocaleDateString("en-US", {
-                  month: "short",
-                })}
+                weekday={
+                  diveDate
+                    ? diveDate.toLocaleDateString("en-US", {
+                        month: "short",
+                      })
+                    : "No Date Selected"
+                }
                 hours={diveTime}
                 mb="20px"
               />
@@ -197,7 +208,10 @@ export default function DiveSelection(props) {
                 size="sm"
                 bgColor="brand.300"
                 _hover={{ bg: "brand.400" }}
-                onClick={() => setSelectedSites([])}
+                onClick={() => {
+                  setSelectedSites([]);
+                  setDiveDate();
+                }}
               >
                 Clear Sites
               </Button>
@@ -299,8 +313,10 @@ export default function DiveSelection(props) {
               <MiniCalendar
                 // gridArea={{ md: "1 / 1 / 2 / 2;", lg: "1 / 1 / 2 / 2" }}
                 selectRange={false}
-                setSelectedDate={setSelectedDate}
+                diveDate={diveDate}
+                setDiveDate={setDiveDate}
                 setDiveTime={setDiveTime}
+                diveTime={diveTime}
               />
             </Flex>
           </Flex>

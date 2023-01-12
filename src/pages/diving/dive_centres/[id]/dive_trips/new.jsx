@@ -15,12 +15,13 @@ export default function CreateCentreTrip() {
   const [price, setPrice] = useState();
   const [name, setName] = useState();
   const [description, setDescription] = useState();
-  const [checkIn, setCheckIn] = useState();
+  const [checkIn, setCheckIn] = useState("1_hour");
   const [duration, setDuration] = useState();
-  const [minCert, setMinCert] = useState();
-  const [status, setStatus] = useState(false);
-  const [diveTime, setDiveTime] = useState();
-  const [selectedDate, setSelectedDate] = useState();
+  const [minCert, setMinCert] = useState("open_water");
+  const [status, setStatus] = useState("active");
+  const [visible, setVisible] = useState(true);
+  const [diveTime, setDiveTime] = useState("07:00");
+  const [diveDate, setDiveDate] = useState();
   const toast = useToast();
 
   const getStripePriceId = (n) => {
@@ -58,20 +59,23 @@ export default function CreateCentreTrip() {
   async function saveDiveTrip() {
     const { data, error: diveTripError } = await supabase
       .from("dive_trips")
-      .insert({
-        name,
-        description,
-        check_in: checkIn,
-        start_date: selectedDate,
-        start_time: "01:02:03",
-        duration,
-        min_cert: minCert,
-        status,
-        price,
-        stripe_price_id: getStripePriceId(selectedSites.length),
-        pay_now: getPayNow(selectedSites.length),
-        dive_centre_id: diveCentreId,
-      })
+      .insert([
+        {
+          name,
+          description,
+          check_in: checkIn,
+          start_date: diveDate,
+          start_time: diveTime,
+          duration,
+          min_cert: minCert,
+          status,
+          visible,
+          price,
+          stripe_price_id: getStripePriceId(selectedSites.length),
+          pay_now: getPayNow(selectedSites.length),
+          dive_centre_id: diveCentreId,
+        },
+      ])
       .select()
       .single();
 
@@ -97,7 +101,7 @@ export default function CreateCentreTrip() {
         <AlertPopup
           type="success"
           text="Dive Trip Saved"
-          subtext={data} // Not Working
+          // subtext={data} // Not Working
         />
       ),
     });
@@ -129,14 +133,22 @@ export default function CreateCentreTrip() {
         setSelectedSites={setSelectedSites}
         diveTime={diveTime}
         setDiveTime={setDiveTime}
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
+        diveDate={diveDate}
+        setDiveDate={setDiveDate}
       />
 
       {/* Row 2: List of Dives */}
       <TripDetails
         mb="20px"
         name={name}
+        price={price}
+        status={status}
+        minCert={minCert}
+        description={description}
+        checkIn={checkIn}
+        duration={duration}
+        visible={visible}
+        setVisible={setVisible}
         setPrice={setPrice}
         setStatus={setStatus}
         setMinCert={setMinCert}
