@@ -16,10 +16,12 @@ import {
   Text,
   // useColorMode,
   useColorModeValue,
+  Tooltip,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { HiOutlineUserCircle } from "react-icons/hi";
 import { IoLogoInstagram, IoMenuOutline } from "react-icons/io5";
 import { MdChevronRight } from "react-icons/md";
 
@@ -130,18 +132,6 @@ export default function LandingNavbar(props) {
         <Flex ms="auto">
           <Link
             display={{ base: "none", lg: "block" }}
-            href="/diving/home"
-            color={textColor}
-            fontSize="md"
-            fontWeight="600"
-            me="30px"
-            my="auto"
-            _hover={{ color: hoverColor, cursor: "pointer" }}
-          >
-            Home
-          </Link>
-          <Link
-            display={{ base: "none", lg: "block" }}
             href="/diving/map"
             color={textColor}
             fontSize="md"
@@ -193,27 +183,52 @@ export default function LandingNavbar(props) {
             bg={textColor}
             display={{ base: "none", lg: "block" }}
           />
-          <Link
-            me="10px"
-            my="auto"
-            href="https://instagram.com/coralplayground/"
-          >
-            <Button
-              variant="no-hover"
-              h="max-content"
-              w="max-content"
-              bg="transparent"
+          <Tooltip label="Sign Up / Login">
+            <Link my="auto" href="/auth/login">
+              <Button
+                variant="no-hover"
+                h="max-content"
+                w="max-content"
+                bg="transparent"
+                my="auto"
+              >
+                <Icon
+                  as={HiOutlineUserCircle}
+                  color={textColor}
+                  w="22px"
+                  h="22px"
+                />
+              </Button>
+            </Link>
+          </Tooltip>
+          <Tooltip label="Follow us on Instagram">
+            <Link
+              me="10px"
               my="auto"
-              // onClick={gtag.event({
-              //   action: "follow-instagram",
-              //   category: "button",
-              //   label: "Follow us on Instagram",
-              //   // value: ,
-              // })}
+              href="https://instagram.com/coralplayground/"
             >
-              <Icon as={IoLogoInstagram} color={textColor} w="18px" h="18px" />
-            </Button>
-          </Link>
+              <Button
+                variant="no-hover"
+                h="max-content"
+                w="max-content"
+                bg="transparent"
+                my="auto"
+                // onClick={gtag.event({
+                //   action: "follow-instagram",
+                //   category: "button",
+                //   label: "Follow us on Instagram",
+                //   // value: ,
+                // })}
+              >
+                <Icon
+                  as={IoLogoInstagram}
+                  color={textColor}
+                  w="18px"
+                  h="18px"
+                />
+              </Button>
+            </Link>
+          </Tooltip>
           <Menu>
             <MenuButton
               display={{ base: "block", lg: "none" }}
@@ -244,24 +259,6 @@ export default function LandingNavbar(props) {
               border="none"
             >
               <Flex flexDirection="column" p="10px">
-                <MenuItem
-                  _hover={{ bg: "none" }}
-                  _focus={{ bg: "none" }}
-                  borderRadius="8px"
-                  px="14px"
-                >
-                  <Link
-                    href="/diving/home"
-                    color={menuTextColor}
-                    fontSize="md"
-                    fontWeight="500"
-                    me="30px"
-                    my="auto"
-                    _hover={{ color: hoverColor, cursor: "pointer" }}
-                  >
-                    Home
-                  </Link>
-                </MenuItem>
                 <MenuItem
                   _hover={{ bg: "none" }}
                   _focus={{ bg: "none" }}

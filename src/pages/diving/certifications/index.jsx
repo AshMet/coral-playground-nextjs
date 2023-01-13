@@ -39,13 +39,16 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  Icon,
 } from "@chakra-ui/react";
 // Custom components
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
+import Calendar from "react-calendar";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 import { supabase } from "../../api";
-import MiniCalendar from "components/calendar/MiniCalendar";
+// import MiniCalendar from "components/calendar/MiniCalendar";
 import Card from "components/card/Card";
 // import Schedule from "views/admin/main/account/courses/components/Schedule";
 import Course from "components/card/Course";
@@ -60,8 +63,8 @@ export default function Courses({ certifications }) {
   const [price, setPrice] = useState();
   const [priceId, setPriceId] = useState();
   const [courseName, setCourseName] = useState();
-  const [selectedDate, setSelectedDate] = useState();
-  const [diveTime, setDiveTime] = useState();
+  const [diveDate, setDiveDate] = useState(new Date());
+  const [diveTime] = useState("07:00:00");
   const [courses, setCourses] = useState();
   const [payNow, setPayNow] = useState();
 
@@ -289,20 +292,31 @@ export default function Courses({ certifications }) {
                 cart for checkout
               </Text>
             </Flex>
-            <MiniCalendar
+            <Calendar
+              onChange={setDiveDate}
+              value={diveDate}
+              // selectRange={selectRange}
+              view="month"
+              tileContent={<Text color="brand.500" />}
+              prevLabel={<Icon as={MdChevronLeft} w="24px" h="24px" mt="4px" />}
+              nextLabel={
+                <Icon as={MdChevronRight} w="24px" h="24px" mt="4px" />
+              }
+            />
+            {/* <MiniCalendar
               gridArea={{ md: "1 / 1 / 2 / 2;", lg: "1 / 1 / 2 / 2" }}
               selectRange={false}
               mb="20px"
               setSelectedDate={setSelectedDate}
               setDiveTime={setDiveTime}
-            />
+            /> */}
             <BookingDetails
               courseName={courseName}
               courseId={courseId}
               price={price}
               priceId={priceId}
-              setSelectedDate={setSelectedDate}
-              diveDate={selectedDate}
+              // setSelectedDate={setSelectedDate}
+              diveDate={diveDate}
               diveTime={diveTime}
               payNow={payNow}
               gridArea={{ md: "1 / 2 / 2 / 3", lg: "2 / 1 / 3 / 2" }}

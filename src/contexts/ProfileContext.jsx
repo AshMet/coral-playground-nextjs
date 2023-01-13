@@ -238,10 +238,6 @@ export const ProfileProvider = ({ children }) => {
   return (
     <ProfileContext.Provider
       value={{
-        // username,
-        // setUsername,
-        // avatarUrl,
-        // setAvatarUrl,
         profile,
         setProfile,
         updateProfile,

@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
+import { BsExclamationCircle } from "react-icons/bs";
 import { IoMdTrash } from "react-icons/io";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
@@ -31,7 +32,6 @@ function CartList(props) {
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const purpleColor = useColorModeValue("purple.800", "purple.300");
 
   return (
     <Card {...rest}>
@@ -62,9 +62,19 @@ function CartList(props) {
           />
         ))
       ) : (
-        <Text fontSize="md" fontWeight="500" color={purpleColor} my="30px">
-          No dives selected. Please add at least one dive to continue
-        </Text>
+        <Flex align="center">
+          <Icon
+            color="brand.100"
+            me="8px"
+            as={BsExclamationCircle}
+            w="20px"
+            h="20px"
+          />
+          <Text color="brand.100" fontSize="lg" me="6px" fontWeight="500">
+            No dives selected. <br /> Please add at least one dive or course to
+            continue
+          </Text>
+        </Flex>
       )}
     </Card>
   );

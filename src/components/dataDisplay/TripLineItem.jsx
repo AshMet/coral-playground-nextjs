@@ -76,27 +76,24 @@ export default function TripLineItem(props) {
 
         <Flex align="center">
           <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
-          <Text color={textColor} fontSize="sm" fontWeight="500">
-            {diveDate ? (
-              new Date(diveDate).toLocaleDateString("en-US", {
+          {diveDate ? (
+            <Text color={textColor} fontSize="sm" fontWeight="500">
+              {new Date(diveDate).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "short",
                 day: "numeric",
-              })
-            ) : (
-              <Tooltip label="Select Date before adding to cart">
-                <Flex align="center">
-                  <DatePicker onChange={onChange} value={value} />
-                </Flex>
-              </Tooltip>
-            )}
-            {`@ ${diveTime?.split(":")[0]}:${diveTime?.split(":")[1]}`}
-            {/* {diveTime &&
-              ` @ ${new Date(diveTime).toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}`} */}
-          </Text>
+              })}
+              <Text as="span" ml="5px">{`@ ${diveTime?.split(":")[0]}:${
+                diveTime?.split(":")[1]
+              }`}</Text>
+            </Text>
+          ) : (
+            <Tooltip label="Select Date before adding to cart">
+              <Flex align="center">
+                <DatePicker onChange={onChange} value={value} />
+              </Flex>
+            </Tooltip>
+          )}
         </Flex>
       </Flex>
 

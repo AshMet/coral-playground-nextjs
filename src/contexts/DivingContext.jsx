@@ -132,7 +132,7 @@ export const DivingProvider = ({ children }) => {
     toast({
       position: "top",
       render: () => (
-        <AlertPopup type="success" text="Dive Removed" subtext={name} />
+        <AlertPopup type="success" text="Item Removed" subtext={name} />
       ),
     });
   }

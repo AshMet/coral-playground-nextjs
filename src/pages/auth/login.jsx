@@ -146,29 +146,30 @@ function SignIn() {
           title="Sign In"
           description="Log in to start enjoying all the features of Coral Playground"
         />
-        <CenteredAuth
-          image="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
-          cardTop={{ base: "140px", md: "14vh" }}
-          cardBottom={{ base: "50px", lg: "auto" }}
-          mx="0px"
-        >
-          <Flex
-            maxW={{ base: "100%", md: "max-content" }}
-            w="100%"
-            mx={{ base: "auto", lg: "0px" }}
-            me="auto"
-            justifyContent="center"
-            px={{ base: "20px", md: "0px" }}
-            flexDirection="column"
+        <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+          <CenteredAuth
+            image="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
+            cardTop={{ base: "140px", md: "14vh" }}
+            cardBottom={{ base: "50px", lg: "auto" }}
+            mx="0px"
           >
-            {/* Using built-in supabase auth form */}
-            <Auth
-              supabaseClient={supabase}
-              appearance={{ theme: ThemeSupa }}
-              theme="dark"
-            />
-            {/* Following sectiion is for manual auth form */}
-            {/* <Box me="auto">
+            <Flex
+              maxW={{ base: "100%", md: "max-content" }}
+              w="100%"
+              mx={{ base: "auto", lg: "0px" }}
+              me="auto"
+              justifyContent="center"
+              px={{ base: "20px", md: "0px" }}
+              flexDirection="column"
+            >
+              {/* Using built-in supabase auth form */}
+              <Auth
+                supabaseClient={supabase}
+                appearance={{ theme: ThemeSupa }}
+                theme="dark"
+              />
+              {/* Following sectiion is for manual auth form */}
+              {/* <Box me="auto">
               <Heading color={textColor} fontSize="36px" mb="10px">
                 Sign In
               </Heading>
@@ -352,8 +353,9 @@ function SignIn() {
                 </Text>
               </Flex>
             </Flex> */}
-          </Flex>
-        </CenteredAuth>
+            </Flex>
+          </CenteredAuth>
+        </Box>
       </>
     );
 }
