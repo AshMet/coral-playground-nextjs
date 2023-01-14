@@ -87,7 +87,14 @@ export default function TripLineItem(props) {
           ) : (
             <Tooltip label="Select Date before adding to cart">
               <Flex align="center">
-                <DatePicker onChange={onChange} value={value} />
+                <DatePicker
+                  onChange={onChange}
+                  value={value}
+                  format="d MMM y"
+                  minDate={new Date()}
+                  clearIcon={null}
+                  calendarIcon={null}
+                />
               </Flex>
             </Tooltip>
           )}
