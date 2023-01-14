@@ -143,9 +143,9 @@ function SignedInMenuList() {
         <Avatar
           _hover={{ cursor: "pointer" }}
           color="white"
-          name={user.email}
+          // name={user.email}
           src={
-            profile.avatarUrl ||
+            profile?.avatarUrl ||
             `https://avatars.dicebear.com/api/miniavs/${user.email}.svg`
           }
           size="sm"

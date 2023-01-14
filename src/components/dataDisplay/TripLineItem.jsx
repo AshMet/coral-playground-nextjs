@@ -83,9 +83,6 @@ export default function TripLineItem(props) {
                 month: "short",
                 day: "numeric",
               })}
-              <Text as="span" ml="5px">{`@ ${diveTime?.split(":")[0]}:${
-                diveTime?.split(":")[1]
-              }`}</Text>
             </Text>
           ) : (
             <Tooltip label="Select Date before adding to cart">
@@ -94,6 +91,13 @@ export default function TripLineItem(props) {
               </Flex>
             </Tooltip>
           )}
+          <Text
+            ml="5px"
+            color={textColor}
+            fontSize="md"
+            me="6px"
+            fontWeight="500"
+          >{`@ ${diveTime?.split(":")[0]}:${diveTime?.split(":")[1]}`}</Text>
         </Flex>
       </Flex>
 

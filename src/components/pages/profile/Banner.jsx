@@ -11,7 +11,7 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useContext, useRef, useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
@@ -27,6 +27,7 @@ export default function Settings(props) {
   const [uploading, setUploading] = useState(false);
   const inputRef = useRef(null);
   const toast = useToast();
+  const user = useUser();
   const { profile, setProfile, updateProfile } = useContext(ProfileContext);
 
   // async function downloadImage(path) {
@@ -43,6 +44,10 @@ export default function Settings(props) {
   //   } catch (error) {
   //   }
   // }
+
+  // useEffect(() => {
+  //   updateProfile();
+  // }, [profile]);
 
   const uploadAvatar = async (e) => {
     try {
@@ -65,11 +70,10 @@ export default function Settings(props) {
       if (uploadError) {
         throw uploadError;
       }
-      await setProfile({
+      setProfile({
         ...profile,
         avatarUrl: newAvatarUrl,
       });
-      updateProfile();
     } catch (error) {
       toast({
         position: "top",
@@ -88,6 +92,7 @@ export default function Settings(props) {
         // value: newItem.title,
       });
     } finally {
+      updateProfile();
       setUploading(false);
     }
   };
@@ -106,7 +111,10 @@ export default function Settings(props) {
       <Avatar
         key={new Date().toUTCString}
         mx="auto"
-        src={profile?.avatarUrl}
+        src={
+          profile?.avatarUrl ||
+          `https://avatars.dicebear.com/api/miniavs/${user.email}.svg`
+        }
         h="87px"
         w="87px"
         mt="-43px"

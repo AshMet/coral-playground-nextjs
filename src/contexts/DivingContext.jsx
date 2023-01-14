@@ -67,7 +67,8 @@ export const DivingProvider = ({ children }) => {
       });
       return;
     }
-    if (!(newItem.diveDate instanceof Date) || isNaN(newItem.diveDate)) {
+    // if (!(newItem.diveDate instanceof Date) || newItem.diveDate !== null) {
+    if (isNaN(newItem.diveDate.getTime())) {
       toast({
         position: "top",
         render: () => (
