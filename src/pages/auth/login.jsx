@@ -49,7 +49,6 @@ import {
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { NextSeo } from "next-seo";
-// import { useRouter } from "next/router";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";

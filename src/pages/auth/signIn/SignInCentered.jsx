@@ -46,9 +46,6 @@ import {
   AlertTitle,
 } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
-// import { NavLink } from "react-router-dom";
-// Chakra imports
-// Assets
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";

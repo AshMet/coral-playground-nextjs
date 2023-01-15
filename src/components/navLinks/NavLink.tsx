@@ -2,7 +2,6 @@ import type { LinkProps } from "@chakra-ui/react";
 import { Link as ChakraLink, useColorModeValue } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import type React from "react";
 
 interface NavLinkProps extends LinkProps {
   children?: string | React.ReactNode;
