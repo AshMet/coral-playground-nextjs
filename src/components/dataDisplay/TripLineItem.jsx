@@ -50,9 +50,15 @@ export default function TripLineItem(props) {
     const year = date.getFullYear();
     const month = date.getMonth() + 1; // Jan is 0, dec is 11
     const day = date.getDate();
-    const dateString = `${year}-${month}-${day}`;
-    return new Date(`${dateString} ${time}`);
+    const hours = time.split(":")[0];
+    const minutes = time.split(":")[1];
+    return new Date(year, month, day, hours, minutes, 0);
+    // const dateString = `${year}-${month}-${day}`;
+    // return new Date(`${dateString} ${time}`);
   }
+
+  // console.log("value", value);
+  // console.log("selectedDate", selectedDate);
 
   // console.log("TripLineItem trip", trip);
   return (
@@ -90,7 +96,7 @@ export default function TripLineItem(props) {
                 <DatePicker
                   onChange={onChange}
                   value={value}
-                  format="d MMM y"
+                  format="dd MMM y"
                   minDate={new Date()}
                   clearIcon={null}
                   calendarIcon={null}
