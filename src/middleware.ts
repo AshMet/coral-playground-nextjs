@@ -21,15 +21,18 @@ export async function middleware(req: NextRequest) {
 
   // Auth condition not met, redirect to home page.
   const redirectUrl = req.nextUrl.clone();
-  redirectUrl.pathname = "/";
+  redirectUrl.pathname = "/auth/login";
   redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname);
   return NextResponse.redirect(redirectUrl);
 }
 
 export const config = {
   matcher: [
-    "/diving/dive_centres/*/edit/:path*",
+    "/diving/dive_centres/:id/edit/:path",
     "/diving/dive_centres/new/:path",
-    "/diving/dive_centres/dive_trips/:path",
+    "/diving/dive_sites/:id/edit/:path",
+    "/diving/dive_sites/new/:path",
+    "/nfts/:path*",
+    "/admin/nfts/:path*",
   ],
 };
