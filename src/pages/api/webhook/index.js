@@ -6,9 +6,10 @@
 import { buffer } from "micro";
 import Stripe from "stripe";
 
-import { supabase } from "..";
+import { getServiceSupabase } from "utils/supabase";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const supabase = getServiceSupabase();
 
 export const config = {
   api: {

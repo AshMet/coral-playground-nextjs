@@ -32,8 +32,8 @@ import {
   useColorModeValue,
   SimpleGrid,
 } from "@chakra-ui/react";
-import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 import { useMoralisQuery } from "react-moralis";
 
@@ -51,7 +51,7 @@ import Banner from "../../../../components/pages/nftPage/Banner";
 import Details from "../../../../components/pages/nftPage/Details";
 import NFT from "components/card/NFT";
 // import useTokenUriDetails from "components/hooks/useTokenUriDetails";
-import NftLayout from "layouts/nft";
+import NftLayout from "layouts/NftLayout";
 
 export default function Page() {
   const router = useRouter();

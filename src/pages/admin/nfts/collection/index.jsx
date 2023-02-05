@@ -50,7 +50,7 @@ import NftBanner1 from "../../../../../public/img/nfts/NftBanner1.jpg";
 import NFT from "../../../../components/card/NFT";
 import Banner from "../../../../components/pages/nftCollection/Banner";
 import SearchBar from "../../../../components/pages/nftCollection/Search";
-import NftLayout from "layouts/nft";
+import NftLayout from "layouts/NftLayout";
 
 export default function Collection() {
   const textColor = useColorModeValue("secondaryGray.900", "white");

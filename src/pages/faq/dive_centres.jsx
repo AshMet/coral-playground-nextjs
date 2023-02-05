@@ -16,7 +16,7 @@ import {
 import { useRouter } from "next/router";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
-import LandingLayout from "../../layouts/home/Landing";
+import LandingLayout from "layouts/LandingLayout";
 import faqs from "lib/constants/diveCentreFaqInputs.json";
 
 export default function DiveCentreFAQ() {

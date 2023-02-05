@@ -472,18 +472,9 @@ body.chakra-ui-dark .react-date-picker__calendar .react-calendar {
   box-sizing: content-box;
   -moz-appearance: textfield;
 }
-/* body.chakra-ui-dark .react-time-picker__inputGroup__input {
-  min-width: 0.54em;
-  height: 100%;
-  position: relative;
-  padding: 0 2px;
+.chakra-ui-light .react-time-picker__inputGroup__input {
   color: #101010;
-  border: 0;
-  background: none;
-  font: inherit;
-  box-sizing: content-box;
-  -moz-appearance: textfield;
-} */
+}
 .react-time-picker__inputGroup__input::-webkit-outer-spin-button,
 .react-time-picker__inputGroup__input::-webkit-inner-spin-button {
   -webkit-appearance: none;

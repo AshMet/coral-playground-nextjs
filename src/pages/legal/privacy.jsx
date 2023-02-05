@@ -9,11 +9,11 @@ import {
 } from "@chakra-ui/react";
 // import Layout from "components/layout/Layout";
 // Custom Components
-import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 
-import LandingLayout from "../../layouts/home/Landing";
 import { HSeparator } from "components/separator/Separator";
+import LandingLayout from "layouts/LandingLayout";
 // import { useEffect } from "react";
 // import { NavLink } from "react-router-dom";
 // import { Helmet } from "react-helmet";

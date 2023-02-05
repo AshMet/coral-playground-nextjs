@@ -22,6 +22,7 @@ export default function FixedPlugin(props) {
       // left={document.documentElement.dir === "rtl" ? "35px" : ""}
       // right={document.documentElement.dir === "rtl" ? "" : "35px"}
       bottom="30px"
+      left="35px"
       border="1px solid"
       borderColor="#6a53ff"
       borderRadius="50px"

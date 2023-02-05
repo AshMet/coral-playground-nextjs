@@ -69,7 +69,7 @@ import SearchBar from "../../../../components/pages/nftProfile/Search";
 import CollectionCard from "components/card/CollectionCard";
 import NFT from "components/card/NFT";
 import { HSeparator } from "components/separator/Separator";
-import NftLayout from "layouts/nft";
+import NftLayout from "layouts/NftLayout";
 
 export default function Collection() {
   const [tabState, setTabState] = useState("collected");

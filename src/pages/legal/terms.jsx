@@ -1,6 +1,6 @@
 import { Button, Flex, ListItem, OrderedList, Text } from "@chakra-ui/react";
-import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 // import Layout from "components/layout/Layout";
 
 // Custom Components
@@ -8,8 +8,8 @@ import { useRouter } from "next/router";
 // import { Helmet } from "react-helmet";
 // import { NavLink } from "react-router-dom";
 
-import LandingLayout from "../../layouts/home/Landing";
 import { HSeparator } from "components/separator/Separator";
+import LandingLayout from "layouts/LandingLayout";
 
 const TermsConditions = () => {
   const router = useRouter();

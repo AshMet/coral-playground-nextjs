@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-plusplus */
 import { Box, Button, Flex, useToast } from "@chakra-ui/react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -8,7 +9,6 @@ import AlertPopup from "components/alerts/AlertPopup";
 import DiveSelection from "components/pages/bookings/DiveSelection";
 import TripDetails from "components/pages/diveTrips/TripDetails";
 import DivingLayout from "layouts/DivingLayout";
-import { supabase } from "pages/api/index";
 
 export default function CreateCentreTrip() {
   const [selectedSites, setSelectedSites] = useState([]);
@@ -23,6 +23,7 @@ export default function CreateCentreTrip() {
   const [diveTime, setDiveTime] = useState("07:00");
   const [diveDate, setDiveDate] = useState();
   const toast = useToast();
+  const supabase = useSupabaseClient();
 
   const getStripePriceId = (n) => {
     switch (n) {
@@ -76,7 +77,7 @@ export default function CreateCentreTrip() {
           dive_centre_id: diveCentreId,
         },
       ])
-      .select()
+      .select("*")
       .single();
 
     // Handle Trip Data

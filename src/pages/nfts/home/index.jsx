@@ -12,7 +12,7 @@ import HomeFooter from "components/pages/home/HomeFooter";
 import HomeHero from "components/pages/home/HomeHero";
 import HomeJellyfish from "components/pages/home/HomeJellyfish";
 import HomeTimeline from "components/pages/home/HomeTimeline";
-import LandingLayout from "layouts/home/Landing";
+import LandingLayout from "layouts/LandingLayout";
 
 export default function Home() {
   // const { authenticate, isAuthenticated, isAuthenticating, Moralis, user } =

@@ -50,10 +50,10 @@ import Auction from "../../../../components/pages/nftPage/Auction";
 import Banner from "../../../../components/pages/nftPage/Banner";
 import Details from "../../../../components/pages/nftPage/Details";
 import TableLastOffer from "../../../../components/pages/nftPage/TableLastOffer";
-import { tableColumnsLastOffer } from "../../../../variables/nftPage/tableColumnsLastOffer";
-import tableDataLastOffer from "../../../../variables/nftPage/tableDataLastOffer.json";
+import { tableColumnsLastOffer } from "../../../../utils/variables/nftPage/tableColumnsLastOffer";
+import tableDataLastOffer from "../../../../utils/variables/nftPage/tableDataLastOffer.json";
 import NFT from "components/card/NFT";
-import NftLayout from "layouts/nft";
+import NftLayout from "layouts/NftLayout";
 
 export default function Page() {
   const textColor = useColorModeValue("secondaryGray.900", "white");

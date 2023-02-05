@@ -10,7 +10,7 @@ import { Portal, Box, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 
 import routes from "../routes";
-import Footer from "components/footer/FooterAdmin";
+import Footer from "components/footer/FooterDiving";
 // Layout components
 import NavbarDiving from "components/navbar/NavbarDiving";
 import Sidebar from "components/sidebar/Sidebar";

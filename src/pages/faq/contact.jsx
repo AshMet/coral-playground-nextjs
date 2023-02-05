@@ -1,8 +1,8 @@
 import { Box, Flex, useColorModeValue, Text } from "@chakra-ui/react";
 // import { useRouter } from "next/router";
 
-import LandingLayout from "../../layouts/home/Landing";
 import ContactForm from "components/contact/ContactForm";
+import LandingLayout from "layouts/LandingLayout";
 
 export default function ContactUs() {
   // const router = useRouter();

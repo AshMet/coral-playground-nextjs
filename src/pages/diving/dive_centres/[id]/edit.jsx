@@ -13,11 +13,12 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { supabase } from "../../../api/index";
 import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
@@ -27,6 +28,7 @@ import * as gtag from "lib/data/gtag";
 
 export default function UpdateDiveCentre({ diveCentreData }) {
   const toast = useToast();
+  const supabase = useSupabaseClient();
 
   const placeholderColor = "secondaryGray.600";
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -193,6 +195,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
         services,
         city_id: cityId,
       })
+      // .eq("owner_id", user?.id)
       .eq("id", id);
     // Success Alert
     toast({
@@ -229,6 +232,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
     }
 
     setLoading(false);
+    // console.log("data", data);
     router.push(`/diving/dive_centres/${id}`);
   };
 
@@ -506,7 +510,21 @@ export default function UpdateDiveCentre({ diveCentreData }) {
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  const { data: diveCentreData } = await supabase
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(context);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  const { data } = await supabase
     .from("dive_centre_view")
     .select(
       `id, name, description, address, latitude, longitude, paymentMethods, equipment, services, languages, memberships,
@@ -517,7 +535,9 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      diveCentreData,
+      // initialSession: session,
+      // user: session.user,
+      diveCentreData: data ?? [],
     },
   };
 }

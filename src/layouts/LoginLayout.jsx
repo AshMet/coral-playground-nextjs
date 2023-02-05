@@ -1,24 +1,15 @@
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/prop-types */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-extraneous-dependencies */
-// Chakra imports
-import { Box, Flex, Icon, Text } from "@chakra-ui/react";
-import PropTypes from "prop-types";
-import React from "react";
+import { Box, Button, Flex, Icon, Text } from "@chakra-ui/react";
+// import PropTypes from "prop-types";
+import { useRouter } from "next/router";
 import { FaChevronLeft } from "react-icons/fa";
 
 import FixedPlugin from "components/fixedPlugin/FixedPlugin";
-import Footer from "components/footer/FooterAuthDefault";
-// Custom components
-// import { NavLink } from "react-router-dom";
-import NavLink from "components/navLinks/NavLink";
-// Assets
+import Footer from "components/footer/FooterDiving";
 
-function AuthIllustration(props) {
+function LoginLayout(props) {
   const { children, illustrationBackground } = props;
-  // Chakra color mode
+  const router = useRouter();
   return (
     <Flex position="relative" h="max-content">
       <Flex
@@ -37,12 +28,12 @@ function AuthIllustration(props) {
         justifyContent="start"
         direction="column"
       >
-        <NavLink
-          to="/admin"
-          style={() => ({
-            width: "fit-content",
-            marginTop: "40px",
-          })}
+        <Button
+          // as="link"
+          variant="link"
+          width="fit-content"
+          mt="40px"
+          onClick={() => router.back()}
         >
           <Flex
             align="center"
@@ -58,10 +49,10 @@ function AuthIllustration(props) {
               color="secondaryGray.600"
             />
             <Text ms="0px" fontSize="sm" color="secondaryGray.600">
-              Back to Simmmple
+              Back to Coral Playground
             </Text>
           </Flex>
-        </NavLink>
+        </Button>
         {/* Insert template body here */}
         {children}
         {/* Insert template body here */}
@@ -93,9 +84,9 @@ function AuthIllustration(props) {
 }
 // PROPS
 
-AuthIllustration.propTypes = {
-  illustrationBackground: PropTypes.string,
-  image: PropTypes.any,
-};
+// LoginLayout.propTypes = {
+//   illustrationBackground: PropTypes.string,
+//   image: PropTypes.any,
+// };
 
-export default AuthIllustration;
+export default LoginLayout;

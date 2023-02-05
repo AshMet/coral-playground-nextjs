@@ -37,8 +37,8 @@ import {
 // import Image from "next/image";
 // import React from "react";
 // Custom components
-import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 import { useState, useEffect } from "react";
 import { MdDashboard, MdApps } from "react-icons/md";
 import { useMoralisQuery } from "react-moralis";
@@ -53,7 +53,7 @@ import NftProfile from "../../../../public/img/nfts/NftProfile.png";
 import NFT from "../../../components/card/NFT";
 import Banner from "../../../components/pages/nftCollection/Banner";
 import SearchBar from "../../../components/pages/nftCollection/Search";
-import NftLayout from "layouts/nft";
+import NftLayout from "layouts/NftLayout";
 
 export default function Collection() {
   const textColor = useColorModeValue("secondaryGray.900", "white");

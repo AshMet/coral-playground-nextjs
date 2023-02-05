@@ -3,8 +3,8 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
 import { Box, Grid } from "@chakra-ui/react";
-import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 
 import { supabase } from "../../../api/index";

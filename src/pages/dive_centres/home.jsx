@@ -34,7 +34,7 @@ import ManageBenefits from "components/pages/diveCentresHome/ManageBenefits";
 import Mission from "components/pages/diveCentresHome/Mission";
 import OperateBenefits from "components/pages/diveCentresHome/OperateBenefits";
 import PromoteBenefits from "components/pages/diveCentresHome/PromoteBenefits";
-import LandingLayout from "layouts/home/Landing";
+import LandingLayout from "layouts/LandingLayout";
 
 export default function diveCentresHome() {
   return (

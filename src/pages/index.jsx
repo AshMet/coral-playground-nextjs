@@ -12,7 +12,7 @@ import HowItWorks from "components/pages/divingHome/HowItWorks";
 import Mission from "components/pages/divingHome/Mission";
 import Profile from "components/pages/profile/Profile";
 import DivingLayout from "layouts/DivingLayout";
-import LandingLayout from "layouts/home/Landing";
+import LandingLayout from "layouts/LandingLayout";
 
 export default function Home() {
   const session = useSession();

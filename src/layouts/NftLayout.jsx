@@ -10,8 +10,8 @@ import { Portal, Box, useDisclosure } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { MoralisProvider } from "react-moralis";
 
-import routes from "../../routes";
-import Footer from "components/footer/FooterAdmin";
+import routes from "../routes";
+import Footer from "components/footer/FooterDiving";
 // Layout components
 import Navbar from "components/navbar/NavbarNft";
 import Sidebar from "components/sidebar/Sidebar";

@@ -4,8 +4,8 @@
 // Chakra imports
 import { AspectRatio, Box, Button, Grid } from "@chakra-ui/react";
 // Custom components
-import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 
 import Card from "components/card/Card";
