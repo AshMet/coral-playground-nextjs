@@ -21,6 +21,7 @@ import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import { FaEthereum } from "react-icons/fa";
+import { HiOutlineUserCircle } from "react-icons/hi";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import { IoLogOutOutline, IoWalletOutline } from "react-icons/io5";
 
@@ -44,14 +45,7 @@ function SignedOutMenuList() {
   return (
     <Menu>
       <MenuButton p="0px">
-        <Avatar
-          _hover={{ cursor: "pointer" }}
-          color="white"
-          bg="#11047A"
-          size="sm"
-          w="40px"
-          h="40px"
-        />
+        <HiOutlineUserCircle />
       </MenuButton>
       <MenuList
         boxShadow={shadow}

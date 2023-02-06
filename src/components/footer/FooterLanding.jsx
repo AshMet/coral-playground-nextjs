@@ -16,8 +16,8 @@ import { HSeparator } from "components/separator/Separator";
 
 export default function Footer() {
   // const textColor = useColorModeValue("secondaryGray.900", "white");
-  const textColorSecondary = useColorModeValue("white", "white"); // "secondaryGray.700"
-  const textFooter = useColorModeValue("white", "white"); // "secondaryGray.900"
+  const textColorSecondary = useColorModeValue("secondaryGray.700", "white"); // "secondaryGray.700"
+  const textFooter = useColorModeValue("brand.300", "white"); // "secondaryGray.900"
   return (
     <Flex
       zIndex="3"

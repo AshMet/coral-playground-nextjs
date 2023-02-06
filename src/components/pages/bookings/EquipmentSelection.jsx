@@ -9,6 +9,8 @@ import {
   VStack,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useUser } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/router";
 import { useContext } from "react";
 
 import { DivingContext } from "../../../contexts/DivingContext";
@@ -23,8 +25,10 @@ export default function EquipmentSelection(props) {
     "",
     "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
   );
+  const user = useUser();
   const selectedBgColor = useColorModeValue("brand.400", "brand.400");
   // const [equipmentList, setEquipmentList] = useState([]);
+  const router = useRouter();
 
   const { equipmentList, setEquipmentList, redirectToCheckout } =
     useContext(DivingContext);
@@ -139,16 +143,29 @@ export default function EquipmentSelection(props) {
           >
             Prev
           </Button>
-          <Button
-            variant="darkBrand"
-            fontSize="sm"
-            borderRadius="16px"
-            w={{ base: "128px", md: "148px" }}
-            h="46px"
-            onClick={() => redirectToCheckout()}
-          >
-            Go to Payment
-          </Button>
+          {user ? (
+            <Button
+              variant="darkBrand"
+              fontSize="sm"
+              borderRadius="16px"
+              w={{ base: "128px", md: "148px" }}
+              h="46px"
+              onClick={() => redirectToCheckout()}
+            >
+              Go to Payment
+            </Button>
+          ) : (
+            <Button
+              variant="darkBrand"
+              fontSize="sm"
+              borderRadius="16px"
+              w={{ base: "128px", md: "148px" }}
+              h="46px"
+              onClick={() => router.push("/auth/login")}
+            >
+              Login to Checkout
+            </Button>
+          )}
         </Flex>
       </Flex>
     </Card>

@@ -82,7 +82,7 @@ function Login() {
               fontWeight="400"
               fontSize="md"
             >
-              Enter your email and password to sign in!
+              Select your preferred method below:
             </Text>
           </Box>
           <Flex
@@ -101,6 +101,8 @@ function Login() {
               supabaseClient={supabase}
               appearance={{ theme: ThemeSupa }}
               theme={colorMode}
+              providers={["google"]}
+              magicLink
             />
           </Flex>
         </Flex>
