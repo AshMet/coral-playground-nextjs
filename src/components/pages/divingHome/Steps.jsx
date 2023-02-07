@@ -51,7 +51,7 @@ export default function Conversion(props) {
         <IconStep
           icon={MdCheckCircle}
           title="Checkout"
-          subtitle="BProvide your basic details and pay a refundable deposit"
+          subtitle="Provide your basic details and pay a refundable deposit"
         />
       </Flex>
     </Box>

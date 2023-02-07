@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/exhaustive-deps */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
@@ -22,36 +24,53 @@
 
 // Chakra imports
 import {
-  Button,
+  Avatar,
   Box,
   Flex,
+  Tag,
+  TagLabel,
   Text,
-  Link,
   useColorModeValue,
-  Grid,
-  GridItem,
 } from "@chakra-ui/react";
-// Custom components
-// import PageCard from "components/pages/divingHome/PageCard";
-// import Image from "components/actions/NextChakraImg";
-import { Parallax } from "react-scroll-parallax";
+import { useState, useRef } from "react";
+import Map, {
+  Marker,
+  NavigationControl,
+  FullscreenControl,
+  ScaleControl,
+  GeolocateControl,
+} from "react-map-gl";
 
-import Image from "../../actions/NextChakraImg";
+import Card from "components/card/Card";
+import DiveSiteCard from "components/card/DiveSiteCard";
 import InnerContent from "layouts/InnerContent";
+import "mapbox-gl/dist/mapbox-gl.css";
 
-export default function Mission() {
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+
+export default function Mission(props) {
+  const { sites } = props;
+  const mapRef = useRef();
+  const [mapLocation, setMapLocation] = useState("Select Location");
+
+  const mapStyles = useColorModeValue(
+    "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r",
+    "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r"
+  );
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  // const textColorSecondary = useColorModeValue("secondaryGray.700", "white");
-  const endGradient = useColorModeValue(
-    "linear-gradient(360deg, #F7FAFC 17.92%, rgba(247, 250, 252, 0) 100%)",
-    "linear-gradient(360deg, #172041 17.92%, rgba(23, 32, 65, 0) 54.26%)"
+  const textColorSecondary = useColorModeValue(
+    "secondaryGray.700",
+    "secondaryGray.300"
   );
+  // const endGradient = useColorModeValue(
+  //   "linear-gradient(360deg, #F7FAFC 17.92%, rgba(247, 250, 252, 0) 100%)",
+  //   "linear-gradient(360deg, #172041 17.92%, rgba(23, 32, 65, 0) 54.26%)"
+  // );
   return (
     <Flex
       w="100%"
       direction={{ base: "column" }}
-      mt="-50px"
       pt={{ base: "180px", md: "200px", xl: "100px" }}
       overflow="hidden"
       bgSize="cover"
@@ -84,13 +103,13 @@ export default function Mission() {
               lineHeight={{ base: "38px", md: "50px", lg: "58px" }}
               mb="20px"
             >
-              Improve your Diving Experience
+              A Better Diving Experience
             </Text>
             <Text color={textColor} fontSize="lg" w="100%" mb="20px">
               Coral Playground is your gateway to the largest collection of
               dives in Egypt, operated by a network of the highest quality dive
               centres, guides and instructors.{" "}
-              <Text color={textColor} as="span" fontWeight="700">
+              <Text color={textColorSecondary} as="span" fontWeight="700">
                 Our goal is to make sure you can book the best dive vacation of
                 your life as quickly and easily as possible with complete peace
                 of mind.
@@ -99,91 +118,102 @@ export default function Mission() {
           </Flex>
         </Flex>
         <Flex
-          mb="90px"
-          justify="center"
-          direction="column"
-          // w={{ base: "72%", md: "90%" }}
-          // flexWrap="wrap"
+          direction={{ sm: "column", md: "row" }}
+          w="full"
+          h={{ sm: "75vh", lg: "50vh" }}
+          boxShadow="dark-lg"
         >
-          {/* <Box>
-            <Image
-              src="/img/diving/dive_site_marker.svg"
-              width="100px"
-              height="50px"
-              ml="500px"
-            />
-          </Box> */}
-          <Grid templateColumns="repeat(20, 1fr)" gap={0} zIndex="20">
-            {/* <GridItem colStart={8} colSpan={1}>
-              <Parallax translateY={[0, 190, "easeOutExpo"]} endScroll={200}>
-                <Image
-                  src="/img/diving/dive_site_marker.svg"
-                  width="100px"
-                  height="150px"
-                />
-              </Parallax>
-            </GridItem> */}
-            <GridItem colStart={7} colSpan={1}>
-              <Parallax translateY={[0, 130, "easeOutExpo"]} endScroll={150}>
-                <Image
-                  src="/img/diving/dive_site_marker.svg"
-                  width="100px"
-                  height="150px"
-                />
-              </Parallax>
-            </GridItem>
-            <GridItem colStart={8} colSpan={1}>
-              <Parallax translateY={[0, 170, "easeOutExpo"]} endScroll={150}>
-                <Image
-                  src="/img/diving/dive_site_marker.svg"
-                  width="100px"
-                  height="150px"
-                />
-              </Parallax>
-            </GridItem>
-            <GridItem colStart={9} colSpan={1}>
-              <Parallax translateY={[0, 200, "easeOutExpo"]} endScroll={200}>
-                <Image
-                  src="/img/diving/dive_centre_marker.svg"
-                  width="100px"
-                  height="150px"
-                />
-              </Parallax>
-            </GridItem>
-          </Grid>
-          <Image
-            src="/img/diving/egypt_dive_map.png"
-            // layout="fill"
-            width="1000"
-            height="500"
-          />
-          {/* <PageCard
-            mb="20px"
-            me={{ base: "0px", md: "20px" }}
-            title="Dive Sites"
-            // image={image}
-            link="https://horizon-ui.com/horizon-ui-chakra/#/admin/default"
-          />
-          <PageCard
-            mb="20px"
-            me={{ base: "0px", xl: "20px" }}
-            title="Dive Centres"
-            // image={image1}
-            link="https://horizon-ui.com/horizon-ui-chakra/#/admin/nft-marketplace"
-          /> */}
-        </Flex>
-        <Link href="/diving/map">
-          <Button
-            h="50px"
-            borderRadius="12px"
-            variant="darkBrand"
-            fontSize="sm"
+          <Card
+            justifyContent="center"
+            position="relative"
+            direction="column"
+            borderRadius="xl"
+            w="100%"
+            p={{ sm: "0px", md: "10px" }}
+            zIndex="0"
+            h={{ sm: "calc(100vh - 150px)", md: "calc(100vh - 150px)" }}
+            overflow="hidden"
           >
-            View Interactive Dive Map
-          </Button>
-        </Link>
+            <Map
+              ref={mapRef}
+              initialViewState={{
+                latitude: 27.914633,
+                longitude: 34.352383,
+                pitch: 85,
+                zoom: 13,
+              }}
+              style={{ borderRadius: "20px", width: "100%", height: "100%" }}
+              mapStyle={mapStyles}
+              mapboxAccessToken={MAPBOX_TOKEN}
+              onClick={() => setMapLocation("Select Location")}
+            >
+              <GeolocateControl position="top-left" />
+              <FullscreenControl position="top-left" />
+              <NavigationControl position="top-left" />
+              <ScaleControl />
+
+              {sites.map(
+                (location) =>
+                  location.latitude &&
+                  location.longitude && (
+                    <Marker
+                      key={location.latitude + location.longitude}
+                      latitude={location.latitude}
+                      longitude={location.longitude}
+                      anchor="bottom"
+                      onClick={(e) => {
+                        // If we let the click event propagates to the map, it will immediately close the popup
+                        // with `closeOnClick: true`
+                        e.originalEvent.stopPropagation();
+                        setMapLocation(location);
+                        mapRef.current?.flyTo({
+                          center: [
+                            location.longitude,
+                            location.latitude + 0.02,
+                          ],
+                          zoom: 13,
+                          duration: 2000,
+                        });
+                      }}
+                    >
+                      {location.latitude !== mapLocation.latitude ? (
+                        <Tag
+                          size="sm"
+                          bgColor="#0b050575"
+                          color="white"
+                          borderRadius="full"
+                        >
+                          <Avatar
+                            src="/img/diving/dive_site_icon.svg"
+                            size={
+                              location.latitude === mapLocation.latitude
+                                ? "sm"
+                                : "xs"
+                            }
+                            ml={-1}
+                            mr={2}
+                          />
+                          <TagLabel>{location.name}</TagLabel>
+                        </Tag>
+                      ) : (
+                        <DiveSiteCard
+                          key={location.location_id}
+                          id={location.location_id}
+                          name={location.name}
+                          tagList={location.divingTypes}
+                          type="dive_site"
+                          image={location.dive_map}
+                          zIndex={3}
+                        />
+                      )}
+                    </Marker>
+                  )
+              )}
+            </Map>
+          </Card>
+        </Flex>
       </InnerContent>
-      <Box bg={endGradient} h="140px" w="100%" />
+      <Box h="200px" w="100%" />
     </Flex>
   );
 }

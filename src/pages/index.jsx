@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Box, Flex } from "@chakra-ui/react";
 import { useSession } from "@supabase/auth-helpers-react";
 import { NextSeo } from "next-seo";
@@ -13,8 +14,9 @@ import Mission from "components/pages/divingHome/Mission";
 import Profile from "components/pages/profile/Profile";
 import DivingLayout from "layouts/DivingLayout";
 import LandingLayout from "layouts/LandingLayout";
+import { supabase } from "utils/supabase";
 
-export default function Home() {
+export default function Home({ data }) {
   const session = useSession();
   // console.log("session", session);
 
@@ -42,7 +44,7 @@ export default function Home() {
             <ParallaxProvider>
               <Flex direction={{ base: "column" }}>
                 <Hero />
-                <Mission />
+                <Mission sites={data} />
                 <HowItWorks />
                 <Benefits />
                 <DiveSiteBenefits />
@@ -57,4 +59,12 @@ export default function Home() {
       )}
     </Box>
   );
+}
+
+export async function getStaticProps() {
+  const { data } = await supabase
+    .from("dive_sites")
+    .select(`id, name, latitude, longitude, dive_map`)
+    .neq("dive_map", null);
+  return { props: { data }, revalidate: 86400 };
 }

@@ -78,13 +78,13 @@ export default function DiveSiteBenefits() {
                 <Text
                   fontWeight="800"
                   color={textColor}
-                  fontSize={{ base: "28px", md: "48px" }}
-                  lineHeight={{ base: "38px", md: "58px" }}
+                  fontSize={{ base: "28px", md: "40px" }}
+                  lineHeight={{ base: "38px", md: "50px" }}
                   mb="20px"
                   textAlign={{ base: "center", lg: "left" }}
                   maxW={{ base: "100%", md: "unset" }}
                 >
-                  All Site Info in One Place
+                  Explore the Best Dive Sites with Confidence
                 </Text>
                 <Text
                   textAlign={{ base: "center", lg: "left" }}
@@ -93,11 +93,10 @@ export default function DiveSiteBenefits() {
                   w={{ base: "100%", md: "100%" }}
                   mb="30px"
                 >
-                  Know everything you need to about your dive ahead of time so
-                  you can choose the right sites for your interest and
-                  experience levels. Coral Playground provides detailed
-                  information including maps, descriptions, conditions and
-                  species
+                  Get all the Information You Need with Coral Playground!
+                  Discover maps, descriptions, conditions and species
+                  information to help you select dive sites that align with your
+                  interests and expertise.
                 </Text>
                 <Flex
                   align="center"

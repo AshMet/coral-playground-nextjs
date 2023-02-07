@@ -28,7 +28,7 @@ const Hero = () => {
       w="full"
       px={{ base: 6, md: "100px" }}
       py={14}
-      h="100vh"
+      h="70%"
       bgImage="url(/img/diving/Hero.jpg)"
       bgRepeat="no-repeat"
       backgroundSize="cover"

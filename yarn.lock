@@ -3290,6 +3290,11 @@
     "@typescript-eslint/types" "5.50.0"
     eslint-visitor-keys "^3.3.0"
 
+"@vercel/analytics@^0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@vercel/analytics/-/analytics-0.1.8.tgz#71f1f8c7bb98ac0c5c47eb3fb8ccbe8141b9fe47"
+  integrity sha512-PQrOI8BJ9qUiVJuQfnKiJd15eDjDJH9TBKsNeMrtelT4NAk7d9mBVz1CoZkvoFnHQ0OW7Xnqmr1F2nScfAnznQ==
+
 "@wojtekmaj/date-utils@^1.0.0", "@wojtekmaj/date-utils@^1.0.2", "@wojtekmaj/date-utils@^1.0.3", "@wojtekmaj/date-utils@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@wojtekmaj/date-utils/-/date-utils-1.1.2.tgz#e22d3b6fe4559cd4b47e439b9f9fc51d1bc1fa64"

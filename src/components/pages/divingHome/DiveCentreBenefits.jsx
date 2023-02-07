@@ -89,14 +89,14 @@ export default function DiveCentreBenefits() {
                 <Text
                   fontWeight="800"
                   color={textColor}
-                  fontSize={{ base: "28px", md: "48px" }}
-                  lineHeight={{ base: "38px", md: "58px" }}
+                  fontSize={{ base: "28px", md: "40px" }}
+                  lineHeight={{ base: "38px", md: "50px" }}
                   mb="20px"
                   px={{ base: "30px", md: "unset" }}
                   textAlign={{ base: "center", lg: "left" }}
                   maxW={{ base: "100%", md: "unset" }}
                 >
-                  Find the Right Dive Centre for You
+                  Find Your Perfect Dive Centre - No Guesswork Required!
                 </Text>
                 <Text
                   color={textColorSecondary}
@@ -105,13 +105,12 @@ export default function DiveCentreBenefits() {
                   w={{ base: "100%", md: "100%" }}
                   mb="30px"
                 >
-                  Stop trying to figure out which dive centre meets your needs
-                  or feeling tied to your hotel dive shop. Whether you&apos;re
-                  interested in comparing prices, looking for someone who speaks
-                  your language or seeking additional services, we have you
-                  covered. Additionally, all our partners are guaranteed to
-                  follow the highest standards in safety and environmental
-                  practices.
+                  Say goodbye to the hassle of searching for a dive centre that
+                  fits your needs. Whether you want to compare prices, find a
+                  dive centre with staff who speak your language, or seek
+                  additional services, we&apos;ve got you covered. Plus, you can
+                  trust that all of our partners maintain the highest standards
+                  in safety and environmental practices.
                 </Text>
                 <Flex
                   align="center"

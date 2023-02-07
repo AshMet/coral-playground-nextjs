@@ -38,7 +38,7 @@ import { Parallax } from "react-scroll-parallax";
 import Image from "../../actions/NextChakraImg";
 import InnerContent from "layouts/InnerContent";
 
-export default function BookingBenefits() {
+export default function CertBenefits() {
   // const image = useColorModeValue(imageLight, imageLight);
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -78,13 +78,13 @@ export default function BookingBenefits() {
                 <Text
                   fontWeight="800"
                   color={textColor}
-                  fontSize={{ base: "28px", md: "48px" }}
-                  lineHeight={{ base: "38px", md: "58px" }}
+                  fontSize={{ base: "28px", md: "40px" }}
+                  lineHeight={{ base: "38px", md: "50px" }}
                   mb="20px"
                   textAlign={{ base: "center", lg: "left" }}
                   maxW={{ base: "100%", md: "unset" }}
                 >
-                  Arrive Ready to Dive!
+                  Dive into Adventure - All Levels Welcome!
                 </Text>
                 <Text
                   textAlign={{ base: "center", lg: "left" }}
@@ -93,11 +93,11 @@ export default function BookingBenefits() {
                   w={{ base: "100%", md: "100%" }}
                   mb="30px"
                 >
-                  Whether you&apos;re looking to take your first plunge into a
-                  new world, expand your skillsets to complete more specialized
-                  dives, or become a divving professional, we have you covered.
-                  Just select your desired date and dive centre, and we will
-                  take care of everything else
+                  Take the leap into a new world of diving. Whether you&apos;re
+                  a beginner ready for your first dive, looking to advance your
+                  skills, or pursuing a career as a professional, we&apos;ve got
+                  you covered. Simply choose your preferred date and dive
+                  centre, and we&apos;ll handle the rest.
                 </Text>
                 <Flex
                   align="center"
