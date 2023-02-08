@@ -32,7 +32,6 @@ import Hero from "components/pages/diveCentresHome/Hero";
 import HowItWorks from "components/pages/diveCentresHome/HowItWorks";
 import ManageBenefits from "components/pages/diveCentresHome/ManageBenefits";
 import Mission from "components/pages/diveCentresHome/Mission";
-import OperateBenefits from "components/pages/diveCentresHome/OperateBenefits";
 import PromoteBenefits from "components/pages/diveCentresHome/PromoteBenefits";
 import LandingLayout from "layouts/LandingLayout";
 
@@ -51,7 +50,6 @@ export default function diveCentresHome() {
           <Benefits />
           <PromoteBenefits />
           <ManageBenefits />
-          <OperateBenefits />
           {/* <Numbers />
         <Upgrade /> */}
         </Flex>

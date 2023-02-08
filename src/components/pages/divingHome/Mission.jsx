@@ -171,7 +171,7 @@ export default function Mission(props) {
                             location.longitude,
                             location.latitude + 0.02,
                           ],
-                          zoom: 13,
+                          zoom: 11,
                           duration: 2000,
                         });
                       }}

@@ -1,55 +1,86 @@
-// Chakra imports
-import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
-import { GiShop } from "react-icons/gi";
-import { IoBoatOutline } from "react-icons/io5";
-import { MdCheckCircle } from "react-icons/md";
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react/no-array-index-key */
+import {
+  Container,
+  Box,
+  chakra,
+  Text,
+  SimpleGrid,
+  Flex,
+  // Link,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import { BsCartCheck, BsShop } from "react-icons/bs";
+import { TbScubaMask } from "react-icons/tb";
 
-import { DashCurveDown, DashCurveUp } from "components/icons/Icons";
-import IconStep from "components/icons/IconStep";
+const features = [
+  {
+    heading: "Create Dive Centre",
+    content:
+      "Set up your dive center profile and become part of our network of trusted businesses.",
+    icon: <BsShop size="40px" />,
+  },
+  {
+    heading: "Add Dive Trips",
+    content:
+      "Offer your customers a range of diving experiences by listing your dive trips and packages.",
+    icon: <TbScubaMask size="40px" />,
+  },
+  {
+    heading: "Receive Bookings",
+    content:
+      "Start receiving bookings from customers all over the world. Our platform handles all the details.",
+    icon: <BsCartCheck size="40px" />,
+  },
+];
 
-export default function Conversion(props) {
-  const { ...rest } = props;
-
-  // Chakra Color Mode
-  const dashColor = useColorModeValue("brand.500", "whiteAlpha.500");
+const Features = () => {
   return (
-    <Box px="80px" py="30px" w="100%" {...rest}>
-      <Flex
-        position="relative"
-        direction={{ base: "column", md: "row" }}
-        justifyContent="space-around"
+    <Container maxW="6xl" p={{ base: 5, md: 10 }}>
+      <SimpleGrid
+        columns={{ base: 1, sm: 2, md: 3 }}
+        placeItems="center"
+        spacing={10}
+        mb={4}
       >
-        <IconStep
-          icon={GiShop}
-          title="Promote"
-          subtitle="Add your diving calendar to help customers discover and book from your upcoming dive trips"
-        />
-        <DashCurveUp
-          mt="10px"
-          color={dashColor}
-          w={{ base: "100px", lg: "132px" }}
-          display={{ base: "none", md: "flex" }}
-          h="22px"
-        />
-        <IconStep
-          icon={MdCheckCircle}
-          title="Confirm"
-          subtitle="Customers will reserve their desired dives and dates with a small deposit. Once payment is complete, you will both receieve an automated confirmation email with the complete itinerary"
-          // mx="60px"
-        />
-        <DashCurveDown
-          mt="50px"
-          color={dashColor}
-          w={{ base: "100px", lg: "132px" }}
-          display={{ base: "none", md: "flex" }}
-          h="22px"
-        />
-        <IconStep
-          icon={IoBoatOutline}
-          title="Dive"
-          subtitle="Customers will be given an option to complete a pre-dive check-in to speed up onboarding and will pay any outstanding fees directly to the dive centre"
-        />
-      </Flex>
-    </Box>
+        {features.map((feature, index) => (
+          <Box
+            key={index}
+            bg={useColorModeValue("gray.100", "gray.700")}
+            p={6}
+            rounded="lg"
+            textAlign="center"
+            pos="relative"
+          >
+            <Flex
+              p={4}
+              w="max-content"
+              color="white"
+              bgGradient="linear(to-br, #228be6, #15aabf)"
+              rounded="md"
+              marginInline="auto"
+              pos="absolute"
+              left={0}
+              right={0}
+              top="-2rem"
+              boxShadow="lg"
+            >
+              {feature.icon}
+            </Flex>
+            <chakra.h3 fontWeight="semibold" fontSize="2xl" mt={6}>
+              {feature.heading}
+            </chakra.h3>
+            <Text fontSize="md" mt={4}>
+              {feature.content}
+            </Text>
+            {/* <Link href="#" mt={4} fontSize="sm" color="blue.400">
+              Learn more →
+            </Link> */}
+          </Box>
+        ))}
+      </SimpleGrid>
+    </Container>
   );
-}
+};
+
+export default Features;

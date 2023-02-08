@@ -109,7 +109,7 @@ const Hero = () => {
                   direction={{ base: "column", md: "row" }}
                   mb="30px"
                 >
-                  <Link href="/diving/map">
+                  <Link href="/auth/login">
                     <Button
                       py="20px"
                       px="16px"
@@ -121,7 +121,7 @@ const Hero = () => {
                       w="210px"
                       h="54px"
                     >
-                      Become a Trusted Partner
+                      Join Now
                       <Icon
                         as={MdChevronRight}
                         ms="5px"

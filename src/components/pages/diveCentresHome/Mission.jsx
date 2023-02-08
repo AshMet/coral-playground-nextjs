@@ -23,7 +23,6 @@
 // Chakra imports
 import {
   Button,
-  Box,
   Flex,
   Text,
   Link,
@@ -43,15 +42,11 @@ export default function Mission() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   // const textColorSecondary = useColorModeValue("secondaryGray.700", "white");
-  const endGradient = useColorModeValue(
-    "linear-gradient(360deg, #F7FAFC 17.92%, rgba(247, 250, 252, 0) 100%)",
-    "linear-gradient(360deg, #172041 17.92%, rgba(23, 32, 65, 0) 54.26%)"
-  );
   return (
     <Flex
       w="100%"
       direction={{ base: "column" }}
-      mt="-50px"
+      my="50px"
       pt={{ base: "180px", md: "200px", xl: "100px" }}
       overflow="hidden"
       bgSize="cover"
@@ -62,7 +57,6 @@ export default function Mission() {
           <Flex
             direction="column"
             mx="auto"
-            mb="40px"
             maxW={{ base: "100%", md: "100%", lg: "80%", xl: "70%" }}
             textAlign="center"
           >
@@ -87,45 +81,19 @@ export default function Mission() {
               Help Drive Your Business Forward
             </Text>
             <Text color={textColor} fontSize="lg" w="100%" mb="20px">
-              Coral Playground is your gateway to a growing community of scuba
-              divers from all over the world looking to book their next diving
-              trip. By becoming a business partner, you will join our network of
-              high-quality trusted business, giving you instant visibility and
-              allowing you to more effectively market and grow your busniess.{" "}
+              Join the Coral Playground community and reach a growing network of
+              scuba divers worldwide! As a business partner, you&apos;ll be part
+              of a trusted network of high-quality dive centers.{" "}
               <Text color={textColor} as="span" fontWeight="700">
-                Our goal is to make sure you can manage your customers and
-                upcoming dive trips as quickly and easily as possible with
-                complete peace of mind. Let us take care of the bookings so you
-                can focus on the diving.
+                We make managing customers and dive trips a breeze so you can
+                focus on what really matters - the diving experience. Let us
+                handle the bookings and give you complete peace of mind.
               </Text>
             </Text>
           </Flex>
         </Flex>
-        <Flex
-          mb="90px"
-          justify="center"
-          direction="column"
-          // w={{ base: "72%", md: "90%" }}
-          // flexWrap="wrap"
-        >
-          {/* <Box>
-            <Image
-              src="/img/diving/dive_site_marker.svg"
-              width="100px"
-              height="50px"
-              ml="500px"
-            />
-          </Box> */}
+        <Flex justify="center" direction="column">
           <Grid templateColumns="repeat(20, 1fr)" gap={0} zIndex="20">
-            {/* <GridItem colStart={8} colSpan={1}>
-              <Parallax translateY={[0, 190, "easeOutExpo"]} endScroll={200}>
-                <Image
-                  src="/img/diving/dive_site_marker.svg"
-                  width="100px"
-                  height="150px"
-                />
-              </Parallax>
-            </GridItem> */}
             <GridItem colStart={7} colSpan={1}>
               <Parallax translateY={[0, 130, "easeOutExpo"]} endScroll={150}>
                 <Image
@@ -186,7 +154,6 @@ export default function Mission() {
           </Button>
         </Link>
       </InnerContent>
-      <Box bg={endGradient} h="140px" w="100%" />
     </Flex>
   );
 }

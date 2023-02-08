@@ -63,9 +63,9 @@ export default function DiveCentreBenefits() {
             <Parallax speed={-10}>
               <Image
                 // me="110px"
-                src="/img/diving/dive_centre_3d.png"
+                src="/img/home/dive_centre/laptop.png"
                 // w={{ base: "90%", md: "100%", lg: "400px", xl: "565px" }}
-                width="800px"
+                width="1100px"
                 height="800px"
                 // mt={{ base: "40px", md: "40px", lg: "0px" }}
               />
@@ -96,7 +96,7 @@ export default function DiveCentreBenefits() {
                   textAlign={{ base: "center", lg: "left" }}
                   maxW={{ base: "100%", md: "unset" }}
                 >
-                  Easily Manage Operations
+                  Streamline Operations
                 </Text>
                 <Text
                   color={textColorSecondary}
@@ -105,10 +105,12 @@ export default function DiveCentreBenefits() {
                   w={{ base: "100%", md: "100%" }}
                   mb="30px"
                 >
-                  All confirmed dive bookings will appear on your dive centre
-                  dashboard. You will have the ability to view diver details,
-                  contact divers, re-schedule or cancel dives all from a central
-                  spot.
+                  Manage your dive center with ease and focus on the diving
+                  experience. Customers pre-pay a small deposit to reserve their
+                  spot, with the remainder payable directly to your dive center.
+                  Our system handles automatic payments, email confirmations,
+                  and check-ins, ensuring a seamless experience for both you and
+                  your customers.
                 </Text>
                 <Flex
                   align="center"

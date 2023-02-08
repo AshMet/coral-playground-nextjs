@@ -88,12 +88,13 @@ export default function Tools() {
               fontSize="md"
               fontWeight="400"
             >
-              Customer bookings are confirmed with a fully refundable 15%
-              deposit on their selected dives, with the rest owing directly to
-              your dive centre upon the customer&apos;s arrival. This process
-              will also provide your dive centre with all the info you need to
-              prepare for your dive trip including diver details, safety info
-              and any additional equipment needed.
+              At Coral Playground, we make booking a dive trip a breeze for both
+              you and your customers. Customers can secure their spot with a
+              deposit on their selected dives, and the rest is payable directly
+              to you upon their arrival. This process also provides you with all
+              the necessary information, including diver details, safety
+              information, and any additional equipment needs, so you can
+              prepare for the trip with ease.
             </Text>
           </Flex>
         </Flex>

@@ -53,7 +53,6 @@ const Hero = () => {
                 {" "}
                 Red Sea{" "}
               </chakra.span>{" "}
-              <br />
               Diving Adventure
             </Text>
             <Text

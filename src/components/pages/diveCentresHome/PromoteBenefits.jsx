@@ -84,7 +84,7 @@ export default function DiveSiteBenefits() {
                   textAlign={{ base: "center", lg: "left" }}
                   maxW={{ base: "100%", md: "unset" }}
                 >
-                  Increase your Dive Bookings
+                  Get More Customers
                 </Text>
                 <Text
                   textAlign={{ base: "center", lg: "left" }}
@@ -93,9 +93,10 @@ export default function DiveSiteBenefits() {
                   w={{ base: "100%", md: "100%" }}
                   mb="30px"
                 >
-                  Adding dives to your dive schedule makes them instantly
-                  bookable either directly from your dive centre page or through
-                  any dive site you will be operating in
+                  Reach a growing community of scuba divers looking for their
+                  next adventure. As a trusted member of our network of
+                  high-quality dive centers, you&apos;ll gain instant
+                  visibility, making it easier to market and grow your business.
                 </Text>
                 <Flex
                   align="center"
