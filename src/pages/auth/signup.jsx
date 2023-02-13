@@ -66,7 +66,6 @@ export default function SignUp() {
   const toast = useToast();
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
-  const brandStars = useColorModeValue("brand.500", "brand.400");
   const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
   const googleText = useColorModeValue("navy.700", "white");
   const googleHover = useColorModeValue(
@@ -129,24 +128,6 @@ export default function SignUp() {
         },
       },
     });
-    // Success Alert
-    toast({
-      position: "top",
-      render: () => (
-        <AlertPopup
-          type="success"
-          text="Sign Up Successful"
-          subtext="Please confirm your email to complete registration"
-        />
-      ),
-    });
-    // Success Analytics Tag
-    gtag.event({
-      action: "create-dive-centre-success",
-      category: "button",
-      label: "Dive Centre",
-      // value: newItem.title,
-    });
     // Alert & Analytics for failed load
     if (error) {
       toast({
@@ -154,15 +135,34 @@ export default function SignUp() {
         render: () => (
           <AlertPopup
             type="danger"
-            text="Unable to save Dive Trip"
+            text="Unable to Sign Up"
             subtext={error.message}
           />
         ),
       });
       gtag.event({
-        action: "update-profile-failed",
+        action: "signup-error",
         category: "button",
-        label: "Profile",
+        label: "User",
+        // value: newItem.title,
+      });
+    } else {
+      // Success Alert
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="success"
+            text="Sign Up Successful"
+            subtext="Please confirm your email to complete registration"
+          />
+        ),
+      });
+      // Success Analytics Tag
+      gtag.event({
+        action: "signup-success",
+        category: "button",
+        label: "User",
         // value: newItem.title,
       });
     }
@@ -175,24 +175,6 @@ export default function SignUp() {
     setLoading(true);
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-    });
-    // Success Alert
-    toast({
-      position: "top",
-      render: () => (
-        <AlertPopup
-          type="success"
-          text="Signed Up using Google Successfully"
-          subtext="Redirecting..."
-        />
-      ),
-    });
-    // Success Analytics Tag
-    gtag.event({
-      action: "create-dive-centre-success",
-      category: "button",
-      label: "Dive Centre",
-      // value: newItem.title,
     });
     // Alert & Analytics for failed load
     if (error) {
@@ -207,9 +189,28 @@ export default function SignUp() {
         ),
       });
       gtag.event({
-        action: "update-profile-failed",
+        action: "google-login-error",
         category: "button",
-        label: "Profile",
+        label: "User",
+        // value: newItem.title,
+      });
+    } else {
+      // Success Alert
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="success"
+            text="Signed Up using Google Successfully"
+            subtext="Redirecting..."
+          />
+        ),
+      });
+      // Success Analytics Tag
+      gtag.event({
+        action: "signup-google-success",
+        category: "button",
+        label: "User",
         // value: newItem.title,
       });
     }
@@ -220,10 +221,6 @@ export default function SignUp() {
 
   if (user) {
     router.push("/");
-    // toast({
-    //   position: "top",
-    //   render: () => <AlertPopup type="info" text="User is already logged in" />,
-    // });
   } else
     return (
       <LoginLayout
@@ -322,12 +319,12 @@ export default function SignUp() {
                   </Flex>
                 </>
               )}
-              <FormControl>
-                <SimpleGrid
-                  columns={{ base: "1", md: "2" }}
-                  gap={{ sm: "10px", md: "26px" }}
-                >
-                  <Flex direction="column">
+              <SimpleGrid
+                columns={{ base: "1", md: "2" }}
+                gap={{ sm: "10px", md: "26px" }}
+              >
+                <Flex direction="column">
+                  <FormControl isRequired isError={firstName === ""}>
                     <FormLabel
                       display="flex"
                       ms="4px"
@@ -336,7 +333,7 @@ export default function SignUp() {
                       color={textColor}
                       mb="8px"
                     >
-                      First name<Text color={brandStars}>*</Text>
+                      First name
                     </FormLabel>
                     <Input
                       name="firstName"
@@ -350,8 +347,20 @@ export default function SignUp() {
                       size="lg"
                       onChange={handleChange}
                     />
-                  </Flex>
-                  <Flex direction="column">
+                    {/* {firstName !== "" ? (
+                      <FormHelperText>
+                        Enter the email you&apos;d like to receive the
+                        newsletter on.
+                      </FormHelperText>
+                    ) : (
+                      <FormErrorMessage>
+                        First Name is required.
+                      </FormErrorMessage>
+                    )} */}
+                  </FormControl>
+                </Flex>
+                <Flex direction="column">
+                  <FormControl isRequired>
                     <FormLabel
                       display="flex"
                       ms="4px"
@@ -360,7 +369,7 @@ export default function SignUp() {
                       color={textColor}
                       mb="8px"
                     >
-                      Last name<Text color={brandStars}>*</Text>
+                      Last name
                     </FormLabel>
                     <Input
                       name="lastName"
@@ -373,8 +382,10 @@ export default function SignUp() {
                       size="lg"
                       onChange={handleChange}
                     />
-                  </Flex>
-                </SimpleGrid>
+                  </FormControl>
+                </Flex>
+              </SimpleGrid>
+              <FormControl isRequired>
                 <FormLabel
                   display="flex"
                   ms="4px"
@@ -383,7 +394,7 @@ export default function SignUp() {
                   color={textColor}
                   mb="8px"
                 >
-                  Email<Text color={brandStars}>*</Text>
+                  Email
                 </FormLabel>
                 <Input
                   name="email"
@@ -397,6 +408,8 @@ export default function SignUp() {
                   size="lg"
                   onChange={handleChange}
                 />
+              </FormControl>
+              <FormControl isRequired>
                 <FormLabel
                   ms="4px"
                   fontSize="sm"
@@ -405,74 +418,70 @@ export default function SignUp() {
                   color={textColor}
                   display="flex"
                 >
-                  Password<Text color={brandStars}>*</Text>
+                  Password
                 </FormLabel>
-                <InputGroup size="md">
-                  <Input
-                    name="password"
-                    value={password}
-                    isRequired
-                    variant="auth"
-                    fontSize="sm"
-                    ms={{ base: "0px", md: "4px" }}
-                    placeholder="Min. 8 characters"
-                    mb="24px"
-                    size="lg"
-                    type={show ? "text" : "password"}
-                    onChange={handleChange}
-                  />
-                  <InputRightElement
-                    display="flex"
-                    alignItems="center"
-                    mt="4px"
-                  >
-                    <Icon
-                      color={textColorSecondary}
-                      _hover={{ cursor: "pointer" }}
-                      as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                      onClick={togglePassVis}
-                    />
-                  </InputRightElement>
-                </InputGroup>
-                <Flex justifyContent="space-between" align="center" mb="24px">
-                  <FormControl display="flex" alignItems="start">
-                    <Checkbox
-                      id="remember-login"
-                      colorScheme="brandScheme"
-                      me="10px"
-                      mt="3px"
-                    />
-                    <FormLabel
-                      htmlFor="remember-login"
-                      mb="0"
-                      fontWeight="normal"
-                      color={textColor}
-                      fontSize="sm"
-                    >
-                      By creating an account means you agree to the{" "}
-                      <Link href="legal/terms" fontWeight="500">
-                        Terms and Conditions,
-                      </Link>{" "}
-                      and our{" "}
-                      <Link href="legal/privacy" fontWeight="500">
-                        Privacy Policy
-                      </Link>
-                    </FormLabel>
-                  </FormControl>
-                </Flex>
-                <Button
-                  variant="brand"
-                  fontSize="14px"
-                  fontWeight="500"
-                  w="100%"
-                  h="50"
-                  mb="24px"
-                  onClick={signUpEmailPass}
-                  disabled={loading}
-                >
-                  Create my account
-                </Button>
               </FormControl>
+              <InputGroup size="md">
+                <Input
+                  name="password"
+                  value={password}
+                  isRequired
+                  variant="auth"
+                  fontSize="sm"
+                  ms={{ base: "0px", md: "4px" }}
+                  placeholder="Min. 8 characters"
+                  mb="24px"
+                  size="lg"
+                  type={show ? "text" : "password"}
+                  onChange={handleChange}
+                />
+                <InputRightElement display="flex" alignItems="center" mt="4px">
+                  <Icon
+                    color={textColorSecondary}
+                    _hover={{ cursor: "pointer" }}
+                    as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                    onClick={togglePassVis}
+                  />
+                </InputRightElement>
+              </InputGroup>
+              <Flex justifyContent="space-between" align="center" mb="24px">
+                <FormControl display="flex" alignItems="start">
+                  <Checkbox
+                    id="remember-login"
+                    colorScheme="brandScheme"
+                    me="10px"
+                    mt="3px"
+                  />
+                  <FormLabel
+                    htmlFor="remember-login"
+                    mb="0"
+                    fontWeight="normal"
+                    color={textColor}
+                    fontSize="sm"
+                  >
+                    By creating an account means you agree to the{" "}
+                    <Link href="legal/terms" fontWeight="500">
+                      Terms and Conditions,
+                    </Link>{" "}
+                    and our{" "}
+                    <Link href="legal/privacy" fontWeight="500">
+                      Privacy Policy
+                    </Link>
+                  </FormLabel>
+                </FormControl>
+              </Flex>
+              <Button
+                variant="brand"
+                fontSize="14px"
+                fontWeight="500"
+                w="100%"
+                h="50"
+                mb="24px"
+                onClick={signUpEmailPass}
+                disabled={loading}
+              >
+                Create my account
+              </Button>
               <Flex
                 flexDirection="column"
                 justifyContent="center"
