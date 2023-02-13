@@ -88,11 +88,11 @@ export default function Tools() {
               fontSize="md"
               fontWeight="400"
             >
-              Bookings are confirmed with a fully refnudable 25% deposit on your
-              selected dives, with the rest owing directly to the dive centre
-              upon arrival. This process will also provide your dive centre with
-              all the info they need to prepare for your dive including diver
-              details, safety info and any additional equipment needed.
+              At Coral Playground, we make booking a dive trip easy and secure
+              for everyone involved. Confirm your spot with a fully refundable
+              deposit on your selected dives and rest easy knowing the remainder
+              is payable directly to the dive center upon arrival. Book with
+              confidence and explore the underwater world with us.
             </Text>
           </Flex>
         </Flex>

@@ -117,7 +117,7 @@ export default function DiveCentre({ diveCentreData }) {
 export async function getServerSideProps(context) {
   const { id } = context.query;
   const { data: diveCentreData } = await supabase
-    .from("dive_centre_view")
+    .from("dive_centres_view")
     .select(
       `id, name, description, address, latitude, longitude, paymentMethods, equipment, services, languages, memberships,
       coverPhotoUrl, city, country`

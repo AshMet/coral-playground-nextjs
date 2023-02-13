@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
@@ -22,20 +23,23 @@
 
 // Chakra imports
 import {
-  // Box,
+  Box,
   Flex,
-  // Link,
+  Icon,
+  Stack,
   Text,
   useColorModeValue,
-  // SimpleGrid,
 } from "@chakra-ui/react";
-// import Image from "next/image";
+import {
+  TbAward,
+  TbCalendarEvent,
+  TbCreditCard,
+  TbCrown,
+  TbGlobe,
+  TbRun,
+} from "react-icons/tb";
 
-// Assets
-// import card1 from "assets/img/free/tools/card1.png";
-// import card2 from "assets/img/free/tools/card2.png";
-// Custom components
-// import Card from "components/card/Card";
+import Feature from "components/features/2ColumnIcon";
 import InnerContent from "layouts/InnerContent";
 
 export default function Benefits() {
@@ -90,98 +94,75 @@ export default function Benefits() {
             </Text>
           </Flex>
         </Flex>
-        {/* <SimpleGrid
-          w="100%"
-          columns={{ base: "1", lg: "2" }}
-          gap="20px"
-          px="20px"
-        >
-          <Link href="https://www.supa-palette.com/?ref=horizon-ui">
-            <Card p="0px">
-              <Image src={card1} borderRadius="30px" />
-              <Box
-                mt={{ base: "-38px", md: "-44px" }}
-                me={{ base: "0px", lg: "0px" }}
-                p="30px"
-              >
-                <Text
-                  fontWeight="800"
-                  mb="20px"
-                  color={textColor}
-                  fontSize={{ base: "xl", xl: "22px" }}
-                  lineHeight={{ base: "140%", md: "100%" }}
-                  maxW={{ base: "90%", md: "unset" }}
-                >
-                  Horizon UI + Supa Palette
-                </Text>
-                <Text
-                  mb="30px"
-                  fontWeight="500"
-                  color={textColorSecondary}
-                  fontSize={{ base: "sm", md: "md" }}
-                >
-                  Horizon UI’s color palette system is available on Supa
-                  Palette, a color palettes generator, editor and manager plugin
-                  for Figma!
-                </Text>
-                <Link
-                  mt={{ base: "20px", md: "unset" }}
-                  w="max-content"
-                  color={brandColor}
-                  fontWeight="700"
-                  href="https://www.supa-palette.com/?ref=horizon-ui"
-                  fontSize="md"
-                  whiteSpace="nowrap"
-                  textDecor="underline"
-                >
-                  Try Horizon + Supa Pallete for free
-                </Link>
-              </Box>
-            </Card>
-          </Link>
-          <Link href="https://appseed.us/product/horizon-ui/api-server-nodejs/?ref=horizon-ui">
-            <Card p="0px">
-              <Image src={card2} borderRadius="30px" />
-              <Box
-                mt={{ base: "-38px", md: "-44px" }}
-                me={{ base: "0px", lg: "0px" }}
-                p="30px"
-              >
-                <Text
-                  fontWeight="800"
-                  mb="20px"
-                  color={textColor}
-                  fontSize={{ base: "xl", xl: "22px" }}
-                  lineHeight={{ base: "140%", md: "100%" }}
-                  maxW={{ base: "90%", md: "unset" }}
-                >
-                  Horizon UI - NodeJS, Django, Flask & Firebase
-                </Text>
-                <Text
-                  mb="30px"
-                  fontWeight="500"
-                  color={textColorSecondary}
-                  fontSize={{ base: "sm", md: "md" }}
-                >
-                  Try Horizon UI with the most popular back-end languages:
-                  NodeJS, Django, Flask & Firebase made with AppSeed generator!
-                </Text>
-                <Link
-                  mt={{ base: "20px", md: "unset" }}
-                  w="max-content"
-                  color={brandColor}
-                  fontWeight="700"
-                  href="https://appseed.us/product/horizon-ui/api-server-nodejs/?ref=horizon-ui"
-                  fontSize="md"
-                  whiteSpace="nowrap"
-                  textDecor="underline"
-                >
-                  Get started with Horizon Full Stack
-                </Link>
-              </Box>
-            </Card>
-          </Link>
-        </SimpleGrid> */}
+
+        <Box my={20}>
+          <Stack
+            spacing={{
+              base: 10,
+              md: 0,
+            }}
+            display={{
+              md: "grid",
+            }}
+            gridTemplateColumns={{
+              md: "repeat(2,1fr)",
+            }}
+            gridColumnGap={{
+              md: 8,
+            }}
+            gridRowGap={{
+              md: 10,
+            }}
+          >
+            <Feature
+              title="Reserve Your Spot with Ease"
+              icon={<Icon as={TbCalendarEvent} size="25px" />}
+            >
+              Secure your dive trip with a small, fully refundable deposit.
+              Booking with us has never been easier!
+            </Feature>
+
+            <Feature
+              title="Browse and Compare"
+              icon={<Icon as={TbGlobe} size="25px" />}
+            >
+              Browse through a variety of dive sites and dive centers in the Red
+              Sea, and compare to find the perfect fit for you.
+            </Feature>
+
+            <Feature
+              title="Get Certified"
+              icon={<Icon as={TbAward} size="25px" />}
+            >
+              Enhance your diving experience by getting certified through our
+              network of trusted dive centers.
+            </Feature>
+
+            <Feature
+              title="Enjoy Secure Payments"
+              icon={<Icon as={TbCreditCard} size="25px" />}
+            >
+              Make secure, hassle-free payments with confidence. We&apos;ve got
+              you covered.
+            </Feature>
+
+            <Feature
+              title="Streamline Your Experience"
+              icon={<Icon as={TbRun} size="25px" />}
+            >
+              Check-in faster and dive sooner with our automated check-in
+              process. Say goodbye to long wait times.
+            </Feature>
+
+            <Feature
+              title="Access Exclusive Trips"
+              icon={<Icon as={TbCrown} size="25px" />}
+            >
+              Join us for unique and unforgettable diving experiences, only
+              available through Coral Playground.
+            </Feature>
+          </Stack>
+        </Box>
       </InnerContent>
     </Flex>
   );

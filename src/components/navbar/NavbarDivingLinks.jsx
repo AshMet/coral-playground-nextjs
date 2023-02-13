@@ -45,7 +45,7 @@ function SignedOutMenuList() {
   return (
     <Menu>
       <MenuButton p="0px">
-        <HiOutlineUserCircle />
+        <HiOutlineUserCircle size={20} />
       </MenuButton>
       <MenuList
         boxShadow={shadow}
@@ -106,7 +106,7 @@ function SignedOutMenuList() {
               mt={1}
               mr={4}
               leftIcon={<IoWalletOutline />}
-              onClick={() => router.push("/auth/login")}
+              onClick={() => router.push("/auth/signup")}
             >
               Sign Up
             </Button>

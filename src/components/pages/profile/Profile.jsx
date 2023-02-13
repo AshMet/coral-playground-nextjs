@@ -25,14 +25,14 @@
 
 */
 
-import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
-// import { useContext } from "react";
+import { Box, Flex, SimpleGrid, Text } from "@chakra-ui/react";
+import { useContext } from "react";
 
 // import AlertPopup from "components/alerts/AlertPopup";
 import Banner from "components/pages/profile/Banner";
 import DiveCentreHub from "components/pages/profile/DiveCentreHub";
 import Info from "components/pages/profile/Info";
-// import { ProfileContext } from "contexts/ProfileContext";
+import { ProfileContext } from "contexts/ProfileContext";
 // import * as gtag from "lib/data/gtag";
 
 export default function Profile({ session }) {
@@ -41,14 +41,7 @@ export default function Profile({ session }) {
   // const [username, setUsername] = useState(null);
   // const [avatarUrl, setAvatarUrl] = useState(null);
   // const toast = useToast();
-  // const {
-  // username,
-  // setUsername,
-  // avatarUrl,
-  // setAvatarUrl,
-  //   updateProfile,
-  //   profileLoading,
-  // } = useContext(ProfileContext);
+  const { profile } = useContext(ProfileContext);
 
   // async function getProfile() {
   //   try {
@@ -149,17 +142,18 @@ export default function Profile({ session }) {
         {/* Column Left */}
         <Flex direction="column">
           <Banner uid={session.user.id} />
-          {/* uid={user!.id} */}
-          <Info
-          // username={username}
-          // setUsername={setUsername}
-          // updateProfile={updateProfile}
-          // loading={profileLoading}
-          />
+          <Info />
         </Flex>
         {/* Column Right */}
         <Flex direction="column">
-          <DiveCentreHub />
+          {profile.userRole === "dive_centre_owner" && (
+            <>
+              <Text fontSize="xl" fontWeight="bold" mb={5}>
+                Manage your business
+              </Text>
+              <DiveCentreHub />
+            </>
+          )}
           {/* <Socials />
           <Password /> */}
         </Flex>

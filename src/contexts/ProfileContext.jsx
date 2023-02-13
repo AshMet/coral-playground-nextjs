@@ -33,7 +33,7 @@ export const ProfileProvider = ({ children }) => {
         error,
         status,
       } = await supabase
-        .from("dive_centre_view")
+        .from("dive_centres_view")
         .select("*")
         .eq("ownerId", user.id)
         .single();
@@ -56,7 +56,7 @@ export const ProfileProvider = ({ children }) => {
     const getProfile = async () => {
       setProfileLoading(true);
       const { data } = await supabase
-        .from("profile_view")
+        .from("user_profiles_view")
         .select("*")
         .eq("id", user.id)
         .single();
@@ -72,16 +72,26 @@ export const ProfileProvider = ({ children }) => {
     setProfileLoading(true);
     // Get Profile Data
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { data, error } = await supabase.from("profiles").upsert({
-      id: user.id,
-      username,
-      bio,
-      avatar_url: avatarUrl,
-      first_name: firstName,
-      last_name: lastName,
-      certification: divingCert,
-      // avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarUrl}`,
-      updated_at: new Date().toISOString(),
+    // const { data, error } = await supabase.from("profiles").upsert({
+    //   id: user.id,
+    //   username,
+    //   bio,
+    //   avatar_url: avatarUrl,
+    //   first_name: firstName,
+    //   last_name: lastName,
+    //   certification: divingCert,
+    //   // avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarUrl}`,
+    //   updated_at: new Date().toISOString(),
+    // });
+    const { error } = await supabase.auth.updateUser({
+      data: {
+        username,
+        bio,
+        avatar_url: avatarUrl,
+        first_name: firstName,
+        last_name: lastName,
+        certification: divingCert,
+      },
     });
     // Success Alert
     toast({

@@ -179,7 +179,7 @@ export default function DiveSites({ diveCentres }) {
 
 export async function getStaticProps() {
   const { data: diveCentres } = await supabase
-    .from("dive_centre_view")
+    .from("active_dive_centres_view")
     .select(
       `
       id, name, description, address, coverPhotoUrl, city, country

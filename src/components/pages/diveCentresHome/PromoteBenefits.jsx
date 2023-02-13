@@ -129,7 +129,7 @@ export default function DiveSiteBenefits() {
                   direction={{ base: "column", md: "row" }}
                   mb="30px"
                 >
-                  <Link href="/diving/dive_sites">
+                  <Link href="/auth/login">
                     <Button
                       py="20px"
                       px="16px"
@@ -141,7 +141,7 @@ export default function DiveSiteBenefits() {
                       w={{ base: "335px", md: "210px" }}
                       h="54px"
                     >
-                      View Dive Sites
+                      Join Today
                       <Icon
                         as={MdChevronRight}
                         ms="5px"
@@ -151,7 +151,7 @@ export default function DiveSiteBenefits() {
                       />
                     </Button>
                   </Link>
-                  <Link href="/">
+                  {/* <Link href="/">
                     <Button
                       variant="no-hover"
                       border="1px solid"
@@ -166,7 +166,7 @@ export default function DiveSiteBenefits() {
                     >
                       See Live Preview
                     </Button>
-                  </Link>
+                  </Link> */}
                 </Flex>
               </Box>
             </Parallax>

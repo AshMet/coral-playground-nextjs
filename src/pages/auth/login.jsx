@@ -73,7 +73,7 @@ function Login() {
         >
           <Box me="auto">
             <Heading color={textColor} fontSize="36px" mb="10px">
-              Login or Sign Up
+              Login
             </Heading>
             <Text
               mb="36px"

@@ -20,8 +20,10 @@ import { useState } from "react";
 import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
+import SwitchField from "components/fields/SwitchField";
 import TextField from "components/fields/TextField";
 // import ImageUploader from "components/pages/diveCentre/ImageUploader";
+import MapWithAutoComplete from "components/maps/MapWithAutoComplete";
 import DivingLayout from "layouts/DivingLayout";
 import * as gtag from "lib/data/gtag";
 
@@ -38,6 +40,7 @@ export default function CreateDiveCentre() {
     languages: [],
     services: [],
     cityId: "",
+    active: false,
   };
 
   const toast = useToast();
@@ -68,6 +71,7 @@ export default function CreateDiveCentre() {
     languages,
     services,
     cityId,
+    active,
   } = diveCentre;
 
   const handleChange = (e) => {
@@ -87,7 +91,7 @@ export default function CreateDiveCentre() {
       setSelectedPaymentItems(selectedItems);
       setDiveCentre({
         ...diveCentre,
-        paymentMethods: selectedPaymentItems?.map((item) => item.value),
+        paymentMethods: selectedItems?.map((item) => item.value),
       });
     }
   };
@@ -108,7 +112,7 @@ export default function CreateDiveCentre() {
       setSelectedEquipmentItems(selectedItems);
       setDiveCentre({
         ...diveCentre,
-        equipment: selectedEquipmentItems?.map((item) => item.value),
+        equipment: selectedItems?.map((item) => item.value),
       });
     }
   };
@@ -132,7 +136,7 @@ export default function CreateDiveCentre() {
       setSelectedLanguageItems(selectedItems);
       setDiveCentre({
         ...diveCentre,
-        languages: selectedLanguageItems?.map((item) => item.value),
+        languages: selectedItems?.map((item) => item.value),
       });
     }
   };
@@ -148,7 +152,7 @@ export default function CreateDiveCentre() {
       setSelectedMembershipItems(selectedItems);
       setDiveCentre({
         ...diveCentre,
-        memberships: selectedMembershipItems?.map((item) => item.value),
+        memberships: selectedItems?.map((item) => item.value),
       });
     }
   };
@@ -172,7 +176,7 @@ export default function CreateDiveCentre() {
       setSelectedServiceItems(selectedItems);
       setDiveCentre({
         ...diveCentre,
-        services: selectedServiceItems?.map((item) => item.value),
+        services: selectedItems?.map((item) => item.value),
       });
     }
   };
@@ -192,6 +196,7 @@ export default function CreateDiveCentre() {
         languages,
         memberships,
         services,
+        active,
         city_id: cityId,
         owner_id: user.id,
       })
@@ -253,6 +258,10 @@ export default function CreateDiveCentre() {
             </Text>
           </Flex>
           {/* <ImageUploader avatarUrl={avatarUrl} setAvatarUrl={setAvatarUrl} /> */}
+          <MapWithAutoComplete
+            diveCentre={diveCentre}
+            setDiveCentre={setDiveCentre}
+          />
           <SimpleGrid
             columns={{ sm: 1, md: 2 }}
             spacing={{ base: "20px", xl: "20px" }}
@@ -489,6 +498,20 @@ export default function CreateDiveCentre() {
               value={description}
               placeholder="Additional Information about your business and operations"
               onChange={handleChange}
+            />
+            <SwitchField
+              mb="25px"
+              me="30px"
+              id="1"
+              isChecked={active}
+              onChange={() =>
+                setDiveCentre({
+                  ...diveCentre,
+                  active: !active,
+                })
+              }
+              label={`Status: ${active}`}
+              desc="If disabled, your dive centre will no longer appear in the search results and will no longer be able to receive any new bookings. This can be changed back at any time."
             />
           </SimpleGrid>
         </Card>

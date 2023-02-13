@@ -38,7 +38,7 @@ const Features = () => {
   return (
     <Container maxW="6xl" p={{ base: 5, md: 10 }}>
       <SimpleGrid
-        columns={{ base: 1, sm: 2, md: 3 }}
+        columns={{ sm: 1, md: 3 }}
         placeItems="center"
         spacing={10}
         mb={4}
@@ -51,6 +51,7 @@ const Features = () => {
             rounded="lg"
             textAlign="center"
             pos="relative"
+            mb={6}
           >
             <Flex
               p={4}

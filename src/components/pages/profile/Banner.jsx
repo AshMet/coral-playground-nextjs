@@ -6,7 +6,6 @@ import {
   Button,
   Flex,
   Image,
-  Select,
   Text,
   useColorModeValue,
   useToast,
@@ -123,7 +122,7 @@ export default function Settings(props) {
       <Text fontSize="2xl" textColor={textColorPrimary} fontWeight="700">
         {profile?.username}
       </Text>
-      <Flex align="center" mx="auto" px="15px">
+      <Flex align="center" mx="auto" px="15px" mb={5}>
         <Text
           me="4px"
           color={textColorSecondary}
@@ -133,19 +132,17 @@ export default function Settings(props) {
         >
           Account type:
         </Text>
-        <Select
-          id="user_type"
-          w="unset"
-          variant="transparent"
+        <Text
+          ml={3}
           display="flex"
           textColor={textColorPrimary}
           color={textColorPrimary}
           alignItems="center"
-          defaultValue="Dive Centre Owner"
         >
-          <option value="Dive Centre Owner">Dive Centre Owner</option>
-          <option value="Diver">Diver</option>
-        </Select>
+          {user.user_metadata.user_role === "dive_centre_owner"
+            ? "Dive Centre Owner"
+            : "Scuba Diver"}
+        </Text>
       </Flex>
       <Flex width={150} direction="column" mx="auto">
         {/* <label className="button primary block" htmlFor="single">

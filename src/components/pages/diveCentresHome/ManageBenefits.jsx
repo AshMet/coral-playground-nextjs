@@ -118,7 +118,7 @@ export default function DiveCentreBenefits() {
                   mb="30px"
                   justifyContent={{ base: "center", lg: "unset" }}
                 >
-                  <Link href="/diving/dive_sites">
+                  <Link href="/auth/login">
                     <Button
                       py="20px"
                       px="16px"
@@ -130,7 +130,7 @@ export default function DiveCentreBenefits() {
                       w={{ base: "335px", md: "210px" }}
                       h="54px"
                     >
-                      View Dive Centres
+                      Sign up
                       <Icon
                         as={MdChevronRight}
                         ms="5px"

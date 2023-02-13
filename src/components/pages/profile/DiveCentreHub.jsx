@@ -4,18 +4,20 @@ import {
   Center,
   Flex,
   Icon,
+  SimpleGrid,
   Spinner,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { FaRegCommentDots } from "react-icons/fa";
 import {} from "react-icons/io";
 import { IoEllipsisHorizontal } from "react-icons/io5";
-import { MdOutlineFavoriteBorder, MdAdd } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
 
+import SetUp from "components/actions/SetUp";
 import Card from "components/card/Card";
+import SwitchField from "components/fields/SwitchField";
 import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import OwnerDiveCentreMenu from "components/pages/profile/OwnerDiveCentreMenu";
 import { ProfileContext } from "contexts/ProfileContext";
@@ -23,6 +25,7 @@ import { ProfileContext } from "contexts/ProfileContext";
 export default function DiveCentreHub(props) {
   const { ...rest } = props;
   const textColor = useColorModeValue("gray.700", "white");
+  const borderColor = useColorModeValue("secondaryGray.400", "whiteAlpha.100");
   const bgAdd = useColorModeValue("white", "navy.800");
   const { ownerDiveCentre, diveCentreLoading } = useContext(ProfileContext);
   const router = useRouter();
@@ -60,65 +63,64 @@ export default function DiveCentreHub(props) {
               />
             </Flex>
           </Box>
-          <Flex direction="column">
-            <ImageUploader
-              diveCentre={ownerDiveCentre}
-              // coverPhoto={ownerDiveCentre.cover_photo}
+          <ImageUploader
+            diveCentre={ownerDiveCentre}
+            // coverPhoto={ownerDiveCentre.cover_photo}
+          />
+          <SimpleGrid
+            columns={{ sm: 1, md: 1, xl: 1 }}
+            spacing={{ base: "20px", xl: "0px" }}
+          >
+            <SwitchField
+              mb="25px"
+              me="30px"
+              id="1"
+              label="Status: Active"
+              desc="If disabled, your dive centre will no longer appear in the search results and will no longer be able to receive any new bookings. This can be changed back at any time."
             />
-            {/* <Image
-              src={ownerDiveCentre.cover_photo}
-              minW={{ sm: "270px" }}
-              h="auto"
-              borderRadius="16px"
-              mb="30px"
-            /> */}
-            <Box px={{ md: "20px" }}>
-              <Flex justify="space-between" align="center" mb="30px">
-                <Flex align="center" color={textColor}>
-                  <Icon
-                    as={MdOutlineFavoriteBorder}
-                    w="18px"
-                    h="18px"
-                    me="4px"
-                    cursor="pointer"
-                  />
-                  <Text fontSize="md" fontWeight="500">
-                    7
-                    <Text
-                      as="span"
-                      display={{ base: "none", md: "unset" }}
-                      fontSize="md"
-                      fontWeight="500"
-                    >
-                      {" "}
-                      Dive Trips
-                    </Text>
-                  </Text>
-                </Flex>
-                <Flex align="center" color={textColor}>
-                  <Icon
-                    as={FaRegCommentDots}
-                    w="18px"
-                    h="18px"
-                    me="4px"
-                    cursor="pointer"
-                  />
-                  <Text fontSize="md" fontWeight="500">
-                    38
-                    <Text
-                      as="span"
-                      display={{ base: "none", md: "unset" }}
-                      fontSize="md"
-                      fontWeight="500"
-                    >
-                      {" "}
-                      Images
-                    </Text>
-                  </Text>
-                </Flex>
-              </Flex>
-            </Box>
-          </Flex>
+            <SetUp
+              py="20px"
+              borderBottom="1px solid"
+              borderColor={borderColor}
+              name="View Dive Centre page"
+              value="Active"
+              actionName="View"
+              action={() =>
+                router.push(`/diving/dive_centres/${ownerDiveCentre.id}`)
+              }
+            />
+            <SetUp
+              py="20px"
+              borderBottom="1px solid"
+              borderColor={borderColor}
+              name="Make changes"
+              value="Last change: 34/07/2022"
+              actionName="Edit"
+              action={() =>
+                router.push(`/diving/dive_centres/${ownerDiveCentre.id}/edit`)
+              }
+            />
+            <SetUp
+              py="20px"
+              borderBottom="1px solid"
+              borderColor={borderColor}
+              name="Add Dive Trips"
+              value="Available: 7"
+              actionName="Add"
+              action={() =>
+                router.push(
+                  `/diving/dive_centres/${ownerDiveCentre.id}/dive_trips/new`
+                )
+              }
+            />
+            <SetUp
+              pt="20px"
+              name="Archive Dive Centre"
+              value="Cannot be Undone!"
+              actionName="Delete"
+              btnColor="brand.100"
+            />
+          </SimpleGrid>
         </>
       ) : (
         <Center>

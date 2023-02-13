@@ -1,9 +1,6 @@
 // Chakra imports
 import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
-// Custom components
-import { GiDivingHelmet } from "react-icons/gi";
-import { IoBoatOutline } from "react-icons/io5";
-import { MdCheckCircle } from "react-icons/md";
+import { TbCalendarEvent, TbScubaMask, TbShoppingCart } from "react-icons/tb";
 
 import { DashCurveDown, DashCurveUp } from "components/icons/Icons";
 import IconStep from "components/icons/IconStep";
@@ -22,8 +19,8 @@ export default function Conversion(props) {
         justifyContent="space-around"
       >
         <IconStep
-          icon={GiDivingHelmet}
-          title="Explore"
+          icon={TbScubaMask}
+          title="Discover"
           subtitle="Browse our list of Dive Sites and Dive Centres to find upcoming
             trips"
         />
@@ -35,8 +32,8 @@ export default function Conversion(props) {
           h="22px"
         />
         <IconStep
-          icon={IoBoatOutline}
-          title="Select"
+          icon={TbCalendarEvent}
+          title="Schedule"
           subtitle="Pick the dive trips and dates you wish to dive, and we will take
             care of the rest"
           // mx="60px"
@@ -49,7 +46,7 @@ export default function Conversion(props) {
           h="22px"
         />
         <IconStep
-          icon={MdCheckCircle}
+          icon={TbShoppingCart}
           title="Checkout"
           subtitle="Provide your basic details and pay a refundable deposit"
         />

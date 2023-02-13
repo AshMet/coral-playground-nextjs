@@ -22,6 +22,7 @@ import { useState } from "react";
 import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
+import SwitchField from "components/fields/SwitchField";
 import TextField from "components/fields/TextField";
 import DivingLayout from "layouts/DivingLayout";
 import * as gtag from "lib/data/gtag";
@@ -54,12 +55,17 @@ export default function UpdateDiveCentre({ diveCentreData }) {
     equipment,
     languages,
     services,
+    active,
     cityId,
   } = diveCentre;
 
+  const [activeStatus, setActiveStatus] = useState(active);
   const handleChange = (e) => {
     setDiveCentre({ ...diveCentre, [e.target.name]: e.target.value });
   };
+
+  // const makeActive = (e) => {
+  //   setDiveCentre({ ...diveCentre, active: !active });
 
   // Payment Methods
   const paymentOptions = [
@@ -76,7 +82,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
       setSelectedPaymentItems(selectedItems);
       setDiveCentre({
         ...diveCentre,
-        paymentMethods: selectedPaymentItems?.map((item) => item.value),
+        paymentMethods: selectedItems?.map((item) => item.value),
       });
     }
   };
@@ -100,7 +106,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
       setSelectedEquipmentItems(selectedItems);
       setDiveCentre({
         ...diveCentre,
-        equipment: selectedEquipmentItems?.map((item) => item.value),
+        equipment: selectedItems?.map((item) => item.value),
       });
     }
   };
@@ -127,7 +133,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
       setSelectedLanguageItems(selectedItems);
       setDiveCentre({
         ...diveCentre,
-        languages: selectedLanguageItems?.map((item) => item.value),
+        languages: selectedItems?.map((item) => item.value),
       });
     }
   };
@@ -146,7 +152,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
       setSelectedMembershipItems(selectedItems);
       setDiveCentre({
         ...diveCentre,
-        memberships: selectedMembershipItems?.map((item) => item.value),
+        memberships: selectedItems?.map((item) => item.value),
       });
     }
   };
@@ -173,7 +179,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
       setSelectedServiceItems(selectedItems);
       setDiveCentre({
         ...diveCentre,
-        services: selectedServiceItems?.map((item) => item.value),
+        services: selectedItems?.map((item) => item.value),
       });
     }
   };
@@ -193,6 +199,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
         languages,
         memberships,
         services,
+        active: activeStatus,
         city_id: cityId,
       })
       // .eq("owner_id", user?.id)
@@ -486,6 +493,18 @@ export default function UpdateDiveCentre({ diveCentreData }) {
               placeholder="Additional Information about your business and operations"
               onChange={handleChange}
             />
+            <SwitchField
+              mb="25px"
+              me="30px"
+              id="1"
+              size="xl"
+              name="active"
+              // value={!active}
+              isChecked={activeStatus || false}
+              onChange={() => setActiveStatus(!activeStatus)}
+              label={`Status: ${activeStatus ? "Active" : "Not Active"}`}
+              desc="If disabled, your dive centre will no longer appear in the search results and will no longer be able to receive any new bookings. This can be changed back at any time."
+            />
           </SimpleGrid>
         </Card>
       </FormControl>
@@ -525,10 +544,10 @@ export async function getServerSideProps(context) {
       },
     };
   const { data } = await supabase
-    .from("dive_centre_view")
+    .from("dive_centres_view")
     .select(
       `id, name, description, address, latitude, longitude, paymentMethods, equipment, services, languages, memberships,
-      coverPhotoUrl, city, cityId, country`
+      coverPhotoUrl, city, cityId, country, active`
     )
     .match({ id })
     .single();
