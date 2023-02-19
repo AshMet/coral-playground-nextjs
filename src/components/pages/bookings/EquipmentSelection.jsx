@@ -9,29 +9,23 @@ import {
   VStack,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useUser } from "@supabase/auth-helpers-react";
-import { useRouter } from "next/router";
 import { useContext } from "react";
 
-import { DivingContext } from "../../../contexts/DivingContext";
 import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
+import { CartContext } from "contexts/CartContext";
 
 export default function EquipmentSelection(props) {
-  const { equipment, mediaTab } = props;
+  const { equipment, summaryTab } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const priceColor = useColorModeValue("green.300", "green.500");
   const iconColor = useColorModeValue(
     "",
     "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
   );
-  const user = useUser();
   const selectedBgColor = useColorModeValue("brand.400", "brand.400");
-  // const [equipmentList, setEquipmentList] = useState([]);
-  const router = useRouter();
 
-  const { equipmentList, setEquipmentList, redirectToCheckout } =
-    useContext(DivingContext);
+  const { equipmentList, setEquipmentList } = useContext(CartContext);
 
   const freeEquipment = equipment.filter((item) => item.price === 0);
   const PaidEquipment = equipment.filter((item) => item.price !== 0);
@@ -124,7 +118,7 @@ export default function EquipmentSelection(props) {
                     width="100%"
                     height="40px"
                     borderRadius="15px"
-                    filter="invert(100%) sepia(0%) saturate(7500%) hue-rotate(70deg) brightness(99%) contrast(107%)"
+                    filter={iconColor}
                   />
                   <Text mb={0}>{item.name}</Text>
                 </VStack>
@@ -134,38 +128,20 @@ export default function EquipmentSelection(props) {
         </Flex>
         <Flex justify="space-between" mt="24px">
           <Button
-            variant="light"
+            // isLoading={cartItems.length === 0}
+            loadingText="Select a Dive"
+            spinnerPlacement="end"
+            // spinner={<BeatLoader size={8} color='white' />}
+            variant="darkBrand"
             fontSize="sm"
             borderRadius="16px"
             w={{ base: "128px", md: "148px" }}
             h="46px"
-            onClick={() => mediaTab.current.click()}
+            ms="auto"
+            onClick={() => summaryTab.current.click()}
           >
-            Prev
+            Next
           </Button>
-          {user ? (
-            <Button
-              variant="darkBrand"
-              fontSize="sm"
-              borderRadius="16px"
-              w={{ base: "128px", md: "148px" }}
-              h="46px"
-              onClick={() => redirectToCheckout()}
-            >
-              Go to Payment
-            </Button>
-          ) : (
-            <Button
-              variant="darkBrand"
-              fontSize="sm"
-              borderRadius="16px"
-              w={{ base: "128px", md: "148px" }}
-              h="46px"
-              onClick={() => router.push("/auth/login")}
-            >
-              Login to Checkout
-            </Button>
-          )}
         </Flex>
       </Flex>
     </Card>

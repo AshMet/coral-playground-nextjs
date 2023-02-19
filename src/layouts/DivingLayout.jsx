@@ -14,7 +14,7 @@ import Footer from "components/footer/FooterDiving";
 // Layout components
 import NavbarDiving from "components/navbar/NavbarDiving";
 import Sidebar from "components/sidebar/Sidebar";
-import { DivingProvider } from "contexts/DivingContext";
+import { CartProvider } from "contexts/CartContext";
 import SidebarContext from "contexts/SidebarContext";
 
 // import { Redirect, Route, Switch } from "react-router-dom";
@@ -129,7 +129,7 @@ export default function DivingLayout({ children, ...props }) {
   const { onOpen } = useDisclosure();
   return (
     <Box>
-      <DivingProvider>
+      <CartProvider>
         <SidebarContext.Provider
           value={{
             toggleSidebar,
@@ -185,7 +185,7 @@ export default function DivingLayout({ children, ...props }) {
             </Box>
           </Box>
         </SidebarContext.Provider>
-      </DivingProvider>
+      </CartProvider>
     </Box>
   );
 }

@@ -34,7 +34,7 @@ import Card from "components/card/Card";
 // import SummaryTable from "components/pages/bookings/SummaryTable";
 import Banner from "components/pages/diving/Banner";
 import Content from "components/pages/diving/Content";
-import { DivingContext } from "contexts/DivingContext";
+import { CartContext } from "contexts/CartContext";
 import DivingLayout from "layouts/DivingLayout";
 
 export default function Invoice({ session, lineItems }) {
@@ -48,7 +48,7 @@ export default function Invoice({ session, lineItems }) {
   stripeLineItems.sort((a, b) => a.price.id.localeCompare(b.price.id));
   // console.log("stripeLineItems", stripeLineItems);
   // console.log("session metadata", session.metadata);
-  const { clearCart } = useContext(DivingContext);
+  const { clearCart } = useContext(CartContext);
 
   useEffect(() => {
     clearCart();

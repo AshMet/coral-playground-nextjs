@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 // Chakra imports
 import {
@@ -8,25 +9,46 @@ import {
   FormLabel,
   Select,
   useColorModeValue,
+  Button,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useUser } from "@supabase/auth-helpers-react";
+import { useContext, useEffect } from "react";
 
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
 import TextField from "components/fields/TextField";
+import { CartContext } from "contexts/CartContext";
 
-export default function Settings(props) {
-  const { setDiverName, setDiverEmail, setDiverCert, setLastDive, setNotes } =
-    props;
+import CheckoutButton from "./CheckoutButton";
 
-  const [diverName] = useState();
-  const [diverEmail] = useState();
-  const [diverCert] = useState();
-  const [lastDive] = useState();
-  const [notes] = useState();
+export default function DiverInfo(props) {
+  const { summaryTab } = props;
+
+  const user = useUser();
+
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
+  const {
+    diverName,
+    setDiverName,
+    diverEmail,
+    setDiverEmail,
+    diverCert,
+    setDiverCert,
+    lastDive,
+    setLastDive,
+    notes,
+    setNotes,
+  } = useContext(CartContext);
+
+  useEffect(() => {
+    setDiverName(
+      `${user?.user_metadata.first_name} ${user?.user_metadata.last_name}`
+    );
+    setDiverEmail(user?.email);
+    setDiverCert(user?.user_metadata.certification);
+  }, [user]);
 
   return (
     <FormControl>
@@ -36,7 +58,8 @@ export default function Settings(props) {
             Diver Information
           </Text>
           <Text fontSize="md" color={textColorSecondary}>
-            Please provide some basic information to ensure you are qualified
+            Please provide some basic information for a faster check-in when you
+            arrive at your dive centre.
           </Text>
         </Flex>
         <SimpleGrid
@@ -50,6 +73,7 @@ export default function Settings(props) {
             label="Diver Name"
             value={diverName}
             placeholder="eg. John Smith"
+            isDisabled={!user}
             onChange={(e) => setDiverName(e.target.value)}
           />
           <InputField
@@ -58,6 +82,7 @@ export default function Settings(props) {
             label="Email"
             value={diverEmail}
             placeholder="For Booking Confirmation"
+            isDisabled={!user}
             onChange={(e) => setDiverEmail(e.target.value)}
           />
           <Flex direction="column">
@@ -79,6 +104,7 @@ export default function Settings(props) {
                 h="44px"
                 maxh="44px"
                 defaultValue="open_water"
+                isDisabled={!user}
                 value={diverCert}
                 onChange={(e) => setDiverCert(e.target.value)}
               >
@@ -104,6 +130,7 @@ export default function Settings(props) {
                 variant="main"
                 h="44px"
                 maxh="44px"
+                isDisabled={!user}
                 value={lastDive}
                 defaultValue="6months"
                 onChange={(e) => setLastDive(e.target.value)}
@@ -120,11 +147,39 @@ export default function Settings(props) {
             label="Notes"
             mb="0px"
             h="100%"
+            isDisabled={!user}
             value={notes}
             placeholder="Please provide any other important information before your dive (e.g. Medical conditions)"
             onChange={(e) => setNotes(e.target.value)}
           />
         </SimpleGrid>
+        <Flex justify="space-between" mt="24px">
+          <Button
+            variant="light"
+            fontSize="sm"
+            borderRadius="16px"
+            w={{ base: "128px", md: "148px" }}
+            h="46px"
+            onClick={() => summaryTab.current.click()}
+          >
+            Prev
+          </Button>
+          <CheckoutButton />
+          {/* <Button
+            variant="darkBrand"
+            fontSize="sm"
+            borderRadius="16px"
+            w={{ base: "128px", md: "148px" }}
+            h="46px"
+            onClick={
+              user
+                ? () => redirectToCheckout()
+                : () => router.push("/auth/login")
+            }
+          >
+            {user ? "Go to Payment" : "Login to Checkout"}
+          </Button> */}
+        </Flex>
       </Card>
     </FormControl>
   );

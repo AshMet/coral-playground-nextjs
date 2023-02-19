@@ -20,7 +20,7 @@ export default function DiveCentreCover({ diveCentre }) {
       .update({
         id: diveCentre.id,
         cover_photo: newCoverPhotoUrl,
-        updated_at: new Date().toISOString(),
+        // updated_at: new Date().toISOString(),
       })
       .eq("id", diveCentre.id);
     // Alert & Analytics for successful load

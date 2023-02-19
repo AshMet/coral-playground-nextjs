@@ -2,6 +2,7 @@
 import {
   Box,
   Center,
+  Button,
   Table,
   TableContainer,
   Tbody,
@@ -10,15 +11,27 @@ import {
   Th,
   Thead,
   Tr,
+  Flex,
 } from "@chakra-ui/react";
+import { useContext } from "react";
 
-import Card from "../../card/Card";
-import TripSummary from "../../dataDisplay/TripSummary";
+import Card from "components/card/Card";
+import TripSummary from "components/dataDisplay/TripSummary";
+import { CartContext } from "contexts/CartContext";
 
-export default function SummaryTable({ cartItems }) {
+export default function SummaryTable({ diverInfoTab, equipmentTab }) {
+  const { cartItems } = useContext(CartContext);
   // console.log(cartItems);
   return (
-    <Card>
+    <Card p="30px">
+      <Text fontSize="2xl" fontWeight="700" mb="20px">
+        Price Summary
+      </Text>
+      <Text color="grey.500" fontSize="md" fontWeight="500" mb="20px">
+        Please review prices carefully. <br />
+        Payments on Coral Playground are only a deposit with the rest owing to
+        the dive centre
+      </Text>
       <Box>
         <TableContainer>
           <Table variant="simple">
@@ -42,7 +55,6 @@ export default function SummaryTable({ cartItems }) {
                         title={item.title}
                         centreName={item.centreName}
                         diveDate={item.diveDate}
-                        diveTime={item.diveTime}
                       />
                     </Td>
                     <Td>1</Td>
@@ -80,6 +92,29 @@ export default function SummaryTable({ cartItems }) {
           credit towards their next dive.
         </Text>
       </Box>
+      <Flex justify="space-between" mt="24px">
+        <Button
+          variant="light"
+          fontSize="sm"
+          borderRadius="16px"
+          w={{ base: "128px", md: "148px" }}
+          h="46px"
+          onClick={() => equipmentTab.current.click()}
+        >
+          Prev
+        </Button>
+        <Button
+          variant="darkBrand"
+          fontSize="sm"
+          borderRadius="16px"
+          w={{ base: "128px", md: "148px" }}
+          h="46px"
+          isActive={cartItems.length > 0}
+          onClick={() => diverInfoTab.current.click()}
+        >
+          Next
+        </Button>
+      </Flex>
     </Card>
   );
 }

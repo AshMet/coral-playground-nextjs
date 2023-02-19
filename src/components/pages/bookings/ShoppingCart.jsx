@@ -23,12 +23,12 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 
 import Card from "components/card/Card";
 import TimelineItem from "components/dataDisplay/TimelineItem";
-import { DivingContext } from "contexts/DivingContext";
+import { CartContext } from "contexts/CartContext";
 import * as gtag from "lib/data/gtag";
 
 function CartList(props) {
   const { ...rest } = props;
-  const { cartItems } = useContext(DivingContext);
+  const { cartItems } = useContext(CartContext);
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -82,10 +82,10 @@ function CartList(props) {
 
 export default function ShoppingCart() {
   const menuBg = useColorModeValue("white", "navy.800");
-  const { cartItems } = useContext(DivingContext);
+  const { cartItems } = useContext(CartContext);
   const router = useRouter();
   // console.log("navbar cartItems", cartItems);
-  const { clearCart } = useContext(DivingContext);
+  const { clearCart } = useContext(CartContext);
   const iconBgColor = useColorModeValue("green.200", "green.700");
 
   const cartCheckout = () => {

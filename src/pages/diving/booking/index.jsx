@@ -28,7 +28,6 @@
 // Chakra imports
 import {
   Box,
-  Button,
   Flex,
   Tab,
   TabList,
@@ -38,41 +37,26 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
-import { useRef, useState, useContext } from "react";
+import { useRef, useState } from "react";
 
 // Custom components
-import SummaryTable from "../../../components/pages/bookings/SummaryTable";
-import { DivingContext } from "../../../contexts/DivingContext";
-import { supabase } from "../../api";
-import Card from "components/card/Card";
 import DiverInfo from "components/pages/bookings/DiverInfo";
 // import DiveSelection from "components/pages/bookings/DiveSelection";
 import EquipmentSelection from "components/pages/bookings/EquipmentSelection";
+import SummaryTable from "components/pages/bookings/SummaryTable";
 import DivingLayout from "layouts/DivingLayout";
+import { supabase } from "utils/supabase";
 
 export default function NewBooking({ equipment }) {
-  const {
-    diverName,
-    setDiverName,
-    diverEmail,
-    setDiverEmail,
-    diverCert,
-    setDiverCert,
-    lastDive,
-    setLastDive,
-    notes,
-    setNotes,
-    cartItems,
-  } = useContext(DivingContext);
   const [activeBullets, setActiveBullets] = useState({
     product: true,
     media: false,
     pricing: false,
   });
 
-  const productTab = useRef();
-  const mediaTab = useRef();
-  const pricingTab = useRef();
+  const equipmentTab = useRef();
+  const summaryTab = useRef();
+  const diverInfoTab = useRef();
   // const brand = useColorModeValue("brand.500", "brand.400");
 
   return (
@@ -111,7 +95,7 @@ export default function NewBooking({ equipment }) {
             justifySelf="center"
           >
             <Tab
-              ref={productTab}
+              ref={equipmentTab}
               _focus="none"
               w={{ sm: "120px", md: "250px", lg: "300px" }}
               onClick={() =>
@@ -158,7 +142,7 @@ export default function NewBooking({ equipment }) {
                   fontWeight={activeBullets.product ? "bold" : "normal"}
                   display={{ sm: "none", md: "block" }}
                 >
-                  Select Dives
+                  Equipment
                 </Text>
                 <Text
                   color={activeBullets.product ? "white" : "gray.300"}
@@ -170,7 +154,7 @@ export default function NewBooking({ equipment }) {
               </Flex>
             </Tab>
             <Tab
-              ref={mediaTab}
+              ref={summaryTab}
               _focus="none"
               w={{ sm: "120px", md: "250px", lg: "300px" }}
               onClick={() =>
@@ -214,7 +198,7 @@ export default function NewBooking({ equipment }) {
                   fontWeight={activeBullets.media ? "bold" : "normal"}
                   display={{ sm: "none", md: "block" }}
                 >
-                  Diver Info
+                  Summary
                 </Text>
                 <Text
                   color={activeBullets.product ? "white" : "gray.300"}
@@ -226,7 +210,7 @@ export default function NewBooking({ equipment }) {
               </Flex>
             </Tab>
             <Tab
-              ref={pricingTab}
+              ref={diverInfoTab}
               _focus="none"
               w={{ sm: "120px", md: "250px", lg: "300px" }}
               onClick={() =>
@@ -258,7 +242,7 @@ export default function NewBooking({ equipment }) {
                   fontWeight={activeBullets.pricing ? "bold" : "normal"}
                   display={{ sm: "none", md: "block" }}
                 >
-                  Equipment
+                  Diver Info
                 </Text>
                 <Text
                   color={activeBullets.product ? "white" : "gray.300"}
@@ -277,68 +261,21 @@ export default function NewBooking({ equipment }) {
               p="0px"
               mx="auto"
             >
-              {/* Row 1: List of Dives */}
-              {/* <DiveList mb="20px" dives={dives} setDives={setDives} /> */}
-              <SummaryTable cartItems={cartItems} />
-              {/* Row 2: Map  & Calendar */}
-              {/* <DiveSelection /> */}
-              <Flex justify="space-between" mt="24px">
-                <Button
-                  isLoading={cartItems.length === 0}
-                  loadingText="Select a Dive"
-                  spinnerPlacement="end"
-                  // spinner={<BeatLoader size={8} color='white' />}
-                  variant="darkBrand"
-                  fontSize="sm"
-                  borderRadius="16px"
-                  w={{ base: "128px", md: "148px" }}
-                  h="46px"
-                  ms="auto"
-                  onClick={() => mediaTab.current.click()}
-                >
-                  Next
-                </Button>
-              </Flex>
+              <EquipmentSelection
+                summaryTab={summaryTab}
+                equipment={equipment}
+              />
             </TabPanel>
-            {/* Panel 2: Diver Info */}
+            {/* Panel 2: Price Breakdown Summary */}
             <TabPanel
               w={{ sm: "330px", md: "700px", lg: "850px" }}
               p="0px"
               mx="auto"
             >
-              <Card p="30px">
-                <DiverInfo
-                  mb="20px"
-                  setDiverName={setDiverName}
-                  setDiverEmail={setDiverEmail}
-                  setLastDive={setLastDive}
-                  setDiverCert={setDiverCert}
-                  setNotes={setNotes}
-                />
-                <Flex justify="space-between" mt="24px">
-                  <Button
-                    variant="light"
-                    fontSize="sm"
-                    borderRadius="16px"
-                    w={{ base: "128px", md: "148px" }}
-                    h="46px"
-                    onClick={() => productTab.current.click()}
-                  >
-                    Prev
-                  </Button>
-                  <Button
-                    variant="darkBrand"
-                    fontSize="sm"
-                    borderRadius="16px"
-                    w={{ base: "128px", md: "148px" }}
-                    h="46px"
-                    isActive={cartItems.length > 0}
-                    onClick={() => pricingTab.current.click()}
-                  >
-                    Next
-                  </Button>
-                </Flex>
-              </Card>
+              <SummaryTable
+                equipmentTab={equipmentTab}
+                diverInfoTab={diverInfoTab}
+              />
             </TabPanel>
             {/* Panel 3: Pricing */}
             <TabPanel
@@ -346,16 +283,7 @@ export default function NewBooking({ equipment }) {
               p="0px"
               mx="auto"
             >
-              <EquipmentSelection
-                mediaTab={mediaTab}
-                equipment={equipment}
-                dives={cartItems}
-                diverName={diverName}
-                diverEmail={diverEmail}
-                diverCert={diverCert}
-                lastDive={lastDive}
-                notes={notes}
-              />
+              <DiverInfo mb="20px" summaryTab={summaryTab} />
             </TabPanel>
           </TabPanels>
         </Tabs>

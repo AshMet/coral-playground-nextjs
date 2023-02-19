@@ -232,7 +232,7 @@ function SignedInMenuList() {
 //     "40px 17px 40px 4px rgba(112, 144, 176, 0.38)",
 //     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
 //   );
-//   const { cartItems } = useContext(DivingContext);
+//   const { cartItems } = useContext(CartContext);
 //   console.log("navbar cartItems", cartItems);
 
 //   const router = useRouter();

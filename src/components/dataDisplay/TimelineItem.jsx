@@ -16,10 +16,10 @@ import { BsX } from "react-icons/bs";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoStorefrontOutline } from "react-icons/io5";
 
-import { DivingContext } from "contexts/DivingContext";
+import { CartContext } from "contexts/CartContext";
 
 export default function Default(props) {
-  const { removeFromCart } = useContext(DivingContext);
+  const { removeFromCart } = useContext(CartContext);
 
   const {
     confirmed,

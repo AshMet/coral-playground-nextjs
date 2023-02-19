@@ -16,7 +16,7 @@ import { IoMdTime } from "react-icons/io";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
 
-import { DivingContext } from "contexts/DivingContext";
+import { CartContext } from "contexts/CartContext";
 import "../../../public/css/MiniCalendar.module.css";
 // import "react-calendar/dist/Calendar.css";
 // import "react-datetime-picker/dist/DateTimePicker.css";
@@ -24,7 +24,7 @@ import "../../../public/css/MiniCalendar.module.css";
 
 export default function TripLineItem(props) {
   const { trip, icon, ...rest } = props;
-  const { addToCart } = useContext(DivingContext);
+  const { addToCart } = useContext(CartContext);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   // const bgHover = useColorModeValue("brand.100", "brand.100");

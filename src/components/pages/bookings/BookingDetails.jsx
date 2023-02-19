@@ -17,7 +17,7 @@ import { useContext, useState } from "react";
 import Card from "components/card/Card";
 // import InputField from "components/fields/InputField";
 // import checkout from "components/pages/diving/checkout";
-import { DivingContext } from "contexts/DivingContext";
+import { CartContext } from "contexts/CartContext";
 // Assets
 
 export default function BookingDetails(props) {
@@ -31,7 +31,7 @@ export default function BookingDetails(props) {
     payNow,
     ...rest
   } = props;
-  const { addToCart } = useContext(DivingContext);
+  const { addToCart } = useContext(CartContext);
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
