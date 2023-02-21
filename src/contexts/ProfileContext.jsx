@@ -25,28 +25,23 @@ export const ProfileProvider = ({ children }) => {
   const { username, avatarUrl, firstName, lastName, divingCert, bio } = profile;
 
   async function getOwnerDiveCentre() {
-    try {
-      setDiveCentreLoading(true);
+    setDiveCentreLoading(true);
+    const {
+      data: diveCentre,
+      error,
+      status,
+    } = await supabase
+      .from("dive_centres_view")
+      .select("*")
+      .eq("ownerId", user.id)
+      .single();
 
-      const {
-        data: diveCentre,
-        error,
-        status,
-      } = await supabase
-        .from("dive_centres_view")
-        .select("*")
-        .eq("ownerId", user.id)
-        .single();
-
-      if (error && status !== 406) {
-        throw error;
-      }
-      if (diveCentre) {
-        setOwnerDiveCentre(diveCentre);
-      }
-    } catch (error) {
+    if (error && status !== 406) {
       // console.log(error);
-    } finally {
+      throw error;
+    }
+    if (diveCentre) {
+      setOwnerDiveCentre(diveCentre);
       setDiveCentreLoading(false);
     }
   }

@@ -1,13 +1,6 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
-import {
-  Box,
-  Flex,
-  FormLabel,
-  Switch,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Flex, FormLabel, Switch, Text } from "@chakra-ui/react";
 
 export default function Default(props) {
   const {
@@ -19,9 +12,9 @@ export default function Default(props) {
     textWidth,
     reversed,
     fontSize,
+    labelColor,
     ...rest
   } = props;
-  const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   return (
     <Box w="100%" fontWeight="500" {...rest}>
       {reversed ? (
@@ -51,7 +44,7 @@ export default function Default(props) {
             mb="0px"
             maxW={textWidth || "75%"}
           >
-            <Text color={textColorPrimary} fontSize="md" fontWeight="500">
+            <Text color="red.500" fontSize="md" fontWeight="500">
               {label}
             </Text>
             <Text color="secondaryGray.600" fontSize={fontSize || "md"}>
@@ -67,30 +60,31 @@ export default function Default(props) {
             direction="column"
             maxW={textWidth || "75%"}
           >
-            <Text color={textColorPrimary} fontSize="md" fontWeight="500">
+            <Text color={labelColor} fontSize="md" fontWeight="500">
               {label}
             </Text>
             <Text color="secondaryGray.600" fontSize={fontSize || "md"}>
               {desc}
             </Text>
           </FormLabel>
-          {isChecked && onChange ? (
+          {/* {isChecked && onChange ? (
             <Switch
-              isChecked={isChecked}
+              // isChecked={isChecked}
               id={id}
               variant="main"
               colorScheme="brandScheme"
               size="md"
               onChange={onChange}
             />
-          ) : (
-            <Switch
-              id={id}
-              variant="main"
-              colorScheme="brandScheme"
-              size="md"
-            />
-          )}
+          ) : ( */}
+          <Switch
+            id={id}
+            variant="main"
+            colorScheme="brandScheme"
+            size="md"
+            onChange={onChange}
+          />
+          {/* )} */}
         </Flex>
       )}
     </Box>

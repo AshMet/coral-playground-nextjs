@@ -32,6 +32,7 @@ import { useContext } from "react";
 import Banner from "components/pages/profile/Banner";
 import DiveCentreHub from "components/pages/profile/DiveCentreHub";
 import Info from "components/pages/profile/Info";
+import UserOrders from "components/pages/profile/UserOrders";
 import { ProfileContext } from "contexts/ProfileContext";
 // import * as gtag from "lib/data/gtag";
 
@@ -133,7 +134,7 @@ export default function Profile({ session }) {
   // console.log(session);
 
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+    <Box pt={{ sm: "60px", xl: "100px" }}>
       <SimpleGrid
         mb="20px"
         columns={{ sm: 1, lg: 2 }}
@@ -146,12 +147,19 @@ export default function Profile({ session }) {
         </Flex>
         {/* Column Right */}
         <Flex direction="column">
-          {profile.userRole === "dive_centre_owner" && (
+          {profile.userRole === "dive_centre_owner" ? (
             <>
               <Text fontSize="xl" fontWeight="bold" mb={5}>
                 Manage your business
               </Text>
               <DiveCentreHub />
+            </>
+          ) : (
+            <>
+              <Text fontSize="xl" fontWeight="bold" mb={5}>
+                Current Orders
+              </Text>
+              <UserOrders />
             </>
           )}
           {/* <Socials />

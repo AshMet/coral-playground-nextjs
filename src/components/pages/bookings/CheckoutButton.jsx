@@ -32,6 +32,26 @@ export default function CheckoutButton() {
   async function checkout() {
     let stripePromise = null;
 
+    // --------- Calculate Totals ----------
+    async function calcTotalPaid() {
+      const cartPrice = cartItems
+        .map((item) => item.pay_now / 100)
+        .reduce((partialSum, a) => partialSum + a, 0);
+      const equipmentPrice = equipmentList
+        .map((item) => item.pay_now / 100)
+        .reduce((partialSum, a) => partialSum + a, 0);
+      return parseFloat(cartPrice + equipmentPrice);
+    }
+    async function calcTotalCost() {
+      const cartPrice = cartItems
+        .map((item) => item.price / 100)
+        .reduce((partialSum, a) => partialSum + a, 0);
+      const equipmentPrice = equipmentList
+        .map((item) => item.price / 100)
+        .reduce((partialSum, a) => partialSum + a, 0);
+      return parseFloat(cartPrice + equipmentPrice);
+    }
+
     // --------- Create Order ----------
     async function createOrder() {
       const { data: order } = await supabase
@@ -42,9 +62,8 @@ export default function CheckoutButton() {
             diving_cert: diverCert,
             last_dive: lastDive,
             notes,
-            amount_paid: 3000,
-            // amount_paid: parseFloat(session.amount_total),
-            // amount_total: parseFloat(session.amount_total),
+            amount_paid: calcTotalPaid(),
+            amount_total: calcTotalCost(),
             currency: "eur",
             status: "pending",
             // stripe_customer_id: custId,

@@ -1,3 +1,6 @@
+/* eslint-disable consistent-return */
+/* eslint-disable sonarjs/cognitive-complexity */
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
   Button,
@@ -7,28 +10,89 @@ import {
   SimpleGrid,
   Spinner,
   Text,
+  useToast,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import {} from "react-icons/io";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 import { MdAdd } from "react-icons/md";
 
 import SetUp from "components/actions/SetUp";
+import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
 import SwitchField from "components/fields/SwitchField";
 import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import OwnerDiveCentreMenu from "components/pages/profile/OwnerDiveCentreMenu";
 import { ProfileContext } from "contexts/ProfileContext";
+import * as gtag from "lib/data/gtag";
 
 export default function DiveCentreHub(props) {
   const { ...rest } = props;
   const textColor = useColorModeValue("gray.700", "white");
   const borderColor = useColorModeValue("secondaryGray.400", "whiteAlpha.100");
   const bgAdd = useColorModeValue("white", "navy.800");
+  const textColorActive = useColorModeValue("green.600", "green.400");
+  const textColorInactive = useColorModeValue("red.700", "red.400");
   const { ownerDiveCentre, diveCentreLoading } = useContext(ProfileContext);
   const router = useRouter();
+  const [active, setActive] = useState(false);
+  const supabase = useSupabaseClient();
+  const toast = useToast();
+
+  async function updateActive() {
+    if (!ownerDiveCentre) {
+      return null;
+    }
+    const { data, error } = await supabase
+      .from("dive_centres")
+      .update({ active })
+      .select()
+      .eq("id", ownerDiveCentre.id);
+
+    if (error) {
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="danger"
+            text="Unable to update Dive Centre"
+            subtext={error.message}
+          />
+        ),
+      });
+      gtag.event({
+        action: "update-dive-centre-failed",
+        category: "button",
+        label: "Dive Centre",
+        // value: newItem.title,
+      });
+    }
+    if (data) {
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="danger"
+            text="Dive Centre Updated"
+            subtext={`Status: ${active ? "Active" : "Not Active"}`}
+          />
+        ),
+      });
+      gtag.event({
+        action: "update-dive-centre-failed",
+        category: "button",
+        label: "Dive Centre",
+        // value: newItem.title,
+      });
+    }
+  }
+
+  useEffect(() => {
+    updateActive();
+  }, [active]);
 
   return diveCentreLoading ? (
     <Card p={{ base: "15px", md: "30px" }} {...rest}>
@@ -73,10 +137,13 @@ export default function DiveCentreHub(props) {
           >
             <SwitchField
               mb="25px"
+              mt="30px"
               me="30px"
               id="1"
-              label="Status: Active"
+              onChange={() => setActive(!active)}
+              label={`Status: ${active ? "Active" : "Not Active"}`}
               desc="If disabled, your dive centre will no longer appear in the search results and will no longer be able to receive any new bookings. This can be changed back at any time."
+              labelColor={active ? textColorActive : textColorInactive}
             />
             <SetUp
               py="20px"

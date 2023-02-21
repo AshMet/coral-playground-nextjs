@@ -52,12 +52,15 @@ export default function CreateDiveCentre() {
     "secondaryGray.100",
     "whiteAlpha.100"
   );
+  const textColorActive = useColorModeValue("green.600", "green.400");
+  const textColorInactive = useColorModeValue("red.700", "red.400");
   const router = useRouter();
   const supabase = useSupabaseClient();
   const user = useUser();
 
   const [diveCentre, setDiveCentre] = useState(initialState);
   const [loading, setLoading] = useState(false);
+  const [active, setActive] = useState(false);
 
   const {
     name,
@@ -71,7 +74,6 @@ export default function CreateDiveCentre() {
     languages,
     services,
     cityId,
-    active,
   } = diveCentre;
 
   const handleChange = (e) => {
@@ -503,15 +505,12 @@ export default function CreateDiveCentre() {
               mb="25px"
               me="30px"
               id="1"
-              isChecked={active}
-              onChange={() =>
-                setDiveCentre({
-                  ...diveCentre,
-                  active: !active,
-                })
-              }
-              label={`Status: ${active}`}
+              // isChecked={active}
+              // onchange={handleChange}
+              onChange={() => setActive(!active)}
+              label={`Status: ${active ? "Active" : "Not Active"}`}
               desc="If disabled, your dive centre will no longer appear in the search results and will no longer be able to receive any new bookings. This can be changed back at any time."
+              labelColor={active ? textColorActive : textColorInactive}
             />
           </SimpleGrid>
         </Card>
