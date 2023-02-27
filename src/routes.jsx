@@ -2,24 +2,8 @@
 import { Icon } from "@chakra-ui/react";
 // import { FaEthereum } from "react-icons/fa";
 // import { FaRegUserCircle } from "react-icons/fa";
-import {
-  GiScubaMask,
-  GiGraduateCap,
-  // GiOctopus,
-  // GiLockedChest,
-  GiDivingHelmet,
-} from "react-icons/gi";
-import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoStorefrontOutline } from "react-icons/io5";
-// import {
-// MdDashboard,
-// MdHome,
-// MdLock,
-// MdOutlineShoppingCart,
-// MdOutlineLogin,
-// MdOutlineCollections,
-// } from "react-icons/md";
-
+import { TbCertificate, TbFlag, TbMapPin, TbScubaMask } from "react-icons/tb";
 // Admin Imports
 // import DashboardsCarInterface from "pages/admin/dashboards/carInterface";
 // import DashboardsDefault from "pages/admin/dashboards/default";
@@ -29,6 +13,7 @@ import { IoStorefrontOutline } from "react-icons/io5";
 // import NFTMarketplace from "pages/admin/nfts/marketplace";
 // import Booking from "pages/diving/booking";
 // import Profile from "pages";
+
 import Certifications from "pages/diving/certifications";
 import DiveCentres from "pages/diving/dive_centres";
 import DiveSites from "pages/diving/dive_sites";
@@ -260,9 +245,7 @@ const routes = [
   {
     name: "Diving",
     path: "/diving",
-    icon: (
-      <Icon as={GiDivingHelmet} width="15px" height="20px" color="inherit" />
-    ),
+    icon: <Icon as={TbScubaMask} width="15px" height="20px" color="inherit" />,
     collapse: true,
     items: [
       // {
@@ -277,14 +260,7 @@ const routes = [
         layout: "",
         path: "/diving/map",
         component: DiveMap,
-        icon: (
-          <Icon
-            as={HiOutlineLocationMarker}
-            width="15px"
-            height="20px"
-            color="inherit"
-          />
-        ),
+        icon: <Icon as={TbMapPin} width="15px" height="20px" color="inherit" />,
       },
       {
         name: "Certifications",
@@ -292,7 +268,7 @@ const routes = [
         path: "/diving/certifications",
         component: Certifications,
         icon: (
-          <Icon as={GiGraduateCap} width="15px" height="20px" color="inherit" />
+          <Icon as={TbCertificate} width="15px" height="20px" color="inherit" />
         ),
       },
       {
@@ -300,9 +276,7 @@ const routes = [
         layout: "",
         path: "/diving/dive_sites",
         component: DiveSites,
-        icon: (
-          <Icon as={GiScubaMask} width="15px" height="20px" color="inherit" />
-        ),
+        icon: <Icon as={TbFlag} width="15px" height="20px" color="inherit" />,
       },
       {
         name: "Dive Centres",

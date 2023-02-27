@@ -33,22 +33,24 @@ export default function CheckoutButton() {
     let stripePromise = null;
 
     // --------- Calculate Totals ----------
-    async function calcTotalPaid() {
+    function calcTotalPaid() {
       const cartPrice = cartItems
-        .map((item) => item.pay_now / 100)
+        .map((item) => item.payNow)
         .reduce((partialSum, a) => partialSum + a, 0);
       const equipmentPrice = equipmentList
-        .map((item) => item.pay_now / 100)
+        .map((item) => item.payNow)
         .reduce((partialSum, a) => partialSum + a, 0);
+      // console.log("cartPrice", cartPrice);
       return parseFloat(cartPrice + equipmentPrice);
     }
-    async function calcTotalCost() {
+    function calcTotalCost() {
       const cartPrice = cartItems
-        .map((item) => item.price / 100)
+        .map((item) => item.price)
         .reduce((partialSum, a) => partialSum + a, 0);
       const equipmentPrice = equipmentList
-        .map((item) => item.price / 100)
+        .map((item) => item.price)
         .reduce((partialSum, a) => partialSum + a, 0);
+      // console.log("cartPrice2", cartPrice);
       return parseFloat(cartPrice + equipmentPrice);
     }
 
@@ -56,7 +58,7 @@ export default function CheckoutButton() {
     async function createOrder() {
       const { data: order } = await supabase
         .from("orders")
-        .upsert([
+        .insert([
           {
             user_id: user.id,
             diving_cert: diverCert,
@@ -73,6 +75,8 @@ export default function CheckoutButton() {
         .select()
         .single();
 
+      // console.log("calcTotalPaid", calcTotalPaid());
+      // console.log("order", order);
       return order;
     }
 
@@ -95,11 +99,11 @@ export default function CheckoutButton() {
         )
         .select();
       if (tripLineItemError) {
-        console.log(
-          `Line Item Save Failed: ${JSON.stringify(tripLineItemError)}`
-        );
+        // console.log(
+        //   `Line Item Save Failed: ${JSON.stringify(tripLineItemError)}`
+        // );
       }
-      console.log("insertDataTrip", insertDataTrip);
+      // console.log("insertDataTrip", insertDataTrip);
 
       // --------- Create Order Certs ----------
       const insertDataCert = cartItems
@@ -117,11 +121,11 @@ export default function CheckoutButton() {
         )
         .select();
       if (certLineItemError) {
-        console.log(
-          `Line Item Save Failed: ${JSON.stringify(certLineItemError)}`
-        );
+        // console.log(
+        //   `Line Item Save Failed: ${JSON.stringify(certLineItemError)}`
+        // );
       }
-      console.log("insertDataCert", insertDataCert);
+      // console.log("insertDataCert", insertDataCert);
 
       // --------- Create Order Eqiupment ----------
       const insertDataEquipment = equipmentList
@@ -140,11 +144,11 @@ export default function CheckoutButton() {
         )
         .select();
       if (eqiupLineItemError) {
-        console.log(
-          `Line Item Save Failed: ${JSON.stringify(eqiupLineItemError)}`
-        );
+        // console.log(
+        //   `Line Item Save Failed: ${JSON.stringify(eqiupLineItemError)}`
+        // );
       }
-      console.log("insertDataEquipment", insertDataEquipment);
+      // console.log("insertDataEquipment", insertDataEquipment);
       return order;
     }
 
@@ -192,8 +196,7 @@ export default function CheckoutButton() {
       );
 
       const sessionMetadata = {
-        userId: user.id,
-        orderId: order.id,
+        order: JSON.stringify(order),
         ...cartMetadata,
         ...equipmentMetadata,
       };
@@ -211,15 +214,15 @@ export default function CheckoutButton() {
       );
 
       // Update user with stripe_id
-      const { data, error } = await supabase.auth.updateUser({
+      await supabase.auth.updateUser({
         data: {
           stripe_customer_id: custId,
           certification: diverCert,
         },
       });
 
-      console.log("updated user", data);
-      console.log("updated user error", error);
+      // console.log("updated user", data);
+      // console.log("updated user error", error);
 
       // Redirect to checkout
       const getStripe = () => {

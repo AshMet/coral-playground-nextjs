@@ -71,7 +71,10 @@ export default function DiveCentre({ diveCentreData }) {
             me={{ lg: "20px" }}
             mb={{ base: "20px", lg: "0px" }}
           >
-            <ImageUploader diveCentre={diveCentre} />
+            <ImageUploader
+              diveCentreId={diveCentre.id}
+              diveCentreImg={diveCentre.coverPhotoUrl}
+            />
             <CentreInfo
               name={diveCentre.name}
               description={diveCentre.description}
@@ -132,39 +135,6 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
-// export const getStaticPaths = async () => {
-//   const { data: diveCentres } = await supabase
-//     .from("dive_centres")
-//     .select("id");
-//   const paths = diveCentres.map(({ id }) => ({
-//     params: {
-//       id,
-//     },
-//   }));
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
-
-// export const getStaticProps = async ({ params: { id } }) => {
-//   const { data: diveCentre } = await supabase
-//     .from("dive_centres")
-//     .select(
-//       `id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships,
-//       cover_photo, city: cities (name), country: cities (countries (name))`
-//     )
-//     .match({ id })
-//     .single();
-
-//   return {
-//     props: {
-//       diveCentre,
-//     },
-//     revalidate: 86400,
-//   };
-// };
 
 DiveCentre.getLayout = function getLayout(page) {
   return <DivingLayout>{page}</DivingLayout>;

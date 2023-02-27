@@ -14,6 +14,7 @@ import { HSeparator } from "components/separator/Separator";
 
 export default function Content(props) {
   const {
+    userId,
     diverName,
     email,
     title,
@@ -22,6 +23,7 @@ export default function Content(props) {
     diverCert,
     lastDive,
     certLevel,
+    notes,
     lineItems,
     currency,
     metadata,
@@ -114,7 +116,6 @@ export default function Content(props) {
               lineHeight="26px"
             >
               {email}
-              {/* <br /> Address 2 */}
             </Text>
           </Flex>
           <Flex direction="column">
@@ -150,7 +151,7 @@ export default function Content(props) {
         columnsData={tableColumnsInvoice}
         currency={currency}
       /> */}
-      <SummaryTable cartItems={metadata} />
+      <SummaryTable lineItems={metadata} />
       <Flex mt="70px" direction={{ base: "column", md: "row" }}>
         <Box me="auto" mb={{ base: "40px", md: "0px" }}>
           <Text fontSize="lg" fontWeight="700" color={textColor}>
@@ -163,7 +164,8 @@ export default function Content(props) {
             maxW="292px"
           >
             {diverCert && `Current Certification: ${diverCert}`} <br />
-            {lastDive && `Last Dive: ${lastDive}`}
+            {lastDive && `Last Dive: ${lastDive}`} <br />
+            {notes}
           </Text>
         </Box>
         <Box>

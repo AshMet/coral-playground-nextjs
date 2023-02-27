@@ -15,56 +15,58 @@ export const ProfileContext = createContext();
 export const ProfileProvider = ({ children }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
-  const [profileLoading, setProfileLoading] = useState(true);
-  const [diveCentreLoading, setDiveCentreLoading] = useState();
-  // const [username, setUsername] = useState(null);
-  // const [avatarUrl, setAvatarUrl] = useState(null);
-  const [ownerDiveCentre, setOwnerDiveCentre] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState("");
   const toast = useToast();
   const { username, avatarUrl, firstName, lastName, divingCert, bio } = profile;
 
-  async function getOwnerDiveCentre() {
-    setDiveCentreLoading(true);
-    const {
-      data: diveCentre,
-      error,
-      status,
-    } = await supabase
-      .from("dive_centres_view")
-      .select("*")
-      .eq("ownerId", user.id)
-      .single();
+  // async function getOwnerDiveCentre() {
+  //   setLoading(true);
+  //   const {
+  //     data: diveCentre,
+  //     error,
+  //     status,
+  //   } = await supabase
+  //     .from("dive_centres_view")
+  //     .select("*")
+  //     .eq("ownerId", user.id)
+  //     .single();
 
-    if (error && status !== 406) {
-      // console.log(error);
-      throw error;
-    }
-    if (diveCentre) {
-      setOwnerDiveCentre(diveCentre);
-      setDiveCentreLoading(false);
-    }
-  }
+  //   if (error && status !== 406) {
+  //     // console.log(error);
+  //     throw error;
+  //   }
+  //   if (diveCentre) {
+  //     setOwnerDiveCentre(diveCentre);
+  //     setLoading(false);
+  //   }
+  // }
 
   useEffect(() => {
     if (!user) return null;
     const getProfile = async () => {
-      setProfileLoading(true);
-      const { data } = await supabase
+      setLoading(true);
+      const { data, error, status } = await supabase
         .from("user_profiles_view")
         .select("*")
         .eq("id", user.id)
         .single();
-      setProfile(data);
-      setProfileLoading(false);
+
+      if (error && status !== 406) {
+        // console.log(error);
+        throw error;
+      }
+      if (data) {
+        setProfile(data);
+        setLoading(false);
+      }
     };
     getProfile();
-    getOwnerDiveCentre();
   }, [user]);
 
   const updateProfile = async () => {
     // Start Spinner
-    setProfileLoading(true);
+    setLoading(true);
     // Get Profile Data
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     // const { data, error } = await supabase.from("profiles").upsert({
@@ -126,12 +128,12 @@ export const ProfileProvider = ({ children }) => {
       });
     }
     // Stop Spinner
-    setProfileLoading(false);
+    setLoading(false);
   };
 
   // async function getProfile() {
   //   try {
-  //     setProfileLoading(true);
+  //     setLoading(true);
 
   //     const { data, error, status } = await supabase
   //       .from("profiles")
@@ -156,13 +158,13 @@ export const ProfileProvider = ({ children }) => {
   //     //   ),
   //     // });
   //   } finally {
-  //     setProfileLoading(false);
+  //     setLoading(false);
   //   }
   // }
 
   // async function updateProfile(newUsername, newAvatarUrl) {
   //   try {
-  //     setProfileLoading(true);
+  //     setLoading(true);
 
   //     const updates = {
   //       id: user.id,
@@ -212,7 +214,7 @@ export const ProfileProvider = ({ children }) => {
   //       // value: newItem.title,
   //     });
   //   } finally {
-  //     setProfileLoading(false);
+  //     setLoading(false);
   //   }
   // }
 
@@ -233,8 +235,8 @@ export const ProfileProvider = ({ children }) => {
   //     avatarUrl,
   //     setAvatarUrl,
   //     updateProfile,
-  //     profileLoading,
-  //     diveCentreLoading,
+  //     loading,
+  //     loading,
   //     ownerDiveCentre,
   //   }),
   //   [user]
@@ -246,9 +248,7 @@ export const ProfileProvider = ({ children }) => {
         profile,
         setProfile,
         updateProfile,
-        profileLoading,
-        diveCentreLoading,
-        ownerDiveCentre,
+        loading,
       }}
     >
       {children}

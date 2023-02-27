@@ -191,7 +191,7 @@ export default function Course(props) {
                     fontWeight="bold"
                     mb="6px"
                   >
-                    €{(price / 100).toFixed(0)}
+                    €{parseFloat(price / 100)}
                   </Text>
                   <Text
                     color={selected ? selectedTextColor : textBrand}

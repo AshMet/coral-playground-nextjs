@@ -22,8 +22,8 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [diverName, setDiverName] = useState();
   const [diverEmail, setDiverEmail] = useState();
-  const [diverCert, setDiverCert] = useState();
-  const [lastDive, setLastDive] = useState();
+  const [diverCert, setDiverCert] = useState("Open Water");
+  const [lastDive, setLastDive] = useState("6 months");
   const [notes, setNotes] = useState();
   const [equipmentList, setEquipmentList] = useState([]);
   const [cartItems, setCartItems] = useState([]);
@@ -153,7 +153,7 @@ export const CartProvider = ({ children }) => {
   }
 
   console.log("equipmentList", equipmentList);
-  console.log("cartItems", { ...cartItems });
+  console.log("cartItems", cartItems);
   // console.log("context sessionMetadata", sessionMetadata);
 
   return (

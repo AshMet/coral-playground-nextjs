@@ -2,7 +2,6 @@
 import {
   Box,
   Center,
-  Button,
   Table,
   TableContainer,
   Tbody,
@@ -11,17 +10,14 @@ import {
   Th,
   Thead,
   Tr,
-  Flex,
 } from "@chakra-ui/react";
-import { useContext } from "react";
 
 import Card from "components/card/Card";
 import TripSummary from "components/dataDisplay/TripSummary";
-import { CartContext } from "contexts/CartContext";
 
-export default function SummaryTable({ diverInfoTab, equipmentTab }) {
-  const { cartItems } = useContext(CartContext);
-  // console.log(cartItems);
+export default function SummaryTable({ lineItems }) {
+  // const { lineItems } = useContext(CartContext);
+  // console.log(lineItems);
   return (
     <Card p="30px">
       <Text fontSize="2xl" fontWeight="700" mb="20px">
@@ -46,8 +42,8 @@ export default function SummaryTable({ diverInfoTab, equipmentTab }) {
               </Tr>
             </Thead>
             <Tbody>
-              {cartItems.length > 0 ? (
-                cartItems.map((item, index) => (
+              {lineItems.length > 0 ? (
+                lineItems.map((item, index) => (
                   <Tr key={item.title}>
                     <Td>{index + 1}</Td>
                     <Td>
@@ -92,7 +88,7 @@ export default function SummaryTable({ diverInfoTab, equipmentTab }) {
           credit towards their next dive.
         </Text>
       </Box>
-      <Flex justify="space-between" mt="24px">
+      {/* <Flex justify="space-between" mt="24px">
         <Button
           variant="light"
           fontSize="sm"
@@ -109,12 +105,12 @@ export default function SummaryTable({ diverInfoTab, equipmentTab }) {
           borderRadius="16px"
           w={{ base: "128px", md: "148px" }}
           h="46px"
-          isActive={cartItems.length > 0}
+          isActive={lineItems.length > 0}
           onClick={() => diverInfoTab.current.click()}
         >
           Next
         </Button>
-      </Flex>
+      </Flex> */}
     </Card>
   );
 }

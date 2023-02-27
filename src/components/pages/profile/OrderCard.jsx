@@ -7,6 +7,7 @@ import {
   useColorModeValue,
   Spacer,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 import Card from "components/card/Card";
 
@@ -21,8 +22,11 @@ export default function OrderCard(props) {
     status,
     tripCount,
     certCount,
+    sessionId,
+    // equipmentCount,
   } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
+  const router = useRouter();
   return (
     <Card p={{ base: "15px", md: "30px" }} mb="10px">
       <Flex direction={{ base: "column", md: "row" }}>
@@ -75,7 +79,16 @@ export default function OrderCard(props) {
             </Text>
           </Flex>
           <Spacer />
-          <Button size="sm">View Details</Button>
+          <Button
+            size="sm"
+            onClick={() =>
+              router.push(
+                `http://localhost:3000/diving/booking/success?session_id=${sessionId}`
+              )
+            }
+          >
+            View Details
+          </Button>
         </Flex>
         <Flex direction="column">
           <Text

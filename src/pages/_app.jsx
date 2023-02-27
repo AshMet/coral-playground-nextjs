@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import defaultSEOConfig from "../../next-seo.config";
 // import Layout from "lib/layout";
 import * as gtag from "../lib/data/gtag";
+import mautic from "../lib/data/mt";
 import { store } from "../lib/redux/store";
 import theme from "../theme/theme";
 import "../../public/css/App.css";
@@ -24,10 +25,15 @@ const MyApp = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || ((page) => page);
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
 
+  useEffect(() => {
+    mautic.initialize("https://mautic.chondrohub.dscloud.me/mtc.js");
+  }, []);
+
   const router = useRouter();
   useEffect(() => {
     const handleRouteChange = (url) => {
       gtag.pageview(url);
+      mautic.pageView({ url });
     };
     router.events.on("routeChangeComplete", handleRouteChange);
     return () => {

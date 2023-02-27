@@ -36,6 +36,8 @@ const createBooking = async (session) => {
   console.log("webhook customer", customer);
   console.log("webhook session", session);
 
+  const stripeOrder = JSON.parse(session.metadata.order);
+
   // Create Order
   // const { data: order, error } = await supabase
   //   .from("orders")
@@ -63,11 +65,11 @@ const createBooking = async (session) => {
     .update({
       amount_paid: parseFloat(session.amount_total),
       status: session.payment_status,
-      // amount_total: parseFloat(session.amount_total),
-      stripe_customer_id: session.customer,
+      currency: session.currency,
+      // stripe_customer_id: session.customer,
       stripe_session_id: session.id,
     })
-    .eq('id', session.metadata.orderId);
+    .eq('id', stripeOrder.id);
 
   console.log(`Booking Saved: ${JSON.stringify(order)}`);
   if (error) {

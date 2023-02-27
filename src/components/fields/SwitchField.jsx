@@ -67,24 +67,24 @@ export default function Default(props) {
               {desc}
             </Text>
           </FormLabel>
-          {/* {isChecked && onChange ? (
+          {isChecked && onChange ? (
             <Switch
-              // isChecked={isChecked}
+              isChecked={isChecked}
               id={id}
               variant="main"
               colorScheme="brandScheme"
               size="md"
               onChange={onChange}
             />
-          ) : ( */}
-          <Switch
-            id={id}
-            variant="main"
-            colorScheme="brandScheme"
-            size="md"
-            onChange={onChange}
-          />
-          {/* )} */}
+          ) : (
+            <Switch
+              id={id}
+              variant="main"
+              colorScheme="brandScheme"
+              size="md"
+              onChange={onChange}
+            />
+          )}
         </Flex>
       )}
     </Box>

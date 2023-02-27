@@ -28,6 +28,7 @@
 // Chakra imports
 import {
   Box,
+  Button,
   Flex,
   Tab,
   TabList,
@@ -37,13 +38,14 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 // Custom components
 import DiverInfo from "components/pages/bookings/DiverInfo";
 // import DiveSelection from "components/pages/bookings/DiveSelection";
 import EquipmentSelection from "components/pages/bookings/EquipmentSelection";
 import SummaryTable from "components/pages/bookings/SummaryTable";
+import { CartContext } from "contexts/CartContext";
 import DivingLayout from "layouts/DivingLayout";
 import { supabase } from "utils/supabase";
 
@@ -53,6 +55,7 @@ export default function NewBooking({ equipment }) {
     media: false,
     pricing: false,
   });
+  const { cartItems } = useContext(CartContext);
 
   const equipmentTab = useRef();
   const summaryTab = useRef();
@@ -272,10 +275,30 @@ export default function NewBooking({ equipment }) {
               p="0px"
               mx="auto"
             >
-              <SummaryTable
-                equipmentTab={equipmentTab}
-                diverInfoTab={diverInfoTab}
-              />
+              <SummaryTable lineItems={cartItems} />
+              <Flex justify="space-between" mt="24px">
+                <Button
+                  variant="light"
+                  fontSize="sm"
+                  borderRadius="16px"
+                  w={{ base: "128px", md: "148px" }}
+                  h="46px"
+                  onClick={() => equipmentTab.current.click()}
+                >
+                  Prev
+                </Button>
+                <Button
+                  variant="darkBrand"
+                  fontSize="sm"
+                  borderRadius="16px"
+                  w={{ base: "128px", md: "148px" }}
+                  h="46px"
+                  isActive={cartItems.length > 0}
+                  onClick={() => diverInfoTab.current.click()}
+                >
+                  Next
+                </Button>
+              </Flex>
             </TabPanel>
             {/* Panel 3: Pricing */}
             <TabPanel

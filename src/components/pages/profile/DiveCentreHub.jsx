@@ -36,21 +36,21 @@ export default function DiveCentreHub(props) {
   const bgAdd = useColorModeValue("white", "navy.800");
   const textColorActive = useColorModeValue("green.600", "green.400");
   const textColorInactive = useColorModeValue("red.700", "red.400");
-  const { ownerDiveCentre, diveCentreLoading } = useContext(ProfileContext);
+  const { profile, loading } = useContext(ProfileContext);
   const router = useRouter();
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState();
   const supabase = useSupabaseClient();
   const toast = useToast();
 
   async function updateActive() {
-    if (!ownerDiveCentre) {
+    if (!profile) {
       return null;
     }
     const { data, error } = await supabase
       .from("dive_centres")
       .update({ active })
       .select()
-      .eq("id", ownerDiveCentre.id);
+      .eq("id", profile.homeCentreId);
 
     if (error) {
       toast({
@@ -94,20 +94,20 @@ export default function DiveCentreHub(props) {
     updateActive();
   }, [active]);
 
-  return diveCentreLoading ? (
+  return loading ? (
     <Card p={{ base: "15px", md: "30px" }} {...rest}>
       <Spinner size="lg" />
     </Card>
   ) : (
     <Card p={{ base: "15px", md: "30px" }} {...rest}>
-      {ownerDiveCentre ? (
+      {profile ? (
         <>
           <Box mb="45px" w="100%">
             <Flex justify="space-between" align="center" w="100%">
               <Flex>
                 <Flex direction="column">
                   <Text fontSize="md" color={textColor} fontWeight="700">
-                    {ownerDiveCentre.name}
+                    {profile.homeCentreName}
                   </Text>
                   <Text fontSize="sm" color="gray.500" fontWeight="500">
                     Dive Centre
@@ -115,7 +115,7 @@ export default function DiveCentreHub(props) {
                 </Flex>
               </Flex>
               <OwnerDiveCentreMenu
-                diveCentreId={ownerDiveCentre.id}
+                diveCentreId={profile.homeCentreId}
                 icon={
                   <Icon
                     as={IoEllipsisHorizontal}
@@ -128,7 +128,8 @@ export default function DiveCentreHub(props) {
             </Flex>
           </Box>
           <ImageUploader
-            diveCentre={ownerDiveCentre}
+            diveCentreId={profile.homeCentreId}
+            diveCentreImg={profile.homeCentreImg}
             // coverPhoto={ownerDiveCentre.cover_photo}
           />
           <SimpleGrid
@@ -140,6 +141,7 @@ export default function DiveCentreHub(props) {
               mt="30px"
               me="30px"
               id="1"
+              isChecked={active}
               onChange={() => setActive(!active)}
               label={`Status: ${active ? "Active" : "Not Active"}`}
               desc="If disabled, your dive centre will no longer appear in the search results and will no longer be able to receive any new bookings. This can be changed back at any time."
@@ -153,7 +155,7 @@ export default function DiveCentreHub(props) {
               value="Active"
               actionName="View"
               action={() =>
-                router.push(`/diving/dive_centres/${ownerDiveCentre.id}`)
+                router.push(`/diving/dive_centres/${profile.homeCentreId}`)
               }
             />
             <SetUp
@@ -164,7 +166,7 @@ export default function DiveCentreHub(props) {
               value="Last change: 34/07/2022"
               actionName="Edit"
               action={() =>
-                router.push(`/diving/dive_centres/${ownerDiveCentre.id}/edit`)
+                router.push(`/diving/dive_centres/${profile.homeCentreId}/edit`)
               }
             />
             <SetUp
@@ -176,7 +178,7 @@ export default function DiveCentreHub(props) {
               actionName="Add"
               action={() =>
                 router.push(
-                  `/diving/dive_centres/${ownerDiveCentre.id}/dive_trips/new`
+                  `/diving/dive_centres/${profile.homeCentreId}/dive_trips/new`
                 )
               }
             />

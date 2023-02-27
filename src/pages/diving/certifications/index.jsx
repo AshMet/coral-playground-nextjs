@@ -98,7 +98,7 @@ export default function Courses({ certifications }) {
               agency={course.agency}
               duration={course.duration}
               category={course.category}
-              price={course.price.toFixed(0)}
+              price={parseFloat(course.price)}
               priceId={course.stripe_price_id}
               payNow={course.pay_now}
               setCourseId={setCourseId}

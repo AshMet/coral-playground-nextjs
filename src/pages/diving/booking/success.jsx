@@ -1,28 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-/*!
-  _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
- | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
- | |_| | | | | |_) || |  / / | | |  \| | | | | || |  | |_) | |_) | | | |
- |  _  | |_| |  _ < | | / /| |_| | |\  | | |_| || |  |  __/|  _ <| |_| |
- |_| |_|\___/|_| \_\___/____\___/|_| \_|  \___/|___| |_|   |_| \_\\___/ 
-                                                                                                                                                                                                                                                                                                                                       
-=========================================================
-* Horizon UI Dashboard PRO - v1.0.0
-=========================================================
-
-* Product Page: https://www.horizon-ui.com/pro/
-* Copyright 2022 Horizon UI (https://www.horizon-ui.com/)
-
-* Designed and Coded by Simmmple
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// Chakra imports
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 // Custom components
 // import { getServerSideProps } from "next";
@@ -42,10 +19,15 @@ export default function Invoice({ session, lineItems }) {
   // console.log("line items", lineItems);
 
   const tripMetadata = Object.values(session.metadata);
+  // const userId = tripMetadata.pop();
+  const orderJson = tripMetadata.pop();
+  const order = JSON.parse(orderJson);
   const trips = tripMetadata.map((trip) => JSON.parse(trip));
   trips.sort((a, b) => a.priceId.localeCompare(b.priceId));
   const stripeLineItems = lineItems.data;
   stripeLineItems.sort((a, b) => a.price.id.localeCompare(b.price.id));
+  // console.log("trips", trips);
+  // console.log("tripMetadata", tripMetadata);
   // console.log("stripeLineItems", stripeLineItems);
   // console.log("session metadata", session.metadata);
   const { clearCart } = useContext(CartContext);
@@ -79,17 +61,16 @@ export default function Invoice({ session, lineItems }) {
       </Box>
       <Card maxW="920px" mx="auto">
         <Flex direction="column" width="stretch">
-          <Banner sessionId={session.id} />
+          <Banner orderId={order.id} />
           {/* <SummaryTable cartItems={trips} /> */}
           <Content
+            userId={order.user_id}
             diverName={session.customer_details.name}
             email={session.customer_details.email}
             title={session.metadata.title}
-            diveDate={session.metadata.dive_date}
-            diveTime={session.metadata.dive_time}
-            diverCert={session.customer.metadata.diverCert}
-            lastDive={session.customer.metadata.lastDive}
-            cert={session.metadata.cert}
+            diverCert={order.diving_cert}
+            lastDive={order.last_dive}
+            notes={order.notes}
             lineItems={stripeLineItems}
             currency={session.currency}
             metadata={trips}
@@ -115,7 +96,7 @@ export const getServerSideProps = async (context) => {
   const lineItems = await stripe.checkout.sessions.listLineItems(sessionId, {
     limit: 10,
   });
-  return { props: { session, lineItems }, revalidate: 86400 };
+  return { props: { session, lineItems } };
 };
 
 Invoice.getLayout = function getLayout(page) {

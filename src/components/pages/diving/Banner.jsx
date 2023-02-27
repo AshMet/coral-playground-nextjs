@@ -10,12 +10,12 @@ import { VSeparator } from "components/separator/Separator";
 // import InvoiceBg from "assets/img/account/InvoiceBg.png";
 
 export default function Banner(props) {
-  const { sessionId } = props;
+  const { orderId } = props;
 
   return (
     <Card
       // backgroundImage="/img/nfts/NftBanner1.jpg"
-      bgColor="brand.300"
+      bg="linear-gradient(179.78deg, #7A64FF 0.23%, #FF508B 66.58%, #FD6D53 99.75%, #FD6D53 99.75%)"
       backgroundRepeat="no-repeat"
       bgSize="cover"
       bgPosition="10%"
@@ -38,11 +38,9 @@ export default function Banner(props) {
             mt={{ base: "10px", md: "0px" }}
             fontSize={{ base: "2xl", md: "32px", lg: "44px", xl: "44px" }}
             fontWeight="bold"
+            casing="uppercase"
           >
-            {`Booking Ref: ${sessionId
-              .toString()
-              .substr(sessionId.length - 12)
-              .toUpperCase()}`}
+            {`Booking Ref: ${orderId.split("-").pop()}`}
           </Text>
         </Flex>
         <VSeparator
@@ -56,7 +54,7 @@ export default function Banner(props) {
               src="/svg/coral-logo.svg"
               width="200px"
               height="45px"
-              filter="invert(100%) sepia(0%) saturate(7500%) hue-rotate(70deg) brightness(99%) contrast(107%)"
+              filter="invert(0%) sepia(0%) saturate(100%) hue-rotate(268deg) brightness(300%) contrast(107%)"
             />
           </Box>
           <Text
