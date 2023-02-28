@@ -7,6 +7,21 @@ option {
   color: black;
 }
 
+/* Blog Posts */
+.blog-post h1 {
+  font-size: x-large;
+  font-weight: 700;
+  margin-top: 30px;
+  color: #7551FF;
+}
+.blog-post h2 {
+  font-size: large;
+  margin-top: 20px;
+}
+.blog-post strong {
+  color: #9277fe;
+}
+
 /* MiniCalendar component css - REMOVE FROM GLOBAL SCOPE */
 /* LIGHT MODE + GENERAL */
 

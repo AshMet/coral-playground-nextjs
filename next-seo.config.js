@@ -4,22 +4,22 @@ const defaultSEOConfig = {
   title: "Coral Playground",
   titleTemplate: "%s | Coral Playground",
   defaultTitle: "Coral Playground",
-  description: "Welcome to the Ocean Metaverse",
+  description: "The best way to book a diving trip in the Red Sea",
   canonical: "https://www.coralplayground.com",
   openGraph: {
     url: "https://www.coralplayground.com",
     title: "Coral Playground",
-    description: "Welcome to the Ocean Metaverse",
+    description: "The best way to book a diving trip in the Red Sea",
     images: [
       {
-        url: "https://www.newsecuritybeat.org/wp-content/uploads/2020/12/shutterstock_737988934-645x430.jpg",
+        url: "img/diving/4-anemone.jpeg",
         alt: "Coral Playground",
       },
     ],
     site_name: "Coral Playground",
   },
   twitter: {
-    handle: "@AshMetwalli",
+    handle: "@coralplayground",
     cardType: "summary_large_image",
   },
 };

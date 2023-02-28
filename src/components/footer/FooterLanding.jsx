@@ -163,13 +163,13 @@ export default function Footer() {
               Resources
             </Text>
             <Link
-              href="/"
+              href="/blog"
               fontSize="md"
               color={textColorSecondary}
               fontWeight="400"
               mb="20px"
             >
-              Company
+              Blog
             </Link>
             <Flex>
               <Link

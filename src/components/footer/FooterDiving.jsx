@@ -60,8 +60,8 @@ export default function Footer() {
             md: "44px",
           }}
         >
-          <Link fontWeight="500" color={textColor} href="/">
-            Careers
+          <Link fontWeight="500" color={textColor} href="/blog">
+            Blog
           </Link>
         </ListItem>
         <ListItem
@@ -71,12 +71,12 @@ export default function Footer() {
           }}
         >
           <Link fontWeight="500" color={textColor} href="/">
-            Timeline
+            Careers
           </Link>
         </ListItem>
         <ListItem>
-          <Link fontWeight="500" color={textColor} href="/">
-            Mission
+          <Link fontWeight="500" color={textColor} href="/dive_centres/home">
+            Become a Partner
           </Link>
         </ListItem>
       </List>
