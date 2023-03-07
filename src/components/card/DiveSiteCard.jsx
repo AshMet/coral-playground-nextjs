@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
 // Chakra imports
 import {
@@ -14,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { motion, isValidMotionProp } from "framer-motion";
 import Link from "next/link";
+import { posthog } from "posthog-js";
 import { useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
@@ -81,6 +83,12 @@ export default function DiveSiteCard(props) {
                     width="300"
                     height="200"
                     borderRadius="20px"
+                    onClick={() =>
+                      posthog.capture("View Dive Centre", {
+                        id,
+                        name,
+                      })
+                    }
                   />
                 )}
                 <Button

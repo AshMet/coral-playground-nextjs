@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
@@ -43,6 +44,7 @@ import {
 } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
+import { posthog } from "posthog-js";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -117,7 +119,7 @@ export default function SignUp() {
 
   const signUpEmailPass = async () => {
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -158,6 +160,7 @@ export default function SignUp() {
           />
         ),
       });
+      posthog.identify(data.id, { role }, { email });
       // Success Analytics Tag
       gtag.event({
         action: "signup-success",

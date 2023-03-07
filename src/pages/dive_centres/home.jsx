@@ -42,6 +42,24 @@ export default function diveCentresHome() {
         title="Dive Centres Landing"
         description="Coral Playground Dive Centres Home Page"
       />
+      <NextSeo
+        title="Coral Playground | Dive Centres Landing Page"
+        description="Dive Centres Landing Page"
+        openGraph={{
+          type: "website",
+          title: "Coral Playground | Dive Centres Landing Page",
+          description: "Dive Centres Landing Page",
+          url: "https://www.coralplayground.com/dive_centres/home",
+          images: [
+            {
+              url: "https://www.coralplayground.com/svg/coral-logo.svg",
+              width: 800,
+              height: 400,
+              alt: "Coral Playground Logo",
+            },
+          ],
+        }}
+      />
       <ParallaxProvider>
         <Flex direction={{ base: "column" }}>
           <Hero />

@@ -77,8 +77,22 @@ export default function Default({ data }) {
   return (
     <>
       <NextSeo
-        title="Dive Map"
+        title="Coral Playground | Dive Map"
         description="Explore dive sites and centres on our interactive map"
+        openGraph={{
+          type: "website",
+          title: "Coral Playground | Dive Map",
+          description: "Explore dive sites and centres on our interactive map",
+          url: "https://www.coralplayground.com/diving/map/",
+          images: [
+            {
+              url: "https://www.coralplayground.com/img/diving/dive_site_bg.jpg",
+              width: 800,
+              height: 600,
+              alt: "Dive Sites Cover Photo",
+            },
+          ],
+        }}
       />
       <Flex
         gridArea="1 / 1 / 1 / 1"

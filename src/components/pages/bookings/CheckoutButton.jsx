@@ -148,6 +148,11 @@ export default function CheckoutButton() {
         //   `Line Item Save Failed: ${JSON.stringify(eqiupLineItemError)}`
         // );
       }
+      posthog.capture("checkout", {
+        orderId: order.id,
+        amountPaid: order.amountPaid,
+        amountTotal: order.amountTotal,
+      });
       // console.log("insertDataEquipment", insertDataEquipment);
       return order;
     }

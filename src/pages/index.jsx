@@ -26,8 +26,22 @@ export default function Home({ data }) {
         // Profile Page
         <>
           <NextSeo
-            title="User Account"
-            description="View upcoming dives and bookings"
+            title="Coral Playground | User Account"
+            description="User Profile & Settings"
+            openGraph={{
+              type: "website",
+              title: "Coral Playground | User Account",
+              description: "User Profile & Settings",
+              url: "https://www.coralplayground.com/",
+              images: [
+                {
+                  url: "https://www.coralplayground.com/svg/coral-logo.svg",
+                  width: 800,
+                  height: 400,
+                  alt: "Coral Playground Logo",
+                },
+              ],
+            }}
           />
           <DivingLayout>
             <Profile session={session} />
@@ -37,8 +51,22 @@ export default function Home({ data }) {
         // Landing Page
         <>
           <NextSeo
-            title="Diving Landing"
-            description="Coral Playground Diving Home Page"
+            title="Coral Playground | Home Page"
+            description="User Profile & Settings"
+            openGraph={{
+              type: "website",
+              title: "Coral Playground | Home Page",
+              description: "User Profile & Settings",
+              url: "https://www.coralplayground.com/",
+              images: [
+                {
+                  url: "https://www.coralplayground.com/svg/coral-logo.svg",
+                  width: 800,
+                  height: 400,
+                  alt: "Coral Playground Logo",
+                },
+              ],
+            }}
           />
           <LandingLayout>
             <ParallaxProvider>

@@ -58,6 +58,20 @@ export default function DiveCentre({ diveCentreData }) {
       <NextSeo
         title={`Dive Centre - ${diveCentre.name}`}
         description={`Dive Centre - ${diveCentre.name}, ${diveCentre.city}, ${diveCentre.country}`}
+        openGraph={{
+          type: "website",
+          title: `Dive Centre - ${diveCentre.name}`,
+          description: `Dive Centre - ${diveCentre.name}, ${diveCentre.city}, ${diveCentre.country}`,
+          url: `https://www.coralplayground.com/diving/dive_centres/${diveCentre.id}`,
+          images: [
+            {
+              url: diveCentre.coverPhotoUrl,
+              width: 800,
+              height: 600,
+              alt: `Dive Centre Cover Photo - ${diveCentre.name}`,
+            },
+          ],
+        }}
       />
       <Box maxW="100%">
         <Grid

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
 import { ChakraProvider } from "@chakra-ui/react";
@@ -8,6 +10,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { DefaultSeo } from "next-seo";
+import posthog from "posthog-js";
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
@@ -24,16 +27,23 @@ import { ProfileProvider } from "contexts/ProfileContext";
 const MyApp = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || ((page) => page);
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+  const router = useRouter();
 
   useEffect(() => {
     mautic.initialize("https://mautic.chondrohub.dscloud.me/mtc.js");
+    posthog.init("phc_eh7TvObhukSTsvOP2TXEDzxDskVHLo8Xt2EhbawijcC", {
+      api_host: "https://app.posthog.com",
+      // loaded: (posthog) => {
+      //   if (process.env.NODE_ENV === "development") posthog.opt_out_capturing();
+      // },
+    });
   }, []);
 
-  const router = useRouter();
   useEffect(() => {
     const handleRouteChange = (url) => {
       gtag.pageview(url);
       mautic.pageView({ url });
+      posthog.capture("$pageview");
     };
     router.events.on("routeChangeComplete", handleRouteChange);
     return () => {

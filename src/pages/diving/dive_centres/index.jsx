@@ -68,8 +68,22 @@ export default function DiveSites({ diveCentres }) {
   return (
     <>
       <NextSeo
-        title="Dive Centres"
-        description="A list of all partner dive centres."
+        title="Coral Playground | Dive Centres"
+        description="List of Dive Centres in Egypt"
+        openGraph={{
+          type: "website",
+          title: "Coral Playground | Dive Centres",
+          description: "List of Dive Centres in Egypt",
+          url: "https://www.coralplayground.com/diving/dive_centres/",
+          images: [
+            {
+              url: "https://www.coralplayground.com/img/diving/dive_centre_bg.jpg",
+              width: 800,
+              height: 600,
+              alt: "Dive Centres Cover Photo",
+            },
+          ],
+        }}
       />
       <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
         {/* <Text>{JSON.stringify(diveCentres[0].diveMap)}</Text> */}

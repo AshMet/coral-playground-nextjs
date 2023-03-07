@@ -112,6 +112,7 @@ export default function BlogPost({ frontmatter, content, slug }) {
                   src={`/${frontmatter.socialImage}`}
                   alt="Blog Post Image"
                   objectFit="cover"
+                  borderRadius="xl"
                   layout="fill"
                 />
               </Link>

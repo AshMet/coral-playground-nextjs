@@ -56,6 +56,20 @@ export default function DiveSitePage({ diveSite }) {
       <NextSeo
         title={`Dive Site - ${diveSite.name}`}
         description={`Dive Site - ${diveSite.name}, ${diveSite.city.name}, ${diveSite.country.countries.name}`}
+        openGraph={{
+          type: "website",
+          title: `Dive Centre - ${diveSite.name}`,
+          description: `Dive Centre - ${diveSite.name}, ${diveSite.city.name}, ${diveSite.country.countries.name}`,
+          url: `https://www.coralplayground.com/diving/dive_sites/${diveSite.id}`,
+          images: [
+            {
+              url: diveSite.dive_map,
+              width: 800,
+              height: 600,
+              alt: `Dive Site Cover Photo - ${diveSite.name}`,
+            },
+          ],
+        }}
       />
       <Box maxW="100%">
         <Grid
