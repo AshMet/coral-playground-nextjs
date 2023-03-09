@@ -6,7 +6,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react/destructuring-assignment */
-/* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
 
@@ -71,7 +70,7 @@ export default function AuthNavbar(props) {
     const foundRoute = routes.filter(function (route) {
       return route.items && route.name === routeName;
     });
-    console.log(foundRoute);
+    // console.log(foundRoute);
     return foundRoute[0]?.items;
   }
   // function getLinksCollapse(routeName) {

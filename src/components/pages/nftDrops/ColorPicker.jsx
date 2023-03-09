@@ -78,7 +78,7 @@ export default function ColorPicker(props) {
     const baseURL = "data:image/svg+xml;base64";
     const s = new XMLSerializer().serializeToString(svg);
     const encodedData = window.btoa(s);
-    console.log(encodedData);
+    // console.log(encodedData);
     return `${baseURL},${encodedData}`;
   }
 
@@ -87,7 +87,7 @@ export default function ColorPicker(props) {
     const octopusSvgURI = svgToImageURI(octopusSvg);
     setImage(octopusSvgURI);
     setMintable(true);
-    console.log(octopusSvgURI);
+    // console.log(octopusSvgURI);
   };
 
   const popover = {

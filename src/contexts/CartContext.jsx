@@ -55,7 +55,7 @@ export const CartProvider = ({ children }) => {
     const alreadyInCart = cartItems.some(
       (item) => item.name + item.id === newItem.name + newItem.id
     );
-    console.log("newItem", newItem);
+    // console.log("newItem", newItem);
     if (alreadyInCart) {
       toast({
         position: "top",
@@ -152,8 +152,8 @@ export const CartProvider = ({ children }) => {
     });
   }
 
-  console.log("equipmentList", equipmentList);
-  console.log("cartItems", cartItems);
+  // console.log("equipmentList", equipmentList);
+  // console.log("cartItems", cartItems);
   // console.log("context sessionMetadata", sessionMetadata);
 
   return (

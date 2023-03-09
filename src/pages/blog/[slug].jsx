@@ -49,10 +49,12 @@ export default function BlogPost({ frontmatter, content, slug }) {
   return (
     <>
       <NextSeo
-        title={frontmatter.title}
+        title={`Blog | ${frontmatter.title}`}
         description={frontmatter.metaDesc}
         canonical="https://www.coralplayground.com/blog"
         openGraph={{
+          title: `Blog | ${frontmatter.title}`,
+          description: frontmatter.metaDesc,
           type: "article",
           article: {
             publishedTime: frontmatter.date,
@@ -61,12 +63,14 @@ export default function BlogPost({ frontmatter, content, slug }) {
             tags: frontmatter.tags,
           },
           url: `https://www.coralplayground.com/blog/${slug}`,
-          images: {
-            url: frontmatter.socialImage,
-            width: 850,
-            height: 650,
-            alt: frontmatter.metaDesc,
-          },
+          images: [
+            {
+              url: frontmatter.socialImage,
+              width: 850,
+              height: 650,
+              alt: frontmatter.title,
+            },
+          ],
         }}
       />
       <Container maxW="7xl" p="12">

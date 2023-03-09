@@ -24,7 +24,7 @@ export default function DiveCentre({ diveCentreData }) {
 
   useEffect(() => {
     setDiveCentre(diveCentreData);
-    console.log("diveCentre", diveCentreData);
+    // console.log("diveCentre", diveCentreData);
   }, [diveCentreData]);
 
   async function fetchCentreTrips() {
@@ -45,7 +45,7 @@ export default function DiveCentre({ diveCentreData }) {
       .single();
     setTrips(data?.dive_trips || []);
     setLoading(false);
-    console.log("centreTripData", data);
+    // console.log("centreTripData", data);
   }
 
   useEffect(() => {
@@ -56,12 +56,12 @@ export default function DiveCentre({ diveCentreData }) {
   return (
     <>
       <NextSeo
-        title={`Dive Centre - ${diveCentre.name}`}
-        description={`Dive Centre - ${diveCentre.name}, ${diveCentre.city}, ${diveCentre.country}`}
+        title={`Dive with ${diveCentre.name} in ${diveCentre.country}`}
+        description={`Book your next dive trip with ${diveCentre.name} and explore the wonders of the underwater world near ${diveCentre.city} and beyond!`}
         openGraph={{
           type: "website",
-          title: `Dive Centre - ${diveCentre.name}`,
-          description: `Dive Centre - ${diveCentre.name}, ${diveCentre.city}, ${diveCentre.country}`,
+          title: `Dive with ${diveCentre.name} in ${diveCentre.country}`,
+          description: `Book your next dive trip with ${diveCentre.name} and explore the wonders of the underwater world near ${diveCentre.city} and beyond!`,
           url: `https://www.coralplayground.com/diving/dive_centres/${diveCentre.id}`,
           images: [
             {

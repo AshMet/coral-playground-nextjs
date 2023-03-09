@@ -88,7 +88,7 @@ export default function Settings() {
     submitToApi(formData);
   }
 
-  console.log("outside", diveMap);
+  // console.log("outside", diveMap);
 
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>

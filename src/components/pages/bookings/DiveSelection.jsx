@@ -89,7 +89,7 @@ export default function DiveSelection(props) {
   // Add items to cart
   function addSite(newItem) {
     const alreadyInCart = selectedSites.some((item) => item.id === newItem.id);
-    console.log("newItem", newItem);
+    // console.log("newItem", newItem);
     if (alreadyInCart) {
       toast({
         position: "top",

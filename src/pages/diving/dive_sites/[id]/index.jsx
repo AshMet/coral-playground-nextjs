@@ -54,12 +54,12 @@ export default function DiveSitePage({ diveSite }) {
   return (
     <>
       <NextSeo
-        title={`Dive Site - ${diveSite.name}`}
-        description={`Dive Site - ${diveSite.name}, ${diveSite.city.name}, ${diveSite.country.countries.name}`}
+        title={`Dive ${diveSite.name}, ${diveSite.country.countries.name}`}
+        description={`Book your next scuba diving trip in ${diveSite.city.name}, ${diveSite.country.countries.name} with Coral Playground today for an unforgattable trip`}
         openGraph={{
           type: "website",
-          title: `Dive Centre - ${diveSite.name}`,
-          description: `Dive Centre - ${diveSite.name}, ${diveSite.city.name}, ${diveSite.country.countries.name}`,
+          title: `Experience diving at ${diveSite.name}`,
+          description: `Book your next scuba diving trip in ${diveSite.city.name}, ${diveSite.country.countries.name} with Coral Playground today for an unforgattable trip`,
           url: `https://www.coralplayground.com/diving/dive_sites/${diveSite.id}`,
           images: [
             {

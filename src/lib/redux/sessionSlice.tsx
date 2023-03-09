@@ -134,7 +134,7 @@ export const logoutUser = createAsyncThunk(
   async (payload: string, { rejectWithValue }) => {
     const response = await logoutUserWithToken(payload);
     // if response has errors rejectwithvalue
-    console.log(response);
+    // console.log(response);
     if (response.error) {
       // The value we return becomes the `rejected` action payload
       return rejectWithValue(response);

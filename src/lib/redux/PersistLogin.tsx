@@ -26,7 +26,7 @@ function PersistLogin() {
         // This line needs to be fixed due to type mismatch
         // dispatch(refreshAccessToken(refreshToken));
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
     if (!accessToken) {

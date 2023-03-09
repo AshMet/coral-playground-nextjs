@@ -6,7 +6,7 @@ module.exports = {
   priority: 0.7,
   sitemapSize: 5000,
   generateRobotsTxt: true,
-  exclude: ['/protected-page', '/awesome/secret-page'],
+  exclude: ['/admin/nfts', '/nfts'],
   // alternateRefs: [
   //   {
   //     href: 'https://es.example.com',
@@ -45,10 +45,8 @@ module.exports = {
       //   disallow: ['/sub-path-1', '/path-2'],
       // },
     ],
-    // additionalSitemaps: [
-    //   'https://example.com/my-custom-sitemap-1.xml',
-    //   'https://example.com/my-custom-sitemap-2.xml',
-    //   'https://example.com/my-custom-sitemap-3.xml',
-    // ],
+    additionalSitemaps: [
+      'https://www.coralplayground.com/sitemap-0.xml ',
+    ],
   },
 }

@@ -52,17 +52,17 @@ export default function Home({ data }) {
         <>
           <NextSeo
             title="Coral Playground | Home Page"
-            description="User Profile & Settings"
+            description="The best place to book your next Red Sea dive trip"
             openGraph={{
               type: "website",
               title: "Coral Playground | Home Page",
-              description: "User Profile & Settings",
+              description: "The best place to book your next Red Sea dive trip",
               url: "https://www.coralplayground.com/",
               images: [
                 {
                   url: "https://www.coralplayground.com/svg/coral-logo.svg",
-                  width: 800,
-                  height: 400,
+                  width: 1200,
+                  height: 630,
                   alt: "Coral Playground Logo",
                 },
               ],

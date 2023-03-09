@@ -77,11 +77,11 @@ export default function Default({ data }) {
   return (
     <>
       <NextSeo
-        title="Coral Playground | Dive Map"
+        title="Coral Playground | Scuba Diving Map"
         description="Explore dive sites and centres on our interactive map"
         openGraph={{
           type: "website",
-          title: "Coral Playground | Dive Map",
+          title: "Coral Playground | Scuba Diving Map",
           description: "Explore dive sites and centres on our interactive map",
           url: "https://www.coralplayground.com/diving/map/",
           images: [

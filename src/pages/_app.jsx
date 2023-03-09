@@ -71,6 +71,14 @@ const MyApp = ({ Component, pageProps }) => {
           `,
         }}
       />
+      <Script
+        id="metricoolScript"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"7ae02e7a19e343c1d009847b3ab506ce"})});
+          `,
+        }}
+      />
       <SessionContextProvider
         supabaseClient={supabaseClient}
         initialSession={pageProps.initialSession}
