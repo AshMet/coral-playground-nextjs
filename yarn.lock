@@ -7600,6 +7600,11 @@ react-map-gl@^7.0.17:
   dependencies:
     "@types/mapbox-gl" "^2.6.0"
 
+react-messenger-chat-plugin@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/react-messenger-chat-plugin/-/react-messenger-chat-plugin-3.0.5.tgz#65bc53919e1bbc489e4ac3d65b25e5774addaee3"
+  integrity sha512-393uI68xyWLElbIYZknOb+zeb8onxIi6ZxmyhsJT76ct6yu/S2Jv7H1eKeB6BqG+vLHST3PrUlTL8gauZdoYIg==
+
 react-moralis@^1.4.2:
   version "1.4.2"
   resolved "https://registry.npmjs.org/react-moralis/-/react-moralis-1.4.2.tgz"

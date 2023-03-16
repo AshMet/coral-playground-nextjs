@@ -1,8 +1,11 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-props-no-spreading */
 import { ColorModeScript } from "@chakra-ui/react";
 import type { DocumentContext } from "next/document";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
+import { FB_PIXEL_ID } from "../utils/fpixel";
 import customTheme from "lib/styles/customTheme";
 
 const APP_NAME = "nextarter-chakra";
@@ -36,6 +39,15 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon" sizes="180x180" href="/coral-icon.png" />
           <link rel="icon" href="/coral-icon.png" />
           <link rel="manifest" href="/manifest.json" />
+
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{ display: "none" }}
+              src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
+            />
+          </noscript>
         </Head>
         <body>
           <ColorModeScript

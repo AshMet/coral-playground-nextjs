@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
@@ -38,10 +37,6 @@ import LandingLayout from "layouts/LandingLayout";
 export default function diveCentresHome() {
   return (
     <>
-      <NextSeo
-        title="Dive Centres Landing"
-        description="Coral Playground Dive Centres Home Page"
-      />
       <NextSeo
         title="Coral Playground | Dive Centres Landing Page"
         description="Dive Centres Landing Page"

@@ -1,7 +1,10 @@
+/* eslint-disable no-console */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
 import { Box, Flex } from "@chakra-ui/react";
 import { useSession } from "@supabase/auth-helpers-react";
 import { NextSeo } from "next-seo";
+import { MessengerChat } from "react-messenger-chat-plugin";
 import { ParallaxProvider } from "react-scroll-parallax";
 
 import Benefits from "components/pages/divingHome/Benefits";
@@ -80,6 +83,34 @@ export default function Home({ data }) {
                 <BookingBenefits />
                 {/* <Numbers />
                 <Upgrade /> */}
+                <MessengerChat
+                  pageId="105856435673294"
+                  language="en_US"
+                  themeColor="#000000"
+                  bottomSpacing={300}
+                  loggedInGreeting="loggedInGreeting"
+                  loggedOutGreeting="loggedOutGreeting"
+                  greetingDialogDisplay="show"
+                  debugMode
+                  onMessengerShow={() => {
+                    console.log("onMessengerShow");
+                  }}
+                  onMessengerHide={() => {
+                    console.log("onMessengerHide");
+                  }}
+                  onMessengerDialogShow={() => {
+                    console.log("onMessengerDialogShow");
+                  }}
+                  onMessengerDialogHide={() => {
+                    console.log("onMessengerDialogHide");
+                  }}
+                  onMessengerMounted={() => {
+                    console.log("onMessengerMounted");
+                  }}
+                  onMessengerLoad={() => {
+                    console.log("onMessengerLoad");
+                  }}
+                />
               </Flex>
             </ParallaxProvider>
           </LandingLayout>

@@ -20,6 +20,7 @@ import * as gtag from "../lib/data/gtag";
 import mautic from "../lib/data/mt";
 import { store } from "../lib/redux/store";
 import theme from "../theme/theme";
+import * as fbq from "../utils/fpixel";
 import "../../public/css/App.css";
 import "../../public/css/Map.css";
 import { ProfileProvider } from "contexts/ProfileContext";
@@ -44,6 +45,7 @@ const MyApp = ({ Component, pageProps }) => {
       gtag.pageview(url);
       mautic.pageView({ url });
       posthog.capture("$pageview");
+      fbq.pageview();
     };
     router.events.on("routeChangeComplete", handleRouteChange);
     return () => {
@@ -77,6 +79,40 @@ const MyApp = ({ Component, pageProps }) => {
         dangerouslySetInnerHTML={{
           __html: `function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"7ae02e7a19e343c1d009847b3ab506ce"})});
           `,
+        }}
+      />
+      {/* Global Site Code Pixel - Facebook Pixel */}
+      <Script
+        id="fb-pixel"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', ${fbq.FB_PIXEL_ID});
+          `,
+        }}
+      />
+      <Script
+        id="many-chat-1"
+        strategy="afterInteractive"
+        defer
+        dangerouslySetInnerHTML={{
+          __html: ` src="//widget.manychat.com/526229_5f573.js" `,
+        }}
+      />
+      <Script
+        id="many-chat-2"
+        strategy="afterInteractive"
+        defer
+        dangerouslySetInnerHTML={{
+          __html: ` src="https://mccdn.me/assets/js/widget.js `,
         }}
       />
       <SessionContextProvider

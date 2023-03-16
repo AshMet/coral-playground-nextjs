@@ -12,6 +12,8 @@ import {
 import Link from "next/link";
 import { MdChevronRight } from "react-icons/md";
 
+// import * as fbq from "utils/fpixel";
+
 // import InnerContent from "../../../layouts/InnerContent";
 
 // import heroVideo from "../../../../public/img/diving/HeroVideo.mp4";
@@ -20,6 +22,9 @@ const Hero = () => {
   // Chakra Color Mode
   const textColor = useColorModeValue("white", "white");
   const textColorSecondary = useColorModeValue("secondaryGray.700", "white");
+  // const handleClick = () => {
+  //   fbq.event("Purchase", { currency: "USD", value: 10 });
+  // };
 
   return (
     <Flex
@@ -87,6 +92,7 @@ const Hero = () => {
                   mb={{ base: "20px", md: "0px" }}
                   w="210px"
                   h="54px"
+                  // onClick={handleClick}
                 >
                   Start Exploring
                   <Icon
