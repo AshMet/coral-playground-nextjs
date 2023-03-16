@@ -4,7 +4,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { useSession } from "@supabase/auth-helpers-react";
 import { NextSeo } from "next-seo";
-import { MessengerChat } from "react-messenger-chat-plugin";
+// import { MessengerChat } from "react-messenger-chat-plugin";
 import { ParallaxProvider } from "react-scroll-parallax";
 
 import Benefits from "components/pages/divingHome/Benefits";
@@ -83,7 +83,7 @@ export default function Home({ data }) {
                 <BookingBenefits />
                 {/* <Numbers />
                 <Upgrade /> */}
-                <MessengerChat
+                {/* <MessengerChat
                   pageId="105856435673294"
                   language="en_US"
                   themeColor="#000000"
@@ -110,7 +110,7 @@ export default function Home({ data }) {
                   onMessengerLoad={() => {
                     console.log("onMessengerLoad");
                   }}
-                />
+                /> */}
               </Flex>
             </ParallaxProvider>
           </LandingLayout>
