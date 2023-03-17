@@ -15,12 +15,15 @@ import Hero from "components/pages/divingHome/Hero";
 import HowItWorks from "components/pages/divingHome/HowItWorks";
 import Mission from "components/pages/divingHome/Mission";
 import Profile from "components/pages/profile/Profile";
+import useExternalScripts from "hooks/useExternalScripts";
 import DivingLayout from "layouts/DivingLayout";
 import LandingLayout from "layouts/LandingLayout";
 import { supabase } from "utils/supabase";
 
 export default function Home({ data }) {
   const session = useSession();
+  useExternalScripts("//widget.manychat.com/526229_5f573.js");
+  useExternalScripts("https://mccdn.me/assets/js/widget.js");
   // console.log("session", session);
 
   return (

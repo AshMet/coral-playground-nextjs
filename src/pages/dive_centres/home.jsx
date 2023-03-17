@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
@@ -32,9 +33,12 @@ import HowItWorks from "components/pages/diveCentresHome/HowItWorks";
 import ManageBenefits from "components/pages/diveCentresHome/ManageBenefits";
 import Mission from "components/pages/diveCentresHome/Mission";
 import PromoteBenefits from "components/pages/diveCentresHome/PromoteBenefits";
+import useExternalScripts from "hooks/useExternalScripts";
 import LandingLayout from "layouts/LandingLayout";
 
 export default function diveCentresHome() {
+  useExternalScripts("//widget.manychat.com/526229_5f573.js");
+  useExternalScripts("https://mccdn.me/assets/js/widget.js");
   return (
     <>
       <NextSeo
