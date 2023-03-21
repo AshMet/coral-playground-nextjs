@@ -25,6 +25,7 @@ import { MdApps, MdDashboard } from "react-icons/md";
 import { supabase } from "../../api/index";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import DivingLayout from "layouts/DivingLayout";
+import generateDiveSiteRSS from "utils/generateDiveSiteRSS";
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === "children",
@@ -194,6 +195,8 @@ export async function getStaticProps() {
   `
     )
     .order("name", { ascending: true });
+  await generateDiveSiteRSS(diveSites);
+
   return {
     props: { diveSites },
     revalidate: 86400,
