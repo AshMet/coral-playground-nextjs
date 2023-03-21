@@ -100,20 +100,12 @@ const MyApp = ({ Component, pageProps }) => {
         }}
       />
       <Script
-        id="many-chat-1"
-        strategy="afterInteractive"
-        defer
-        dangerouslySetInnerHTML={{
-          __html: ` src="//widget.manychat.com/526229_5f573.js" `,
-        }}
+        src="//widget.manychat.com/526229_5f573.js"
+        strategy="lazyOnload"
       />
       <Script
-        id="many-chat-2"
-        strategy="afterInteractive"
-        defer
-        dangerouslySetInnerHTML={{
-          __html: ` src="https://mccdn.me/assets/js/widget.js `,
-        }}
+        src="https://mccdn.me/assets/js/widget.js"
+        strategy="lazyOnload"
       />
       <SessionContextProvider
         supabaseClient={supabaseClient}
