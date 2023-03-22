@@ -100,7 +100,7 @@ export default function DiveCentreHub(props) {
     </Card>
   ) : (
     <Card p={{ base: "15px", md: "30px" }} {...rest}>
-      {profile ? (
+      {profile.homeCentreId ? (
         <>
           <Box mb="45px" w="100%">
             <Flex justify="space-between" align="center" w="100%">

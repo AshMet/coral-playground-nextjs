@@ -4,7 +4,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { useSession } from "@supabase/auth-helpers-react";
 import { NextSeo } from "next-seo";
-// import { MessengerChat } from "react-messenger-chat-plugin";
 import { ParallaxProvider } from "react-scroll-parallax";
 
 import Benefits from "components/pages/divingHome/Benefits";
@@ -15,15 +14,12 @@ import Hero from "components/pages/divingHome/Hero";
 import HowItWorks from "components/pages/divingHome/HowItWorks";
 import Mission from "components/pages/divingHome/Mission";
 import Profile from "components/pages/profile/Profile";
-import useExternalScripts from "hooks/useExternalScripts";
 import DivingLayout from "layouts/DivingLayout";
 import LandingLayout from "layouts/LandingLayout";
 import { supabase } from "utils/supabase";
 
 export default function Home({ data }) {
   const session = useSession();
-  useExternalScripts("//widget.manychat.com/526229_5f573.js");
-  useExternalScripts("https://mccdn.me/assets/js/widget.js");
   // console.log("session", session);
 
   return (
@@ -84,36 +80,6 @@ export default function Home({ data }) {
                 <DiveSiteBenefits />
                 <DiveCentreBenefits />
                 <BookingBenefits />
-                {/* <Numbers />
-                <Upgrade /> */}
-                {/* <MessengerChat
-                  pageId="105856435673294"
-                  language="en_US"
-                  themeColor="#000000"
-                  bottomSpacing={300}
-                  loggedInGreeting="loggedInGreeting"
-                  loggedOutGreeting="loggedOutGreeting"
-                  greetingDialogDisplay="show"
-                  debugMode
-                  onMessengerShow={() => {
-                    console.log("onMessengerShow");
-                  }}
-                  onMessengerHide={() => {
-                    console.log("onMessengerHide");
-                  }}
-                  onMessengerDialogShow={() => {
-                    console.log("onMessengerDialogShow");
-                  }}
-                  onMessengerDialogHide={() => {
-                    console.log("onMessengerDialogHide");
-                  }}
-                  onMessengerMounted={() => {
-                    console.log("onMessengerMounted");
-                  }}
-                  onMessengerLoad={() => {
-                    console.log("onMessengerLoad");
-                  }}
-                /> */}
               </Flex>
             </ParallaxProvider>
           </LandingLayout>

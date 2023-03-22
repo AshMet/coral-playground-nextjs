@@ -4,16 +4,10 @@
         <title>Coral Playground | Dive Sites | RSS Feed</title>
         <link>http://localhost:3000</link>
         <description>Welcome to Coral Playground, your best source for dive site info in the Red Sea</description>
-        <lastBuildDate>Tue, 21 Mar 2023 05:57:16 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 22 Mar 2023 04:40:25 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <copyright>All rights reserved 2023, Coral Playground</copyright>
-        <item>
-            <title><![CDATA[Abu Dabbab North]]></title>
-            <link>http://localhost:3000/diving/dive_sites/1</link>
-            <guid>http://localhost:3000/diving/dive_sites/1</guid>
-            <description><![CDATA[Habili Ali is the largest Habili in the reef system known as St. Johns. Habili is the Arabic word for a reef that never rises to the sea surface, which means it is not yet an adult reef. The steep walls of the reef are covered in colorful soft corals and huge black coral sea fans. The average depth of the site is over 30m/98ft and in some places the wall drops down to 70m/230ft. Due to the exposed location of the reef, divers always experience some currents at this dive site.]]></description>
-        </item>
         <item>
             <title><![CDATA[Abu Hashish]]></title>
             <link>http://localhost:3000/diving/dive_sites/3</link>

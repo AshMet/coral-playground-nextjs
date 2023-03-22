@@ -9,7 +9,8 @@ export default async function generateRssFeed(dive_sites) {
       site.description !== null &&
       site.latitude !== null &&
       site.longitude !== null &&
-      site.dive_map !== null
+      site.dive_map !== null &&
+      site.id !== 1
     );
   });
 
