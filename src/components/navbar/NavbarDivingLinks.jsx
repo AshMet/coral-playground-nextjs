@@ -185,7 +185,7 @@ function SignedInMenuList() {
               size="sm"
               mr={4}
               leftIcon={<ProfileIcon />}
-              onClick={() => router.push("/")}
+              onClick={() => router.push("/users/me")}
             >
               Profile
             </Button>

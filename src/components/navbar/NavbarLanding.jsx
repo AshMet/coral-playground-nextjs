@@ -1,7 +1,7 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import {
   Box,
@@ -18,6 +18,7 @@ import {
   useColorModeValue,
   Tooltip,
 } from "@chakra-ui/react";
+import { useUser } from "@supabase/auth-helpers-react";
 import Image from "next/image";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
@@ -29,6 +30,7 @@ import { VSeparator } from "components/separator/Separator";
 // import * as gtag from "lib/data/gtag";
 
 export default function LandingNavbar(props) {
+  const user = useUser();
   const [scrolled, setScrolled] = useState(false);
   // const { colorMode, toggleColorMode } = useColorMode();
 
@@ -183,24 +185,45 @@ export default function LandingNavbar(props) {
             bg={textColor}
             display={{ base: "none", lg: "block" }}
           />
-          <Tooltip label="Sign Up / Login">
-            <Link my="auto" href="/auth/login">
-              <Button
-                variant="no-hover"
-                h="max-content"
-                w="max-content"
-                bg="transparent"
-                my="auto"
-              >
-                <Icon
-                  as={HiOutlineUserCircle}
-                  color={textColor}
-                  w="22px"
-                  h="22px"
-                />
-              </Button>
-            </Link>
-          </Tooltip>
+          {user ? (
+            <Tooltip label="Profile">
+              <Link my="auto" href="/users/me">
+                <Button
+                  variant="no-hover"
+                  h="max-content"
+                  w="max-content"
+                  bg="transparent"
+                  my="auto"
+                >
+                  <Icon
+                    as={HiOutlineUserCircle}
+                    color={textColor}
+                    w="22px"
+                    h="22px"
+                  />
+                </Button>
+              </Link>
+            </Tooltip>
+          ) : (
+            <Tooltip label="Sign Up / Login">
+              <Link my="auto" href="/auth/login">
+                <Button
+                  variant="no-hover"
+                  h="max-content"
+                  w="max-content"
+                  bg="transparent"
+                  my="auto"
+                >
+                  <Icon
+                    as={HiOutlineUserCircle}
+                    color={textColor}
+                    w="22px"
+                    h="22px"
+                  />
+                </Button>
+              </Link>
+            </Tooltip>
+          )}
           <Tooltip label="Follow us on Instagram">
             <Link
               me="10px"
