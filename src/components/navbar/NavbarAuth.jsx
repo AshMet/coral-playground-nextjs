@@ -36,6 +36,7 @@ import routes from "../../routes";
 import NavLink from "../navLinks/NavLink";
 import { SidebarResponsive } from "../sidebar/Sidebar";
 import Image from "components/actions/NextChakraImg";
+import { useUser } from "@supabase/auth-helpers-react";
 
 // Assets
 // import"/img/layout/dropdown.png"ain from "assets/img/layout"/img/layout/dropdown.png"ain.png";
@@ -44,6 +45,7 @@ import Image from "components/actions/NextChakraImg";
 export default function AuthNavbar(props) {
   const { logo, logoText, secondary, sidebarWidth, ...rest } = props;
   const { colorMode } = useColorMode();
+  const user = useUser();
   // Menu States
   const {
     isOpen: isOpenAuth,
@@ -122,7 +124,7 @@ export default function AuthNavbar(props) {
     brand = (
       <Link
         minW="175px"
-        href={`${process.env.PUBLIC_URL}/#/`}
+        href={user ? "/users/me" : "/"}
         target="_blank"
         display="flex"
         lineHeight="100%"

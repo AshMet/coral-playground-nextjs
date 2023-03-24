@@ -66,10 +66,10 @@ export default function Settings(props) {
           <InputField
             mb="0px"
             id="price"
-            label="Price"
-            value={price}
+            label={`Price: ${(price / 100).toFixed(2)} Euro`}
+            value={price ? price / 100 : 0}
             placeholder="Total Price including commission"
-            onChange={(e) => setPrice(Number(e.target.value))}
+            onChange={(e) => setPrice(Number(e.target.value) * 100)}
           />
           <InputField
             mb="0px"

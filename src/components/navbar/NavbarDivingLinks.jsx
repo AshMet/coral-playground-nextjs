@@ -19,7 +19,6 @@ import {
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
-import { useContext } from "react";
 import { FaEthereum } from "react-icons/fa";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
@@ -31,7 +30,6 @@ import { ProfileIcon } from "components/icons/Icons";
 // import Balance from "components/navbar/Balance";
 import SearchBar from "components/navbar/searchBar/SearchBar";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
-import { ProfileContext } from "contexts/ProfileContext";
 import routes from "routes";
 
 function SignedOutMenuList() {
@@ -129,7 +127,6 @@ function SignedInMenuList() {
   const supabase = useSupabaseClient();
   const user = useUser();
   const router = useRouter();
-  const { profile } = useContext(ProfileContext);
 
   return (
     <Menu>
@@ -139,7 +136,7 @@ function SignedInMenuList() {
           color="white"
           // name={user.email}
           src={
-            profile?.avatarUrl ||
+            user?.user_metadata.avatar_url ||
             `https://avatars.dicebear.com/api/miniavs/${user.email}.svg`
           }
           size="sm"
@@ -170,7 +167,7 @@ function SignedInMenuList() {
           >
             {/* {user.attributes.accounts[0].substring(0, 7)} {` ...... `}
             {user.attributes.accounts[0].slice(-7)} */}
-            {profile?.username || user.email}
+            {user?.user_metadata.username || user.email}
           </Text>
         </Flex>
         <Flex flexDirection="column" p="10px">

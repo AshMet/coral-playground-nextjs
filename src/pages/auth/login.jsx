@@ -160,7 +160,7 @@ export default function Login() {
   };
 
   if (user) {
-    router.push("/");
+    router.push("/users/me");
   } else
     return (
       <LoginLayout

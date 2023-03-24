@@ -191,7 +191,7 @@ export async function getStaticProps() {
     .select(
       `
     id, name, description, latitude, longitude, min_visibility, max_visibility, depth, current, cert_level, tags, access, dive_map,
-    city: cities (name)
+    updated_at, city: cities (name)
   `
     )
     .order("name", { ascending: true });

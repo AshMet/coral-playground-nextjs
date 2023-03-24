@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable consistent-return */
 /* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -15,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {} from "react-icons/io";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 import { MdAdd } from "react-icons/md";
@@ -26,31 +27,27 @@ import Card from "components/card/Card";
 import SwitchField from "components/fields/SwitchField";
 import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import OwnerDiveCentreMenu from "components/pages/profile/OwnerDiveCentreMenu";
-import { ProfileContext } from "contexts/ProfileContext";
 import * as gtag from "lib/data/gtag";
 
 export default function DiveCentreHub(props) {
-  const { ...rest } = props;
+  const { diveCentre, loading, ...rest } = props;
   const textColor = useColorModeValue("gray.700", "white");
   const borderColor = useColorModeValue("secondaryGray.400", "whiteAlpha.100");
   const bgAdd = useColorModeValue("white", "navy.800");
   const textColorActive = useColorModeValue("green.600", "green.400");
   const textColorInactive = useColorModeValue("red.700", "red.400");
-  const { profile, loading } = useContext(ProfileContext);
   const router = useRouter();
-  const [active, setActive] = useState();
+  const [active, setActive] = useState(diveCentre.active);
   const supabase = useSupabaseClient();
   const toast = useToast();
 
-  async function updateActive() {
-    if (!profile) {
-      return null;
-    }
+  async function updateStatus(newStatus) {
+    await setActive(newStatus);
     const { data, error } = await supabase
       .from("dive_centres")
-      .update({ active })
+      .update({ active: newStatus })
       .select()
-      .eq("id", profile.homeCentreId);
+      .eq("id", diveCentre.id);
 
     if (error) {
       toast({
@@ -75,24 +72,76 @@ export default function DiveCentreHub(props) {
         position: "top",
         render: () => (
           <AlertPopup
-            type="danger"
+            type="success"
             text="Dive Centre Updated"
-            subtext={`Status: ${active ? "Active" : "Not Active"}`}
+            subtext={`Status: ${newStatus ? "Active" : "Not Active"}`}
           />
         ),
       });
       gtag.event({
-        action: "update-dive-centre-failed",
+        action: "update-dive-centre-success",
         category: "button",
         label: "Dive Centre",
         // value: newItem.title,
       });
     }
+    // console.log("active: ", active);
+    // console.log("newStatus: ", newStatus);
   }
 
-  useEffect(() => {
-    updateActive();
-  }, [active]);
+  // async function updateActive() {
+  //   // if (!diveCentre) {
+  //   //   return null;
+  //   // }
+  //   const { data, error } = await supabase
+  //     .from("dive_centres")
+  //     .update({ active })
+  //     .select()
+  //     .eq("id", diveCentre.id);
+
+  //   if (error) {
+  //     toast({
+  //       position: "top",
+  //       render: () => (
+  //         <AlertPopup
+  //           type="danger"
+  //           text="Unable to update Dive Centre"
+  //           subtext={error.message}
+  //         />
+  //       ),
+  //     });
+  //     gtag.event({
+  //       action: "update-dive-centre-failed",
+  //       category: "button",
+  //       label: "Dive Centre",
+  //       // value: newItem.title,
+  //     });
+  //   }
+  //   if (data) {
+  //     toast({
+  //       position: "top",
+  //       render: () => (
+  //         <AlertPopup
+  //           type="danger"
+  //           text="Dive Centre Updated"
+  //           subtext={`Status: ${active ? "Active" : "Not Active"}`}
+  //         />
+  //       ),
+  //     });
+  //     gtag.event({
+  //       action: "update-dive-centre-success",
+  //       category: "button",
+  //       label: "Dive Centre",
+  //       // value: newItem.title,
+  //     });
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   updateActive();
+  // }, [active]);
+
+  useEffect(() => {}, [active]);
 
   return loading ? (
     <Card p={{ base: "15px", md: "30px" }} {...rest}>
@@ -100,14 +149,14 @@ export default function DiveCentreHub(props) {
     </Card>
   ) : (
     <Card p={{ base: "15px", md: "30px" }} {...rest}>
-      {profile.homeCentreId ? (
+      {diveCentre ? (
         <>
           <Box mb="45px" w="100%">
             <Flex justify="space-between" align="center" w="100%">
               <Flex>
                 <Flex direction="column">
                   <Text fontSize="md" color={textColor} fontWeight="700">
-                    {profile.homeCentreName}
+                    {diveCentre.name}
                   </Text>
                   <Text fontSize="sm" color="gray.500" fontWeight="500">
                     Dive Centre
@@ -115,7 +164,7 @@ export default function DiveCentreHub(props) {
                 </Flex>
               </Flex>
               <OwnerDiveCentreMenu
-                diveCentreId={profile.homeCentreId}
+                diveCentreId={diveCentre.id}
                 icon={
                   <Icon
                     as={IoEllipsisHorizontal}
@@ -128,8 +177,8 @@ export default function DiveCentreHub(props) {
             </Flex>
           </Box>
           <ImageUploader
-            diveCentreId={profile.homeCentreId}
-            diveCentreImg={profile.homeCentreImg}
+            diveCentreId={diveCentre.id}
+            diveCentreImg={diveCentre.cover_photo}
             // coverPhoto={ownerDiveCentre.cover_photo}
           />
           <SimpleGrid
@@ -142,7 +191,8 @@ export default function DiveCentreHub(props) {
               me="30px"
               id="1"
               isChecked={active}
-              onChange={() => setActive(!active)}
+              onChange={() => updateStatus(!active)}
+              // onChange={() => setActive(!active)}
               label={`Status: ${active ? "Active" : "Not Active"}`}
               desc="If disabled, your dive centre will no longer appear in the search results and will no longer be able to receive any new bookings. This can be changed back at any time."
               labelColor={active ? textColorActive : textColorInactive}
@@ -155,7 +205,7 @@ export default function DiveCentreHub(props) {
               value="Active"
               actionName="View"
               action={() =>
-                router.push(`/diving/dive_centres/${profile.homeCentreId}`)
+                router.push(`/diving/dive_centres/${diveCentre.id}`)
               }
             />
             <SetUp
@@ -163,10 +213,16 @@ export default function DiveCentreHub(props) {
               borderBottom="1px solid"
               borderColor={borderColor}
               name="Make changes"
-              value="Last change: 34/07/2022"
+              value={`Last change: ${new Date(
+                diveCentre.updated_at
+              ).toLocaleDateString("en-US", {
+                // year: "2-digit",
+                month: "short",
+                day: "numeric",
+              })}`}
               actionName="Edit"
               action={() =>
-                router.push(`/diving/dive_centres/${profile.homeCentreId}/edit`)
+                router.push(`/diving/dive_centres/${diveCentre.id}/edit`)
               }
             />
             <SetUp
@@ -174,11 +230,11 @@ export default function DiveCentreHub(props) {
               borderBottom="1px solid"
               borderColor={borderColor}
               name="Add Dive Trips"
-              value="Available: 7"
+              // value="Available: 7"
               actionName="Add"
               action={() =>
                 router.push(
-                  `/diving/dive_centres/${profile.homeCentreId}/dive_trips/new`
+                  `/diving/dive_centres/${diveCentre.id}/dive_trips/new`
                 )
               }
             />

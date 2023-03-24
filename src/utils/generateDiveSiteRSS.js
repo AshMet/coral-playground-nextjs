@@ -18,8 +18,9 @@ export default async function generateRssFeed(dive_sites) {
     title: "Coral Playground | Dive Sites | RSS Feed",
     description:
       "Welcome to Coral Playground, your best source for dive site info in the Red Sea",
-    id: siteUrl,
+    id: `${siteUrl}/coral-icon.png`,
     link: siteUrl,
+    image: `${siteUrl}/coral-icon.png`,
     favicon: `${siteUrl}/favicon.png`,
     copyright: `All rights reserved ${new Date().getFullYear()}, Coral Playground`,
     generator: "Feed for Node.js",
@@ -33,11 +34,11 @@ export default async function generateRssFeed(dive_sites) {
   activeSites.forEach((site) => {
     feed.addItem({
       title: site.name,
-      id: `${siteUrl}/diving/dive_sites/${site.id}`,
-      link: `${siteUrl}/diving/dive_sites/${site.id}`,
-      image: site.dive_map,
       description: site.description,
-      // date: new Date(frontmatter.date),
+      id: `dive_sites/${site.id}`,
+      link: `${siteUrl}/diving/dive_sites/${site.id}`,
+      // image: site.dive_map,
+      date: site.updated_at ? new Date(site.updated_at) : new Date(2023, 1, 19),
     });
   });
 

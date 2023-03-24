@@ -128,7 +128,7 @@ export default function LandingNavbar(props) {
         alignItems="center"
         mb={gap}
       >
-        <Link href="/">
+        <Link href={user ? "/users/me" : "/"}>
           <Image src="/svg/coral-logo.svg" width="200px" height="45px" />
         </Link>
         <Flex ms="auto">

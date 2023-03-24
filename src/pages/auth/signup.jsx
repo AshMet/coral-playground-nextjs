@@ -223,7 +223,7 @@ export default function SignUp() {
   };
 
   if (user) {
-    router.push("/");
+    router.push("/users/me");
   } else
     return (
       <LoginLayout

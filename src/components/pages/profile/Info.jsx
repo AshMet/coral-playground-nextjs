@@ -13,22 +13,17 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useContext } from "react";
 
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
 import TextField from "components/fields/TextField";
-import { ProfileContext } from "contexts/ProfileContext";
 
-export default function Info() {
-  // Chakra Color Mode
+export default function Info(props) {
+  const { profile, setProfile, updateProfile, loading } = props;
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
   const supabase = useSupabaseClient();
   const user = useUser();
-
-  const { profile, setProfile, updateProfile, profileLoading } =
-    useContext(ProfileContext);
 
   const handleProfileChange = (e) => {
     setProfile({
@@ -65,7 +60,7 @@ export default function Info() {
           name="email"
           label="Email Address"
           placeholder="example@email.com"
-          value={user.email}
+          value={user?.email}
           disabled
         />
         <InputField
@@ -103,7 +98,7 @@ export default function Info() {
           _placeholder={{ color: "secondaryGray.600" }}
           _hover={{ cursor: "pointer" }}
         >
-          Current Certification Level
+          Current Certification Level: {profile?.divingCert || "Not set"}
         </FormLabel>
         <Select
           fontSize="sm"
@@ -114,7 +109,7 @@ export default function Info() {
           placeholder="Select..."
           borderColor={useColorModeValue("secondaryGray.100", "whiteAlpha.100")}
           // defaultValue={2}
-          value={profile?.divingCert}
+          value={profile?.certification}
           onChange={handleProfileChange}
         >
           <option value="Open Water">Open Water</option>
@@ -146,9 +141,9 @@ export default function Info() {
           ms="auto"
           _hover={{ bgColor: "brand.300" }}
           onClick={updateProfile}
-          disabled={profileLoading}
+          // disabled={profileLoading}
         >
-          {profileLoading ? "Loading ..." : "Update"}
+          {loading ? "Loading ..." : "Update"}
         </Button>
         <Button
           variant="outline"

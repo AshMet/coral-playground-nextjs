@@ -23,7 +23,6 @@ import theme from "../theme/theme";
 import * as fbq from "../utils/fpixel";
 import "../../public/css/App.css";
 import "../../public/css/Map.css";
-import { ProfileProvider } from "contexts/ProfileContext";
 
 const MyApp = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || ((page) => page);
@@ -112,19 +111,17 @@ const MyApp = ({ Component, pageProps }) => {
         initialSession={pageProps.initialSession}
       >
         <ChakraProvider theme={theme}>
-          <ProfileProvider>
-            <Provider store={store}>
-              <Head>
-                <meta
-                  name="viewport"
-                  content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-                />
-              </Head>
-              <DefaultSeo {...defaultSEOConfig} />
-              {getLayout(<Component {...pageProps} />)}
-              <Analytics />
-            </Provider>
-          </ProfileProvider>
+          <Provider store={store}>
+            <Head>
+              <meta
+                name="viewport"
+                content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
+              />
+            </Head>
+            <DefaultSeo {...defaultSEOConfig} />
+            {getLayout(<Component {...pageProps} />)}
+            <Analytics />
+          </Provider>
         </ChakraProvider>
       </SessionContextProvider>
     </>

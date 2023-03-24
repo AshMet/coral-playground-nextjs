@@ -11,15 +11,14 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
-import { ProfileContext } from "contexts/ProfileContext";
 import * as gtag from "lib/data/gtag";
 
 export default function Settings(props) {
-  const { uid } = props;
+  const { uid, profile, setProfile, updateProfile } = props;
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
   const supabase = useSupabaseClient();
@@ -27,7 +26,6 @@ export default function Settings(props) {
   const inputRef = useRef(null);
   const toast = useToast();
   const user = useUser();
-  const { profile, setProfile, updateProfile } = useContext(ProfileContext);
 
   // async function downloadImage(path) {
   //   try {
@@ -49,31 +47,23 @@ export default function Settings(props) {
   // }, [profile]);
 
   const uploadAvatar = async (e) => {
-    try {
-      setUploading(true);
+    setUploading(true);
 
-      if (!e.target.files || e.target.files.length === 0) {
-        throw new Error("You must select an image to upload.");
-      }
+    if (!e.target.files || e.target.files.length === 0) {
+      throw new Error("You must select an image to upload.");
+    }
 
-      const file = e.target.files[0];
-      const fileExt = file.name.split(".").pop();
-      const fileName = `${uid}.${fileExt}`;
-      const filePath = `${fileName}`;
-      const newAvatarUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${filePath}`;
+    const file = e.target.files[0];
+    const fileExt = file.name.split(".").pop();
+    const fileName = `${uid}.${fileExt}`;
+    const filePath = `${fileName}`;
+    const newAvatarUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${filePath}`;
 
-      const { error: uploadError } = await supabase.storage
-        .from("avatars")
-        .upload(filePath, file, { upsert: true });
+    const { error } = await supabase.storage
+      .from("avatars")
+      .upload(filePath, file, { upsert: true });
 
-      if (uploadError) {
-        throw uploadError;
-      }
-      setProfile({
-        ...profile,
-        avatarUrl: newAvatarUrl,
-      });
-    } catch (error) {
+    if (error) {
       toast({
         position: "top",
         render: () => (
@@ -90,10 +80,16 @@ export default function Settings(props) {
         label: "Profile",
         // value: newItem.title,
       });
-    } finally {
-      updateProfile();
-      setUploading(false);
+      throw error;
     }
+
+    setProfile({
+      ...profile,
+      avatarUrl: newAvatarUrl,
+    });
+
+    updateProfile();
+    setUploading(false);
   };
 
   // useEffect(() => {
@@ -111,8 +107,8 @@ export default function Settings(props) {
         key={new Date().toUTCString}
         mx="auto"
         src={
-          profile?.avatarUrl ||
-          `https://avatars.dicebear.com/api/miniavs/${user.email}.svg`
+          profile.avatarUrl ||
+          `https://avatars.dicebear.com/api/miniavs/${user?.email}.svg`
         }
         h="87px"
         w="87px"
@@ -139,7 +135,7 @@ export default function Settings(props) {
           color={textColorPrimary}
           alignItems="center"
         >
-          {user.user_metadata.user_role === "dive_centre_owner"
+          {profile?.userRole === "dive_centre_owner"
             ? "Dive Centre Owner"
             : "Scuba Diver"}
         </Text>
