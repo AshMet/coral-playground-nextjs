@@ -42,8 +42,9 @@ module.exports = {  //withPWA(
       'avatars.dicebear.com',
       'ipfs.moralis.io',
       'rvlocxzrtjom.usemoralis.com',
-      "tfpamgcqwydaqamjcxpu.supabase.co",
-      "stzgaygfnnszcvhmnbqy.supabase.co",
+      'tfpamgcqwydaqamjcxpu.supabase.co',
+      'stzgaygfnnszcvhmnbqy.supabase.co',
+      'trrwzjpbcilwehezrxqn.supabase.co',
       'localhost',
       'https://s3.eu-west-3.amazonaws.com/media.coralplayground.com',
       'coral-playground-api.herokuapp.com'

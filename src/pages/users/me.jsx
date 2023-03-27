@@ -11,6 +11,7 @@ import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
+import Invite from "components/pages/diveCentre/Invite";
 import Banner from "components/pages/profile/Banner";
 import DiveCentreHub from "components/pages/profile/DiveCentreHub";
 import Info from "components/pages/profile/Info";
@@ -20,12 +21,13 @@ import * as gtag from "lib/data/gtag";
 // import { supabase } from "utils/supabase";
 
 export default function Profile(props) {
-  const { session, user, diveCentre } = props;
+  const { session, user, data } = props;
   // const session = useSession();
   const supabase = useSupabaseClient();
   // const user = useUser();
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState("");
+  const [diveCentre, setDiveCentre] = useState(data);
   const toast = useToast();
   const {
     username,
@@ -67,6 +69,11 @@ export default function Profile(props) {
       userRole: user?.user_metadata.user_role,
     });
   }, [user]);
+
+  useEffect(() => {
+    if (!data) return null;
+    setDiveCentre(data);
+  }, [data]);
 
   // const getProfile = async () => {
   //   setLoading(true);
@@ -185,54 +192,59 @@ export default function Profile(props) {
             ],
           }}
         />
-        <DivingLayout>
-          <Box pt={{ sm: "60px", xl: "100px" }}>
-            <SimpleGrid
-              mb="20px"
-              columns={{ sm: 1, lg: 2 }}
-              spacing={{ base: "20px", xl: "20px" }}
-            >
-              {/* Column Left */}
-              <Flex direction="column">
-                <Banner
-                  uid={user.id}
-                  profile={profile}
-                  setProfile={setProfile}
-                  updateProfile={updateProfile}
-                />
-                <Info
-                  profile={profile}
-                  setProfile={setProfile}
-                  updateProfile={updateProfile}
-                />
-              </Flex>
-              {/* Column Right */}
-              <Flex direction="column">
-                {userRole === "dive_centre_owner" ? (
-                  <>
-                    <Text fontSize="xl" fontWeight="bold" mb={5}>
-                      Manage your business
-                    </Text>
-                    <DiveCentreHub
-                      loading={loading}
-                      user={session?.user}
-                      diveCentre={diveCentre}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <Text fontSize="xl" fontWeight="bold" mb={5}>
-                      Current Orders
-                    </Text>
-                    <UserOrders />
-                  </>
-                )}
-                {/* <Socials />
+        <Box pt={{ sm: "60px", xl: "100px" }}>
+          <SimpleGrid
+            mb="20px"
+            columns={{ sm: 1, lg: 2 }}
+            spacing={{ base: "20px", xl: "20px" }}
+          >
+            {/* Column Left */}
+            <Flex direction="column">
+              <Banner
+                uid={user.id}
+                profile={profile}
+                setProfile={setProfile}
+                updateProfile={updateProfile}
+              />
+              <Info
+                profile={profile}
+                setProfile={setProfile}
+                updateProfile={updateProfile}
+              />
+            </Flex>
+            {/* Column Right */}
+            <Flex direction="column">
+              {userRole === "dive_centre_owner" ? (
+                <>
+                  <Text fontSize="xl" fontWeight="bold" mb={5}>
+                    Manage your business
+                  </Text>
+                  <DiveCentreHub
+                    loading={loading}
+                    user={session?.user}
+                    diveCentre={diveCentre}
+                  />
+                  <Invite
+                    referralCode={`${process.env.NEXT_PUBLIC_SITE_URL}/diving/dive_centres/${diveCentre.id}`}
+                    fbLink="#"
+                    twtLink="#"
+                    gridArea={{ base: "2 / 1 / 3 / 3", "2xl": "1 / 2 / 2 / 3" }}
+                    mt={5}
+                  />
+                </>
+              ) : (
+                <>
+                  <Text fontSize="xl" fontWeight="bold" mb={5}>
+                    Current Orders
+                  </Text>
+                  <UserOrders />
+                </>
+              )}
+              {/* <Socials />
           <Password /> */}
-              </Flex>
-            </SimpleGrid>
-          </Box>
-        </DivingLayout>
+            </Flex>
+          </SimpleGrid>
+        </Box>
       </>
     </Box>
   );
@@ -249,14 +261,14 @@ export const getServerSideProps = async (ctx) => {
 
   console.log("session:", session);
 
-  const { data: diveCentre } = await supabase
+  const { data } = await supabase
     .from("dive_centres")
     .select("*")
     .eq("owner_id", userId)
     .single();
 
   console.log("userId: ", userId);
-  console.log("dive_centre: ", diveCentre);
+  console.log("dive_centre: ", data);
 
   // debugger;
 
@@ -272,7 +284,11 @@ export const getServerSideProps = async (ctx) => {
     props: {
       session,
       user: session.user,
-      diveCentre: diveCentre ?? [],
+      data: data ?? [],
     },
   };
+};
+
+Profile.getLayout = function getLayout(page) {
+  return <DivingLayout>{page}</DivingLayout>;
 };

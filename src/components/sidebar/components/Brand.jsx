@@ -4,11 +4,11 @@ import { Flex, Box, useColorModeValue } from "@chakra-ui/react";
 // import React from "react";
 // Custom components
 // import { HorizonLogo } from "components/icons/Icons";
+import { useUser } from "@supabase/auth-helpers-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { HSeparator } from "components/separator/Separator";
-import { useUser } from "@supabase/auth-helpers-react";
 // import Image from "../../actions/NextChakraImg";
 
 export function SidebarBrand() {

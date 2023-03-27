@@ -149,7 +149,7 @@ export default function DiveCentreHub(props) {
     </Card>
   ) : (
     <Card p={{ base: "15px", md: "30px" }} {...rest}>
-      {diveCentre ? (
+      {diveCentre.id ? (
         <>
           <Box mb="45px" w="100%">
             <Flex justify="space-between" align="center" w="100%">
@@ -201,6 +201,39 @@ export default function DiveCentreHub(props) {
               py="20px"
               borderBottom="1px solid"
               borderColor={borderColor}
+              name="Add Dive Trips"
+              // value="Available: 7"
+              actionName="Add"
+              action={() =>
+                router.push(
+                  `/diving/dive_centres/${diveCentre.id}/dive_trips/new`
+                )
+              }
+            />
+            <SetUp
+              py="20px"
+              borderBottom="1px solid"
+              borderColor={borderColor}
+              name="Manage Dive Trips"
+              actionName="View"
+              action={() =>
+                router.push(`/diving/dive_centres/${diveCentre.id}/manage`)
+              }
+            />
+            <SetUp
+              py="20px"
+              borderBottom="1px solid"
+              borderColor={borderColor}
+              name="View Orders"
+              actionName="View"
+              action={() =>
+                router.push(`/diving/dive_centres/${diveCentre.id}/order_list`)
+              }
+            />
+            <SetUp
+              py="20px"
+              borderBottom="1px solid"
+              borderColor={borderColor}
               name="View Dive Centre page"
               value="Active"
               actionName="View"
@@ -212,7 +245,7 @@ export default function DiveCentreHub(props) {
               py="20px"
               borderBottom="1px solid"
               borderColor={borderColor}
-              name="Make changes"
+              name="Edit Dive Centre"
               value={`Last change: ${new Date(
                 diveCentre.updated_at
               ).toLocaleDateString("en-US", {
@@ -223,19 +256,6 @@ export default function DiveCentreHub(props) {
               actionName="Edit"
               action={() =>
                 router.push(`/diving/dive_centres/${diveCentre.id}/edit`)
-              }
-            />
-            <SetUp
-              py="20px"
-              borderBottom="1px solid"
-              borderColor={borderColor}
-              name="Add Dive Trips"
-              // value="Available: 7"
-              actionName="Add"
-              action={() =>
-                router.push(
-                  `/diving/dive_centres/${diveCentre.id}/dive_trips/new`
-                )
               }
             />
             <SetUp

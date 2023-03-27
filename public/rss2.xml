@@ -4,7 +4,7 @@
         <title>Coral Playground | Dive Sites | RSS Feed</title>
         <link>http://localhost:3000</link>
         <description>Welcome to Coral Playground, your best source for dive site info in the Red Sea</description>
-        <lastBuildDate>Fri, 24 Mar 2023 22:44:49 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 25 Mar 2023 00:27:53 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -22,6 +22,7 @@
 
 .A tongue of reef extends about 1km south of the island. The dive site is at its southernmost tip. There is a shelf between 15 meters and 22 meters outside, and beyond that a steep, but fairly bare, drop-off, usually with superb visibility. Inside the tongue of reef there are many table corals and ergs to be explored.The trip here can be choppy. Rough seas often make this site inaccessible from Hurghada although the site itself is well protected. Actually, it’s a desired spot for all levels of divers and custom made for all levels of training. Current is mainly north to south and strongest along the drop-off.
 Your best bet is to leave the lagoon through an obvious channel filled with table corals, cross the shelf to the drop-off and follow it north. There are some beautiful caves in the 30 meter region. Return along the inside of the shelf and finish the dive back in the lagoon amongst the numerous ergs.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/abu-hashish.jpg?t=2022-12-18T20%3A34%3A49.657Z" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Abu Nuhas]]></title>
@@ -29,6 +30,7 @@ Your best bet is to leave the lagoon through an obvious channel filled with tabl
             <guid>dive_sites/5</guid>
             <pubDate>Sun, 23 Oct 2022 18:27:56 GMT</pubDate>
             <description><![CDATA[Abu Nuhas is a large triangular shaped reef. The average depth is 24m/79ft and water visibility is around 20-30m/65-100ft. The reef is located just a little bit north of Shadwan Island and the area is covered with shipwrecks. The wrecks are on the northern and rougher side of the reef with the main ones from west to east being the Giannis D, the Carnatic, the Chrisoula K and the Kimon M. The currents can be quite strong.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/abu-nuhas.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Abu Ramada South]]></title>
@@ -36,6 +38,7 @@ Your best bet is to leave the lagoon through an obvious channel filled with tabl
             <guid>dive_sites/7</guid>
             <pubDate>Sun, 23 Oct 2022 18:27:56 GMT</pubDate>
             <description><![CDATA[South Abu Ramada (also known as Abu Ramada South) is a dive site with huge reefs of hard and soft corals and sea fans sitting on a sandy bottom, and a very old wreck that is very much decayed. Aside from diving, the South Abu Ramada site is famous for being a good snorkeling spot. Photography lovers can also enjoy good conditions for taking photos.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/abu-ramada-south.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Banana Reef]]></title>
@@ -43,6 +46,7 @@ Your best bet is to leave the lagoon through an obvious channel filled with tabl
             <guid>dive_sites/9</guid>
             <pubDate>Sun, 23 Oct 2022 18:27:56 GMT</pubDate>
             <description><![CDATA[Banana shaped reef in the middle of the Giftun Strait has the average depth of 10m/32.8ft and water visibility around 10-30m/32-98ft. An easy current at this dive site allows to drift all along the coral wall. In the northwest there is a spectacular pinnacle covered in soft corals while the northeast has some caves full of various marine life.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/banana-reef.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Carless Reef]]></title>
@@ -50,6 +54,7 @@ Your best bet is to leave the lagoon through an obvious channel filled with tabl
             <guid>dive_sites/14</guid>
             <pubDate>Sun, 23 Oct 2022 18:27:57 GMT</pubDate>
             <description><![CDATA[This reef is about 15-18m/50-60ft deep and is located south of El Gouna, Egypt. It has drop-offs on all sides, the eastern one being dramatic and highly scenic. There are two huge pinnacles covered by corals on the plateau. Both pinnacles' tops are at 6-8m/20-26ft’ depth. There may be a current here. This mid-sea dive site is available in calm weather only.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/carless-reef.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Deadalus Reef]]></title>
@@ -57,6 +62,7 @@ Your best bet is to leave the lagoon through an obvious channel filled with tabl
             <guid>dive_sites/16</guid>
             <pubDate>Sun, 23 Oct 2022 18:27:57 GMT</pubDate>
             <description><![CDATA[Daedalus Reef is a 400-metre-long and 100-metre-wide offshore coral formation located approximately 90 kilometres east of Marsa Alam. Its remote location protected it from mass tourism, and today Daedalus is considered to be Egypt’s less-visited reef. The distance from the shore exposes Daedalus to strong currents, which promote an explosive growth of several hundred species of soft and hard corals, perfectly preserved thanks to the reef’s limited access. The dive site also has steep walls that drop down to vertiginous depths and an abundance of pelagic species, including various oceanic sharks such as hammerheads, longimanus, and threshers. Daedalus is suitable for experienced divers who are confident with currents and drift diving.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/deadalus-reef.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[El Fanadir]]></title>
@@ -64,6 +70,7 @@ Your best bet is to leave the lagoon through an obvious channel filled with tabl
             <guid>dive_sites/21</guid>
             <pubDate>Sun, 23 Oct 2022 18:27:57 GMT</pubDate>
             <description><![CDATA[Fanadir is one of the longest and straightest reefs in Hurghada. Located in the north, out of Hurghada’s bay it is a good diving place for a calm drift dive. The average depth 25m/82ft with the water visibility around 25-30m/80-100ft. Besides the main reef on the west side, the sandy plateau is slopping down from 12-22 m/39-72ft, where the drop off wall starts on the east, going down to 50m/164ft.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/el-fanadir.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[El Fanous West]]></title>
@@ -85,6 +92,7 @@ You will cross the lagoon in the north-west direction keeping the reef on the ri
 When you reach the northern edge of the lagoon, you will continue north to an erg covered with hard corals that you can admire.
 
 You will return to the boat on the other side of the lagoon, keeping another main reef on your left side.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/el-fanous-west.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[El Mina Wreck]]></title>
@@ -92,6 +100,7 @@ You will return to the boat on the other side of the lagoon, keeping another mai
             <guid>dive_sites/23</guid>
             <pubDate>Sun, 23 Oct 2022 18:27:57 GMT</pubDate>
             <description><![CDATA[The El Mina wreck (Arabic for ”The Harbor") is a Russian-made T-43 minesweeper that was built between 1947 and 1957 for the duties of harbor protection and mine clearing. Later it was sold to the Egyptian navy, and in 1969 (the date is a matter of some debate), an Israeli fighter plane struck two large holes into her starboard side and she sank while anchored. Since then this 60m/197ft-long wreck has been lying on its port side in 33m/108ft of water at the stern, and divers can explore everything, including the blast hole on the starboard side, the propellers, and the rest of this wreck, which is in good condition. However, penetrating the wreck is not recommended, because the passages are small and tight. The sea bed around the wreck is littered with live ammunition, that divers are not allowed to touch. In 2 minutes divers will come across the Mohamed Hasabella, which is also worth visiting.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/el-mina-wreck.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Elphinstone]]></title>
@@ -99,6 +108,7 @@ You will return to the boat on the other side of the lagoon, keeping another mai
             <guid>dive_sites/24</guid>
             <pubDate>Sun, 23 Oct 2022 18:27:57 GMT</pubDate>
             <description><![CDATA[Elphinstone Reef or Sha'ab Abu Hamra is one of the most famous dive sites in the Red Sea. It is a reef around 300m/984ft in length, with average depth of 20-40m/60-120ft and average water visibility of 20-30m/60-100ft. Its spectacular walls drop far below 100m/328ft on both sides of the reef. Strong currents make this a perfect drift dive along the steep walls with many species of fish, corals, sponges, gorgonias and sea whips to observe.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/elphinstone.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Erg Sabina]]></title>
@@ -106,6 +116,7 @@ You will return to the boat on the other side of the lagoon, keeping another mai
             <guid>dive_sites/26</guid>
             <pubDate>Sun, 23 Oct 2022 18:27:58 GMT</pubDate>
             <description><![CDATA[This is a small reef, although the luxury of rich marine life means that this dive site can offer an extraordinary dive. The erg itself is by nature best on the north face so concentrate on this side. Next to the reef there are a few big brain corals, around which schooling fish hover, facing the current. About 50m north there is a breathtaking little erg full of soft coral, glassfish and excellent camera angles. Take your time on the way out there and back, glancing underneath table corals and coral blocks and you will be in for a treat.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/erg-sabina.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Erg Somaya]]></title>
@@ -125,6 +136,7 @@ While diving Erg Somaya you really shouldn’t skip the caves between north and 
 Erg Somaya can dive as a drift dive. You will start the drift dive from the north of the anchorage and follow the eastern wall southwards to a superb coral tower where your boat will be waiting. This wall will appear to be a living wall full of cracks where small reef fish species may hide. After having admired the different aspects of Erg Somaya, go up along the main reef, where you will reach the boat.
 
 Erg Somaya is considered to be one of the most stunning dive sites near Hurghada, with some colorful ergs, some nice caves and a spectacular drop off into the deep. So definitely worth diving at!]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/erg-somaya.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Giannis D]]></title>
@@ -132,6 +144,7 @@ Erg Somaya is considered to be one of the most stunning dive sites near Hurghada
             <guid>dive_sites/31</guid>
             <pubDate>Sun, 23 Oct 2022 18:27:58 GMT</pubDate>
             <description><![CDATA[The Giannis D was a general cargo ship built in Japan in 1969. The original name of the ship was the Shoyo Maru, and later the name was changed twice, because the vessel was sold twice. The second time the ship was sold to a Greek company that gave the ship its final name, the Giannis D. In 1983, this freighter collided with the reef and immediately sank with its cargo of timber. Now the wreck lies next to the reef with its stern on the seabed at a depth of about 24m/79ft and its mast at a depth of only 6m/20ft. Divers can penetrate the wreck and explore some of its areas from the inside.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/giannis-d.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Gota Abu Ramada]]></title>
@@ -139,6 +152,7 @@ Erg Somaya is considered to be one of the most stunning dive sites near Hurghada
             <guid>dive_sites/33</guid>
             <pubDate>Sun, 23 Oct 2022 18:27:58 GMT</pubDate>
             <description><![CDATA[Gota Abu Ramada was also named the “Aquarium”, due to the variety of marine life. The depth of the dive site is around 100m/300ft with average water visibility 20-25m/65-80ft. There is an abundance of hard and soft corals and a great variety of marine life.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/gota-abu-ramada.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Hamda]]></title>
@@ -168,6 +182,7 @@ But also dare to look into the big blue, where you can spot triggerfish, jacks, 
 The appearance of whale sharks have also been reported, in the area of Hamda.
 
 If you choose to make a drift dive at Hamda you will start from the north. The wall is more interesting along the way a few coral formations.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/hamda.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Panorama Reef]]></title>
@@ -177,6 +192,7 @@ If you choose to make a drift dive at Hamda you will start from the north. The w
             <description><![CDATA[On the north side is a plateau at a depth of 25 meters with beautiful fan corals and beautiful table corals from Acropora. Keep an eye into the blue: kingfish, tuna, barracuda are often present. You can also meet the “caretaker” of Panorama, a very curious Napoleon. At 27 meters, a crack in the rock with giant fan corals and a school of glass fish has its hiding place here. Stingrays, blue-spotted stingrays, lionfish and moray eels live on the plateau. During your safety stop you can linger over Anemone City.
 
 On the south plateau you are practically guaranteed to see several Napoleon wrasse. It is especially pleasant that there are many young fish. Pelagic species such as tuna visit from time to time, and other predators such as bigeye trevally and barracudas hunt in large schools of fusilier. Eagle rays, manta rays, white tip reef sharks, gray sharks, silky sharks, and even oceanic white tips have been spotted here.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/panorama-reef.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Ras Disha]]></title>
@@ -194,6 +210,7 @@ Your other bet is diving from the mooring network. You start by touring to the d
 The wall is the place to be for butterflyfish and bannerfish, paired with surgeonfish and parrotfish. The local sandbed is infested with residential marine life. Hiding crustaceans and other invertebrates are hunted by frantically digging moses sole, blue spotted rays and torpedo rays. Gobies and shrimps are on the lookout from their burrows.
 
 The pinnacles at Ras Disha are punctuated with cracks. Together with caverns bursting with glassfish they provide excellent photograpic momentums]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/ras-disha.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Salem Express]]></title>
@@ -201,6 +218,7 @@ The pinnacles at Ras Disha are punctuated with cracks. Together with caverns bur
             <guid>dive_sites/66</guid>
             <pubDate>Sun, 23 Oct 2022 18:26:18 GMT</pubDate>
             <description><![CDATA[The Salem Express was a 100m/328ft long passenger and vehicle ferry that sank in 1991. Propellers, corridors, upper decks, the restaurant and the bridge can all still be seen. Passenger luggage such as rolls of carpet, stereos, bicycles and chairs can all be found in and near the wreck. Coral coverage and marine life is good enough here. The site is suitable for divers of all experience levels as the top of the wreck is located at only 10m/32ft of depth]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/salem-express.jpeg" length="0" type="image/jpeg"/>
         </item>
         <item>
             <title><![CDATA[Shaab Abu Nugar]]></title>
@@ -223,6 +241,7 @@ In the north, Torfa Abu Nugar stretches in east-west direction, featuring an exq
 The elliptical reef at Gota Abu Nugar is situated to the east. The reef  touches the surface from a bottom covered in corals. Its size allows exploring to the full extent in one single dive.
 
 Due south the Erg Abu Nugar features an impressive string of pinnacles, sitting on a sandy bottom, decorated with a lot of coral rocks.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/shaab-abu-nugar.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Shaab Eshta]]></title>
@@ -236,6 +255,7 @@ Small clusters of coral blocks and table corals are dispersed over the sandy fla
 The bottom here is largely decorated with gentle swaying turtle grass. Head out into the turtle grass beds, where you’ll find a wide variety of unfamiliar fish.
 
 At Shaab Eshta schools of barracuda often hover over just below the surface. They are waiting for food to swim by. The sandy bottom is the natural habitat for gobies in symbiosis with their shrimps.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/shaab-eshta.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Shaab Petra]]></title>
@@ -243,6 +263,7 @@ At Shaab Eshta schools of barracuda often hover over just below the surface. The
             <guid>dive_sites/73</guid>
             <pubDate>Sun, 23 Oct 2022 18:28:03 GMT</pubDate>
             <description><![CDATA[There are mooring lines on the south side of each erg so you might start your dive on either one of them. They are both hill-shaped, and the hard corals in the shallows are in truly fantastic condition. The eastern erg has a huge brain coral at its end pointing in the direction of the coral garden making it look like a turtle resting on the bottom. At the other side there is a small cavern inhabited by a group of glassfish and a red tooth grouper chasing lionfish away to defend his supply of fresh food. The western erg is smooth-shaped and sits on a flat sandy bottom. A ‘figure of eight’ route here should take you about 45 minutes in a relaxed tempo.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/shaab-petra.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Shaab Sabina]]></title>
@@ -260,6 +281,7 @@ The nutrient-rich water has made the north side of the reef wall sparkle with li
 The most beautiful table and brain corals can be found at Shaab Sabina. Shaab Sabina is mainly dived for its impressive coral landscapes.
 
 Dive into this exceptional coral garden, which drops in steps from the upper part of the reef to the bottom at 14 meters. A labyrinth of coral provides a wonderful view as the waves send downlight reflections dancing on the bright sandy bottom. In the south of this maze, the wall of the main reef stretches from a depth of 8 to 10 meters to the surface. The hard corals grow over each other and give the impression of a Japanese garden.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/shaab-sabina.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Shabrur Um Gamar]]></title>
@@ -267,6 +289,7 @@ Dive into this exceptional coral garden, which drops in steps from the upper par
             <guid>dive_sites/76</guid>
             <pubDate>Sun, 23 Oct 2022 18:28:03 GMT</pubDate>
             <description><![CDATA[Shabrur Umm Gamar is located approximately 1km/0.6mi north of the island of Umm Gamar and is a submerged mountain blanketed in rich corals. The walls of the mountain are notable not only for their corals, but also because of the crevices and caves sheltering a variety of marine fauna species. In addition to the mountain, the site also has several wrecks of Egyptian boats, one of which can be reached at 20m/66ft deep. The two other wrecks lie at over 70m/230ft deep, and can only be reached by technical divers. The site is known for big fish and superb conditions for photography.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/shabrur-um-gamar.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Small Giftun]]></title>
@@ -277,6 +300,7 @@ Dive into this exceptional coral garden, which drops in steps from the upper par
 When the main reef curves to the west over the plateau the drop-off suddenly makes a few turns giving the edge a zigzag contour. 15m deeper (around 45m) there is a tunnel, which although spectacular, is out of reach for recreational divers.
 All over the drop-off in this area huge gorgonias form a virtual jungle swaying in the current, whereas soft corals squeeze in wherever there is a space big enough to root. The plateau itself is a semi-covered coral garden leading up to the shallow parts of the wall, as well as the moorings.
 ]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/small-giftun.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Turft El Shahed]]></title>
@@ -284,6 +308,7 @@ All over the drop-off in this area huge gorgonias form a virtual jungle swaying 
             <guid>dive_sites/97</guid>
             <pubDate>Sun, 23 Oct 2022 18:28:05 GMT</pubDate>
             <description><![CDATA[A shallow channel leads in a westerly direction from the mooring to the pinnacles that are the main attractions here. Northwest of the channel there is a mainly flat sandy bottom that is scattered with random coral blocks. If you continue to head north, you will reach a beautiful erg perforated by cavities and overhangs. Closer to the mooring, on the south side of the main reef the corals are not in such a good condition. A stonefish encounter makes the safety stop here worthwhile. Another option is to drift all the way to the neighbouring Banana Reef but this requires good air consumption and navigation skills.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/turft-el-shahed.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Umm Gamar North]]></title>
@@ -295,6 +320,7 @@ Umm Gamar is a long-isolated reef formed by an underwater mountain, near the isl
 
 Umm Gamar means Mother of the Moon, a reference to the crescent-shaped wedge of the island at the top of the reef.
 You can also dive on the north side of Umm Gamar but only when weather conditions are calm. Currents can be very strong at this place. This side of Umm Gamar is characterized by large table corals and a large school of fish. You can spot a lot of butterflyfish, blackfish and many other species. Here you can make very sheltered dives. If you are heading to the south part of Umm Gamar North you can see black corals and at a depth of 27 meters, you will find a cave in the reef. This side of the site is also known for encountering Spanish dancers even during the day.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/umm-gamar-north.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Umm Gamar South]]></title>
@@ -307,6 +333,7 @@ Umm Gamar means Mother of the Moon, a reference to the crescent-shaped wedge of 
 At its south-eastern side, there is a very steep wall where many species of the pelagic hunt for smaller fish. There is also a small plateau at its western side which is full of small caves and overhangs. The site features a generally sloping wall which finally plummets into the deep.
 
 Umm Gamar has a plateau on the south, at a depth of 14 to 24 meters with a beautiful coral garden where you regularly spot a turtle, batfish, moray eel and also Napoleon fish. On the way to the drop-off, you can encounter amazing coral towers, full of aquamarine life, such as glassfish and lionfish. These towers are above all covered with mesmerizing soft corals and fan corals. But don’t forget to take a look in the direction of the blue. You may see big pelagic fish passing by. You can also dive there starting from the coral garden and following the reef wall on the way back. You will see colorful fishes and sometimes turtles.]]></description>
+            <enclosure url="https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/dive-maps/umm-gamar-south.jpg" length="0" type="image/jpg"/>
         </item>
     </channel>
 </rss>

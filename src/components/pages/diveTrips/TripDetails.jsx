@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable react/prop-types */
 // Chakra imports
 import {
@@ -66,7 +67,9 @@ export default function Settings(props) {
           <InputField
             mb="0px"
             id="price"
-            label={`Price: ${(price / 100).toFixed(2)} Euro`}
+            label={`Price: ${
+              price ? (price / 100).toFixed(2) : "Enter value in"
+            } Euro`}
             value={price ? price / 100 : 0}
             placeholder="Total Price including commission"
             onChange={(e) => setPrice(Number(e.target.value) * 100)}
@@ -74,10 +77,12 @@ export default function Settings(props) {
           <InputField
             mb="0px"
             id="duration"
-            label="Duration"
-            value={duration}
+            default={8}
+            label={`Trip Duration (${duration || "Enter value in"} hours)`}
+            // value={duration}
+            isError={duration !== "" && isNaN(duration)}
             placeholder="Total length of the dive trip"
-            onChange={(e) => setDuration(e.target.value)}
+            onChange={(e) => setDuration(Number(e.target.value))}
           />
           <Flex direction="column">
             <Flex direction="column" mb="20px">

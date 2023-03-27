@@ -8,7 +8,7 @@ import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
 import * as gtag from "lib/data/gtag";
 
-export default function DiveCentreCover({ diveCentreId, diveCentreImg }) {
+export default function DiveCentreCover({ diveCentre }) {
   const [uploading, setUploading] = useState(null);
   const toast = useToast();
   const inputRef = useRef(null);
@@ -18,11 +18,11 @@ export default function DiveCentreCover({ diveCentreId, diveCentreImg }) {
     const { error } = await supabase
       .from("dive_centres")
       .update({
-        id: diveCentreId,
+        id: diveCentre.id,
         cover_photo: newCoverPhotoUrl,
         // updated_at: new Date().toISOString(),
       })
-      .eq("id", diveCentreId);
+      .eq("id", diveCentre.id);
     // Alert & Analytics for successful load
     toast({
       position: "top",
@@ -38,7 +38,7 @@ export default function DiveCentreCover({ diveCentreId, diveCentreImg }) {
       action: "update-cover-photo",
       category: "button",
       label: "Dive Centre",
-      value: diveCentreId,
+      value: diveCentre.id,
     });
     // Alert & Analytics for failed load
     if (error) {
@@ -67,7 +67,7 @@ export default function DiveCentreCover({ diveCentreId, diveCentreImg }) {
     }
     const file = event.target.files[0];
     const fileExt = file.name.split(".").pop();
-    const fileName = `${diveCentreId}.${fileExt}`;
+    const fileName = `${diveCentre.slug || diveCentre.id}.${fileExt}`;
     const filePath = `dive-centres/${fileName}`;
     const newCoverPhotoUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cover-photos/${filePath}`;
     // https://tfpamgcqwydaqamjcxpu.supabase.co/storage/v1/object/sign/avatars/b374e3e9-b7a0-4f07-937a-a7698bf159e1.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzL2IzNzRlM2U5LWI3YTAtNGYwNy05MzdhLWE3Njk4YmYxNTllMS5qcGVnIiwidHJhbnNmb3JtYXRpb25zIjoiIiwiaWF0IjoxNjcyNDY4OTU2LCJleHAiOjE5ODc4Mjg5NTZ9.Z2cbltrf8oRlyqNwHGJEnGwPNjM5m1E6AHL-TyMzUOU
@@ -90,7 +90,7 @@ export default function DiveCentreCover({ diveCentreId, diveCentreImg }) {
         w=""
         minH={{ base: "200px", md: "100%" }}
         h="400px"
-        bgImage={diveCentreImg || "/img/diving/dive_centre_bg.jpg"}
+        bgImage={diveCentre?.cover_photo || "/img/diving/dive_centre_bg.jpg"}
       >
         <Box mt="auto">
           {/* <Button

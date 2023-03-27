@@ -2,6 +2,7 @@
 // Chakra imports
 import {
   Flex,
+  FormErrorMessage,
   FormLabel,
   Input,
   Text,
@@ -10,7 +11,7 @@ import {
 // Custom components
 
 export default function Default(props) {
-  const { id, label, extra, placeholder, type, mb, ...rest } = props;
+  const { id, label, extra, placeholder, type, mb, isError, ...rest } = props;
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const borderPrimary = useColorModeValue(
@@ -46,6 +47,7 @@ export default function Default(props) {
         maxh="44px"
         borderColor={borderPrimary}
       />
+      {isError ?? <FormErrorMessage>Error Message</FormErrorMessage>}
     </Flex>
   );
 }

@@ -27,6 +27,7 @@ import {
   useDisclosure,
   SimpleGrid,
 } from "@chakra-ui/react";
+import { useUser } from "@supabase/auth-helpers-react";
 import PropTypes from "prop-types";
 // Custom components
 import { GoChevronDown } from "react-icons/go";
@@ -36,7 +37,6 @@ import routes from "../../routes";
 import NavLink from "../navLinks/NavLink";
 import { SidebarResponsive } from "../sidebar/Sidebar";
 import Image from "components/actions/NextChakraImg";
-import { useUser } from "@supabase/auth-helpers-react";
 
 // Assets
 // import"/img/layout/dropdown.png"ain from "assets/img/layout"/img/layout/dropdown.png"ain.png";
