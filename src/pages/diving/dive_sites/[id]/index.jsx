@@ -76,7 +76,7 @@ export default function DiveSitePage({ diveSite }) {
           maxW="100%"
           display={{ base: "block", lg: "grid" }}
           pt={{ base: "130px", md: "80px", xl: "80px" }}
-          gridTemplateColumns="2.3fr 1fr"
+          gridTemplateColumns="1.7fr 1fr"
         >
           <Box
             gridArea="1 / 1 / 2 / 2"

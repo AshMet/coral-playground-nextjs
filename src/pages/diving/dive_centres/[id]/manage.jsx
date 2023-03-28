@@ -24,57 +24,16 @@
 // Chakra imports
 import { Box, Grid, Text, useColorModeValue } from "@chakra-ui/react";
 
-// Custom components
 import { supabase } from "../../../api/index";
 import EventCalendar from "components/calendar/EventCalendar";
 import Timeline from "components/calendar/Timeline";
 import Card from "components/card/Card";
 import DivingLayout from "layouts/DivingLayout";
+import { getCalendarDives, getDailyDives } from "utils/dive_centre_helpers";
 // import { calendarData } from "utils/variables/calendar";
 
 export default function DiveCentreCalendar({ diveCentre, diveTrips }) {
-  // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
-
-  function combineDateAndTime(date, time, duration = 0) {
-    const formattedDate = new Date(date);
-    // console.log("date", formattedDate);
-    const year = formattedDate.getFullYear();
-    const month = formattedDate.getMonth(); // Jan is 0, dec is 11
-    const day = formattedDate.getDate();
-    const hours = Number(time.split(":")[0]) + duration;
-    const minutes = time.split(":")[1];
-    return new Date(year, month, day, hours, minutes, 0);
-  }
-
-  const dailyDives = diveTrips
-    .filter((trip) => trip.start_date === null)
-    .map((trip) => ({
-      id: trip.id,
-      name: trip.name,
-      visible: trip.visible,
-      start_time: trip.start_time,
-      borderColor: "transparent",
-      backgroundColor: "#7551FF",
-      className: "info",
-    }));
-  const calendarDives = diveTrips
-    .filter((trip) => trip.start_date !== null)
-    .map((trip) => ({
-      title: trip.name,
-      borderColor: "transparent",
-      start: combineDateAndTime(trip.start_date, trip.start_time, 0),
-      // start_time: trip.start_time,
-      end: combineDateAndTime(trip.start_date, trip.start_time, trip.duration),
-      // endTime: combineDateAndTime(trip.start_date, trip.start_time, 8),
-      allDay: false,
-      backgroundColor: "#7551FF",
-      className: "info",
-    }));
-  // console.log("trip: ", diveTrips[1].start_date);
-  // console.log("trip: ", combineDateAndTime(diveTrips[1].start_date, diveTrips[1].start_time, 12));
-  // console.log("diveCentre", diveCentre);
-  // console.log("diveTrips", diveTrips);
 
   return (
     <Grid
@@ -84,7 +43,7 @@ export default function DiveCentreCalendar({ diveCentre, diveTrips }) {
       display={{ base: "block", lg: "grid" }}
     >
       <Box gridArea="1 / 1 / 2 / 2">
-        <Timeline dailyDives={dailyDives} mb="20px" />
+        <Timeline dailyDives={getDailyDives(diveTrips)} mb="20px" />
       </Box>
       <Card gridArea="1 / 2 / 2 / 3" minH="680px">
         <Text fontSize="2xl" fontWeight="700" color={textColor}>
@@ -98,7 +57,10 @@ export default function DiveCentreCalendar({ diveCentre, diveTrips }) {
         >
           Add your non-daily trips to your calendar{" "}
         </Text>
-        <EventCalendar initialDate={new Date()} calendarDives={calendarDives} />
+        <EventCalendar
+          initialDate={new Date()}
+          calendarDives={getCalendarDives(diveTrips)}
+        />
       </Card>
     </Grid>
   );
@@ -109,7 +71,7 @@ export const getServerSideProps = async ({ params: { id } }) => {
     .from("dive_centres_view")
     .select(
       `id, name, description, address, latitude, longitude, paymentMethods, equipment, services, languages, memberships,
-      coverPhotoUrl, city, country`
+      coverPhotoUrl, city, country, slug`
     )
     .match({ id })
     .single();

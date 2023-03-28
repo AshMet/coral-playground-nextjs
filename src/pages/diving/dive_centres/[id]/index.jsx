@@ -2,15 +2,14 @@
 /* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
 // Chakra imports
-import { Box, Grid } from "@chakra-ui/react";
+import { AspectRatio, Box, Grid } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 
 import { supabase } from "../../../api/index";
-// import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import Card from "components/card/Card";
 import CentreInfo from "components/pages/diveCentre/CentreInfo";
-import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import TripsSidebar from "components/sidebar/TripsSidebar";
 import DivingLayout from "layouts/DivingLayout";
 
@@ -78,17 +77,25 @@ export default function DiveCentre({ diveCentreData }) {
           maxW="100%"
           display={{ base: "block", lg: "grid" }}
           pt={{ base: "130px", md: "80px", xl: "80px" }}
-          gridTemplateColumns="2.3fr 1fr"
+          gridTemplateColumns="1.7fr 1fr"
         >
           <Box
             gridArea="1 / 1 / 2 / 2"
             me={{ lg: "20px" }}
             mb={{ base: "20px", lg: "0px" }}
           >
-            <ImageUploader
-              diveCentreId={diveCentre.id}
-              diveCentreImg={diveCentre.coverPhotoUrl}
-            />
+            <AspectRatio w="100%" maxW="100%" ratio={1130 / 636}>
+              <Card
+                bgSize="cover"
+                w=""
+                minH={{ base: "200px", md: "100%" }}
+                h="400px"
+                bgImage={
+                  diveCentre?.coverPhotoUrl || "/img/diving/dive_centre_bg.jpg"
+                }
+              />
+            </AspectRatio>
+
             <CentreInfo
               name={diveCentre.name}
               description={diveCentre.description}
@@ -137,7 +144,7 @@ export async function getServerSideProps(context) {
     .from("dive_centres_view")
     .select(
       `id, name, description, address, latitude, longitude, paymentMethods, equipment, services, languages, memberships,
-      coverPhotoUrl, city, country`
+      coverPhotoUrl, city, country, slug`
       // `id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships, cover_photo, city: cities (name), country: cities (countries (name))`
     )
     .match({ id })

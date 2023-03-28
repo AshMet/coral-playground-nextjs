@@ -112,7 +112,7 @@ export default function DiveCentreCover({ diveCentre }) {
             borderRadius="70px"
             mt="auto"
             fontSize="sm"
-            bg="linear-gradient(112.83deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0) 110.84%)"
+            bg="linear-gradient(112.83deg, rgba(0, 0, 0, 0.32) 0%, rgba(255, 255, 255, 0) 110.84%)"
             color="white"
             fontWeight="bold"
             onClick={() => inputRef.current.click()}

@@ -176,11 +176,7 @@ export default function DiveCentreHub(props) {
               />
             </Flex>
           </Box>
-          <ImageUploader
-            diveCentreId={diveCentre.id}
-            diveCentreImg={diveCentre.cover_photo}
-            // coverPhoto={ownerDiveCentre.cover_photo}
-          />
+          <ImageUploader diveCentre={diveCentre} />
           <SimpleGrid
             columns={{ sm: 1, md: 1, xl: 1 }}
             spacing={{ base: "20px", xl: "0px" }}

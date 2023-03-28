@@ -62,18 +62,11 @@ export default function TripSidebar({ trips, diveSite, diveCentre, ...rest }) {
 
   return (
     <Card {...rest} maxH="max-content">
-      <Text color={textColor} fontSize="xl" fontWeight="700" mb="16px">
-        Upcoming Dive Trips
-      </Text>
-      <Text color={textColorTertiary} fontSize="md" mb="16px">
-        Add a dive to your cart by selecting your preferred date and clicking
-        the <Icon as={MdAddCircle} color="brand.400" w="16px" h="16px" /> button
-      </Text>
       <Card
         bg={bg}
         height="200px"
         maxW={{ base: "400px" }}
-        mb="30px"
+        mb="10px"
         mx={0}
         p={0}
         w="100%"
@@ -142,8 +135,19 @@ export default function TripSidebar({ trips, diveSite, diveCentre, ...rest }) {
             ))}
         </GoogleMap>
       </Card>
-      {trips.length > 0 ? (
-        trips.map((trip) => (
+      <Text color={textColor} fontSize="xl" fontWeight="700" mb="5px">
+        Upcoming Dive Trips
+      </Text>
+      <Text color={textColorTertiary} fontSize="md" mb="16px">
+        Add a dive to your cart by selecting your preferred date and clicking
+        the <Icon as={MdAddCircle} color="brand.400" w="16px" h="16px" /> button
+      </Text>
+      <Text color="brand.400" fontSize="md" fontWeight="700" mb="5px">
+        Special Dives
+      </Text>
+      {trips
+        .filter((trip) => trip?.start_date !== null)
+        .map((trip) => (
           <Flex
             key={trip.id}
             direction="column"
@@ -158,23 +162,34 @@ export default function TripSidebar({ trips, diveSite, diveCentre, ...rest }) {
             />
             <Divider my="25px" />
           </Flex>
-        ))
+        ))}
+      <Text color="brand.400" fontSize="md" fontWeight="700" mb="5px">
+        Daily Dives
+      </Text>
+      {trips.length > 0 ? (
+        trips
+          .filter((trip) => trip.start_date === null)
+          .map((trip) => (
+            <Flex
+              key={trip.id}
+              direction="column"
+              justify="space-between"
+              align="center"
+            >
+              <TripLineItem
+                trip={diveSite ? trip.dive_trip : trip}
+                icon={
+                  <Icon as={MdAddCircle} color={textColor} w="20px" h="18px" />
+                }
+              />
+              <Divider my="25px" />
+            </Flex>
+          ))
       ) : (
         <Text fontSize="md" fontWeight="500" color="brand.400" mb="30px">
           No Dives scheduled. Check back soon, new dives are added regularly
         </Text>
       )}
-      {/* Need to add logic to authorize only allowed users to create a new trip */}
-      {/* {diveCentreId && (
-        <Link
-          href={{
-            pathname: "/diving/dive_trips/new",
-            query: { diveCentreId },
-          }}
-        >
-          <Button>New Trip</Button>
-        </Link>
-      )} */}
     </Card>
   );
 }
