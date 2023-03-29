@@ -11,15 +11,6 @@ export const combineDateAndTime = (date, time, duration = 0) => {
 
 export const getDailyDives = (diveTrips) => {
   return diveTrips.filter((trip) => trip.start_date === null);
-  // .map((trip) => ({
-  //   id: trip.id,
-  //   name: trip.name,
-  //   visible: trip.visible,
-  //   start_time: trip.start_time,
-  //   borderColor: "transparent",
-  //   backgroundColor: "#7551FF",
-  //   className: "info",
-  // }))
 };
 
 export const getCalendarDives = (diveTrips) => {

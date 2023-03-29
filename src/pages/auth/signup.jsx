@@ -31,7 +31,6 @@ import {
   FormLabel,
   Heading,
   Icon,
-  Input,
   InputGroup,
   InputRightElement,
   Link,
@@ -52,6 +51,7 @@ import { RiEyeCloseLine } from "react-icons/ri";
 // import { TbBuildingStore, TbScubaMask } from "react-icons/tb";
 
 import AlertPopup from "components/alerts/AlertPopup";
+import InputField from "components/fields/InputField";
 import RadioCard from "components/fields/RadioCard";
 import NavLink from "components/navLinks/NavLink";
 import { HSeparator } from "components/separator/Separator";
@@ -81,6 +81,7 @@ export default function SignUp() {
 
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [consented, setConsented] = useState(false);
   const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
@@ -118,6 +119,18 @@ export default function SignUp() {
   const options = ["Sign up as a Diver", "Register My Business"];
 
   const signUpEmailPass = async () => {
+    if (consented === false) {
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="danger"
+            text="Please accept terms & conditions before proceeding"
+          />
+        ),
+      });
+      return;
+    }
     setLoading(true);
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -227,8 +240,11 @@ export default function SignUp() {
   } else
     return (
       <LoginLayout
-        illustrationBackground="/img/auth/anemone-clown-fish.jpg"
-        image="/img/auth/anemone-clown-fish.jpg"
+        illustrationBackground={
+          role === "dive_centre_owner"
+            ? "/img/auth/dive_school.jpg"
+            : "/img/auth/diver.jpg"
+        }
       >
         <Flex
           maxW={{ base: "100%", md: "max-content" }}
@@ -327,107 +343,46 @@ export default function SignUp() {
                 gap={{ sm: "10px", md: "26px" }}
               >
                 <Flex direction="column">
-                  <FormControl isRequired isError={firstName === ""}>
-                    <FormLabel
-                      display="flex"
-                      ms="4px"
-                      fontSize="sm"
-                      fontWeight="500"
-                      color={textColor}
-                      mb="8px"
-                    >
-                      First name
-                    </FormLabel>
-                    <Input
-                      name="firstName"
-                      value={firstName}
-                      isRequired
-                      fontSize="sm"
-                      ms={{ base: "0px", md: "4px" }}
-                      placeholder="First name"
-                      variant="auth"
-                      mb="24px"
-                      size="lg"
-                      onChange={handleChange}
-                    />
-                    {/* {firstName !== "" ? (
-                      <FormHelperText>
-                        Enter the email you&apos;d like to receive the
-                        newsletter on.
-                      </FormHelperText>
-                    ) : (
-                      <FormErrorMessage>
-                        First Name is required.
-                      </FormErrorMessage>
-                    )} */}
-                  </FormControl>
+                  <InputField
+                    name="firstName"
+                    label="First Name"
+                    value={firstName}
+                    placeholder="First Name"
+                    onChange={handleChange}
+                    isError={firstName === ""}
+                    errorMessage="First name cannot be empty"
+                    isRequired
+                  />
                 </Flex>
                 <Flex direction="column">
-                  <FormControl isRequired>
-                    <FormLabel
-                      display="flex"
-                      ms="4px"
-                      fontSize="sm"
-                      fontWeight="500"
-                      color={textColor}
-                      mb="8px"
-                    >
-                      Last name
-                    </FormLabel>
-                    <Input
-                      name="lastName"
-                      value={lastName}
-                      isRequired
-                      variant="auth"
-                      fontSize="sm"
-                      placeholder="Last name"
-                      mb="24px"
-                      size="lg"
-                      onChange={handleChange}
-                    />
-                  </FormControl>
+                  <InputField
+                    name="lastName"
+                    label="Last Name"
+                    value={lastName}
+                    placeholder="Last Name"
+                    onChange={handleChange}
+                    isError={lastName === ""}
+                    errorMessage="Last name cannot be empty"
+                    isRequired
+                  />
                 </Flex>
               </SimpleGrid>
-              <FormControl isRequired>
-                <FormLabel
-                  display="flex"
-                  ms="4px"
-                  fontSize="sm"
-                  fontWeight="500"
-                  color={textColor}
-                  mb="8px"
-                >
-                  Email
-                </FormLabel>
-                <Input
-                  name="email"
-                  value={email}
-                  isRequired
-                  variant="auth"
-                  fontSize="sm"
-                  type="email"
-                  placeholder="user@email.com"
-                  mb="24px"
-                  size="lg"
-                  onChange={handleChange}
-                />
-              </FormControl>
-              <FormControl isRequired>
-                <FormLabel
-                  ms="4px"
-                  fontSize="sm"
-                  fontWeight="500"
-                  isRequired
-                  color={textColor}
-                  display="flex"
-                >
-                  Password
-                </FormLabel>
-              </FormControl>
+
+              <InputField
+                name="email"
+                label="Email"
+                value={email}
+                placeholder="Email"
+                onChange={handleChange}
+                isError={email === ""}
+                errorMessage="Email cannot be empty"
+                isRequired
+              />
               <InputGroup size="md">
-                <Input
+                <InputField
                   name="password"
                   value={password}
+                  label="Password"
                   isRequired
                   variant="auth"
                   fontSize="sm"
@@ -436,9 +391,11 @@ export default function SignUp() {
                   mb="24px"
                   size="lg"
                   type={show ? "text" : "password"}
+                  isError={password === ""}
+                  errorMessage="Password cannot be empty"
                   onChange={handleChange}
                 />
-                <InputRightElement display="flex" alignItems="center" mt="4px">
+                <InputRightElement display="flex" alignItems="center" mt="30px">
                   <Icon
                     color={textColorSecondary}
                     _hover={{ cursor: "pointer" }}
@@ -454,6 +411,9 @@ export default function SignUp() {
                     colorScheme="brandScheme"
                     me="10px"
                     mt="3px"
+                    isChecked={consented}
+                    onChange={() => setConsented(!consented)}
+                    isRequired
                   />
                   <FormLabel
                     htmlFor="remember-login"
@@ -463,11 +423,11 @@ export default function SignUp() {
                     fontSize="sm"
                   >
                     By creating an account means you agree to the{" "}
-                    <Link href="legal/terms" fontWeight="500">
+                    <Link href="../legal/terms" fontWeight="500">
                       Terms and Conditions,
                     </Link>{" "}
                     and our{" "}
-                    <Link href="legal/privacy" fontWeight="500">
+                    <Link href="../legal/privacy" fontWeight="500">
                       Privacy Policy
                     </Link>
                   </FormLabel>

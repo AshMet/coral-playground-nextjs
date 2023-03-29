@@ -70,8 +70,8 @@ export default function Footer() {
             md: "44px",
           }}
         >
-          <Link fontWeight="500" color={textColor} href="/">
-            Careers
+          <Link fontWeight="500" color={textColor} href="/faq/divers">
+            FAQs
           </Link>
         </ListItem>
         <ListItem>

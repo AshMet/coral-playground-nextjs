@@ -4,7 +4,7 @@
         <title>Coral Playground | Blog posts | RSS Feed</title>
         <link>http://localhost:3000</link>
         <description>Welcome to Coral Playground's blog posts, your definitive guide to everything related to scuba diving</description>
-        <lastBuildDate>Tue, 21 Mar 2023 00:41:20 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 28 Mar 2023 23:37:02 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <image>

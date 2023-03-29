@@ -7,7 +7,6 @@ import {
   FormLabel,
   Heading,
   Icon,
-  Input,
   InputGroup,
   InputRightElement,
   Text,
@@ -23,6 +22,7 @@ import { RiEyeCloseLine } from "react-icons/ri";
 // import { TbBuildingStore, TbScubaMask } from "react-icons/tb";
 
 import AlertPopup from "components/alerts/AlertPopup";
+import InputField from "components/fields/InputField";
 import NavLink from "components/navLinks/NavLink";
 import { HSeparator } from "components/separator/Separator";
 import LoginLayout from "layouts/LoginLayout";
@@ -247,46 +247,21 @@ export default function Login() {
                   </Flex>
                 </>
               )}
-              <FormControl isRequired>
-                <FormLabel
-                  display="flex"
-                  ms="4px"
-                  fontSize="sm"
-                  fontWeight="500"
-                  color={textColor}
-                  mb="8px"
-                >
-                  Email
-                </FormLabel>
-                <Input
-                  name="email"
-                  value={email}
-                  isRequired
-                  variant="auth"
-                  fontSize="sm"
-                  type="email"
-                  placeholder="user@email.com"
-                  mb="24px"
-                  size="lg"
-                  onChange={handleChange}
-                />
-              </FormControl>
-              <FormControl isRequired>
-                <FormLabel
-                  ms="4px"
-                  fontSize="sm"
-                  fontWeight="500"
-                  isRequired
-                  color={textColor}
-                  display="flex"
-                >
-                  Password
-                </FormLabel>
-              </FormControl>
+              <InputField
+                name="email"
+                label="Email"
+                value={email}
+                placeholder="Email"
+                onChange={handleChange}
+                isError={email === ""}
+                errorMessage="Email cannot be empty"
+                isRequired
+              />
               <InputGroup size="md">
-                <Input
+                <InputField
                   name="password"
                   value={password}
+                  label="Password"
                   isRequired
                   variant="auth"
                   fontSize="sm"
@@ -295,9 +270,11 @@ export default function Login() {
                   mb="24px"
                   size="lg"
                   type={show ? "text" : "password"}
+                  isError={password === ""}
+                  errorMessage="Password cannot be empty"
                   onChange={handleChange}
                 />
-                <InputRightElement display="flex" alignItems="center" mt="4px">
+                <InputRightElement display="flex" alignItems="center" mt="30px">
                   <Icon
                     color={textColorSecondary}
                     _hover={{ cursor: "pointer" }}

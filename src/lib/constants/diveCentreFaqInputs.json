@@ -1,17 +1,82 @@
 [
   {
-    "question": "How can I join as a Coral Playground business partner?",
-    "answer":
-      "."
+    "question": "What is Coral Playground and how can it benefit my business?",
+    "answer": "Coral Playground is a platform that allows dive centers to create a page for their business and enables customers to find and book dives directly on the platform. This can benefit your business by providing a new source of customers and streamlining the booking process."
   },
   {
-    "question": "How can I modify / cancel a booking?",
-    "answer":
-      "."
+    "question": "How do I sign up my business on the Coral Playground platform?",
+    "answer": "You can sign up your business on Coral Playground by clicking on the 'Sign up' button on the homepage and following the instructions to create an account."
   },
   {
-    "question": "What percentage does Coral Playgroud take from each reservation",
-    "answer":
-      "20%"
+    "question": "What information do I need to provide to create a business page on Coral Playground?",
+    "answer": "You will need to provide basic information such as your name, contact information, business services & eqiupment, and details about the dives or services you offer."
+  },
+  {
+    "question": "How does Coral Playground handle payments for bookings?",
+    "answer": "Coral Playground handles payments by charging an upfront commission of roughly 12% for each booking by several payment methods such as credit card, Apple & Google Pay. The remainder of the payment is payable directly to the business on arrival for their dive."
+  },
+  {
+    "question": "What is the commission rate charged by Coral Playground for bookings?",
+    "answer": "The commission rate charged by Coral Playground for bookings is roughly 12%."
+  },
+  {
+    "question": "How can I manage and update my business information on Coral Playground?",
+    "answer": "You can manage and update your business information on Coral Playground by logging into your account and going to your profiel screen. From there, you will be able to view / modify all your business details."
+  },
+  {
+    "question": "Can I customize my business page on Coral Playground?",
+    "answer": "Yes, you can customize your business page on Coral Playground by adding photos, descriptions, services, equipment, dive schedule and other information to make your page stand out. Always use a catchy high quality cover photo to ensure you catch divers' attention"
+  },
+  {
+    "question": "How does Coral Playground handle customer reviews and ratings?",
+    "answer": "We are currently taking feedback directly from customers, however we are in the process of implementing a direct rating and reviews capability for businesses to truly highlight how much their customers love them."
+  },
+  {
+    "question": "Can I respond to customer reviews on Coral Playground?",
+    "answer": "For now, this can not be done automatically. All customer complaints are either addressed with us to take up with the business or are taken up with the business directly."
+  },
+  {
+    "question": "How does Coral Playground handle cancellations or changes to bookings?",
+    "answer": "Coral Playground has a cancellation policy in place that allows customers to cancel or change their booking within a certain timeframe. The policy may vary depending on the specific dive center or service provider. We generally aim to allow customers to modify / cancel their bookings for a complete refund if done more than 48 hours before the dive date"
+  },
+  {
+    "question": "What happens if a customer is unsatisfied with their dive experience?",
+    "answer": "If a customer is unsatisfied with their dive experience, they can contact Coral Playground's customer support team to report any issues or they may voice their complaints to your business directly. In most circumstances, we will try to issue a refund of the deposit or offer the customer a free booking on their next trip, but it is at your business' discretion how to handle things on your end"
+  },
+  {
+    "question": "Can I offer discounts or promotions through Coral Playground?",
+    "answer": "Not right now, although we aim to provide this functionality in the near future. You can currently just temporarily reduce the price of any trips you have on your homepage to attract new customers or reward loyal ones."
+  },
+  {
+    "question": "How does Coral Playground handle customer support and inquiries?",
+    "answer": "Coral Playground has a customer support team that is available to help customers with any inquiries or issues they may have. You can also provide your own contact information for customers to reach out to you directly."
+  },
+  {
+    "question": "Can I integrate Coral Playground with my existing booking system?",
+    "answer": "It is not currently possible to integrate Coral Playground with your existing booking system, however, we are looking to enable this in the near future for select booking systems to help businesses further streamline their operations."
+  },
+  {
+    "question": "How does Coral Playground ensure the safety and quality of dive centers listed on the platform?",
+    "answer": "Coral Playground verifies the authenticity of each business before listing them on the platform, and monitors reviews and ratings to ensure that the quality and safety standards of each business are up to par."
+  },
+  {
+    "question": "How can I track my bookings and revenue on Coral Playground?",
+    "answer": "You can track your bookings and revenue on Coral Playground by logging into your account and viewing your booking history and financial reports."
+  },
+  {
+    "question": "Are there any restrictions on the types of dives or services I can offer through Coral Playground?",
+    "answer": "We currently only enable customers to book services listed on our website. We generally try to accommodate all types of diving activities, but there may be certain restrictions on the types of dives or services you can offer through Coral Playground, depending on local laws and regulations or if not supported by our platform. If that is the case, we strongly advise you to contact us and we can do our best to enable these services for you if possible."
+  },
+  {
+    "question": "How does Coral Playground handle data privacy and security?",
+    "answer": "Coral Playground takes data privacy and security very seriously and employs industry-standard security measures to protect user data. Your data will never be shared without your knowledge, and will never be sold in any way. If you ever decide to delete your accoount, all personal information will be removed from the platform permanently"
+  },
+  {
+    "question": "How does Coral Playground promote my business and drive traffic to my page?",
+    "answer": "Coral Playground uses various marketing and advertising techniques to promote businesses listed on the platform and drive traffic to their pages. We also provide businesses with great ways to share they page on social media and update customers when new activity occurs. However, it is ultimately up to each business to provide excellent service and attract positive reviews to stand out."
+  },
+  {
+    "question": "How does Coral Playground handle disputes or conflicts between businesses and customers?",
+    "answer": "Coral Playground has a dispute resolution process in place to handle conflicts between businesses and customers. If a dispute arises, Coral Playground's customer support team can assist in resolving the issue in a fair and timely manner."
   }
 ]

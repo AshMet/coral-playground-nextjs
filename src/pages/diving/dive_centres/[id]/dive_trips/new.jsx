@@ -19,7 +19,7 @@ export default function CreateCentreTrip() {
   const [duration, setDuration] = useState();
   const [minCert, setMinCert] = useState("open_water");
   const [status, setStatus] = useState("active");
-  const [visible, setVisible] = useState(true);
+  const [active, setActive] = useState(true);
   const [diveTime, setDiveTime] = useState("07:00");
   const [diveDate, setDiveDate] = useState();
   const toast = useToast();
@@ -70,7 +70,7 @@ export default function CreateCentreTrip() {
           duration,
           min_cert: minCert,
           status,
-          visible,
+          active,
           price,
           stripe_price_id: getStripePriceId(selectedSites.length),
           pay_now: getPayNow(selectedSites.length),
@@ -148,8 +148,8 @@ export default function CreateCentreTrip() {
         description={description}
         checkIn={checkIn}
         duration={duration}
-        visible={visible}
-        setVisible={setVisible}
+        active={active}
+        setActive={setActive}
         setPrice={setPrice}
         setStatus={setStatus}
         setMinCert={setMinCert}

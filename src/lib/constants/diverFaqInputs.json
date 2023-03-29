@@ -1,17 +1,82 @@
 [
   {
-    "question": "How many dives can I book at once?",
-    "answer":
-      "."
+    "question": "What is Coral Playground?",
+    "answer": "Coral Playground is a platform that allows you to browse and book dives directly with dive centers around the world."
   },
   {
-    "question": "My dive was cancelled, how do I get my refund?",
-    "answer":
-      "."
+    "question": "How do I create an account on Coral Playground?",
+    "answer": "You can create an account on Coral Playground by signing up with your email address or Google account. We will be adding social media login capabilities in the very near future."
   },
   {
-    "question": "How can I make a change to my order?",
-    "answer":
-      "."
+    "question": "How do I search for dive sites or dive centers on Coral Playground?",
+    "answer": "You can search for dive sites or dive centers on Coral Playground by navigating to their respective pages from the sidebar or top navbar, or by browsing the map and clicking on your selected divesite."
+  },
+  {
+    "question": "How do I book a dive through Coral Playground?",
+    "answer": "You can book a dive through Coral Playground by adding your selected dive trips from any dive center or dive site page. Once all trips have been selected, click on the cart icon in the navbar to provide your details and complete checkout. Payment will be processed securely through the platform."
+  },
+  {
+    "question": "How do bookings work on Coral Playground?",
+    "answer": "Coral Playground charges an upfront commission fee of approximately 12% for bookings made through the platform. Before you complete your order, we will let you know the amount that is due now vs. the amount remaining to be paid to the dive center directly."
+  },
+  {
+    "question": "What types of dives and packages are available on Coral Playground?",
+    "answer": "Coral Playground offers a wide variety of dives and packages, including reef dives, wreck dives, night dives, and more, depending on the dive center and location."
+  },
+  {
+    "question": "How do I know if a dive center is legitimate and safe?",
+    "answer": "Coral Playground verifies the authenticity of each dive center before listing them on the platform, and monitors reviews and ratings to ensure that the quality and safety standards of each business are up to par."
+  },
+  {
+    "question": "What is the cancellation policy for dives booked through Coral Playground?",
+    "answer": "We can usually refund deposits or allow booking changes for customers that cancel more than 48 hours before their scheduled dive date, or for any cancellations that are the result of dive centre changes or unfavorable weather, however, it is at the discretion of the dive centers if they offer full or partial refunds if you cancel within a certain timeframe for payments made directly to them. Cancellation policies may vary depending on the dive center and package, so be sure to check the details before booking. "
+  },
+  {
+    "question": "What should I bring on a dive and what is provided by the dive center?",
+    "answer": "Dive centers will usually provide most essential equipment and gear such as tank, BCD, weights, fins and mask, but it's best to check with them directly. We also offer the rental of special equipment such as cameras and dry suits from select dive centres where available. Finally, you should bring your own swimsuit, towel, sunscreen and any personal items you may need."
+  },
+  {
+    "question": "What if I have a medical condition or am not a strong swimmer?",
+    "answer": "Some dives may have specific requirements or restrictions, so it's important to check with the dive center before booking. If you have a medical condition or are not a strong swimmer, you should also consult with a doctor and the dive center before booking. The dive centre has the right to refuse your dive booking at any time if they feel that it might pose a safety concern for yourself or any of the other divers / crew on your dive."
+  },
+  {
+    "question": "What if the weather is bad or the dive is cancelled?",
+    "answer": "Dive centers may cancel or reschedule dives in the event of bad weather or other unforeseen circumstances. They will typically offer refunds or the option to reschedule for another date."
+  },
+  {
+    "question": "How do I leave a review of a dive center on Coral Playground?",
+    "answer": "We are currently working of adding feedback and review mechanisms into the platform, but in the meantime, you can always email us or message us directly through and of our available social media channels and we will get back to you as qiuckly as possiible"
+  },
+  {
+    "question": "What payment methods are accepted on Coral Playground?",
+    "answer": "Coral Playground accepts a variety of payment methods, including major credit cards, ApplePay and Google Pay depending on your device. The remaining balance of your dive is payable directly to the dive centre and depends on their existing payment facilities. For more information, please contact the dive centre directly."
+  },
+  {
+    "question": "How do I get to the dive center?",
+    "answer": "Ever dive centre should have its address and any specific directions information posted on its page. If you've unsure, it's best to check with the dive center directly for directions and transportation options. Some dive centers may offer pickup and drop-off services, while others may be located within walking distance or require a taxi or rental car."
+  },
+  {
+    "question": "What if I want to customize a dive package or create a private tour?",
+    "answer": "Coral playground enables you to do just that! Pick from any number of trips across all dive centres within your reach. We currently only enable individual bookings, but will be adding group bookings soon. In the meantime, mmany dive centers offer customizable packages and private tours, so it's best to contact them directly to discuss your options."
+  },
+  {
+    "question": "What is the typical duration of a dive?",
+    "answer": "The duration of a dive can vary depending on the location, dive center, and package. Some dives may be as short as 30 minutes, while others may last several hours. It's best to check with the dive center for specifics."
+  },
+  {
+    "question": "What is the best time of year to dive in Egypt?",
+    "answer": "The best time of year to dive in Egypt can vary depending on factors such as weather, water temperature, and marine life activity. The Red Sea is famous for its crystal clear waters all year, but it's best to do some research on the dive site page for additional information, or contact the dive center to determine the best time to go."
+  },
+  {
+    "question": "What if I have questions or concerns about my booking or the dive center?",
+    "answer": "If you have any questions or concerns about your booking or the dive center, you can always contact Coral Playground's customer support team for assistance."
+  },
+  {
+    "question": "Is travel insurance recommended for diving trips booked through Coral Playground?",
+    "answer": "It is recommended that you purchase travel insurance for any diving trips booked through Coral Playground to protect yourself in case of cancellations, medical emergencies, or other unforeseen circumstances."
+  },
+  {
+    "question": "What if I have never dived before?",
+    "answer": "Many dive centers offer introductory dives or certification courses for beginners. It's best to contact the dive center directly to discuss your options and any requirements or restrictions that may apply."
   }
 ]

@@ -25,8 +25,8 @@ export default function Settings(props) {
     description,
     checkIn,
     duration,
-    visible,
-    setVisible,
+    active,
+    setActive,
     setDuration,
     setDescription,
     setCheckIn,
@@ -172,20 +172,20 @@ export default function Settings(props) {
             <Flex>
               <Switch
                 colorScheme="teal"
-                value={visible}
+                value={active}
                 defaultChecked
-                onChange={() => setVisible(!visible)}
-                id="visible"
+                onChange={() => setActive(!active)}
+                id="active"
               />
               <FormLabel
                 ms="10px"
-                htmlFor="visible"
+                htmlFor="active"
                 fontSize="sm"
                 fontWeight="bold"
                 _placeholder={{ color: textColorSecondary }}
                 _hover={{ cursor: "pointer" }}
               >
-                {visible
+                {active
                   ? "Active: Publicly visible on your dive centre page"
                   : "Inactive: Trip is hidden from customers"}
               </FormLabel>

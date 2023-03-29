@@ -19,7 +19,7 @@ import * as gtag from "lib/data/gtag";
 
 export default function DailyTripCard(props) {
   const { diveTrip, ...rest } = props;
-  const [visible, setVisible] = useState(diveTrip.visible);
+  const [active, setActive] = useState(diveTrip.active);
   // Chakra Color Mode
   const miniCardNonCurrent = useColorModeValue("gray.200", "gray.700");
   const textNonCurrent = useColorModeValue("secondaryGray.900", "white");
@@ -30,9 +30,10 @@ export default function DailyTripCard(props) {
   const toast = useToast();
 
   const updateStatus = async (newStatus) => {
+    await setActive(newStatus);
     const { data } = await supabase
       .from("dive_trips")
-      .update({ visible: newStatus })
+      .update({ active: newStatus })
       .select()
       .eq("id", diveTrip.id);
     if (data) {
@@ -41,21 +42,21 @@ export default function DailyTripCard(props) {
         render: () => (
           <AlertPopup
             type="success"
-            text="Dive Centre Updated"
+            text="Dive Trip Updated"
             subtext={`Status: ${newStatus ? "Active" : "Not Active"}`}
           />
         ),
       });
       gtag.event({
-        action: "update-dive-centre-success",
+        action: "update-dive-trip-success",
         category: "button",
-        label: "Dive Centre",
+        label: "Dive Trip",
         // value: newItem.title,
       });
     }
-    setVisible(newStatus);
+    setActive(newStatus);
   };
-  useEffect(() => {}, [visible]);
+  useEffect(() => {}, [active]);
 
   return (
     <Flex
@@ -87,11 +88,11 @@ export default function DailyTripCard(props) {
       <Box m={0}>
         <SwitchField
           id="1"
-          isChecked={visible}
-          onChange={() => updateStatus(!visible)}
+          isChecked={active}
+          onChange={() => updateStatus(!active)}
           // onChange={() => setActive(!active)}
-          // label={`Status: ${visible ? "Active" : "Not Active"}`}
-          labelColor={visible ? textColorActive : textColorInactive}
+          // label={`Status: ${active ? "Active" : "Not Active"}`}
+          labelColor={active ? textColorActive : textColorInactive}
         />
       </Box>
     </Flex>

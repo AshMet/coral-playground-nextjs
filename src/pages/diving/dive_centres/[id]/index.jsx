@@ -32,7 +32,7 @@ export default function DiveCentre({ diveCentreData }) {
       .select(
         `
           id,
-          dive_trips:dive_trips(id, name, description, notes, min_cert, status, price, pay_now,
+          dive_trips:dive_trips(id, name, description, notes, min_cert, active, price, pay_now,
             stripe_price_id, start_date, start_time, check_in,
             dive_sites:trip_sites!dive_trip_id(
               dive_site:dive_site_id(id, name, latitude, longitude)),
@@ -51,6 +51,8 @@ export default function DiveCentre({ diveCentreData }) {
     fetchCentreTrips();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log("trips", trips);
 
   return (
     <>
@@ -126,7 +128,7 @@ export default function DiveCentre({ diveCentreData }) {
           {trips && (
             <Box gridArea="1 / 2 / 2 / 3">
               <TripsSidebar
-                trips={trips}
+                trips={trips.filter((trip) => trip.active === true)}
                 diveCentre={diveCentre}
                 loading={loading}
               />
