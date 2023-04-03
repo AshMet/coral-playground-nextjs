@@ -18,7 +18,7 @@ export function SidebarBrand() {
 
   return (
     <Flex align="start" direction="column">
-      <Link href={user ? "/users/me" : "/"}>
+      <Link href="/">
         <Box ml="30px" mb="20px" _hover={{ cursor: "pointer" }}>
           <Image src="/svg/coral-logo.svg" width="200px" height="45px" />
         </Box>

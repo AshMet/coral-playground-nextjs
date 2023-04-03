@@ -2,8 +2,8 @@
 title: 'Top Dive Sites in the Red Sea'
 metaTitle: 'Top Dive Sites in the Red Sea'
 metaDesc: 'Top Dive Sites in the Red Sea'
-socialImage: 'img/home/clown_fish.jpeg'
-date: '2021-04-06T19:01:27Z'
+socialImage: 'img/blogs/underwater-shot-of-a-coral-reef-in-the-red-sea.jpeg'
+date: '2021-09-03T19:01:27Z'
 author: '@scubasteve'
 summary: 'Visiting Egypt soon and wondering where to go diving? With so much to do and see in Egypt, it is possible to miss the adventures that the ocean has to offer. Let us guide you to the best places to go diving in the Red Sea'
 tags:

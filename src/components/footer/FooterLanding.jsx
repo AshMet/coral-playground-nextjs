@@ -252,7 +252,7 @@ export default function Footer() {
               Instagram
             </Link>
             <Link
-              href="https://www.facebook.com/coral.playground"
+              href="https://www.facebook.com/coralplayground"
               fontSize="md"
               color={textColorSecondary}
               fontWeight="400"

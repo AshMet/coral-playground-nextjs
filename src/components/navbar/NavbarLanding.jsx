@@ -18,19 +18,18 @@ import {
   useColorModeValue,
   Tooltip,
 } from "@chakra-ui/react";
-import { useUser } from "@supabase/auth-helpers-react";
 import Image from "next/image";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { HiOutlineUserCircle } from "react-icons/hi";
 import { IoLogoInstagram, IoMenuOutline } from "react-icons/io5";
 import { MdChevronRight } from "react-icons/md";
 
+import AvatarMenuItem from "../icons/AvatarMenuItem";
+import DarkModeMenuItem from "../icons/DarkModeMenuItem";
 import { VSeparator } from "components/separator/Separator";
 // import * as gtag from "lib/data/gtag";
 
 export default function LandingNavbar(props) {
-  const user = useUser();
   const [scrolled, setScrolled] = useState(false);
   // const { colorMode, toggleColorMode } = useColorMode();
 
@@ -128,11 +127,11 @@ export default function LandingNavbar(props) {
         alignItems="center"
         mb={gap}
       >
-        <Link href={user ? "/users/me" : "/"}>
+        <Link href="/">
           <Image src="/svg/coral-logo.svg" width="200px" height="45px" />
         </Link>
         <Flex ms="auto">
-          <Link
+          {/* <Link
             display={{ base: "none", lg: "block" }}
             href="/diving/map"
             color={textColor}
@@ -143,7 +142,7 @@ export default function LandingNavbar(props) {
             _hover={{ color: hoverColor, cursor: "pointer" }}
           >
             Map
-          </Link>
+          </Link> */}
           <Link
             display={{ base: "none", lg: "block" }}
             href="/diving/certifications"
@@ -185,63 +184,14 @@ export default function LandingNavbar(props) {
             bg={textColor}
             display={{ base: "none", lg: "block" }}
           />
-          {user ? (
-            <Tooltip label="Profile">
-              <Link my="auto" href="/users/me">
-                <Button
-                  variant="no-hover"
-                  h="max-content"
-                  w="max-content"
-                  bg="transparent"
-                  my="auto"
-                >
-                  <Icon
-                    as={HiOutlineUserCircle}
-                    color={textColor}
-                    w="22px"
-                    h="22px"
-                  />
-                </Button>
-              </Link>
-            </Tooltip>
-          ) : (
-            <Tooltip label="Sign Up / Login">
-              <Link my="auto" href="/auth/login">
-                <Button
-                  variant="no-hover"
-                  h="max-content"
-                  w="max-content"
-                  bg="transparent"
-                  my="auto"
-                >
-                  <Icon
-                    as={HiOutlineUserCircle}
-                    color={textColor}
-                    w="22px"
-                    h="22px"
-                  />
-                </Button>
-              </Link>
-            </Tooltip>
-          )}
           <Tooltip label="Follow us on Instagram">
-            <Link
-              me="10px"
-              my="auto"
-              href="https://instagram.com/coralplayground/"
-            >
+            <Link href="https://instagram.com/coralplayground/">
               <Button
                 variant="no-hover"
                 h="max-content"
                 w="max-content"
                 bg="transparent"
-                my="auto"
-                // onClick={gtag.event({
-                //   action: "follow-instagram",
-                //   category: "button",
-                //   label: "Follow us on Instagram",
-                //   // value: ,
-                // })}
+                mt={3}
               >
                 <Icon
                   as={IoLogoInstagram}
@@ -251,6 +201,14 @@ export default function LandingNavbar(props) {
                 />
               </Button>
             </Link>
+          </Tooltip>
+          <Box my="auto">
+            <DarkModeMenuItem iconColor={textColor} />
+          </Box>
+          <Tooltip label="Login / Sign Up">
+            <Box my="auto" mr="12px" ml="10px">
+              <AvatarMenuItem secondary={secondary} iconColor={textColor} />
+            </Box>
           </Tooltip>
           <Menu>
             <MenuButton
@@ -282,7 +240,7 @@ export default function LandingNavbar(props) {
               border="none"
             >
               <Flex flexDirection="column" p="10px">
-                <MenuItem
+                {/* <MenuItem
                   _hover={{ bg: "none" }}
                   _focus={{ bg: "none" }}
                   borderRadius="8px"
@@ -299,7 +257,7 @@ export default function LandingNavbar(props) {
                   >
                     Map
                   </Link>
-                </MenuItem>
+                </MenuItem> */}
                 <MenuItem
                   _hover={{ bg: "none" }}
                   _focus={{ bg: "none" }}
@@ -400,7 +358,7 @@ export default function LandingNavbar(props) {
               my="auto"
               _hover={{ bg: "brand.100", cursor: "pointer" }}
             >
-              Become a Business Partner
+              Add your Dive Centre
               <Icon as={MdChevronRight} ms="5px" mt="2px" h="16px" w="16px" />
             </Button>
           </Link>

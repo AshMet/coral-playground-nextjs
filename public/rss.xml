@@ -4,7 +4,7 @@
         <title>Coral Playground | Blog posts | RSS Feed</title>
         <link>http://localhost:3000</link>
         <description>Welcome to Coral Playground's blog posts, your definitive guide to everything related to scuba diving</description>
-        <lastBuildDate>Tue, 28 Mar 2023 23:37:02 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 03 Apr 2023 01:58:59 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -18,20 +18,20 @@
             <link>http://localhost:3000/blog/how-to-prepare-for-your-diving-trip</link>
             <guid>http://localhost:3000/blog/how-to-prepare-for-your-diving-trip</guid>
             <pubDate>Tue, 06 Apr 2021 19:01:27 GMT</pubDate>
-            <description><![CDATA[When most people think about Egypt, they think of the history and culture, but did you know that Egypt is also a world class diving destination? If you are planning to visit Egypt, make sure to also take some time to discover one of the great wonders of the underwater world]]></description>
+            <description><![CDATA[If you're planning a scuba diving trip, you're likely feeling a mix of excitement and nervousness. It's important to prepare properly to ensure a safe and enjoyable diving experience. In this article, we explore some essential factors to consider when preparing for your trip.]]></description>
         </item>
         <item>
             <title><![CDATA[Top Dive Sites in the Red Sea]]></title>
             <link>http://localhost:3000/blog/top-dive-sites-in-the-red-sea</link>
             <guid>http://localhost:3000/blog/top-dive-sites-in-the-red-sea</guid>
-            <pubDate>Tue, 06 Apr 2021 19:01:27 GMT</pubDate>
+            <pubDate>Fri, 03 Sep 2021 19:01:27 GMT</pubDate>
             <description><![CDATA[Visiting Egypt soon and wondering where to go diving? With so much to do and see in Egypt, it is possible to miss the adventures that the ocean has to offer. Let us guide you to the best places to go diving in the Red Sea]]></description>
         </item>
         <item>
             <title><![CDATA[Top Scuba Diving Destinations in the World]]></title>
             <link>http://localhost:3000/blog/top-scuba-diving-destinations-in-the-world</link>
             <guid>http://localhost:3000/blog/top-scuba-diving-destinations-in-the-world</guid>
-            <pubDate>Tue, 06 Apr 2021 19:01:27 GMT</pubDate>
+            <pubDate>Sat, 22 Jan 2022 19:01:27 GMT</pubDate>
             <description><![CDATA[When most people think about Egypt, they think of the history and culture, but did you know that Egypt is also a world class diving destination? If you are planning to visit Egypt, make sure to also take some time to discover one of the great wonders of the underwater world]]></description>
         </item>
     </channel>

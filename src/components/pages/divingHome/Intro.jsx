@@ -72,6 +72,7 @@ const Intro = () => {
                 spacing={{ base: 5, md: 10 }}
                 flexWrap="wrap"
                 justifyContent="center"
+                align="center"
                 mt={10}
               >
                 <Link href="/diving/map">

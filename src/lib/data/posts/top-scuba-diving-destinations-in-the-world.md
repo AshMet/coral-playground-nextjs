@@ -2,8 +2,8 @@
 title: 'Top Scuba Diving Destinations in the World'
 metaTitle: 'Top Scuba Diving Destinations in the World'
 metaDesc: 'Top Scuba Diving Destinations in the World'
-socialImage: 'img/home/clown_fish.jpeg'
-date: '2021-04-06T19:01:27Z'
+socialImage: 'img/blogs/cruise-yacht-bow-in-clear-water.jpeg'
+date: '2022-01-22T19:01:27Z'
 author: '@scubasteve'
 summary: 'When most people think about Egypt, they think of the history and culture, but did you know that Egypt is also a world class diving destination? If you are planning to visit Egypt, make sure to also take some time to discover one of the great wonders of the underwater world'
 tags:
@@ -40,5 +40,8 @@ Palau is a group of islands located in the western Pacific Ocean. **It is known 
 The Galapagos Islands are a group of volcanic islands located in the Pacific Ocean, off the coast of Ecuador. **It is one of the most unique diving destinations in the world, known for its incredible marine life and underwater topography.** Divers can expect to see everything from sea lions and turtles to large pelagic species like hammerhead sharks and whale sharks.
 
 
-## Book Your Next Dive with Coral Playground
+## [Book Your Next Dive with Coral Playground](https://www.coralplayground.com)
+
+
+
 ***If you're planning your next scuba diving adventure, then look no further than Coral Playground. We offer the best dive information and booking services in Egypt, making us the go-to source for divers looking for their next adventure. Contact us today to book your next dive and experience the beauty of the underwater world.***

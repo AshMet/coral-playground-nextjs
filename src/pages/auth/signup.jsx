@@ -173,7 +173,14 @@ export default function SignUp() {
           />
         ),
       });
-      posthog.identify(data.id, { role }, { email });
+      // posthog.identify(data.id, { role }, { email });
+      posthog.identify({
+        distinctId: data.id,
+        properties: {
+          role,
+          email,
+        },
+      });
       // Success Analytics Tag
       gtag.event({
         action: "signup-success",

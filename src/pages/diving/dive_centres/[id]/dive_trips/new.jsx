@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicated-branches */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-plusplus */
 import { Box, Button, Flex, useToast } from "@chakra-ui/react";
@@ -28,13 +29,21 @@ export default function CreateCentreTrip() {
   const getStripePriceId = (n) => {
     switch (n) {
       case 1:
-        return "price_1LuqESAvLPvC9h7xbA3kQhgH";
+        return process.env.NODE_ENV === "development"
+          ? "price_1LuqESAvLPvC9h7xbA3kQhgH"
+          : "price_1M7v52AvLPvC9h7xKhGRAJss";
       case 2:
-        return "price_1M659GAvLPvC9h7xSxCVcVPv";
+        return process.env.NODE_ENV === "development"
+          ? "price_1M659GAvLPvC9h7xSxCVcVPv"
+          : "price_1M7v5AAvLPvC9h7xXq1s7Lsg";
       case 3:
-        return "price_1LuqGLAvLPvC9h7xTYNbk7hI";
+        return process.env.NODE_ENV === "development"
+          ? "price_1LuqGLAvLPvC9h7xTYNbk7hI"
+          : "price_1M7v5IAvLPvC9h7xF54jEsGG";
       default:
-        return "price_1LuqGLAvLPvC9h7xTYNbk7hI";
+        return process.env.NODE_ENV === "development"
+          ? "price_1M659GAvLPvC9h7xSxCVcVPv"
+          : "price_1M7v5AAvLPvC9h7xXq1s7Lsg";
     }
   };
 

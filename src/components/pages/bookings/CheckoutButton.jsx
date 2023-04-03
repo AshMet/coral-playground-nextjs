@@ -7,6 +7,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { posthog } from "posthog-js";
 import { useContext } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
@@ -148,7 +149,7 @@ export default function CheckoutButton() {
         //   `Line Item Save Failed: ${JSON.stringify(eqiupLineItemError)}`
         // );
       }
-      posthog.capture("checkout", {
+      posthog.capture("Checkout", {
         orderId: order.id,
         amountPaid: order.amountPaid,
         amountTotal: order.amountTotal,

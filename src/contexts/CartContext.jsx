@@ -127,6 +127,10 @@ export const CartProvider = ({ children }) => {
       label: "Add item to cart",
       value: newItem.title,
     });
+    posthog.capture("Added Item to cart", {
+      id,
+      name,
+    });
   }
 
   // Remove from Cart
@@ -137,6 +141,10 @@ export const CartProvider = ({ children }) => {
       render: () => (
         <AlertPopup type="success" text="Item Removed" subtext={name} />
       ),
+    });
+    posthog.capture("Removed Item from cart", {
+      id,
+      name,
     });
   }
 

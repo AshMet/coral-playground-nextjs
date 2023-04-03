@@ -1,14 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
 // Chakra imports
 import {
   Badge,
   Box,
-  Button,
   chakra,
   Flex,
-  Icon,
-  // SimpleGrid,
   Spinner,
   Text,
   useColorModeValue,
@@ -16,8 +14,8 @@ import {
 import { motion, isValidMotionProp } from "framer-motion";
 import Link from "next/link";
 import { posthog } from "posthog-js";
-import { useState } from "react";
-import { IoHeart, IoHeartOutline } from "react-icons/io5";
+// import { useState } from "react";
+// import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 import Image from "../actions/NextChakraImg";
 // Custom components
@@ -44,7 +42,7 @@ export default function DiveSiteCard(props) {
     isLoading,
     ...rest
   } = props;
-  const [like, setLike] = useState(false);
+  // const [like, setLike] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
   const bgImg =
     type === "dive_site"
@@ -54,6 +52,13 @@ export default function DiveSiteCard(props) {
     type === "dive_site"
       ? `/diving/dive_sites/${id}`
       : `/diving/dive_centres/${id}`;
+
+  function cardClicked() {
+    posthog.capture(`Viewed Dive ${type === "dive_site" ? "Site" : "Centre"}`, {
+      id,
+      name,
+    });
+  }
 
   return (
     <ChakraBox
@@ -83,15 +88,10 @@ export default function DiveSiteCard(props) {
                     width="300"
                     height="200"
                     borderRadius="20px"
-                    onClick={() =>
-                      posthog.capture("View Dive Centre", {
-                        id,
-                        name,
-                      })
-                    }
+                    onClick={() => cardClicked()}
                   />
                 )}
-                <Button
+                {/* <Button
                   position="absolute"
                   bg="white"
                   _hover={{ bg: "whiteAlpha.900" }}
@@ -114,7 +114,7 @@ export default function DiveSiteCard(props) {
                     as={like ? IoHeart : IoHeartOutline}
                     color="brand.500"
                   />
-                </Button>
+                </Button> */}
               </Box>
             </Link>
           )}

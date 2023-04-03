@@ -29,7 +29,7 @@ import { useMoralis } from "react-moralis";
 
 import routes from "../../routes";
 // import ItemContent from "../menu/ItemContent";
-import ShoppingCart from "../pages/bookings/ShoppingCart";
+import ShoppingCart from "../icons/ShoppingCart";
 import { ProfileIcon } from "components/icons/Icons";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Balance from "components/navbar/Balance";
