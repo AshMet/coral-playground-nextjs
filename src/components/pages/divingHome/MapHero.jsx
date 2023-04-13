@@ -24,19 +24,15 @@
 
 // Chakra imports
 import {
-  Avatar,
   Box,
   chakra,
   Flex,
   Stack,
-  Tag,
-  TagLabel,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import Map, {
-  Marker,
   NavigationControl,
   FullscreenControl,
   ScaleControl,
@@ -44,19 +40,16 @@ import Map, {
 } from "react-map-gl";
 
 import Card from "components/card/Card";
-import DiveSiteCard from "components/card/DiveSiteCard";
+
 import "mapbox-gl/dist/mapbox-gl.css";
+import MapMarker from "./MapMarker";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-function createKey(location) {
-  return location.lat + location.lng;
-}
-
-export default function Mission(props) {
-  const { data } = props;
-  const mapRef = useRef();
+export default function MapHero(props) {
+  const { diveSites, diveCentres } = props;
   const [mapLocation, setMapLocation] = useState("Select Location");
+  const mapRef = useRef();
 
   const mapStyles = useColorModeValue(
     "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r",
@@ -109,59 +102,30 @@ export default function Mission(props) {
             <NavigationControl position="top-left" />
             <ScaleControl />
 
-            {data?.map(
+            {diveSites?.map(
               (location) =>
-                location.lat &&
-                location.lng && (
-                  <Marker
-                    key={createKey(location)}
-                    latitude={location.lat}
-                    longitude={location.lng}
-                    anchor="bottom"
-                    onClick={(e) => {
-                      // If we let the click event propagates to the map, it will immediately close the popup
-                      // with `closeOnClick: true`
-                      e.originalEvent.stopPropagation();
-                      setMapLocation(location);
-                      mapRef.current?.flyTo({
-                        center: [location.lng, location.lat + 0.02],
-                        zoom: 13,
-                        duration: 2000,
-                      });
-                    }}
-                  >
-                    {location.lat !== mapLocation.lat ? (
-                      <Tag
-                        size="sm"
-                        bgColor="#0b050575"
-                        color="white"
-                        borderRadius="full"
-                      >
-                        <Avatar
-                          src={
-                            location.locationType === "dive_site"
-                              ? "/img/diving/dive_site_icon.svg"
-                              : "/img/diving/dive_centre_icon.svg"
-                          }
-                          size={location.lat === mapLocation.lat ? "sm" : "xs"}
-                          // name={location.name}
-                          ml={-1}
-                          mr={2}
-                        />
-                        <TagLabel>{location.name}</TagLabel>
-                      </Tag>
-                    ) : (
-                      <DiveSiteCard
-                        key={location.location_id}
-                        id={location.location_id}
-                        name={location.name}
-                        tagList={location.divingTypes}
-                        type={location.locationType}
-                        image={location.itemImg}
-                        zIndex={3}
-                      />
-                    )}
-                  </Marker>
+                location.latitude &&
+                location.longitude && (
+                  <MapMarker
+                    location={location}
+                    mapLocation={mapLocation}
+                    setMapLocation={setMapLocation}
+                    type="diveSite"
+                    mapRef={mapRef}
+                  />
+                )
+            )}
+            {diveCentres?.map(
+              (location) =>
+                location.latitude &&
+                location.longitude && (
+                  <MapMarker
+                    location={location}
+                    mapLocation={mapLocation}
+                    setMapLocation={setMapLocation}
+                    type="diveCentre"
+                    mapRef={mapRef}
+                  />
                 )
             )}
           </Map>

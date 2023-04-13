@@ -6,7 +6,7 @@ module.exports = {
   priority: 0.7,
   sitemapSize: 5000,
   generateRobotsTxt: true,
-  exclude: ['/admin/nfts', '/nfts'],
+  exclude: ['/admin/*', '/users/*'],
   // alternateRefs: [
   //   {
   //     href: 'https://es.example.com',

@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable no-plusplus */
@@ -6,6 +7,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable sonarjs/no-duplicated-branches */
 import {
+  Avatar,
   Badge,
   Button,
   Flex,
@@ -34,9 +36,11 @@ import {
   useTable,
 } from "react-table";
 
+import EditModal from "./EditModal";
+
 // import { SearchBar } from "components/navbar/searchBar/SearchBar";
 
-function SearchTableOrders(props) {
+function SearchTableDiveSites(props) {
   const { columnsData, tableData } = props;
 
   const columns = useMemo(() => columnsData, [columnsData]);
@@ -83,11 +87,7 @@ function SearchTableOrders(props) {
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
   const brandColor = useColorModeValue("brand.500", "brand.400");
   return (
-    <Flex
-      direction="column"
-      w="100%"
-      overflowX={{ sm: "scroll", lg: "hidden" }}
-    >
+    <Flex direction="column" w="100%" overflowX="scroll">
       <Flex
         align={{ sm: "flex-start", lg: "flex-start" }}
         justify={{ sm: "flex-start", lg: "flex-start" }}
@@ -133,58 +133,77 @@ function SearchTableOrders(props) {
               <Tr {...row.getRowProps()} key={index}>
                 {row.cells.map((cell, index) => {
                   let data = "";
-                  if (cell.column.Header === "USER NAME") {
+                  if (cell.column.Header === "NAME") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "EMAIL") {
+                  } else if (cell.column.Header === "MAP") {
+                    data = cell.value && (
+                      <Avatar
+                        src={cell.value}
+                        w="36px"
+                        h="36px"
+                        me="8px"
+                        borderRadius="14px"
+                      />
+                    );
+                  } else if (cell.column.Header === "MIN_VIS") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "DATE") {
+                  } else if (cell.column.Header === "MAX_VIS") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "STATUS ORDER") {
+                  } else if (cell.column.Header === "DEPTH") {
                     data = (
                       <Badge
-                        colorScheme={
-                          cell.value === "Completed" ? "green" : "red"
-                        }
-                        color={
-                          cell.value === "Completed" ? "green.500" : "red.500"
-                        }
+                        colorScheme={cell.value < 32 ? "green" : "red"}
+                        color={cell.value < 32 ? "green.500" : "red.500"}
                         fontSize="md"
                         fontWeight="500"
                       >
                         {cell.value}
                       </Badge>
                     );
-                  } else if (cell.column.Header === "TOTAL PRICE") {
+                  } else if (cell.column.Header === "CURRENT") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "ORDER ACTIONS") {
+                  } else if (cell.column.Header === "LAT") {
                     data = (
-                      <Text
-                        cursor="pointer"
-                        color={brandColor}
-                        textDecoration="underline"
-                        fontSize="md"
-                        fontWeight="500"
-                        id={cell.value}
-                      >
-                        Edit order
+                      <Text color={textColor} fontSize="md" fontWeight="500">
+                        {cell.value}
                       </Text>
                     );
+                  } else if (cell.column.Header === "LNG") {
+                    data = (
+                      <Text color={textColor} fontSize="md" fontWeight="500">
+                        {cell.value}
+                      </Text>
+                    );
+                  } else if (cell.column.Header === "ACCESS") {
+                    data = (
+                      <Text color={textColor} fontSize="md" fontWeight="500">
+                        {cell.value}
+                      </Text>
+                    );
+                  } else if (cell.column.Header === "TAGS") {
+                    data = (
+                      <Text color={textColor} fontSize="md" fontWeight="500">
+                        {cell.value}
+                      </Text>
+                    );
+                  } else if (cell.column.Header === "SITE_ACTIONS") {
+                    data = <EditModal diveSiteData={cell} />;
                   }
                   return (
                     <Td
@@ -319,4 +338,4 @@ function SearchTableOrders(props) {
   );
 }
 
-export default SearchTableOrders;
+export default SearchTableDiveSites;

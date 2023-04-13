@@ -15,7 +15,7 @@ import MapHero from "components/pages/divingHome/MapHero";
 import LandingLayout from "layouts/LandingLayout";
 import { supabase } from "utils/supabase";
 
-export default function Home({ data }) {
+export default function Home({ diveSites, diveCentres }) {
   return (
     <Box>
       <>
@@ -40,7 +40,7 @@ export default function Home({ data }) {
         <LandingLayout>
           <ParallaxProvider>
             <Flex direction={{ base: "column" }}>
-              <MapHero data={data} />
+              <MapHero diveSites={diveSites} diveCentres={diveCentres} />
               <Intro />
               {/* <Hero /> */}
               {/* <Mission sites={data} /> */}
@@ -58,49 +58,21 @@ export default function Home({ data }) {
 }
 
 export async function getStaticProps() {
-  const { data: siteResults } = await supabase.from("dive_sites").select(
-    `id, name, description, latitude, longitude, min_visibility, max_visibility, depth, current, cert_level,
-        tags, access, dive_map, city: cities (name), country: cities (countries (name))`
-  );
-  const { data: centreResults } = await supabase.from("dive_centres").select(
-    `id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships,
-      cover_photo, city: cities (name), country: cities (countries (name))`
-  );
-  const data = [];
-
-  for (let i = 0; i < siteResults.length; ++i) {
-    data.push({
-      location_id: siteResults[i].id,
-      name: siteResults[i].name,
-      lat: siteResults[i].latitude,
-      lng: siteResults[i].longitude,
-      itemImg: siteResults[i].dive_map,
-      maxDepth: siteResults[i].depth,
-      cert_level: siteResults[i].cert_level,
-      access: siteResults[i].access,
-      divingTypes: siteResults[i].tags,
-      city: siteResults[i].city.name,
-      country: siteResults[i].country.countries.name,
-      locationType: "dive_site",
-    });
-  }
-
-  for (let i = 0; i < centreResults.length; ++i) {
-    data.push({
-      location_id: centreResults[i].id,
-      name: centreResults[i].name,
-      lat: centreResults[i].latitude,
-      lng: centreResults[i].longitude,
-      itemImg: centreResults[i].cover_photo,
-      memberships: centreResults[i].memberships,
-      languages: centreResults[i].languages,
-      city: centreResults[i].city.name,
-      country: centreResults[i].country.countries.name,
-      locationType: "dive_centre",
-    });
-  }
-
-  // const data = JSON.stringify(results);
-
-  return { props: { data }, revalidate: 86400 };
+  const { data: diveSites } = await supabase
+    .from("dive_site_view")
+    .select(`id, name, latitude, longitude, diveMap`);
+  const { data: diveCentres } = await supabase
+    .from("active_dive_centres_view")
+    .select(`id, name, latitude, longitude, coverPhotoUrl`);
+  return { props: { diveSites, diveCentres }, revalidate: 86400 };
 }
+
+// export async function getStaticProps() {
+//   const { data: siteResults } = await supabase.from("dive_sites").select(
+//     `id, name, description, latitude, longitude, min_visibility, max_visibility, depth, current, cert_level,
+//         tags, access, dive_map, city: cities (name), country: cities (countries (name))`
+//   );
+//   const { data: centreResults } = await supabase.from("dive_centres").select(
+//     `id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships,
+//       cover_photo, city: cities (name), country: cities (countries (name))`
+//   );

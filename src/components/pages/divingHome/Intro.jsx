@@ -11,7 +11,7 @@ import { MdChevronRight } from "react-icons/md";
 
 const Intro = () => {
   // Chakra Color Mode
-  const textColor = useColorModeValue("white", "white");
+  const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = useColorModeValue("secondaryGray.700", "white");
   // const handleClick = () => {
   //   fbq.event("Purchase", { currency: "USD", value: 10 });
@@ -49,7 +49,7 @@ const Intro = () => {
             >
               A Better Diving Experience
             </Text>
-            <Text color={textColor} fontSize="xl" w="100%" mb="20px">
+            <Text color={textColorSecondary} fontSize="xl" w="100%" mb="20px">
               Coral Playground is your gateway to the largest collection of
               dives in Egypt, operated by a network of the highest quality dive
               centres, guides and instructors.{" "}

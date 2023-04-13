@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 // import { useState } from "react";
 
 // import Card from "components/card/Card";
-import FixedPlugin from "components/fixedPlugin/FixedPlugin";
+// import FixedPlugin from "components/fixedPlugin/FixedPlugin";
 import Footer from "components/footer/FooterLanding";
 import Navbar from "components/navbar/NavbarLanding";
 // import SidebarContext from "../../../contexts/SidebarContext";
@@ -47,7 +47,7 @@ function AuthCentered(props) {
       mx="0px"
       minH="100vh"
     >
-      <FixedPlugin />
+      {/* <FixedPlugin /> */}
       <Box
         position="absolute"
         minH={{ base: "50vh", md: "50vh" }}
