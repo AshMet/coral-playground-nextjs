@@ -174,9 +174,10 @@ export default function DiveSiteCard(props) {
                           colorScheme="purple"
                           borderRadius="15px"
                           display="flex"
-                          px={1}
-                          py={1}
+                          px="0px"
+                          py="1px"
                           justifyContent="center"
+                          fontSize="xs"
                         >
                           {tag}
                         </Badge>

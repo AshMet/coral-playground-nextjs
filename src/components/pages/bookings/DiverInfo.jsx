@@ -13,6 +13,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { useUser } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 
 import Card from "components/card/Card";
@@ -21,7 +22,6 @@ import TextField from "components/fields/TextField";
 import { CartContext } from "contexts/CartContext";
 
 import CheckoutButton from "./CheckoutButton";
-import { useRouter } from "next/router";
 
 export default function DiverInfo(props) {
   const { summaryTab } = props;

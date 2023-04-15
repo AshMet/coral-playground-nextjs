@@ -67,6 +67,7 @@ export default function NewBooking({ equipment }) {
       <NextSeo
         title="Dive Booking"
         description="Complete your booking details and proceed to payment"
+        canonical="https://www.coralplayground.com/diving/booking"
       />
       <Flex
         direction="column"

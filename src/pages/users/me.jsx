@@ -177,6 +177,7 @@ export default function Profile(props) {
         <NextSeo
           title="Coral Playground | User Account"
           description="User Profile & Settings"
+          canonical="https://www.coralplayground.com/"
           openGraph={{
             type: "website",
             title: "Coral Playground | User Account",
