@@ -4,7 +4,7 @@ import { Flex, Icon, Text, Link } from '@chakra-ui/react';
 import { BrandLogo } from 'components/icons/Icons';
 export default function Footer() {
 	return (
-		<Link href='https://coralplayground.com/'>
+		<Link href='https://www.coralplayground.com/'>
 			<Flex
 				px={{
 					base: '20px',

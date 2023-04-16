@@ -50,7 +50,7 @@ export default function CentreInfo({
   return (
     <Card mt="20px" p={{ base: "20px", md: "20px 40px" }}>
       <Flex align="center" w="100%">
-        <Text color={textColor} fontSize="3xl" fontWeight="bold">
+        <Text as="h1" color={textColor} fontSize="3xl" fontWeight="bold">
           {name}
         </Text>
       </Flex>

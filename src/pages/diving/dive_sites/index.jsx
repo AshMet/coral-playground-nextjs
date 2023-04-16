@@ -44,7 +44,7 @@ export default function DiveSites({ diveSites }) {
   );
 
   const [country, setCountry] = useState();
-  const [city, setCity] = useState("Hurghada");
+  const [city, setCity] = useState(0);
   const [filtered, setFiltered] = useState();
 
   useEffect(() => {
