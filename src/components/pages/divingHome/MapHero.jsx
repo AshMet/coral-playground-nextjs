@@ -137,7 +137,7 @@ export default function MapHero(props) {
         spacing={10}
         justifyContent="center"
         align="center"
-        mt={{ sm: "-220px", lg: "-170px" }}
+        mt={{ sm: "-120px", lg: "-170px" }}
         zIndex={50}
       >
         <Box
@@ -149,7 +149,7 @@ export default function MapHero(props) {
         >
           <Text
             as="h1"
-            fontSize={{ sm: "5xl", lg: "5xl" }}
+            fontSize={{ sm: "3xl", lg: "5xl" }}
             color="white"
             lineHeight={1}
             fontWeight="bold"
