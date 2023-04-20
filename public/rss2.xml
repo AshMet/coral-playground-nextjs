@@ -4,7 +4,7 @@
         <title>Coral Playground | Dive Sites | RSS Feed</title>
         <link>http://localhost:3000</link>
         <description>Welcome to Coral Playground, your best source for dive site info in the Red Sea</description>
-        <lastBuildDate>Thu, 20 Apr 2023 00:46:18 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 20 Apr 2023 02:48:03 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -15,6 +15,8 @@
         <copyright>All rights reserved 2023, Coral Playground</copyright>
         <category>Technology</category>
         <category>Scuba Diving</category>
+        <category>Corals</category>
+        <category>Marine Life</category>
         <item>
             <title><![CDATA[Abu Hashish Dive Site near Hurghada, Egypt]]></title>
             <link>http://localhost:3000/diving/dive_sites/abu-hashish</link>

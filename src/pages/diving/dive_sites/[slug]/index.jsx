@@ -156,7 +156,10 @@ export const getStaticPaths = async () => {
   const paths = diveSites.map(({ name }) => ({
     params: {
       // id: id.toString(),
-      slug: slugify(name, { lower: true }),
+      slug: slugify(name.replace("&", ""), {
+        lower: true,
+        remove: /[*+~.()&'"!:@]/g,
+      }),
     },
   }));
 

@@ -48,8 +48,14 @@ export default function DiveSiteCard(props) {
       : "/img/diving/dive_centre_bg.jpg";
   const siteUrl =
     type === "dive_site"
-      ? `/diving/dive_sites/${slugify(name, { lower: true })}`
-      : `/diving/dive_centres/${slugify(name, { lower: true })}`;
+      ? `/diving/dive_sites/${slugify(name.replace("&", ""), {
+          lower: true,
+          remove: /[*+~.()'"!:@]/g,
+        })}`
+      : `/diving/dive_centres/${slugify(name.replace("&", ""), {
+          lower: true,
+          remove: /[*+~.()'"!:@]/g,
+        })}`;
 
   function cardClicked() {
     posthog.capture(`Viewed Dive ${type === "dive_site" ? "Site" : "Centre"}`, {
@@ -57,7 +63,6 @@ export default function DiveSiteCard(props) {
       name,
     });
   }
-
   return (
     <ChakraBox
       layout

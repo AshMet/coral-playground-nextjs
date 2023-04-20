@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
@@ -20,8 +21,8 @@ import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 import { MdApps, MdDashboard } from "react-icons/md";
+import slugify from "slugify";
 
-// import { SearchBar } from "views/admin/nfts/profile/components/Search";
 import { supabase } from "../../api/index";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import DivingLayout from "layouts/DivingLayout";
@@ -57,6 +58,14 @@ export default function DiveSites({ diveSites }) {
     setFiltered(cityFiltered);
     // console.log("site data", data);
   }, [diveSites, city, country]);
+
+  console.log(
+    slugify("Shark & Yolanda Reef".replace("&", ""), {
+      lower: true,
+      remove: /[*+~.()'"!:@]/g,
+      strict: true,
+    })
+  );
 
   return (
     <>
