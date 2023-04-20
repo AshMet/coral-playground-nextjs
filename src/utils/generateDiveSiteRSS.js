@@ -18,7 +18,7 @@ export default async function generateRssFeed(dive_sites) {
     title: "Coral Playground | Dive Sites | RSS Feed",
     description:
       "Welcome to Coral Playground, your best source for dive site info in the Red Sea",
-    id: `${siteUrl}/coral-icon.png`,
+    id: siteUrl,
     link: siteUrl,
     image: `${siteUrl}/coral-icon.png`,
     favicon: `${siteUrl}/favicon.png`,
@@ -33,14 +33,19 @@ export default async function generateRssFeed(dive_sites) {
 
   activeSites.forEach((site) => {
     feed.addItem({
-      title: site.name,
+      title: `${site.name} Dive Site near ${site.city.name}, Egypt`,
       description: site.description,
-      id: `dive_sites/${site.id}`,
-      link: `${siteUrl}/diving/dive_sites/${site.id}`,
+      id: `${siteUrl}/diving/dive_sites/${site.slug}`,
+      link: `${siteUrl}/diving/dive_sites/${site.slug}`,
       // image: site.dive_map,
       date: site.updated_at ? new Date(site.updated_at) : new Date(2023, 1, 19),
     });
   });
+
+  feed.addCategory("Technology");
+  feed.addCategory("Scuba Diving");
+  feed.addCategory("Corals");
+  feed.addCategory("Marine Life");
 
   fs.writeFileSync("./public/rss2.xml", feed.rss2());
 }

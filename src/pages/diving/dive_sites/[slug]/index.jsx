@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 /* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
@@ -7,6 +8,7 @@ import { AspectRatio, Box, Button, Grid } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
+import slugify from "slugify";
 
 import Card from "components/card/Card";
 import SiteInfo from "components/pages/diveSite/SiteInfo";
@@ -18,7 +20,7 @@ export default function DiveSitePage({ diveSite }) {
   // console.log("siteData", diveSite);
 
   const router = useRouter();
-  const { id } = router.query;
+  const { slug } = router.query;
 
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,7 +30,7 @@ export default function DiveSitePage({ diveSite }) {
       .from("dive_sites")
       .select(
         `
-          id, 
+          id, slug,
           dive_trips: trip_sites!dive_site_id(
             dive_trip: dive_trip_id (id, name, description, notes, min_cert, status, price, pay_now,
               stripe_price_id, start_date, start_time, check_in, 
@@ -39,7 +41,7 @@ export default function DiveSitePage({ diveSite }) {
           )
         `
       )
-      .eq("id", id)
+      .eq("slug", slug)
       .single();
     // console.log("siteTripData", data);
     setTrips(data.dive_trips);
@@ -149,13 +151,16 @@ export default function DiveSitePage({ diveSite }) {
 }
 
 export const getStaticPaths = async () => {
-  const { data: diveSites } = await supabase.from("dive_sites").select("id");
+  const { data: diveSites } = await supabase.from("dive_sites").select("name");
 
-  const paths = diveSites.map(({ id }) => ({
+  const paths = diveSites.map(({ name }) => ({
     params: {
-      id: id.toString(),
+      // id: id.toString(),
+      slug: slugify(name, { lower: true }),
     },
   }));
+
+  console.log(paths);
 
   return {
     paths,
@@ -163,18 +168,18 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params: { id } }) => {
+export const getStaticProps = async ({ params: { slug } }) => {
   const { data: diveSite } = await supabase
     .from("dive_sites")
     .select(
-      `id, name, description, latitude, longitude, min_visibility, max_visibility, depth, 
-      current, cert_level, tags, access, dive_map, 
+      `id, slug, name, description, latitude, longitude, min_visibility, max_visibility,
+        depth, current, cert_level, tags, access, dive_map, 
         city: cities (name),
         country: cities (countries (name)),
         species: site_species!dive_site_id (
           specie: species_id (id, name, cover_photo))`
     )
-    .match({ id })
+    .match({ slug })
     .single();
 
   return {

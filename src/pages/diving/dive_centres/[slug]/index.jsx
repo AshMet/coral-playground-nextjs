@@ -15,7 +15,7 @@ import DivingLayout from "layouts/DivingLayout";
 
 export default function DiveCentre({ diveCentreData }) {
   const router = useRouter();
-  const { id } = router.query;
+  const { slug } = router.query;
 
   const [trips, setTrips] = useState([]);
   const [diveCentre, setDiveCentre] = useState(true);
@@ -31,7 +31,7 @@ export default function DiveCentre({ diveCentreData }) {
       .from("dive_centres")
       .select(
         `
-          id,
+          id, slug,
           dive_trips:dive_trips(id, name, description, notes, min_cert, active, price, pay_now,
             stripe_price_id, start_date, start_time, check_in,
             dive_sites:trip_sites!dive_trip_id(
@@ -40,7 +40,7 @@ export default function DiveCentre({ diveCentreData }) {
           )
         `
       )
-      .eq("id", id)
+      .eq("slug", slug)
       .single();
     setTrips(data?.dive_trips || []);
     setLoading(false);
@@ -141,7 +141,7 @@ export default function DiveCentre({ diveCentreData }) {
 }
 
 export async function getServerSideProps(context) {
-  const { id } = context.query;
+  const { slug } = context.query;
   const { data: diveCentreData } = await supabase
     .from("dive_centres_view")
     .select(
@@ -149,7 +149,7 @@ export async function getServerSideProps(context) {
       coverPhotoUrl, city, country, slug`
       // `id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships, cover_photo, city: cities (name), country: cities (countries (name))`
     )
-    .match({ id })
+    .match({ slug })
     .single();
 
   return {

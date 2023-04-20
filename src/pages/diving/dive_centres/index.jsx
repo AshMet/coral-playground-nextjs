@@ -196,7 +196,7 @@ export async function getStaticProps() {
     .from("active_dive_centres_view")
     .select(
       `
-      id, name, description, address, coverPhotoUrl, city, country
+      id, name, description, address, coverPhotoUrl, city, country, slug
     `
     )
     .order("name", { ascending: true });

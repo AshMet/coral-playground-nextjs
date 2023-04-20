@@ -45,8 +45,8 @@ module.exports = {
       //   disallow: ['/sub-path-1', '/path-2'],
       // },
     ],
-    additionalSitemaps: [
-      'https://www.coralplayground.com/sitemap-0.xml ',
-    ],
+    // additionalSitemaps: [
+    //   'https://www.coralplayground.com/sitemap-0.xml ',
+    // ],
   },
 }

@@ -14,11 +14,9 @@ import {
 import { motion, isValidMotionProp } from "framer-motion";
 import Link from "next/link";
 import { posthog } from "posthog-js";
-// import { useState } from "react";
-// import { IoHeart, IoHeartOutline } from "react-icons/io5";
+import slugify from "slugify";
 
 import Image from "../actions/NextChakraImg";
-// Custom components
 // import { CircProgressMini } from "components/charts/CircularProgress";
 
 import Card from "./Card";
@@ -50,8 +48,8 @@ export default function DiveSiteCard(props) {
       : "/img/diving/dive_centre_bg.jpg";
   const siteUrl =
     type === "dive_site"
-      ? `/diving/dive_sites/${id}`
-      : `/diving/dive_centres/${id}`;
+      ? `/diving/dive_sites/${slugify(name, { lower: true })}`
+      : `/diving/dive_centres/${slugify(name, { lower: true })}`;
 
   function cardClicked() {
     posthog.capture(`Viewed Dive ${type === "dive_site" ? "Site" : "Centre"}`, {

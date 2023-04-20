@@ -4,7 +4,7 @@
         <title>Coral Playground | Dive Sites | RSS Feed</title>
         <link>http://localhost:3000</link>
         <description>Welcome to Coral Playground, your best source for dive site info in the Red Sea</description>
-        <lastBuildDate>Sun, 16 Apr 2023 18:26:23 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 20 Apr 2023 00:46:18 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,63 +13,63 @@
             <link>http://localhost:3000</link>
         </image>
         <copyright>All rights reserved 2023, Coral Playground</copyright>
+        <category>Technology</category>
+        <category>Scuba Diving</category>
         <item>
-            <title><![CDATA[Abu Hashish]]></title>
-            <link>http://localhost:3000/diving/dive_sites/3</link>
-            <guid>dive_sites/3</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:56 GMT</pubDate>
-            <description><![CDATA[Abu Hashish is the island at the center of a wide bay 90 minutes south of Hurghada. It is enclosed by a vast reef network, situated on a large flat and sandy plateau which leads to a steep drop-off. Due to its ideal location it was once used as drop-off point for smugglers bringing contraband into the country
-
-.A tongue of reef extends about 1km south of the island. The dive site is at its southernmost tip. There is a shelf between 15 meters and 22 meters outside, and beyond that a steep, but fairly bare, drop-off, usually with superb visibility. Inside the tongue of reef there are many table corals and ergs to be explored.The trip here can be choppy. Rough seas often make this site inaccessible from Hurghada although the site itself is well protected. Actually, it’s a desired spot for all levels of divers and custom made for all levels of training. Current is mainly north to south and strongest along the drop-off.
+            <title><![CDATA[Abu Hashish Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/abu-hashish</link>
+            <guid>http://localhost:3000/diving/dive_sites/abu-hashish</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
+            <description><![CDATA[Abu Hashish is the island at the center of a wide bay 90 minutes south of Hurghada. It is enclosed by a vast reef network, situated on a large flat and sandy plateau which leads to a steep drop-off. Due to its ideal location it was once used as drop-off point for smugglers bringing contraband into the country.A tongue of reef extends about 1km south of the island. The dive site is at its southernmost tip. There is a shelf between 15 meters and 22 meters outside, and beyond that a steep, but fairly bare, drop-off, usually with superb visibility. Inside the tongue of reef there are many table corals and ergs to be explored.The trip here can be choppy. Rough seas often make this site inaccessible from Hurghada although the site itself is well protected. Actually, it’s a desired spot for all levels of divers and custom made for all levels of training. Current is mainly north to south and strongest along the drop-off.
 Your best bet is to leave the lagoon through an obvious channel filled with table corals, cross the shelf to the drop-off and follow it north. There are some beautiful caves in the 30 meter region. Return along the inside of the shelf and finish the dive back in the lagoon amongst the numerous ergs.]]></description>
         </item>
         <item>
-            <title><![CDATA[Abu Nuhas]]></title>
-            <link>http://localhost:3000/diving/dive_sites/5</link>
-            <guid>dive_sites/5</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:56 GMT</pubDate>
+            <title><![CDATA[Abu Nuhas Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/abu-nuhas</link>
+            <guid>http://localhost:3000/diving/dive_sites/abu-nuhas</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Abu Nuhas is a large triangular shaped reef. The average depth is 24m/79ft and water visibility is around 20-30m/65-100ft. The reef is located just a little bit north of Shadwan Island and the area is covered with shipwrecks. The wrecks are on the northern and rougher side of the reef with the main ones from west to east being the Giannis D, the Carnatic, the Chrisoula K and the Kimon M. The currents can be quite strong.]]></description>
         </item>
         <item>
-            <title><![CDATA[Abu Ramada South]]></title>
-            <link>http://localhost:3000/diving/dive_sites/7</link>
-            <guid>dive_sites/7</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:56 GMT</pubDate>
+            <title><![CDATA[Abu Ramada South Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/abu-ramada-south</link>
+            <guid>http://localhost:3000/diving/dive_sites/abu-ramada-south</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[South Abu Ramada (also known as Abu Ramada South) is a dive site with huge reefs of hard and soft corals and sea fans sitting on a sandy bottom, and a very old wreck that is very much decayed. Aside from diving, the South Abu Ramada site is famous for being a good snorkeling spot. Photography lovers can also enjoy good conditions for taking photos.]]></description>
         </item>
         <item>
-            <title><![CDATA[Banana Reef]]></title>
-            <link>http://localhost:3000/diving/dive_sites/9</link>
-            <guid>dive_sites/9</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:56 GMT</pubDate>
+            <title><![CDATA[Banana Reef Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/banana-reef</link>
+            <guid>http://localhost:3000/diving/dive_sites/banana-reef</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Banana shaped reef in the middle of the Giftun Strait has the average depth of 10m/32.8ft and water visibility around 10-30m/32-98ft. An easy current at this dive site allows to drift all along the coral wall. In the northwest there is a spectacular pinnacle covered in soft corals while the northeast has some caves full of various marine life.]]></description>
         </item>
         <item>
-            <title><![CDATA[Carless Reef]]></title>
-            <link>http://localhost:3000/diving/dive_sites/14</link>
-            <guid>dive_sites/14</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:57 GMT</pubDate>
+            <title><![CDATA[Carless Reef Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/carless-reef</link>
+            <guid>http://localhost:3000/diving/dive_sites/carless-reef</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[This reef is about 15-18m/50-60ft deep and is located south of El Gouna, Egypt. It has drop-offs on all sides, the eastern one being dramatic and highly scenic. There are two huge pinnacles covered by corals on the plateau. Both pinnacles' tops are at 6-8m/20-26ft’ depth. There may be a current here. This mid-sea dive site is available in calm weather only.]]></description>
         </item>
         <item>
-            <title><![CDATA[Deadalus Reef]]></title>
-            <link>http://localhost:3000/diving/dive_sites/16</link>
-            <guid>dive_sites/16</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:57 GMT</pubDate>
+            <title><![CDATA[Deadalus Reef Dive Site near Marsa Alam, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/deadalus-reef</link>
+            <guid>http://localhost:3000/diving/dive_sites/deadalus-reef</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Daedalus Reef is a 400-metre-long and 100-metre-wide offshore coral formation located approximately 90 kilometres east of Marsa Alam. Its remote location protected it from mass tourism, and today Daedalus is considered to be Egypt’s less-visited reef. The distance from the shore exposes Daedalus to strong currents, which promote an explosive growth of several hundred species of soft and hard corals, perfectly preserved thanks to the reef’s limited access. The dive site also has steep walls that drop down to vertiginous depths and an abundance of pelagic species, including various oceanic sharks such as hammerheads, longimanus, and threshers. Daedalus is suitable for experienced divers who are confident with currents and drift diving.]]></description>
         </item>
         <item>
-            <title><![CDATA[El Fanadir]]></title>
-            <link>http://localhost:3000/diving/dive_sites/21</link>
-            <guid>dive_sites/21</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:57 GMT</pubDate>
+            <title><![CDATA[El Fanadir Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/el-fanadir</link>
+            <guid>http://localhost:3000/diving/dive_sites/el-fanadir</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Fanadir is one of the longest and straightest reefs in Hurghada. Located in the north, out of Hurghada’s bay it is a good diving place for a calm drift dive. The average depth 25m/82ft with the water visibility around 25-30m/80-100ft. Besides the main reef on the west side, the sandy plateau is slopping down from 12-22 m/39-72ft, where the drop off wall starts on the east, going down to 50m/164ft.]]></description>
         </item>
         <item>
-            <title><![CDATA[El Fanous West]]></title>
-            <link>http://localhost:3000/diving/dive_sites/22</link>
-            <guid>dive_sites/22</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:57 GMT</pubDate>
+            <title><![CDATA[El Fanous West Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/el-fanous-west</link>
+            <guid>http://localhost:3000/diving/dive_sites/el-fanous-west</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Fanous means a kind of lighthouse in the Arabic language. They call this dive site Fanous because of the small light point located on the eastern part of the dive site. The reef itself is approximately 300 meters long and extends on the west side.
 
 This dive site is about 30 minutes away from Hurghada by boat.
@@ -87,31 +87,31 @@ When you reach the northern edge of the lagoon, you will continue north to an er
 You will return to the boat on the other side of the lagoon, keeping another main reef on your left side.]]></description>
         </item>
         <item>
-            <title><![CDATA[El Mina Wreck]]></title>
-            <link>http://localhost:3000/diving/dive_sites/23</link>
-            <guid>dive_sites/23</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:57 GMT</pubDate>
+            <title><![CDATA[El Mina Wreck Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/el-mina-wreck</link>
+            <guid>http://localhost:3000/diving/dive_sites/el-mina-wreck</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[The El Mina wreck (Arabic for ”The Harbor") is a Russian-made T-43 minesweeper that was built between 1947 and 1957 for the duties of harbor protection and mine clearing. Later it was sold to the Egyptian navy, and in 1969 (the date is a matter of some debate), an Israeli fighter plane struck two large holes into her starboard side and she sank while anchored. Since then this 60m/197ft-long wreck has been lying on its port side in 33m/108ft of water at the stern, and divers can explore everything, including the blast hole on the starboard side, the propellers, and the rest of this wreck, which is in good condition. However, penetrating the wreck is not recommended, because the passages are small and tight. The sea bed around the wreck is littered with live ammunition, that divers are not allowed to touch. In 2 minutes divers will come across the Mohamed Hasabella, which is also worth visiting.]]></description>
         </item>
         <item>
-            <title><![CDATA[Elphinstone]]></title>
-            <link>http://localhost:3000/diving/dive_sites/24</link>
-            <guid>dive_sites/24</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:57 GMT</pubDate>
+            <title><![CDATA[Elphinstone Dive Site near Marsa Alam, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/elphinstone</link>
+            <guid>http://localhost:3000/diving/dive_sites/elphinstone</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Elphinstone Reef or Sha'ab Abu Hamra is one of the most famous dive sites in the Red Sea. It is a reef around 300m/984ft in length, with average depth of 20-40m/60-120ft and average water visibility of 20-30m/60-100ft. Its spectacular walls drop far below 100m/328ft on both sides of the reef. Strong currents make this a perfect drift dive along the steep walls with many species of fish, corals, sponges, gorgonias and sea whips to observe.]]></description>
         </item>
         <item>
-            <title><![CDATA[Erg Sabina]]></title>
-            <link>http://localhost:3000/diving/dive_sites/26</link>
-            <guid>dive_sites/26</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:58 GMT</pubDate>
+            <title><![CDATA[Erg Sabina Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/erg-sabina</link>
+            <guid>http://localhost:3000/diving/dive_sites/erg-sabina</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[This is a small reef, although the luxury of rich marine life means that this dive site can offer an extraordinary dive. The erg itself is by nature best on the north face so concentrate on this side. Next to the reef there are a few big brain corals, around which schooling fish hover, facing the current. About 50m north there is a breathtaking little erg full of soft coral, glassfish and excellent camera angles. Take your time on the way out there and back, glancing underneath table corals and coral blocks and you will be in for a treat.]]></description>
         </item>
         <item>
-            <title><![CDATA[Erg Somaya]]></title>
-            <link>http://localhost:3000/diving/dive_sites/27</link>
-            <guid>dive_sites/27</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:58 GMT</pubDate>
+            <title><![CDATA[Erg Somaya Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/erg-somaya</link>
+            <guid>http://localhost:3000/diving/dive_sites/erg-somaya</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Erg Somaya has an amazing coral garden with hard and soft corals and high beautifully overgrown coral towers. And a great drop off running far into the depth completes the picture.
 
 The two caves that are located here, are also worth a visit.
@@ -127,24 +127,24 @@ Erg Somaya can dive as a drift dive. You will start the drift dive from the nort
 Erg Somaya is considered to be one of the most stunning dive sites near Hurghada, with some colorful ergs, some nice caves and a spectacular drop off into the deep. So definitely worth diving at!]]></description>
         </item>
         <item>
-            <title><![CDATA[Giannis D]]></title>
-            <link>http://localhost:3000/diving/dive_sites/31</link>
-            <guid>dive_sites/31</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:58 GMT</pubDate>
+            <title><![CDATA[Giannis D Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/giannis-d</link>
+            <guid>http://localhost:3000/diving/dive_sites/giannis-d</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[The Giannis D was a general cargo ship built in Japan in 1969. The original name of the ship was the Shoyo Maru, and later the name was changed twice, because the vessel was sold twice. The second time the ship was sold to a Greek company that gave the ship its final name, the Giannis D. In 1983, this freighter collided with the reef and immediately sank with its cargo of timber. Now the wreck lies next to the reef with its stern on the seabed at a depth of about 24m/79ft and its mast at a depth of only 6m/20ft. Divers can penetrate the wreck and explore some of its areas from the inside.]]></description>
         </item>
         <item>
-            <title><![CDATA[Gota Abu Ramada]]></title>
-            <link>http://localhost:3000/diving/dive_sites/33</link>
-            <guid>dive_sites/33</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:58 GMT</pubDate>
+            <title><![CDATA[Gota Abu Ramada Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/gota-abu-ramada</link>
+            <guid>http://localhost:3000/diving/dive_sites/gota-abu-ramada</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Gota Abu Ramada was also named the “Aquarium”, due to the variety of marine life. The depth of the dive site is around 100m/300ft with average water visibility 20-25m/65-80ft. There is an abundance of hard and soft corals and a great variety of marine life.]]></description>
         </item>
         <item>
-            <title><![CDATA[Hamda]]></title>
-            <link>http://localhost:3000/diving/dive_sites/35</link>
-            <guid>dive_sites/35</guid>
-            <pubDate>Sun, 23 Oct 2022 18:27:59 GMT</pubDate>
+            <title><![CDATA[Hamda Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/hamda</link>
+            <guid>http://localhost:3000/diving/dive_sites/hamda</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Hamda is located on the northeast side of the Big Giftun Island, at about 1 hour by boat from Hurghada.
 
 Apparently, Hamda is situated below several rock formations straight over a white pebble beach.
@@ -170,19 +170,19 @@ The appearance of whale sharks have also been reported, in the area of Hamda.
 If you choose to make a drift dive at Hamda you will start from the north. The wall is more interesting along the way a few coral formations.]]></description>
         </item>
         <item>
-            <title><![CDATA[Panorama Reef]]></title>
-            <link>http://localhost:3000/diving/dive_sites/50</link>
-            <guid>dive_sites/50</guid>
-            <pubDate>Sun, 23 Oct 2022 18:28:00 GMT</pubDate>
+            <title><![CDATA[Panorama Reef Dive Site near Safaga, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/panorama-reef</link>
+            <guid>http://localhost:3000/diving/dive_sites/panorama-reef</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[On the north side is a plateau at a depth of 25 meters with beautiful fan corals and beautiful table corals from Acropora. Keep an eye into the blue: kingfish, tuna, barracuda are often present. You can also meet the “caretaker” of Panorama, a very curious Napoleon. At 27 meters, a crack in the rock with giant fan corals and a school of glass fish has its hiding place here. Stingrays, blue-spotted stingrays, lionfish and moray eels live on the plateau. During your safety stop you can linger over Anemone City.
 
 On the south plateau you are practically guaranteed to see several Napoleon wrasse. It is especially pleasant that there are many young fish. Pelagic species such as tuna visit from time to time, and other predators such as bigeye trevally and barracudas hunt in large schools of fusilier. Eagle rays, manta rays, white tip reef sharks, gray sharks, silky sharks, and even oceanic white tips have been spotted here.]]></description>
         </item>
         <item>
-            <title><![CDATA[Ras Disha]]></title>
-            <link>http://localhost:3000/diving/dive_sites/56</link>
-            <guid>dive_sites/56</guid>
-            <pubDate>Sun, 23 Oct 2022 18:28:01 GMT</pubDate>
+            <title><![CDATA[Ras Disha Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/ras-disha</link>
+            <guid>http://localhost:3000/diving/dive_sites/ras-disha</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Ras Disha is also known by the name of Torfa Ras Disha or Disha Malagk. It’s situated 90 minutes from central Hurghada, Sheltered from the wind in a natural bay, it’s suitable for any level of diver and ideal for drift dives. Ras Disha stands for ‘fringing reef’.
 
 Ras Disha is a shallow plateau with a sandy bottom. The bottom is profiled by pinnacles and an elliptical erg in the southern region of the site. Going northwest, this plateau takes on the shape of a narrow ledge, allowing access to a steep wall.
@@ -196,17 +196,17 @@ The wall is the place to be for butterflyfish and bannerfish, paired with surgeo
 The pinnacles at Ras Disha are punctuated with cracks. Together with caverns bursting with glassfish they provide excellent photograpic momentums]]></description>
         </item>
         <item>
-            <title><![CDATA[Salem Express]]></title>
-            <link>http://localhost:3000/diving/dive_sites/66</link>
-            <guid>dive_sites/66</guid>
-            <pubDate>Sun, 23 Oct 2022 18:26:18 GMT</pubDate>
+            <title><![CDATA[Salem Express Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/salem-express</link>
+            <guid>http://localhost:3000/diving/dive_sites/salem-express</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[The Salem Express was a 100m/328ft long passenger and vehicle ferry that sank in 1991. Propellers, corridors, upper decks, the restaurant and the bridge can all still be seen. Passenger luggage such as rolls of carpet, stereos, bicycles and chairs can all be found in and near the wreck. Coral coverage and marine life is good enough here. The site is suitable for divers of all experience levels as the top of the wreck is located at only 10m/32ft of depth]]></description>
         </item>
         <item>
-            <title><![CDATA[Shaab Abu Nugar]]></title>
-            <link>http://localhost:3000/diving/dive_sites/67</link>
-            <guid>dive_sites/67</guid>
-            <pubDate>Sun, 23 Oct 2022 18:28:02 GMT</pubDate>
+            <title><![CDATA[Shaab Abu Nugar Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/shaab-abu-nugar</link>
+            <guid>http://localhost:3000/diving/dive_sites/shaab-abu-nugar</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Shaab Abu Nugar near Hurghada represents rich marine life paired with several cleaning stations. The colorful corals are in pristine condition in many places.
 
 This reef is one of the most northern dive sites of Hurghada, reaching almost the area of El Gouna at a 90 minutes sailing distance.  It’s a good choice for all levels of diving and training.
@@ -225,10 +225,10 @@ The elliptical reef at Gota Abu Nugar is situated to the east. The reef  touches
 Due south the Erg Abu Nugar features an impressive string of pinnacles, sitting on a sandy bottom, decorated with a lot of coral rocks.]]></description>
         </item>
         <item>
-            <title><![CDATA[Shaab Eshta]]></title>
-            <link>http://localhost:3000/diving/dive_sites/71</link>
-            <guid>dive_sites/71</guid>
-            <pubDate>Sun, 23 Oct 2022 18:28:02 GMT</pubDate>
+            <title><![CDATA[Shaab Eshta Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/shaab-eshta</link>
+            <guid>http://localhost:3000/diving/dive_sites/shaab-eshta</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[A narrow channel here separate two ergs. The smaller erg is to the west and the bigger one is to the east. This pinnacle is shaped like a a heart. Leading up to the top is a canyon-like passage.
 
 Small clusters of coral blocks and table corals are dispersed over the sandy flats here and dominate the closer perimeter.
@@ -238,17 +238,17 @@ The bottom here is largely decorated with gentle swaying turtle grass. Head out 
 At Shaab Eshta schools of barracuda often hover over just below the surface. They are waiting for food to swim by. The sandy bottom is the natural habitat for gobies in symbiosis with their shrimps.]]></description>
         </item>
         <item>
-            <title><![CDATA[Shaab Petra]]></title>
-            <link>http://localhost:3000/diving/dive_sites/73</link>
-            <guid>dive_sites/73</guid>
-            <pubDate>Sun, 23 Oct 2022 18:28:03 GMT</pubDate>
+            <title><![CDATA[Shaab Petra Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/shaab-petra</link>
+            <guid>http://localhost:3000/diving/dive_sites/shaab-petra</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[There are mooring lines on the south side of each erg so you might start your dive on either one of them. They are both hill-shaped, and the hard corals in the shallows are in truly fantastic condition. The eastern erg has a huge brain coral at its end pointing in the direction of the coral garden making it look like a turtle resting on the bottom. At the other side there is a small cavern inhabited by a group of glassfish and a red tooth grouper chasing lionfish away to defend his supply of fresh food. The western erg is smooth-shaped and sits on a flat sandy bottom. A ‘figure of eight’ route here should take you about 45 minutes in a relaxed tempo.]]></description>
         </item>
         <item>
-            <title><![CDATA[Shaab Sabina]]></title>
-            <link>http://localhost:3000/diving/dive_sites/74</link>
-            <guid>dive_sites/74</guid>
-            <pubDate>Sun, 23 Oct 2022 18:28:03 GMT</pubDate>
+            <title><![CDATA[Shaab Sabina Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/shaab-sabina</link>
+            <guid>http://localhost:3000/diving/dive_sites/shaab-sabina</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Shaab Sabina is consisting of the main reef, a protected sandy lagoon and an erg standing alone on the north.
 
 North of the main reef, a maze of ridges and ergs makes the underwater landscape exciting and in the northwest is a delightful coral garden. The hills are densely covered with hard corals which are the shelter for small species of fish. It is like being in a valley surrounded by mountains of corals.
@@ -262,34 +262,34 @@ The most beautiful table and brain corals can be found at Shaab Sabina. Shaab Sa
 Dive into this exceptional coral garden, which drops in steps from the upper part of the reef to the bottom at 14 meters. A labyrinth of coral provides a wonderful view as the waves send downlight reflections dancing on the bright sandy bottom. In the south of this maze, the wall of the main reef stretches from a depth of 8 to 10 meters to the surface. The hard corals grow over each other and give the impression of a Japanese garden.]]></description>
         </item>
         <item>
-            <title><![CDATA[Shabrur Um Gamar]]></title>
-            <link>http://localhost:3000/diving/dive_sites/76</link>
-            <guid>dive_sites/76</guid>
-            <pubDate>Sun, 23 Oct 2022 18:28:03 GMT</pubDate>
+            <title><![CDATA[Shabrur Um Gamar Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/shabrur-um-gamar</link>
+            <guid>http://localhost:3000/diving/dive_sites/shabrur-um-gamar</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Shabrur Umm Gamar is located approximately 1km/0.6mi north of the island of Umm Gamar and is a submerged mountain blanketed in rich corals. The walls of the mountain are notable not only for their corals, but also because of the crevices and caves sheltering a variety of marine fauna species. In addition to the mountain, the site also has several wrecks of Egyptian boats, one of which can be reached at 20m/66ft deep. The two other wrecks lie at over 70m/230ft deep, and can only be reached by technical divers. The site is known for big fish and superb conditions for photography.]]></description>
         </item>
         <item>
-            <title><![CDATA[Small Giftun]]></title>
-            <link>http://localhost:3000/diving/dive_sites/83</link>
-            <guid>dive_sites/83</guid>
-            <pubDate>Sun, 23 Oct 2022 18:28:03 GMT</pubDate>
+            <title><![CDATA[Small Giftun Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/small-giftun</link>
+            <guid>http://localhost:3000/diving/dive_sites/small-giftun</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[At this site a drift is the natural choice even if the plateau also can be reached from the mooring. You drop next to a vertical wall and follow the current due south as it gives way to a shelf getting wider further south.
 When the main reef curves to the west over the plateau the drop-off suddenly makes a few turns giving the edge a zigzag contour. 15m deeper (around 45m) there is a tunnel, which although spectacular, is out of reach for recreational divers.
 All over the drop-off in this area huge gorgonias form a virtual jungle swaying in the current, whereas soft corals squeeze in wherever there is a space big enough to root. The plateau itself is a semi-covered coral garden leading up to the shallow parts of the wall, as well as the moorings.
 ]]></description>
         </item>
         <item>
-            <title><![CDATA[Turft El Shahed]]></title>
-            <link>http://localhost:3000/diving/dive_sites/97</link>
-            <guid>dive_sites/97</guid>
-            <pubDate>Sun, 23 Oct 2022 18:28:05 GMT</pubDate>
+            <title><![CDATA[Turft El Shahed Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/turft-el-shahed</link>
+            <guid>http://localhost:3000/diving/dive_sites/turft-el-shahed</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[A shallow channel leads in a westerly direction from the mooring to the pinnacles that are the main attractions here. Northwest of the channel there is a mainly flat sandy bottom that is scattered with random coral blocks. If you continue to head north, you will reach a beautiful erg perforated by cavities and overhangs. Closer to the mooring, on the south side of the main reef the corals are not in such a good condition. A stonefish encounter makes the safety stop here worthwhile. Another option is to drift all the way to the neighbouring Banana Reef but this requires good air consumption and navigation skills.]]></description>
         </item>
         <item>
-            <title><![CDATA[Umm Gamar North]]></title>
-            <link>http://localhost:3000/diving/dive_sites/100</link>
-            <guid>dive_sites/100</guid>
-            <pubDate>Sun, 23 Oct 2022 18:28:05 GMT</pubDate>
+            <title><![CDATA[Umm Gamar North Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/umm-gamar-north</link>
+            <guid>http://localhost:3000/diving/dive_sites/umm-gamar-north</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[
 Umm Gamar is a long-isolated reef formed by an underwater mountain, near the island having the same name as the dive site and about 90 minutes away from Hurghada.
 
@@ -297,10 +297,10 @@ Umm Gamar means Mother of the Moon, a reference to the crescent-shaped wedge of 
 You can also dive on the north side of Umm Gamar but only when weather conditions are calm. Currents can be very strong at this place. This side of Umm Gamar is characterized by large table corals and a large school of fish. You can spot a lot of butterflyfish, blackfish and many other species. Here you can make very sheltered dives. If you are heading to the south part of Umm Gamar North you can see black corals and at a depth of 27 meters, you will find a cave in the reef. This side of the site is also known for encountering Spanish dancers even during the day.]]></description>
         </item>
         <item>
-            <title><![CDATA[Umm Gamar South]]></title>
-            <link>http://localhost:3000/diving/dive_sites/101</link>
-            <guid>dive_sites/101</guid>
-            <pubDate>Sun, 23 Oct 2022 18:28:05 GMT</pubDate>
+            <title><![CDATA[Umm Gamar South Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/umm-gamar-south</link>
+            <guid>http://localhost:3000/diving/dive_sites/umm-gamar-south</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Umm Gamar is a long-isolated reef formed by an underwater mountain, near the island having the same name as the dive site and about 90 minutes away from Hurghada.
 
 Umm Gamar means Mother of the Moon, a reference to the crescent-shaped wedge of the island at the top of the reef.

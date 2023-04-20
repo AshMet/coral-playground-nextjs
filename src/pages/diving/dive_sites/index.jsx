@@ -190,7 +190,7 @@ export async function getStaticProps() {
     .from("dive_sites")
     .select(
       `
-    id, name, description, latitude, longitude, min_visibility, max_visibility, depth, current, cert_level, tags, access, dive_map,
+    id, slug, name, description, latitude, longitude, min_visibility, max_visibility, depth, current, cert_level, tags, access, dive_map,
     updated_at, city: cities (name)
   `
     )
