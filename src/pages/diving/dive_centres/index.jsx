@@ -77,10 +77,10 @@ export default function DiveSites({ diveCentres }) {
           url: "https://www.coralplayground.com/diving/dive_centres/",
           images: [
             {
-              url: "https://www.coralplayground.com/img/diving/dive_centre_bg.jpg",
-              width: 800,
-              height: 600,
-              alt: "Dive Centres Cover Photo",
+              url: "https://www.coralplayground.com/img/diving/og_dive_centres.jpg",
+              width: 1200,
+              height: 630,
+              alt: "Dive Centres Cover Photo with Logo",
             },
           ],
         }}

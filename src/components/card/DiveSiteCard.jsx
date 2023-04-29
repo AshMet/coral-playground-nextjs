@@ -3,7 +3,6 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
 import {
-  Badge,
   Box,
   chakra,
   Flex,
@@ -171,19 +170,14 @@ export default function DiveSiteCard(props) {
                 )}
                 {type === "dive_site" && (
                   <Box>
-                    <Flex wrap="wrap" gap={1}>
-                      {tagList?.map((tag) => (
-                        <Badge
-                          colorScheme="purple"
-                          borderRadius="15px"
-                          display="flex"
-                          px="0px"
-                          py="1px"
-                          justifyContent="center"
-                          fontSize="xs"
-                        >
-                          {tag}
-                        </Badge>
+                    <Flex wrap="wrap">
+                      {tagList?.map((tag, index) => (
+                        <Text p="0px" fontSize="xs">
+                          {tag.toUpperCase()}
+                          <Text as="span" mx={1}>
+                            {index === tagList.length - 1 ? "" : "●"}
+                          </Text>
+                        </Text>
                       ))}
                     </Flex>
                     {/* <SimpleGrid columns={3} spacing="40px">

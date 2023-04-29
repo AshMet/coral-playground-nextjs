@@ -57,7 +57,7 @@ export default function DiveCentre({ diveCentreData }) {
   return (
     <>
       <NextSeo
-        title={`Dive with ${diveCentre.name} in ${diveCentre.country}`}
+        title={`Dive with ${diveCentre.name} in ${diveCentre.city}`}
         description={`Book your next dive trip with ${diveCentre.name} and explore the wonders of the underwater world near ${diveCentre.city} and beyond!`}
         openGraph={{
           type: "website",
@@ -67,8 +67,8 @@ export default function DiveCentre({ diveCentreData }) {
           images: [
             {
               url: diveCentre.coverPhotoUrl,
-              width: 800,
-              height: 600,
+              width: 1200,
+              height: 630,
               alt: `Dive Centre Cover Photo - ${diveCentre.name}`,
             },
           ],

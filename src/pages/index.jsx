@@ -25,15 +25,16 @@ export default function Home({ diveSites, diveCentres }) {
           canonical="https://www.coralplayground.com"
           openGraph={{
             type: "website",
-            title: "Coral Playground | Home Page",
-            description: "The best place to book your next Red Sea dive trip",
+            title: "Coral Playground | The best place to book your next dive",
+            description:
+              "Explore the largest collection of dives in the Red Sea and book your next dive trip with Coral Playground",
             url: "https://www.coralplayground.com/",
             images: [
               {
-                url: "https://www.coralplayground.com/svg/coral-logo.svg",
+                url: "https://www.coralplayground.com/img/home/og-home-page.jpg",
                 width: 1200,
                 height: 630,
-                alt: "Coral Playground Logo",
+                alt: "Coral Playground cover photo with logo",
               },
             ],
           }}

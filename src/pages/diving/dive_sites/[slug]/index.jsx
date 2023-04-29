@@ -56,7 +56,7 @@ export default function DiveSitePage({ diveSite }) {
   return (
     <>
       <NextSeo
-        title={`Dive ${diveSite.name}, ${diveSite.country.countries.name}`}
+        title={`${diveSite.name} Dive Site in ${diveSite.city.name}`}
         description={`Book your next scuba diving trip in ${diveSite.city.name}, ${diveSite.country.countries.name} with Coral Playground today for an unforgattable trip`}
         openGraph={{
           type: "website",
@@ -66,8 +66,8 @@ export default function DiveSitePage({ diveSite }) {
           images: [
             {
               url: diveSite.dive_map,
-              width: 800,
-              height: 600,
+              width: 1200,
+              height: 630,
               alt: `Dive Site Cover Photo - ${diveSite.name}`,
             },
           ],
@@ -162,8 +162,6 @@ export const getStaticPaths = async () => {
       }),
     },
   }));
-
-  console.log(paths);
 
   return {
     paths,
