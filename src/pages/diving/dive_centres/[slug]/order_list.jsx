@@ -83,15 +83,20 @@ export default function OrdersList({ orders }) {
   );
 }
 
-export const getServerSideProps = async ({ params: { id } }) => {
+export const getServerSideProps = async ({ params: { slug } }) => {
+  const { data: diveCentreId } = await supabase
+    .from("dive_centres")
+    .select("id")
+    .eq("slug", slug);
+
   const { data: trips } = await supabase
     .from("dive_trips")
     .select("id")
-    .eq("dive_centre_id", id);
+    .eq("dive_centre_id", diveCentreId);
 
   // console.log("trip list:", trips);
 
-  const tripIds = trips.map((trip) => trip.id);
+  const tripIds = trips ? trips.map((trip) => trip.id) : [];
 
   // console.log("trip ids:", tripIds);
   const { data: orderJoins } = await supabase

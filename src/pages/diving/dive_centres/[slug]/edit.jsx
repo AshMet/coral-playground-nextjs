@@ -528,7 +528,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
 }
 
 export async function getServerSideProps(context) {
-  const { id } = context.query;
+  const { slug } = context.query;
   // Create authenticated Supabase Client
   const supabase = createServerSupabaseClient(context);
   // Check if we have a session
@@ -547,9 +547,9 @@ export async function getServerSideProps(context) {
     .from("dive_centres_view")
     .select(
       `id, name, description, address, latitude, longitude, paymentMethods, equipment, services, languages, memberships,
-      coverPhotoUrl, city, cityId, country, active`
+      coverPhotoUrl, city, cityId, country, active, slug`
     )
-    .match({ id })
+    .match({ slug })
     .single();
 
   return {

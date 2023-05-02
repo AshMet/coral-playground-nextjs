@@ -81,7 +81,11 @@ export default function DiveSiteCard(props) {
         <Flex direction={{ base: "column" }} justify="center">
           {id && (
             <Link href={siteUrl}>
-              <Box position="relative" cursor="pointer">
+              <Box
+                position="relative"
+                cursor="pointer"
+                onClick={() => cardClicked()}
+              >
                 {isLoading ? (
                   <Spinner />
                 ) : (
@@ -90,7 +94,6 @@ export default function DiveSiteCard(props) {
                     width="300"
                     height="200"
                     borderRadius="20px"
-                    onClick={() => cardClicked()}
                   />
                 )}
                 {/* <Button

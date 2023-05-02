@@ -15,6 +15,7 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import slugify from "slugify";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
@@ -224,7 +225,12 @@ export default function CreateDiveCentre() {
         label: "Dive Centre",
         // value: newItem.title,
       });
-      router.push(`/diving/dive_centres/${data.id}`);
+      router.push(
+        `/diving/dive_centres/${slugify(data.name.replace("&", ""), {
+          lower: true,
+          remove: /[*+~.()'"!:@]/g,
+        })}`
+      );
     }
 
     // Alert & Analytics for failed load

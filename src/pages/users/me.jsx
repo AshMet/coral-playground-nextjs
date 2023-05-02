@@ -11,23 +11,16 @@ import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
-import Invite from "components/pages/diveCentre/Invite";
 import Banner from "components/pages/profile/Banner";
-import DiveCentreHub from "components/pages/profile/DiveCentreHub";
 import Info from "components/pages/profile/Info";
 import UserOrders from "components/pages/profile/UserOrders";
 import DivingLayout from "layouts/DivingLayout";
 import * as gtag from "lib/data/gtag";
-// import { supabase } from "utils/supabase";
 
 export default function Profile(props) {
-  const { session, user, data } = props;
-  // const session = useSession();
+  const { user } = props;
   const supabase = useSupabaseClient();
-  // const user = useUser();
-  const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState("");
-  const [diveCentre, setDiveCentre] = useState(data);
   const toast = useToast();
   const {
     username,
@@ -41,24 +34,6 @@ export default function Profile(props) {
 
   useEffect(() => {
     if (!user) return null;
-    // const getProfile = async () => {
-    //   setLoading(true);
-    //   const { data, error, status } = await supabase
-    //     .from("user_profiles_view")
-    //     .select("*")
-    //     .eq("id", user.id)
-    //     .single();
-
-    //   if (error && status !== 406) {
-    //     // console.log(error);
-    //     throw error;
-    //   }
-    //   if (data) {
-    //     setProfile(data);
-    //     setLoading(false);
-    //   }
-    // };
-    // getProfile();
     setProfile({
       username: user?.user_metadata.username,
       avatarUrl: user?.user_metadata.avatar_url,
@@ -70,54 +45,7 @@ export default function Profile(props) {
     });
   }, [user]);
 
-  useEffect(() => {
-    if (!data) return null;
-    setDiveCentre(data);
-  }, [data]);
-
-  // const getProfile = async () => {
-  //   setLoading(true);
-  //   const { data, error, status } = await supabase
-  //     .from("user_profiles_view")
-  //     .select("*")
-  //     .eq("id", user.id)
-  //     .single();
-
-  //   if (error && status !== 406) {
-  //     // console.log(error);
-  //     throw error;
-  //   }
-  //   if (data) {
-  //     setProfile(data);
-  //     setLoading(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (!user) return null;
-  //   getProfile();
-  // }, [user]);
-
-  // useEffect(() => {
-  //   setProfile(profile);
-  // }, [profile]);
-
   const updateProfile = async () => {
-    // Start Spinner
-    setLoading(true);
-    // Get Profile Data
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // const { data, error } = await supabase.from("profiles").upsert({
-    //   id: user.id,
-    //   username,
-    //   bio,
-    //   avatar_url: avatarUrl,
-    //   first_name: firstName,
-    //   last_name: lastName,
-    //   certification: divingCert,
-    //   // avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarUrl}`,
-    //   updated_at: new Date().toISOString(),
-    // });
     const { error } = await supabase.auth.updateUser({
       data: {
         username,
@@ -165,11 +93,7 @@ export default function Profile(props) {
         // value: newItem.title,
       });
     }
-    // Stop Spinner
-    setLoading(false);
   };
-  console.log("profile: ", profile);
-  console.log("diveCentre: ", diveCentre);
 
   return (
     <Box>
@@ -207,44 +131,30 @@ export default function Profile(props) {
                 setProfile={setProfile}
                 updateProfile={updateProfile}
               />
+            </Flex>
+            {/* Column Right */}
+            <Flex direction="column">
               <Info
                 profile={profile}
                 setProfile={setProfile}
                 updateProfile={updateProfile}
               />
             </Flex>
-            {/* Column Right */}
-            <Flex direction="column">
-              {userRole === "dive_centre_owner" ? (
-                <>
-                  <Text fontSize="xl" fontWeight="bold" mb={5}>
-                    Manage your business
-                  </Text>
-                  <DiveCentreHub
-                    loading={loading}
-                    user={session?.user}
-                    diveCentre={diveCentre}
-                  />
-                  <Invite
-                    referralCode={`${process.env.NEXT_PUBLIC_SITE_URL}/diving/dive_centres/${diveCentre.id}`}
-                    fbLink="#"
-                    twtLink="#"
-                    gridArea={{ base: "2 / 1 / 3 / 3", "2xl": "1 / 2 / 2 / 3" }}
-                    mt={5}
-                  />
-                </>
-              ) : (
-                <>
-                  <Text fontSize="xl" fontWeight="bold" mb={5}>
-                    Current Orders
-                  </Text>
-                  <UserOrders />
-                </>
-              )}
-              {/* <Socials />
-          <Password /> */}
-            </Flex>
           </SimpleGrid>
+          <Box>
+            {userRole === "dive_centre_owner" ? (
+              <Text fontSize="xl" fontWeight="bold" mb={5}>
+                Manage your business
+              </Text>
+            ) : (
+              <>
+                <Text fontSize="xl" fontWeight="bold" mb={5}>
+                  Current Orders
+                </Text>
+                <UserOrders />
+              </>
+            )}
+          </Box>
         </Box>
       </>
     </Box>
@@ -267,11 +177,6 @@ export const getServerSideProps = async (ctx) => {
     .select("*")
     .eq("owner_id", userId)
     .single();
-
-  console.log("userId: ", userId);
-  console.log("dive_centre: ", data);
-
-  // debugger;
 
   if (!session)
     return {

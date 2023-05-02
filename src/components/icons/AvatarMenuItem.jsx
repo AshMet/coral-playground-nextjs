@@ -18,7 +18,11 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { HiOutlineUserCircle } from "react-icons/hi";
-import { IoLogOutOutline, IoWalletOutline } from "react-icons/io5";
+import {
+  IoLogOutOutline,
+  IoLogInOutline,
+  IoStorefrontOutline,
+} from "react-icons/io5";
 
 import { ProfileIcon } from "components/icons/Icons";
 
@@ -61,8 +65,8 @@ function SignedOutMenuList({ iconColor }) {
             <Button
               variant="link"
               size="sm"
-              color="teal"
-              leftIcon={<ProfileIcon />}
+              color={useColorModeValue("brand.100", "brand.300")}
+              leftIcon={<IoLogInOutline />}
               onClick={() => router.push("/auth/login")}
             >
               Sign In
@@ -78,9 +82,10 @@ function SignedOutMenuList({ iconColor }) {
             <Button
               variant="link"
               size="sm"
+              color={useColorModeValue("brand.100", "brand.300")}
               mt={1}
               mr={4}
-              leftIcon={<IoWalletOutline />}
+              leftIcon={<ProfileIcon />}
               onClick={() => router.push("/auth/signup")}
             >
               Sign Up
@@ -95,7 +100,6 @@ function SignedOutMenuList({ iconColor }) {
 function SignedInMenuList() {
   // const defaultColor = useColorModeValue("white", "navy.800");
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const navbarIcon = useColorModeValue("gray.400", "white");
   const borderColor = useColorModeValue("#E6ECFA", "rgba(135, 140, 189, 0.3)");
   const shadow = useColorModeValue(
     "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
@@ -164,10 +168,27 @@ function SignedInMenuList() {
               Profile
             </Button>
           </MenuItem>
+          {user?.user_metadata.user_role && (
+            <MenuItem
+              _hover={{ bg: "none" }}
+              _focus={{ bg: "none" }}
+              borderRadius="8px"
+              px="14px"
+            >
+              <Button
+                variant="link"
+                size="sm"
+                mr={4}
+                leftIcon={<IoStorefrontOutline />}
+                onClick={() => router.push("/dive_centres/manage")}
+              >
+                Manage Dive Centre
+              </Button>
+            </MenuItem>
+          )}
           <MenuItem
             _hover={{ bg: "none" }}
             _focus={{ bg: "none" }}
-            color="red.400"
             borderRadius="8px"
             px="14px"
           >
@@ -175,12 +196,12 @@ function SignedInMenuList() {
               // isLoading={isAuthenticating}
               onClick={() => supabase.auth.signOut()}
               variant="link"
-              colorScheme="red"
+              color="brand.100"
               size="sm"
               mr={4}
               leftIcon={
                 <IoLogOutOutline
-                  color={navbarIcon}
+                  color="brand.100"
                   w="22px"
                   h="22px"
                   me="0px"

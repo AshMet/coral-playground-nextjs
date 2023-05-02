@@ -14,17 +14,23 @@ export const getDailyDives = (diveTrips) => {
 };
 
 export const getCalendarDives = (diveTrips) => {
-  return diveTrips
-    .filter((trip) => trip.start_date !== null)
-    .map((trip) => ({
-      title: trip.name,
-      borderColor: "transparent",
-      start: combineDateAndTime(trip.start_date, trip.start_time, 0),
-      // start_time: trip.start_time,
-      end: combineDateAndTime(trip.start_date, trip.start_time, trip.duration),
-      // endTime: combineDateAndTime(trip.start_date, trip.start_time, 8),
-      allDay: false,
-      backgroundColor: "#7551FF",
-      className: "info",
-    }));
+  return diveTrips.length > 0
+    ? diveTrips
+        .filter((trip) => trip.start_date !== null)
+        .map((trip) => ({
+          title: trip.name,
+          borderColor: "transparent",
+          start: combineDateAndTime(trip.start_date, trip.start_time, 0),
+          // start_time: trip.start_time,
+          end: combineDateAndTime(
+            trip.start_date,
+            trip.start_time,
+            trip.duration
+          ),
+          // endTime: combineDateAndTime(trip.start_date, trip.start_time, 8),
+          allDay: false,
+          backgroundColor: "#7551FF",
+          className: "info",
+        }))
+    : [];
 };

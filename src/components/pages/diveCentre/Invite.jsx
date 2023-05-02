@@ -1,23 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable func-names */
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-no-bind */
 // Chakra imports
-import {
-  Flex,
-  Icon,
-  IconButton,
-  Text,
-  useToast,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Flex, Box, Text, useToast, useColorModeValue } from "@chakra-ui/react";
 // Custom components
-import { IoLogoFacebook, IoLogoTwitter } from "react-icons/io";
-
-import Card from "components/card/Card";
+// import { IoLogoFacebook, IoLogoTwitter } from "react-icons/io";
 
 export default function Conversion(props) {
-  const { referralCode, fbLink, twtLink, ...rest } = props;
+  const { referralCode, fbLink, twtLink } = props;
   const toast = useToast();
 
   // Chakra Color Mode
@@ -25,14 +17,14 @@ export default function Conversion(props) {
   const iconColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
   return (
-    <Card px="26px" py="30px" w="100%" {...rest}>
-      <Text color={textColor} fontSize="2xl" fontWeight="700" mb="10px">
+    <Box>
+      {/* <Text color={textColor} fontSize="lg" fontWeight="700" mb="5px">
         Share the referral link
-      </Text>
-      <Text color="secondaryGray.600" fontSize="md" fontWeight="400" mb="30px">
+      </Text> */}
+      {/* <Text color="secondaryGray.600" fontSize="md" fontWeight="400" mb="30px">
         You can also share your referral link by copying and sending it to your
         friends or sharing it on social media.
-      </Text>
+      </Text> */}
       <Flex>
         <Flex
           w={{ base: "74%", md: "100%", "2xl": "75%", "3xl": "378px" }}
@@ -64,13 +56,13 @@ export default function Conversion(props) {
             Copy link
           </Text>
         </Flex>
-        <IconButton me="6px" bg={boxBg} borderRadius="50%">
+        {/* <IconButton me="6px" bg={boxBg} borderRadius="50%">
           <Icon w="22px" h="22px" as={IoLogoFacebook} color={iconColor} />
         </IconButton>
         <IconButton bg={boxBg} borderRadius="50%">
           <Icon w="18px" h="18px" as={IoLogoTwitter} color={iconColor} />
-        </IconButton>
+        </IconButton> */}
       </Flex>
-    </Card>
+    </Box>
   );
 }

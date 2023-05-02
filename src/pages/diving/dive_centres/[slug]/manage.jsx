@@ -23,11 +23,11 @@
 
 // Chakra imports
 import { Box, Grid, Text, useColorModeValue } from "@chakra-ui/react";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
-import { supabase } from "../../../api/index";
-import EventCalendar from "components/calendar/EventCalendar";
-import Timeline from "components/calendar/Timeline";
 import Card from "components/card/Card";
+import EventCalendar from "components/pages/diveCentreManage/EventCalendar";
+import Timeline from "components/pages/diveCentreManage/Timeline";
 import DivingLayout from "layouts/DivingLayout";
 import { getCalendarDives, getDailyDives } from "utils/dive_centre_helpers";
 // import { calendarData } from "utils/variables/calendar";
@@ -66,15 +66,32 @@ export default function DiveCentreCalendar({ diveCentre, diveTrips }) {
   );
 }
 
-export const getServerSideProps = async ({ params: { id } }) => {
+export const getServerSideProps = async (ctx) => {
+  const { slug } = ctx.params;
+  // get user id from supabase
+  const supabase = createServerSupabaseClient(ctx);
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const userId = session?.user.id;
+
   const { data: diveCentre } = await supabase
     .from("dive_centres_view")
     .select(
       `id, name, description, address, latitude, longitude, paymentMethods, equipment, services, languages, memberships,
-      coverPhotoUrl, city, country, slug`
+      coverPhotoUrl, city, country, slug, ownerId`
     )
-    .match({ id })
+    .match({ slug })
     .single();
+
+  if (diveCentre.ownerId !== userId || diveCentre.ownerId === null) {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
 
   // Get dive trips with the current dive centre
   const { data: diveTrips } = await supabase
@@ -86,7 +103,7 @@ export const getServerSideProps = async ({ params: { id } }) => {
             dive_site:dive_site_id(id, name, latitude, longitude))
       `
     )
-    .eq("dive_centre_id", id);
+    .eq("dive_centre_id", diveCentre.id);
   // .order("updated_at", { ascending: true });
 
   return {
