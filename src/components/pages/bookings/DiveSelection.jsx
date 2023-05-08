@@ -24,9 +24,7 @@ import { useEffect, useState } from "react";
 import { MdAdd } from "react-icons/md";
 
 import AlertPopup from "components/alerts/AlertPopup";
-import MiniCalendar from "components/calendar/MiniCalendar";
 import Card from "components/card/Card";
-import TimelineItem from "components/dataDisplay/TimelineItem";
 import { DarkMap, LightMap } from "components/maps/MapStyles";
 import * as gtag from "lib/data/gtag";
 import { supabase } from "pages/api/index";
@@ -48,16 +46,8 @@ function createKey(site) {
 }
 
 export default function DiveSelection(props) {
-  const {
-    name,
-    setName,
-    selectedSites,
-    setSelectedSites,
-    diveDate,
-    setDiveDate,
-    diveTime,
-    setDiveTime,
-  } = props;
+  const { setName, selectedSites, setSelectedSites, setDiveDate, diveCount } =
+    props;
 
   const [mapLocation, setMapLocation] = useState("Select Location");
   const [diveSites, setDiveSites] = useState();
@@ -82,9 +72,19 @@ export default function DiveSelection(props) {
   }, []);
 
   useEffect(() => {
-    setName(selectedSites?.map((site) => site.name).join(" + "));
+    const noSitesName = `${diveCount} Dive Package`;
+    const sitesName = selectedSites?.map((site) => site.name).join(" + ");
+    if (selectedSites.length === 0) {
+      setName(noSitesName);
+    } else if (selectedSites.length > 0) {
+      setName(
+        selectedSites.length <= diveCount - 1
+          ? `${sitesName} (${diveCount} dives)`
+          : sitesName
+      );
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedSites]);
+  }, [selectedSites, diveCount]);
 
   // Add items to cart
   function addSite(newItem) {
@@ -173,51 +173,18 @@ export default function DiveSelection(props) {
         <Spinner size="lg" />
       ) : (
         <>
-          <Box>
-            <Text fontSize="2xl" fontWeight="700" color={textColor}>
-              Select Dives
-            </Text>
-            <Text
-              fontSize="md"
-              fontWeight="500"
-              color="secondaryGray.600"
-              mb="30px"
-            >
-              Add your dive sites to get started
-            </Text>
-            <Flex direction={{ sm: "column", md: "row" }}>
-              <TimelineItem
-                width="100%"
-                mr="20px"
-                title={selectedSites ? name : "Select Dive Site"}
-                day={diveDate?.toLocaleDateString("en-US", {
-                  day: "numeric",
-                })}
-                weekday={
-                  diveDate
-                    ? diveDate.toLocaleDateString("en-US", {
-                        month: "short",
-                      })
-                    : "No Date Selected"
-                }
-                hours={diveTime}
-                mb="20px"
-              />
-              <Button
-                mb="20px"
-                size="sm"
-                bgColor="brand.300"
-                _hover={{ bg: "brand.400" }}
-                onClick={() => {
-                  setSelectedSites([]);
-                  setDiveDate();
-                }}
-              >
-                Clear Sites
-              </Button>
-            </Flex>
-          </Box>
-          <Flex direction={{ sm: "column", lg: "row" }}>
+          <Text fontSize="2xl" fontWeight="700" color={textColor}>
+            Select Dives
+          </Text>
+          <Text
+            fontSize="md"
+            fontWeight="500"
+            color="secondaryGray.600"
+            mb="30px"
+          >
+            Add your dive sites to get started
+          </Text>
+          <Flex direction="column">
             <Card
               minH="400px"
               p="0px"
@@ -309,17 +276,20 @@ export default function DiveSelection(props) {
                 </Card>
               </Box>
             </Card>
-            <Flex direction="column">
-              <MiniCalendar
-                // gridArea={{ md: "1 / 1 / 2 / 2;", lg: "1 / 1 / 2 / 2" }}
-                selectRange={false}
-                diveDate={diveDate}
-                setDiveDate={setDiveDate}
-                setDiveTime={setDiveTime}
-                diveTime={diveTime}
-              />
-            </Flex>
           </Flex>
+          <Button
+            size="lg"
+            color="white"
+            bgColor="brand.300"
+            _hover={{ bg: "brand.400" }}
+            mt={2}
+            onClick={() => {
+              setSelectedSites([]);
+              setDiveDate();
+            }}
+          >
+            Clear Sites
+          </Button>
         </>
       )}
     </Card>

@@ -2,7 +2,9 @@
 /* eslint-disable react/prop-types */
 // chakra imports
 import { Box, Flex, Stack } from "@chakra-ui/react";
+import { useUser } from "@supabase/auth-helpers-react";
 
+import adminRoutes from "../../../routes_admin";
 import Brand from "components/sidebar/components/Brand";
 import Links from "components/sidebar/components/Links";
 
@@ -13,7 +15,7 @@ import Links from "components/sidebar/components/Links";
 
 function SidebarContent(props) {
   const { routes } = props;
-
+  const user = useUser();
   // const {
   //   isAuthenticated,
   //   nickname,
@@ -37,6 +39,9 @@ function SidebarContent(props) {
       <Stack direction="column" mb="auto" mt="8px">
         <Box ps="20px" pe={{ md: "16px", "2xl": "1px" }}>
           <Links routes={routes} />
+          {user?.user_metadata.user_role === "dive_centre_owner" && (
+            <Links routes={adminRoutes} />
+          )}
           {/* <AdminLinks /> */}
         </Box>
       </Stack>

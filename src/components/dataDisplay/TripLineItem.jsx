@@ -131,7 +131,7 @@ export default function TripLineItem(props) {
           <Button
             align="center"
             justifyContent="center"
-            bg="brand.400"
+            bg="brand.100"
             w="37px"
             h="37px"
             mt="10px"

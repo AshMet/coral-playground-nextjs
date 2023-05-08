@@ -1,13 +1,15 @@
 /* eslint-disable sonarjs/no-duplicated-branches */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-plusplus */
-import { Box, Button, Flex, useToast } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, useToast } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
+import MiniCalendar from "components/calendar/MiniCalendar";
 import DiveSelection from "components/pages/bookings/DiveSelection";
+import Summary from "components/pages/diveTrips/Summary";
 import TripDetails from "components/pages/diveTrips/TripDetails";
 import DivingLayout from "layouts/DivingLayout";
 
@@ -23,6 +25,8 @@ export default function CreateCentreTrip() {
   const [active, setActive] = useState(true);
   const [diveTime, setDiveTime] = useState("07:00");
   const [diveDate, setDiveDate] = useState();
+  const [diveCount, setDiveCount] = useState(1);
+  const [payNow, setPayNow] = useState();
   const toast = useToast();
   const supabase = useSupabaseClient();
 
@@ -81,8 +85,9 @@ export default function CreateCentreTrip() {
           status,
           active,
           price,
-          stripe_price_id: getStripePriceId(selectedSites.length),
-          pay_now: getPayNow(selectedSites.length),
+          dive_count: diveCount,
+          stripe_price_id: getStripePriceId(diveCount),
+          pay_now: getPayNow(diveCount),
           dive_centre_id: diveCentreId,
         },
       ])
@@ -133,58 +138,85 @@ export default function CreateCentreTrip() {
     }
   }
 
-  return (
-    <Box p="0px" mx="auto" mt="100px">
-      {/* Row 1: Map  & Calendar */}
-      <DiveSelection
-        name={name}
-        setName={setName}
-        selectedSites={selectedSites}
-        setSelectedSites={setSelectedSites}
-        diveTime={diveTime}
-        setDiveTime={setDiveTime}
-        diveDate={diveDate}
-        setDiveDate={setDiveDate}
-      />
+  useEffect(() => {
+    setPayNow(getPayNow(diveCount));
+  }, [diveCount]);
 
-      {/* Row 2: List of Dives */}
-      <TripDetails
-        mb="20px"
-        name={name}
-        price={price}
-        status={status}
-        minCert={minCert}
-        description={description}
-        checkIn={checkIn}
-        duration={duration}
-        active={active}
-        setActive={setActive}
-        setPrice={setPrice}
-        setStatus={setStatus}
-        setMinCert={setMinCert}
-        setDescription={setDescription}
-        setCheckIn={setCheckIn}
-        setDuration={setDuration}
-      />
-      {/* <TripsList mb="20px" tripDives={tripDives} setTripDives={setTripDives} /> */}
-      <Flex justify="space-between" mt="24px">
-        <Button
-          // isLoading={tripDives.length === 0}
-          // isDisabled={tripDives.length === 0}
-          loadingText="Select a Dive"
-          spinnerPlacement="end"
-          // spinner={<BeatLoader size={8} color='white' />}
-          variant="darkBrand"
-          fontSize="sm"
-          borderRadius="16px"
-          w={{ base: "128px", md: "148px" }}
-          h="46px"
-          ms="auto"
-          onClick={saveDiveTrip}
-        >
-          Save Trip
-        </Button>
-      </Flex>
+  return (
+    <Box p="0px" mx="auto" mt="100px" maxW="100%">
+      <Grid
+        maxW="100%"
+        display={{ base: "block", lg: "grid" }}
+        gridTemplateColumns="2.7fr 1fr"
+        gap={5}
+      >
+        <Box>
+          {/* Row 1: Map */}
+          <DiveSelection
+            setName={setName}
+            selectedSites={selectedSites}
+            setSelectedSites={setSelectedSites}
+            setDiveDate={setDiveDate}
+            diveCount={diveCount}
+          />
+          {/* Row 2: Calendar */}
+          <MiniCalendar
+            selectRange={false}
+            diveDate={diveDate}
+            setDiveDate={setDiveDate}
+            setDiveTime={setDiveTime}
+            diveTime={diveTime}
+            diveCount={diveCount}
+            setDiveCount={setDiveCount}
+          />
+
+          {/* Row 3: Trip form */}
+          <TripDetails
+            mb="20px"
+            name={name}
+            price={price}
+            status={status}
+            minCert={minCert}
+            description={description}
+            checkIn={checkIn}
+            duration={duration}
+            active={active}
+            setActive={setActive}
+            setPrice={setPrice}
+            setStatus={setStatus}
+            setMinCert={setMinCert}
+            setDescription={setDescription}
+            setCheckIn={setCheckIn}
+            setDuration={setDuration}
+          />
+        </Box>
+        <Flex direction="column" mt={{ sm: "20px", md: "0px" }}>
+          <Summary
+            name={name}
+            diveDate={diveDate}
+            diveTime={diveTime}
+            duration={duration}
+            price={price}
+            payNow={payNow}
+          />
+          <Button
+            // isLoading={tripDives.length === 0}
+            // isDisabled={tripDives.length === 0}
+            loadingText="Select a Dive"
+            spinnerPlacement="end"
+            // spinner={<BeatLoader size={8} color='white' />}
+            variant="darkBrand"
+            fontSize="sm"
+            borderRadius="16px"
+            w="100%"
+            h="46px"
+            ms="auto"
+            onClick={saveDiveTrip}
+          >
+            Add Dive Trip
+          </Button>
+        </Flex>
+      </Grid>
     </Box>
   );
 }

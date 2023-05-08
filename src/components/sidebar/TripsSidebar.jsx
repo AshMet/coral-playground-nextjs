@@ -1,32 +1,17 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 // Chakra imports
-import {
-  Flex,
-  Text,
-  Icon,
-  // Link,
-  useColorMode,
-  useColorModeValue,
-  Divider,
-  // Button,
-} from "@chakra-ui/react";
+import { Flex, Text, Icon, useColorModeValue } from "@chakra-ui/react";
 // Custom components
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 // import Link from "next/link";
 import { MdAddCircle } from "react-icons/md";
 
 import Card from "components/card/Card";
-// import TimelineItem from "components/dataDisplay/TimelineItem";
-import TripLineItem from "components/dataDisplay/TripLineItem";
-import { DarkMap, LightMap } from "components/maps/MapStyles";
+// import { getCalendarDives, getDailyDives } from "utils/dive_centre_helpers";
 
-const mapApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-const libraries = ["places"];
-const containerStyle = {
-  width: "100%",
-  height: "100%", // { sm: "calc(100vh + 50px)", xl: "calc(100vh - 75px - 275px)" }
-};
+import RegularTrips from "./components/RegularTrips";
+import SpecialTrips from "./components/SpecialTrips";
+import TripsMap from "./components/TripsMap";
 
 export default function TripSidebar({ trips, diveSite, diveCentre, ...rest }) {
   // Chakra Color Mode
@@ -35,161 +20,24 @@ export default function TripSidebar({ trips, diveSite, diveCentre, ...rest }) {
     "secondaryGray.700",
     "secondaryGray.500"
   );
-  const bg = useColorModeValue("secondaryGray.300", "navy.700");
-  const { colorMode } = useColorMode();
-
-  const mapOptions = {
-    styles: colorMode === "light" ? LightMap : DarkMap,
-    disableDefaultUI: true,
-    zoomControl: true,
-    mapTypeId: "satellite",
-    mapTypeControlOptions: {
-      mapTypeIds: ["coordinate", "satellite"],
-      // style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-    },
-  };
-
-  const { isLoaded, loadError } = useLoadScript({
-    id: "google-map-script",
-    googleMapsApiKey: mapApiKey,
-    libraries,
-  });
-
-  if (loadError) return "Error Loading Maps";
-  if (!isLoaded) return "Loading Map";
 
   // console.log("sidebar trips", trips);
 
   return (
-    <Card {...rest} maxH="max-content">
-      <Card
-        bg={bg}
-        height="200px"
-        maxW={{ base: "400px" }}
-        mb="10px"
-        mx={0}
-        p={0}
-        w="100%"
-        overflow="hidden"
-      >
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={{
-            lat: diveSite ? diveSite.latitude : diveCentre.latitude, // || 28
-            lng: diveSite ? diveSite.longitude : diveCentre.longitude, // || 35
-          }}
-          zoom={8}
-          options={mapOptions}
-          mb="0px"
-          border="20px"
-        >
-          {/* Home Marker */}
-          <Marker
-            key={diveSite ? diveSite.id : diveCentre.id}
-            position={{
-              lat: diveSite ? diveSite.latitude : diveCentre.latitude,
-              lng: diveSite ? diveSite.longitude : diveCentre.longitude,
-            }}
-            // onClick={() => setMapLocation(location)}
-            icon={{
-              url: diveSite
-                ? "/img/diving/dive_site_marker.svg"
-                : "/img/diving/dive_centre_marker.svg",
-              scaledSize: new window.google.maps.Size(34, 34),
-            }}
-          />
-
-          {/* Show all dive sites with trips from given diveCentre */}
-          {diveCentre &&
-            trips?.map((trip) =>
-              trip.dive_sites.map((site) => (
-                <Marker
-                  key={`${trip.id}-${site.id}`}
-                  position={{
-                    lat: site.dive_site.latitude,
-                    lng: site.dive_site.longitude,
-                  }}
-                  // onClick={() => setMapLocation(location)}
-                  icon={{
-                    url: "/img/diving/dive_site_marker.svg",
-                    scaledSize: new window.google.maps.Size(34, 34),
-                  }}
-                />
-              ))
-            )}
-
-          {/* Show all dive centres with trips to given diveSite */}
-          {diveSite &&
-            trips?.map((trip) => (
-              <Marker
-                key={trip.dive_trip.dive_centre.id}
-                position={{
-                  lat: trip.dive_trip.dive_centre.latitude,
-                  lng: trip.dive_trip.dive_centre.longitude,
-                }}
-                icon={{
-                  url: "/img/diving/dive_centre_marker.svg",
-                  scaledSize: new window.google.maps.Size(34, 34),
-                }}
-              />
-            ))}
-        </GoogleMap>
-      </Card>
-      <Text color={textColor} fontSize="xl" fontWeight="700" mb="5px">
-        Upcoming Dive Trips
-      </Text>
-      <Text color={textColorTertiary} fontSize="md" mb="16px">
-        Add a dive to your cart by selecting your preferred date and clicking
-        the <Icon as={MdAddCircle} color="brand.400" w="16px" h="16px" /> button
-      </Text>
-      <Text color="brand.400" fontSize="md" fontWeight="700" mb="5px">
-        Special Dives
-      </Text>
-      {trips
-        .filter((trip) => trip?.start_date !== null)
-        .map((trip) => (
-          <Flex
-            key={trip.id}
-            direction="column"
-            justify="space-between"
-            align="center"
-          >
-            <TripLineItem
-              trip={diveSite ? trip.dive_trip : trip}
-              icon={
-                <Icon as={MdAddCircle} color={textColor} w="20px" h="18px" />
-              }
-            />
-            <Divider my="25px" />
-          </Flex>
-        ))}
-      <Text color="brand.400" fontSize="md" fontWeight="700" mb="5px">
-        Daily Dives
-      </Text>
-      {trips.length > 0 ? (
-        trips
-          .filter((trip) => trip.start_date === null)
-          .map((trip) => (
-            <Flex
-              key={trip.id}
-              direction="column"
-              justify="space-between"
-              align="center"
-            >
-              <TripLineItem
-                trip={diveSite ? trip.dive_trip : trip}
-                icon={
-                  <Icon as={MdAddCircle} color={textColor} w="20px" h="18px" />
-                }
-              />
-              <Divider my="25px" />
-            </Flex>
-          ))
-      ) : (
-        <Text fontSize="md" fontWeight="500" color="brand.400" mb="30px">
-          No Dives scheduled. Check back soon, new dives are added regularly
+    <Flex direction="column">
+      <Card {...rest} maxH="max-content">
+        <Text color={textColor} fontSize="xl" fontWeight="700" mb="5px">
+          Upcoming Dive Trips
         </Text>
-      )}
-    </Card>
+        <Text color={textColorTertiary} fontSize="md" mb="16px">
+          Add a dive to your cart by selecting your preferred date and clicking
+          the <Icon as={MdAddCircle} color="brand.400" w="16px" h="16px" />{" "}
+          button
+        </Text>
+        <TripsMap trips={trips} diveSite={diveSite} diveCentre={diveCentre} />
+      </Card>
+      <SpecialTrips trips={trips} diveSite={diveSite} />
+      <RegularTrips trips={trips} diveSite={diveSite} />
+    </Flex>
   );
 }

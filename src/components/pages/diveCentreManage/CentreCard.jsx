@@ -141,7 +141,7 @@ export default function CentreCard(props) {
             onChange={() => updateStatus(!active)}
             // onChange={() => setActive(!active)}
             label={`Status: ${active ? "Active" : "Not Active"}`}
-            desc="If disabled, your dive centre will no longer appear in the search results and will no longer be able to receive any new bookings."
+            desc="If disabled, your dive centre will no longer appear in the search results and will not receive any new bookings."
             labelColor={active ? textColorActive : textColorInactive}
           />
           <Flex justify="space-between" w="100%" my={5}>
@@ -215,6 +215,11 @@ export default function CentreCard(props) {
                 h="56px"
                 mb="5px"
                 boxShadow={shadow}
+                onClick={() =>
+                  router.push(
+                    `/diving/dive_centres/${diveCentre?.slug}/dive_trips/new`
+                  )
+                }
                 icon={<Icon as={MdAdd} color={greenIcon} w="24px" h="24px" />}
               />
               <Text fontSize="sm" fontWeight="500" color={textColor}>

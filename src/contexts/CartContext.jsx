@@ -11,6 +11,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Tooltip, useToast } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import posthog from "posthog-js";
 import { createContext, useState, useEffect } from "react";
 
 import AlertPopup from "../components/alerts/AlertPopup";
@@ -128,8 +129,7 @@ export const CartProvider = ({ children }) => {
       value: newItem.title,
     });
     posthog.capture("Added Item to cart", {
-      id,
-      name,
+      name: newItem.title,
     });
   }
 
@@ -143,8 +143,7 @@ export const CartProvider = ({ children }) => {
       ),
     });
     posthog.capture("Removed Item from cart", {
-      id,
-      name,
+      name: newItem.title,
     });
   }
 

@@ -28,7 +28,7 @@ import { renderThumb, renderTrack, renderView } from "../scrollbar/Scrollbar";
 import Content from "./components/Content";
 
 function Sidebar(props) {
-  const { routes } = props;
+  const { routes, adminRoutes } = props;
 
   // this is for the rest of the collapses
   const variantChange = "0.2s linear";
@@ -66,7 +66,7 @@ function Sidebar(props) {
           renderThumbVertical={renderThumb}
           renderView={renderView}
         >
-          <Content routes={routes} />
+          <Content routes={routes} adminRoutes={adminRoutes} />
         </Scrollbars>
       </Box>
     </Box>

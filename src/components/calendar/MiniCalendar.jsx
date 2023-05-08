@@ -10,6 +10,8 @@ import {
   TabPanels,
   TabPanel,
   Tab,
+  NumberInput,
+  NumberInputField,
 } from "@chakra-ui/react";
 import Calendar from "react-calendar";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
@@ -20,8 +22,16 @@ import TimePicker from "react-time-picker/dist/entry.nostyle";
 import Card from "components/card/Card";
 
 export default function MiniCalendar(props) {
-  const { selectRange, diveDate, setDiveDate, setDiveTime, diveTime, ...rest } =
-    props;
+  const {
+    selectRange,
+    diveDate,
+    setDiveDate,
+    setDiveTime,
+    diveTime,
+    diveCount,
+    setDiveCount,
+    ...rest
+  } = props;
   // const [diveDate, setDiveDate] = useState(new Date());
   // const [diveTime] = useState();
   // Chakra Color Mode
@@ -33,61 +43,72 @@ export default function MiniCalendar(props) {
   // }, [setSelectedDate, diveDate]);
 
   return (
-    <Card
-      border="1px solid"
-      borderColor={borderColor}
-      align="center"
-      direction="column"
-      w="100%"
-      maxW="max-content"
-      p="20px 15px"
-      h="max-content"
-      {...rest}
-    >
-      <Flex direction="column">
-        <Tabs variant="line" colorScheme="purple" isFitted>
-          <TabList>
-            <Tab>Flexible Date</Tab>
-            <Tab>Fixed Date</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <Text mt="30px" maxW="450px">
-                {" "}
-                If no date is selected, your customers will be able to select
-                their preferred date. Just select your usual departure time
-                below:
-              </Text>
-            </TabPanel>
-            <TabPanel>
-              <FormLabel
-                ms="10px"
-                htmlFor="diveDate"
-                fontSize="sm"
-                color={textColor}
-                fontWeight="bold"
-                _hover={{ cursor: "pointer" }}
-              >
-                Dive Date
-              </FormLabel>
-              <Calendar
-                onChange={setDiveDate}
-                value={diveDate}
-                selectRange={selectRange}
-                view="month"
-                tileContent={<Text color="brand.500" />}
-                prevLabel={
-                  <Icon as={MdChevronLeft} w="24px" h="24px" mt="4px" />
-                }
-                nextLabel={
-                  <Icon as={MdChevronRight} w="24px" h="24px" mt="4px" />
-                }
-              />
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-        <TimePicker onChange={setDiveTime} value={diveTime} disableClock />
-        {/* <FormLabel
+    <Flex direction="column" my={5}>
+      <Card
+        border="1px solid"
+        borderColor={borderColor}
+        align="center"
+        direction="column"
+        w="100%"
+        minW="400px"
+        // p="20px 15px"
+        h="max-content"
+        {...rest}
+      >
+        <Flex direction="column">
+          <Tabs variant="line" colorScheme="purple" isFitted>
+            <TabList>
+              <Tab>Daily Dives</Tab>
+              <Tab>Special Dives</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <Text mt="30px" mb="20px" maxW="450px">
+                  If no date is selected, your customers will be able to select
+                  their preferred date. Just select your usual departure time
+                  below:
+                </Text>
+              </TabPanel>
+              <TabPanel>
+                <FormLabel
+                  ms="10px"
+                  htmlFor="diveDate"
+                  fontSize="sm"
+                  color={textColor}
+                  fontWeight="bold"
+                  _hover={{ cursor: "pointer" }}
+                >
+                  Dive Date
+                </FormLabel>
+                <Calendar
+                  onChange={setDiveDate}
+                  value={diveDate}
+                  selectRange={selectRange}
+                  view="month"
+                  tileContent={<Text color="brand.500" />}
+                  prevLabel={
+                    <Icon as={MdChevronLeft} w="24px" h="24px" mt="4px" />
+                  }
+                  nextLabel={
+                    <Icon as={MdChevronRight} w="24px" h="24px" mt="4px" />
+                  }
+                />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+          <FormLabel
+            ms="10px"
+            htmlFor="diveStartTime"
+            fontSize="sm"
+            color={textColor}
+            fontWeight="bold"
+            _hover={{ cursor: "pointer" }}
+            mb={0}
+          >
+            Dive Departure Time
+          </FormLabel>
+          <TimePicker onChange={setDiveTime} value={diveTime} disableClock />
+          {/* <FormLabel
           mt="30px"
           ms="10px"
           htmlFor="diveTime"
@@ -111,7 +132,41 @@ export default function MiniCalendar(props) {
           <option value="morning">Morning (9:00 AM)</option>
           <option value="afternoon">Afternoon (1:00 PM)</option>
         </Select> */}
-      </Flex>
-    </Card>
+        </Flex>
+        <FormLabel
+          ms="10px"
+          htmlFor="numberDives"
+          fontSize="sm"
+          color={textColor}
+          fontWeight="bold"
+          _hover={{ cursor: "pointer" }}
+          mt={5}
+        >
+          Number of Dives
+        </FormLabel>
+        <NumberInput
+          fontSize="sm"
+          id="minCert"
+          variant="main"
+          h="40px"
+          maxh="44px"
+          placeholder="Select..."
+          borderColor={borderColor}
+        >
+          <NumberInputField
+            color={textColor}
+            value={diveCount}
+            min={1}
+            max={10}
+            defaultValue={1}
+            onChange={(e) => setDiveCount(Number(e.target.value))}
+          />
+          {/* <NumberInputStepper>
+            <NumberIncrementStepper onClick={(e) => setDiveCount(e.target.value)} />
+            <NumberDecrementStepper />
+          </NumberInputStepper> */}
+        </NumberInput>
+      </Card>
+    </Flex>
   );
 }

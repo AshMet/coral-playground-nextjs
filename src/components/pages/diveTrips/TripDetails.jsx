@@ -67,9 +67,9 @@ export default function Settings(props) {
           <InputField
             mb="0px"
             id="price"
-            label={`Price: ${
+            label={`Price (${
               price ? (price / 100).toFixed(2) : "Enter value in"
-            } Euro`}
+            } Euro)`}
             value={price ? price / 100 : 0}
             placeholder="Total Price including commission"
             onChange={(e) => setPrice(Number(e.target.value) * 100)}

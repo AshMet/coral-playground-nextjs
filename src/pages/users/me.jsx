@@ -1,10 +1,11 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-throw-literal */
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
-import { Box, Flex, SimpleGrid, Text, useToast } from "@chakra-ui/react";
+import { Box, Flex, SimpleGrid, useToast } from "@chakra-ui/react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { NextSeo } from "next-seo";
@@ -13,7 +14,7 @@ import { useEffect, useState } from "react";
 import AlertPopup from "components/alerts/AlertPopup";
 import Banner from "components/pages/profile/Banner";
 import Info from "components/pages/profile/Info";
-import UserOrders from "components/pages/profile/UserOrders";
+// import UserOrders from "components/pages/profile/UserOrders";
 import DivingLayout from "layouts/DivingLayout";
 import * as gtag from "lib/data/gtag";
 
@@ -29,7 +30,7 @@ export default function Profile(props) {
     lastName,
     divingCert,
     bio,
-    userRole,
+    // userRole,
   } = profile;
 
   useEffect(() => {
@@ -141,7 +142,7 @@ export default function Profile(props) {
               />
             </Flex>
           </SimpleGrid>
-          <Box>
+          {/* <Box>
             {userRole === "dive_centre_owner" ? (
               <Text fontSize="xl" fontWeight="bold" mb={5}>
                 Manage your business
@@ -154,7 +155,7 @@ export default function Profile(props) {
                 <UserOrders />
               </>
             )}
-          </Box>
+          </Box> */}
         </Box>
       </>
     </Box>
