@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
@@ -17,7 +18,7 @@ import { Provider } from "react-redux";
 import defaultSEOConfig from "../../next-seo.config";
 // import Layout from "lib/layout";
 import * as gtag from "../lib/data/gtag";
-import mautic from "../lib/data/mt";
+// import mautic from "../lib/data/mt";
 import { store } from "../lib/redux/store";
 import theme from "../theme/theme";
 import * as fbq from "../utils/fpixel";
@@ -27,10 +28,11 @@ import "../../public/css/Map.css";
 const MyApp = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || ((page) => page);
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+  const [sendinblueLoaded, setSendinblueLoaded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    mautic.initialize("https://mautic.chondrohub.dscloud.me/mtc.js");
+    // mautic.initialize("https://mautic.chondrohub.dscloud.me/mtc.js");
     posthog.init("phc_eh7TvObhukSTsvOP2TXEDzxDskVHLo8Xt2EhbawijcC", {
       api_host: "https://app.posthog.com",
       // loaded: (posthog) => {
@@ -42,7 +44,7 @@ const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {
     const handleRouteChange = (url) => {
       gtag.pageview(url);
-      mautic.pageView({ url });
+      // mautic.pageView({ url });
       posthog.capture("$pageview");
       fbq.pageview();
     };
@@ -105,6 +107,43 @@ const MyApp = ({ Component, pageProps }) => {
       <Script
         src="https://mccdn.me/assets/js/widget.js"
         strategy="lazyOnload"
+      />
+      <Script
+        id="script-sendinblue"
+        strategy="afterInteractive"
+        onReady={() => {
+          // using onReady because onLoad doesn't fire for inline scripts
+          setSendinblueLoaded(true);
+        }}
+        dangerouslySetInnerHTML={{
+          /* the code below is provided by Sendinblue */
+          __html: `
+        (function() {
+          window.sib = {
+              equeue: [],
+              client_key: "5jhg8jrrc75q3sj0uq2pctlg"
+          };
+          /* OPTIONAL: email for identify request*/
+          // window.sib.email_id = 'example@domain.com';
+          window.sendinblue = {};
+          for (var j = ['track', 'identify', 'trackLink', 'page'], i = 0; i < j.length; i++) {
+          (function(k) {
+              window.sendinblue[k] = function() {
+                  var arg = Array.prototype.slice.call(arguments);
+                  (window.sib[k] || function() {
+                          var t = {};
+                          t[k] = arg;
+                          window.sib.equeue.push(t);
+                      })(arg[0], arg[1], arg[2], arg[3]);
+                  };
+              })(j[i]);
+          }
+          var n = document.createElement("script"),
+              i = document.getElementsByTagName("script")[0];
+          n.type = "text/javascript", n.id = "sendinblue-js", n.async = !0, n.src = "https://sibautomation.com/sa.js?key=" + window.sib.client_key, i.parentNode.insertBefore(n, i), window.sendinblue.page();
+        })();
+        `,
+        }}
       />
       <SessionContextProvider
         supabaseClient={supabaseClient}

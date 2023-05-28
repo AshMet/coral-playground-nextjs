@@ -87,10 +87,10 @@ export default function MapHero(props) {
           <Map
             ref={mapRef}
             initialViewState={{
-              latitude: 28.0132,
-              longitude: 33.7751,
+              latitude: 27.2134,
+              longitude: 33.9,
               pitch: 85,
-              zoom: 7,
+              zoom: 12,
             }}
             style={{ borderRadius: "20px", width: "100%", height: "100%" }}
             mapStyle={mapStyles}

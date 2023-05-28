@@ -46,7 +46,7 @@ export default function DiveSiteCard(props) {
       ? "/img/diving/dive_site_bg.jpg"
       : "/img/diving/dive_centre_bg.jpg";
   const siteUrl =
-    type === "dive_site"
+    type === "diveSite"
       ? `/diving/dive_sites/${slugify(name.replace("&", ""), {
           lower: true,
           remove: /[*+~.()'"!:@]/g,
@@ -171,7 +171,7 @@ export default function DiveSiteCard(props) {
                     {address}
                   </Text>
                 )}
-                {type === "dive_site" && (
+                {type === "diveSite" && (
                   <Box>
                     <Flex wrap="wrap">
                       {tagList?.map((tag, index) => (
