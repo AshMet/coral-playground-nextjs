@@ -50,13 +50,15 @@ export default function Profile(props) {
         />
         <Box pt={{ sm: "60px", xl: "100px" }}>
           <Card p={{ base: "15px", md: "30px" }}>
-            {diveCentre?.id ? (
-              <CentreCard diveCentre={diveCentre} />
-            ) : (
+            {diveCentre.length === 0 ? (
               <NoCentreCard />
+            ) : (
+              <CentreCard diveCentre={diveCentre} />
             )}
           </Card>
-          <CentreTrips diveCentre={diveCentre} diveTrips={diveTrips} />
+          {diveCentre.length !== 0 && (
+            <CentreTrips diveCentre={diveCentre} diveTrips={diveTrips} />
+          )}
         </Box>
       </>
     </Box>
@@ -96,11 +98,18 @@ export const getServerSideProps = async (ctx) => {
       },
     };
 
-  if (diveCentre.ownerId !== userId || diveCentre.ownerId === null) {
+  if (diveCentre?.ownerId !== userId || diveCentre?.ownerId === null) {
+    // return {
+    //   redirect: {
+    //     destination: "/404",
+    //     permanent: false,
+    //   },
+    // };
     return {
-      redirect: {
-        destination: "/404",
-        permanent: false,
+      props: {
+        session,
+        user: session.user,
+        centreData: [],
       },
     };
   }

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
@@ -58,6 +59,8 @@ import NavLink from "components/navLinks/NavLink";
 import { HSeparator } from "components/separator/Separator";
 import LoginLayout from "layouts/LoginLayout";
 import * as gtag from "lib/data/gtag";
+import { addBrevoContact } from "utils/sendInBlue/addContact";
+import { sendBrevoMail } from "utils/sendInBlue/sendMail";
 
 export default function SignUp() {
   // Chakra color mode
@@ -189,6 +192,16 @@ export default function SignUp() {
         label: "User",
         // value: newItem.title,
       });
+      // Add user to Brevo
+      const brevoUser = await addBrevoContact(firstName, lastName, email, role);
+      const brevoEmail = await sendBrevoMail(
+        "Coral Playground",
+        email,
+        "Welcome to Coral Plaground",
+        role === "dive_centre_owner" ? 10 : 4
+      );
+      console.log("brevoUser", brevoUser);
+      console.log("brevoEmail", brevoEmail);
     }
 
     setLoading(false);
