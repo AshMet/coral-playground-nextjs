@@ -102,8 +102,7 @@ export default function SignUp() {
   };
 
   const handleRoleChange = (value) => {
-    const roleValue =
-      value === "Register My Business" ? "dive_centre_owner" : "diver";
+    const roleValue = value === "Register My Business" ? "business" : "diver";
     setUserData({ ...userData, role: roleValue });
     // console.log("roleValue", roleValue);
     // console.log("userData", userData);
@@ -193,12 +192,18 @@ export default function SignUp() {
         // value: newItem.title,
       });
       // Add user to Brevo
-      const brevoUser = await addBrevoContact(firstName, lastName, email, role);
+      const brevoUser = await addBrevoContact(
+        firstName,
+        lastName,
+        email,
+        role
+        // businessName,
+      );
       const brevoEmail = await sendBrevoMail(
         "Coral Playground",
         email,
         "Welcome to Coral Plaground",
-        role === "dive_centre_owner" ? 10 : 4
+        role === "business" ? 10 : 4
       );
       console.log("brevoUser", brevoUser);
       console.log("brevoEmail", brevoEmail);
@@ -282,7 +287,7 @@ export default function SignUp() {
         />
         <LoginLayout
           illustrationBackground={
-            role === "dive_centre_owner"
+            role === "business"
               ? "/img/auth/dive_school.jpg"
               : "/img/auth/diver.jpg"
           }
@@ -349,7 +354,7 @@ export default function SignUp() {
                 me="auto"
                 mb={{ base: "20px", md: "auto" }}
               >
-                {userData.role !== "dive_centre_owner" && (
+                {userData.role !== "business" && (
                   <>
                     <Button
                       fontSize="sm"

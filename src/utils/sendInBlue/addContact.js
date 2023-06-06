@@ -2,7 +2,13 @@
 /* eslint-disable consistent-return */
 import axios from "axios";
 
-export const addBrevoContact = async (firstName, lastName, email, role) => {
+export const addBrevoContact = async (
+  firstName,
+  lastName,
+  email,
+  role
+  // businessName
+) => {
   try {
     const request = await axios
       .post("/api/sendInBlue/createContact", {
@@ -10,6 +16,7 @@ export const addBrevoContact = async (firstName, lastName, email, role) => {
         firstName,
         lastName,
         role,
+        // businessName,
       })
       .then((res) => {
         return res;

@@ -39,7 +39,7 @@ function SidebarContent(props) {
       <Stack direction="column" mb="auto" mt="8px">
         <Box ps="20px" pe={{ md: "16px", "2xl": "1px" }}>
           <Links routes={routes} />
-          {user?.user_metadata.user_role === "dive_centre_owner" && (
+          {user?.user_metadata.user_role === "business" && (
             <Links routes={adminRoutes} />
           )}
           {/* <AdminLinks /> */}

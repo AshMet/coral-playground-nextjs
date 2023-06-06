@@ -143,7 +143,7 @@ export default function Profile(props) {
             </Flex>
           </SimpleGrid>
           {/* <Box>
-            {userRole === "dive_centre_owner" ? (
+            {userRole === "business" ? (
               <Text fontSize="xl" fontWeight="bold" mb={5}>
                 Manage your business
               </Text>

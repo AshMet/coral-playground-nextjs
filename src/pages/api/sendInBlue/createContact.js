@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable func-names */
 const SibApiV3Sdk = require("sib-api-v3-sdk");
@@ -11,12 +12,15 @@ apiKey.apiKey = process.env.BREVO_API_KEY;
 export default async function handler(req, res) {
   const apiInstance = new SibApiV3Sdk.ContactsApi();
   const newContact = new SibApiV3Sdk.CreateContact();
+  // const userType = req?.body?.role || "";
 
   newContact.email = req?.body?.email;
   newContact.attributes = {
-    FNAME: req?.body?.firstName,
-    LNAME: req?.body?.lastName,
-    BUSNESSNAME: req?.body?.role,
+    FIRSTNAME: req?.body?.firstName,
+    LASTNAME: req?.body?.lastName,
+    USERTYPE: req?.body?.role === "business" ? "Business" : "Diver",
+    // USERTYPE: userType.charAt(0).toUpperCase() + userType.slice(1),
+    // BUSINESSNAME: req?.body?.businessName,
   };
   newContact.listIds = [5];
 

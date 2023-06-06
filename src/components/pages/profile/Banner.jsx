@@ -135,9 +135,7 @@ export default function Settings(props) {
           color={textColorPrimary}
           alignItems="center"
         >
-          {profile?.userRole === "dive_centre_owner"
-            ? "Dive Centre Owner"
-            : "Scuba Diver"}
+          {profile?.userRole === "business" ? "Business" : "Diver"}
         </Text>
       </Flex>
       <Flex width={150} direction="column" mx="auto">

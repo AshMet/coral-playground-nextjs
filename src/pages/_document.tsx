@@ -3,10 +3,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { ColorModeScript } from "@chakra-ui/react";
 import type { DocumentContext } from "next/document";
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main } from "next/document";
 
 import { FB_PIXEL_ID } from "../utils/fpixel";
 import customTheme from "lib/styles/customTheme";
+import DeferNextScript from "utils/DeferNextScript";
 
 const APP_NAME = "nextarter-chakra";
 
@@ -54,7 +55,7 @@ class MyDocument extends Document {
             initialColorMode={customTheme.config?.initialColorMode}
           />
           <Main />
-          <NextScript />
+          <DeferNextScript />
         </body>
       </Html>
     );
