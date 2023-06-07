@@ -181,7 +181,7 @@ export default function DiveSites({ diveSites }) {
                       depth={site.depth}
                       max_visibility={site.max_visibility}
                       current={site.current}
-                      type="dive_site"
+                      type="diveSite"
                       // address={`${site.city}, ${site.country}`}
                     />
                   );

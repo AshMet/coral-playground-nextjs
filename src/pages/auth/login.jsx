@@ -238,7 +238,7 @@ export default function Login() {
                 me="auto"
                 mb={{ base: "20px", md: "auto" }}
               >
-                {userData.role !== "dive_centre_owner" && (
+                {userData.role !== "business" && (
                   <>
                     <Button
                       fontSize="sm"

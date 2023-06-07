@@ -26,6 +26,7 @@ import TextField from "components/fields/TextField";
 import MapWithAutoComplete from "components/maps/MapWithAutoComplete";
 import DivingLayout from "layouts/DivingLayout";
 import * as gtag from "lib/data/gtag";
+import { updateBrevoBusinessName } from "utils/sendInBlue/contacts";
 
 export default function CreateDiveCentre() {
   const initialState = {
@@ -225,6 +226,7 @@ export default function CreateDiveCentre() {
         label: "Dive Centre",
         // value: newItem.title,
       });
+      updateBrevoBusinessName(user.email, data.name, "business");
       router.push(
         `/diving/dive_centres/${slugify(data.name.replace("&", ""), {
           lower: true,

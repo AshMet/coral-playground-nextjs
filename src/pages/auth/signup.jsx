@@ -59,7 +59,7 @@ import NavLink from "components/navLinks/NavLink";
 import { HSeparator } from "components/separator/Separator";
 import LoginLayout from "layouts/LoginLayout";
 import * as gtag from "lib/data/gtag";
-import { addBrevoContact } from "utils/sendInBlue/addContact";
+import { addBrevoContact } from "utils/sendInBlue/contacts";
 import { sendBrevoMail } from "utils/sendInBlue/sendMail";
 
 export default function SignUp() {

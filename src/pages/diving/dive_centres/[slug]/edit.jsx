@@ -14,10 +14,11 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import slugify from "slugify";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
@@ -26,6 +27,7 @@ import SwitchField from "components/fields/SwitchField";
 import TextField from "components/fields/TextField";
 import DivingLayout from "layouts/DivingLayout";
 import * as gtag from "lib/data/gtag";
+import { updateBrevoBusinessName } from "utils/sendInBlue/contacts";
 
 export default function UpdateDiveCentre({ diveCentreData }) {
   const toast = useToast();
@@ -39,6 +41,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
     "whiteAlpha.100"
   );
   const router = useRouter();
+  const user = useUser();
 
   const [diveCentre, setDiveCentre] = useState(diveCentreData);
   const [loading, setLoading] = useState(false);
@@ -211,6 +214,8 @@ export default function UpdateDiveCentre({ diveCentreData }) {
         <AlertPopup type="success" text="Dive Centre Updated!" subtext={name} />
       ),
     });
+    // Update Brevo User Business Name
+    updateBrevoBusinessName(user.email, name);
     // Success Analytics Tag
     gtag.event({
       action: "create-dive-centre-success",
@@ -240,7 +245,12 @@ export default function UpdateDiveCentre({ diveCentreData }) {
 
     setLoading(false);
     // console.log("data", data);
-    router.push(`/diving/dive_centres/${id}`);
+    router.push(
+      `/diving/dive_centres/${slugify(name.replace("&", ""), {
+        lower: true,
+        remove: /[*+~.()'"!:@]/g,
+      })}`
+    );
   };
 
   return (

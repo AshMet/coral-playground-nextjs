@@ -214,7 +214,7 @@ export async function getStaticProps() {
         divingTypes: siteResults[i].tags,
         city: siteResults[i].city.name,
         country: siteResults[i].country.countries.name,
-        locationType: "dive_site",
+        locationType: "diveSite",
       });
     }
 
@@ -229,7 +229,7 @@ export async function getStaticProps() {
         languages: centreResults[i].languages,
         city: centreResults[i].city.name,
         country: centreResults[i].country.countries.name,
-        locationType: "dive_centre",
+        locationType: "diveCentre",
       });
     }
 

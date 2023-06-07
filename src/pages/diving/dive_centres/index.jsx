@@ -178,7 +178,7 @@ export default function DiveSites({ diveCentres }) {
                         centre.coverPhotoUrl || "/img/diving/dive_centre_bg.jpg"
                       }
                       name={centre.name}
-                      type="dive_centre"
+                      type="diveCentre"
                       // address={`${site.city}, ${site.country}`}
                     />
                   );
