@@ -317,7 +317,7 @@ export default function LandingNavbar(props) {
                   _focus={{ bg: "none" }}
                   borderRadius="8px"
                 >
-                  <Link href="/dive_centres/home">
+                  <Link href="/business/home">
                     <Button
                       variant="outline"
                       border="1px solid"
@@ -343,10 +343,7 @@ export default function LandingNavbar(props) {
             </MenuList>
           </Menu>
 
-          <Link
-            href="/dive_centres/home"
-            display={{ base: "none", lg: "block" }}
-          >
+          <Link href="/business/home" display={{ base: "none", lg: "block" }}>
             <Button
               variant="outline"
               border="1px solid"

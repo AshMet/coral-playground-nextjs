@@ -180,7 +180,7 @@ function SignedInMenuList() {
                 size="sm"
                 mr={4}
                 leftIcon={<IoStorefrontOutline />}
-                onClick={() => router.push("/dive_centres/manage")}
+                onClick={() => router.push("/business/manage")}
               >
                 Manage Dive Centre
               </Button>

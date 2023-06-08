@@ -67,10 +67,16 @@ export default function CreateCentreTrip() {
   const router = useRouter();
   const {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    query: { id: diveCentreId },
+    query: { slug: diveCentreSlug },
   } = router;
 
   async function saveDiveTrip() {
+    const { data: diveCentre } = await supabase
+      .from("dive_centres")
+      .select("id")
+      .eq("slug", diveCentreSlug)
+      .single();
+
     const { data, error: diveTripError } = await supabase
       .from("dive_trips")
       .insert([
@@ -88,7 +94,7 @@ export default function CreateCentreTrip() {
           dive_count: diveCount,
           stripe_price_id: getStripePriceId(diveCount),
           pay_now: getPayNow(diveCount),
-          dive_centre_id: diveCentreId,
+          dive_centre_id: diveCentre.id,
         },
       ])
       .select("*")
@@ -121,7 +127,7 @@ export default function CreateCentreTrip() {
       ),
     });
 
-    router.push(`/diving/dive_centres/${diveCentreId}`);
+    router.push(`/diving/dive_centres/${diveCentreSlug}`);
 
     if (diveTripError) {
       // console.log("new trip error", diveTripError);

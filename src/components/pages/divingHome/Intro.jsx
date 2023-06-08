@@ -98,7 +98,7 @@ const Intro = () => {
                     />
                   </Button>
                 </Link>
-                <Link href="/dive_centres/home">
+                <Link href="/business/home">
                   <Button
                     variant="no-hover"
                     border="1px solid"

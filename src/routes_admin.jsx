@@ -3,13 +3,13 @@ import { Icon } from "@chakra-ui/react";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { TbCalendar, TbUser } from "react-icons/tb";
 
-import DiveCentre from "pages/dive_centres/manage";
+import DiveCentre from "pages/business/manage";
 import User from "pages/users/me";
 
 const routes = [
   {
     name: "Business Admin",
-    path: "/users" || "/dive_centres/manage",
+    path: "/users" || "/business/manage",
     icon: (
       <Icon
         as={IoStorefrontOutline}
@@ -30,7 +30,7 @@ const routes = [
       {
         name: "Manage Dive Centre",
         layout: "",
-        path: "/dive_centres/manage",
+        path: "/business/manage",
         component: DiveCentre,
         icon: (
           <Icon as={TbCalendar} width="15px" height="20px" color="inherit" />

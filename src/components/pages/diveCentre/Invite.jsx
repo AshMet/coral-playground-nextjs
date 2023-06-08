@@ -43,6 +43,7 @@ export default function Conversion(props) {
           }}
           bg={boxBg}
           me="6px"
+          minH="40px"
         >
           <Text
             fontSize="sm"

@@ -90,7 +90,7 @@ export default function DiveCentreCover({ diveCentre }) {
         w=""
         minH={{ base: "200px", md: "100%" }}
         h="400px"
-        bgImage={diveCentre?.cover_photo || "/img/diving/dive_centre_bg.jpg"}
+        bgImage={diveCentre.coverPhotoUrl || "/img/diving/dive_centre_bg.jpg"}
       >
         <Box mt="auto">
           {/* <Button

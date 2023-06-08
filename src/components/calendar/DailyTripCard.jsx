@@ -4,6 +4,7 @@ import {
   Box,
   Flex,
   Icon,
+  Spacer,
   Text,
   useColorModeValue,
   useToast,
@@ -11,9 +12,11 @@ import {
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 import { IoMdTime } from "react-icons/io";
+import { IoEllipsisHorizontal } from "react-icons/io5";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import SwitchField from "components/fields/SwitchField";
+import DiveTripMenu from "components/pages/diveTrips/tripMenu";
 import * as gtag from "lib/data/gtag";
 // Assets
 
@@ -22,6 +25,7 @@ export default function DailyTripCard(props) {
   const [active, setActive] = useState(diveTrip.active);
   // Chakra Color Mode
   const miniCardNonCurrent = useColorModeValue("gray.200", "gray.700");
+  const textColor = useColorModeValue("gray.700", "white");
   const textNonCurrent = useColorModeValue("secondaryGray.900", "white");
   const textSecondaryNonCurrent = useColorModeValue("gray.500", "gray.200");
   const textColorActive = useColorModeValue("green.600", "green.400");
@@ -85,7 +89,19 @@ export default function DailyTripCard(props) {
           </Text>
         </Flex>
       </Box>
+      <Spacer />
       <Box m={0}>
+        <DiveTripMenu
+          diveCentreId={diveTrip.id}
+          icon={
+            <Icon
+              as={IoEllipsisHorizontal}
+              w="24px"
+              h="24px"
+              color={textColor}
+            />
+          }
+        />
         <SwitchField
           id="1"
           isChecked={active}

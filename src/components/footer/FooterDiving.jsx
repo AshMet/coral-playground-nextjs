@@ -75,7 +75,7 @@ export default function Footer() {
           </Link>
         </ListItem>
         <ListItem>
-          <Link fontWeight="500" color={textColor} href="/dive_centres/home">
+          <Link fontWeight="500" color={textColor} href="/business/home">
             Become a Partner
           </Link>
         </ListItem>
