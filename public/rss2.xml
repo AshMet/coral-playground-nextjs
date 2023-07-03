@@ -4,7 +4,7 @@
         <title>Coral Playground | Dive Sites | RSS Feed</title>
         <link>http://localhost:3000</link>
         <description>Welcome to Coral Playground, your best source for dive site info in the Red Sea</description>
-        <lastBuildDate>Tue, 06 Jun 2023 04:28:30 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 03 Jul 2023 03:14:37 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -238,6 +238,13 @@ Small clusters of coral blocks and table corals are dispersed over the sandy fla
 The bottom here is largely decorated with gentle swaying turtle grass. Head out into the turtle grass beds, where you’ll find a wide variety of unfamiliar fish.
 
 At Shaab Eshta schools of barracuda often hover over just below the surface. They are waiting for food to swim by. The sandy bottom is the natural habitat for gobies in symbiosis with their shrimps.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Shaab Maksur Dive Site near Marsa Alam, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/shaab-maksur</link>
+            <guid>http://localhost:3000/diving/dive_sites/shaab-maksur</guid>
+            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
+            <description><![CDATA[Sha’ab Maksur, located approximately 28km/17mi off Hamata, is the easternmost reef in a group of reefs known as Fury Shoals. In Arabic Maksur means ‘broken’, which probably refers to the shape of the southern side of the reef. On its northern side, the reef starts at 22m/72ft and gently slopes to a plateau at 40m/131ft before dropping off to over 90m/295ft. The north side of the reef is the most exposed to the open sea and divers can only dive there when the sea is calm. The east and west sides of the reef are steep walls. The south side features a plateau at a depth of 18m/59ft and two large pinnacles that do not rise to the sea surface at only 6m/20ft. Due to the large size of the reef, divers may need to do up to three dives here in order to fully enjoy and explore this beautiful coral reef.]]></description>
         </item>
         <item>
             <title><![CDATA[Shaab Petra Dive Site near Hurghada, Egypt]]></title>

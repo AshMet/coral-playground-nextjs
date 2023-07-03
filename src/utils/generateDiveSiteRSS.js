@@ -4,14 +4,8 @@ import fs from "fs";
 
 export default async function generateRssFeed(dive_sites) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  const activeSites = dive_sites.filter((site) => {
-    return (
-      site.description !== null &&
-      site.latitude !== null &&
-      site.longitude !== null &&
-      site.dive_map !== null &&
-      site.id !== 1
-    );
+  const activeSites = dive_sites?.filter((site) => {
+    return site.description !== null && site.dive_map !== null && site.id !== 1;
   });
 
   const feedOptions = {
@@ -31,7 +25,7 @@ export default async function generateRssFeed(dive_sites) {
 
   const feed = new Feed(feedOptions);
 
-  activeSites.forEach((site) => {
+  activeSites?.forEach((site) => {
     feed.addItem({
       title: `${site.name} Dive Site near ${site.city.name}, Egypt`,
       description: site.description,

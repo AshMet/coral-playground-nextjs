@@ -13,9 +13,8 @@ export default function SpecialTrips(props) {
       <Text color={textColor} fontSize="2xl" fontWeight="700" mb="20px">
         Special Trips
       </Text>
-      {trips
-        .filter((trip) => trip?.start_date !== null)
-        .map((trip) => (
+      {trips.length > 0 ? (
+        trips.map((trip) => (
           <Flex
             key={trip.id}
             direction="column"
@@ -30,7 +29,12 @@ export default function SpecialTrips(props) {
             />
             <Divider my="25px" />
           </Flex>
-        ))}
+        ))
+      ) : (
+        <Text fontSize="md" fontWeight="500" color="brand.400" mb="30px">
+          No Dives scheduled. Check back soon, new dives are added regularly
+        </Text>
+      )}
     </Card>
   );
 }

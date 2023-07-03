@@ -112,8 +112,8 @@ export default function DiveSitePage({ diveSite }) {
               city={diveSite.city.name}
               country={diveSite.country.countries.name}
               depth={diveSite.depth}
-              min_visibility={diveSite.min_visibility}
-              max_visibility={diveSite.max_visibility}
+              minVisibility={diveSite.min_visibility}
+              maxVisibility={diveSite.max_visibility}
               current={diveSite.current}
               access={diveSite.access}
               cert_level={diveSite.cert_level}

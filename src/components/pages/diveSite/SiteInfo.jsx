@@ -42,7 +42,7 @@ export default function SiteInfo({
   diveTypes,
   ...rest
 }) {
-  const [tabState, setTabState] = useState("info");
+  const [tabState, setTabState] = useState("description");
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -92,6 +92,44 @@ export default function SiteInfo({
               <TabList overflowX={{ sm: "scroll", lg: "unset" }}>
                 <Flex>
                   <Tab
+                    onClick={function () {
+                      setTabState("description");
+                    }}
+                    pb="0px"
+                    me="10px"
+                    bg="unset"
+                    _selected={{
+                      bg: "none",
+                    }}
+                    _focus={{ border: "none" }}
+                    minW="max-content"
+                    flexDirection="column"
+                  >
+                    <Flex align="center">
+                      <Text
+                        color={
+                          tabState === "description"
+                            ? textColor
+                            : textColorTertiary
+                        }
+                        fontSize="lg"
+                        fontWeight="500"
+                      >
+                        Description
+                      </Text>
+                    </Flex>
+                    <Box
+                      height="4px"
+                      w="100%"
+                      transition="0.1s linear"
+                      bg={
+                        tabState === "description" ? "brand.400" : "transparent"
+                      }
+                      mt="15px"
+                      borderRadius="30px"
+                    />
+                  </Tab>
+                  <Tab
                     pb="0px"
                     flexDirection="column"
                     onClick={function () {
@@ -112,7 +150,7 @@ export default function SiteInfo({
                         fontSize="lg"
                         fontWeight="500"
                       >
-                        Species
+                        Details
                       </Text>
                     </Flex>
                     <Box
@@ -128,45 +166,8 @@ export default function SiteInfo({
                     pb="0px"
                     flexDirection="column"
                     onClick={function () {
-                      setTabState("description");
-                    }}
-                    me="10px"
-                    bg="unset"
-                    _selected={{
-                      bg: "none",
-                    }}
-                    _focus={{ border: "none" }}
-                    minW="max-content"
-                  >
-                    <Flex align="center">
-                      <Text
-                        color={
-                          tabState === "description"
-                            ? textColor
-                            : textColorTertiary
-                        }
-                        fontSize="lg"
-                        fontWeight="500"
-                      >
-                        Details
-                      </Text>
-                    </Flex>
-                    <Box
-                      height="4px"
-                      w="100%"
-                      transition="0.1s linear"
-                      bg={
-                        tabState === "description" ? "brand.400" : "transparent"
-                      }
-                      mt="15px"
-                      borderRadius="30px"
-                    />
-                  </Tab>
-                  <Tab
-                    onClick={function () {
                       setTabState("species");
                     }}
-                    pb="0px"
                     me="10px"
                     bg="unset"
                     _selected={{
@@ -174,7 +175,6 @@ export default function SiteInfo({
                     }}
                     _focus={{ border: "none" }}
                     minW="max-content"
-                    flexDirection="column"
                   >
                     <Flex align="center">
                       <Text
@@ -184,7 +184,7 @@ export default function SiteInfo({
                         fontSize="lg"
                         fontWeight="500"
                       >
-                        Description
+                        Species
                       </Text>
                     </Flex>
                     <Box
@@ -199,9 +199,7 @@ export default function SiteInfo({
                 </Flex>
               </TabList>
               <TabPanels pt="30px">
-                <TabPanel px="0px">
-                  <SpeciesTab collection={species} />
-                </TabPanel>
+                <TabPanel px="0px">{descTab()}</TabPanel>
                 <TabPanel px="0px">
                   <DetailsTab
                     depth={depth}
@@ -213,7 +211,9 @@ export default function SiteInfo({
                     diveTypes={diveTypes}
                   />
                 </TabPanel>
-                <TabPanel px="0px">{descTab()}</TabPanel>
+                <TabPanel px="0px">
+                  <SpeciesTab collection={species} />
+                </TabPanel>
               </TabPanels>
             </Tabs>
             {/* <Flex direction={{ base: "column", md: "row" }} align="center">

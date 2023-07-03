@@ -21,7 +21,6 @@ import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 import { MdApps, MdDashboard } from "react-icons/md";
-import slugify from "slugify";
 
 import { supabase } from "../../api/index";
 import DiveSiteCard from "components/card/DiveSiteCard";
@@ -59,23 +58,15 @@ export default function DiveSites({ diveSites }) {
     // console.log("site data", data);
   }, [diveSites, city, country]);
 
-  console.log(
-    slugify("Shark & Yolanda Reef".replace("&", ""), {
-      lower: true,
-      remove: /[*+~.()'"!:@]/g,
-      strict: true,
-    })
-  );
-
   return (
     <>
       <NextSeo
         title="Coral Playground | Scuba Diving Sites in Egypt"
-        description={`With ${diveSites.length} dive sites, book your perfect scuba diving adventure with Coral Playground and experience the wonders of the Red Sea!`}
+        description={`With ${diveSites?.length} dive sites, book your perfect scuba diving adventure with Coral Playground and experience the wonders of the Red Sea!`}
         openGraph={{
           type: "website",
           title: "Coral Playground | Scuba Diving Sites in Egypt",
-          description: `With ${diveSites.length} dive sites, book your perfect scuba diving adventure with Coral Playground and experience the wonders of the Red Sea!`,
+          description: `With ${diveSites?.length} dive sites, book your perfect scuba diving adventure with Coral Playground and experience the wonders of the Red Sea!`,
           url: "https://www.coralplayground.com/diving/dive_sites/",
           images: [
             {

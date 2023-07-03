@@ -36,8 +36,14 @@ export default function TripSidebar({ trips, diveSite, diveCentre, ...rest }) {
         </Text>
         <TripsMap trips={trips} diveSite={diveSite} diveCentre={diveCentre} />
       </Card>
-      <SpecialTrips trips={trips} diveSite={diveSite} />
-      <RegularTrips trips={trips} diveSite={diveSite} />
+      <SpecialTrips
+        trips={trips?.filter((trip) => trip?.start_date === null)}
+        diveSite={diveSite}
+      />
+      <RegularTrips
+        trips={trips?.filter((trip) => trip?.start_date !== null)}
+        diveSite={diveSite}
+      />
     </Flex>
   );
 }

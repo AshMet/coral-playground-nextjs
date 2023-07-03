@@ -6,8 +6,8 @@ export const addBrevoContact = async (
   firstName,
   lastName,
   email,
-  role
-  // businessName
+  role,
+  businessName
 ) => {
   try {
     const request = await axios
@@ -16,7 +16,7 @@ export const addBrevoContact = async (
         firstName,
         lastName,
         role,
-        // businessName,
+        businessName,
       })
       .then((res) => {
         return res;

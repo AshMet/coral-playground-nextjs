@@ -1,28 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
-/*!
-  _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
- | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
- | |_| | | | | |_) || |  / / | | |  \| | | | | || |  | |_) | |_) | | | |
- |  _  | |_| |  _ < | | / /| |_| | |\  | | |_| || |  |  __/|  _ <| |_| |
- |_| |_|\___/|_| \_\___/____\___/|_| \_|  \___/|___| |_|   |_| \_\\___/ 
-                                                                                                                                                                                                                                                                                                                                       
-=========================================================
-* Horizon UI Dashboard PRO - v1.0.0
-=========================================================
 
-* Product Page: https://www.horizon-ui.com/pro/
-* Copyright 2022 Horizon UI (https://www.horizon-ui.com/)
-
-* Designed and Coded by Simmmple
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// Chakra imports
 import {
   Box,
   Button,
@@ -45,7 +23,6 @@ import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import { posthog } from "posthog-js";
 import { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 // import { TbBuildingStore, TbScubaMask } from "react-icons/tb";
@@ -53,7 +30,6 @@ import { RiEyeCloseLine } from "react-icons/ri";
 import AlertPopup from "components/alerts/AlertPopup";
 import InputField from "components/fields/InputField";
 import NavLink from "components/navLinks/NavLink";
-import { HSeparator } from "components/separator/Separator";
 import LoginLayout from "layouts/LoginLayout";
 import * as gtag from "lib/data/gtag";
 import { addBrevoContact } from "utils/sendInBlue/contacts";
@@ -69,16 +45,6 @@ export default function SignUp() {
   const toast = useToast();
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
-  const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
-  const googleText = useColorModeValue("navy.700", "white");
-  const googleHover = useColorModeValue(
-    { bg: "gray.200" },
-    { bg: "whiteAlpha.300" }
-  );
-  const googleActive = useColorModeValue(
-    { bg: "secondaryGray.300" },
-    { bg: "whiteAlpha.200" }
-  );
 
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -88,11 +54,12 @@ export default function SignUp() {
     lastName: "",
     email: "",
     password: "",
-    role: "diver",
+    role: "business",
+    businessName: "",
   });
   const togglePassVis = () => setShow(!show);
 
-  const { firstName, lastName, email, password, role } = userData;
+  const { firstName, lastName, email, password, role, businessName } = userData;
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -169,63 +136,21 @@ export default function SignUp() {
         // value: newItem.title,
       });
       // Add user to Brevo
-      const brevoUser = await addBrevoContact(firstName, lastName, email, role);
+      const brevoUser = await addBrevoContact(
+        firstName,
+        lastName,
+        email,
+        role,
+        businessName
+      );
       const brevoEmail = await sendBrevoMail(
         "Coral Playground",
         email,
         "Welcome to Coral Plaground",
-        4
+        10
       );
       console.log("brevoUser", brevoUser);
       console.log("brevoEmail", brevoEmail);
-    }
-
-    setLoading(false);
-    // router.push(`/diving/dive_centres/${data.id}`);
-  };
-
-  const signUpGoogle = async () => {
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
-    // Alert & Analytics for failed load
-    if (error) {
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup
-            type="danger"
-            text="Unable to Login using Google, please try a different method"
-            subtext={error.message}
-          />
-        ),
-      });
-      gtag.event({
-        action: "google-login-error",
-        category: "button",
-        label: "User",
-        // value: newItem.title,
-      });
-    } else {
-      // Success Alert
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup
-            type="success"
-            text="Signed Up using Google Successfully"
-            subtext="Redirecting..."
-          />
-        ),
-      });
-      // Success Analytics Tag
-      gtag.event({
-        action: "signup-google-success",
-        category: "button",
-        label: "User",
-        // value: newItem.title,
-      });
     }
 
     setLoading(false);
@@ -256,7 +181,7 @@ export default function SignUp() {
             ],
           }}
         />
-        <LoginLayout illustrationBackground="/img/auth/diver.jpg">
+        <LoginLayout illustrationBackground="/img/auth/dive_school.jpg">
           <Flex
             maxW={{ base: "100%", md: "max-content" }}
             w="100%"
@@ -272,7 +197,7 @@ export default function SignUp() {
           >
             <Box me="auto">
               <Heading color={textColor} fontSize="36px" mb="10px">
-                Sign Up
+                Business Sign Up
               </Heading>
               <Text
                 mb="36px"
@@ -281,8 +206,8 @@ export default function SignUp() {
                 fontWeight="400"
                 fontSize="md"
               >
-                Sign Up as a Business Instead?
-                <Link href="/business/signup" color="brand.100" ml={3}>
+                Sign Up as a Diver Instead?
+                <Link href="/auth/signup" color="brand.100" ml={3}>
                   Click Here
                 </Link>
               </Text>
@@ -310,36 +235,6 @@ export default function SignUp() {
                 me="auto"
                 mb={{ base: "20px", md: "auto" }}
               >
-                {userData.role !== "business" && (
-                  <>
-                    <Button
-                      fontSize="sm"
-                      me="0px"
-                      mb="26px"
-                      py="15px"
-                      h="50px"
-                      borderRadius="16px"
-                      bg={googleBg}
-                      color={googleText}
-                      fontWeight="500"
-                      _hover={googleHover}
-                      _active={googleActive}
-                      _focus={googleActive}
-                      onClick={signUpGoogle}
-                      disabled={loading}
-                    >
-                      <Icon as={FcGoogle} w="20px" h="20px" me="10px" />
-                      Sign up with Google
-                    </Button>
-                    <Flex align="center" mb="25px">
-                      <HSeparator />
-                      <Text color={textColorSecondary} mx="14px">
-                        or
-                      </Text>
-                      <HSeparator />
-                    </Flex>
-                  </>
-                )}
                 <SimpleGrid
                   columns={{ base: "1", md: "2" }}
                   gap={{ sm: "10px", md: "26px" }}
@@ -370,6 +265,16 @@ export default function SignUp() {
                   </Flex>
                 </SimpleGrid>
 
+                <InputField
+                  name="businessName"
+                  label="Business Name"
+                  value={businessName}
+                  placeholder="Name of your dive centre"
+                  onChange={handleChange}
+                  isError={businessName === ""}
+                  errorMessage="Business Name cannot be empty"
+                  isRequired
+                />
                 <InputField
                   name="email"
                   label="Email"
