@@ -4,7 +4,7 @@
         <title>Coral Playground | Dive Sites | RSS Feed</title>
         <link>http://localhost:3000</link>
         <description>Welcome to Coral Playground, your best source for dive site info in the Red Sea</description>
-        <lastBuildDate>Mon, 03 Jul 2023 03:14:37 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 03 Jul 2023 21:38:02 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -201,7 +201,7 @@ The pinnacles at Ras Disha are punctuated with cracks. Together with caverns bur
             <title><![CDATA[Salem Express Dive Site near Hurghada, Egypt]]></title>
             <link>http://localhost:3000/diving/dive_sites/salem-express</link>
             <guid>http://localhost:3000/diving/dive_sites/salem-express</guid>
-            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
+            <pubDate>Mon, 03 Jul 2023 19:59:26 GMT</pubDate>
             <description><![CDATA[The Salem Express was a 100m/328ft long passenger and vehicle ferry that sank in 1991. Propellers, corridors, upper decks, the restaurant and the bridge can all still be seen. Passenger luggage such as rolls of carpet, stereos, bicycles and chairs can all be found in and near the wreck. Coral coverage and marine life is good enough here. The site is suitable for divers of all experience levels as the top of the wreck is located at only 10m/32ft of depth]]></description>
         </item>
         <item>
@@ -276,6 +276,13 @@ Dive into this exceptional coral garden, which drops in steps from the upper par
             <guid>http://localhost:3000/diving/dive_sites/shabrur-um-gamar</guid>
             <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
             <description><![CDATA[Shabrur Umm Gamar is located approximately 1km/0.6mi north of the island of Umm Gamar and is a submerged mountain blanketed in rich corals. The walls of the mountain are notable not only for their corals, but also because of the crevices and caves sheltering a variety of marine fauna species. In addition to the mountain, the site also has several wrecks of Egyptian boats, one of which can be reached at 20m/66ft deep. The two other wrecks lie at over 70m/230ft deep, and can only be reached by technical divers. The site is known for big fish and superb conditions for photography.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Siyul Kebira Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/diving/dive_sites/siyul-kebira</link>
+            <guid>http://localhost:3000/diving/dive_sites/siyul-kebira</guid>
+            <pubDate>Mon, 03 Jul 2023 21:20:21 GMT</pubDate>
+            <description><![CDATA[This reef dive site with depth 36m/118ft and water visibility averaging 30m/100ft, suits divers of all experience levels. The highlight of the dive is a small pinnacle at the turning point of the dive, it has lovely soft corals and is home to thousands of glass fish, small moray eels and a great variety of colorful reef fish. When there is a strong north current this dive can be done as a drift.]]></description>
         </item>
         <item>
             <title><![CDATA[Small Giftun Dive Site near Hurghada, Egypt]]></title>
