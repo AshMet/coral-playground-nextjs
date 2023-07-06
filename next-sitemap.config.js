@@ -6,7 +6,7 @@ module.exports = {
   priority: 0.7,
   sitemapSize: 5000,
   generateRobotsTxt: true,
-  exclude: ['/admin/*', '/users/*', 'diving/booking/success', 'diving/dive_centres/new'],
+  exclude: ['/admin/*', '/users/*', 'booking/success', 'dive_centres/new'],
   // alternateRefs: [
   //   {
   //     href: 'https://es.example.com',

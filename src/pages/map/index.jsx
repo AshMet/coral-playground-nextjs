@@ -45,7 +45,7 @@ import Map, {
 import "mapbox-gl/dist/mapbox-gl.css";
 
 // Assets
-import { supabase } from "../../api";
+import { supabase } from "../api";
 // import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
 // import SearchBar from "components/navbar/searchBar/SearchBar";
@@ -83,7 +83,7 @@ export default function Default({ data }) {
           type: "website",
           title: "Coral Playground | Scuba Diving Map",
           description: "Explore dive sites and centres on our interactive map",
-          url: "https://www.coralplayground.com/diving/map/",
+          url: "https://www.coralplayground.com/map/",
           images: [
             {
               url: "https://www.coralplayground.com/img/diving/dive_site_bg.jpg",
@@ -114,7 +114,7 @@ export default function Default({ data }) {
             initialViewState={{
               latitude: 28.0132,
               longitude: 33.7751,
-              pitch: 85,
+              pitch: 65,
               zoom: 7,
             }}
             style={{ borderRadius: "20px", width: "100%", height: "100%" }}

@@ -293,7 +293,7 @@ function SignedInMenuList() {
 //             px="14px"
 //           >
 //             <Button
-//               onClick={() => router.push("/diving/booking")}
+//               onClick={() => router.push("/booking")}
 //               variant="link"
 //               colorScheme="purple"
 //               size="sm"

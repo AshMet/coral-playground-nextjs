@@ -127,7 +127,7 @@ export default function CreateCentreTrip() {
       ),
     });
 
-    router.push(`/diving/dive_centres/${diveCentreSlug}`);
+    router.push(`/dive_centres/${diveCentreSlug}`);
 
     if (diveTripError) {
       // console.log("new trip error", diveTripError);

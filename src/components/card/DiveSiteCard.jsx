@@ -47,11 +47,11 @@ export default function DiveSiteCard(props) {
       : "/img/diving/dive_centre_bg.jpg";
   const siteUrl =
     type === "diveSite"
-      ? `/diving/dive_sites/${slugify(name.replace("&", ""), {
+      ? `/dive_sites/${slugify(name.replace("&", ""), {
           lower: true,
           remove: /[*+~.()'"!:@]/g,
         })}`
-      : `/diving/dive_centres/${slugify(name.replace("&", ""), {
+      : `/dive_centres/${slugify(name.replace("&", ""), {
           lower: true,
           remove: /[*+~.()'"!:@]/g,
         })}`;

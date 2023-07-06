@@ -129,7 +129,7 @@ export default function DiveSiteBenefits() {
                   direction={{ base: "column", md: "row" }}
                   mb="30px"
                 >
-                  <Link href="/diving/dive_sites">
+                  <Link href="/dive_sites">
                     <Button
                       py="20px"
                       px="16px"

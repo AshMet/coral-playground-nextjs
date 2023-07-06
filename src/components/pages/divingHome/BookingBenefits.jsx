@@ -105,7 +105,7 @@ export default function CertBenefits() {
                   direction={{ base: "column", md: "row" }}
                   mb="30px"
                 >
-                  <Link href="/diving/certifications">
+                  <Link href="/certifications">
                     <Button
                       py="20px"
                       px="16px"

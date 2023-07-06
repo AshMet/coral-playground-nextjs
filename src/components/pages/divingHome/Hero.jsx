@@ -81,7 +81,7 @@ const Hero = () => {
                   direction={{ base: "column", md: "row" }}
                   mb="30px"
                 > */}
-              <Link href="/diving/map">
+              <Link href="/map">
                 <Button
                   py="20px"
                   px="16px"

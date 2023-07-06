@@ -89,7 +89,7 @@ export default function MapHero(props) {
             initialViewState={{
               latitude: 27.2134,
               longitude: 33.9,
-              pitch: 85,
+              pitch: 65,
               zoom: 12,
             }}
             style={{ borderRadius: "20px", width: "100%", height: "100%" }}

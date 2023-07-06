@@ -82,9 +82,7 @@ export default function OrderCard(props) {
           <Button
             size="sm"
             onClick={() =>
-              router.push(
-                `http://localhost:3000/diving/booking/success?session_id=${sessionId}`
-              )
+              router.push(`/booking/success?session_id=${sessionId}`)
             }
           >
             View Details

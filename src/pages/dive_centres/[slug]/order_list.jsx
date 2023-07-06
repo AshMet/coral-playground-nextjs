@@ -24,7 +24,7 @@
 // Chakra imports
 import { Flex } from "@chakra-ui/react";
 
-import { supabase } from "../../../api/index";
+import { supabase } from "../../api/index";
 import Card from "components/card/Card";
 import SearchTableOrders from "components/pages/orders/SearchTableOrders";
 import DivingLayout from "layouts/DivingLayout";

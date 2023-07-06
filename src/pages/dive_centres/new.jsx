@@ -228,7 +228,7 @@ export default function CreateDiveCentre() {
       });
       updateBrevoBusinessName(user.email, data.name, "business");
       router.push(
-        `/diving/dive_centres/${slugify(data.name.replace("&", ""), {
+        `/dive_centres/${slugify(data.name.replace("&", ""), {
           lower: true,
           remove: /[*+~.()'"!:@]/g,
         })}`

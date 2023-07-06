@@ -109,7 +109,7 @@ export default function Login() {
     }
 
     setLoading(false);
-    // router.push(`/diving/dive_centres/${data.id}`);
+    // router.push(`/dive_centres/${data.id}`);
   };
 
   const loginGoogle = async () => {
@@ -142,14 +142,14 @@ export default function Login() {
         render: () => (
           <AlertPopup
             type="success"
-            text="Signed Up using Google Successfully"
+            text="Logged In using Google Successfully"
             subtext="Redirecting..."
           />
         ),
       });
       // Success Analytics Tag
       gtag.event({
-        action: "signup-google-success",
+        action: "login-google-success",
         category: "button",
         label: "User",
         // value: newItem.title,
@@ -157,7 +157,7 @@ export default function Login() {
     }
 
     setLoading(false);
-    // router.push(`/diving/dive_centres/${data.id}`);
+    // router.push(`/dive_centres.id}`);
   };
 
   if (user) {

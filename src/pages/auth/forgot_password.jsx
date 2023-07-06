@@ -79,7 +79,7 @@ export default function Login() {
     }
 
     setLoading(false);
-    // router.push(`/diving/dive_centres/${data.id}`);
+    // router.push(`/dive_centres/${data.id}`);
   };
 
   if (user) {

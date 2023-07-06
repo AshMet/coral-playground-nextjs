@@ -246,7 +246,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
     setLoading(false);
     // console.log("data", data);
     router.push(
-      `/diving/dive_centres/${slugify(name.replace("&", ""), {
+      `/dive_centres/${slugify(name.replace("&", ""), {
         lower: true,
         remove: /[*+~.()'"!:@]/g,
       })}`

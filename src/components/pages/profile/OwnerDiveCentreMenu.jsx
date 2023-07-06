@@ -75,7 +75,7 @@ export default function OwnerDiveCentreMenu(props) {
             bg: "transparent",
           }}
           mb="10px"
-          onClick={() => router.push(`/diving/dive_centres/${diveCentreId}`)}
+          onClick={() => router.push(`/dive_centres/${diveCentreId}`)}
         >
           <Flex align="center">
             <Icon as={MdOutlinePerson} h="16px" w="16px" me="8px" />
@@ -97,9 +97,7 @@ export default function OwnerDiveCentreMenu(props) {
             bg: "transparent",
           }}
           mb="10px"
-          onClick={() =>
-            router.push(`/diving/dive_centres/${diveCentreId}/edit`)
-          }
+          onClick={() => router.push(`/dive_centres/${diveCentreId}/edit`)}
         >
           <Flex align="center">
             <Icon as={MdOutlineCardTravel} h="16px" w="16px" me="8px" />
@@ -121,7 +119,7 @@ export default function OwnerDiveCentreMenu(props) {
             bg: "transparent",
           }}
           onClick={() =>
-            router.push(`/diving/dive_centres/${diveCentreId}/dive_trips/new`)
+            router.push(`/dive_centres/${diveCentreId}/dive_trips/new`)
           }
         >
           <Flex align="center">

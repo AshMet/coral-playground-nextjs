@@ -160,9 +160,7 @@ export default function CentreCard(props) {
                 h="56px"
                 mb="5px"
                 boxShadow={shadow}
-                onClick={() =>
-                  router.push(`/diving/dive_centres/${diveCentre.slug}`)
-                }
+                onClick={() => router.push(`/dive_centres/${diveCentre.slug}`)}
                 icon={
                   <Icon
                     as={AiOutlineShop}
@@ -192,7 +190,7 @@ export default function CentreCard(props) {
                 mb="5px"
                 boxShadow={shadow}
                 onClick={() =>
-                  router.push(`/diving/dive_centres/${diveCentre?.slug}/edit`)
+                  router.push(`/dive_centres/${diveCentre?.slug}/edit`)
                 }
                 icon={<Icon as={MdEdit} color={yellowIcon} w="24px" h="24px" />}
               />
@@ -217,7 +215,7 @@ export default function CentreCard(props) {
                 boxShadow={shadow}
                 onClick={() =>
                   router.push(
-                    `/diving/dive_centres/${diveCentre?.slug}/dive_trips/new`
+                    `/dive_centres/${diveCentre?.slug}/dive_trips/new`
                   )
                 }
                 icon={<Icon as={MdAdd} color={greenIcon} w="24px" h="24px" />}
@@ -238,9 +236,7 @@ export default function CentreCard(props) {
                 mb="5px"
                 boxShadow={shadow}
                 onClick={() =>
-                  router.push(
-                    `/diving/dive_centres/${diveCentre.slug}/order_list`
-                  )
+                  router.push(`/dive_centres/${diveCentre.slug}/order_list`)
                 }
                 icon={
                   <Icon as={MdAttachMoney} color={redIcon} w="24px" h="24px" />
@@ -252,7 +248,7 @@ export default function CentreCard(props) {
             </Flex>
           </Flex>
           <Invite
-            referralCode={`${process.env.NEXT_PUBLIC_SITE_URL}/diving/dive_centres/${diveCentre?.slug}`}
+            referralCode={`${process.env.NEXT_PUBLIC_SITE_URL}/dive_centres/${diveCentre?.slug}`}
             fbLink="#"
             twtLink="#"
             gridArea={{

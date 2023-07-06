@@ -101,7 +101,7 @@ export default function UserOrders() {
                   minW="max-content"
                   boxShadow="unset"
                   flexDirection="column"
-                  onClick={() => router.push("/diving/dive_centres")}
+                  onClick={() => router.push("/dive_centres")}
                 >
                   <Flex
                     mx="auto"
@@ -146,7 +146,7 @@ export default function UserOrders() {
                   minW="max-content"
                   boxShadow="unset"
                   flexDirection="column"
-                  onClick={() => router.push("/diving/dive_sites")}
+                  onClick={() => router.push("/dive_sites")}
                 >
                   <Flex
                     mx="auto"

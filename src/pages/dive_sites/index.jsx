@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
@@ -21,23 +22,16 @@ import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 import { MdApps, MdDashboard } from "react-icons/md";
 
-// import { SearchBar } from "views/admin/nfts/profile/components/Search";
-import { supabase } from "../../api/index";
+import { supabase } from "../api/index";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import DivingLayout from "layouts/DivingLayout";
-
-// const Moralis = require("moralis/node");
+import generateDiveSiteRSS from "utils/generateDiveSiteRSS";
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === "children",
 });
 
-export default function DiveSites({ diveCentres }) {
-  // const { image, name, address } = props;
-  // const name = "Dive Site";
-  // const address = "Hurghada, Egypt";
-  // const parsedData = JSON.parse(diveCentres);
-
+export default function DiveSites({ diveSites }) {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const buttonBg = useColorModeValue("transparent", "navy.800");
   const hoverButton = useColorModeValue(
@@ -54,39 +48,37 @@ export default function DiveSites({ diveCentres }) {
   const [filtered, setFiltered] = useState();
 
   useEffect(() => {
-    if (!diveCentres) return null;
+    if (!diveSites) return null;
     if (city === 0 || city === "All Cities") {
-      setFiltered(diveCentres);
+      setFiltered(diveSites);
       return;
     }
-    // console.log("centres", diveCentres);
-    const cityFiltered = diveCentres.filter((centre) => centre.city === city);
+    const cityFiltered = diveSites.filter((site) => site.city.name === city);
     setFiltered(cityFiltered);
-    // console.log("centres", diveCentres);
-  }, [diveCentres, city, country]);
+    // console.log("site data", data);
+  }, [diveSites, city, country]);
 
   return (
     <>
       <NextSeo
-        title="Coral Playground | Scuba Diving Centres in Egypt"
-        description={`Choose from ${diveCentres.length} scuba dive centres and book your perfect scuba diving adventure with Coral Playground to experience the wonders of the Red Sea!`}
+        title="Coral Playground | Scuba Diving Sites in Egypt"
+        description={`With ${diveSites?.length} dive sites, book your perfect scuba diving adventure with Coral Playground and experience the wonders of the Red Sea!`}
         openGraph={{
           type: "website",
-          title: "Coral Playground | Scuba Diving Centres in Egypt",
-          description: `Choose from ${diveCentres.length} scuba dive centres and book your perfect scuba diving adventure with Coral Playground to experience the wonders of the Red Sea!`,
-          url: "https://www.coralplayground.com/diving/dive_centres/",
+          title: "Coral Playground | Scuba Diving Sites in Egypt",
+          description: `With ${diveSites?.length} dive sites, book your perfect scuba diving adventure with Coral Playground and experience the wonders of the Red Sea!`,
+          url: "https://www.coralplayground.com/dive_sites/",
           images: [
             {
-              url: "https://www.coralplayground.com/img/diving/og_dive_centres.jpg",
-              width: 1200,
-              height: 630,
-              alt: "Dive Centres Cover Photo with Logo",
+              url: "https://www.coralplayground.com/img/diving/dive_site_bg.jpg",
+              width: 800,
+              height: 600,
+              alt: "Dive Sites Cover Photo",
             },
           ],
         }}
       />
       <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-        {/* <Text>{JSON.stringify(diveCentres[0].diveMap)}</Text> */}
         <Flex w="100%">
           {/* <SearchBar /> */}
           <Select
@@ -169,16 +161,18 @@ export default function DiveSites({ diveCentres }) {
           <AnimatePresence>
             <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap="20px">
               {filtered &&
-                filtered.map((centre) => {
+                filtered.map((site) => {
                   return (
                     <DiveSiteCard
-                      key={centre.id}
-                      id={centre.id}
-                      image={
-                        centre.coverPhotoUrl || "/img/diving/dive_centre_bg.jpg"
-                      }
-                      name={centre.name}
-                      type="diveCentre"
+                      key={site.id}
+                      id={site.id}
+                      image={site.dive_map || "/img/diving/dive_site_bg.jpg"}
+                      name={site.name}
+                      tagList={site.tags}
+                      depth={site.depth}
+                      max_visibility={site.max_visibility}
+                      current={site.current}
+                      type="diveSite"
                       // address={`${site.city}, ${site.country}`}
                     />
                   );
@@ -192,16 +186,19 @@ export default function DiveSites({ diveCentres }) {
 }
 
 export async function getStaticProps() {
-  const { data: diveCentres } = await supabase
-    .from("active_dive_centres_view")
+  const { data: diveSites } = await supabase
+    .from("dive_sites")
     .select(
       `
-      id, name, description, address, coverPhotoUrl, city, country, slug
-    `
+    id, slug, name, description, latitude, longitude, min_visibility, max_visibility, depth, current, cert_level, tags, access, dive_map,
+    updated_at, city: cities (name)
+  `
     )
     .order("name", { ascending: true });
+  await generateDiveSiteRSS(diveSites);
+
   return {
-    props: { diveCentres },
+    props: { diveSites },
     revalidate: 86400,
   };
 }

@@ -28,11 +28,11 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/diving/dive_centres/:id/edit/:path",
-    "/diving/dive_centres/new/:path",
-    "/diving/dive_sites/:id/edit/:path",
-    "/diving/dive_sites/new/:path",
-    "/nfts/:path*",
-    "/admin/nfts/:path*",
+    "/dive_centres/:id/edit/:path",
+    "/dive_centres/new/:path",
+    "/dive_sites/:id/edit/:path",
+    "/dive_sites/new/:path",
+    // "/nfts/:path*",
+    // "/admin/nfts/:path*",
   ],
 };

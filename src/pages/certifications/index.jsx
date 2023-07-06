@@ -47,7 +47,7 @@ import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
-import { supabase } from "../../api";
+import { supabase } from "../api";
 // import MiniCalendar from "components/calendar/MiniCalendar";
 import Card from "components/card/Card";
 // import Schedule from "views/admin/main/account/courses/components/Schedule";

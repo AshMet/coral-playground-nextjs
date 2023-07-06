@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 
-import { supabase } from "../../../api/index";
+import { supabase } from "../../api/index";
 import Card from "components/card/Card";
 import CentreInfo from "components/pages/diveCentre/CentreInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
@@ -59,11 +59,12 @@ export default function DiveCentre({ diveCentreData }) {
       <NextSeo
         title={`Dive with ${diveCentre.name} in ${diveCentre.city}`}
         description={`Book your next dive trip with ${diveCentre.name} and explore the wonders of the underwater world near ${diveCentre.city} and beyond!`}
+        canonical={`https://www.coralplayground.com/dive_centres/${diveCentre.slug}`}
         openGraph={{
           type: "website",
           title: `Dive with ${diveCentre.name} in ${diveCentre.country}`,
           description: `Book your next dive trip with ${diveCentre.name} and explore the wonders of the underwater world near ${diveCentre.city} and beyond!`,
-          url: `https://www.coralplayground.com/diving/dive_centres/${diveCentre.id}`,
+          url: `https://www.coralplayground.com/dive_centres/${diveCentre.slug}`,
           images: [
             {
               url: diveCentre.coverPhotoUrl,

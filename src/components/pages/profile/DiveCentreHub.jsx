@@ -201,9 +201,7 @@ export default function DiveCentreHub(props) {
               // value="Available: 7"
               actionName="Add"
               action={() =>
-                router.push(
-                  `/diving/dive_centres/${diveCentre?.slug}/dive_trips/new`
-                )
+                router.push(`/dive_centres/${diveCentre?.slug}/dive_trips/new`)
               }
             />
             <SetUp
@@ -213,7 +211,7 @@ export default function DiveCentreHub(props) {
               name="Manage Dive Trips"
               actionName="View"
               action={() =>
-                router.push(`/diving/dive_centres/${diveCentre?.slug}/manage`)
+                router.push(`/dive_centres/${diveCentre?.slug}/manage`)
               }
             />
             <SetUp
@@ -223,9 +221,7 @@ export default function DiveCentreHub(props) {
               name="View Orders"
               actionName="View"
               action={() =>
-                router.push(
-                  `/diving/dive_centres/${diveCentre?.slug}/order_list`
-                )
+                router.push(`/dive_centres/${diveCentre?.slug}/order_list`)
               }
             />
             <SetUp
@@ -235,9 +231,7 @@ export default function DiveCentreHub(props) {
               name="View Dive Centre page"
               value="Active"
               actionName="View"
-              action={() =>
-                router.push(`/diving/dive_centres/${diveCentre.slug}`)
-              }
+              action={() => router.push(`/dive_centres/${diveCentre.slug}`)}
             />
             <SetUp
               py="20px"
@@ -253,7 +247,7 @@ export default function DiveCentreHub(props) {
               })}`}
               actionName="Edit"
               action={() =>
-                router.push(`/diving/dive_centres/${diveCentre?.slug}/edit`)
+                router.push(`/dive_centres/${diveCentre?.slug}/edit`)
               }
             />
             <SetUp
@@ -284,7 +278,7 @@ export default function DiveCentreHub(props) {
               minW="max-content"
               boxShadow="unset"
               flexDirection="column"
-              onClick={() => router.push("/diving/dive_centres/new")}
+              onClick={() => router.push("/dive_centres/new")}
             >
               <Flex
                 mx="auto"

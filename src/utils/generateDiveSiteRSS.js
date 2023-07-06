@@ -29,8 +29,8 @@ export default async function generateRssFeed(dive_sites) {
     feed.addItem({
       title: `${site.name} Dive Site near ${site.city.name}, Egypt`,
       description: site.description,
-      id: `${siteUrl}/diving/dive_sites/${site.slug}`,
-      link: `${siteUrl}/diving/dive_sites/${site.slug}`,
+      id: `${siteUrl}/dive_sites/${site.slug}`,
+      link: `${siteUrl}/dive_sites/${site.slug}`,
       // image: site.dive_map,
       date: site.updated_at ? new Date(site.updated_at) : new Date(2023, 1, 19),
     });

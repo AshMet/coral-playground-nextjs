@@ -75,7 +75,7 @@ const Intro = () => {
                 align="center"
                 mt={10}
               >
-                <Link href="/diving/map">
+                <Link href="/map">
                   <Button
                     py="20px"
                     px="16px"

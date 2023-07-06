@@ -32,7 +32,7 @@ export default function NoCentreCard() {
           minW="max-content"
           boxShadow="unset"
           flexDirection="column"
-          onClick={() => router.push("/diving/dive_centres/new")}
+          onClick={() => router.push("/dive_centres/new")}
         >
           <Flex
             mx="auto"

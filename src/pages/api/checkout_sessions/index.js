@@ -11,8 +11,8 @@ export default async function handler(req, res) {
         customer: req?.body?.customer,
         line_items: req?.body?.items ?? [],
         metadata: req?.body?.metadata ?? {},
-        success_url: `${req.headers.origin}/diving/booking/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/diving/booking`,
+        success_url: `${req.headers.origin}/booking/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.origin}/booking`,
       });
 
       res.status(200).json(session);

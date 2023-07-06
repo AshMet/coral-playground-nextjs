@@ -133,7 +133,7 @@ export default function LandingNavbar(props) {
         <Flex ms="auto">
           {/* <Link
             display={{ base: "none", lg: "block" }}
-            href="/diving/map"
+            href="/map"
             color={textColor}
             fontSize="md"
             fontWeight="600"
@@ -145,7 +145,7 @@ export default function LandingNavbar(props) {
           </Link> */}
           <Link
             display={{ base: "none", lg: "block" }}
-            href="/diving/certifications"
+            href="/certifications"
             color={textColor}
             fontSize="md"
             fontWeight="600"
@@ -157,7 +157,7 @@ export default function LandingNavbar(props) {
           </Link>
           <Link
             display={{ base: "none", lg: "block" }}
-            href="/diving/dive_sites"
+            href="/dive_sites"
             color={textColor}
             fontSize="md"
             fontWeight="600"
@@ -169,7 +169,7 @@ export default function LandingNavbar(props) {
           </Link>
           <Link
             display={{ base: "none", lg: "block" }}
-            href="/diving/dive_centres"
+            href="/dive_centres"
             color={textColor}
             fontSize="md"
             fontWeight="600"
@@ -247,7 +247,7 @@ export default function LandingNavbar(props) {
                   px="14px"
                 >
                   <Link
-                    href="/diving/map"
+                    href="/map"
                     color={menuTextColor}
                     fontSize="md"
                     fontWeight="500"
@@ -265,7 +265,7 @@ export default function LandingNavbar(props) {
                   px="14px"
                 >
                   <Link
-                    href="/diving/certifications"
+                    href="/certifications"
                     color={menuTextColor}
                     fontSize="md"
                     fontWeight="500"
@@ -283,7 +283,7 @@ export default function LandingNavbar(props) {
                   px="14px"
                 >
                   <Link
-                    href="/diving/dive_sites"
+                    href="/dive_sites"
                     color={menuTextColor}
                     fontSize="md"
                     fontWeight="500"
@@ -301,7 +301,7 @@ export default function LandingNavbar(props) {
                   px="14px"
                 >
                   <Link
-                    href="/diving/dive_centres"
+                    href="/dive_centres"
                     color={menuTextColor}
                     fontSize="md"
                     fontWeight="500"

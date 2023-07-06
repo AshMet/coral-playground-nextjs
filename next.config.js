@@ -26,15 +26,35 @@ module.exports = {  //withPWA(
     dirs: ["src"],
   },
   pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/',
-  //       destination: '/diving/home',
-  //       permanent: true,
-  //     },
-  //   ]
-  // },
+  async redirects() {
+    return [
+      {
+        source: '/diving/map*',
+        destination: '/map*',
+        permanent: true,
+      },
+      {
+        source: '/diving/certifications*',
+        destination: '/certifications*',
+        permanent: true,
+      },
+      {
+        source: '/diving/dive_sites*',
+        destination: '/dive_sites*',
+        permanent: true,
+      },
+      {
+        source: '/diving/dive_centres*',
+        destination: '/dive_centres*',
+        permanent: true,
+      },
+      {
+        source: '/diving/booking*',
+        destination: '/booking*',
+        permanent: true,
+      },
+    ]
+  },
   images: {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -46,8 +66,6 @@ module.exports = {  //withPWA(
       'stzgaygfnnszcvhmnbqy.supabase.co',
       'trrwzjpbcilwehezrxqn.supabase.co',
       'localhost',
-      'https://s3.eu-west-3.amazonaws.com/media.coralplayground.com',
-      'coral-playground-api.herokuapp.com'
     ]
   }
 };

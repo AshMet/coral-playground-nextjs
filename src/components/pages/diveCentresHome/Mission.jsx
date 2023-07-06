@@ -143,7 +143,7 @@ export default function Mission() {
             link="https://horizon-ui.com/horizon-ui-chakra/#/admin/nft-marketplace"
           /> */}
         </Flex>
-        <Link href="/diving/map">
+        <Link href="/map">
           <Button
             h="50px"
             borderRadius="12px"

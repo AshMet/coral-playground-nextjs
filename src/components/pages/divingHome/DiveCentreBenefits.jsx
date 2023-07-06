@@ -118,7 +118,7 @@ export default function DiveCentreBenefits() {
                   mb="30px"
                   justifyContent={{ base: "center", lg: "unset" }}
                 >
-                  <Link href="/diving/dive_sites">
+                  <Link href="/dive_sites">
                     <Button
                       py="20px"
                       px="16px"

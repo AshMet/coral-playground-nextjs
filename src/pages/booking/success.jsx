@@ -41,7 +41,7 @@ export default function Invoice({ session, lineItems }) {
       <NextSeo
         title="Booking Success"
         description="Your dive booking has completed successfully"
-        canonical="https://www.coralplayground.com/diving/booking"
+        canonical="https://www.coralplayground.com/booking"
       />
       <Box
         mt={{ base: "130px", md: "80px", xl: "80px" }}

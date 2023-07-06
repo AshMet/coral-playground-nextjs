@@ -103,7 +103,7 @@ export default function SearchBar(props) {
         <PopoverBody borderRadius="20px">
           {searchResults &&
             searchResults.map((result) => (
-              <Link href={`/diving/dive_sites/${result.id}`}>
+              <Link href={`/dive_sites/${result.id}`}>
                 <Flex mb="25px" align="center" cursor="pointer">
                   <Icon
                     color={menuText}

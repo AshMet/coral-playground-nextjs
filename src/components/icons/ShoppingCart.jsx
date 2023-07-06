@@ -95,7 +95,7 @@ export default function ShoppingCart() {
       label: "Start Cart Checkout",
       // value:
     });
-    router.push("/diving/booking");
+    router.push("/booking");
   };
 
   return (

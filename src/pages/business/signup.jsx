@@ -154,7 +154,7 @@ export default function SignUp() {
     }
 
     setLoading(false);
-    // router.push(`/diving/dive_centres/${data.id}`);
+    // router.push(`/dive_centres/${data.id}`);
   };
 
   if (user) {
@@ -165,12 +165,12 @@ export default function SignUp() {
         <NextSeo
           title="Coral Playground | Sign Up"
           description="Login Page"
-          canonical="https://www.coralplayground.com/auth/signup"
+          canonical="https://www.coralplayground.com/business/signup"
           openGraph={{
             type: "website",
             title: "Coral Playground | Sign Up",
             description: "Dive Centres Sign Up Page",
-            url: "https://www.coralplayground.com/auth/signup",
+            url: "https://www.coralplayground.com/business/signup",
             images: [
               {
                 url: "https://www.coralplayground.com/svg/coral-logo.svg",
@@ -196,7 +196,7 @@ export default function SignUp() {
             flexDirection="column"
           >
             <Box me="auto">
-              <Heading color={textColor} fontSize="36px" mb="10px">
+              <Heading as="h1" color={textColor} fontSize="36px" mb="10px">
                 Business Sign Up
               </Heading>
               <Text

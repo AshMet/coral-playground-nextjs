@@ -29,7 +29,7 @@ export default function TripSummary(props) {
               fontSize="md"
               me="6px"
               fontWeight="700"
-              // onClick={() => router.push("/diving/booking")} // Not Working
+              // onClick={() => router.push("/booking")} // Not Working
             >
               {title}
             </Text>

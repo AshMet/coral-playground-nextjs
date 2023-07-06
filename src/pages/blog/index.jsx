@@ -48,7 +48,7 @@ export default function Blog({ posts }) {
           title: "Coral Playground | Scuba Diving Blog",
           description:
             "Find out everything you've ever wanted to know about scuba diving",
-          url: "https://www.coralplayground.com/diving/dive_sites/",
+          url: "https://www.coralplayground.com/dive_sites/",
           images: [
             {
               url: "https://www.coralplayground.com/img/diving/dive_site_bg.jpg",

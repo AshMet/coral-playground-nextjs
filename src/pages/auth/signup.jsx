@@ -181,7 +181,7 @@ export default function SignUp() {
     }
 
     setLoading(false);
-    // router.push(`/diving/dive_centres/${data.id}`);
+    // router.push(`/dive_centres/${data.id}`);
   };
 
   const signUpGoogle = async () => {
@@ -229,7 +229,7 @@ export default function SignUp() {
     }
 
     setLoading(false);
-    // router.push(`/diving/dive_centres/${data.id}`);
+    // router.push(`/dive_centres/${data.id}`);
   };
 
   if (user) {
@@ -271,7 +271,7 @@ export default function SignUp() {
             flexDirection="column"
           >
             <Box me="auto">
-              <Heading color={textColor} fontSize="36px" mb="10px">
+              <Heading as="h1" color={textColor} fontSize="36px" mb="10px">
                 Sign Up
               </Heading>
               <Text
