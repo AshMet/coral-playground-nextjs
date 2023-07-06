@@ -29,28 +29,28 @@ module.exports = {  //withPWA(
   async redirects() {
     return [
       {
-        source: '/diving/map*',
-        destination: '/map*',
+        source: '/diving/map ',
+        destination: '/map ',
         permanent: true,
       },
       {
-        source: '/diving/certifications*',
-        destination: '/certifications*',
+        source: '/diving/certifications ',
+        destination: '/certifications ',
         permanent: true,
       },
       {
-        source: '/diving/dive_sites*',
-        destination: '/dive_sites*',
+        source: '/diving/dive_sites ',
+        destination: '/dive_sites ',
         permanent: true,
       },
       {
-        source: '/diving/dive_centres*',
-        destination: '/dive_centres*',
+        source: '/diving/dive_centres ',
+        destination: '/dive_centres ',
         permanent: true,
       },
       {
-        source: '/diving/booking*',
-        destination: '/booking*',
+        source: '/diving/booking ',
+        destination: '/booking ',
         permanent: true,
       },
     ]
