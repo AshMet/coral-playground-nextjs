@@ -79,7 +79,7 @@ export default function SignUp() {
       return;
     }
     setLoading(true);
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -121,12 +121,11 @@ export default function SignUp() {
         ),
       });
       // posthog.identify(data.id, { role }, { email });
-      posthog.identify({
-        distinctId: data.id,
-        properties: {
-          role,
-          email,
-        },
+      posthog.capture("Sign Up", {
+        email,
+        role,
+        first_name: firstName,
+        last_name: lastName,
       });
       // Success Analytics Tag
       gtag.event({

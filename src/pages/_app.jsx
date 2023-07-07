@@ -32,9 +32,8 @@ const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // mautic.initialize("https://mautic.chondrohub.dscloud.me/mtc.js");
-    posthog.init("phc_eh7TvObhukSTsvOP2TXEDzxDskVHLo8Xt2EhbawijcC", {
-      api_host: "https://app.posthog.com",
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
       // loaded: (posthog) => {
       //   if (process.env.NODE_ENV === "development") posthog.opt_out_capturing();
       // },

@@ -304,7 +304,7 @@ export default function Footer() {
       <HSeparator mt="75px" mb="50px" maxW="1170px" mx="auto" />
       <Flex mx="auto">
         <Text me="4px" textColor={textColorSecondary}>
-          © 2022 Coral Playground. All Rights Reserved.
+          © {new Date().getFullYear()} Coral Playground. All Rights Reserved.
         </Text>
       </Flex>
     </Flex>

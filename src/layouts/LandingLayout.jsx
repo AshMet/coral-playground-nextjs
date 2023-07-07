@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/forbid-prop-types */
@@ -6,6 +7,8 @@
 // Chakra imports
 import { Box, Flex, Text } from "@chakra-ui/react";
 // Custom components
+import { useUser } from "@supabase/auth-helpers-react";
+import posthog from "posthog-js";
 import PropTypes from "prop-types";
 // import { useState } from "react";
 
@@ -13,12 +16,28 @@ import PropTypes from "prop-types";
 // import FixedPlugin from "components/fixedPlugin/FixedPlugin";
 import Footer from "components/footer/FooterLanding";
 import Navbar from "components/navbar/NavbarLanding";
+import { useEffect } from "react";
 // import SidebarContext from "../../../contexts/SidebarContext";
 // import React from "react";
 
 function AuthCentered(props) {
   // const [toggleSidebar, setToggleSidebar] = useState(false);
   const { children, title, description, image } = props; // , cardTop, cardBottom
+  const user = useUser();
+
+  useEffect(() => {
+    if (user) {
+      posthog?.identify(
+        user.email, // distinctId
+        {
+          role: user?.user_metadata.role,
+          first_name: user?.user_metadata.first_name,
+          last_name: user?.user_metadata.last_name,
+        }
+      );
+    }
+  }, [posthog, user]);
+
   return (
     // <Box>
     //   <SidebarContext.Provider

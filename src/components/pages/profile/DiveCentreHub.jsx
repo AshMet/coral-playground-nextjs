@@ -164,7 +164,7 @@ export default function DiveCentreHub(props) {
                 </Flex>
               </Flex>
               <OwnerDiveCentreMenu
-                diveCentreId={diveCentre.id}
+                diveCentreSlug={diveCentre.slug}
                 icon={
                   <Icon
                     as={IoEllipsisHorizontal}

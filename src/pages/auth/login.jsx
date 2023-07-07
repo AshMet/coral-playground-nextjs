@@ -28,6 +28,7 @@ import NavLink from "components/navLinks/NavLink";
 import { HSeparator } from "components/separator/Separator";
 import LoginLayout from "layouts/LoginLayout";
 import * as gtag from "lib/data/gtag";
+import { posthog } from "posthog-js";
 
 export default function Login() {
   // Chakra color mode
@@ -100,6 +101,9 @@ export default function Login() {
         ),
       });
       // Success Analytics Tag
+      posthog.capture("Login", {
+        email,
+      });
       gtag.event({
         action: "login-success",
         category: "button",

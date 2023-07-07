@@ -23,7 +23,7 @@ import {
 } from "react-icons/md";
 
 export default function OwnerDiveCentreMenu(props) {
-  const { icon, diveCentreId, ...rest } = props;
+  const { icon, diveCentreSlug, ...rest } = props;
 
   // Ellipsis modals
   const {
@@ -75,7 +75,7 @@ export default function OwnerDiveCentreMenu(props) {
             bg: "transparent",
           }}
           mb="10px"
-          onClick={() => router.push(`/dive_centres/${diveCentreId}`)}
+          onClick={() => router.push(`/dive_centres/${diveCentreSlug}`)}
         >
           <Flex align="center">
             <Icon as={MdOutlinePerson} h="16px" w="16px" me="8px" />
@@ -97,7 +97,7 @@ export default function OwnerDiveCentreMenu(props) {
             bg: "transparent",
           }}
           mb="10px"
-          onClick={() => router.push(`/dive_centres/${diveCentreId}/edit`)}
+          onClick={() => router.push(`/dive_centres/${diveCentreSlug}/edit`)}
         >
           <Flex align="center">
             <Icon as={MdOutlineCardTravel} h="16px" w="16px" me="8px" />
@@ -119,7 +119,7 @@ export default function OwnerDiveCentreMenu(props) {
             bg: "transparent",
           }}
           onClick={() =>
-            router.push(`/dive_centres/${diveCentreId}/dive_trips/new`)
+            router.push(`/dive_centres/${diveCentreSlug}/dive_trips/new`)
           }
         >
           <Flex align="center">

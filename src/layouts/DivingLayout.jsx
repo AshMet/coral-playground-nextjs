@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/jsx-no-constructed-context-values */
@@ -7,7 +8,9 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
 import { Portal, Box, useDisclosure } from "@chakra-ui/react";
-import { useState } from "react";
+import { useUser } from "@supabase/auth-helpers-react";
+import posthog from "posthog-js";
+import { useEffect, useState } from "react";
 
 import routes from "../routes";
 import Footer from "components/footer/FooterDiving";
@@ -26,6 +29,20 @@ export default function DivingLayout({ children, ...props }) {
   // states and functions
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
+  const user = useUser();
+
+  useEffect(() => {
+    if (user) {
+      posthog?.identify(
+        user.email, // distinctId
+        {
+          role: user?.user_metadata.role,
+          first_name: user?.user_metadata.first_name,
+          last_name: user?.user_metadata.last_name,
+        }
+      );
+    }
+  }, [posthog, user]);
   // functions for changing the states from components
   const getRoute = () => {
     return (
