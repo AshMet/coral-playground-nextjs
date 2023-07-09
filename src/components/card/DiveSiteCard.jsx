@@ -80,7 +80,7 @@ export default function DiveSiteCard(props) {
       >
         <Flex direction={{ base: "column" }} justify="center">
           {id && (
-            <Link href={siteUrl}>
+            <Link href={siteUrl} passHref>
               <Box
                 position="relative"
                 cursor="pointer"
