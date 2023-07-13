@@ -81,46 +81,48 @@ export default function DiveSiteCard(props) {
         <Flex direction={{ base: "column" }} justify="center">
           {id && (
             <Link href={siteUrl} passHref>
-              <Box
-                position="relative"
-                cursor="pointer"
-                onClick={() => cardClicked()}
-              >
-                {isLoading ? (
-                  <Spinner />
-                ) : (
-                  <Image
-                    src={image || bgImg}
-                    width="300"
-                    height="200"
-                    borderRadius="20px"
-                  />
-                )}
-                {/* <Button
-                  position="absolute"
-                  bg="white"
-                  _hover={{ bg: "whiteAlpha.900" }}
-                  _active={{ bg: "white" }}
-                  _focus={{ bg: "white" }}
-                  p="0px !important"
-                  top="14px"
-                  right="14px"
-                  borderRadius="50%"
-                  minW="36px"
-                  h="36px"
-                  onClick={() => {
-                    setLike(!like);
-                  }}
+              <a>
+                <Box
+                  position="relative"
+                  cursor="pointer"
+                  onClick={() => cardClicked()}
                 >
-                  <Icon
-                    transition="0.2s linear"
-                    w="20px"
-                    h="20px"
-                    as={like ? IoHeart : IoHeartOutline}
-                    color="brand.500"
-                  />
-                </Button> */}
-              </Box>
+                  {isLoading ? (
+                    <Spinner />
+                  ) : (
+                    <Image
+                      src={image || bgImg}
+                      width="300"
+                      height="200"
+                      borderRadius="20px"
+                    />
+                  )}
+                  {/* <Button
+                    position="absolute"
+                    bg="white"
+                    _hover={{ bg: "whiteAlpha.900" }}
+                    _active={{ bg: "white" }}
+                    _focus={{ bg: "white" }}
+                    p="0px !important"
+                    top="14px"
+                    right="14px"
+                    borderRadius="50%"
+                    minW="36px"
+                    h="36px"
+                    onClick={() => {
+                      setLike(!like);
+                    }}
+                  >
+                    <Icon
+                      transition="0.2s linear"
+                      w="20px"
+                      h="20px"
+                      as={like ? IoHeart : IoHeartOutline}
+                      color="brand.500"
+                    />
+                  </Button> */}
+                </Box>
+              </a>
             </Link>
           )}
           <Flex

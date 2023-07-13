@@ -23,38 +23,13 @@
 */
 
 // Chakra imports
-import {
-  Box,
-  chakra,
-  Flex,
-  Stack,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { useRef, useState } from "react";
-import Map, {
-  NavigationControl,
-  FullscreenControl,
-  ScaleControl,
-  GeolocateControl,
-} from "react-map-gl";
-
-import Card from "components/card/Card";
+import { Box, chakra, Flex, Stack, Text } from "@chakra-ui/react";
 
 import "mapbox-gl/dist/mapbox-gl.css";
-import MapMarker from "./MapMarker";
-
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+import MapBase from "components/maps/MapBase";
 
 export default function MapHero(props) {
   const { diveSites, diveCentres } = props;
-  const [mapLocation, setMapLocation] = useState("Select Location");
-  const mapRef = useRef();
-
-  const mapStyles = useColorModeValue(
-    "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r",
-    "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r"
-  );
 
   return (
     <Flex
@@ -66,71 +41,12 @@ export default function MapHero(props) {
       position="relative"
       h="100vh"
     >
-      {/* <InnerContent w="100%"> */}
-      <Flex
-        direction={{ sm: "column", md: "row" }}
-        w="full"
-        // h={{ sm: "75vh", lg: "50vh" }}
+      <MapBase
+        diveSites={diveSites}
+        diveCentres={diveCentres}
+        h="100vh"
         boxShadow="dark-lg"
-      >
-        <Card
-          justifyContent="center"
-          position="relative"
-          direction="column"
-          borderRadius="xl"
-          w="100%"
-          p={{ sm: "0px", md: "10px" }}
-          zIndex="0"
-          h="100vh"
-          overflow="hidden"
-        >
-          <Map
-            ref={mapRef}
-            initialViewState={{
-              latitude: 27.2134,
-              longitude: 33.9,
-              pitch: 65,
-              zoom: 12,
-            }}
-            style={{ borderRadius: "20px", width: "100%", height: "100%" }}
-            mapStyle={mapStyles}
-            mapboxAccessToken={MAPBOX_TOKEN}
-            onClick={() => setMapLocation("Select Location")}
-          >
-            <GeolocateControl position="top-left" />
-            <FullscreenControl position="top-left" />
-            <NavigationControl position="top-left" />
-            <ScaleControl />
-
-            {diveSites?.map(
-              (location) =>
-                location.latitude &&
-                location.longitude && (
-                  <MapMarker
-                    location={location}
-                    mapLocation={mapLocation}
-                    setMapLocation={setMapLocation}
-                    type="diveSite"
-                    mapRef={mapRef}
-                  />
-                )
-            )}
-            {diveCentres?.map(
-              (location) =>
-                location.latitude &&
-                location.longitude && (
-                  <MapMarker
-                    location={location}
-                    mapLocation={mapLocation}
-                    setMapLocation={setMapLocation}
-                    type="diveCentre"
-                    mapRef={mapRef}
-                  />
-                )
-            )}
-          </Map>
-        </Card>
-      </Flex>
+      />
       {/* </InnerContent> */}
       <Stack
         direction="column"

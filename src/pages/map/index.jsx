@@ -26,54 +26,14 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import {
-  Avatar,
-  Flex,
-  Tag,
-  TagLabel,
-  useColorModeValue,
-} from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
-import { useState, useRef } from "react";
-import Map, {
-  Marker,
-  NavigationControl,
-  FullscreenControl,
-  ScaleControl,
-  GeolocateControl,
-} from "react-map-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
 
 // Assets
 import { supabase } from "../api";
-// import Image from "components/actions/NextChakraImg";
-import Card from "components/card/Card";
-// import SearchBar from "components/navbar/searchBar/SearchBar";
-// import LocationSummary from "components/maps/LocationSummary";
-import DiveSiteCard from "components/card/DiveSiteCard";
+import MapBase from "components/maps/MapBase";
 import DivingLayout from "layouts/DivingLayout";
-// const Moralis = require("moralis/node");
 
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-
-function createKey(location) {
-  return location.lat + location.lng;
-}
-
-export default function Default({ data }) {
-  const mapRef = useRef();
-  const [mapLocation, setMapLocation] = useState("Select Location");
-  // const parsedData = JSON.parse(data);
-
-  // const centerMap = useCallback(({ latitude, longitude }) => {
-  //   mapRef.current?.flyTo({ center: [longitude, latitude], duration: 2000 });
-  // }, []);
-
-  const mapStyles = useColorModeValue(
-    "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r",
-    "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r"
-  );
-
+export default function Default({ diveSites, diveCentres }) {
   return (
     <>
       <NextSeo
@@ -94,151 +54,31 @@ export default function Default({ data }) {
           ],
         }}
       />
-      <Flex
+      {/* <Flex
         gridArea="1 / 1 / 1 / 1"
         display={{ base: "block", lg: "flex" }}
         pt="80px"
-      >
-        <Card
-          justifyContent="center"
-          position="relative"
-          direction="column"
-          w="100%"
-          p={{ sm: "0px", md: "10px" }}
-          zIndex="0"
-          h={{ sm: "calc(100vh - 150px)", md: "calc(100vh - 150px)" }}
-          overflow="hidden"
-        >
-          <Map
-            ref={mapRef}
-            initialViewState={{
-              latitude: 28.0132,
-              longitude: 33.7751,
-              pitch: 65,
-              zoom: 7,
-            }}
-            style={{ borderRadius: "20px", width: "100%", height: "100%" }}
-            mapStyle={mapStyles}
-            mapboxAccessToken={MAPBOX_TOKEN}
-            onClick={() => setMapLocation("Select Location")}
-          >
-            <GeolocateControl position="top-left" />
-            <FullscreenControl position="top-left" />
-            <NavigationControl position="top-left" />
-            <ScaleControl />
-
-            {data?.map(
-              (location) =>
-                location.lat &&
-                location.lng && (
-                  <Marker
-                    key={createKey(location)}
-                    latitude={location.lat}
-                    longitude={location.lng}
-                    anchor="bottom"
-                    onClick={(e) => {
-                      // If we let the click event propagates to the map, it will immediately close the popup
-                      // with `closeOnClick: true`
-                      e.originalEvent.stopPropagation();
-                      setMapLocation(location);
-                      mapRef.current?.flyTo({
-                        center: [location.lng, location.lat + 0.02],
-                        zoom: 13,
-                        duration: 2000,
-                      });
-                    }}
-                  >
-                    {location.lat !== mapLocation.lat ? (
-                      <Tag
-                        size="sm"
-                        bgColor="#0b050575"
-                        color="white"
-                        borderRadius="full"
-                      >
-                        <Avatar
-                          src={
-                            location.locationType === "dive_site"
-                              ? "/img/diving/dive_site_icon.svg"
-                              : "/img/diving/dive_centre_icon.svg"
-                          }
-                          size={location.lat === mapLocation.lat ? "sm" : "xs"}
-                          // name={location.name}
-                          ml={-1}
-                          mr={2}
-                        />
-                        <TagLabel>{location.name}</TagLabel>
-                      </Tag>
-                    ) : (
-                      <DiveSiteCard
-                        key={location.location_id}
-                        id={location.location_id}
-                        name={location.name}
-                        tagList={location.divingTypes}
-                        type={location.locationType}
-                        image={location.itemImg}
-                        zIndex={3}
-                      />
-                    )}
-                  </Marker>
-                )
-            )}
-          </Map>
-        </Card>
-      </Flex>
+      > */}
+      <MapBase
+        diveSites={diveSites}
+        diveCentres={diveCentres}
+        h={{ sm: "calc(100vh - 110px)", md: "calc(100vh - 90px)" }}
+        pt={{ sm: "40px", lg: "60px" }}
+        gridArea="1 / 1 / 1 / 1"
+      />
+      {/* </Flex> */}
     </>
   );
 }
 
 export async function getStaticProps() {
-  try {
-    const { data: siteResults } = await supabase.from("dive_sites").select(
-      `id, name, description, latitude, longitude, min_visibility, max_visibility, depth, current, cert_level,
-        tags, access, dive_map, city: cities (name), country: cities (countries (name))`
-    );
-    const { data: centreResults } = await supabase.from("dive_centres").select(
-      `id, name, description, address, latitude, longitude, payment_methods, equipment, services, languages, memberships,
-      cover_photo, city: cities (name), country: cities (countries (name))`
-    );
-    const data = [];
-
-    for (let i = 0; i < siteResults.length; ++i) {
-      data.push({
-        location_id: siteResults[i].id,
-        name: siteResults[i].name,
-        lat: siteResults[i].latitude,
-        lng: siteResults[i].longitude,
-        itemImg: siteResults[i].dive_map,
-        maxDepth: siteResults[i].depth,
-        cert_level: siteResults[i].cert_level,
-        access: siteResults[i].access,
-        divingTypes: siteResults[i].tags,
-        city: siteResults[i].city.name,
-        country: siteResults[i].country.countries.name,
-        locationType: "diveSite",
-      });
-    }
-
-    for (let i = 0; i < centreResults.length; ++i) {
-      data.push({
-        location_id: centreResults[i].id,
-        name: centreResults[i].name,
-        lat: centreResults[i].latitude,
-        lng: centreResults[i].longitude,
-        itemImg: centreResults[i].cover_photo,
-        memberships: centreResults[i].memberships,
-        languages: centreResults[i].languages,
-        city: centreResults[i].city.name,
-        country: centreResults[i].country.countries.name,
-        locationType: "diveCentre",
-      });
-    }
-
-    // const data = JSON.stringify(results);
-
-    return { props: { data }, revalidate: 86400 };
-  } catch (error) {
-    console.error(error);
-  }
+  const { data: diveSites } = await supabase
+    .from("dive_sites_view")
+    .select(`id, name, latitude, longitude, diveMap`);
+  const { data: diveCentres } = await supabase
+    .from("active_dive_centres_view")
+    .select(`id, name, latitude, longitude, coverPhotoUrl`);
+  return { props: { diveSites, diveCentres }, revalidate: 86400 };
 }
 
 Default.getLayout = function getLayout(page) {
