@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { motion, isValidMotionProp } from "framer-motion";
 import Link from "next/link";
-import { posthog } from "posthog-js";
+import { usePostHog } from "posthog-js/react";
 import slugify from "slugify";
 
 import Image from "../actions/NextChakraImg";
@@ -39,6 +39,7 @@ export default function DiveSiteCard(props) {
     isLoading,
     ...rest
   } = props;
+  const posthog = usePostHog();
   // const [like, setLike] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
   const bgImg =

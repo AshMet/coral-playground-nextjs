@@ -43,7 +43,7 @@ import {
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
-import { posthog } from "posthog-js";
+import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -67,6 +67,7 @@ export default function SignUp() {
   const user = useUser();
   const router = useRouter();
   const toast = useToast();
+  const posthog = usePostHog();
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");

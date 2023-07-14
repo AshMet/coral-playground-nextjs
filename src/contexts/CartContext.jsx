@@ -11,7 +11,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Tooltip, useToast } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import posthog from "posthog-js";
+import { usePostHog } from "posthog-js/react";
 import { createContext, useState, useEffect } from "react";
 
 import AlertPopup from "../components/alerts/AlertPopup";
@@ -31,8 +31,8 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const supabase = useSupabaseClient();
   const user = useUser();
-
   const toast = useToast();
+  const postHog = usePostHog();
 
   // Local Storage: setting & getting data
   useEffect(() => {

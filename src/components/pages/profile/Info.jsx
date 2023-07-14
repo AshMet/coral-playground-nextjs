@@ -52,7 +52,7 @@ export default function Info(props) {
           name="username"
           label="Username"
           placeholder="@username"
-          value={profile?.username || ""}
+          value={profile?.username || user?.user_metadata.username || ""}
           onChange={handleProfileChange}
         />
         <InputField

@@ -8,15 +8,12 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 // Custom components
 import { useUser } from "@supabase/auth-helpers-react";
-import posthog from "posthog-js";
+import { usePostHog } from "posthog-js/react";
 import PropTypes from "prop-types";
-// import { useState } from "react";
+import { useEffect } from "react";
 
-// import Card from "components/card/Card";
-// import FixedPlugin from "components/fixedPlugin/FixedPlugin";
 import Footer from "components/footer/FooterLanding";
 import Navbar from "components/navbar/NavbarLanding";
-import { useEffect } from "react";
 // import SidebarContext from "../../../contexts/SidebarContext";
 // import React from "react";
 
@@ -24,6 +21,7 @@ function AuthCentered(props) {
   // const [toggleSidebar, setToggleSidebar] = useState(false);
   const { children, title, description, image } = props; // , cardTop, cardBottom
   const user = useUser();
+  const posthog = usePostHog();
 
   useEffect(() => {
     if (user) {

@@ -9,6 +9,7 @@ import { Box, Flex, SimpleGrid, useToast } from "@chakra-ui/react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { NextSeo } from "next-seo";
+import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
@@ -23,15 +24,8 @@ export default function Profile(props) {
   const supabase = useSupabaseClient();
   const [profile, setProfile] = useState("");
   const toast = useToast();
-  const {
-    username,
-    avatarUrl,
-    firstName,
-    lastName,
-    divingCert,
-    bio,
-    // userRole,
-  } = profile;
+  const posthog = usePostHog();
+  const { username, avatarUrl, firstName, lastName, divingCert, bio } = profile;
 
   useEffect(() => {
     if (!user) return null;
@@ -57,24 +51,6 @@ export default function Profile(props) {
         certification: divingCert,
       },
     });
-    // Success Alert
-    toast({
-      position: "top",
-      render: () => (
-        <AlertPopup
-          type="success"
-          text="Profile Updated!"
-          // subtext="View Shopping Cart to complete your order"
-        />
-      ),
-    });
-    // Success Analytics Tag
-    gtag.event({
-      action: "update-profile-success",
-      category: "button",
-      label: "Profile",
-      // value: newItem.title,
-    });
     // Alert & Analytics for failed load
     if (error) {
       toast({
@@ -92,6 +68,35 @@ export default function Profile(props) {
         category: "button",
         label: "Profile",
         // value: newItem.title,
+      });
+    } else {
+      // Success Alert
+      // console.log("data", data);
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="success"
+            text="Profile Updated!"
+            // subtext="View Shopping Cart to complete your order"
+          />
+        ),
+      });
+      // Success Analytics Tag
+      gtag.event({
+        action: "update-profile-success",
+        category: "button",
+        label: "Profile",
+        // value: newItem.title,
+      });
+      posthog.capture("Updated Profile", {
+        email: user.email,
+        username: !!user.user_metadata.username,
+        bio: !!user.user_metadata.bio,
+        avatar_url: !!user.user_metadata.avatar_url,
+        first_name: !!user.user_metadata.first_name,
+        last_name: !!user.user_metadata.last_name,
+        certification: user.user_metadata.diving_cert,
       });
     }
   };

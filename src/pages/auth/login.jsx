@@ -16,6 +16,7 @@ import {
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
+import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -28,7 +29,6 @@ import NavLink from "components/navLinks/NavLink";
 import { HSeparator } from "components/separator/Separator";
 import LoginLayout from "layouts/LoginLayout";
 import * as gtag from "lib/data/gtag";
-import { posthog } from "posthog-js";
 
 export default function Login() {
   // Chakra color mode
@@ -38,6 +38,7 @@ export default function Login() {
   const user = useUser();
   const router = useRouter();
   const toast = useToast();
+  const posthog = usePostHog();
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");

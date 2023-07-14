@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -12,6 +13,7 @@ import { useRouter } from "next/router";
 import Script from "next/script";
 import { DefaultSeo } from "next-seo";
 import posthog from "posthog-js";
+import { PostHogProvider } from "posthog-js/react";
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
@@ -31,14 +33,26 @@ const MyApp = ({ Component, pageProps }) => {
   const [sendinblueLoaded, setSendinblueLoaded] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  //     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+  //     // loaded: (posthog) => {
+  //     //   if (process.env.NODE_ENV === "development") posthog.opt_out_capturing();
+  //     // },
+  //   });
+  // }, []);
+
+  // Check that PostHog is client-side (used to handle Next.js SSR)
+  if (typeof window !== "undefined") {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-      // loaded: (posthog) => {
-      //   if (process.env.NODE_ENV === "development") posthog.opt_out_capturing();
-      // },
+      api_host:
+        process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://app.posthog.com",
+      // Enable debug mode in development
+      loaded: (posthog) => {
+        if (process.env.NODE_ENV === "development") posthog.debug();
+      },
     });
-  }, []);
+  }
 
   useEffect(() => {
     const handleRouteChange = (url) => {
@@ -51,7 +65,8 @@ const MyApp = ({ Component, pageProps }) => {
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
-  }, [router.events]);
+  }, []);
+
   return (
     <>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
@@ -149,17 +164,19 @@ const MyApp = ({ Component, pageProps }) => {
         initialSession={pageProps.initialSession}
       >
         <ChakraProvider theme={theme}>
-          <Provider store={store}>
-            <Head>
-              <meta
-                name="viewport"
-                content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-              />
-            </Head>
-            <DefaultSeo {...defaultSEOConfig} />
-            {getLayout(<Component {...pageProps} />)}
-            <Analytics />
-          </Provider>
+          <PostHogProvider client={posthog}>
+            <Provider store={store}>
+              <Head>
+                <meta
+                  name="viewport"
+                  content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
+                />
+              </Head>
+              <DefaultSeo {...defaultSEOConfig} />
+              {getLayout(<Component {...pageProps} />)}
+              <Analytics />
+            </Provider>
+          </PostHogProvider>
         </ChakraProvider>
       </SessionContextProvider>
     </>

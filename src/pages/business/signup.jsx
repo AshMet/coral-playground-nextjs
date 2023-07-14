@@ -21,7 +21,7 @@ import {
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
-import { posthog } from "posthog-js";
+import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
@@ -36,15 +36,16 @@ import { addBrevoContact } from "utils/sendInBlue/contacts";
 import { sendBrevoMail } from "utils/sendInBlue/sendMail";
 
 export default function SignUp() {
-  // Chakra color mode
-  const textColor = useColorModeValue("navy.700", "white");
-  const textColorSecondary = "gray.400";
   const supabase = useSupabaseClient();
   const user = useUser();
   const router = useRouter();
   const toast = useToast();
+  const posthog = usePostHog();
+
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
+  const textColor = useColorModeValue("navy.700", "white");
+  const textColorSecondary = "gray.400";
 
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);

@@ -7,7 +7,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { posthog } from "posthog-js";
+import { usePostHog } from "posthog-js/react";
 import { useContext } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
@@ -29,6 +29,7 @@ export default function CheckoutButton() {
   const user = useUser();
   const toast = useToast();
   const router = useRouter();
+  const posthog = usePostHog();
 
   async function checkout() {
     let stripePromise = null;

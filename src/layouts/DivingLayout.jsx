@@ -9,7 +9,7 @@
 // Chakra imports
 import { Portal, Box, useDisclosure } from "@chakra-ui/react";
 import { useUser } from "@supabase/auth-helpers-react";
-import posthog from "posthog-js";
+import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 
 import routes from "../routes";
@@ -30,6 +30,7 @@ export default function DivingLayout({ children, ...props }) {
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const user = useUser();
+  const posthog = usePostHog();
 
   useEffect(() => {
     if (user) {
