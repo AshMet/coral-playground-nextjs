@@ -159,12 +159,12 @@ const MyApp = ({ Component, pageProps }) => {
         `,
         }}
       />
-      <SessionContextProvider
-        supabaseClient={supabaseClient}
-        initialSession={pageProps.initialSession}
-      >
-        <ChakraProvider theme={theme}>
-          <PostHogProvider client={posthog}>
+      <PostHogProvider client={posthog}>
+        <SessionContextProvider
+          supabaseClient={supabaseClient}
+          initialSession={pageProps.initialSession}
+        >
+          <ChakraProvider theme={theme}>
             <Provider store={store}>
               <Head>
                 <meta
@@ -176,9 +176,9 @@ const MyApp = ({ Component, pageProps }) => {
               {getLayout(<Component {...pageProps} />)}
               <Analytics />
             </Provider>
-          </PostHogProvider>
-        </ChakraProvider>
-      </SessionContextProvider>
+          </ChakraProvider>
+        </SessionContextProvider>
+      </PostHogProvider>
     </>
   );
 };
