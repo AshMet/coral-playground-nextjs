@@ -33,26 +33,26 @@ const MyApp = ({ Component, pageProps }) => {
   const [sendinblueLoaded, setSendinblueLoaded] = useState(false);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-  //     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-  //     // loaded: (posthog) => {
-  //     //   if (process.env.NODE_ENV === "development") posthog.opt_out_capturing();
-  //     // },
-  //   });
-  // }, []);
-
-  // Check that PostHog is client-side (used to handle Next.js SSR)
-  if (typeof window !== "undefined") {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-      api_host:
-        process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://app.posthog.com",
-      // Enable debug mode in development
+  useEffect(() => {
+    posthog.init(`${process.env.NEXT_PUBLIC_POSTHOG_KEY}`, {
+      api_host: `${process.env.NEXT_PUBLIC_POSTHOG_HOST}`,
       loaded: (posthog) => {
         if (process.env.NODE_ENV === "development") posthog.debug();
       },
     });
-  }
+  }, []);
+
+  // Check that PostHog is client-side (used to handle Next.js SSR)
+  // if (typeof window !== "undefined") {
+  //   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  //     api_host:
+  //       process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://app.posthog.com",
+  //     // Enable debug mode in development
+  //     loaded: (posthog) => {
+  //       if (process.env.NODE_ENV === "development") posthog.debug();
+  //     },
+  //   });
+  // }
 
   useEffect(() => {
     const handleRouteChange = (url) => {
@@ -159,13 +159,13 @@ const MyApp = ({ Component, pageProps }) => {
         `,
         }}
       />
-      <PostHogProvider client={posthog}>
-        <SessionContextProvider
-          supabaseClient={supabaseClient}
-          initialSession={pageProps.initialSession}
-        >
-          <ChakraProvider theme={theme}>
-            <Provider store={store}>
+      <SessionContextProvider
+        supabaseClient={supabaseClient}
+        initialSession={pageProps.initialSession}
+      >
+        <ChakraProvider theme={theme}>
+          <Provider store={store}>
+            <PostHogProvider client={posthog}>
               <Head>
                 <meta
                   name="viewport"
@@ -175,10 +175,10 @@ const MyApp = ({ Component, pageProps }) => {
               <DefaultSeo {...defaultSEOConfig} />
               {getLayout(<Component {...pageProps} />)}
               <Analytics />
-            </Provider>
-          </ChakraProvider>
-        </SessionContextProvider>
-      </PostHogProvider>
+            </PostHogProvider>
+          </Provider>
+        </ChakraProvider>
+      </SessionContextProvider>
     </>
   );
 };

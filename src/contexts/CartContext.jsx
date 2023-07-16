@@ -32,7 +32,7 @@ export const CartProvider = ({ children }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const toast = useToast();
-  const postHog = usePostHog();
+  const posthog = usePostHog();
 
   // Local Storage: setting & getting data
   useEffect(() => {
