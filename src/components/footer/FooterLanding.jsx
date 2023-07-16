@@ -28,7 +28,7 @@ export default function Footer() {
       justifyContent="space-between"
       pb="30px"
       position="relative"
-      backgroundImage="/img/diving/footer_bg.jpg"
+      // backgroundImage="/img/diving/footer_bg.jpeg"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
       backgroundPosition="left"

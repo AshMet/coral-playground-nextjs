@@ -5,19 +5,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useToast } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { usePostHog } from "posthog-js/react";
 import { createContext, useState, useEffect } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 
 export const ProfileContext = createContext();
 
 export const ProfileProvider = ({ children }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
+  const toast = useToast();
+  const posthog = usePostHog();
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState("");
-  const toast = useToast();
   const { username, avatarUrl, firstName, lastName, divingCert, bio } = profile;
 
   // async function getOwnerDiveCentre() {
@@ -80,7 +82,7 @@ export const ProfileProvider = ({ children }) => {
     //   // avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarUrl}`,
     //   updated_at: new Date().toISOString(),
     // });
-    const { error } = await supabase.auth.updateUser({
+    const { data, error } = await supabase.auth.updateUser({
       data: {
         username,
         bio,
@@ -89,24 +91,6 @@ export const ProfileProvider = ({ children }) => {
         last_name: lastName,
         certification: divingCert,
       },
-    });
-    // Success Alert
-    toast({
-      position: "top",
-      render: () => (
-        <AlertPopup
-          type="success"
-          text="Profile Updated!"
-          // subtext="View Shopping Cart to complete your order"
-        />
-      ),
-    });
-    // Success Analytics Tag
-    gtag.event({
-      action: "update-profile-success",
-      category: "button",
-      label: "Profile",
-      // value: newItem.title,
     });
     // Alert & Analytics for failed load
     if (error) {
@@ -120,11 +104,40 @@ export const ProfileProvider = ({ children }) => {
           />
         ),
       });
-      gtag.event({
-        action: "update-profile-failed",
-        category: "button",
-        label: "Profile",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "update-profile-failed",
+      //   category: "button",
+      //   label: "Profile",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Profile Update Failed");
+    } else if (data) {
+      // Success Alert
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="success"
+            text="Profile Updated!"
+            // subtext="View Shopping Cart to complete your order"
+          />
+        ),
+      });
+      // Success Analytics Tag
+      // gtag.event({
+      //   action: "update-profile-success",
+      //   category: "button",
+      //   label: "Profile",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Profile Updated", {
+        email: user.email,
+        username: !!data.username,
+        bio: !!data.bio,
+        avatar_url: !!data.avatar_url,
+        first_name: !!data.first_name,
+        last_name: !!data.last_name,
+        certification: data.certification,
       });
     }
     // Stop Spinner

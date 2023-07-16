@@ -11,11 +11,12 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { usePostHog } from "posthog-js/react";
 import { useRef, useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 
 export default function Settings(props) {
   const { uid, profile, setProfile, updateProfile } = props;
@@ -26,6 +27,7 @@ export default function Settings(props) {
   const inputRef = useRef(null);
   const toast = useToast();
   const user = useUser();
+  const posthog = usePostHog();
 
   // async function downloadImage(path) {
   //   try {
@@ -74,21 +76,24 @@ export default function Settings(props) {
           />
         ),
       });
-      gtag.event({
-        action: "update-profile",
-        category: "button",
-        label: "Profile",
-        // value: newItem.title,
-      });
+      // gtag.event({
+      //   action: "update-profile",
+      //   category: "button",
+      //   label: "Profile",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Avatar Update Failed");
       throw error;
+    } else {
+      setProfile({
+        ...profile,
+        avatarUrl: newAvatarUrl,
+      });
+      posthog.capture("Avatar Updated");
+
+      updateProfile();
     }
 
-    setProfile({
-      ...profile,
-      avatarUrl: newAvatarUrl,
-    });
-
-    updateProfile();
     setUploading(false);
   };
 

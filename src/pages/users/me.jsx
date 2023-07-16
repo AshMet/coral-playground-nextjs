@@ -17,7 +17,7 @@ import Banner from "components/pages/profile/Banner";
 import Info from "components/pages/profile/Info";
 // import UserOrders from "components/pages/profile/UserOrders";
 import DivingLayout from "layouts/DivingLayout";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 
 export default function Profile(props) {
   const { user } = props;
@@ -63,11 +63,15 @@ export default function Profile(props) {
           />
         ),
       });
-      gtag.event({
-        action: "update-profile-failed",
-        category: "button",
-        label: "Profile",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "update-profile-failed",
+      //   category: "button",
+      //   label: "Profile",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Profile Update Failed", {
+        email: user.email,
+        error: error.message,
       });
     } else {
       // Success Alert
@@ -83,20 +87,20 @@ export default function Profile(props) {
         ),
       });
       // Success Analytics Tag
-      gtag.event({
-        action: "update-profile-success",
-        category: "button",
-        label: "Profile",
-        // value: newItem.title,
-      });
-      posthog.capture("Updated Profile", {
+      // gtag.event({
+      //   action: "update-profile-success",
+      //   category: "button",
+      //   label: "Profile",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Profile Updated", {
         email: user.email,
-        username: !!user.user_metadata.username,
-        bio: !!user.user_metadata.bio,
-        avatar_url: !!user.user_metadata.avatar_url,
-        first_name: !!user.user_metadata.first_name,
-        last_name: !!user.user_metadata.last_name,
-        certification: user.user_metadata.diving_cert,
+        username: !!username,
+        bio: !!bio,
+        avatar_url: !!avatarUrl,
+        first_name: !!firstName,
+        last_name: !!lastName,
+        certification: divingCert,
       });
     }
   };

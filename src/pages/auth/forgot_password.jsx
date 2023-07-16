@@ -12,12 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
+import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
-// import { TbBuildingStore, TbScubaMask } from "react-icons/tb";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import LoginLayout from "layouts/LoginLayout";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 
 export default function Login() {
   // Chakra color mode
@@ -27,6 +27,7 @@ export default function Login() {
   const user = useUser();
   const router = useRouter();
   const toast = useToast();
+  const posthog = usePostHog();
 
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({ email: "" });
@@ -51,12 +52,13 @@ export default function Login() {
           />
         ),
       });
-      gtag.event({
-        action: "pass-reset-error",
-        category: "button",
-        label: "User",
-        // value: newItem.title,
-      });
+      // gtag.event({
+      //   action: "pass-reset-error",
+      //   category: "button",
+      //   label: "User",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Password Reset Failed");
     } else {
       // Success Alert
       toast({
@@ -70,12 +72,13 @@ export default function Login() {
         ),
       });
       // Success Analytics Tag
-      gtag.event({
-        action: "pass-reset-success",
-        category: "button",
-        label: "User",
-        // value: newItem.title,
-      });
+      // gtag.event({
+      //   action: "pass-reset-success",
+      //   category: "button",
+      //   label: "User",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Password Reset");
     }
 
     setLoading(false);

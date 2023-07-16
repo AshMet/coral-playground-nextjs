@@ -10,6 +10,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 import { IoMdTime } from "react-icons/io";
 import { IoEllipsisHorizontal } from "react-icons/io5";
@@ -17,7 +18,7 @@ import { IoEllipsisHorizontal } from "react-icons/io5";
 import AlertPopup from "components/alerts/AlertPopup";
 import SwitchField from "components/fields/SwitchField";
 import DiveTripMenu from "components/pages/diveTrips/tripMenu";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 // Assets
 
 export default function DailyTripCard(props) {
@@ -32,6 +33,7 @@ export default function DailyTripCard(props) {
   const textColorInactive = useColorModeValue("red.700", "red.400");
   const supabase = useSupabaseClient();
   const toast = useToast();
+  const posthog = usePostHog();
 
   const updateStatus = async (newStatus) => {
     await setActive(newStatus);
@@ -51,11 +53,15 @@ export default function DailyTripCard(props) {
           />
         ),
       });
-      gtag.event({
-        action: "update-dive-trip-success",
-        category: "button",
-        label: "Dive Trip",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "update-dive-trip-success",
+      //   category: "button",
+      //   label: "Dive Trip",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Dive Trip Updated", {
+        dive_trip: data.name,
+        active: data.active ? "Active" : "Inactive",
       });
     }
     setActive(newStatus);

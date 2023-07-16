@@ -17,6 +17,7 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
+import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import slugify from "slugify";
 
@@ -26,7 +27,7 @@ import InputField from "components/fields/InputField";
 import SwitchField from "components/fields/SwitchField";
 import TextField from "components/fields/TextField";
 import DivingLayout from "layouts/DivingLayout";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 import { updateBrevoBusinessName } from "utils/sendInBlue/contacts";
 
 export default function UpdateDiveCentre({ diveCentreData }) {
@@ -42,6 +43,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
   );
   const router = useRouter();
   const user = useUser();
+  const posthog = usePostHog();
 
   const [diveCentre, setDiveCentre] = useState(diveCentreData);
   const [loading, setLoading] = useState(false);
@@ -217,11 +219,15 @@ export default function UpdateDiveCentre({ diveCentreData }) {
     // Update Brevo User Business Name
     updateBrevoBusinessName(user.email, name);
     // Success Analytics Tag
-    gtag.event({
-      action: "create-dive-centre-success",
-      category: "button",
-      label: "Dive Centre",
-      value: name,
+    // gtag.event({
+    //   action: "create-dive-centre-success",
+    //   category: "button",
+    //   label: "Dive Centre",
+    //   value: name,
+    // });
+    posthog.capture("Dive Centre Updated", {
+      dive_centre: name,
+      error: error.message,
     });
     // Alert & Analytics for failed load
     if (error) {
@@ -235,11 +241,15 @@ export default function UpdateDiveCentre({ diveCentreData }) {
           />
         ),
       });
-      gtag.event({
-        action: "update-dive-centre-failed",
-        category: "button",
-        label: "Dive Centre",
-        value: name,
+      // gtag.event({
+      //   action: "update-dive-centre-failed",
+      //   category: "button",
+      //   label: "Dive Centre",
+      //   value: name,
+      // });
+      posthog.capture("Dive Centre Update Failed", {
+        dive_centre: name,
+        error: error.message,
       });
     }
 

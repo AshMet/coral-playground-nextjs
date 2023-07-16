@@ -16,7 +16,7 @@ import { createContext, useState, useEffect } from "react";
 
 import AlertPopup from "../components/alerts/AlertPopup";
 import equipment from "lib/constants/equipment.json";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 import * as sendinblue from "lib/data/sendinblue";
 
 export const CartContext = createContext();
@@ -123,14 +123,14 @@ export const CartProvider = ({ children }) => {
         />
       ),
     });
-    gtag.event({
-      action: "add-to-cart",
-      category: "button",
-      label: "Add item to cart",
-      value: newItem.title,
-    });
+    // gtag.event({
+    //   action: "add-to-cart",
+    //   category: "button",
+    //   label: "Add item to cart",
+    //   value: newItem.title,
+    // });
     posthog.capture("Added Item to cart", {
-      name: newItem.title,
+      dive_trip: newItem.title,
     });
     sendinblue.track("add-to-cart");
   }

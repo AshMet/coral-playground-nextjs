@@ -2,17 +2,19 @@
 /* eslint-disable react/prop-types */
 import { AspectRatio, Box, Button, useToast } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { usePostHog } from "posthog-js/react";
 import { useState, useRef } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 
 export default function DiveCentreCover({ diveCentre }) {
   const [uploading, setUploading] = useState(null);
   const toast = useToast();
   const inputRef = useRef(null);
   const supabase = useSupabaseClient();
+  const posthog = usePostHog();
 
   async function updateDiveCentre(newCoverPhotoUrl) {
     const { error } = await supabase
@@ -34,11 +36,14 @@ export default function DiveCentreCover({ diveCentre }) {
         />
       ),
     });
-    gtag.event({
-      action: "update-cover-photo",
-      category: "button",
-      label: "Dive Centre",
-      value: diveCentre.id,
+    // gtag.event({
+    //   action: "update-cover-photo",
+    //   category: "button",
+    //   label: "Dive Centre",
+    //   value: diveCentre.id,
+    // });
+    posthog.capture("Updated Dive Centre Cover Photo", {
+      dive_centre: diveCentre.name,
     });
     // Alert & Analytics for failed load
     if (error) {
@@ -52,11 +57,14 @@ export default function DiveCentreCover({ diveCentre }) {
           />
         ),
       });
-      gtag.event({
-        action: "update-profile",
-        category: "button",
-        label: "DiveCentre",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "Dive Centre Photo Update Failed",
+      //   category: "button",
+      //   label: "DiveCentre",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Updated Profile", {
+        dive_centre: diveCentre.name,
       });
     }
   }

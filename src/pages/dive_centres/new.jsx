@@ -14,6 +14,7 @@ import {
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
+import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import slugify from "slugify";
 
@@ -25,7 +26,7 @@ import TextField from "components/fields/TextField";
 // import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import MapWithAutoComplete from "components/maps/MapWithAutoComplete";
 import DivingLayout from "layouts/DivingLayout";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 import { updateBrevoBusinessName } from "utils/sendInBlue/contacts";
 
 export default function CreateDiveCentre() {
@@ -58,6 +59,7 @@ export default function CreateDiveCentre() {
   const router = useRouter();
   const supabase = useSupabaseClient();
   const user = useUser();
+  const posthog = usePostHog();
 
   const [diveCentre, setDiveCentre] = useState(initialState);
   const [loading, setLoading] = useState(false);
@@ -220,11 +222,14 @@ export default function CreateDiveCentre() {
         ),
       });
       // Success Analytics Tag
-      gtag.event({
-        action: "create-dive-centre-success",
-        category: "button",
-        label: "Dive Centre",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "create-dive-centre-success",
+      //   category: "button",
+      //   label: "Dive Centre",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Dive Centre Created", {
+        dive_centre: data.name,
       });
       updateBrevoBusinessName(user.email, data.name, "business");
       router.push(
@@ -247,11 +252,15 @@ export default function CreateDiveCentre() {
           />
         ),
       });
-      gtag.event({
-        action: "update-dive-centre-failed",
-        category: "button",
-        label: "Dive Centre",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "update-dive-centre-failed",
+      //   category: "button",
+      //   label: "Dive Centre",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Dive Centre Creation Failed", {
+        dive_centre: name,
+        error: error.message,
       });
     }
   };

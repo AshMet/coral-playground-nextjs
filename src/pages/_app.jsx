@@ -19,7 +19,7 @@ import { Provider } from "react-redux";
 
 import defaultSEOConfig from "../../next-seo.config";
 // import Layout from "lib/layout";
-import * as gtag from "../lib/data/gtag";
+// import * as gtag from "../lib/data/gtag";
 // import mautic from "../lib/data/mt";
 import { store } from "../lib/redux/store";
 import theme from "../theme/theme";
@@ -36,6 +36,7 @@ const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {
     posthog.init(`${process.env.NEXT_PUBLIC_POSTHOG_KEY}`, {
       api_host: `${process.env.NEXT_PUBLIC_POSTHOG_HOST}`,
+      autocapture: false,
       loaded: (posthog) => {
         if (process.env.NODE_ENV === "development") posthog.debug();
       },
@@ -56,7 +57,7 @@ const MyApp = ({ Component, pageProps }) => {
 
   useEffect(() => {
     const handleRouteChange = (url) => {
-      gtag.pageview(url);
+      // gtag.pageview(url);
       // mautic.pageView({ url });
       posthog.capture("$pageview");
       fbq.pageview();
@@ -70,7 +71,7 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
-      <Script
+      {/* <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
       />
@@ -87,7 +88,7 @@ const MyApp = ({ Component, pageProps }) => {
             });
           `,
         }}
-      />
+      /> */}
       <Script
         id="metricoolScript"
         strategy="afterInteractive"

@@ -28,7 +28,7 @@ import InputField from "components/fields/InputField";
 import NavLink from "components/navLinks/NavLink";
 import { HSeparator } from "components/separator/Separator";
 import LoginLayout from "layouts/LoginLayout";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 
 export default function Login() {
   // Chakra color mode
@@ -83,11 +83,16 @@ export default function Login() {
           />
         ),
       });
-      gtag.event({
-        action: "login-error",
-        category: "button",
-        label: "User",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "login-error",
+      //   category: "button",
+      //   label: "User",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Login Failed", {
+        email,
+        login_method: "Email",
+        error: error.message,
       });
     } else {
       // Success Alert
@@ -104,13 +109,14 @@ export default function Login() {
       // Success Analytics Tag
       posthog.capture("Login", {
         email,
+        login_method: "Email",
       });
-      gtag.event({
-        action: "login-success",
-        category: "button",
-        label: "User",
-        // value: newItem.title,
-      });
+      // gtag.event({
+      //   action: "login-success",
+      //   category: "button",
+      //   label: "User",
+      //   // value: newItem.title,
+      // });
     }
 
     setLoading(false);
@@ -134,11 +140,14 @@ export default function Login() {
           />
         ),
       });
-      gtag.event({
-        action: "google-login-error",
-        category: "button",
-        label: "User",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "google-login-error",
+      //   category: "button",
+      //   label: "User",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Google Login Failed", {
+        error: error.message,
       });
     } else {
       // Success Alert
@@ -153,11 +162,15 @@ export default function Login() {
         ),
       });
       // Success Analytics Tag
-      gtag.event({
-        action: "login-google-success",
-        category: "button",
-        label: "User",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "login-google-success",
+      //   category: "button",
+      //   label: "User",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Login", {
+        email,
+        login_method: "Google",
       });
     }
 

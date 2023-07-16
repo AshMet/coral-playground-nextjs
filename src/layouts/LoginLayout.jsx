@@ -28,7 +28,7 @@ function LoginLayout(props) {
         }
       );
     }
-  }, [posthog, user]);
+  }, [user]);
 
   return (
     <Flex position="relative" h="max-content">

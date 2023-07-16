@@ -16,6 +16,7 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { usePostHog } from "posthog-js/react";
 import { useContext } from "react";
 import { BsExclamationCircle } from "react-icons/bs";
 import { IoMdTrash } from "react-icons/io";
@@ -24,7 +25,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import Card from "components/card/Card";
 import TimelineItem from "components/dataDisplay/TimelineItem";
 import { CartContext } from "contexts/CartContext";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 
 function CartList(props) {
   const { ...rest } = props;
@@ -84,17 +85,19 @@ export default function ShoppingCart() {
   const menuBg = useColorModeValue("white", "navy.800");
   const { cartItems } = useContext(CartContext);
   const router = useRouter();
+  const posthog = usePostHog();
   // console.log("navbar cartItems", cartItems);
   const { clearCart } = useContext(CartContext);
   const iconBgColor = useColorModeValue("green.200", "green.700");
 
   const cartCheckout = () => {
-    gtag.event({
-      action: "start-cart-checkout",
-      category: "button",
-      label: "Start Cart Checkout",
-      // value:
-    });
+    // gtag.event({
+    //   action: "start-cart-checkout",
+    //   category: "button",
+    //   label: "Start Cart Checkout",
+    //   // value:
+    // });
+    posthog.capture("Cart Checkout");
     router.push("/booking");
   };
 

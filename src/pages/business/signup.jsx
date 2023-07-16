@@ -31,7 +31,7 @@ import AlertPopup from "components/alerts/AlertPopup";
 import InputField from "components/fields/InputField";
 import NavLink from "components/navLinks/NavLink";
 import LoginLayout from "layouts/LoginLayout";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 import { addBrevoContact } from "utils/sendInBlue/contacts";
 import { sendBrevoMail } from "utils/sendInBlue/sendMail";
 
@@ -103,11 +103,16 @@ export default function SignUp() {
           />
         ),
       });
-      gtag.event({
-        action: "signup-error",
-        category: "button",
-        label: "User",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "signup-error",
+      //   category: "button",
+      //   label: "User",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Sign Up Failed", {
+        email,
+        signup_method: "Email",
+        error: error.message,
       });
     } else {
       // Success Alert
@@ -129,12 +134,12 @@ export default function SignUp() {
         last_name: lastName,
       });
       // Success Analytics Tag
-      gtag.event({
-        action: "signup-success",
-        category: "button",
-        label: "User",
-        // value: newItem.title,
-      });
+      // gtag.event({
+      //   action: "signup-success",
+      //   category: "button",
+      //   label: "User",
+      //   // value: newItem.title,
+      // });
       // Add user to Brevo
       const brevoUser = await addBrevoContact(
         firstName,

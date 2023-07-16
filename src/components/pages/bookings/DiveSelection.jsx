@@ -26,7 +26,7 @@ import { MdAdd } from "react-icons/md";
 import AlertPopup from "components/alerts/AlertPopup";
 import Card from "components/card/Card";
 import { DarkMap, LightMap } from "components/maps/MapStyles";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 import { supabase } from "pages/api/index";
 
 const mapApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -115,11 +115,14 @@ export default function DiveSelection(props) {
         />
       ),
     });
-    gtag.event({
-      action: "add-site-to-trip",
-      category: "button",
-      label: "Add Dive Site to Trip",
-      value: newItem.name,
+    // gtag.event({
+    //   action: "add-site-to-trip",
+    //   category: "button",
+    //   label: "Add Dive Site to Trip",
+    //   value: newItem.name,
+    // });
+    posthog.capture("Dive Site Added to Trip", {
+      dive_site: newItem.name,
     });
   }
 

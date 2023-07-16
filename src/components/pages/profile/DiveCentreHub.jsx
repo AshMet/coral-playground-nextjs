@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
+import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 import {} from "react-icons/io";
 import { IoEllipsisHorizontal } from "react-icons/io5";
@@ -27,7 +28,7 @@ import Card from "components/card/Card";
 import SwitchField from "components/fields/SwitchField";
 import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import OwnerDiveCentreMenu from "components/pages/profile/OwnerDiveCentreMenu";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 
 export default function DiveCentreHub(props) {
   const { diveCentre, loading, ...rest } = props;
@@ -40,6 +41,7 @@ export default function DiveCentreHub(props) {
   const [active, setActive] = useState(diveCentre.active);
   const supabase = useSupabaseClient();
   const toast = useToast();
+  const posthog = usePostHog();
 
   async function updateStatus(newStatus) {
     await setActive(newStatus);
@@ -60,14 +62,16 @@ export default function DiveCentreHub(props) {
           />
         ),
       });
-      gtag.event({
-        action: "update-dive-centre-failed",
-        category: "button",
-        label: "Dive Centre",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "update-dive-centre-failed",
+      //   category: "button",
+      //   label: "Dive Centre",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Dive Centre Update Failed", {
+        dive_centre: diveCentre.name,
       });
-    }
-    if (data) {
+    } else if (data) {
       toast({
         position: "top",
         render: () => (
@@ -78,11 +82,14 @@ export default function DiveCentreHub(props) {
           />
         ),
       });
-      gtag.event({
-        action: "update-dive-centre-success",
-        category: "button",
-        label: "Dive Centre",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "update-dive-centre-success",
+      //   category: "button",
+      //   label: "Dive Centre",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Dive Centre Updated", {
+        dive_centre: diveCentre.name,
       });
     }
     // console.log("active: ", active);

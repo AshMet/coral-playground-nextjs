@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
+import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import { AiOutlineShop } from "react-icons/ai";
 import { IoEllipsisHorizontal } from "react-icons/io5";
@@ -21,12 +22,13 @@ import SwitchField from "components/fields/SwitchField";
 import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import Invite from "components/pages/diveCentre/Invite";
 import OwnerDiveCentreMenu from "components/pages/profile/OwnerDiveCentreMenu";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 
 export default function CentreCard(props) {
   const { diveCentre } = props;
   const supabase = useSupabaseClient();
   const toast = useToast();
+  const posthog = usePostHog();
   const textColor = useColorModeValue("gray.700", "white");
   const textColorActive = useColorModeValue("green.600", "green.400");
   const textColorInactive = useColorModeValue("red.700", "red.400");
@@ -70,11 +72,14 @@ export default function CentreCard(props) {
           />
         ),
       });
-      gtag.event({
-        action: "update-dive-centre-failed",
-        category: "button",
-        label: "Dive Centre",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "update-dive-centre-failed",
+      //   category: "button",
+      //   label: "Dive Centre",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Dive Centre Update Failed", {
+        dive_centre: diveCentre.name,
       });
     }
     if (data) {
@@ -88,11 +93,14 @@ export default function CentreCard(props) {
           />
         ),
       });
-      gtag.event({
-        action: "update-dive-centre-success",
-        category: "button",
-        label: "Dive Centre",
-        // value: newItem.title,
+      // gtag.event({
+      //   action: "update-dive-centre-success",
+      //   category: "button",
+      //   label: "Dive Centre",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Dive Centre Updated", {
+        dive_centre: diveCentre.name,
       });
     }
   }
