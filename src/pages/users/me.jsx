@@ -94,13 +94,15 @@ export default function Profile(props) {
       //   // value: newItem.title,
       // });
       posthog.capture("Profile Updated", {
-        email: user.email,
-        username: !!username,
-        bio: !!bio,
-        avatar_url: !!avatarUrl,
-        first_name: !!firstName,
-        last_name: !!lastName,
-        certification: divingCert,
+        $set: {
+          email: user.email,
+          username,
+          bio: !!bio,
+          avatar_url: !!avatarUrl,
+          first_name: !!firstName,
+          last_name: !!lastName,
+          certification: divingCert,
+        },
       });
     }
   };

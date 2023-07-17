@@ -161,10 +161,12 @@ export default function SignUp() {
       });
       // posthog.identify(data.id, { role }, { email });
       posthog.capture("Sign Up", {
-        email,
-        role,
-        first_name: firstName,
-        last_name: lastName,
+        $set: {
+          email,
+          role,
+          first_name: firstName,
+          last_name: lastName,
+        },
       });
       // Success Analytics Tag
       // gtag.event({

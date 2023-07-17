@@ -12,7 +12,7 @@ import { useContext } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import { CartContext } from "contexts/CartContext";
-import * as gtag from "lib/data/gtag";
+// import * as gtag from "lib/data/gtag";
 
 export default function CheckoutButton() {
   const {
@@ -77,6 +77,11 @@ export default function CheckoutButton() {
         .select()
         .single();
 
+      posthog.capture("Stripe Checkout", {
+        order_id: order.id,
+        amount_paid: order.amount_paid / 100,
+        amount_total: order.amount_total / 100,
+      });
       // console.log("calcTotalPaid", calcTotalPaid());
       // console.log("order", order);
       return order;
@@ -137,7 +142,7 @@ export default function CheckoutButton() {
           equipment_id: item.id,
           quantity: 1,
         }));
-      const { error: eqiupLineItemError } = await supabase
+      const { error: equipLineItemError } = await supabase
         .from("order_equipment")
         .insert(
           insertDataEquipment.length === 1
@@ -145,16 +150,11 @@ export default function CheckoutButton() {
             : insertDataEquipment
         )
         .select();
-      if (eqiupLineItemError) {
+      if (equipLineItemError) {
         // console.log(
-        //   `Line Item Save Failed: ${JSON.stringify(eqiupLineItemError)}`
+        //   `Line Item Save Failed: ${JSON.stringify(equipLineItemError)}`
         // );
       }
-      posthog.capture("Checkout", {
-        orderId: order.id,
-        amountPaid: order.amountPaid,
-        amountTotal: order.amountTotal,
-      });
       // console.log("insertDataEquipment", insertDataEquipment);
       return order;
     }
@@ -257,12 +257,12 @@ export default function CheckoutButton() {
       });
       return null;
     }
-    gtag.event({
-      action: "start-stripe-checkout",
-      category: "button",
-      label: "Stripe Checkout Start",
-      // value:
-    });
+    // gtag.event({
+    //   action: "start-stripe-checkout",
+    //   category: "button",
+    //   label: "Stripe Checkout Start",
+    //   // value:
+    // });
     checkout();
   }
 

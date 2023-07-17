@@ -63,7 +63,7 @@ export default function DiveCentreCover({ diveCentre }) {
       //   label: "DiveCentre",
       //   // value: newItem.title,
       // });
-      posthog.capture("Updated Profile", {
+      posthog.capture("Dive Centre Cover Photo Update Failed", {
         dive_centre: diveCentre.name,
       });
     }

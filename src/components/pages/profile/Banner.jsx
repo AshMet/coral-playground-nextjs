@@ -82,14 +82,20 @@ export default function Settings(props) {
       //   label: "Profile",
       //   // value: newItem.title,
       // });
-      posthog.capture("Avatar Update Failed");
+      posthog.capture("Avatar Update Failed", {
+        error: error.message,
+      });
       throw error;
     } else {
       setProfile({
         ...profile,
         avatarUrl: newAvatarUrl,
       });
-      posthog.capture("Avatar Updated");
+      posthog.capture("Avatar Updated", {
+        $set: {
+          avatar: !!newAvatarUrl,
+        },
+      });
 
       updateProfile();
     }

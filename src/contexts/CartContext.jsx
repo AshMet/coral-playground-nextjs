@@ -131,12 +131,13 @@ export const CartProvider = ({ children }) => {
     // });
     posthog.capture("Added Item to cart", {
       dive_trip: newItem.title,
+      dive_centre: newItem.centreName,
     });
     sendinblue.track("add-to-cart");
   }
 
   // Remove from Cart
-  function removeFromCart(id, name) {
+  function removeFromCart(id, name, centreName) {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
     toast({
       position: "top",
@@ -145,7 +146,8 @@ export const CartProvider = ({ children }) => {
       ),
     });
     posthog.capture("Removed Item from cart", {
-      name: newItem.title,
+      dive_trip: name,
+      dive_centre: centreName,
     });
   }
 

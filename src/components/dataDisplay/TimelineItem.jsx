@@ -18,7 +18,7 @@ import { IoStorefrontOutline } from "react-icons/io5";
 
 import { CartContext } from "contexts/CartContext";
 
-export default function Default(props) {
+export default function TimelineItem(props) {
   const { removeFromCart } = useContext(CartContext);
 
   const {
@@ -160,7 +160,7 @@ export default function Default(props) {
             transform: "scale(1.5) rotate(180deg)",
             transformOrigin: "center center",
           }}
-          onClick={() => removeFromCart(id, title)}
+          onClick={() => removeFromCart(id, title, diveCentre)}
         >
           <Icon
             as={BsX}

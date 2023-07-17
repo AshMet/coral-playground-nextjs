@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { motion, isValidMotionProp } from "framer-motion";
 import Link from "next/link";
-import { usePostHog } from "posthog-js/react";
+// import { usePostHog } from "posthog-js/react";
 import slugify from "slugify";
 
 import Image from "../actions/NextChakraImg";
@@ -39,7 +39,7 @@ export default function DiveSiteCard(props) {
     isLoading,
     ...rest
   } = props;
-  const posthog = usePostHog();
+  // const posthog = usePostHog();
   // const [like, setLike] = useState(false);
   const textColor = useColorModeValue("navy.700", "white");
   const bgImg =
@@ -57,12 +57,13 @@ export default function DiveSiteCard(props) {
           remove: /[*+~.()'"!:@]/g,
         })}`;
 
-  function cardClicked() {
-    posthog.capture(`Viewed Dive ${type === "dive_site" ? "Site" : "Centre"}`, {
-      id,
-      name,
-    });
-  }
+  // function cardClicked() {
+  //   const siteType = type === "dive_site" ? "Dive Site" : "Dive Centre";
+  //   posthog.capture(`Viewed Dive ${siteType}`, {
+  //     id,
+  //     name,
+  //   });
+  // }
   return (
     <ChakraBox
       layout
@@ -86,7 +87,7 @@ export default function DiveSiteCard(props) {
                 <Box
                   position="relative"
                   cursor="pointer"
-                  onClick={() => cardClicked()}
+                  // onClick={() => cardClicked()}
                 >
                   {isLoading ? (
                     <Spinner />
