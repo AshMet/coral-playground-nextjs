@@ -43,7 +43,7 @@ export default function DiveCentreCover({ diveCentre }) {
     //   value: diveCentre.id,
     // });
     posthog.capture("Updated Dive Centre Cover Photo", {
-      dive_centre: diveCentre.name,
+      "Dive Centre": diveCentre.name,
     });
     // Alert & Analytics for failed load
     if (error) {
@@ -64,7 +64,7 @@ export default function DiveCentreCover({ diveCentre }) {
       //   // value: newItem.title,
       // });
       posthog.capture("Dive Centre Cover Photo Update Failed", {
-        dive_centre: diveCentre.name,
+        "Dive Centre": diveCentre.name,
       });
     }
   }

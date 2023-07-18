@@ -69,7 +69,7 @@ export default function DiveCentreHub(props) {
       //   // value: newItem.title,
       // });
       posthog.capture("Dive Centre Update Failed", {
-        dive_centre: diveCentre.name,
+        "Dive Centre": diveCentre.name,
       });
     } else if (data) {
       toast({
@@ -89,7 +89,7 @@ export default function DiveCentreHub(props) {
       //   // value: newItem.title,
       // });
       posthog.capture("Dive Centre Updated", {
-        dive_centre: diveCentre.name,
+        "Dive Centre": diveCentre.name,
       });
     }
     // console.log("active: ", active);

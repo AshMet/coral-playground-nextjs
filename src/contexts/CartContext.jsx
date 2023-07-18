@@ -130,8 +130,8 @@ export const CartProvider = ({ children }) => {
     //   value: newItem.title,
     // });
     posthog.capture("Added Item to cart", {
-      dive_trip: newItem.title,
-      dive_centre: newItem.centreName,
+      "Dive Trip": newItem.title,
+      "Dive Centre": newItem.centreName,
     });
     sendinblue.track("add-to-cart");
   }
@@ -146,8 +146,8 @@ export const CartProvider = ({ children }) => {
       ),
     });
     posthog.capture("Removed Item from cart", {
-      dive_trip: name,
-      dive_centre: centreName,
+      "Dive Trip": name,
+      "Dive Centre": centreName,
     });
   }
 

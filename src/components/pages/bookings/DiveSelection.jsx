@@ -20,6 +20,7 @@ import {
   MarkerClusterer,
   InfoWindow,
 } from "@react-google-maps/api";
+import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 import { MdAdd } from "react-icons/md";
 
@@ -55,6 +56,7 @@ export default function DiveSelection(props) {
   const [zoom, setZoom] = useState(5);
   const [infoOpen, setInfoOpen] = useState(false);
   const toast = useToast();
+  const posthog = usePostHog();
 
   async function fetchSites() {
     setLoading(true);
@@ -122,7 +124,7 @@ export default function DiveSelection(props) {
     //   value: newItem.name,
     // });
     posthog.capture("Dive Site Added to Trip", {
-      dive_site: newItem.name,
+      "Dive Site": newItem.name,
     });
   }
 

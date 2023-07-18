@@ -7,10 +7,8 @@
 // Chakra imports
 import { Box, Flex, Text } from "@chakra-ui/react";
 // Custom components
-import { useUser } from "@supabase/auth-helpers-react";
-import { usePostHog } from "posthog-js/react";
+// import { usePostHog } from "posthog-js/react";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
 
 import Footer from "components/footer/FooterLanding";
 import Navbar from "components/navbar/NavbarLanding";
@@ -20,21 +18,21 @@ import Navbar from "components/navbar/NavbarLanding";
 function AuthCentered(props) {
   // const [toggleSidebar, setToggleSidebar] = useState(false);
   const { children, title, description, image } = props; // , cardTop, cardBottom
-  const user = useUser();
-  const posthog = usePostHog();
+  // const user = useUser();
+  // const posthog = usePostHog();
 
-  useEffect(() => {
-    if (user) {
-      posthog?.identify(
-        user.email, // distinctId
-        {
-          role: user?.user_metadata.role,
-          first_name: user?.user_metadata.first_name,
-          last_name: user?.user_metadata.last_name,
-        }
-      );
-    }
-  }, [posthog, user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     posthog?.identify(
+  //       user.email, // distinctId
+  //       {
+  //         role: user?.user_metadata.role,
+  //         first_name: user?.user_metadata.first_name,
+  //         last_name: user?.user_metadata.last_name,
+  //       }
+  //     );
+  //   }
+  // }, [posthog, user]);
 
   return (
     // <Box>

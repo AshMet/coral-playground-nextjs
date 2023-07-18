@@ -60,8 +60,8 @@ export default function DailyTripCard(props) {
       //   // value: newItem.title,
       // });
       posthog.capture("Dive Trip Updated", {
-        dive_trip: data.name,
-        active: data.active ? "Active" : "Inactive",
+        "Dive Trip": data.name,
+        Status: data.active ? "Active" : "Inactive",
       });
     }
     setActive(newStatus);

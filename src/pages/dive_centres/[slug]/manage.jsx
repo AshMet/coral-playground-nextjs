@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
@@ -24,6 +25,8 @@
 // Chakra imports
 import { Box, Grid, Text, useColorModeValue } from "@chakra-ui/react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { usePostHog } from "posthog-js/react";
+import { useEffect } from "react";
 
 import Card from "components/card/Card";
 import EventCalendar from "components/pages/diveCentreManage/EventCalendar";
@@ -33,7 +36,12 @@ import { getCalendarDives, getDailyDives } from "utils/dive_centre_helpers";
 // import { calendarData } from "utils/variables/calendar";
 
 export default function DiveCentreCalendar({ diveCentre, diveTrips }) {
+  const posthog = usePostHog();
   const textColor = useColorModeValue("secondaryGray.900", "white");
+
+  useEffect(() => {
+    posthog.capture("$pageview");
+  }, []);
 
   return (
     <Grid

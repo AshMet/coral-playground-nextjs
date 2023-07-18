@@ -90,9 +90,9 @@ export default function Login() {
       //   // value: newItem.title,
       // });
       posthog.capture("Login Failed", {
-        email,
-        login_method: "Email",
-        error: error.message,
+        Email: email,
+        Method: "Email",
+        Error: error.message,
       });
     } else {
       // Success Alert
@@ -108,8 +108,8 @@ export default function Login() {
       });
       // Success Analytics Tag
       posthog.capture("Login", {
-        email,
-        login_method: "Email",
+        Email: email,
+        Method: "Email",
       });
       // gtag.event({
       //   action: "login-success",
@@ -147,7 +147,7 @@ export default function Login() {
       //   // value: newItem.title,
       // });
       posthog.capture("Google Login Failed", {
-        error: error.message,
+        Error: error.message,
       });
     } else {
       // Success Alert
@@ -169,8 +169,8 @@ export default function Login() {
       //   // value: newItem.title,
       // });
       posthog.capture("Login", {
-        email,
-        login_method: "Google",
+        Email: email,
+        Method: "Google",
       });
     }
 

@@ -59,7 +59,7 @@ export default function MiniCalendar(props) {
           <Tabs variant="line" colorScheme="purple" isFitted>
             <TabList>
               <Tab>Daily Dives</Tab>
-              <Tab>Special Dives</Tab>
+              <Tab>One-Time Dives</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>

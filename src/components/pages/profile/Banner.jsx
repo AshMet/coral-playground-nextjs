@@ -83,7 +83,7 @@ export default function Settings(props) {
       //   // value: newItem.title,
       // });
       posthog.capture("Avatar Update Failed", {
-        error: error.message,
+        Error: error.message,
       });
       throw error;
     } else {
@@ -93,7 +93,7 @@ export default function Settings(props) {
       });
       posthog.capture("Avatar Updated", {
         $set: {
-          avatar: !!newAvatarUrl,
+          Avatar: !!newAvatarUrl,
         },
       });
 

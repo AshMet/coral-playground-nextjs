@@ -78,9 +78,9 @@ export default function CheckoutButton() {
         .single();
 
       posthog.capture("Stripe Checkout", {
-        order_id: order.id,
-        amount_paid: order.amount_paid / 100,
-        amount_total: order.amount_total / 100,
+        "Order Id": order.id,
+        "Amount Paid": order.amount_paid / 100,
+        "Amount Total": order.amount_total / 100,
       });
       // console.log("calcTotalPaid", calcTotalPaid());
       // console.log("order", order);

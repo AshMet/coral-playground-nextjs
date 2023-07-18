@@ -70,8 +70,8 @@ export default function Profile(props) {
       //   // value: newItem.title,
       // });
       posthog.capture("Profile Update Failed", {
-        email: user.email,
-        error: error.message,
+        Email: user.email,
+        Error: error.message,
       });
     } else {
       // Success Alert
@@ -96,12 +96,12 @@ export default function Profile(props) {
       posthog.capture("Profile Updated", {
         $set: {
           email: user.email,
-          username,
-          bio: !!bio,
-          avatar_url: !!avatarUrl,
-          first_name: !!firstName,
-          last_name: !!lastName,
-          certification: divingCert,
+          Username: username,
+          Bio: !!bio,
+          Avatar: !!avatarUrl,
+          "First Name": !!firstName,
+          "Last Name": !!lastName,
+          Certification: divingCert,
         },
       });
     }

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-plusplus */
@@ -18,7 +19,7 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
 import { usePostHog } from "posthog-js/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import slugify from "slugify";
 
 import AlertPopup from "components/alerts/AlertPopup";
@@ -63,6 +64,10 @@ export default function UpdateDiveCentre({ diveCentreData }) {
     active,
     cityId,
   } = diveCentre;
+
+  useEffect(() => {
+    posthog.capture("$pageview");
+  }, []);
 
   const [activeStatus, setActiveStatus] = useState(active);
   const handleChange = (e) => {
@@ -226,8 +231,8 @@ export default function UpdateDiveCentre({ diveCentreData }) {
     //   value: name,
     // });
     posthog.capture("Dive Centre Updated", {
-      dive_centre: name,
-      error: error.message,
+      "Dive Centre": name,
+      Error: error.message,
     });
     // Alert & Analytics for failed load
     if (error) {
@@ -248,8 +253,8 @@ export default function UpdateDiveCentre({ diveCentreData }) {
       //   value: name,
       // });
       posthog.capture("Dive Centre Update Failed", {
-        dive_centre: name,
-        error: error.message,
+        "Dive Centre": name,
+        Error: error.message,
       });
     }
 

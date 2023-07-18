@@ -110,9 +110,9 @@ export default function SignUp() {
       //   // value: newItem.title,
       // });
       posthog.capture("Sign Up Failed", {
-        email,
-        signup_method: "Email",
-        error: error.message,
+        Email: email,
+        Method: "Email",
+        Error: error.message,
       });
     } else {
       // Success Alert
@@ -130,10 +130,10 @@ export default function SignUp() {
       posthog.capture("Sign Up", {
         $set: {
           email,
-          role,
-          first_name: firstName,
-          last_name: lastName,
-          business_name: businessName,
+          Role: role,
+          "First Name": firstName,
+          "Last Name": lastName,
+          "Business Name": businessName,
         },
       });
       // Success Analytics Tag

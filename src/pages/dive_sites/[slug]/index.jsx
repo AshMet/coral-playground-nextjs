@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 /* eslint-disable consistent-return */
@@ -7,6 +8,7 @@ import { AspectRatio, Box, Button, Grid } from "@chakra-ui/react";
 // Custom components
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
+import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 import slugify from "slugify";
 
@@ -17,13 +19,20 @@ import DivingLayout from "layouts/DivingLayout";
 import { supabase } from "pages/api/index";
 
 export default function DiveSitePage({ diveSite }) {
-  // console.log("siteData", diveSite);
-
+  const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const posthog = usePostHog();
   const router = useRouter();
   const { slug } = router.query;
 
-  const [trips, setTrips] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // console.log("siteData", diveSite);
+  useEffect(() => {
+    posthog.capture("$pageview", {
+      "Dive Site": diveSite.name,
+      City: diveSite.city.name,
+      Country: diveSite.country.countries.name,
+    });
+  }, []);
 
   async function fetchSiteTrips() {
     const { data } = await supabase

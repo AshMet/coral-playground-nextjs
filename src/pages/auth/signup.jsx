@@ -143,9 +143,9 @@ export default function SignUp() {
       //   // value: newItem.title,
       // });
       posthog.capture("Sign Up Failed", {
-        email,
-        signup_method: "Email",
-        error: error.message,
+        Email: email,
+        Method: "Email",
+        Error: error.message,
       });
     } else {
       // Success Alert
@@ -163,9 +163,9 @@ export default function SignUp() {
       posthog.capture("Sign Up", {
         $set: {
           email,
-          role,
-          first_name: firstName,
-          last_name: lastName,
+          Role: role,
+          "First Name": firstName,
+          "Last Name": lastName,
         },
       });
       // Success Analytics Tag
@@ -215,9 +215,9 @@ export default function SignUp() {
       //   // value: newItem.title,
       // });
       posthog.capture("SignUp Failed", {
-        email,
-        login_method: "Google",
-        error: error.message,
+        Email: email,
+        Method: "Google",
+        Error: error.message,
       });
     } else {
       // Success Alert
@@ -239,8 +239,8 @@ export default function SignUp() {
       //   // value: newItem.title,
       // });
       posthog.capture("SignUp", {
-        email,
-        login_method: "Google",
+        Email: email,
+        Method: "Google",
       });
     }
 

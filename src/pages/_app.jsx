@@ -59,7 +59,10 @@ const MyApp = ({ Component, pageProps }) => {
     const handleRouteChange = (url) => {
       // gtag.pageview(url);
       // mautic.pageView({ url });
-      posthog.capture("$pageview");
+      if (!url.includes("/dive_sites/") && !url.includes("/dive_centres/")) {
+        // alert('URL should not have "dive_sites" in it');
+        posthog.capture("$pageview");
+      }
       fbq.pageview();
     };
     router.events.on("routeChangeComplete", handleRouteChange);

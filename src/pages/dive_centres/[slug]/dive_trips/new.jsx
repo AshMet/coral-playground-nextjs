@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable sonarjs/no-duplicated-branches */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-plusplus */
 import { Box, Button, Flex, Grid, useToast } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
+import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
@@ -21,13 +23,13 @@ export default function CreateCentreTrip() {
   const [checkIn, setCheckIn] = useState("1_hour");
   const [duration, setDuration] = useState();
   const [minCert, setMinCert] = useState("open_water");
-  const [status, setStatus] = useState("active");
   const [active, setActive] = useState(true);
   const [diveTime, setDiveTime] = useState("07:00");
   const [diveDate, setDiveDate] = useState();
   const [diveCount, setDiveCount] = useState(1);
   const [payNow, setPayNow] = useState();
   const toast = useToast();
+  const posthog = usePostHog();
   const supabase = useSupabaseClient();
 
   const getStripePriceId = (n) => {
@@ -70,10 +72,14 @@ export default function CreateCentreTrip() {
     query: { slug: diveCentreSlug },
   } = router;
 
+  useEffect(() => {
+    posthog.capture("$pageview");
+  }, []);
+
   async function saveDiveTrip() {
     const { data: diveCentre } = await supabase
       .from("dive_centres")
-      .select("id")
+      .select("id, name")
       .eq("slug", diveCentreSlug)
       .single();
 
@@ -88,7 +94,6 @@ export default function CreateCentreTrip() {
           start_time: diveTime,
           duration,
           min_cert: minCert,
-          status,
           active,
           price,
           dive_count: diveCount,
@@ -116,19 +121,6 @@ export default function CreateCentreTrip() {
 
     // console.log("new trip", data);
 
-    toast({
-      position: "top",
-      render: () => (
-        <AlertPopup
-          type="success"
-          text="Dive Trip Saved"
-          // subtext={data} // Not Working
-        />
-      ),
-    });
-
-    router.push(`/dive_centres/${diveCentreSlug}`);
-
     if (diveTripError) {
       // console.log("new trip error", diveTripError);
       toast({
@@ -141,6 +133,30 @@ export default function CreateCentreTrip() {
           />
         ),
       });
+      posthog.capture("Dive Trip Creation Failed", {
+        "Dive Centre": diveCentre?.name,
+        Error: diveTripError.message,
+      });
+    } else if (data) {
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="success"
+            text="Dive Trip Saved"
+            // subtext={data} // Not Working
+          />
+        ),
+      });
+      posthog.capture("Dive Trip Created", {
+        "Dive Centre": diveCentre.name,
+        "Pay Now": data.pay_now / 100,
+        Price: data.price / 100,
+        "Dive Count": data.diveCount,
+        "Trip Type": data.start_date ? "One-Off" : "Daily",
+        Status: data.active ? "Active" : "Inactive",
+      });
+      router.push(`/dive_centres/${diveCentreSlug}`);
     }
   }
 
@@ -181,7 +197,6 @@ export default function CreateCentreTrip() {
             mb="20px"
             name={name}
             price={price}
-            status={status}
             minCert={minCert}
             description={description}
             checkIn={checkIn}
@@ -189,7 +204,6 @@ export default function CreateCentreTrip() {
             active={active}
             setActive={setActive}
             setPrice={setPrice}
-            setStatus={setStatus}
             setMinCert={setMinCert}
             setDescription={setDescription}
             setCheckIn={setCheckIn}

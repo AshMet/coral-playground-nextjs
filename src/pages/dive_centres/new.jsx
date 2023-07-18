@@ -14,6 +14,7 @@ import {
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import slugify from "slugify";
@@ -186,6 +187,17 @@ export default function CreateDiveCentre() {
     }
   };
 
+  const cityNames = {
+    "Marsa Alam": 1,
+    Hurghada: 2,
+    "Sharm El Sheikh": 3,
+    Dahab: 4,
+    Safaga: 6,
+  };
+
+  const getCityName = (obj, val) =>
+    Object.keys(obj).filter((key) => obj[key] === val);
+
   const createDiveCentre = async () => {
     setLoading(true);
     const { data, error } = await supabase
@@ -229,7 +241,9 @@ export default function CreateDiveCentre() {
       //   // value: newItem.title,
       // });
       posthog.capture("Dive Centre Created", {
-        dive_centre: data.name,
+        "Dive Centre": data.name,
+        City: getCityName(cityNames, data.cityId),
+        Status: data.active ? "Active" : "Inactive",
       });
       updateBrevoBusinessName(user.email, data.name, "business");
       router.push(
@@ -259,306 +273,309 @@ export default function CreateDiveCentre() {
       //   // value: newItem.title,
       // });
       posthog.capture("Dive Centre Creation Failed", {
-        dive_centre: name,
-        error: error.message,
+        "Dive Centre": name,
+        Error: error.message,
       });
     }
   };
 
   return (
-    <Box p="0px" mx="auto" mt="100px">
-      <Card mb={{ base: "0px", xl: "20px" }}>
-        <Flex direction="column" mb="40px" ms="10px">
-          <Text fontSize="xl" color={textColorPrimary} fontWeight="bold">
-            Create your Dive Centre
-          </Text>
-          <Text fontSize="md" color={textColorSecondary}>
-            Once published, customers will be able to view your dive centre and
-            book diving trips
-          </Text>
-        </Flex>
-        {/* <ImageUploader avatarUrl={avatarUrl} setAvatarUrl={setAvatarUrl} /> */}
-        <MapWithAutoComplete
-          diveCentre={diveCentre}
-          setDiveCentre={setDiveCentre}
-        />
-        <SimpleGrid
-          columns={{ sm: 1, md: 2 }}
-          spacing={{ base: "20px", xl: "20px" }}
-        >
-          <InputField
-            mb="0px"
-            name="name"
-            label="Name"
-            value={name}
-            placeholder="Name of your dive centre"
-            onChange={handleChange}
-            isError={name === ""}
-            errorMessage="name cannot be empty"
-            isRequired
-          />
-          <TextField
-            name="address"
-            label="Address"
-            mb="0px"
-            h="100%"
-            value={address}
-            placeholder="Provide Address and directions where needed"
-            onChange={handleChange}
-          />
-          <InputField
-            mb="0px"
-            name="latitude"
-            label="Latitude"
-            value={latitude}
-            placeholder="eg. 45.2342"
-            onChange={handleChange}
-            isError={latitude === ""}
-            errorMessage="latitude cannot be empty"
-            isRequired
-          />
-          <InputField
-            mb="0px"
-            name="longitude"
-            label="Longitude"
-            value={longitude}
-            placeholder="eg. 72.2342"
-            onChange={handleChange}
-            isError={longitude === ""}
-            errorMessage="longitude cannot be empty"
-            isRequired
-          />
-
-          <CUIAutoComplete
-            name="paymentMethods"
-            label="Payment Methods"
-            placeholder="Select all payment options offered by your dive centre"
-            items={paymentPickerItems}
-            labelStyleProps={{
-              fontSize: "sm",
-              fontWeight: "extrabold",
-              ml: "5px",
-              mt: "20px",
-            }}
-            inputStyleProps={{
-              fontSize: "sm",
-              borderRadius: "2xl",
-              borderColor: borderPrimary,
-              h: "44px",
-              _placeholder: { color: placeholderColor },
-            }}
-            tagStyleProps={{
-              rounded: "full",
-              py: 1,
-              px: 2,
-              color: "white",
-              bgColor: useColorModeValue("brand.300", "brand.400"),
-            }}
-            listStyleProps={{ color: "black", bgColor: "gray.200" }}
-            selectedItems={selectedPaymentItems}
-            onSelectedItemsChange={(changes) =>
-              handlePaymentItemsChange(changes.selectedItems)
-            }
-            disableCreateItem
-          />
-          <CUIAutoComplete
-            name="equipment"
-            label="Equipment"
-            placeholder="Select all equipment available at your dive centre"
-            items={equipmentPickerItems}
-            labelStyleProps={{
-              fontSize: "sm",
-              fontWeight: "extrabold",
-              ml: "5px",
-              mt: "20px",
-            }}
-            inputStyleProps={{
-              fontSize: "sm",
-              borderRadius: "2xl",
-              borderColor: borderPrimary,
-              h: "44px",
-              _placeholder: { color: placeholderColor },
-            }}
-            tagStyleProps={{
-              rounded: "full",
-              py: 1,
-              px: 2,
-              color: "white",
-              bgColor: useColorModeValue("brand.300", "brand.400"),
-            }}
-            listStyleProps={{ color: "black", bgColor: "gray.200" }}
-            selectedItems={selectedEquipmentItems}
-            onSelectedItemsChange={(changes) =>
-              handleEquipmentItemsChange(changes.selectedItems)
-            }
-            disableCreateItem
-          />
-          <CUIAutoComplete
-            name="languages"
-            label="Languages"
-            placeholder="Select all languages spoken by your staff"
-            items={languagePickerItems}
-            labelStyleProps={{
-              fontSize: "sm",
-              fontWeight: "extrabold",
-              ml: "5px",
-              mt: "20px",
-            }}
-            inputStyleProps={{
-              fontSize: "sm",
-              borderRadius: "2xl",
-              borderColor: borderPrimary,
-              h: "44px",
-              _placeholder: { color: placeholderColor },
-            }}
-            tagStyleProps={{
-              rounded: "full",
-              py: 1,
-              px: 2,
-              color: "white",
-              bgColor: useColorModeValue("brand.300", "brand.400"),
-            }}
-            listStyleProps={{ color: "black", bgColor: "gray.200" }}
-            selectedItems={selectedLanguageItems}
-            onSelectedItemsChange={(changes) =>
-              handleLanguageItemsChange(changes.selectedItems)
-            }
-            disableCreateItem
-          />
-          <CUIAutoComplete
-            name="memberships"
-            label="Memberships"
-            placeholder="Select all organizations your dive centre is affiliated with"
-            items={membershipPickerItems}
-            labelStyleProps={{
-              fontSize: "sm",
-              fontWeight: "extrabold",
-              ml: "5px",
-              mt: "20px",
-            }}
-            inputStyleProps={{
-              fontSize: "sm",
-              borderRadius: "2xl",
-              borderColor: borderPrimary,
-              h: "44px",
-              _placeholder: { color: placeholderColor },
-            }}
-            tagStyleProps={{
-              rounded: "full",
-              py: 1,
-              px: 2,
-              color: "white",
-              bgColor: useColorModeValue("brand.300", "brand.400"),
-            }}
-            listStyleProps={{ color: "black", bgColor: "gray.200" }}
-            selectedItems={selectedMembershipItems}
-            onSelectedItemsChange={(changes) =>
-              handleMembershipItemsChange(changes.selectedItems)
-            }
-            disableCreateItem
-          />
-          <CUIAutoComplete
-            name="services"
-            label="Services"
-            placeholder="Select all services available at your dive centre"
-            items={servicePickerItems}
-            labelStyleProps={{
-              fontSize: "sm",
-              fontWeight: "extrabold",
-              ml: "5px",
-              mt: "20px",
-            }}
-            inputStyleProps={{
-              fontSize: "sm",
-              borderRadius: "2xl",
-              borderColor: borderPrimary,
-              h: "44px",
-              _placeholder: { color: placeholderColor },
-            }}
-            tagStyleProps={{
-              rounded: "full",
-              py: 1,
-              px: 2,
-              color: "white",
-              bgColor: useColorModeValue("brand.300", "brand.400"),
-            }}
-            listStyleProps={{ color: "black", bgColor: "gray.200" }}
-            selectedItems={selectedServiceItems}
-            onSelectedItemsChange={(changes) =>
-              handleServiceItemsChange(changes.selectedItems)
-            }
-            disableCreateItem
-          />
-          <Flex direction="column">
-            <FormLabel
-              ms="10px"
-              mt={{ md: "30px" }}
-              htmlFor="checkIn"
-              fontSize="sm"
-              fontWeight="bold"
-              _placeholder={{ color: placeholderColor }}
-              _hover={{ cursor: "pointer" }}
-            >
-              City
-            </FormLabel>
-            <Select
-              fontSize="sm"
-              name="cityId"
-              variant="main"
-              h="44px"
-              maxh="44px"
-              placeholder="Select City"
-              borderColor={borderPrimary}
-              // value={cityId}
-              onChange={handleChange}
-              isInvalid={cityId === ""}
-              isRequired
-            >
-              <option value="4">Dahab</option>
-              <option value="2">Hurghada</option>
-              <option value="1">Marsa Alam</option>
-              <option value="6">Safaga</option>
-              <option value="3">Sharm El Sheikh</option>
-            </Select>
+    <>
+      <NextSeo noindex nofollow />
+      <Box p="0px" mx="auto" mt="100px">
+        <Card mb={{ base: "0px", xl: "20px" }}>
+          <Flex direction="column" mb="40px" ms="10px">
+            <Text fontSize="xl" color={textColorPrimary} fontWeight="bold">
+              Create your Dive Centre
+            </Text>
+            <Text fontSize="md" color={textColorSecondary}>
+              Once published, customers will be able to view your dive centre
+              and book diving trips
+            </Text>
           </Flex>
-          <TextField
-            name="description"
-            label="Description"
-            mb="0px"
-            h="100%"
-            value={description}
-            placeholder="Additional Information about your business and operations"
-            onChange={handleChange}
+          {/* <ImageUploader avatarUrl={avatarUrl} setAvatarUrl={setAvatarUrl} /> */}
+          <MapWithAutoComplete
+            diveCentre={diveCentre}
+            setDiveCentre={setDiveCentre}
           />
-          <SwitchField
-            mb="25px"
-            me="30px"
-            id="1"
-            // isChecked={active}
-            // onchange={handleChange}
-            onChange={() => setActive(!active)}
-            label={`Status: ${active ? "Active" : "Not Active"}`}
-            desc="If disabled, your dive centre will no longer appear in the search results and will no longer be able to receive any new bookings. This can be changed back at any time."
-            labelColor={active ? textColorActive : textColorInactive}
-          />
-        </SimpleGrid>
-      </Card>
-      <Flex justify="space-between" mt="24px">
-        <Button
-          variant="solid"
-          bgColor="brand.400"
-          minW="100%"
-          fontSize="sm"
-          fontWeight="500"
-          ms="auto"
-          _hover={{ bgColor: "brand.300" }}
-          onClick={createDiveCentre}
-          disabled={loading}
-        >
-          {loading ? "Loading ..." : "Create Dive Centre"}
-        </Button>
-      </Flex>
-    </Box>
+          <SimpleGrid
+            columns={{ sm: 1, md: 2 }}
+            spacing={{ base: "20px", xl: "20px" }}
+          >
+            <InputField
+              mb="0px"
+              name="name"
+              label="Name"
+              value={name}
+              placeholder="Name of your dive centre"
+              onChange={handleChange}
+              isError={name === ""}
+              errorMessage="name cannot be empty"
+              isRequired
+            />
+            <TextField
+              name="address"
+              label="Address"
+              mb="0px"
+              h="100%"
+              value={address}
+              placeholder="Provide Address and directions where needed"
+              onChange={handleChange}
+            />
+            <InputField
+              mb="0px"
+              name="latitude"
+              label="Latitude"
+              value={latitude}
+              placeholder="eg. 45.2342"
+              onChange={handleChange}
+              isError={latitude === ""}
+              errorMessage="latitude cannot be empty"
+              isRequired
+            />
+            <InputField
+              mb="0px"
+              name="longitude"
+              label="Longitude"
+              value={longitude}
+              placeholder="eg. 72.2342"
+              onChange={handleChange}
+              isError={longitude === ""}
+              errorMessage="longitude cannot be empty"
+              isRequired
+            />
+
+            <CUIAutoComplete
+              name="paymentMethods"
+              label="Payment Methods"
+              placeholder="Select all payment options offered by your dive centre"
+              items={paymentPickerItems}
+              labelStyleProps={{
+                fontSize: "sm",
+                fontWeight: "extrabold",
+                ml: "5px",
+                mt: "20px",
+              }}
+              inputStyleProps={{
+                fontSize: "sm",
+                borderRadius: "2xl",
+                borderColor: borderPrimary,
+                h: "44px",
+                _placeholder: { color: placeholderColor },
+              }}
+              tagStyleProps={{
+                rounded: "full",
+                py: 1,
+                px: 2,
+                color: "white",
+                bgColor: useColorModeValue("brand.300", "brand.400"),
+              }}
+              listStyleProps={{ color: "black", bgColor: "gray.200" }}
+              selectedItems={selectedPaymentItems}
+              onSelectedItemsChange={(changes) =>
+                handlePaymentItemsChange(changes.selectedItems)
+              }
+              disableCreateItem
+            />
+            <CUIAutoComplete
+              name="equipment"
+              label="Equipment"
+              placeholder="Select all equipment available at your dive centre"
+              items={equipmentPickerItems}
+              labelStyleProps={{
+                fontSize: "sm",
+                fontWeight: "extrabold",
+                ml: "5px",
+                mt: "20px",
+              }}
+              inputStyleProps={{
+                fontSize: "sm",
+                borderRadius: "2xl",
+                borderColor: borderPrimary,
+                h: "44px",
+                _placeholder: { color: placeholderColor },
+              }}
+              tagStyleProps={{
+                rounded: "full",
+                py: 1,
+                px: 2,
+                color: "white",
+                bgColor: useColorModeValue("brand.300", "brand.400"),
+              }}
+              listStyleProps={{ color: "black", bgColor: "gray.200" }}
+              selectedItems={selectedEquipmentItems}
+              onSelectedItemsChange={(changes) =>
+                handleEquipmentItemsChange(changes.selectedItems)
+              }
+              disableCreateItem
+            />
+            <CUIAutoComplete
+              name="languages"
+              label="Languages"
+              placeholder="Select all languages spoken by your staff"
+              items={languagePickerItems}
+              labelStyleProps={{
+                fontSize: "sm",
+                fontWeight: "extrabold",
+                ml: "5px",
+                mt: "20px",
+              }}
+              inputStyleProps={{
+                fontSize: "sm",
+                borderRadius: "2xl",
+                borderColor: borderPrimary,
+                h: "44px",
+                _placeholder: { color: placeholderColor },
+              }}
+              tagStyleProps={{
+                rounded: "full",
+                py: 1,
+                px: 2,
+                color: "white",
+                bgColor: useColorModeValue("brand.300", "brand.400"),
+              }}
+              listStyleProps={{ color: "black", bgColor: "gray.200" }}
+              selectedItems={selectedLanguageItems}
+              onSelectedItemsChange={(changes) =>
+                handleLanguageItemsChange(changes.selectedItems)
+              }
+              disableCreateItem
+            />
+            <CUIAutoComplete
+              name="memberships"
+              label="Memberships"
+              placeholder="Select all organizations your dive centre is affiliated with"
+              items={membershipPickerItems}
+              labelStyleProps={{
+                fontSize: "sm",
+                fontWeight: "extrabold",
+                ml: "5px",
+                mt: "20px",
+              }}
+              inputStyleProps={{
+                fontSize: "sm",
+                borderRadius: "2xl",
+                borderColor: borderPrimary,
+                h: "44px",
+                _placeholder: { color: placeholderColor },
+              }}
+              tagStyleProps={{
+                rounded: "full",
+                py: 1,
+                px: 2,
+                color: "white",
+                bgColor: useColorModeValue("brand.300", "brand.400"),
+              }}
+              listStyleProps={{ color: "black", bgColor: "gray.200" }}
+              selectedItems={selectedMembershipItems}
+              onSelectedItemsChange={(changes) =>
+                handleMembershipItemsChange(changes.selectedItems)
+              }
+              disableCreateItem
+            />
+            <CUIAutoComplete
+              name="services"
+              label="Services"
+              placeholder="Select all services available at your dive centre"
+              items={servicePickerItems}
+              labelStyleProps={{
+                fontSize: "sm",
+                fontWeight: "extrabold",
+                ml: "5px",
+                mt: "20px",
+              }}
+              inputStyleProps={{
+                fontSize: "sm",
+                borderRadius: "2xl",
+                borderColor: borderPrimary,
+                h: "44px",
+                _placeholder: { color: placeholderColor },
+              }}
+              tagStyleProps={{
+                rounded: "full",
+                py: 1,
+                px: 2,
+                color: "white",
+                bgColor: useColorModeValue("brand.300", "brand.400"),
+              }}
+              listStyleProps={{ color: "black", bgColor: "gray.200" }}
+              selectedItems={selectedServiceItems}
+              onSelectedItemsChange={(changes) =>
+                handleServiceItemsChange(changes.selectedItems)
+              }
+              disableCreateItem
+            />
+            <Flex direction="column">
+              <FormLabel
+                ms="10px"
+                mt={{ md: "30px" }}
+                htmlFor="checkIn"
+                fontSize="sm"
+                fontWeight="bold"
+                _placeholder={{ color: placeholderColor }}
+                _hover={{ cursor: "pointer" }}
+              >
+                City
+              </FormLabel>
+              <Select
+                fontSize="sm"
+                name="cityId"
+                variant="main"
+                h="44px"
+                maxh="44px"
+                placeholder="Select City"
+                borderColor={borderPrimary}
+                // value={cityId}
+                onChange={handleChange}
+                isInvalid={cityId === ""}
+                isRequired
+              >
+                <option value="4">Dahab</option>
+                <option value="2">Hurghada</option>
+                <option value="1">Marsa Alam</option>
+                <option value="6">Safaga</option>
+                <option value="3">Sharm El Sheikh</option>
+              </Select>
+            </Flex>
+            <TextField
+              name="description"
+              label="Description"
+              mb="0px"
+              h="100%"
+              value={description}
+              placeholder="Additional Information about your business and operations"
+              onChange={handleChange}
+            />
+            <SwitchField
+              mb="25px"
+              me="30px"
+              id="1"
+              // isChecked={active}
+              // onchange={handleChange}
+              onChange={() => setActive(!active)}
+              label={`Status: ${active ? "Active" : "Not Active"}`}
+              desc="If disabled, your dive centre will no longer appear in the search results and will no longer be able to receive any new bookings. This can be changed back at any time."
+              labelColor={active ? textColorActive : textColorInactive}
+            />
+          </SimpleGrid>
+        </Card>
+        <Flex justify="space-between" mt="24px">
+          <Button
+            variant="solid"
+            bgColor="brand.400"
+            minW="100%"
+            fontSize="sm"
+            fontWeight="500"
+            ms="auto"
+            _hover={{ bgColor: "brand.300" }}
+            onClick={createDiveCentre}
+            disabled={loading}
+          >
+            {loading ? "Loading ..." : "Create Dive Centre"}
+          </Button>
+        </Flex>
+      </Box>
+    </>
   );
 }
 

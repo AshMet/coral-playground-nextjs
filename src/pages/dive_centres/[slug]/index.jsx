@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-console */
 /* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
@@ -5,6 +6,7 @@
 import { AspectRatio, Box, Grid } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
+import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 
 import { supabase } from "../../api/index";
@@ -16,10 +18,19 @@ import DivingLayout from "layouts/DivingLayout";
 export default function DiveCentre({ diveCentreData }) {
   const router = useRouter();
   const { slug } = router.query;
+  const posthog = usePostHog();
 
   const [trips, setTrips] = useState([]);
   const [diveCentre, setDiveCentre] = useState(true);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    posthog.capture("$pageview", {
+      "Dive Centre": diveCentreData.name,
+      City: diveCentreData.city,
+      Country: diveCentreData.country,
+    });
+  }, []);
 
   useEffect(() => {
     setDiveCentre(diveCentreData);

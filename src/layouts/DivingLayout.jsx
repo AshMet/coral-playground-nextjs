@@ -9,7 +9,7 @@
 // Chakra imports
 import { Portal, Box, useDisclosure } from "@chakra-ui/react";
 import { useUser } from "@supabase/auth-helpers-react";
-import { usePostHog } from "posthog-js/react";
+// import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 
 import routes from "../routes";
@@ -30,20 +30,20 @@ export default function DivingLayout({ children, ...props }) {
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const user = useUser();
-  const posthog = usePostHog();
+  // const posthog = usePostHog();
 
-  useEffect(() => {
-    if (user) {
-      posthog?.identify(
-        user.email, // distinctId
-        {
-          role: user?.user_metadata.role,
-          first_name: user?.user_metadata.first_name,
-          last_name: user?.user_metadata.last_name,
-        }
-      );
-    }
-  }, [posthog, user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     posthog?.identify(
+  //       user.email, // distinctId
+  //       {
+  //         role: user?.user_metadata.role,
+  //         first_name: user?.user_metadata.first_name,
+  //         last_name: user?.user_metadata.last_name,
+  //       }
+  //     );
+  //   }
+  // }, [posthog, user]);
   // functions for changing the states from components
   const getRoute = () => {
     return (

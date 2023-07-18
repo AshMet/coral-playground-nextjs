@@ -20,7 +20,6 @@ export default function Settings(props) {
   const {
     name,
     price,
-    // status,
     minCert,
     description,
     checkIn,
@@ -32,7 +31,6 @@ export default function Settings(props) {
     setCheckIn,
     setPrice,
     setMinCert,
-    // setStatus,
   } = props;
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");

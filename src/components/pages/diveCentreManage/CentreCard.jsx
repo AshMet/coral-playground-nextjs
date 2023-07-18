@@ -79,7 +79,7 @@ export default function CentreCard(props) {
       //   // value: newItem.title,
       // });
       posthog.capture("Dive Centre Update Failed", {
-        dive_centre: diveCentre.name,
+        "Dive Centre": diveCentre.name,
       });
     }
     if (data) {
@@ -100,7 +100,7 @@ export default function CentreCard(props) {
       //   // value: newItem.title,
       // });
       posthog.capture("Dive Centre Updated", {
-        dive_centre: diveCentre.name,
+        "Dive Centre": diveCentre.name,
       });
     }
   }

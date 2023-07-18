@@ -2,10 +2,7 @@
 /* eslint-disable react/prop-types */
 import { Box, Button, Flex, Icon, Text } from "@chakra-ui/react";
 // import PropTypes from "prop-types";
-import { useUser } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
-import { usePostHog } from "posthog-js/react";
-import { useEffect } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 
 import FixedPlugin from "components/fixedPlugin/FixedPlugin";
@@ -14,21 +11,19 @@ import Footer from "components/footer/FooterDiving";
 function LoginLayout(props) {
   const { children, illustrationBackground } = props;
   const router = useRouter();
-  const user = useUser();
-  const posthog = usePostHog();
 
-  useEffect(() => {
-    if (user) {
-      posthog?.identify(
-        user.email, // distinctId
-        {
-          role: user?.user_metadata.role,
-          first_name: user?.user_metadata.first_name,
-          last_name: user?.user_metadata.last_name,
-        }
-      );
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     posthog?.identify(
+  //       user.email, // distinctId
+  //       {
+  //         role: user?.user_metadata.role,
+  //         first_name: user?.user_metadata.first_name,
+  //         last_name: user?.user_metadata.last_name,
+  //       }
+  //     );
+  //   }
+  // }, [user]);
 
   return (
     <Flex position="relative" h="max-content">

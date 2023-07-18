@@ -131,13 +131,14 @@ export const ProfileProvider = ({ children }) => {
       //   // value: newItem.title,
       // });
       posthog.capture("Profile Updated", {
-        email: user.email,
-        username: !!data.username,
-        bio: !!data.bio,
-        avatar_url: !!data.avatar_url,
-        first_name: !!data.first_name,
-        last_name: !!data.last_name,
-        certification: data.certification,
+        $set: {
+          Username: !!data.username,
+          Bio: !!data.bio,
+          Avatar: !!data.avatar_url,
+          "First Name": !!data.first_name,
+          "Last Name": !!data.last_name,
+          Certification: data.certification,
+        },
       });
     }
     // Stop Spinner
