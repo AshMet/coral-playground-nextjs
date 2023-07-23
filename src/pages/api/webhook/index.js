@@ -1,15 +1,23 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable default-case */
 /* eslint-disable no-console */
 import { buffer } from "micro";
+import { PostHog } from "posthog-node";
 import Stripe from "stripe";
 
 import { getServiceSupabase } from "utils/supabase";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const supabase = getServiceSupabase();
+const client = new PostHog(
+  process.env.NEXT_PUBLIC_POSTHOG_KEY,
+  { host: process.env.NEXT_PUBLIC_POSTHOG_HOST } // You can omit this line if using PostHog Cloud
+)
+// On program exit, call shutdown to stop pending pollers and flush any remaining events
+await client.shutdownAsync();
 
 export const config = {
   api: {
@@ -73,7 +81,25 @@ const createBooking = async (session) => {
 
   console.log(`Booking Saved: ${JSON.stringify(order)}`);
   if (error) {
-    console.log(`Booking Save Failed: ${JSON.stringify(error)}`);
+    client.capture("Order Creation Failed", {
+      "Order Id": stripeOrder.id,
+      Error: error.message,
+    });
+    // console.log(`Booking Save Failed: ${JSON.stringify(error)}`);
+  } else if (order) {
+    client.capture({
+      distinctId: order.user_id,
+      event: "Order Created",
+      properties: {
+        "Order Id": order.id,
+        "Diving Cert": order.diving_cert,
+        "Last Dive": order.last_dive,
+        "Amount Paid": order.amount_paid / 100,
+        "Amount Total": order.amount_total / 100,
+        Currency: order.currency,
+        Status: order.status,
+      },
+    })
   }
 
   // Create Line Items

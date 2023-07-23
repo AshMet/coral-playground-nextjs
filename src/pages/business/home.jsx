@@ -39,7 +39,7 @@ export default function diveCentresHome() {
   return (
     <>
       <NextSeo
-        title="Coral Playground | Dive Centres Landing Page"
+        title="Dive Centres Landing Page"
         description="Dive Centres Landing Page"
         canonical="https://www.coralplayground.com/business/home"
         openGraph={{

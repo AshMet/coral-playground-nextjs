@@ -184,7 +184,7 @@ export default function Login() {
     return (
       <>
         <NextSeo
-          title="Coral Playground | Login"
+          title="Login"
           description="Login Page"
           canonical="https://www.coralplayground.com/auth/login"
           openGraph={{

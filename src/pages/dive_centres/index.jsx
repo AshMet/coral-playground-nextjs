@@ -68,7 +68,7 @@ export default function DiveSites({ diveCentres }) {
   return (
     <>
       <NextSeo
-        title="Coral Playground | Scuba Diving Centres in Egypt"
+        title="Scuba Diving Centres in Egypt"
         description={`Choose from ${diveCentres.length} scuba dive centres and book your perfect scuba diving adventure with Coral Playground to experience the wonders of the Red Sea!`}
         openGraph={{
           type: "website",

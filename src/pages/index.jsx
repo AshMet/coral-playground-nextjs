@@ -20,7 +20,7 @@ export default function Home({ diveSites, diveCentres }) {
     <Box>
       <>
         <NextSeo
-          title="Coral Playground | Home Page"
+          title="Home Page"
           description="The best place to book your next Red Sea dive trip"
           canonical="https://www.coralplayground.com"
           openGraph={{

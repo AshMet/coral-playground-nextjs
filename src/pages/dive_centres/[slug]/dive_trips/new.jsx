@@ -150,8 +150,10 @@ export default function CreateCentreTrip() {
       });
       posthog.capture("Dive Trip Created", {
         "Dive Centre": diveCentre.name,
+        "Dive Trip": data.name,
         "Pay Now": data.pay_now / 100,
         Price: data.price / 100,
+        Duration: data.duration,
         "Dive Count": data.diveCount,
         "Trip Type": data.start_date ? "One-Off" : "Daily",
         Status: data.active ? "Active" : "Inactive",

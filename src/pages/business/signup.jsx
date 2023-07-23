@@ -129,7 +129,7 @@ export default function SignUp() {
       // posthog.identify(data.id, { role }, { email });
       posthog.capture("Sign Up", {
         $set: {
-          email,
+          Email: email,
           Role: role,
           "First Name": firstName,
           "Last Name": lastName,
@@ -171,7 +171,7 @@ export default function SignUp() {
     return (
       <>
         <NextSeo
-          title="Coral Playground | Sign Up"
+          title="Business Sign Up"
           description="Login Page"
           canonical="https://www.coralplayground.com/business/signup"
           openGraph={{

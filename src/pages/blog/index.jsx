@@ -41,7 +41,7 @@ export default function Blog({ posts }) {
   return (
     <>
       <NextSeo
-        title="Coral Playground | Scuba Diving Blog"
+        title="Scuba Diving Blog"
         description="Find out everything you've ever wanted to know about scuba diving"
         openGraph={{
           type: "website",

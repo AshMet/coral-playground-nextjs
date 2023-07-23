@@ -2,7 +2,7 @@
 /** @type {import('next-seo').DefaultSeoProps} */
 const defaultSEOConfig = {
   title: "Coral Playground",
-  titleTemplate: "%s | Coral Playground",
+  titleTemplate: "Coral Playground | %s",
   defaultTitle: "Coral Playground",
   description: "The best way to book a diving trip in the Red Sea",
   openGraph: {

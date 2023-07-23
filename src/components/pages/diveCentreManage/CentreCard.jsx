@@ -101,6 +101,7 @@ export default function CentreCard(props) {
       // });
       posthog.capture("Dive Centre Updated", {
         "Dive Centre": diveCentre.name,
+        Status: diveCentre.active ? "Active" : "Inactive",
       });
     }
   }

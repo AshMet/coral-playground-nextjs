@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable no-undef */
 /* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
@@ -58,7 +59,7 @@ export default function CheckoutButton() {
 
     // --------- Create Order ----------
     async function createOrder() {
-      const { data: order } = await supabase
+      const { data: order, error: createOrderError } = await supabase
         .from("orders")
         .insert([
           {
@@ -77,11 +78,17 @@ export default function CheckoutButton() {
         .select()
         .single();
 
-      posthog.capture("Stripe Checkout", {
-        "Order Id": order.id,
-        "Amount Paid": order.amount_paid / 100,
-        "Amount Total": order.amount_total / 100,
-      });
+      if (createOrderError) {
+        posthog.capture("Stripe Checkout Failed", {
+          Error: createOrderError.message,
+        });
+      } else if (order) {
+        posthog.capture("Stripe Checkout", {
+          "Order Id": order.id,
+          "Amount Paid": order.amount_paid / 100,
+          "Amount Total": order.amount_total / 100,
+        });
+      }
       // console.log("calcTotalPaid", calcTotalPaid());
       // console.log("order", order);
       return order;

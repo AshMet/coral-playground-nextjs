@@ -29,25 +29,7 @@ export default function Profile(props) {
   return (
     <Box>
       <>
-        <NextSeo
-          title="Coral Playground | User Account"
-          description="User Profile & Settings"
-          canonical="https://www.coralplayground.com/"
-          openGraph={{
-            type: "website",
-            title: "Coral Playground | User Account",
-            description: "User Profile & Settings",
-            url: "https://www.coralplayground.com/",
-            images: [
-              {
-                url: "https://www.coralplayground.com/svg/coral-logo.svg",
-                width: 800,
-                height: 400,
-                alt: "Coral Playground Logo",
-              },
-            ],
-          }}
-        />
+        <NextSeo noindex nofollow />
         <Box pt={{ sm: "60px", xl: "100px" }}>
           <Card p={{ base: "15px", md: "30px" }}>
             {diveCentre.length === 0 ? (
@@ -99,12 +81,6 @@ export const getServerSideProps = async (ctx) => {
     };
 
   if (diveCentre?.ownerId !== userId || diveCentre?.ownerId === null) {
-    // return {
-    //   redirect: {
-    //     destination: "/404",
-    //     permanent: false,
-    //   },
-    // };
     return {
       props: {
         session,

@@ -95,7 +95,7 @@ export default function Profile(props) {
       // });
       posthog.capture("Profile Updated", {
         $set: {
-          email: user.email,
+          Email: user.email,
           Username: username,
           Bio: !!bio,
           Avatar: !!avatarUrl,
@@ -111,7 +111,7 @@ export default function Profile(props) {
     <Box>
       <>
         <NextSeo
-          title="Coral Playground | User Account"
+          title="User Account"
           description="User Profile & Settings"
           canonical="https://www.coralplayground.com/"
           openGraph={{

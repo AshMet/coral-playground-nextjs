@@ -196,7 +196,7 @@ export default function CreateDiveCentre() {
   };
 
   const getCityName = (obj, val) =>
-    Object.keys(obj).filter((key) => obj[key] === val);
+    Object.keys(obj).filter((key) => obj[key] === val)[0];
 
   const createDiveCentre = async () => {
     setLoading(true);
