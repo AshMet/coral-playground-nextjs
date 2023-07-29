@@ -11,9 +11,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { motion, isValidMotionProp } from "framer-motion";
-import Link from "next/link";
 // import { usePostHog } from "posthog-js/react";
-import slugify from "slugify";
+// import slugify from "slugify";
 
 import Image from "../actions/NextChakraImg";
 // import { CircProgressMini } from "components/charts/CircularProgress";
@@ -46,24 +45,17 @@ export default function DiveSiteCard(props) {
     type === "dive_site"
       ? "/img/diving/dive_site_bg.jpg"
       : "/img/diving/dive_centre_bg.jpg";
-  const siteUrl =
-    type === "diveSite"
-      ? `/dive_sites/${slugify(name.replace("&", ""), {
-          lower: true,
-          remove: /[*+~.()'"!:@]/g,
-        })}`
-      : `/dive_centres/${slugify(name.replace("&", ""), {
-          lower: true,
-          remove: /[*+~.()'"!:@]/g,
-        })}`;
+  // const siteUrl =
+  //   type === "diveSite"
+  //     ? `/dive_sites/${slugify(name.replace("&", ""), {
+  //         lower: true,
+  //         remove: /[*+~.()'"!:@]/g,
+  //       })}`
+  //     : `/dive_centres/${slugify(name.replace("&", ""), {
+  //         lower: true,
+  //         remove: /[*+~.()'"!:@]/g,
+  //       })}`;
 
-  // function cardClicked() {
-  //   const siteType = type === "dive_site" ? "Dive Site" : "Dive Centre";
-  //   posthog.capture(`Viewed Dive ${siteType}`, {
-  //     id,
-  //     name,
-  //   });
-  // }
   return (
     <ChakraBox
       layout
@@ -82,24 +74,22 @@ export default function DiveSiteCard(props) {
       >
         <Flex direction={{ base: "column" }} justify="center">
           {id && (
-            <Link href={siteUrl} passHref>
-              <a>
-                <Box
-                  position="relative"
-                  cursor="pointer"
-                  // onClick={() => cardClicked()}
-                >
-                  {isLoading ? (
-                    <Spinner />
-                  ) : (
-                    <Image
-                      src={image || bgImg}
-                      width="300"
-                      height="200"
-                      borderRadius="20px"
-                    />
-                  )}
-                  {/* <Button
+            <Box
+              position="relative"
+              cursor="pointer"
+              // onClick={() => cardClicked()}
+            >
+              {isLoading ? (
+                <Spinner />
+              ) : (
+                <Image
+                  src={image || bgImg}
+                  width="300"
+                  height="200"
+                  borderRadius="20px"
+                />
+              )}
+              {/* <Button
                     position="absolute"
                     bg="white"
                     _hover={{ bg: "whiteAlpha.900" }}
@@ -123,9 +113,7 @@ export default function DiveSiteCard(props) {
                       color="brand.500"
                     />
                   </Button> */}
-                </Box>
-              </a>
-            </Link>
+            </Box>
           )}
           <Flex
             flexDirection="column"

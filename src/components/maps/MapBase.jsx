@@ -24,7 +24,7 @@
 
 // Chakra imports
 import { Flex, useColorModeValue } from "@chakra-ui/react";
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Map, {
   NavigationControl,
   FullscreenControl,
@@ -62,42 +62,6 @@ export default function MapBase(props) {
   //     "circle-color": "#007cbf",
   //   },
   // };
-
-  const diveCentrePins = useMemo(
-    () =>
-      diveCentres?.map(
-        (location) =>
-          location.latitude &&
-          location.longitude && (
-            <MapMarker
-              location={location}
-              mapLocation={mapLocation}
-              setMapLocation={setMapLocation}
-              type="diveCentre"
-              mapRef={mapRef}
-            />
-          )
-      ),
-    []
-  );
-
-  const diveSitePins = useMemo(
-    () =>
-      diveSites?.map(
-        (location) =>
-          location.latitude &&
-          location.longitude && (
-            <MapMarker
-              location={location}
-              mapLocation={mapLocation}
-              setMapLocation={setMapLocation}
-              type="diveSite"
-              mapRef={mapRef}
-            />
-          )
-      ),
-    []
-  );
 
   return (
     <Flex
@@ -138,8 +102,32 @@ export default function MapBase(props) {
           <FullscreenControl position="top-left" />
           <NavigationControl position="top-left" />
           <ScaleControl />
-          {diveSitePins}
-          {diveCentrePins}
+          {diveSites?.map(
+            (location) =>
+              location.latitude &&
+              location.longitude && (
+                <MapMarker
+                  location={location}
+                  mapLocation={mapLocation}
+                  setMapLocation={setMapLocation}
+                  type="diveSite"
+                  mapRef={mapRef}
+                />
+              )
+          )}
+          {diveCentres?.map(
+            (location) =>
+              location.latitude &&
+              location.longitude && (
+                <MapMarker
+                  location={location}
+                  mapLocation={mapLocation}
+                  setMapLocation={setMapLocation}
+                  type="diveCentre"
+                  mapRef={mapRef}
+                />
+              )
+          )}
           {/* <Source type="geojson" data={logojson}>
             <Layer {...layerStyle} />
           </Source> */}

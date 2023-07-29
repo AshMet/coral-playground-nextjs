@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
 import { Avatar, Tag, TagLabel } from "@chakra-ui/react";
+import Link from "next/link";
 import { Marker } from "react-map-gl";
 
 import DiveSiteCard from "components/card/DiveSiteCard";
 
-export default function MapMarker({
-  location,
-  mapLocation,
-  setMapLocation,
-  type,
-  mapRef,
-}) {
+export default function MapMarker(props) {
+  const { location, mapLocation, setMapLocation, type, mapRef } = props;
+  const siteUrl =
+    type === "diveSite"
+      ? `/dive_sites/${location.slug}`
+      : `/dive_centres/${location.slug}`;
   return (
     <Marker
       key={location.latitude + location.longitude}
@@ -45,17 +45,21 @@ export default function MapMarker({
           <TagLabel>{location.name}</TagLabel>
         </Tag>
       ) : (
-        <DiveSiteCard
-          key={location.id}
-          id={location.id}
-          name={location.name}
-          tagList={location.tags}
-          type={type}
-          image={
-            type === "diveSite" ? location.diveMap : location.coverPhotoUrl
-          }
-          zIndex={3}
-        />
+        <Link href={siteUrl} passHref>
+          <a>
+            <DiveSiteCard
+              key={location.id}
+              id={location.id}
+              name={location.name}
+              tagList={location.tags}
+              type={type}
+              image={
+                type === "diveSite" ? location.diveMap : location.coverPhotoUrl
+              }
+              zIndex={3}
+            />
+          </a>
+        </Link>
       )}
     </Marker>
   );

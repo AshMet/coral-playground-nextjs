@@ -63,10 +63,10 @@ export default function Home({ diveSites, diveCentres }) {
 export async function getStaticProps() {
   const { data: diveSites } = await supabase
     .from("dive_sites_view")
-    .select(`id, name, latitude, longitude, diveMap`);
+    .select(`id, name, latitude, longitude, diveMap, slug`);
   const { data: diveCentres } = await supabase
     .from("active_dive_centres_view")
-    .select(`id, name, latitude, longitude, coverPhotoUrl`);
+    .select(`id, name, latitude, longitude, coverPhotoUrl, slug`);
   return { props: { diveSites, diveCentres }, revalidate: 86400 };
 }
 

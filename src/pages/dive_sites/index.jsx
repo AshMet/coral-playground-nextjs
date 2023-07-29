@@ -18,6 +18,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
+import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 import { MdApps, MdDashboard } from "react-icons/md";
@@ -163,18 +164,24 @@ export default function DiveSites({ diveSites }) {
               {filtered &&
                 filtered.map((site) => {
                   return (
-                    <DiveSiteCard
-                      key={site.id}
-                      id={site.id}
-                      image={site.dive_map || "/img/diving/dive_site_bg.jpg"}
-                      name={site.name}
-                      tagList={site.tags}
-                      depth={site.depth}
-                      max_visibility={site.max_visibility}
-                      current={site.current}
-                      type="diveSite"
-                      // address={`${site.city}, ${site.country}`}
-                    />
+                    <Link href={`/dive_sites/${site.slug}`} passHref>
+                      <a>
+                        <DiveSiteCard
+                          key={site.id}
+                          id={site.id}
+                          image={
+                            site.dive_map || "/img/diving/dive_site_bg.jpg"
+                          }
+                          name={site.name}
+                          tagList={site.tags}
+                          depth={site.depth}
+                          max_visibility={site.max_visibility}
+                          current={site.current}
+                          type="diveSite"
+                          // address={`${site.city}, ${site.country}`}
+                        />
+                      </a>
+                    </Link>
                   );
                 })}
             </SimpleGrid>
