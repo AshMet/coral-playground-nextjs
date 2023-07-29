@@ -1,6 +1,0 @@
-User-agent: *
-
-Allow: /
-Disallow: /diving/
-
-Sitemap: https://www.coralplayground.com/sitemap.xml

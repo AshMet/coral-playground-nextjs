@@ -35,6 +35,7 @@ module.exports = {
       {
         userAgent: '*',
         allow: '/',
+        disallow: ['/diving/', '/nft/'],
       },
       // {
       //   userAgent: 'test-bot',
