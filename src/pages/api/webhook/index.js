@@ -16,8 +16,6 @@ const client = new PostHog(
   process.env.NEXT_PUBLIC_POSTHOG_KEY,
   { host: process.env.NEXT_PUBLIC_POSTHOG_HOST } // You can omit this line if using PostHog Cloud
 )
-// On program exit, call shutdown to stop pending pollers and flush any remaining events
-await client.shutdownAsync();
 
 export const config = {
   api: {
@@ -176,6 +174,9 @@ export default async function handler(req, res) {
         break;
       }
     }
+
+    // On program exit, call shutdown to stop pending pollers and flush any remaining events
+    await client.shutdownAsync();
 
     // 3. Return a response to acknowledge receipt of the event.
     res.json({ received: true });
