@@ -27,6 +27,7 @@ import {
   Flex,
   Icon,
   Stack,
+  Heading,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -83,7 +84,7 @@ export default function Benefits() {
             >
               WHAT MAKES US BETTER
             </Text>
-            <Text
+            <Heading
               color={textColor}
               fontWeight="800"
               fontSize={{ base: "28px", md: "48px" }}
@@ -91,7 +92,7 @@ export default function Benefits() {
               mb={{ base: "14px", lg: "30px" }}
             >
               A Complete End-to-End Diving Experience
-            </Text>
+            </Heading>
           </Flex>
         </Flex>
 

@@ -65,7 +65,7 @@ function SignedOutMenuList({ iconColor }) {
             <Button
               variant="link"
               size="sm"
-              color={useColorModeValue("brand.100", "brand.300")}
+              color={useColorModeValue("white", "brand.300")}
               leftIcon={<IoLogInOutline />}
               onClick={() => router.push("/auth/login")}
             >
@@ -82,13 +82,28 @@ function SignedOutMenuList({ iconColor }) {
             <Button
               variant="link"
               size="sm"
-              color={useColorModeValue("brand.100", "brand.300")}
-              mt={1}
-              mr={4}
+              color={useColorModeValue("white", "brand.300")}
               leftIcon={<ProfileIcon />}
               onClick={() => router.push("/auth/signup")}
             >
               Sign Up
+            </Button>
+          </MenuItem>
+          <MenuItem
+            _hover={{ bg: "none" }}
+            _focus={{ bg: "none" }}
+            color="red.400"
+            borderRadius="8px"
+            px="14px"
+          >
+            <Button
+              variant="link"
+              size="sm"
+              color={useColorModeValue("white", "brand.300")}
+              leftIcon={<ProfileIcon />}
+              onClick={() => router.push("/auth/signup")}
+            >
+              Register Business
             </Button>
           </MenuItem>
         </Flex>

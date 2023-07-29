@@ -26,6 +26,7 @@ import {
   Flex,
   Button,
   Icon,
+  Heading,
   Grid,
   Text,
   Link,
@@ -75,7 +76,7 @@ export default function CertBenefits() {
                 >
                   CERTIFICATIONS
                 </Text>
-                <Text
+                <Heading
                   fontWeight="800"
                   color={textColor}
                   fontSize={{ base: "28px", md: "40px" }}
@@ -85,7 +86,7 @@ export default function CertBenefits() {
                   maxW={{ base: "100%", md: "unset" }}
                 >
                   Dive into Adventure - All Levels Welcome!
-                </Text>
+                </Heading>
                 <Text
                   textAlign={{ base: "center", lg: "left" }}
                   color={textColorSecondary}

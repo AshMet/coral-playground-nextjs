@@ -24,7 +24,7 @@
 
 // Chakra imports
 import { Flex, useColorModeValue } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Map, {
   NavigationControl,
   FullscreenControl,
@@ -32,6 +32,7 @@ import Map, {
   GeolocateControl,
 } from "react-map-gl";
 
+// import { logojson } from "../../lib/data/mapbox/coral-logo";
 import Card from "components/card/Card";
 
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -47,6 +48,55 @@ export default function MapBase(props) {
   const mapStyles = useColorModeValue(
     "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r",
     "mapbox://styles/ashmet/cl5g3eivr000q14pcior0262r"
+  );
+
+  const settings = {
+    scrollZoom: false,
+  };
+
+  // const layerStyle = {
+  //   id: "point",
+  //   type: "circle",
+  //   paint: {
+  //     "circle-radius": 10,
+  //     "circle-color": "#007cbf",
+  //   },
+  // };
+
+  const diveCentrePins = useMemo(
+    () =>
+      diveCentres?.map(
+        (location) =>
+          location.latitude &&
+          location.longitude && (
+            <MapMarker
+              location={location}
+              mapLocation={mapLocation}
+              setMapLocation={setMapLocation}
+              type="diveCentre"
+              mapRef={mapRef}
+            />
+          )
+      ),
+    []
+  );
+
+  const diveSitePins = useMemo(
+    () =>
+      diveSites?.map(
+        (location) =>
+          location.latitude &&
+          location.longitude && (
+            <MapMarker
+              location={location}
+              mapLocation={mapLocation}
+              setMapLocation={setMapLocation}
+              type="diveSite"
+              mapRef={mapRef}
+            />
+          )
+      ),
+    []
   );
 
   return (
@@ -76,7 +126,9 @@ export default function MapBase(props) {
             longitude: 33.9,
             pitch: 65,
             zoom: 12,
+            scrollZoom: false,
           }}
+          {...settings}
           style={{ borderRadius: "20px", width: "100%", height: "100%" }}
           mapStyle={mapStyles}
           mapboxAccessToken={MAPBOX_TOKEN}
@@ -86,33 +138,11 @@ export default function MapBase(props) {
           <FullscreenControl position="top-left" />
           <NavigationControl position="top-left" />
           <ScaleControl />
-
-          {diveSites?.map(
-            (location) =>
-              location.latitude &&
-              location.longitude && (
-                <MapMarker
-                  location={location}
-                  mapLocation={mapLocation}
-                  setMapLocation={setMapLocation}
-                  type="diveSite"
-                  mapRef={mapRef}
-                />
-              )
-          )}
-          {diveCentres?.map(
-            (location) =>
-              location.latitude &&
-              location.longitude && (
-                <MapMarker
-                  location={location}
-                  mapLocation={mapLocation}
-                  setMapLocation={setMapLocation}
-                  type="diveCentre"
-                  mapRef={mapRef}
-                />
-              )
-          )}
+          {diveSitePins}
+          {diveCentrePins}
+          {/* <Source type="geojson" data={logojson}>
+            <Layer {...layerStyle} />
+          </Source> */}
         </Map>
       </Card>
     </Flex>

@@ -116,7 +116,7 @@ export function CircProgressMini(props) {
   return (
     <CircularProgressbarWithChildren
       value={percentage}
-      text={`${title}`}
+      text={title}
       styles={buildStyles(stylesColorMode)}
     >
       <Box>

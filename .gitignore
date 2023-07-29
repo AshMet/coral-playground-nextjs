@@ -38,7 +38,7 @@ yarn-error.log*
 **/public/service-worker.js
 
 # sitemap
-robots.txt
+# robots.txt
 sitemap*.xml
 
 # rss

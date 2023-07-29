@@ -465,9 +465,7 @@ export default function HeaderLinks(props) {
       </Menu> */}
 
       <Tooltip
-        label={`${
-          colorMode === "dark" ? "Toggle Light Mode" : "Toggle Dark Mode"
-        }`}
+        label={colorMode === "dark" ? "Toggle Light Mode" : "Toggle Dark Mode"}
       >
         <Button
           variant="no-hover"

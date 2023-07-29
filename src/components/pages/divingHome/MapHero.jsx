@@ -23,7 +23,7 @@
 */
 
 // Chakra imports
-import { Box, chakra, Flex, Stack, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 import MapBase from "components/maps/MapBase";
@@ -48,7 +48,7 @@ export default function MapHero(props) {
         boxShadow="dark-lg"
       />
       {/* </InnerContent> */}
-      <Stack
+      {/* <Stack
         direction="column"
         spacing={10}
         justifyContent="center"
@@ -82,7 +82,7 @@ export default function MapHero(props) {
             Diving Adventure
           </Text>
         </Box>
-      </Stack>
+      </Stack> */}
     </Flex>
   );
 }

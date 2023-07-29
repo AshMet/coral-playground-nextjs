@@ -30,6 +30,7 @@ import {
   Text,
   Link,
   useColorModeValue,
+  Heading,
 } from "@chakra-ui/react";
 // Custom components
 import { MdChevronRight } from "react-icons/md";
@@ -75,7 +76,7 @@ export default function DiveSiteBenefits() {
                 >
                   PROMOTE
                 </Text>
-                <Text
+                <Heading
                   fontWeight="800"
                   color={textColor}
                   fontSize={{ base: "28px", md: "48px" }}
@@ -85,7 +86,7 @@ export default function DiveSiteBenefits() {
                   maxW={{ base: "100%", md: "unset" }}
                 >
                   Get More Customers
-                </Text>
+                </Heading>
                 <Text
                   textAlign={{ base: "center", lg: "left" }}
                   color={textColorSecondary}
@@ -129,7 +130,7 @@ export default function DiveSiteBenefits() {
                   direction={{ base: "column", md: "row" }}
                   mb="30px"
                 >
-                  <Link href="/auth/login">
+                  <Link href="/business/signup">
                     <Button
                       py="20px"
                       px="16px"

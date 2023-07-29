@@ -29,6 +29,7 @@ import {
   useColorModeValue,
   Grid,
   GridItem,
+  Heading,
 } from "@chakra-ui/react";
 // Custom components
 // import PageCard from "components/pages/divingHome/PageCard";
@@ -71,7 +72,7 @@ export default function Mission() {
             >
               OUR MISSION
             </Text>
-            <Text
+            <Heading
               color={textColor}
               fontWeight="800"
               fontSize={{ base: "28px", md: "40px", lg: "48px" }}
@@ -79,7 +80,7 @@ export default function Mission() {
               mb="20px"
             >
               Help Drive Your Business Forward
-            </Text>
+            </Heading>
             <Text color={textColor} fontSize="lg" w="100%" mb="20px">
               Join the Coral Playground community and reach a growing network of
               scuba divers worldwide! As a business partner, you&apos;ll be part

@@ -28,6 +28,7 @@ import {
   Icon,
   Grid,
   Text,
+  Heading,
   Link,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -75,7 +76,7 @@ export default function DiveSiteBenefits() {
                 >
                   DIVE SITES
                 </Text>
-                <Text
+                <Heading
                   fontWeight="800"
                   color={textColor}
                   fontSize={{ base: "28px", md: "40px" }}
@@ -85,7 +86,7 @@ export default function DiveSiteBenefits() {
                   maxW={{ base: "100%", md: "unset" }}
                 >
                   Explore the Best Dive Sites with Confidence
-                </Text>
+                </Heading>
                 <Text
                   textAlign={{ base: "center", lg: "left" }}
                   color={textColorSecondary}

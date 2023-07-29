@@ -16,9 +16,7 @@ export default function DarkModeMenuItem(props) {
 
   return (
     <Tooltip
-      label={`${
-        colorMode === "dark" ? "Toggle Light Mode" : "Toggle Dark Mode"
-      }`}
+      label={colorMode === "dark" ? "Toggle Light Mode" : "Toggle Dark Mode"}
     >
       <Button
         variant="no-hover"

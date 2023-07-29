@@ -3,6 +3,7 @@ import {
   Button,
   Center,
   Flex,
+  Heading,
   Icon,
   Text,
   useColorModeValue,
@@ -77,22 +78,21 @@ const Hero = () => {
                 textAlign="center"
                 mt={{ sm: "200px", lg: "80px" }}
               >
-                <Text
+                <Heading
                   color={textColor}
-                  fontSize={{ base: "54px", md: "48px", xl: "54px" }}
-                  lineHeight={{ base: "64px", md: "58px", xl: "64px" }}
-                  mb="30px"
-                  fontWeight="600"
+                  fontWeight="800"
+                  fontSize={{ base: "28px", md: "40px", lg: "48px" }}
+                  lineHeight={{ base: "38px", md: "50px", lg: "58px" }}
+                  mb="20px"
                 >
-                  Manage & Grow Your Business
-                  <br />
-                  <Text as="span" fontWeight="800">
-                    Like{" "}
-                    <Text color="brand.100" as="span" fontWeight="800">
-                      Never Before
-                    </Text>
+                  Manage & Grow Your <br />
+                  <Text as="span" color="brand.100">
+                    Dive Business{" "}
                   </Text>
-                </Text>
+                  <Text as="span" color={textColor}>
+                    Like Never Before
+                  </Text>
+                </Heading>
                 {/* <Text
                   color={textColor}
                   fontSize="lg"
@@ -109,7 +109,7 @@ const Hero = () => {
                   direction={{ base: "column", md: "row" }}
                   mb="30px"
                 >
-                  <Link href="/auth/login">
+                  <Link href="/business/signup">
                     <Button
                       py="20px"
                       px="16px"

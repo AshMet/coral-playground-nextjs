@@ -21,7 +21,7 @@
 */
 
 // Chakra imports
-import { Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Heading, Text, useColorModeValue } from "@chakra-ui/react";
 
 // import Image from "next/image";
 // Assets
@@ -73,7 +73,7 @@ export default function Tools() {
             >
               HOW IT WORKS
             </Text>
-            <Text
+            <Heading
               color={textColor}
               fontWeight="800"
               fontSize={{ base: "28px", md: "40px", lg: "46px" }}
@@ -81,7 +81,7 @@ export default function Tools() {
               mb={{ base: "14px", lg: "30px" }}
             >
               Increase your Dive Bookings in 3 Easy Steps
-            </Text>
+            </Heading>
             <Text
               textAlign="center"
               color="secondaryGray.600"

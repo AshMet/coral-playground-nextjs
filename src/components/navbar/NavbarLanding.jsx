@@ -317,7 +317,7 @@ export default function LandingNavbar(props) {
                   _focus={{ bg: "none" }}
                   borderRadius="8px"
                 >
-                  <Link href="/business/home">
+                  <Link href="/business/signup">
                     <Button
                       variant="outline"
                       border="1px solid"
@@ -328,7 +328,7 @@ export default function LandingNavbar(props) {
                       my="auto"
                       _hover={{ bg: "brand.100", cursor: "pointer" }}
                     >
-                      Become a Business Partner
+                      Register Your Business
                       <Icon
                         as={MdChevronRight}
                         ms="5px"
@@ -355,7 +355,7 @@ export default function LandingNavbar(props) {
               my="auto"
               _hover={{ bg: "brand.100", cursor: "pointer" }}
             >
-              Add your Dive Centre
+              Register Your Business
               <Icon as={MdChevronRight} ms="5px" mt="2px" h="16px" w="16px" />
             </Button>
           </Link>

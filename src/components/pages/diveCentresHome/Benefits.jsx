@@ -24,6 +24,7 @@
 import {
   // Box,
   Flex,
+  Heading,
   // Link,
   Text,
   useColorModeValue,
@@ -79,7 +80,7 @@ export default function Benefits() {
             >
               WHAT MAKES US BETTER
             </Text>
-            <Text
+            <Heading
               color={textColor}
               fontWeight="800"
               fontSize={{ base: "28px", md: "48px" }}
@@ -87,7 +88,7 @@ export default function Benefits() {
               mb={{ base: "14px", lg: "30px" }}
             >
               Complete Business Management Solution for your Dive Centre
-            </Text>
+            </Heading>
           </Flex>
         </Flex>
         {/* <SimpleGrid

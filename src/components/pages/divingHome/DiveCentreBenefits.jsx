@@ -27,6 +27,7 @@ import {
   Link,
   Button,
   Icon,
+  Heading,
   Grid,
   Text,
   useColorModeValue,
@@ -86,7 +87,7 @@ export default function DiveCentreBenefits() {
                 >
                   DIVE CENTRES
                 </Text>
-                <Text
+                <Heading
                   fontWeight="800"
                   color={textColor}
                   fontSize={{ base: "28px", md: "40px" }}
@@ -97,7 +98,7 @@ export default function DiveCentreBenefits() {
                   maxW={{ base: "100%", md: "unset" }}
                 >
                   Find Your Perfect Dive Centre - No Guesswork Required!
-                </Text>
+                </Heading>
                 <Text
                   color={textColorSecondary}
                   textAlign={{ base: "center", lg: "left" }}

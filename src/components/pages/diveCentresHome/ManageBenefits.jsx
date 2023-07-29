@@ -30,6 +30,7 @@ import {
   Grid,
   Text,
   useColorModeValue,
+  Heading,
 } from "@chakra-ui/react";
 // import Image from "next/image";
 // Assets
@@ -86,7 +87,7 @@ export default function DiveCentreBenefits() {
                 >
                   MANAGE
                 </Text>
-                <Text
+                <Heading
                   fontWeight="800"
                   color={textColor}
                   fontSize={{ base: "28px", md: "48px" }}
@@ -97,7 +98,7 @@ export default function DiveCentreBenefits() {
                   maxW={{ base: "100%", md: "unset" }}
                 >
                   Streamline Operations
-                </Text>
+                </Heading>
                 <Text
                   color={textColorSecondary}
                   textAlign={{ base: "center", lg: "left" }}
@@ -118,7 +119,7 @@ export default function DiveCentreBenefits() {
                   mb="30px"
                   justifyContent={{ base: "center", lg: "unset" }}
                 >
-                  <Link href="/auth/login">
+                  <Link href="/business/signup">
                     <Button
                       py="20px"
                       px="16px"
