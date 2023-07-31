@@ -81,8 +81,8 @@ const Hero = () => {
                 <Heading
                   color={textColor}
                   fontWeight="800"
-                  fontSize={{ base: "28px", md: "40px", lg: "48px" }}
-                  lineHeight={{ base: "38px", md: "50px", lg: "58px" }}
+                  fontSize={{ base: "38px", md: "60px", lg: "68px" }}
+                  lineHeight={{ base: "48px", md: "70px", lg: "78px" }}
                   mb="20px"
                 >
                   Manage & Grow Your <br />

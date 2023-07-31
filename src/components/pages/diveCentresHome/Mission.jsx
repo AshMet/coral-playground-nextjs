@@ -47,7 +47,7 @@ export default function Mission() {
     <Flex
       w="100%"
       direction={{ base: "column" }}
-      my="50px"
+      my="100px"
       pt={{ base: "180px", md: "200px", xl: "100px" }}
       overflow="hidden"
       bgSize="cover"

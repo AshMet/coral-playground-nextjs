@@ -8,6 +8,7 @@ const LOGOUT_URL = "/oauth/revoke";
 const CURRENT_USER_URL = "/users/me";
 const DIVE_SITE_INDEX_URL = "/dive_sites";
 
+// Check if I should remove the NEXT_PUBLIC
 const CLIENT_ID = process.env.NEXT_PUBLIC_SERVER_CLIENT_ID;
 const CLIENT_SECRET = process.env.NEXT_PUBLIC_SERVER_CLIENT_SECRET;
 
@@ -151,12 +152,3 @@ export async function getDiveSites(accessToken: string) {
       return error.response.data;
     });
 }
-
-// function getStaticProps() {
-//   return {
-//     props: {
-//       clientId: process.env.SERVER_CLIENT_ID,
-//       clientSecret: process.env.SERVER_CLIENT_SECRET,
-//     },
-//   };
-// }

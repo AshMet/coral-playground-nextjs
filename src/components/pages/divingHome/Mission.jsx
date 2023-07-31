@@ -15,7 +15,7 @@ const Intro = () => {
   // };
 
   return (
-    <Stack direction={{ base: "column", md: "row" }}>
+    <Stack direction={{ base: "column", md: "row" }} mb="50px">
       <Stack direction="column" spacing={10} justifyContent="center">
         <Flex direction="column" width="stretch">
           <Flex

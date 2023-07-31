@@ -46,7 +46,6 @@ export default function Home({ diveSites, diveCentres }) {
               <MapHero diveSites={diveSites} diveCentres={diveCentres} />
               <Intro />
               <Mission />
-              {/* <Hero /> */}
               <HowItWorks />
               <Benefits />
               <DiveSiteBenefits />

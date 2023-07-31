@@ -42,7 +42,7 @@ export default function Tools() {
       maxW="100%"
       direction={{ base: "column" }}
       pt={{ base: "100px", md: "140px", xl: "100px" }}
-      pb={{ base: "60px", md: "80px" }}
+      pb={{ base: "60px", md: "120px" }}
       overflow="hidden"
       bgSize="cover"
       position="relative"

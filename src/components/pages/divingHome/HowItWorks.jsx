@@ -47,6 +47,7 @@ export default function Tools() {
       bgSize="cover"
       position="relative"
       id="version"
+      mb="50px"
     >
       <InnerContent>
         <Flex

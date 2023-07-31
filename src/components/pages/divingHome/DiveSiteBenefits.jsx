@@ -49,7 +49,7 @@ export default function DiveSiteBenefits() {
     <Flex
       w="100%"
       direction={{ base: "column" }}
-      pt={{ base: "50px", md: "50px", xl: "70px" }}
+      pt={{ base: "50px", md: "50px", xl: "120px" }}
       pb={{ base: "20px", md: "0px", xl: "70px" }}
       overflow="hidden"
       bgSize="cover"

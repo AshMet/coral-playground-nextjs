@@ -65,7 +65,7 @@ export default function Login() {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  const signUpEmailPass = async () => {
+  const signInEmailPass = async () => {
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -361,7 +361,7 @@ export default function Login() {
                   w="100%"
                   h="50"
                   mb="24px"
-                  onClick={signUpEmailPass}
+                  onClick={signInEmailPass}
                   disabled={loading}
                 >
                   Sign In

@@ -52,7 +52,7 @@ export default function DiveCentreBenefits() {
     <Flex
       w="100%"
       direction={{ base: "column" }}
-      pt={{ base: "80px", md: "140px", xl: "50px" }}
+      pt={{ base: "80px", md: "140px", xl: "120px" }}
       pb={{ base: "100px", md: "140px", xl: "100px" }}
       overflow="hidden"
       bgSize="cover"

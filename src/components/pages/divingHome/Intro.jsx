@@ -14,7 +14,7 @@ export default function CallToActionWithAnnotation() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = useColorModeValue("secondaryGray.700", "white");
   return (
-    <Stack direction={{ base: "column", md: "row" }}>
+    <Stack direction={{ base: "column", md: "row" }} mb="100px">
       <Stack direction="column" spacing={10} justifyContent="center" w="100%">
         <Flex direction="column" width="stretch">
           <Flex
@@ -33,17 +33,18 @@ export default function CallToActionWithAnnotation() {
               fontSize="sm"
               w="100%"
               mb="10px"
+              as="h1"
             >
               WELCOME TO CORAL PLAYGROUND
             </Text>
             <Heading
               color={textColor}
               fontWeight="800"
-              fontSize={{ base: "28px", md: "40px", lg: "48px" }}
-              lineHeight={{ base: "38px", md: "50px", lg: "58px" }}
+              fontSize={{ base: "38px", md: "60px", lg: "68px" }}
+              lineHeight={{ base: "48px", md: "70px", lg: "78px" }}
               mb="20px"
             >
-              The Best Way to Book your <br />
+              The Better Way to Book your <br />
               <Text as="span" color="brand.100">
                 Red Sea{" "}
               </Text>
