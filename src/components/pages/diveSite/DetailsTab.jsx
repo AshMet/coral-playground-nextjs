@@ -18,10 +18,12 @@ import CircularProgress from "components/charts/CircularProgress";
 import IconBox from "components/icons/IconBox";
 
 export default function DetailsTab({
-  depth,
+  minDepth,
+  maxDepth,
   minVisibility,
   maxVisibility,
-  current,
+  minCurrent,
+  maxCurrent,
   access,
   certLevel,
   diveTypes,
@@ -35,12 +37,12 @@ export default function DetailsTab({
     <Flex direction="column" w="100%">
       <Box gridArea="1 / 2 / 2 / 3">
         <SimpleGrid mt="20px" columns={{ sm: 2, md: 3 }} gap="20px" mb="20px">
-          {depth && (
+          {maxDepth && (
             <Card p={{ base: "10px", md: "20px" }}>
               <CircularProgress
                 title="Depth"
-                value={depth}
-                text={depth ? `${depth}m` : "N/A"}
+                value={maxDepth}
+                text={`${minDepth || "N/A"} - ${maxDepth || "N/A"}m`}
               />
             </Card>
           )}
@@ -53,12 +55,12 @@ export default function DetailsTab({
               />
             </Card>
           )}
-          {current && (
+          {maxCurrent && (
             <Card p={{ base: "10px", md: "20px" }}>
               <CircularProgress
                 title="Current"
-                value={current}
-                text={current}
+                value={maxCurrent}
+                text={`${minCurrent || "N/A"} - ${maxCurrent || "N/A"}`}
               />
             </Card>
           )}

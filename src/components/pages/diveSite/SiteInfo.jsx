@@ -33,10 +33,12 @@ export default function SiteInfo({
   city,
   country,
   species,
-  depth,
+  minDepth,
+  maxDepth,
   minVisibility,
   maxVisibility,
-  current,
+  minCurrent,
+  maxCurrent,
   access,
   certLevel,
   diveTypes,
@@ -202,10 +204,12 @@ export default function SiteInfo({
                 <TabPanel px="0px">{descTab()}</TabPanel>
                 <TabPanel px="0px">
                   <DetailsTab
-                    depth={depth}
+                    minDepth={minDepth}
+                    maxDepth={maxDepth}
                     minVisibility={minVisibility}
                     maxVisibility={maxVisibility}
-                    current={current}
+                    minCurrent={minCurrent}
+                    maxCurrent={maxCurrent}
                     access={access}
                     certLevel={certLevel}
                     diveTypes={diveTypes}

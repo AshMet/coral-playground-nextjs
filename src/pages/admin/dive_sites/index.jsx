@@ -25,11 +25,11 @@ const columnsDataSites = [
   },
   {
     Header: "DEPTH",
-    accessor: "depth",
+    accessor: "max_depth",
   },
   {
     Header: "CURRENT",
-    accessor: "current",
+    accessor: "max_current",
   },
   {
     Header: "LAT",
@@ -70,10 +70,8 @@ export const getServerSideProps = async () => {
   const { data: diveSites } = await supabase
     .from("dive_sites")
     .select(
-      `
-    id, name, description, latitude, longitude, min_visibility, max_visibility, depth, current, cert_level, tags, access, dive_map,
-    updated_at, city: cities (name)
-  `
+      ` id, name, description, latitude, longitude, min_visibility, max_visibility, min_depth, max_depth,
+        min_current, max_current, cert_level, tags, access, dive_map, updated_at, city: cities (name)`
     )
     .order("name", { ascending: true });
 

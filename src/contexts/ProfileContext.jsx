@@ -70,18 +70,6 @@ export const ProfileProvider = ({ children }) => {
     // Start Spinner
     setLoading(true);
     // Get Profile Data
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // const { data, error } = await supabase.from("profiles").upsert({
-    //   id: user.id,
-    //   username,
-    //   bio,
-    //   avatar_url: avatarUrl,
-    //   first_name: firstName,
-    //   last_name: lastName,
-    //   certification: divingCert,
-    //   // avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarUrl}`,
-    //   updated_at: new Date().toISOString(),
-    // });
     const { data, error } = await supabase.auth.updateUser({
       data: {
         username,
@@ -100,7 +88,7 @@ export const ProfileProvider = ({ children }) => {
           <AlertPopup
             type="danger"
             text="Profile Update Failed!"
-            // subtext="View Shopping Cart to complete your order"
+            subtext={error.message}
           />
         ),
       });
@@ -144,102 +132,6 @@ export const ProfileProvider = ({ children }) => {
     // Stop Spinner
     setLoading(false);
   };
-
-  // async function getProfile() {
-  //   try {
-  //     setLoading(true);
-
-  //     const { data, error, status } = await supabase
-  //       .from("profiles")
-  //       .select(`username, avatar_url`)
-  //       .eq("id", user.id)
-  //       .single();
-
-  //     if (error && status !== 406) {
-  //       throw error;
-  //     }
-
-  //     if (data) {
-  //       setUsername(data.username);
-  //       setAvatarUrl(data.avatar_url);
-  //       // setAvatarUrl(`${data.avatar_url}?token=${session.access_token}`);
-  //     }
-  //   } catch (error) {
-  //     // toast({
-  //     //   position: "top",
-  //     //   render: () => (
-  //     //     <AlertPopup type="danger" text="Error loading user data!" />
-  //     //   ),
-  //     // });
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
-  // async function updateProfile(newUsername, newAvatarUrl) {
-  //   try {
-  //     setLoading(true);
-
-  //     const updates = {
-  //       id: user.id,
-  //       username: newUsername || username,
-  //       avatar_url: newAvatarUrl || avatarUrl,
-  //       // avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarUrl}`,
-  //       updated_at: new Date().toISOString(),
-  //     };
-
-  //     const { error } = await supabase.from("profiles").upsert(updates);
-  //     if (error) throw error;
-
-  //     if (newUsername) setUsername(newUsername);
-  //     if (newAvatarUrl) setAvatarUrl(newAvatarUrl);
-
-  //     toast({
-  //       position: "top",
-  //       render: () => (
-  //         <AlertPopup
-  //           type="success"
-  //           text="Profile Updated!"
-  //           // subtext="View Shopping Cart to complete your order"
-  //         />
-  //       ),
-  //     });
-  //     gtag.event({
-  //       action: "update-profile",
-  //       category: "button",
-  //       label: "Profile",
-  //       // value: newItem.title,
-  //     });
-  //   } catch (error) {
-  //     toast({
-  //       position: "top",
-  //       render: () => (
-  //         <AlertPopup
-  //           type="danger"
-  //           text="Profile Update Failed!"
-  //           // subtext="View Shopping Cart to complete your order"
-  //         />
-  //       ),
-  //     });
-  //     gtag.event({
-  //       action: "update-profile",
-  //       category: "button",
-  //       label: "Profile",
-  //       // value: newItem.title,
-  //     });
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getProfile();
-  //   getOwnerDiveCentre();
-  // }, [user]);
-
-  // useEffect(() => {
-  //   updateProfile();
-  // }, [avatarUrl]);
 
   // Need to figure out how to use useMemo for this
   // const profileValue = useMemo(

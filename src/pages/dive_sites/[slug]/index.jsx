@@ -121,10 +121,12 @@ export default function DiveSitePage({ diveSite }) {
               description={diveSite.description}
               city={diveSite.city.name}
               country={diveSite.country.countries.name}
-              depth={diveSite.depth}
+              minDepth={diveSite.min_depth}
+              maxDepth={diveSite.max_depth}
               minVisibility={diveSite.min_visibility}
               maxVisibility={diveSite.max_visibility}
-              current={diveSite.current}
+              minCurrent={diveSite.min_current}
+              maxCurrent={diveSite.max_current}
               access={diveSite.access}
               cert_level={diveSite.cert_level}
               diveTypes={diveSite.tags}
@@ -184,7 +186,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
     .from("dive_sites")
     .select(
       `id, slug, name, description, latitude, longitude, min_visibility, max_visibility,
-        depth, current, cert_level, tags, access, dive_map, 
+        min_depth, max_depth, min_current, max_current, cert_level, tags, access, dive_map, 
         city: cities (name),
         country: cities (countries (name)),
         species: site_species!dive_site_id (
