@@ -29,6 +29,8 @@ export default function DivingLayout({ children, ...props }) {
   // states and functions
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
+  const [mini, setMini] = useState(true);
+  const [hovered, setHovered] = useState(false);
   const user = useUser();
   // const posthog = usePostHog();
 
@@ -154,7 +156,14 @@ export default function DivingLayout({ children, ...props }) {
             setToggleSidebar,
           }}
         >
-          <Sidebar routes={routes} display="none" {...rest} />
+          <Sidebar
+            hovered={hovered}
+            setHovered={setHovered}
+            mini={mini}
+            routes={routes}
+            display="none"
+            {...rest}
+          />
           <Box
             float="right"
             minHeight="100vh"
@@ -162,8 +171,16 @@ export default function DivingLayout({ children, ...props }) {
             overflow="auto"
             position="relative"
             maxHeight="100%"
-            w={{ base: "100%", xl: "calc( 100% - 290px )" }}
-            maxWidth={{ base: "100%", xl: "calc( 100% - 290px )" }}
+            w={
+              mini === false || hovered === true
+                ? { base: "100%", xl: "calc( 100% - 290px )" }
+                : { base: "100%", xl: "calc( 100% - 120px )" }
+            }
+            maxWidth={
+              mini === false || hovered === true
+                ? { base: "100%", xl: "calc( 100% - 290px )" }
+                : { base: "100%", xl: "calc( 100% - 120px )" }
+            }
             transition="all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1)"
             transitionDuration=".2s, .2s, .35s"
             transitionProperty="top, bottom, width"
@@ -172,10 +189,15 @@ export default function DivingLayout({ children, ...props }) {
             <Portal>
               <Box>
                 <NavbarDiving
+                  hovered={hovered}
+                  setMini={setMini}
+                  mini={mini}
                   onOpen={onOpen}
                   logoText="Coral Playground"
                   brandText={getActiveRoute(routes)}
                   secondary={getActiveNavbar(routes)}
+                  // theme={props.theme}
+                  // setTheme={props.setTheme}
                   message={getActiveNavbarText(routes)}
                   fixed={fixed}
                   {...rest}

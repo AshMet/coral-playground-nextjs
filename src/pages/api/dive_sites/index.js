@@ -78,6 +78,7 @@ export default async function handler(req, res) {
 
     const siteColumns = {
       name: diveSite.name,
+      description: diveSite.description,
       latitude: diveSite.latitude,
       longitude: diveSite.longitude,
       min_visibility: diveSite.min_visibility,

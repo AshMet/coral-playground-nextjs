@@ -14,7 +14,7 @@ import Links from "components/sidebar/components/Links";
 // FUNCTIONS
 
 function SidebarContent(props) {
-  const { routes } = props;
+  const { routes, mini, hovered } = props;
   const user = useUser();
   // const {
   //   isAuthenticated,
@@ -28,19 +28,24 @@ function SidebarContent(props) {
   // const avatar4 = `https://avatars.dicebear.com/api/miniavs/${username}.svg`;
   // SIDEBAR
   return (
-    <Flex
-      direction="column"
-      minH="100%"
-      height="max-content"
-      pt="25px"
-      borderRadius="30px"
-    >
-      <Brand />
+    <Flex direction="column" height="100%" pt="25px" borderRadius="30px">
+      <Brand mini={mini} hovered={hovered} />
       <Stack direction="column" mb="auto" mt="8px">
-        <Box ps="20px" pe={{ md: "16px", "2xl": "1px" }}>
-          <Links routes={routes} />
+        <Box
+          ps={mini === false || hovered === true ? "20px" : "16px"}
+          // ps={
+          //   mini === false
+          //     ? "20px"
+          //     : mini === true && hovered === true
+          //     ? "20px"
+          //     : "16px"
+          // }
+          pe={{ md: "16px", "2xl": "1px" }}
+          ms={mini && hovered === false ? "-16px" : "unset"}
+        >
+          <Links mini={mini} hovered={hovered} routes={routes} />
           {user?.user_metadata.user_role === "business" && (
-            <Links routes={adminRoutes} />
+            <Links mini={mini} hovered={hovered} routes={adminRoutes} />
           )}
           {/* <AdminLinks /> */}
         </Box>

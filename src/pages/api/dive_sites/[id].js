@@ -1,13 +1,13 @@
 /* eslint-disable consistent-return */
-// import { createClient } from "@supabase/supabase-js";
-import { supabase } from "../index";
+import { createClient } from "@supabase/supabase-js";
+// import { supabase } from "../index";
 
 export default async function handler(req, res) {
   // Create a single supabase client for interacting with your database
-  // const supabase = createClient(
-  //   `${process.env.NEXT_PUBLIC_SUPABASE_URL}`,
-  //   `${process.env.SUPABASE_SERVICE_KEY}`
-  // );
+  const supabase = createClient(
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}`,
+    `${process.env.SUPABASE_SERVICE_KEY}`
+  );
 
   if (req.method === "PATCH") {
     const diveSite = req.body;
@@ -25,6 +25,7 @@ export default async function handler(req, res) {
 
     const siteColumns = {
       name: diveSite.name,
+      description: diveSite.description,
       latitude: diveSite.latitude,
       longitude: diveSite.longitude,
       min_visibility: diveSite.min_visibility,

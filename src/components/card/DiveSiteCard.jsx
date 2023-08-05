@@ -70,6 +70,7 @@ export default function DiveSiteCard(props) {
           boxShadow: "0.1em 0.1em 3em rgba(0,0,0,0.3)",
           transform: "scale(1.01)",
         }}
+        as="a"
         {...rest}
       >
         <Flex direction={{ base: "column" }} justify="center">

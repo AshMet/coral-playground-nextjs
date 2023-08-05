@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable react/destructuring-assignment */
@@ -35,7 +36,7 @@ export default function NavbarDiving(props) {
     };
   });
 
-  const { secondary, message, brandText } = props;
+  const { secondary, message, brandText, mini, setMini, hovered } = props;
 
   // Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
   const mainText = useColorModeValue("navy.700", "white");
@@ -92,13 +93,23 @@ export default function NavbarDiving(props) {
       }}
       pt="8px"
       top={{ base: "12px", md: "16px", xl: "18px" }}
-      w={{
-        base: "calc(100vw - 6%)",
-        md: "calc(100vw - 8%)",
-        lg: "calc(100vw - 6%)",
-        xl: "calc(100vw - 350px)",
-        "2xl": "calc(100vw - 365px)",
-      }}
+      w={
+        mini === false || hovered === true
+          ? {
+              base: "calc(100vw - 6%)",
+              md: "calc(100vw - 8%)",
+              lg: "calc(100vw - 6%)",
+              xl: "calc(100vw - 350px)",
+              "2xl": "calc(100vw - 365px)",
+            }
+          : {
+              base: "calc(100vw - 6%)",
+              md: "calc(100vw - 8%)",
+              lg: "calc(100vw - 6%)",
+              xl: "calc(100vw - 185px)",
+              "2xl": "calc(100vw - 200px)",
+            }
+      }
     >
       <Flex
         w="100%"
@@ -148,9 +159,11 @@ export default function NavbarDiving(props) {
         </Hide>
         <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
           <NavbarDivingLinks
+            mini={mini}
+            setMini={setMini}
+            secondary={props.secondary}
             onOpen={props.onOpen}
             logoText={props.logoText}
-            secondary={props.secondary}
             fixed={props.fixed}
             scrolled={scrolled}
           />

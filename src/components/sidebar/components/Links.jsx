@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable react/no-array-index-key */
@@ -33,7 +34,7 @@ export function SidebarLinks(props) {
   );
   const activeIcon = useColorModeValue("brand.100", "brand.100");
 
-  const { routes } = props;
+  const { routes, hovered, mini } = props;
 
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
@@ -69,7 +70,22 @@ export function SidebarLinks(props) {
                 ms={0}
               >
                 {route.icon ? (
-                  <Flex align="center" justifyContent="space-between" w="100%">
+                  <Flex
+                    align="center"
+                    justifyContent={
+                      mini === false || hovered === true
+                        ? "space-between"
+                        : "center"
+                    }
+                    // justifyContent={
+                    //   mini === false
+                    //     ? 'space-between'
+                    //     : mini === true && hovered === true
+                    //     ? 'space-between'
+                    //     : 'center'
+                    // }
+                    w="100%"
+                  >
                     <HStack
                       mb="6px"
                       spacing={
@@ -93,6 +109,11 @@ export function SidebarLinks(props) {
                           {route.icon}
                         </Box>
                         <Text
+                          display={
+                            mini === false || hovered === true
+                              ? "block"
+                              : "none"
+                          }
                           me="auto"
                           color={
                             activeRoute(route.path.toLowerCase())
@@ -107,18 +128,27 @@ export function SidebarLinks(props) {
                       </Flex>
                     </HStack>
                     <AccordionIcon
+                      display={
+                        mini === false || hovered === true ? "block" : "none"
+                      }
                       ms="auto"
                       color="secondaryGray.600"
                       transform={route.icon ? null : "translateX(-70%)"}
                     />
                   </Flex>
                 ) : (
-                  <Flex pt="0px" pb="10px" alignItems="center" w="100%">
+                  <Flex
+                    pt="0px"
+                    pb="10px"
+                    justify="center"
+                    alignItems="center"
+                    w="100%"
+                  >
                     <HStack
                       spacing={
                         activeRoute(route.path.toLowerCase()) ? "22px" : "26px"
                       }
-                      ps="34px"
+                      ps={mini === false || hovered === true ? "34px" : "0px"}
                     >
                       <Text
                         me="auto"
@@ -130,10 +160,13 @@ export function SidebarLinks(props) {
                         fontWeight="500"
                         fontSize="sm"
                       >
-                        {route.name}
+                        {mini === false || hovered === true ? route.name : ""}
                       </Text>
                     </HStack>
                     <AccordionIcon
+                      display={
+                        mini === false || hovered === true ? "block" : "none"
+                      }
                       ms="auto"
                       color="secondaryGray.600"
                       transform={null}
@@ -142,9 +175,13 @@ export function SidebarLinks(props) {
                 )}
               </AccordionButton>
               <AccordionPanel
-                pe={route.icon ? null : "0px"}
+                display={mini === false || hovered === true ? "block" : "flex"}
+                justifyContent="center"
+                alignItems="center"
+                flexDirection="column"
+                pe={route.icon ? "14px !important" : "0px"}
                 py="0px"
-                ps={route.icon ? null : "8px"}
+                ps={route.icon ? "14px !important" : "8px"}
               >
                 <List>
                   {
@@ -195,14 +232,18 @@ export function SidebarLinks(props) {
                     }
                     fontWeight="500"
                   >
-                    {route.name}
+                    {mini === false || hovered === true ? route.name : ""}
                   </Text>
                 </Flex>
               </HStack>
             </Flex>
           ) : (
             <ListItem ms={null}>
-              <Flex ps="34px" alignItems="center" mb="8px">
+              <Flex
+                ps={mini === false || hovered === true ? "34px" : "0px"}
+                alignItems="center"
+                mb="8px"
+              >
                 <Text
                   color={
                     activeRoute(route.path.toLowerCase())
@@ -212,7 +253,7 @@ export function SidebarLinks(props) {
                   fontWeight="500"
                   fontSize="sm"
                 >
-                  {route.name}
+                  {mini === false || hovered === true ? route.name : ""}
                 </Text>
               </Flex>
             </ListItem>
@@ -227,7 +268,7 @@ export function SidebarLinks(props) {
       return (
         <NavLink to={route.layout + route.path} key={key}>
           <ListItem
-            ms="28px"
+            ms={mini === false || hovered === true ? "28px" : "0px"}
             display="flex"
             alignItems="center"
             mb="10px"
@@ -245,7 +286,7 @@ export function SidebarLinks(props) {
               }
               fontSize="sm"
             >
-              {route.name}
+              {mini === false || hovered === true ? route.name : ""}
             </Text>
           </ListItem>
         </NavLink>

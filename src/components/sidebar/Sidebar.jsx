@@ -18,17 +18,22 @@ import {
   DrawerCloseButton,
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
-import React from "react";
+import { useRef } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 // Assers
 import { IoMenuOutline } from "react-icons/io5";
 
-import { renderThumb, renderTrack, renderView } from "../scrollbar/Scrollbar";
+import {
+  renderThumb,
+  renderTrack,
+  renderView,
+  renderViewMini,
+} from "components/scrollbar/Scrollbar";
 
 import Content from "./components/Content";
 
 function Sidebar(props) {
-  const { routes, adminRoutes } = props;
+  const { routes, adminRoutes, mini, hovered, setHovered } = props;
 
   // this is for the rest of the collapses
   const variantChange = "0.2s linear";
@@ -42,11 +47,24 @@ function Sidebar(props) {
   const sidebarMargins = "0px";
 
   return (
-    <Box display={{ sm: "none", xl: "block" }} position="fixed" minH="100%">
+    <Box
+      display={{ sm: "none", xl: "block" }}
+      position="fixed"
+      minH="100%"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <Box
         bg={sidebarBg}
         transition={variantChange}
-        w="285px"
+        w={mini === false || hovered === true ? "285px" : "120px"}
+        // w={
+        //   mini === false
+        //     ? "285px"
+        //     : mini === true && hovered === true
+        //     ? "285px"
+        //     : "120px"
+        // }
         ms={{
           sm: "16px",
         }}
@@ -64,9 +82,23 @@ function Sidebar(props) {
           autoHide
           renderTrackVertical={renderTrack}
           renderThumbVertical={renderThumb}
-          renderView={renderView}
+          renderView={
+            mini === false || hovered === true ? renderView : renderViewMini
+          }
+          // renderView={
+          //   mini === false
+          //     ? renderView
+          //     : mini === true && hovered === true
+          //     ? renderView
+          //     : renderViewMini
+          // }
         >
-          <Content routes={routes} adminRoutes={adminRoutes} />
+          <Content
+            mini={mini}
+            hovered={hovered}
+            routes={routes}
+            adminRoutes={adminRoutes}
+          />
         </Scrollbars>
       </Box>
     </Box>
@@ -79,7 +111,7 @@ export function SidebarResponsive(props) {
   const menuColor = useColorModeValue("gray.400", "white");
   // // SIDEBAR
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
+  const btnRef = useRef();
 
   const { routes } = props;
 
@@ -128,7 +160,7 @@ export function SidebarResponsive(props) {
               renderThumbVertical={renderThumb}
               renderView={renderView}
             >
-              <Content routes={routes} />
+              <Content mini={false} routes={routes} />
             </Scrollbars>
           </DrawerBody>
         </DrawerContent>
