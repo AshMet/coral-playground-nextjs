@@ -17,6 +17,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 // Custom components
+import md from "markdown-it";
 import { useState } from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 
@@ -61,9 +62,13 @@ export default function SiteInfo({
       maxW="100%"
       w={{ base: "100%", md: "unset" }}
     >
-      <Text fontSize="lg" color={textColorSecondary} fontWeight="400">
-        {description}
-      </Text>
+      <Box
+        fontSize="lg"
+        color={textColorSecondary}
+        fontWeight="400"
+        className="site_description"
+        dangerouslySetInnerHTML={{ __html: md().render(description) }}
+      />
     </SimpleGrid>
   );
 
