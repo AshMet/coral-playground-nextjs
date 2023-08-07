@@ -4,7 +4,7 @@
         <title>Coral Playground | Dive Sites | RSS Feed</title>
         <link>http://localhost:3000</link>
         <description>Welcome to Coral Playground, your best source for dive site info in the Red Sea</description>
-        <lastBuildDate>Sun, 06 Aug 2023 20:38:14 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 07 Aug 2023 23:40:41 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -18,6 +18,34 @@
         <category>Corals</category>
         <category>Marine Life</category>
         <item>
+            <title><![CDATA[Abu Ghalawa Dive Site near Hurghada, Egypt]]></title>
+            <link>http://localhost:3000/dive_sites/abu-ghalawa</link>
+            <guid>http://localhost:3000/dive_sites/abu-ghalawa</guid>
+            <pubDate>Mon, 07 Aug 2023 06:38:23 GMT</pubDate>
+            <description><![CDATA[**Abu Galawa** is a diving area located north of Hurghada and offers six dive sites: **Abu Galawa, Shaab Abu Galawa, Sachwat Abu Galawa, Habibi Abu Galawa, Gota Abu Galawa, and Marsa Abu Galawa. Marsa Abu Galawa**, one of the dive sites, is suitable for divers of all levels due to its reef complex topography.
+
+
+The dive begins at the mooring point situated at the entrance of a lagoon, which is about 5 meters deep and contains seagrass beds with sea horses. However, not much else is visible on the sandy bottom of the lagoon.
+
+
+During the dive, divers can explore a coral block with stonefish sightings before reaching the drop-off. As they approach the drop-off, they will encounter beautiful table corals, and the underwater life becomes more abundant. The edge of the drop-off is at 16 meters deep, featuring small pinnacles of hard corals hanging down the slope. Moving further north, divers can spot an eel garden at approximately 14 meters deep.
+
+
+Divers are advised not to miss the shallow part of the reef while returning to the boat. The reef wall can be followed at a shallower depth of 9 meters, providing opportunities to see bass, moray eels, scorpionfish, and small caves with glassfish.
+
+
+The area is rich in diverse hard corals with stunning colors. The terrain slopes down to the drop-off, making careful exploration necessary to uncover its hidden treasures.
+
+
+Marsa Abu Galawa hosts schools of colorful fish, including turtles, moray eels, and groupers, creating an enjoyable and visually appealing dive experience.
+
+
+Divers can explore Marsa Abu Galawa in two ways. The first option involves diving south alongside a smaller reef, passing by an old lobster cage and a garden eel, crossing the plateau to reach the ridge, and returning to the boat. The second approach is to head straight ahead to the ridge of the plateau and then return toward the reef over the plateau, encountering a garden eel.
+
+
+Overall, Marsa Abu Galawa offers a diverse and rewarding dive experience with its varied marine life, impressive coral formations, and unique topography.]]></description>
+        </item>
+        <item>
             <title><![CDATA[Abu Hashish Dive Site near Hurghada, Egypt]]></title>
             <link>http://localhost:3000/dive_sites/abu-hashish</link>
             <guid>http://localhost:3000/dive_sites/abu-hashish</guid>
@@ -29,8 +57,8 @@ Your best bet is to leave the lagoon through an obvious channel filled with tabl
             <title><![CDATA[Abu Nuhas Dive Site near Hurghada, Egypt]]></title>
             <link>http://localhost:3000/dive_sites/abu-nuhas</link>
             <guid>http://localhost:3000/dive_sites/abu-nuhas</guid>
-            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
-            <description><![CDATA[Abu Nuhas is a large triangular shaped reef. The average depth is 24m/79ft and water visibility is around 20-30m/65-100ft. The reef is located just a little bit north of Shadwan Island and the area is covered with shipwrecks. The wrecks are on the northern and rougher side of the reef with the main ones from west to east being the Giannis D, the Carnatic, the Chrisoula K and the Kimon M. The currents can be quite strong.]]></description>
+            <pubDate>Mon, 07 Aug 2023 17:51:02 GMT</pubDate>
+            <description><![CDATA[Abu Nuhas dive site, located in the northern Red Sea, is renowned for its exceptional wreck diving opportunities. The site features at least 7 sunken wrecks, with four of them accessible for recreational scuba diving. What makes it even more attractive is that these wrecks are relatively shallow, making it suitable even for less experienced divers. Abu Nuhas is shaped like a large triangular reef, with an average depth of 24m and excellent water visibility ranging from 20 to 30 meters. It is home to a diverse array of marine life, with vibrant hard and soft coral formations adding to its beauty.\n\n While exploring these shipwrecks, divers are treated to an abundance of marine life, including schools of colorful fish thriving in the crystal-clear waters. The rich variety of hard corals further enhances the dive experience at Abu Nuhas. Known as "Shipwreck City," the site is a magnet for adventure-seeking divers interested in exploring history beneath the waves.\n\n The wrecks on the northern and rougher side of the reef at Abu Nuhas carry fascinating stories and include The Carnatic, a British passenger steamer from 1862, The Chrisoula K, a Greek cargo ship from 1981, The Giannis D, a Greek cargo ship from 1983, and The Kimon M, a Greek cargo ship from 1978.\n\n This dive site offers divers the opportunity to witness diverse marine life such as groupers, jacks, snappers, barracudas, and occasionally sharks and dolphins, adding to the thrill of the underwater exploration.\n\n Overall, Abu Nuhas is a well-known and exciting dive destination, where divers can dive into history, explore intriguing shipwrecks, and immerse themselves in the beauty and biodiversity of the northern Red Sea.]]></description>
         </item>
         <item>
             <title><![CDATA[Abu Ramada South Dive Site near Hurghada, Egypt]]></title>
@@ -132,7 +160,7 @@ Erg Somaya is considered to be one of the most stunning dive sites near Hurghada
             <title><![CDATA[Giannis D Dive Site near Hurghada, Egypt]]></title>
             <link>http://localhost:3000/dive_sites/giannis-d</link>
             <guid>http://localhost:3000/dive_sites/giannis-d</guid>
-            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
+            <pubDate>Mon, 07 Aug 2023 17:45:57 GMT</pubDate>
             <description><![CDATA[The Giannis D was a general cargo ship built in Japan in 1969. The original name of the ship was the Shoyo Maru, and later the name was changed twice, because the vessel was sold twice. The second time the ship was sold to a Greek company that gave the ship its final name, the Giannis D. In 1983, this freighter collided with the reef and immediately sank with its cargo of timber. Now the wreck lies next to the reef with its stern on the seabed at a depth of about 24m/79ft and its mast at a depth of only 6m/20ft. Divers can penetrate the wreck and explore some of its areas from the inside.]]></description>
         </item>
         <item>

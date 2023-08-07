@@ -62,13 +62,17 @@ export default function SiteInfo({
       maxW="100%"
       w={{ base: "100%", md: "unset" }}
     >
-      <Box
-        fontSize="lg"
-        color={textColorSecondary}
-        fontWeight="400"
-        className="site_description"
-        dangerouslySetInnerHTML={{ __html: md().render(description) }}
-      />
+      {description ? (
+        <Box
+          fontSize="lg"
+          color={textColorSecondary}
+          fontWeight="400"
+          className="site_description"
+          dangerouslySetInnerHTML={{ __html: md().render(description) }}
+        />
+      ) : (
+        <Text fontSize="lg" color={textColorSecondary} fontWeight="400" />
+      )}
     </SimpleGrid>
   );
 
