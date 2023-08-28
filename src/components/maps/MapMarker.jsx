@@ -13,7 +13,6 @@ export default function MapMarker(props) {
       : `/dive_centres/${location.slug}`;
   return (
     <Marker
-      key={location.latitude + location.longitude}
       latitude={location.latitude}
       longitude={location.longitude}
       anchor="bottom"

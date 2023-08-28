@@ -11,10 +11,12 @@ import DiveCentreBenefits from "components/pages/divingHome/DiveCentreBenefits";
 import DiveSiteBenefits from "components/pages/divingHome/DiveSiteBenefits";
 import HowItWorks from "components/pages/divingHome/HowItWorks";
 import Intro from "components/pages/divingHome/Intro";
+import Loyalty from "components/pages/divingHome/Loyalty";
 import MapHero from "components/pages/divingHome/MapHero";
 import Mission from "components/pages/divingHome/Mission";
 import LandingLayout from "layouts/LandingLayout";
 import { supabase } from "utils/supabase";
+import Contact from "components/pages/divingHome/Contact";
 
 export default function Home({ diveSites, diveCentres }) {
   return (
@@ -45,12 +47,14 @@ export default function Home({ diveSites, diveCentres }) {
             <Flex direction={{ base: "column" }}>
               <MapHero diveSites={diveSites} diveCentres={diveCentres} />
               <Intro />
+              <Loyalty />
               <Mission />
               <HowItWorks />
               <Benefits />
               <DiveSiteBenefits />
               <DiveCentreBenefits />
               <BookingBenefits />
+              <Contact />
             </Flex>
           </ParallaxProvider>
         </LandingLayout>

@@ -120,6 +120,7 @@ export default function MapBase(props) {
               location.latitude &&
               location.longitude && (
                 <MapMarker
+                  key={location.id}
                   location={location}
                   mapLocation={mapLocation}
                   setMapLocation={setMapLocation}

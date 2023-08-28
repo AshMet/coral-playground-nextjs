@@ -99,7 +99,7 @@ function SignedOutMenuList({ iconColor }) {
             <Button
               variant="link"
               size="sm"
-              color={useColorModeValue("white", "brand.300")}
+              color="brand.100"
               leftIcon={<ProfileIcon />}
               onClick={() => router.push("/auth/signup")}
             >

@@ -5,7 +5,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
 import { ChakraProvider } from "@chakra-ui/react";
-import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { Analytics } from "@vercel/analytics/react";
 import Head from "next/head";
@@ -29,7 +29,7 @@ import "../../public/css/Map.css";
 
 const MyApp = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || ((page) => page);
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+  const [supabaseClient] = useState(() => createPagesBrowserClient());
   const [sendinblueLoaded, setSendinblueLoaded] = useState(false);
   const router = useRouter();
 

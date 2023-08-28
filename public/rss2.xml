@@ -4,7 +4,7 @@
         <title>Coral Playground | Dive Sites | RSS Feed</title>
         <link>http://localhost:3000</link>
         <description>Welcome to Coral Playground, your best source for dive site info in the Red Sea</description>
-        <lastBuildDate>Mon, 07 Aug 2023 23:40:41 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 28 Aug 2023 03:40:33 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -18,11 +18,19 @@
         <category>Corals</category>
         <category>Marine Life</category>
         <item>
+            <title><![CDATA[Abu Dabbab Dive Site near Marsa Alam, Egypt]]></title>
+            <link>http://localhost:3000/dive_sites/abu-dabbab</link>
+            <guid>http://localhost:3000/dive_sites/abu-dabbab</guid>
+            <pubDate>Thu, 24 Aug 2023 01:04:59 GMT</pubDate>
+            <description><![CDATA[Habili Ali is the largest Habili in the reef system known as St. Johns. Habili is the Arabic word for a reef that never rises to the sea surface, which means it is not yet an adult reef. The steep walls of the reef are covered in colorful soft corals and huge black coral sea fans. The average depth of the site is over 30m/98ft and in some places the wall drops down to 70m/230ft. Due to the exposed location of the reef, divers always experience some currents at this dive site.]]></description>
+        </item>
+        <item>
             <title><![CDATA[Abu Ghalawa Dive Site near Hurghada, Egypt]]></title>
             <link>http://localhost:3000/dive_sites/abu-ghalawa</link>
             <guid>http://localhost:3000/dive_sites/abu-ghalawa</guid>
-            <pubDate>Mon, 07 Aug 2023 06:38:23 GMT</pubDate>
+            <pubDate>Sun, 20 Aug 2023 19:50:39 GMT</pubDate>
             <description><![CDATA[**Abu Galawa** is a diving area located north of Hurghada and offers six dive sites: **Abu Galawa, Shaab Abu Galawa, Sachwat Abu Galawa, Habibi Abu Galawa, Gota Abu Galawa, and Marsa Abu Galawa. Marsa Abu Galawa**, one of the dive sites, is suitable for divers of all levels due to its reef complex topography.
+
 
 
 The dive begins at the mooring point situated at the entrance of a lagoon, which is about 5 meters deep and contains seagrass beds with sea horses. However, not much else is visible on the sandy bottom of the lagoon.
@@ -71,8 +79,16 @@ Your best bet is to leave the lagoon through an obvious channel filled with tabl
             <title><![CDATA[Banana Reef Dive Site near Hurghada, Egypt]]></title>
             <link>http://localhost:3000/dive_sites/banana-reef</link>
             <guid>http://localhost:3000/dive_sites/banana-reef</guid>
-            <pubDate>Wed, 19 Apr 2023 23:01:37 GMT</pubDate>
-            <description><![CDATA[Banana shaped reef in the middle of the Giftun Strait has the average depth of 10m/32.8ft and water visibility around 10-30m/32-98ft. An easy current at this dive site allows to drift all along the coral wall. In the northwest there is a spectacular pinnacle covered in soft corals while the northeast has some caves full of various marine life.]]></description>
+            <pubDate>Tue, 08 Aug 2023 03:15:01 GMT</pubDate>
+            <description><![CDATA[True to its name, Banana Reef in Hurghada is banana-shaped and sits at an average depth of 10 meters with visibility ranging from 10-30 meters. The oval reef is surrounded by shallow waters reaching 15 meters at its deepest point.
+
+Banana Reef is ideal for drifting dives along the coral wall, so divers should bring a compass. Drifting allows you to fully explore the reef, rather than boats dropping you at one spot. Gliding along, you'll discover an anemone city teeming with clownfish, then reach the northwest pinnacle blanketed in vibrant soft corals. The northeast side contains caves burrowed into the reef, filled with marine life.
+
+Across the reef, you can spot glassfish, eagle rays, turtles, angelfish, bannerfish, nudibranchs, and pufferfish. The bannerfish colonies are especially impressive. Emperor angelfish and other small reef fish thrive around the pinnacle and gorgonian coral formations.
+
+The mild current makes Banana Reef suitable for divers of all levels. After about a 90-minute boat ride from Hurghada, you can experience spectacular drift dives along this unique reef. Just beyond the main section, an erg awaits, densely covered in soft corals and patrolled by predatory fish. Descending further to 20 meters reveals huge table corals and giant eagle rays gliding by.
+
+While the southern reef is rather barren, the outer reef is ideal for drifting past coral gardens, anemone cities, caves, and pinnacles bursting with exotic marine life. With proper compass navigation, drifting is the best way to fully explore the wonder of Banana Reef.]]></description>
         </item>
         <item>
             <title><![CDATA[Carless Reef Dive Site near Hurghada, Egypt]]></title>

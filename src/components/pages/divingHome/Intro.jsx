@@ -7,6 +7,7 @@ import {
   Icon,
   useColorModeValue,
 } from "@chakra-ui/react";
+// import { TextLine } from "components/icons/Icons";
 import Link from "next/link";
 import { MdChevronRight } from "react-icons/md";
 
@@ -47,6 +48,22 @@ export default function CallToActionWithAnnotation() {
               The Better Way to Book your <br />
               <Text as="span" color="brand.100">
                 Red Sea{" "}
+                {/* <Icon
+                  position="absolute"
+                  as={TextLine}
+                  bottom={{
+                    base: "-20px",
+                    md: "-32px",
+                    lg: "-30px",
+                    xl: "-44px",
+                  }}
+                  left={{ base: "94%", md: "50%" }}
+                  transform={{
+                    base: "translate(-100%, 0px)",
+                    md: "translate(-50%, 0px)",
+                  }}
+                  w={{ base: "180px", md: "300px", xl: "400px" }}
+                /> */}
               </Text>
               <Text as="span" color={textColor}>
                 Diving Adventure

@@ -95,7 +95,7 @@ export default function CentreInfo({
                         fontSize="lg"
                         fontWeight="500"
                       >
-                        Description
+                        About Us
                       </Text>
                     </Flex>
                     <Box
