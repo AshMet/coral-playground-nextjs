@@ -66,7 +66,7 @@ export default function Courses({ certifications }) {
   const [diveDate, setDiveDate] = useState(new Date());
   const [diveTime] = useState("07:00:00");
   const [courses, setCourses] = useState();
-  const [payNow, setPayNow] = useState();
+  const [deposit, setDeposit] = useState();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = useColorModeValue(
@@ -100,12 +100,12 @@ export default function Courses({ certifications }) {
               category={course.category}
               price={parseFloat(course.price)}
               priceId={course.stripe_price_id}
-              payNow={course.pay_now}
+              deposit={course.deposit}
               setCourseId={setCourseId}
               setCourseName={setCourseName}
               setPrice={setPrice}
               setPriceId={setPriceId}
-              setPayNow={setPayNow}
+              setDeposit={setDeposit}
               selected={courseName === course.name}
             />
           );
@@ -318,7 +318,7 @@ export default function Courses({ certifications }) {
               // setSelectedDate={setSelectedDate}
               diveDate={diveDate}
               diveTime={diveTime}
-              payNow={payNow}
+              deposit={deposit}
               gridArea={{ md: "1 / 2 / 2 / 3", lg: "2 / 1 / 3 / 2" }}
               mb="20px"
             />
@@ -333,7 +333,7 @@ export async function getStaticProps() {
   const { data: certifications } = await supabase
     .from("certifications")
     .select(
-      "id, name, description, agency, duration, category, price, pay_now, stripe_price_id, cover_photo"
+      "id, name, description, agency, duration, category, price, deposit, stripe_price_id, cover_photo"
     );
   return {
     props: { certifications },

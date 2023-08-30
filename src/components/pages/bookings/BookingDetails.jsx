@@ -28,7 +28,7 @@ export default function BookingDetails(props) {
     diveTime,
     price,
     priceId,
-    payNow,
+    deposit,
     ...rest
   } = props;
   const { addToCart } = useContext(CartContext);
@@ -150,7 +150,7 @@ export default function BookingDetails(props) {
                   diveTime,
                   price,
                   priceId,
-                  payNow,
+                  deposit,
                 })
               }
             >

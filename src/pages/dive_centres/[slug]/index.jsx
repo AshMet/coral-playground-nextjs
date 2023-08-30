@@ -43,7 +43,7 @@ export default function DiveCentre({ diveCentreData }) {
       .select(
         `
           id, slug,
-          dive_trips:dive_trips(id, name, description, notes, min_cert, active, price, pay_now,
+          dive_trips:dive_trips(id, name, description, notes, min_cert, active, price, deposit,
             stripe_price_id, start_date, start_time, check_in,
             dive_sites:trip_sites!dive_trip_id(
               dive_site:dive_site_id(id, name, latitude, longitude)),

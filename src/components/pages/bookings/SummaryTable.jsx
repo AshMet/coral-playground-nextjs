@@ -55,7 +55,7 @@ export default function SummaryTable({ lineItems }) {
                     </Td>
                     <Td>1</Td>
                     <Td isNumeric>€{item.price / 100}</Td>
-                    <Td isNumeric>€{item.payNow / 100}</Td>
+                    <Td isNumeric>€{item.deposit / 100}</Td>
                   </Tr>
                 ))
               ) : (

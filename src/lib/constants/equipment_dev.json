@@ -1,12 +1,12 @@
 [
-  { "id": 1, "name": "Nitrox", "price": 2000, "payNow": 300, "priceId": "price_1M64qpAvLPvC9h7xquW4EMpa" },
-  { "id": 2, "name": "Camera", "price": 5000, "payNow": 700, "priceId": "price_1M63wRAvLPvC9h7x5yB1GSjp"},
-  { "id": 3, "name": "Drysuit", "price": 7000, "payNow": 1000, "priceId": "price_1M64snAvLPvC9h7xSUOKdrjl" },
-  { "id": 4, "name": "Fins", "price": 0, "payNow": 0 },
-  { "id": 5, "name": "Flashlight", "price": 1000, "payNow": 200, "priceId": "price_1M64uKAvLPvC9h7x8q0dYC62" },
-  { "id": 6, "name": "Snorkel", "price": 0, "payNow": 0 },
-  { "id": 7, "name": "Wetsuit", "price": 0, "payNow": 0 },
-  { "id": 8, "name": "Dive Computer", "price": 4000, "payNow": 600, "priceId": "price_1M64v3AvLPvC9h7x25mMRbrs" },
-  { "id": 9, "name": "Air Tank", "price": 0, "payNow": 0 },
-  { "id": 10, "name": "BCD", "price": 0, "payNow": 0 }
+  { "id": 1, "name": "Nitrox", "price": 2000, "deposit": 300, "priceId": "price_1M64qpAvLPvC9h7xquW4EMpa" },
+  { "id": 2, "name": "Camera", "price": 5000, "deposit": 700, "priceId": "price_1M63wRAvLPvC9h7x5yB1GSjp"},
+  { "id": 3, "name": "Drysuit", "price": 7000, "deposit": 1000, "priceId": "price_1M64snAvLPvC9h7xSUOKdrjl" },
+  { "id": 4, "name": "Fins", "price": 0, "deposit": 0 },
+  { "id": 5, "name": "Flashlight", "price": 1000, "deposit": 200, "priceId": "price_1M64uKAvLPvC9h7x8q0dYC62" },
+  { "id": 6, "name": "Snorkel", "price": 0, "deposit": 0 },
+  { "id": 7, "name": "Wetsuit", "price": 0, "deposit": 0 },
+  { "id": 8, "name": "Dive Computer", "price": 4000, "deposit": 600, "priceId": "price_1M64v3AvLPvC9h7x25mMRbrs" },
+  { "id": 9, "name": "Air Tank", "price": 0, "deposit": 0 },
+  { "id": 10, "name": "BCD", "price": 0, "deposit": 0 }
 ]

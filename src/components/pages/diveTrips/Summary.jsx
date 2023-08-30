@@ -5,7 +5,7 @@ import Card from "components/card/Card";
 
 export default function Auction(props) {
   // Chakra Color Mode
-  const { name, price, payNow, diveDate, diveTime, duration } = props;
+  const { name, price, deposit, diveDate, diveTime, duration } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const shadow = useColorModeValue(
     " 0px 50px 40px -34px rgba(112, 144, 176, 0.16)",
@@ -67,7 +67,7 @@ export default function Auction(props) {
         </Flex>
         <Flex direction="column" align="center" me="60px">
           <Text color={textColor} fontSize="lg" fontWeight="700">
-            {`€${payNow / 100}`}
+            {`€${deposit / 100}`}
           </Text>
           <Text color="secondaryGray.600" fontSize="md" fontWeight="500">
             Deposit
@@ -75,7 +75,7 @@ export default function Auction(props) {
         </Flex>
         <Flex direction="column" align="center">
           <Text color={textColor} fontSize="lg" fontWeight="700">
-            {`€${(price - payNow) / 100}`}
+            {`€${(price - deposit) / 100}`}
           </Text>
           <Text color="secondaryGray.600" fontSize="md" fontWeight="500">
             Remaining

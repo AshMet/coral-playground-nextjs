@@ -7,6 +7,7 @@ import { ParallaxProvider } from "react-scroll-parallax";
 
 import Benefits from "components/pages/divingHome/Benefits";
 import BookingBenefits from "components/pages/divingHome/BookingBenefits";
+import Contact from "components/pages/divingHome/Contact";
 import DiveCentreBenefits from "components/pages/divingHome/DiveCentreBenefits";
 import DiveSiteBenefits from "components/pages/divingHome/DiveSiteBenefits";
 import HowItWorks from "components/pages/divingHome/HowItWorks";
@@ -16,7 +17,6 @@ import MapHero from "components/pages/divingHome/MapHero";
 import Mission from "components/pages/divingHome/Mission";
 import LandingLayout from "layouts/LandingLayout";
 import { supabase } from "utils/supabase";
-import Contact from "components/pages/divingHome/Contact";
 
 export default function Home({ diveSites, diveCentres }) {
   return (

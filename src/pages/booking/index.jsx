@@ -319,7 +319,7 @@ export default function NewBooking({ equipment }) {
 export async function getStaticProps() {
   const { data: equipment } = await supabase
     .from("equipment")
-    .select("id, name, price, pay_now, stripe_price_id");
+    .select("id, name, price, deposit, stripe_price_id");
   return {
     props: { equipment },
     revalidate: 86400,

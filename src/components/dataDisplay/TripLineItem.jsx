@@ -48,7 +48,7 @@ export default function TripLineItem(props) {
 
   function combineDateAndTime(date, time) {
     const year = date.getFullYear();
-    const month = date.getMonth() + 1; // Jan is 0, dec is 11
+    const month = date.getMonth(); // Jan is 0, dec is 11
     const day = date.getDate();
     const hours = time.split(":")[0];
     const minutes = time.split(":")[1];
@@ -148,7 +148,7 @@ export default function TripLineItem(props) {
                 diveTime,
                 price: trip.price,
                 priceId: trip.stripe_price_id,
-                payNow: trip.pay_now,
+                deposit: trip.deposit,
               })
             }
             {...rest}

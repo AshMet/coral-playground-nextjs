@@ -27,7 +27,7 @@ export default function CreateCentreTrip() {
   const [diveTime, setDiveTime] = useState("07:00");
   const [diveDate, setDiveDate] = useState();
   const [diveCount, setDiveCount] = useState(1);
-  const [payNow, setPayNow] = useState();
+  const [deposit, setDeposit] = useState();
   const toast = useToast();
   const posthog = usePostHog();
   const supabase = useSupabaseClient();
@@ -53,7 +53,7 @@ export default function CreateCentreTrip() {
     }
   };
 
-  const getPayNow = (n) => {
+  const getDeposit = (n) => {
     switch (n) {
       case 1:
         return 500;
@@ -98,7 +98,7 @@ export default function CreateCentreTrip() {
           price,
           dive_count: diveCount,
           stripe_price_id: getStripePriceId(diveCount),
-          pay_now: getPayNow(diveCount),
+          deposit: getDeposit(diveCount),
           dive_centre_id: diveCentre.id,
         },
       ])
@@ -151,7 +151,7 @@ export default function CreateCentreTrip() {
       posthog.capture("Dive Trip Created", {
         "Dive Centre": diveCentre.name,
         "Dive Trip": data.name,
-        "Pay Now": data.pay_now / 100,
+        Deposit: data.deposit / 100,
         Price: data.price / 100,
         Duration: data.duration,
         "Dive Count": data.diveCount,
@@ -163,7 +163,7 @@ export default function CreateCentreTrip() {
   }
 
   useEffect(() => {
-    setPayNow(getPayNow(diveCount));
+    setDeposit(getDeposit(diveCount));
   }, [diveCount]);
 
   return (
@@ -219,7 +219,7 @@ export default function CreateCentreTrip() {
             diveTime={diveTime}
             duration={duration}
             price={price}
-            payNow={payNow}
+            deposit={deposit}
           />
           <Button
             // isLoading={tripDives.length === 0}

@@ -38,10 +38,10 @@ export default function CheckoutButton() {
     // --------- Calculate Totals ----------
     function calcTotalPaid() {
       const cartPrice = cartItems
-        .map((item) => item.payNow)
+        .map((item) => item.deposit)
         .reduce((partialSum, a) => partialSum + a, 0);
       const equipmentPrice = equipmentList
-        .map((item) => item.payNow)
+        .map((item) => item.deposit)
         .reduce((partialSum, a) => partialSum + a, 0);
       // console.log("cartPrice", cartPrice);
       return parseFloat(cartPrice + equipmentPrice);

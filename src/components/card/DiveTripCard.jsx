@@ -27,8 +27,8 @@ const ChakraBox = chakra(motion.div, {
 // Assets
 
 export default function DiveTripCard(props) {
-  const { diveTrip, ...rest } = props;
-  const { name, duration, payNow, price, divingCert, diveCentreName } =
+  const { diveTrip, coverPhoto, ...rest } = props;
+  const { name, duration, deposit, price, divingCert, diveCentreName } =
     diveTrip;
   const textColor = useColorModeValue("navy.700", "white");
 
@@ -52,7 +52,7 @@ export default function DiveTripCard(props) {
         <Flex direction={{ base: "column" }} justify="center">
           <Box position="relative" cursor="pointer">
             <Image
-              src="/img/diving/dive_site_bg.jpg"
+              src={coverPhoto}
               width="300"
               height="200"
               borderRadius="20px"
@@ -62,7 +62,7 @@ export default function DiveTripCard(props) {
             flexDirection="column"
             justify="space-between"
             h="100%"
-            p="10px"
+            pl="10px"
           >
             <Flex
               justify="space-between"
@@ -73,7 +73,6 @@ export default function DiveTripCard(props) {
                 xl: "column",
                 "2xl": "row",
               }}
-              mb="auto"
             >
               <Flex direction="column">
                 {name && (
@@ -126,7 +125,7 @@ export default function DiveTripCard(props) {
                         <Text>{divingCert}</Text>
                       </VStack>
                     )}
-                    {payNow && price && (
+                    {deposit && price && (
                       <VStack>
                         <Icon
                           me="8px"
@@ -135,7 +134,7 @@ export default function DiveTripCard(props) {
                           h="16px"
                         />
                         <Text>${price / 100}</Text>
-                        <Text>(${payNow / 100} Now)</Text>
+                        <Text>(${deposit / 100} Now)</Text>
                       </VStack>
                     )}
                   </SimpleGrid>
