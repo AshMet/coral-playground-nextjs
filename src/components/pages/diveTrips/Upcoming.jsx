@@ -8,10 +8,11 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import React from "react";
 
 import TripRow from "./TripRow";
 
-export default function Upcoming({ diveTrips }) {
+export default function Upcoming({ diveTrips, selectedTrip, setSelectedTrip }) {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   return (
     <Box py={6} px={5} width="full">
@@ -63,10 +64,14 @@ export default function Upcoming({ diveTrips }) {
             .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
             .map((trip) => {
               return (
-                <>
-                  <TripRow key={trip.id} trip={trip} />
+                <React.Fragment key={trip.id}>
+                  <TripRow
+                    trip={trip}
+                    setSelectedTrip={setSelectedTrip}
+                    selected={selectedTrip === trip.id}
+                  />
                   <Divider />
-                </>
+                </React.Fragment>
               );
             })
         ) : (

@@ -38,7 +38,7 @@ import {
 // Custom components
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { LuFuel } from "react-icons/lu";
 import { MdOutlineWaterDrop, MdStar, MdStarHalf } from "react-icons/md";
 import {
@@ -52,6 +52,7 @@ import Card from "components/card/Card";
 import DataIconTile from "components/dataDisplay/DataIconTile";
 import Upcoming from "components/pages/diveTrips/Upcoming";
 import Cabins from "components/pages/liveaboard/Cabins";
+import { CartContext } from "contexts/CartContext";
 import DivingLayout from "layouts/DivingLayout";
 // import { supabase } from "pages/api";
 
@@ -59,14 +60,27 @@ export default function Liveaboards({ diveTrips }) {
   const [currentImage, setCurrentImage] = useState(
     "/img/liveaboards/boat_interior1.webp"
   );
+  const [selectedTrip, setSelectedTrip] = useState(diveTrips[0]);
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const Chair1 = "/img/liveaboards/boat_interior2.webp";
-  const Chair2 = "/img/liveaboards/boat_interior3.webp";
-  const Chair3 = "/img/liveaboards/boat_interior4.webp";
-  const Chair4 = "/img/liveaboards/boat_interior5.webp";
-  // const Chair5 = "/img/liveaboards/boat_interior6.webp";
+  const BoatImg1 = "/img/liveaboards/boat_interior3.webp";
+  const BoatImg2 = "/img/liveaboards/boat_interior4.webp";
+  const BoatImg3 = "/img/liveaboards/boat_interior5.webp";
+  const BoatImg4 = "/img/liveaboards/boat_interior6.webp";
 
   const router = useRouter();
+
+  const { addToCart } = useContext(CartContext);
+
+  function combineDateAndTime(date, time) {
+    const year = date.getFullYear();
+    const month = date.getMonth(); // Jan is 0, dec is 11
+    const day = date.getDate();
+    const hours = time.split(":")[0];
+    const minutes = time.split(":")[1];
+    return new Date(year, month, day, hours, minutes, 0);
+    // const dateString = `${year}-${month}-${day}`;
+    // return new Date(`${dateString} ${time}`);
+  }
 
   return (
     <Card mt={{ sm: "75px", md: "75px" }} me={{ lg: "60px" }}>
@@ -104,7 +118,7 @@ export default function Liveaboards({ diveTrips }) {
                 objectFit="contain"
               />
             </Box>
-            <SimpleGrid columns={3} spacing={10}>
+            <SimpleGrid columns={{ sm: 2, md: 3 }} spacing={10}>
               <DataIconTile
                 title="Length"
                 value="23"
@@ -178,7 +192,7 @@ export default function Liveaboards({ diveTrips }) {
             >
               <Box borderRadius="10px" overflow="hidden">
                 <Image
-                  src={Chair1}
+                  src={BoatImg1}
                   width="90px"
                   height="90px"
                   cursor="pointer"
@@ -187,7 +201,7 @@ export default function Liveaboards({ diveTrips }) {
               </Box>
               <Box borderRadius="10px" overflow="hidden">
                 <Image
-                  src={Chair2}
+                  src={BoatImg2}
                   width="90px"
                   height="90px"
                   cursor="pointer"
@@ -196,7 +210,7 @@ export default function Liveaboards({ diveTrips }) {
               </Box>
               <Box borderRadius="10px" overflow="hidden">
                 <Image
-                  src={Chair3}
+                  src={BoatImg3}
                   width="90px"
                   height="90px"
                   cursor="pointer"
@@ -205,7 +219,7 @@ export default function Liveaboards({ diveTrips }) {
               </Box>
               <Box borderRadius="10px" overflow="hidden">
                 <Image
-                  src={Chair4}
+                  src={BoatImg4}
                   width="90px"
                   height="90px"
                   cursor="pointer"
@@ -214,13 +228,13 @@ export default function Liveaboards({ diveTrips }) {
               </Box>
               <Button
                 borderRadius="10px"
-                overflow="hidden"
+                overflow="initial"
                 width="90px"
                 height="90px"
-                bgColor="blue"
+                bgColor="purple.500"
                 onClick={() => router.push("/dive_sites/banana_reef/gallery")}
               >
-                <Text>View More</Text>
+                <Text flexWrap="wrap">View All</Text>
               </Button>
             </Stack>
           </Flex>
@@ -253,7 +267,7 @@ export default function Liveaboards({ diveTrips }) {
               </Text>
             </Flex>
             <Text
-              fontColor="secondaryGray.600"
+              color="secondaryGray.600"
               pe={{ base: "0px", "3xl": "200px" }}
               mb="40px"
             >
@@ -265,13 +279,14 @@ export default function Liveaboards({ diveTrips }) {
               guests.
             </Text>
             <Text
-              textDecoration="line-through"
-              color="secondaryGray.600"
+              // textDecoration="line-through"
+              color={useColorModeValue("purple.500", "purple.300")}
               fontWeight="500"
               fontSize="md"
               lineHeight="100%"
             >
-              $2,999
+              {/* €2,999 */}
+              Selected Trip: {selectedTrip.name}
             </Text>
             <Flex mb="40px" alignItems="center">
               <Text
@@ -280,7 +295,7 @@ export default function Liveaboards({ diveTrips }) {
                 fontSize="38px"
                 me="10px"
               >
-                $2,599
+                €{selectedTrip.price / 100}
               </Text>
               <Badge
                 colorScheme="green"
@@ -326,9 +341,12 @@ export default function Liveaboards({ diveTrips }) {
                     me="20px"
                     defaultValue="dark_grey"
                   >
-                    <option value="dark_grey">Master Suite</option>
-                    <option value="black">Left</option>
-                    <option value="white">Right</option>
+                    <option value="dark_grey">Standard Cabin lower deck</option>
+                    <option value="black">Superior cabin lower deck</option>
+                    <option value="white">
+                      Royal suite main deck (dive deck)
+                    </option>
+                    <option value="white">Suite upper deck</option>
                   </Select>
                 </Flex>
                 <Flex direction="column">
@@ -367,15 +385,36 @@ export default function Liveaboards({ diveTrips }) {
                 minW="183px"
                 fontSize="sm"
                 fontWeight="500"
+                onClick={() =>
+                  addToCart({
+                    id: selectedTrip.id,
+                    title: selectedTrip.name,
+                    itemType: "diveTrip",
+                    centreName: selectedTrip.diveCentreName,
+                    // diveDate: diveDate ? new Date(diveDate) : new Date(value),
+                    diveDate: combineDateAndTime(
+                      new Date(selectedTrip.startDate),
+                      selectedTrip.startTime
+                    ),
+                    diveTime: selectedTrip.startTime,
+                    price: selectedTrip.price,
+                    priceId: selectedTrip.stripePriceId,
+                    deposit: selectedTrip.depsit,
+                  })
+                }
               >
-                Add to cart
+                Reserve for €{selectedTrip.deposit / 100}
               </Button>
             </Flex>
             <Cabins />
           </Flex>
         </Flex>
       </Flex>
-      <Upcoming diveTrips={diveTrips} />
+      <Upcoming
+        diveTrips={diveTrips}
+        selectedTrip={selectedTrip}
+        setSelectedTrip={setSelectedTrip}
+      />
     </Card>
   );
 }
@@ -388,6 +427,7 @@ export async function getStaticProps() {
 
   const diveTrips = [
     {
+      id: 1,
       name: "Brothers, Daedalus & Fury Shoal",
       price: 150000,
       active: true,
@@ -401,6 +441,7 @@ export async function getStaticProps() {
       minCert: "Advanced OW",
     },
     {
+      id: 2,
       name: "North & Tiran",
       price: 230000,
       active: true,
@@ -414,6 +455,7 @@ export async function getStaticProps() {
       minCert: "Open Water",
     },
     {
+      id: 3,
       name: "Hurghada Reef and Wreck Dives",
       price: 110000,
       active: true,
