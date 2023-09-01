@@ -98,7 +98,7 @@ export default function Liveaboards({ diveTrips }) {
               mb={{ sm: "50px", md: "0px" }}
             >
               <Image
-                src="/img/boat2.webp"
+                src="/img/liveaboards/boat2.webp"
                 width="600px"
                 height="200px"
                 objectFit="contain"
