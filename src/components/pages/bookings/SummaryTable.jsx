@@ -38,7 +38,7 @@ export default function SummaryTable({ lineItems }) {
                 <Th>Details</Th>
                 <Th>Quantity</Th>
                 <Th isNumeric>Price</Th>
-                <Th isNumeric>Pay Now</Th>
+                <Th isNumeric>Deposit</Th>
               </Tr>
             </Thead>
             <Tbody>
