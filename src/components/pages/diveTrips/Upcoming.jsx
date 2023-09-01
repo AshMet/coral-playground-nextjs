@@ -67,6 +67,7 @@ export default function Upcoming({ diveTrips, selectedTrip, setSelectedTrip }) {
                 <React.Fragment key={trip.id}>
                   <TripRow
                     trip={trip}
+                    selectedTrip={selectedTrip}
                     setSelectedTrip={setSelectedTrip}
                     selected={selectedTrip === trip.id}
                   />
