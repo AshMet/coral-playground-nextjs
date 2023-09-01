@@ -32,7 +32,7 @@ export default function TripRow({ trip, selectedTrip, setSelectedTrip }) {
     checkIn,
   } = trip;
 
-  const selected = selectedTrip.id === id;
+  const selected = selectedTrip?.id === id;
 
   // color={useColorModeValue(colorTextLight, colorTextDark)}
   // bgColor={useColorModeValue(bgColorLight, bgColorDark)}
