@@ -1,3 +1,5 @@
+/* eslint-disable react/no-children-prop */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable func-names */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-bind */
@@ -17,9 +19,10 @@ import {
   Icon,
 } from "@chakra-ui/react";
 // Custom components
-import md from "markdown-it";
+import ChakraUIRenderer from "chakra-ui-markdown-renderer";
 import { useState } from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 import Card from "components/card/Card";
 
@@ -63,12 +66,10 @@ export default function SiteInfo({
       w={{ base: "100%", md: "unset" }}
     >
       {description ? (
-        <Box
-          fontSize="lg"
-          color={textColorSecondary}
-          fontWeight="400"
-          className="site_description"
-          dangerouslySetInnerHTML={{ __html: md().render(description) }}
+        <ReactMarkdown
+          components={ChakraUIRenderer()}
+          children={description}
+          skipHtml
         />
       ) : (
         <Text fontSize="lg" color={textColorSecondary} fontWeight="400" />

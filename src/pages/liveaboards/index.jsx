@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
@@ -57,15 +58,17 @@ import DivingLayout from "layouts/DivingLayout";
 // import { supabase } from "pages/api";
 
 export default function Liveaboards({ diveTrips }) {
-  const [currentImage, setCurrentImage] = useState(
-    "/img/liveaboards/boat_interior1.webp"
-  );
+  // const [currentImage, setCurrentImage] = useState(
+  //   "/img/liveaboards/boat_interior1.webp"
+  // );
   const [selectedTrip, setSelectedTrip] = useState(diveTrips[0]);
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const BoatImg1 = "/img/liveaboards/boat_interior3.webp";
-  const BoatImg2 = "/img/liveaboards/boat_interior4.webp";
-  const BoatImg3 = "/img/liveaboards/boat_interior5.webp";
-  const BoatImg4 = "/img/liveaboards/boat_interior6.webp";
+  const BoatImgs = [
+    "/img/liveaboards/boat_interior3.webp",
+    "/img/liveaboards/boat_interior4.webp",
+    "/img/liveaboards/boat_interior5.webp",
+    "/img/liveaboards/boat_interior6.webp",
+  ];
 
   const router = useRouter();
 
@@ -109,7 +112,7 @@ export default function Liveaboards({ diveTrips }) {
               align
               mx={{ sm: "auto", lg: "auto", xl: "0px" }}
               mt="50px"
-              mb={{ sm: "50px", md: "0px" }}
+              mb={{ sm: "50px", md: "100px" }}
             >
               <Image
                 src="/img/liveaboards/boat2.webp"
@@ -117,6 +120,42 @@ export default function Liveaboards({ diveTrips }) {
                 height="200px"
                 objectFit="contain"
               />
+
+              <Stack
+                direction="row"
+                spacing={{ sm: "20px", md: "35px", lg: "20px" }}
+                mx="auto"
+                mt="20px"
+              >
+                {BoatImgs.map((item, index) => (
+                  <Box
+                    key={index}
+                    borderRadius="10px"
+                    roundedBottom="10px"
+                    overflow="hidden"
+                  >
+                    <Image
+                      src={item}
+                      width="90px"
+                      height="90px"
+                      cursor="pointer"
+                      onClick={() =>
+                        router.push("/dive_sites/banana_reef/gallery")
+                      }
+                    />
+                  </Box>
+                ))}
+                <Button
+                  borderRadius="10px"
+                  overflow="initial"
+                  width="90px"
+                  height="90px"
+                  bgColor="purple.500"
+                  onClick={() => router.push("/dive_sites/banana_reef/gallery")}
+                >
+                  View All
+                </Button>
+              </Stack>
             </Box>
             <SimpleGrid columns={{ sm: 2, md: 3 }} spacing={10}>
               <DataIconTile
@@ -156,87 +195,6 @@ export default function Liveaboards({ diveTrips }) {
                 icon={<Icon as={PiCalendar} w="20px" h="20px" />}
               />
             </SimpleGrid>
-            <Box
-              w={{
-                sm: "fit",
-                md: "fit",
-                lg: "800px",
-                xl: "555px",
-                "2xl": "745px",
-              }}
-              h={{
-                sm: "100%",
-                md: "100%",
-                lg: "300px",
-                xl: "300px",
-                "2xl": "745px",
-              }}
-              mb="26px"
-              align
-              mx={{ sm: "auto", lg: "auto", xl: "0px" }}
-              mt="50px"
-              borderRadius="10px"
-              overflow="hidden"
-            >
-              <Image
-                src={currentImage}
-                width="600px"
-                height="350px"
-                objectFit="contain"
-              />
-            </Box>
-            <Stack
-              direction="row"
-              spacing={{ sm: "20px", md: "35px", lg: "20px" }}
-              mx="auto"
-            >
-              <Box borderRadius="10px" overflow="hidden">
-                <Image
-                  src={BoatImg1}
-                  width="90px"
-                  height="90px"
-                  cursor="pointer"
-                  onClick={(e) => setCurrentImage(e.target.src)}
-                />
-              </Box>
-              <Box borderRadius="10px" overflow="hidden">
-                <Image
-                  src={BoatImg2}
-                  width="90px"
-                  height="90px"
-                  cursor="pointer"
-                  onClick={(e) => setCurrentImage(e.target.src)}
-                />
-              </Box>
-              <Box borderRadius="10px" overflow="hidden">
-                <Image
-                  src={BoatImg3}
-                  width="90px"
-                  height="90px"
-                  cursor="pointer"
-                  onClick={(e) => setCurrentImage(e.target.src)}
-                />
-              </Box>
-              <Box borderRadius="10px" overflow="hidden">
-                <Image
-                  src={BoatImg4}
-                  width="90px"
-                  height="90px"
-                  cursor="pointer"
-                  onClick={(e) => setCurrentImage(e.target.src)}
-                />
-              </Box>
-              <Button
-                borderRadius="10px"
-                overflow="initial"
-                width="90px"
-                height="90px"
-                bgColor="purple.500"
-                onClick={() => router.push("/dive_sites/banana_reef/gallery")}
-              >
-                <Text flexWrap="wrap">View All</Text>
-              </Button>
-            </Stack>
           </Flex>
           <Flex direction="column">
             <Text

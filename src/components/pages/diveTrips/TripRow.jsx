@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable react/prop-types */
 import {
   Button,
@@ -46,8 +47,7 @@ export default function TripRow({ trip, selectedTrip, setSelectedTrip }) {
 
   return (
     <Stack
-      p={3}
-      py={3}
+      p={selected ? 6 : 3}
       bgColor={selected ? "purple.600" : "transparent"}
       justifyContent={{
         base: "center",
@@ -58,13 +58,26 @@ export default function TripRow({ trip, selectedTrip, setSelectedTrip }) {
         md: "row",
       }}
       alignItems={{ md: "center" }}
+      mt={0}
+      borderRadius={10}
+      color={selected && "white"}
     >
       <Stack direction="row" justify="center" align="center">
-        <DateTile date={new Date(startDate)} time={startTime} />
+        <DateTile
+          date={new Date(startDate)}
+          time={startTime}
+          color="white"
+          bg={selected ? "gray.800" : "purple.400"}
+        />
         <Spacer />
         <Text>to</Text>
         <Spacer />
-        <DateTile date={new Date(endDate)} time={startTime} />
+        <DateTile
+          date={new Date(endDate)}
+          time={startTime}
+          color="white"
+          bg={selected ? "gray.800" : "purple.400"}
+        />
       </Stack>
 
       <Stack w={{ sm: "100%", lg: "45%" }} pl="20px">

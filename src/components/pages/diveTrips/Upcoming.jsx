@@ -69,9 +69,15 @@ export default function Upcoming({ diveTrips, selectedTrip, setSelectedTrip }) {
                     trip={trip}
                     selectedTrip={selectedTrip}
                     setSelectedTrip={setSelectedTrip}
-                    selected={selectedTrip === trip.id}
                   />
-                  <Divider />
+                  <Divider
+                    marginTop={0}
+                    bgColor={
+                      selectedTrip?.id === trip.id
+                        ? "purple.500"
+                        : "transparent"
+                    }
+                  />
                 </React.Fragment>
               );
             })

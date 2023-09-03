@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 /* eslint-disable react/no-danger */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -9,11 +10,12 @@ import {
   useColorModeValue,
   Container,
 } from "@chakra-ui/react";
+import ChakraUIRenderer from "chakra-ui-markdown-renderer";
 import fs from "fs";
 import matter from "gray-matter";
-import md from "markdown-it";
 import Image from "next/image";
 import { NextSeo } from "next-seo";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 import ShareButtons from "components/footer/ShareButtons";
 import BlogAuthor from "components/pages/blog/BlogAuthor";
@@ -160,10 +162,10 @@ export default function BlogPost({ frontmatter, content, slug }) {
             />
           </Box>
         </Box>
-        <Box
-          pt="60px"
-          className="blog-post"
-          dangerouslySetInnerHTML={{ __html: md().render(content) }}
+        <ReactMarkdown
+          components={ChakraUIRenderer()}
+          children={content}
+          skipHtml
         />
         <ShareButtons />
       </Container>
