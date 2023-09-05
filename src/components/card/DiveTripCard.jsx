@@ -54,8 +54,9 @@ export default function DiveTripCard(props) {
             <Image
               src={coverPhoto}
               width="300"
-              height="200"
+              height="400"
               borderRadius="20px"
+              layout="responsive"
             />
           </Box>
           <Flex

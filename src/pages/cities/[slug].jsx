@@ -11,7 +11,7 @@ import { supabase } from "pages/api";
 
 export default function Cities({ city }) {
   return (
-    <>
+    <Box mx={{ lg: "50px" }}>
       <Flex
         mb={{ base: "20px", "2xl": "20px" }}
         justifyContent="center"
@@ -21,8 +21,8 @@ export default function Cities({ city }) {
       >
         <Box
           w={{
-            sm: "fit",
-            md: "fit",
+            sm: "100%",
+            md: "100",
             lg: "800px",
             xl: "100%",
             "2xl": "745px",
@@ -80,7 +80,7 @@ export default function Cities({ city }) {
           skipHtml
         />
       </Flex>
-    </>
+    </Box>
   );
 }
 

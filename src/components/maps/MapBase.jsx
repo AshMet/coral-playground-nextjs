@@ -41,7 +41,8 @@ import MapMarker from "./MapMarker";
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 export default function MapBase(props) {
-  const { diveSites, diveCentres, h, pt, gridArea, boxShadow } = props;
+  const { diveSites, diveCentres, h, pt, gridArea, boxShadow, scrollZoom } =
+    props;
   const [mapLocation, setMapLocation] = useState("Select Location");
   const mapRef = useRef();
 
@@ -51,7 +52,7 @@ export default function MapBase(props) {
   );
 
   const settings = {
-    scrollZoom: false,
+    scrollZoom: scrollZoom || false,
   };
 
   // const layerStyle = {

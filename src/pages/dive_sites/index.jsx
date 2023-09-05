@@ -1,11 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-console */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/prop-types */
 /* eslint-disable import/no-cycle */
-/* eslint-disable consistent-return */
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable sonarjs/no-duplicate-string */
+/* eslint-disable consistent-return */
+/* eslint-disable react/prop-types */
+
 import {
   chakra,
   Box,

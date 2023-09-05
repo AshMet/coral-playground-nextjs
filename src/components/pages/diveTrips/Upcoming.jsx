@@ -12,7 +12,12 @@ import React from "react";
 
 import TripRow from "./TripRow";
 
-export default function Upcoming({ diveTrips, selectedTrip, setSelectedTrip }) {
+export default function Upcoming({
+  diveTrips,
+  selectedTrip,
+  setSelectedTrip,
+  bookable,
+}) {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   return (
     <Box py={6} px={5} width="full">
@@ -58,7 +63,7 @@ export default function Upcoming({ diveTrips, selectedTrip, setSelectedTrip }) {
           </Stack>
         </Stack>
         <Divider />
-        {diveTrips && diveTrips.length > 0 ? (
+        {diveTrips?.length > 0 ? (
           diveTrips
             ?.filter((trip) => trip?.startDate !== null)
             .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
@@ -69,6 +74,7 @@ export default function Upcoming({ diveTrips, selectedTrip, setSelectedTrip }) {
                     trip={trip}
                     selectedTrip={selectedTrip}
                     setSelectedTrip={setSelectedTrip}
+                    bookable={bookable}
                   />
                   <Divider
                     marginTop={0}

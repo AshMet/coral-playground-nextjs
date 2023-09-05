@@ -157,6 +157,18 @@ export default function LandingNavbar(props) {
           </Link>
           <Link
             display={{ base: "none", lg: "block" }}
+            href="/dive_trips"
+            color={textColor}
+            fontSize="md"
+            fontWeight="600"
+            me="30px"
+            my="auto"
+            _hover={{ color: hoverColor, cursor: "pointer" }}
+          >
+            Dive Trips
+          </Link>
+          <Link
+            display={{ base: "none", lg: "block" }}
             href="/dive_sites"
             color={textColor}
             fontSize="md"
@@ -191,7 +203,7 @@ export default function LandingNavbar(props) {
                 h="max-content"
                 w="max-content"
                 bg="transparent"
-                mt={3}
+                mt={{ sm: 0, lg: 3 }}
               >
                 <Icon
                   as={IoLogoInstagram}
@@ -206,7 +218,7 @@ export default function LandingNavbar(props) {
             <DarkModeMenuItem iconColor={textColor} />
           </Box>
           <Tooltip label="Login / Sign Up">
-            <Box my="auto" mr="12px" ml="10px">
+            <Box my="auto" mr="20px" ml="10px">
               <AvatarMenuItem secondary={secondary} iconColor={textColor} />
             </Box>
           </Tooltip>

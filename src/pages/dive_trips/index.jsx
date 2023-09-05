@@ -1,12 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-console */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/prop-types */
-/* eslint-disable import/no-cycle */
 /* eslint-disable consistent-return */
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable sonarjs/no-duplicate-string */
+/* eslint-disable import/no-cycle */
+/* eslint-disable react/prop-types */
+
 import {
   chakra,
   Box,
@@ -17,30 +13,17 @@ import {
   SimpleGrid,
   Text,
   useColorModeValue,
-  Divider,
-  Stack,
-  Heading,
-  List,
-  ListIcon,
-  ListItem,
-  Spacer,
-  HStack,
 } from "@chakra-ui/react";
-import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
+import { motion, isValidMotionProp, AnimatePresence } from "framer-motion";
 // import Link from "next/link";
+import Link from "next/link";
 import { NextSeo } from "next-seo";
-import { useContext, useEffect, useState } from "react";
-import { FaCheckCircle } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { MdApps, MdDashboard } from "react-icons/md";
-import { PiClockAfternoon, PiCertificate } from "react-icons/pi";
-import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { TbScubaMask } from "react-icons/tb";
 
 import { supabase } from "../api/index";
 import DiveTripCard from "components/card/DiveTripCard";
-import DateTile from "components/dataDisplay/DateTile";
 import Upcoming from "components/pages/diveTrips/Upcoming";
-import { CartContext } from "contexts/CartContext";
 import DivingLayout from "layouts/DivingLayout";
 // import generateDiveSiteRSS from "utils/generateDiveSiteRSS";
 
@@ -62,23 +45,25 @@ export default function DiveTrips({ diveTrips, cities }) {
 
   const [country, setCountry] = useState();
   const [city, setCity] = useState(0);
-  // const [filtered, setFiltered] = useState();
+  const [filtered, setFiltered] = useState();
 
-  // useEffect(() => {
-  //   if (!diveTrips) return null;
-  // if (city === 0 || city === "All Cities") {
-  //   setFiltered(diveTrips);
-  //   return;
-  // }
-  // const cityFiltered = diveTrips.filter((site) => site.city.name === city);
-  // setFiltered(cityFiltered);
-  // console.log("site data", data);
-  // }, [diveTrips, city, country]);
+  useEffect(() => {
+    if (!diveTrips) return null;
+    if (city === 0 || city === "All Cities") {
+      setFiltered(diveTrips);
+      return;
+    }
+    const cityFiltered = diveTrips.filter(
+      (trip) => trip.diveCentreCity === city
+    );
+    setFiltered(cityFiltered);
+    // console.log("site data", data);
+  }, [diveTrips, city, country]);
 
   return (
     <>
       <NextSeo
-        title="Scuba Diving Sites in Egypt"
+        title="Upcoming Scuba Diving Trips in Egypt"
         description={`With ${diveTrips?.length} dive trips, book your perfect scuba diving adventure with Coral Playground and experience the wonders of the Red Sea!`}
         openGraph={{
           type: "website",
@@ -95,8 +80,35 @@ export default function DiveTrips({ diveTrips, cities }) {
           ],
         }}
       />
-      <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-        <Flex w="100%">
+      <Box pt="80px">
+        {/* <motion.div display="grid" displayTemplateColumns="repeat(autoFit, minmax(250px, 1fr)" gridColumnGap="1rem" gridRowGap="2rem"> */}
+        <Text
+          mt={{ md: "0px", lg: "30px" }}
+          mb="20px"
+          color={textColor}
+          fontSize="2xl"
+          ms="24px"
+          fontWeight="700"
+        >
+          Top Destinations
+        </Text>
+        <SimpleGrid columns={{ base: 2, md: 3, xl: 5 }} gap="20px">
+          {cities?.map((x) => {
+            return (
+              <Link href={`/cities/${x.slug}`} passHref>
+                <a>
+                  <DiveTripCard
+                    key={x.id}
+                    diveTrip={x}
+                    coverPhoto={x.cover_photo}
+                    url={`/cities/${x.slug}`}
+                  />
+                </a>
+              </Link>
+            );
+          })}
+        </SimpleGrid>
+        <Flex w="100%" mt="80px">
           {/* <SearchBar /> */}
           <Select
             value={country}
@@ -164,20 +176,8 @@ export default function DiveTrips({ diveTrips, cities }) {
           </Button>
         </Flex>
         <ChakraBox layout>
-          {/* <motion.div display="grid" displayTemplateColumns="repeat(autoFit, minmax(250px, 1fr)" gridColumnGap="1rem" gridRowGap="2rem"> */}
-          <SimpleGrid columns={{ base: 1, md: 2, xl: 5 }} gap="20px" mt="50px">
-            {cities?.map((x) => {
-              return (
-                <DiveTripCard
-                  key={x.id}
-                  diveTrip={x}
-                  coverPhoto={x.cover_photo}
-                />
-              );
-            })}
-          </SimpleGrid>
           <AnimatePresence>
-            <Upcoming diveTrips={diveTrips} />
+            <Upcoming diveTrips={filtered} bookable />
           </AnimatePresence>
         </ChakraBox>
       </Box>

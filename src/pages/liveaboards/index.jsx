@@ -1,26 +1,5 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-/*!
-  _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
- | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
- | |_| | | | | |_) || |  / / | | |  \| | | | | || |  | |_) | |_) | | | |
- |  _  | |_| |  _ < | | / /| |_| | |\  | | |_| || |  |  __/|  _ <| |_| |
- |_| |_|\___/|_| \_\___/____\___/|_| \_|  \___/|___| |_|   |_| \_\\___/ 
-                                                                                                                                                                                                                                                                                                                                       
-=========================================================
-* Horizon UI Dashboard PRO - v1.0.0
-=========================================================
-
-* Product Page: https://www.horizon-ui.com/pro/
-* Copyright 2022 Horizon UI (https://www.horizon-ui.com/)
-
-* Designed and Coded by Simmmple
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 
 // Chakra imports
 import {
@@ -71,7 +50,6 @@ export default function Liveaboards({ diveTrips }) {
   ];
 
   const router = useRouter();
-
   const { addToCart } = useContext(CartContext);
 
   function combineDateAndTime(date, time) {
@@ -150,6 +128,7 @@ export default function Liveaboards({ diveTrips }) {
                   overflow="initial"
                   width="90px"
                   height="90px"
+                  color="white"
                   bgColor="purple.500"
                   onClick={() => router.push("/dive_sites/banana_reef/gallery")}
                 >
@@ -397,6 +376,7 @@ export async function getStaticProps() {
       startTime: "07:00:00",
       endDate: "2023-11-08",
       minCert: "Advanced OW",
+      city: "Hurghada",
     },
     {
       id: 2,
@@ -411,6 +391,7 @@ export async function getStaticProps() {
       startTime: "07:00:00",
       endDate: "2023-11-23",
       minCert: "Open Water",
+      city: "Sharm El Sheikh",
     },
     {
       id: 3,
@@ -425,6 +406,7 @@ export async function getStaticProps() {
       startTime: "07:00:00",
       endDate: "2023-10-03",
       minCert: "Advanced OW",
+      city: "Marsa Alam",
     },
   ];
 

@@ -11,12 +11,29 @@ import {
   ListItem,
   Spacer,
 } from "@chakra-ui/react";
-import { PiClockAfternoon, PiCertificate } from "react-icons/pi";
-import { TbScubaMask } from "react-icons/tb";
+import { useContext } from "react";
+import { TbCertificate, TbScubaMask } from "react-icons/tb";
 
 import DateTile from "components/dataDisplay/DateTile";
+import { CartContext } from "contexts/CartContext";
 
-export default function TripRow({ trip, selectedTrip, setSelectedTrip }) {
+function combineDateAndTime(date, time) {
+  const year = date.getFullYear();
+  const month = date.getMonth(); // Jan is 0, dec is 11
+  const day = date.getDate();
+  const hours = time.split(":")[0];
+  const minutes = time.split(":")[1];
+  return new Date(year, month, day, hours, minutes, 0);
+  // const dateString = `${year}-${month}-${day}`;
+  // return new Date(`${dateString} ${time}`);
+}
+
+export default function TripRow({
+  trip,
+  selectedTrip,
+  setSelectedTrip,
+  bookable,
+}) {
   const {
     id,
     name,
@@ -30,9 +47,10 @@ export default function TripRow({ trip, selectedTrip, setSelectedTrip }) {
     price,
     deposit,
     // stripePriceId,
-    checkIn,
+    // checkIn,
   } = trip;
 
+  const { addToCart } = useContext(CartContext);
   const selected = selectedTrip?.id === id;
 
   // color={useColorModeValue(colorTextLight, colorTextDark)}
@@ -92,13 +110,13 @@ export default function TripRow({ trip, selectedTrip, setSelectedTrip }) {
           {diveCount} Dives
         </ListItem>
         <ListItem>
-          <ListIcon as={PiCertificate} />
+          <ListIcon as={TbCertificate} />
           {minCert}
         </ListItem>
-        <ListItem>
+        {/* <ListItem>
           <ListIcon as={PiClockAfternoon} />
           {checkIn}
-        </ListItem>
+        </ListItem> */}
       </List>
       <Stack
         w={{ sm: "100%", lg: "20%" }}
@@ -122,9 +140,28 @@ export default function TripRow({ trip, selectedTrip, setSelectedTrip }) {
           size="md"
           color={useColorModeValue(colorTextLight, colorTextDark)}
           bgColor={useColorModeValue(bgColorLight, bgColorDark)}
-          onClick={() => setSelectedTrip(trip)}
+          onClick={() =>
+            bookable
+              ? addToCart({
+                  id: trip.id,
+                  title: trip.name,
+                  itemType: "diveTrip",
+                  centreName: trip.diveCentreName,
+                  // diveDate: diveDate ? new Date(diveDate) : new Date(value),
+                  diveDate: combineDateAndTime(
+                    new Date(trip.startDate),
+                    trip.startTime
+                  ),
+                  diveTime: trip.startTime,
+                  price: trip.price,
+                  priceId: trip.stripePriceId,
+                  deposit: trip.depsit,
+                })
+              : setSelectedTrip(trip)
+          }
         >
-          {selected ? "Selected" : "Select this trip"}
+          {bookable && "Add to Cart"}
+          {!bookable && (selected ? "Selected" : "Select this trip")}
         </Button>
       </Stack>
     </Stack>

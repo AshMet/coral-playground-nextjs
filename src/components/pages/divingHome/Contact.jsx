@@ -1,4 +1,5 @@
 import {
+  Button,
   Flex,
   HStack,
   Heading,
@@ -7,6 +8,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { IoLogoWhatsapp } from "react-icons/io5";
 
 const Contact = () => {
@@ -62,17 +64,20 @@ const Contact = () => {
                 Call one of our booking agents today and we will do our best to
                 organize your trip <br />
               </Text>
-              <HStack
-                justify="center"
+              <Button
+                h="50px"
                 mt={5}
-                color="white"
-                bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
+                bg="linear-gradient(135deg, #00E676 0%, #1EBEA5 100%)"
               >
-                <Icon as={IoLogoWhatsapp} mr={5} w="30px" h="30px" />
-                <Text fontSize={30} fontWeight="extrabold">
-                  +201032893381
-                </Text>
-              </HStack>
+                <HStack justify="center" color="white">
+                  <Icon as={IoLogoWhatsapp} mr={5} w="30px" h="30px" />
+                  <Link href="tel:+201032893381">
+                    <Text fontSize={30} fontWeight="extrabold" cursor="pointer">
+                      +201032893381
+                    </Text>
+                  </Link>
+                </HStack>
+              </Button>
             </Text>
           </Flex>
         </Flex>
