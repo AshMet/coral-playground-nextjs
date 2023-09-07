@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 // import { PiClockAfternoon } from "react-icons/pi";
 
-export default function DateTile({ title, value, unit, icon }) {
+export default function DataIconTile({ title, value, unit, icon }) {
   return (
     <Stack w="140px" h="77px" borderRadius="15px" border="1px">
       <Flex

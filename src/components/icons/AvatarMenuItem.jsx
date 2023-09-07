@@ -27,11 +27,8 @@ import {
 import { ProfileIcon } from "components/icons/Icons";
 
 function SignedOutMenuList({ iconColor }) {
-  const defaultColor = useColorModeValue("navy.800", "white");
-  const shadow = useColorModeValue(
-    "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
-    "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
-  );
+  const menuBg = useColorModeValue("gray.100", "gray.800");
+  const menuContent = useColorModeValue("navy.800", "white");
   const router = useRouter();
 
   return (
@@ -39,7 +36,7 @@ function SignedOutMenuList({ iconColor }) {
       <MenuButton p="0px">
         <Icon
           as={HiOutlineUserCircle}
-          color={iconColor || defaultColor}
+          color={iconColor || menuContent}
           w="20px"
           h="20px"
           p="0px"
@@ -48,12 +45,12 @@ function SignedOutMenuList({ iconColor }) {
         {/* <HiOutlineUserCircle color={iconColor} size={20} /> */}
       </MenuButton>
       <MenuList
-        boxShadow={shadow}
         p="0px"
         mt="10px"
         borderRadius="20px"
-        bg={defaultColor}
+        bg={menuBg}
         border="none"
+        boxShadow="dark-lg"
       >
         <Flex flexDirection="column" p="10px">
           <MenuItem
@@ -65,7 +62,6 @@ function SignedOutMenuList({ iconColor }) {
             <Button
               variant="link"
               size="sm"
-              color={useColorModeValue("white", "brand.300")}
               leftIcon={<IoLogInOutline />}
               onClick={() => router.push("/auth/login")}
             >
@@ -82,7 +78,6 @@ function SignedOutMenuList({ iconColor }) {
             <Button
               variant="link"
               size="sm"
-              color={useColorModeValue("white", "brand.300")}
               leftIcon={<ProfileIcon />}
               onClick={() => router.push("/auth/signup")}
             >
@@ -113,8 +108,8 @@ function SignedOutMenuList({ iconColor }) {
 }
 
 function SignedInMenuList() {
-  // const defaultColor = useColorModeValue("white", "navy.800");
-  const textColor = useColorModeValue("secondaryGray.900", "white");
+  const menuBg = useColorModeValue("gray.100", "gray.800");
+  const textColor = useColorModeValue("navy.800", "white");
   const borderColor = useColorModeValue("#E6ECFA", "rgba(135, 140, 189, 0.3)");
   const shadow = useColorModeValue(
     "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
@@ -145,7 +140,7 @@ function SignedInMenuList() {
         p="0px"
         mt="10px"
         borderRadius="20px"
-        // bg={defaultColor}
+        bg={menuBg}
         border="none"
       >
         <Flex w="100%" mb="0px">

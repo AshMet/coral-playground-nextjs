@@ -23,43 +23,43 @@ import { IoMdTrash } from "react-icons/io";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
 import Card from "components/card/Card";
-import TimelineItem from "components/dataDisplay/TimelineItem";
+import CartRow from "components/shoppingCart/CartRow";
 import { CartContext } from "contexts/CartContext";
 // import * as gtag from "lib/data/gtag";
 
 function CartList(props) {
   const { ...rest } = props;
   const { cartItems } = useContext(CartContext);
+  const menuBg = useColorModeValue("gray.100", "gray.800");
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
 
   return (
-    <Card {...rest}>
+    <Card
+      {...rest}
+      overflowY="auto"
+      maxH="350px"
+      scrollBehavior="auto"
+      bg={menuBg}
+      w="100%"
+    >
       <Box>
-        <Text fontSize="2xl" fontWeight="700" color={textColor} mb="15px">
-          Selected Dives
+        <Text fontSize="lg" fontWeight="700" color={textColor} mb="15px">
+          Shopping Cart
         </Text>
       </Box>
       {cartItems.length > 0 ? (
         cartItems.map((dive) => (
-          <TimelineItem
+          <CartRow
             key={dive.id}
-            id={dive.id}
-            mb="16px"
+            // id={dive.id}
             title={dive.title}
-            diveCentre={dive.centreName}
-            day={new Date(dive.diveDate).toLocaleDateString("en-US", {
-              day: "numeric",
-            })}
-            weekday={new Date(dive.diveDate).toLocaleDateString("en-US", {
-              month: "short",
-            })}
-            hours={new Date(dive.diveTime).toLocaleTimeString("en-US", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-            confirmed
+            subTitle={dive.centreName}
+            startDate={dive.diveDate}
+            startTime={dive.diveTime}
+            // itemType: "diveTrip",
+            price={dive.price / 100}
           />
         ))
       ) : (
@@ -82,13 +82,13 @@ function CartList(props) {
 }
 
 export default function ShoppingCart() {
-  const menuBg = useColorModeValue("white", "navy.800");
+  const menuBg = useColorModeValue("gray.100", "gray.800");
   const { cartItems } = useContext(CartContext);
   const router = useRouter();
   const posthog = usePostHog();
   // console.log("navbar cartItems", cartItems);
   const { clearCart } = useContext(CartContext);
-  const iconBgColor = useColorModeValue("purple.200", "brand.300");
+  const iconBgColor = useColorModeValue("purple.200", "purple.400");
 
   const cartCheckout = () => {
     // gtag.event({
@@ -153,8 +153,9 @@ export default function ShoppingCart() {
         borderRadius="20px"
         bg={menuBg}
         border="none"
+        mr="10px"
       >
-        <Flex flexDirection="column" maxW={{ sm: "sm", md: "lg" }} p="10px">
+        <Flex flexDirection="column" p="10px">
           <CartList />
         </Flex>
         {cartItems.length !== 0 && (

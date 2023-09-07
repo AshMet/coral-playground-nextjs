@@ -85,7 +85,7 @@ const CabinItem = ({ title, content, features, available, booked }) => {
 export default function Cabins() {
   return (
     <Accordion
-      defaultIndex={[0]}
+      // defaultIndex={[0]}
       allowToggle
       w={{ sm: "100%", md: "100%", xl: "94%" }}
       mb="16px"

@@ -33,7 +33,7 @@ export default function SearchBar(props) {
   const inputBg = useColorModeValue("secondaryGray.300", "navy.900");
   const inputText = useColorModeValue("gray.700", "gray.100");
   const textColorTertiary = useColorModeValue("secondaryGray.600", "white");
-  const menuBg = useColorModeValue("white", "navy.800");
+  const menuBg = useColorModeValue("gray.100", "gray.800");
   const menuText = useColorModeValue("navy.800", "white");
   const [searchString, setSearchString] = useState("");
   const [searchResults, setSearchResults] = useState("");
@@ -44,7 +44,7 @@ export default function SearchBar(props) {
   async function handleSubmit() {
     const { data } = await supabase
       .from("dive_sites")
-      .select()
+      .select("name, slug")
       .textSearch("name", searchString, {
         type: "websearch",
         config: "english",
@@ -96,14 +96,22 @@ export default function SearchBar(props) {
           />
         </InputGroup>
       </PopoverTrigger>
-      <PopoverContent color={menuText} bg={menuBg} borderColor="blue.800">
-        <PopoverHeader pt={4} fontWeight="bold" border="0">
+      <PopoverContent
+        color={menuText}
+        bg={menuBg}
+        borderRadius="20px"
+        boxShadow="dark-lg"
+        _focus="none"
+        _hover="none"
+        px={3}
+      >
+        <PopoverHeader pt={4} fontWeight="bold" border="0" color="purple.400">
           Select Dive Site
         </PopoverHeader>
-        <PopoverBody borderRadius="20px">
-          {searchResults &&
+        <PopoverBody overflowY="auto" maxH="250px" scrollBehavior="auto">
+          {searchResults?.length > 0 ? (
             searchResults.map((result) => (
-              <Link href={`/dive_sites/${result.id}`}>
+              <Link href={`/dive_sites/${result.slug}`}>
                 <Flex mb="25px" align="center" cursor="pointer">
                   <Icon
                     color={menuText}
@@ -130,7 +138,18 @@ export default function SearchBar(props) {
                   />
                 </Flex>
               </Link>
-            ))}
+            ))
+          ) : (
+            <Text
+              color={menuText}
+              fontWeight="500"
+              fontSize="md"
+              me="5px"
+              _hover={{ color: "brand.100" }}
+            >
+              No Results Found. Please try again.
+            </Text>
+          )}
         </PopoverBody>
         {/* <PopoverFooter d="flex" justifyContent="flex-end">
           <ButtonGroup size="sm">

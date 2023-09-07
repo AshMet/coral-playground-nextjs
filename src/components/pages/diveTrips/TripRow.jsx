@@ -14,7 +14,7 @@ import {
 import { useContext } from "react";
 import { TbCertificate, TbScubaMask } from "react-icons/tb";
 
-import DateTile from "components/dataDisplay/DateTile";
+import TimeTile from "components/dataDisplay/TimeTile";
 import { CartContext } from "contexts/CartContext";
 
 function combineDateAndTime(date, time) {
@@ -55,10 +55,10 @@ export default function TripRow({
 
   // color={useColorModeValue(colorTextLight, colorTextDark)}
   // bgColor={useColorModeValue(bgColorLight, bgColorDark)}
-  const colorTextLight = selected ? "white" : "purple.600";
-  const bgColorLight = selected ? "purple.400" : "gray.300";
-  const colorTextDark = selected ? "white" : "purple.500";
-  const bgColorDark = selected ? "purple.400" : "gray.300";
+  const colorTextLight = selected ? "purple.600" : "white";
+  const bgColorLight = selected ? "gray.300" : "purple.400";
+  const colorTextDark = selected ? "purple.600" : "white";
+  const bgColorDark = selected ? "gray.300" : "purple.400";
 
   // console.log("trip", trip);
   // console.log("selectedTrip", selectedTrip);
@@ -81,7 +81,7 @@ export default function TripRow({
       color={selected && "white"}
     >
       <Stack direction="row" justify="center" align="center">
-        <DateTile
+        <TimeTile
           date={new Date(startDate)}
           time={startTime}
           color="white"
@@ -90,7 +90,7 @@ export default function TripRow({
         <Spacer />
         <Text>to</Text>
         <Spacer />
-        <DateTile
+        <TimeTile
           date={new Date(endDate)}
           time={startTime}
           color="white"
@@ -122,7 +122,7 @@ export default function TripRow({
         w={{ sm: "100%", lg: "20%" }}
         direction={{ sm: "row", lg: "column" }}
       >
-        <Text fontSize="sm">
+        <Text fontSize="sm" color={useColorModeValue("green.400", "green.200")}>
           Deposit:{" "}
           <Text as="span" fontSize="xl" fontWeight="black">
             €{deposit / 100}
