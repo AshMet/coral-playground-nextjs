@@ -27,12 +27,11 @@ import { NextSeo } from "next-seo";
 import { ParallaxProvider } from "react-scroll-parallax";
 
 // Components
+import LandingCard from "components/card/LandingCard";
 import Benefits from "components/pages/diveCentresHome/Benefits";
 import Hero from "components/pages/diveCentresHome/Hero";
 import HowItWorks from "components/pages/diveCentresHome/HowItWorks";
-import ManageBenefits from "components/pages/diveCentresHome/ManageBenefits";
 import Mission from "components/pages/diveCentresHome/Mission";
-import PromoteBenefits from "components/pages/diveCentresHome/PromoteBenefits";
 import LandingLayout from "layouts/LandingLayout";
 
 export default function diveCentresHome() {
@@ -63,8 +62,41 @@ export default function diveCentresHome() {
           <Mission />
           <HowItWorks />
           <Benefits />
-          <PromoteBenefits />
-          <ManageBenefits />
+          <LandingCard
+            header="PROMOTE"
+            title="Get a FREE Dive Center Page"
+            description="Reach more customers and increase your revenue with your own free business page. Show off all your dive centre 
+            has to offer including images, services, languages, equipment, and more. "
+            image="/img/home/dive_centre/centre-page.webp"
+            btnText="Claim your FREE page"
+            btnLink="/business/signup"
+            leftImg
+          />
+          <LandingCard
+            header="ONBOARD"
+            title="More Loyal Customers"
+            description="Reach a growing community of scuba divers looking for their
+                  next adventure. As a trusted member of our network of
+                  high-quality dive centers, you'll gain instant
+                  visibility, making it easier to market and grow your business."
+            image="/img/home/dive_centre/yaught.png"
+            btnText="Join Today"
+            btnLink="/business/signup"
+          />
+          <LandingCard
+            header="MANAGE"
+            title="Streamline Operations"
+            description="Manage your dive center with ease and focus on the diving
+                  experience. Customers pre-pay a small deposit to reserve their
+                  spot, with the remainder payable directly to your dive center.
+                  Our system handles automatic payments, email confirmations,
+                  and check-ins, ensuring a seamless experience for both you and
+                  your customers."
+            image="/img/home/dive_centre/laptop.png"
+            btnText="Get Started"
+            btnLink="/business/signup"
+            leftImg
+          />
           {/* <Numbers />
         <Upgrade /> */}
         </Flex>

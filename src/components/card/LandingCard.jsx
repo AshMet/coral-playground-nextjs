@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| |  _ \|  _ \ / _ \ 
@@ -26,20 +27,22 @@ import {
   Flex,
   Button,
   Icon,
-  Heading,
   Grid,
   Text,
   Link,
   useColorModeValue,
+  Heading,
 } from "@chakra-ui/react";
 // Custom components
 import { MdChevronRight } from "react-icons/md";
 import { Parallax } from "react-scroll-parallax";
 
-import Image from "../../actions/NextChakraImg";
+import Image from "components/actions/NextChakraImg";
 import InnerContent from "layouts/InnerContent";
 
-export default function CertBenefits() {
+export default function LandingCard(props) {
+  const { header, title, description, image, btnText, btnLink, leftImg } =
+    props;
   // const image = useColorModeValue(imageLight, imageLight);
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -57,6 +60,20 @@ export default function CertBenefits() {
     >
       <InnerContent px={{ base: "20px", md: "40px", xl: "0px" }}>
         <Flex direction={{ base: "column", lg: "row" }} width="100%">
+          {leftImg && (
+            <Box mb="0" mr="50px">
+              <Parallax speed={-8}>
+                <Image
+                  src={image}
+                  // w={{ base: "100%", md: "100%", lg: "400px", xl: "565px" }}
+                  width="1200px"
+                  height="900px"
+                  mt={{ base: "40px", md: "40px", lg: "0px" }}
+                  objectFit="contain"
+                />
+              </Parallax>
+            </Box>
+          )}
           <Flex
             me={{ lg: "50px", xl: "110px" }}
             direction="column"
@@ -74,18 +91,18 @@ export default function CertBenefits() {
                   w="100%"
                   mb="10px"
                 >
-                  CERTIFICATIONS
+                  {header}
                 </Text>
                 <Heading
                   fontWeight="800"
                   color={textColor}
                   fontSize={{ base: "28px", md: "40px" }}
-                  lineHeight={{ base: "38px", md: "50px" }}
+                  lineHeight={{ base: "38px", md: "58px" }}
                   mb="20px"
                   textAlign={{ base: "center", lg: "left" }}
                   maxW={{ base: "100%", md: "unset" }}
                 >
-                  Dive into Adventure - All Levels Welcome!
+                  {title}
                 </Heading>
                 <Text
                   textAlign={{ base: "center", lg: "left" }}
@@ -94,19 +111,40 @@ export default function CertBenefits() {
                   w={{ base: "100%", md: "100%" }}
                   mb="30px"
                 >
-                  Take the leap into a new world of diving. Whether you&apos;re
-                  a beginner ready for your first dive, looking to advance your
-                  skills, or pursuing a career as a professional, we&apos;ve got
-                  you covered. Simply choose your preferred date and dive
-                  centre, and we&apos;ll handle the rest.
+                  {description}
                 </Text>
+                <Flex
+                  align="center"
+                  mb="30px"
+                  justifyContent={{ base: "center", lg: "unset" }}
+                >
+                  {/* <Flex me={{ base: "20px", md: "50px" }} direction="column">
+                  <Text
+                    color={textColor}
+                    fontWeight="800"
+                    fontSize={{ base: "30px", md: "38px" }}
+                    lineHeight="100%"
+                    mb="10px"
+                  >
+                    100+
+                  </Text>
+                  <Text
+                    color={textColorSecondary}
+                    fontWeight="700"
+                    fontSize={{ base: "xs", md: "sm" }}
+                    letterSpacing="2px"
+                  >
+                    DIVE SITES
+                  </Text>
+                </Flex> */}
+                </Flex>
                 <Flex
                   align="center"
                   justifyContent={{ base: "center", lg: "unset" }}
                   direction={{ base: "column", md: "row" }}
                   mb="30px"
                 >
-                  <Link href="/certifications">
+                  <Link href={btnLink}>
                     <Button
                       py="20px"
                       px="16px"
@@ -118,7 +156,7 @@ export default function CertBenefits() {
                       w={{ base: "335px", md: "210px" }}
                       h="54px"
                     >
-                      Book a Course
+                      {btnText}
                       <Icon
                         as={MdChevronRight}
                         ms="5px"
@@ -128,6 +166,22 @@ export default function CertBenefits() {
                       />
                     </Button>
                   </Link>
+                  {/* <Link href="/">
+                    <Button
+                      variant="no-hover"
+                      border="1px solid"
+                      borderColor={textColorSecondary}
+                      color={textColor}
+                      fontSize="md"
+                      borderRadius="12px"
+                      bg="transparent"
+                      my="auto"
+                      w={{ base: "335px", md: "180px" }}
+                      h="54px"
+                    >
+                      See Live Preview
+                    </Button>
+                  </Link> */}
                 </Flex>
               </Box>
             </Parallax>
@@ -154,15 +208,18 @@ export default function CertBenefits() {
               />
             </Grid>
           </Flex>
-          <Parallax speed={-10}>
-            <Image
-              src="/img/diving/diver_falling.png"
-              // w={{ base: "90%", md: "100%", lg: "400px", xl: "565px" }}
-              width="600px"
-              height="900px"
-              mt={{ base: "40px", md: "40px", lg: "0px" }}
-            />
-          </Parallax>
+          {!leftImg && (
+            <Parallax speed={-8}>
+              <Image
+                src={image}
+                // w={{ base: "100%", md: "100%", lg: "400px", xl: "565px" }}
+                width="1200px"
+                height="900px"
+                mt={{ base: "40px", md: "40px", lg: "0px" }}
+                objectFit="contain"
+              />
+            </Parallax>
+          )}
         </Flex>
       </InnerContent>
     </Flex>

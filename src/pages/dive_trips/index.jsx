@@ -199,7 +199,7 @@ export async function getStaticProps() {
 
   return {
     props: { diveTrips, cities },
-    revalidate: 86400,
+    revalidate: 60,
   };
 }
 DiveTrips.getLayout = function getLayout(page) {

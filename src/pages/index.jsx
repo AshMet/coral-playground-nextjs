@@ -5,11 +5,9 @@ import { Box, Flex } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 import { ParallaxProvider } from "react-scroll-parallax";
 
+import LandingCard from "components/card/LandingCard";
 import Benefits from "components/pages/divingHome/Benefits";
-import BookingBenefits from "components/pages/divingHome/BookingBenefits";
 import Contact from "components/pages/divingHome/Contact";
-import DiveCentreBenefits from "components/pages/divingHome/DiveCentreBenefits";
-import DiveSiteBenefits from "components/pages/divingHome/DiveSiteBenefits";
 import HowItWorks from "components/pages/divingHome/HowItWorks";
 import Intro from "components/pages/divingHome/Intro";
 import Loyalty from "components/pages/divingHome/Loyalty";
@@ -51,9 +49,43 @@ export default function Home({ diveSites, diveCentres }) {
               <Mission />
               <HowItWorks />
               <Benefits />
-              <DiveSiteBenefits />
-              <DiveCentreBenefits />
-              <BookingBenefits />
+              <LandingCard
+                header="DIVE SITES"
+                title="Explore the Best Dive Sites with Confidence"
+                description="Get all the Information You Need with Coral Playground!
+                  Discover maps, descriptions, conditions and species
+                  information to help you select dive sites that align with your
+                  interests and expertise."
+                image="/img/diving/coral_reef_3d.png"
+                btnText="View Dive Sites"
+                btnLink="/dive_sites"
+              />
+              <LandingCard
+                header="DIVE CENTRES"
+                title="Find Your Perfect Dive Centre - No Guesswork Required!"
+                description="Say goodbye to the hassle of searching for a dive centre that
+                  fits your needs. Whether you want to compare prices, find a
+                  dive centre with staff who speak your language, or seek
+                  additional services, we've got you covered. Plus, you can
+                  trust that all of our partners maintain the highest standards
+                  in safety and environmental practices."
+                image="/img/diving/dive_centre_3d.png"
+                btnText="View Dive Centres"
+                btnLink="/dive_centres"
+                leftImg
+              />
+              <LandingCard
+                header="CERTIFICATIONS"
+                title="Dive into Adventure - All Levels Welcome!"
+                description="Take the leap into a new world of diving. Whether you're
+                  a beginner ready for your first dive, looking to advance your
+                  skills, or pursuing a career as a professional, we've got
+                  you covered. Simply choose your preferred date and dive
+                  centre, and we'll handle the rest."
+                image="/img/diving/diver_falling.png"
+                btnText="Book a Course"
+                btnLink="/certifications"
+              />
               <Contact />
             </Flex>
           </ParallaxProvider>
