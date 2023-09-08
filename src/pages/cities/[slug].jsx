@@ -42,14 +42,6 @@ export default function Cities({ city }) {
           overflow="hidden"
           justify="center"
         >
-          {/* <Image
-        src="/img/cities/marsa_alam_banner.webp"
-        width={0}
-        height={0}
-        sizes="100vw"
-        layout="responsive"
-        // style={{ width: "100%", height: "auto" }} // optional
-      /> */}
           <Image
             src={`/img/cities/${city.slug.replaceAll("-", "_")}_banner.webp`}
             width="1080px"
@@ -59,7 +51,7 @@ export default function Cities({ city }) {
         </Box>
         <Text
           as="h1"
-          fontSize="54px"
+          fontSize={{ sm: "36", md: "54px" }}
           fontWeight="700"
           mb="15px"
           lineHeight="100%"

@@ -2,13 +2,12 @@
 import { Icon } from "@chakra-ui/react";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { LuShip } from "react-icons/lu";
-import { TbCertificate, TbMapPin, TbScubaMask } from "react-icons/tb";
+import { TbCertificate, TbScubaMask } from "react-icons/tb";
 
 import Certifications from "pages/certifications";
 import DiveCentres from "pages/dive_centres";
 import DiveSites from "pages/dive_sites";
 import DiveTrips from "pages/dive_trips";
-import DiveMap from "pages/map";
 
 const routes = [
   // {
@@ -17,14 +16,6 @@ const routes = [
   //   icon: <Icon as={TbScubaMask} width="15px" height="20px" color="inherit" />,
   //   collapse: false,
   // },
-  {
-    name: "Map",
-    layout: "",
-    path: "/map",
-    component: DiveMap,
-    icon: <Icon as={TbMapPin} width="15px" height="20px" color="inherit" />,
-    collapse: false,
-  },
   {
     name: "Dive Trips",
     layout: "",
