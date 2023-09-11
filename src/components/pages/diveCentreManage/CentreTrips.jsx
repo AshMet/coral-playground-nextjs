@@ -12,7 +12,7 @@ export default function DiveCentreCalendar({ diveCentre, diveTrips }) {
   return (
     <Grid
       pt={5}
-      gridTemplateColumns={{ base: "2.4fr 1fr", lg: "1fr 1.83fr" }}
+      gridTemplateColumns={{ base: "2.4fr 1fr", lg: "0fr 1fr" }}
       gap={{ base: "20px", xl: "20px" }}
       display={{ base: "block", lg: "grid" }}
     >

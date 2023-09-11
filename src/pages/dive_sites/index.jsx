@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 import { supabase } from "../api/index";
 import DiveSiteCard from "components/card/DiveSiteCard";
-import CitySelectionField from "components/fields/CitySelectionField";
+import TripSearchBar from "components/fields/TripSearchBar";
 import DivingLayout from "layouts/DivingLayout";
 import generateDiveSiteRSS from "utils/generateDiveSiteRSS";
 
@@ -57,12 +57,19 @@ export default function DiveSites({ diveSites }) {
           ],
         }}
       />
-      <CitySelectionField
+      {/* <CitySelectionField
         city={city}
         country={country}
         setCity={setCity}
         setCountry={setCountry}
         pt={{ base: "180px", md: "80px", xl: "80px" }}
+      /> */}
+      <TripSearchBar
+        city={city}
+        country={country}
+        setCity={setCity}
+        setCountry={setCountry}
+        mt={{ base: "180px", md: "80px", xl: "100px" }}
       />
       <Text
         mt="25px"

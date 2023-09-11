@@ -9,11 +9,11 @@ import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 
 import { supabase } from "../api/index";
-import CitySelectionField from "components/fields/CitySelectionField";
+import TripSearchBar from "components/fields/TripSearchBar";
+import MapBase from "components/maps/MapBase";
 import Destinations from "components/pages/diveTrips/Destinations";
 import Upcoming from "components/pages/diveTrips/Upcoming";
 import DivingLayout from "layouts/DivingLayout";
-import MapBase from "components/maps/MapBase";
 // import generateDiveSiteRSS from "utils/generateDiveSiteRSS";
 
 const ChakraBox = chakra(motion.div, {
@@ -22,7 +22,6 @@ const ChakraBox = chakra(motion.div, {
 
 export default function DiveTrips(props) {
   const { diveSites, diveCentres, diveTrips, cities } = props;
-  const [country, setCountry] = useState();
   const [city, setCity] = useState(0);
   const [filtered, setFiltered] = useState();
 
@@ -37,7 +36,7 @@ export default function DiveTrips(props) {
     );
     setFiltered(cityFiltered);
     // console.log("site data", data);
-  }, [diveTrips, city, country]);
+  }, [diveTrips, city]);
 
   return (
     <>
@@ -69,13 +68,7 @@ export default function DiveTrips(props) {
         gridArea="1 / 1 / 1 / 1"
         scrollZoom
       />
-      <CitySelectionField
-        city={city}
-        country={country}
-        setCity={setCity}
-        setCountry={setCountry}
-        mt="80px"
-      />
+      <TripSearchBar city={city} setCity={setCity} mt="80px" />
       <ChakraBox layout>
         <AnimatePresence>
           <Upcoming diveTrips={filtered} bookable />
@@ -98,10 +91,10 @@ export async function getStaticProps() {
 
   const { data: diveSites } = await supabase
     .from("dive_sites_view")
-    .select(`id, name, latitude, longitude, diveMap`);
+    .select(`id, slug, name, latitude, longitude, diveMap`);
   const { data: diveCentres } = await supabase
     .from("active_dive_centres_view")
-    .select(`id, name, latitude, longitude, coverPhotoUrl`);
+    .select(`id, slug, name, latitude, longitude, coverPhotoUrl`);
 
   return {
     props: { diveSites, diveCentres, diveTrips, cities },

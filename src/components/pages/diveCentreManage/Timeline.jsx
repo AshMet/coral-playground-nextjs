@@ -18,7 +18,7 @@ export default function Default(props) {
       <Text fontSize="md" fontWeight="500" color="secondaryGray.600" mb="30px">
         Users can select the given dives on any day
       </Text>
-      {dailyDives.map((trip) => (
+      {dailyDives?.map((trip) => (
         <DailyTripCard mb="16px" diveTrip={trip} />
       ))}
     </Card>

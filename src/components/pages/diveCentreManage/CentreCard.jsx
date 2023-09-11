@@ -260,10 +260,10 @@ export default function CentreCard(props) {
             referralCode={`${process.env.NEXT_PUBLIC_SITE_URL}/dive_centres/${diveCentre?.slug}`}
             fbLink="#"
             twtLink="#"
-            gridArea={{
-              base: "2 / 1 / 3 / 3",
-              "2xl": "1 / 2 / 2 / 3",
-            }}
+            // gridArea={{
+            //   base: "1 / 2 / 2 / 3",
+            //   "2xl": "1 / 2 / 2 / 3",
+            // }}
           />
         </SimpleGrid>
       </SimpleGrid>

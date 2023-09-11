@@ -9,8 +9,9 @@ import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
-import MiniCalendar from "components/calendar/MiniCalendar";
+// import MiniCalendar from "components/calendar/MiniCalendar";
 import DiveSelection from "components/pages/bookings/DiveSelection";
+import Scheduling from "components/pages/diveTrips/Scheduling";
 import Summary from "components/pages/diveTrips/Summary";
 import TripDetails from "components/pages/diveTrips/TripDetails";
 import DivingLayout from "layouts/DivingLayout";
@@ -184,7 +185,7 @@ export default function CreateCentreTrip() {
             diveCount={diveCount}
           />
           {/* Row 2: Calendar */}
-          <MiniCalendar
+          <Scheduling
             selectRange={false}
             diveDate={diveDate}
             setDiveDate={setDiveDate}
@@ -193,6 +194,15 @@ export default function CreateCentreTrip() {
             diveCount={diveCount}
             setDiveCount={setDiveCount}
           />
+          {/* <MiniCalendar
+            selectRange={false}
+            diveDate={diveDate}
+            setDiveDate={setDiveDate}
+            setDiveTime={setDiveTime}
+            diveTime={diveTime}
+            diveCount={diveCount}
+            setDiveCount={setDiveCount}
+          /> */}
 
           {/* Row 3: Trip form */}
           <TripDetails

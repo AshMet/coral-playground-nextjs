@@ -14,8 +14,8 @@ import { useEffect, useState } from "react";
 // import { SearchBar } from "views/admin/nfts/profile/components/Search";
 import { supabase } from "../api/index";
 import DiveSiteCard from "components/card/DiveSiteCard";
+import TripSearchBar from "components/fields/TripSearchBar";
 import DivingLayout from "layouts/DivingLayout";
-import CitySelectionField from "components/fields/CitySelectionField";
 
 // const Moralis = require("moralis/node");
 
@@ -24,7 +24,6 @@ const ChakraBox = chakra(motion.div, {
 });
 
 export default function DiveSites({ diveCentres }) {
-  const [country, setCountry] = useState();
   const [city, setCity] = useState(0);
   const [filtered, setFiltered] = useState();
 
@@ -40,7 +39,7 @@ export default function DiveSites({ diveCentres }) {
     const cityFiltered = diveCentres.filter((centre) => centre.city === city);
     setFiltered(cityFiltered);
     // console.log("centres", diveCentres);
-  }, [diveCentres, city, country]);
+  }, [diveCentres, city]);
 
   return (
     <>
@@ -62,12 +61,10 @@ export default function DiveSites({ diveCentres }) {
           ],
         }}
       />
-      <CitySelectionField
+      <TripSearchBar
         city={city}
-        country={country}
         setCity={setCity}
-        setCountry={setCountry}
-        pt={{ base: "180px", md: "80px", xl: "80px" }}
+        mt={{ base: "180px", md: "80px", xl: "100px" }}
       />
       <Text
         mt="25px"

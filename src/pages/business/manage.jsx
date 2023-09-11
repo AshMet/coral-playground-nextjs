@@ -20,6 +20,7 @@ import DivingLayout from "layouts/DivingLayout";
 export default function Profile(props) {
   const { centreData, diveTrips } = props;
   const [diveCentre, setDiveCentre] = useState(centreData);
+  console.log("manage", diveTrips);
 
   useEffect(() => {
     if (!centreData) return null;
@@ -94,8 +95,8 @@ export const getServerSideProps = async (ctx) => {
   const { data: diveTrips } = await supabase
     .from("dive_trips")
     .select(
-      `id, name, description, notes, min_cert, status, price, deposit,
-          stripe_price_id, start_date, start_time, check_in, created_at, updated_at,
+      `id, name, description, notes, min_cert, active, price, deposit, stripe_price_id,
+          start_date, start_time, check_in, frequency, recur_count, dur, created_at, updated_at,
           dive_sites:trip_sites!dive_trip_id(
             dive_site:dive_site_id(id, name, latitude, longitude))
       `
@@ -103,6 +104,7 @@ export const getServerSideProps = async (ctx) => {
     .eq("dive_centre_id", diveCentre.id);
   // .order("updated_at", { ascending: true });
 
+  console.log("diveTrips: ", diveTrips);
   return {
     props: {
       session,

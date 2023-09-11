@@ -3,13 +3,14 @@
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
+import rrulePlugin from "@fullcalendar/rrule";
 
 function EventCalendar(props) {
   const { initialDate, calendarDives } = props;
 
   return (
     <FullCalendar
-      plugins={[dayGridPlugin, interactionPlugin]}
+      plugins={[dayGridPlugin, interactionPlugin, rrulePlugin]}
       headerToolbar={{
         start: "today prev next",
         center: "title",

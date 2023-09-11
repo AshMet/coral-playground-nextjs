@@ -18,16 +18,16 @@ export default function Conversion(props) {
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
   return (
     <Box>
-      {/* <Text color={textColor} fontSize="lg" fontWeight="700" mb="5px">
-        Share the referral link
-      </Text> */}
-      {/* <Text color="secondaryGray.600" fontSize="md" fontWeight="400" mb="30px">
+      <Text color={textColor} fontSize="lg" fontWeight="700" mb="5px" ml="10px">
+        Share your (social media optimized) referral link
+      </Text>
+      {/* <Text color="secondaryGray.600" fontSize="md" fontWeight="400" mb="5px" ml=>
         You can also share your referral link by copying and sending it to your
         friends or sharing it on social media.
       </Text> */}
       <Flex>
         <Flex
-          w={{ base: "74%", md: "100%", "2xl": "75%", "3xl": "378px" }}
+          w="100%"
           px="18px"
           align="center"
           borderRadius="50px"
