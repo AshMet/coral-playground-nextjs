@@ -6,6 +6,7 @@ import {
   Box,
   chakra,
   Flex,
+  SimpleGrid,
   Spinner,
   Text,
   useColorModeValue,
@@ -15,7 +16,7 @@ import { motion, isValidMotionProp } from "framer-motion";
 // import slugify from "slugify";
 
 import Image from "../actions/NextChakraImg";
-// import { CircProgressMini } from "components/charts/CircularProgress";
+import { CircProgressMini } from "components/charts/CircularProgress";
 
 import Card from "./Card";
 
@@ -31,9 +32,12 @@ export default function DiveSiteCard(props) {
     name,
     address,
     tagList,
-    // maxVisibility,
-    // current,
-    // depth,
+    minDepth,
+    maxDepth,
+    minVisibility,
+    maxVisibility,
+    minCurrent,
+    maxCurrent,
     type,
     isLoading,
     ...rest
@@ -88,6 +92,7 @@ export default function DiveSiteCard(props) {
                   width="300"
                   height="200"
                   borderRadius="20px"
+                  layout="responsive"
                 />
               )}
               {/* <Button
@@ -166,7 +171,7 @@ export default function DiveSiteCard(props) {
                 )}
                 {type === "diveSite" && (
                   <Box>
-                    <Flex wrap="wrap">
+                    {/* <Flex wrap="wrap">
                       {tagList?.map((tag, index) => (
                         <Text p="0px" fontSize="xs">
                           {tag.toUpperCase()}
@@ -175,11 +180,11 @@ export default function DiveSiteCard(props) {
                           </Text>
                         </Text>
                       ))}
-                    </Flex>
-                    {/* <SimpleGrid columns={3} spacing="40px">
-                      {depth && (
+                    </Flex> */}
+                    <SimpleGrid columns={3} spacing="40px">
+                      {maxDepth && (
                         <Box w="35px" mt="10px">
-                          <CircProgressMini title="DEP" value={depth} />
+                          <CircProgressMini title="DEP" value={maxDepth} />
                         </Box>
                       )}
                       {maxVisibility && (
@@ -187,12 +192,12 @@ export default function DiveSiteCard(props) {
                           <CircProgressMini title="VIS" value={maxVisibility} />
                         </Box>
                       )}
-                      {current && (
+                      {maxCurrent && (
                         <Box w="35px" mt="10px">
-                          <CircProgressMini title="CUR" value={current} />
+                          <CircProgressMini title="CUR" value={maxCurrent} />
                         </Box>
                       )}
-                    </SimpleGrid> */}
+                    </SimpleGrid>
                   </Box>
                 )}
               </Flex>

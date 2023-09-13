@@ -53,19 +53,12 @@ export default function Benefits() {
       w="100%"
       maxW="100%"
       direction={{ base: "column" }}
-      // pt={{ base: "80px", md: "120px", xl: "140px" }}
-      // pb={{ base: "80px", lg: "120px", xl: "140px" }}
       overflow="hidden"
-      // bgSize="cover"
       position="relative"
+      px={{ base: "20px", md: "20px", xl: "0px" }}
     >
       <InnerContent>
-        <Flex
-          maxW="100%"
-          direction="column"
-          width="stretch"
-          px={{ base: "20px", md: "20px", xl: "0px" }}
-        >
+        <Flex maxW="100%" direction="column" width="stretch">
           <Flex
             direction="column"
             mx="auto"

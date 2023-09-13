@@ -6,13 +6,14 @@
 import { chakra } from "@chakra-ui/react";
 import { motion, isValidMotionProp, AnimatePresence } from "framer-motion";
 import { NextSeo } from "next-seo";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { supabase } from "../api/index";
 import TripSearchBar from "components/fields/TripSearchBar";
 import MapBase from "components/maps/MapBase";
 import Destinations from "components/pages/diveTrips/Destinations";
 import Upcoming from "components/pages/diveTrips/Upcoming";
+import { TripSearchContext } from "contexts/TripSearchContext";
 import DivingLayout from "layouts/DivingLayout";
 // import generateDiveSiteRSS from "utils/generateDiveSiteRSS";
 
@@ -22,8 +23,16 @@ const ChakraBox = chakra(motion.div, {
 
 export default function DiveTrips(props) {
   const { diveSites, diveCentres, diveTrips, cities } = props;
+  const { dateRange } = useContext(TripSearchContext);
   const [city, setCity] = useState(0);
+
+  // const [startDate, setStartDate] = useState(router.query.startDate || today);
+  // const [endDate, setEndDate] = useState(router.query.endDate || nextMonth);
   const [filtered, setFiltered] = useState();
+
+  // console.log("router", router.query.endDate);
+  // console.log("startDate", startDate);
+  // console.log("endDate", endDate);
 
   useEffect(() => {
     if (!diveTrips) return null;
@@ -35,8 +44,23 @@ export default function DiveTrips(props) {
       (trip) => trip.diveCentreCity === city
     );
     setFiltered(cityFiltered);
-    // console.log("site data", data);
   }, [diveTrips, city]);
+
+  useEffect(() => {
+    const today = new Date();
+    const nextMonth = new Date(today.setMonth(today.getMonth() + 5));
+    if (!diveTrips) return null;
+    const dateFiltered = diveTrips
+      .filter((trip) => trip.startDate !== null)
+      .filter(
+        (trip) =>
+          new Date(trip.startDate).getTime() >=
+            new Date(dateRange ? dateRange[0] : today).getTime() &&
+          new Date(trip.startDate).getTime() <=
+            new Date(dateRange ? dateRange[1] : nextMonth).getTime()
+      );
+    setFiltered(dateFiltered);
+  }, [diveTrips, dateRange]);
 
   return (
     <>
@@ -58,22 +82,31 @@ export default function DiveTrips(props) {
           ],
         }}
       />
-      {/* <motion.div display="grid" displayTemplateColumns="repeat(autoFit, minmax(250px, 1fr)" gridColumnGap="1rem" gridRowGap="2rem"> */}
-      <Destinations cities={cities} pt="80px" />
       <MapBase
         diveSites={diveSites}
         diveCentres={diveCentres}
         h={{ sm: "calc(100vh - 110px)", md: "50vh" }}
-        pt={{ sm: "40px", lg: "60px" }}
+        pt={{ sm: "50px", lg: "100px" }}
         gridArea="1 / 1 / 1 / 1"
         scrollZoom
       />
-      <TripSearchBar city={city} setCity={setCity} mt="80px" />
+      <TripSearchBar
+        city={city}
+        setCity={setCity}
+        // startDate={startDate}
+        // endDate={endDate}
+        // setStartDate={setStartDate}
+        // setEndDate={setEndDate}
+        viewButtons
+        mt="40px"
+        mb="20px"
+      />
       <ChakraBox layout>
         <AnimatePresence>
           <Upcoming diveTrips={filtered} bookable />
         </AnimatePresence>
       </ChakraBox>
+      <Destinations cities={cities} pt="20px" />
     </>
   );
 }

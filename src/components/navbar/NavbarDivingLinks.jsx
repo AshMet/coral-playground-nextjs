@@ -161,7 +161,7 @@ export default function NavbarDivingLinks(props) {
       <Box me="10px">
         <DarkModeMenuItem />
       </Box>
-      <Box me="10px">
+      <Box>
         <AvatarMenuItem />
       </Box>
     </Flex>

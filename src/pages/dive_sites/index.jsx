@@ -57,18 +57,12 @@ export default function DiveSites({ diveSites }) {
           ],
         }}
       />
-      {/* <CitySelectionField
-        city={city}
-        country={country}
-        setCity={setCity}
-        setCountry={setCountry}
-        pt={{ base: "180px", md: "80px", xl: "80px" }}
-      /> */}
       <TripSearchBar
         city={city}
         country={country}
         setCity={setCity}
         setCountry={setCountry}
+        viewButtons
         mt={{ base: "180px", md: "80px", xl: "100px" }}
       />
       <Text
@@ -96,9 +90,10 @@ export default function DiveSites({ diveSites }) {
                         image={site.dive_map || "/img/diving/dive_site_bg.jpg"}
                         name={site.name}
                         tagList={site.tags}
-                        min_depth={site.min_depth}
-                        max_depth={site.max_depth}
-                        max_visibility={site.max_visibility}
+                        minDepth={site.min_depth}
+                        maxDepth={site.max_depth}
+                        minVisibility={site.max_visibility}
+                        maxVisibility={site.max_visibility}
                         minCurrent={site.min_current}
                         maxCurrent={site.max_current}
                         type="diveSite"

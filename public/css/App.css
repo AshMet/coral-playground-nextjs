@@ -675,6 +675,15 @@ body.chakra-ui-dark .react-date-picker__calendar .react-calendar {
   border-radius: 20px;
 }
 
+.react-daterange-picker__range-divider{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+body.chakra-ui-dark .react-calendar--selectRange {
+  background-color: #1a202c;
+}
+
 .react-daterange-picker__calendar .react-calendar{
     box-shadow: none;
 }
@@ -683,9 +692,8 @@ body.chakra-ui-dark .react-daterange-picker__calendar{
     background-color: #1a202c;
 }
 
-/* Not Working */
-body.chakra-ui-dark .react-daterange-picker__clear-button__icon {
-  color: white;
+body.chakra-ui-dark .react-daterange-picker__button svg {
+  stroke: white;
 }
 
 

@@ -20,20 +20,7 @@ export default function Cities({ city }) {
         w="100%"
       >
         <Box
-          w={{
-            sm: "100%",
-            md: "100",
-            lg: "800px",
-            xl: "100%",
-            "2xl": "745px",
-          }}
-          h={{
-            sm: "100%",
-            md: "100%",
-            lg: "200px",
-            xl: "200px",
-            "2xl": "745px",
-          }}
+          w="100%"
           mb="26px"
           align
           mx={{ sm: "auto", lg: "auto", xl: "0px" }}
@@ -53,7 +40,7 @@ export default function Cities({ city }) {
           as="h1"
           fontSize={{ sm: "36", md: "54px" }}
           fontWeight="700"
-          mb="15px"
+          mb="40px"
           lineHeight="100%"
         >
           {city.name}
