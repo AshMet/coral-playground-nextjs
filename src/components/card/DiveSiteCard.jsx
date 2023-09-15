@@ -75,6 +75,7 @@ export default function DiveSiteCard(props) {
           transform: "scale(1.01)",
         }}
         as="a"
+        minW="250px"
         {...rest}
       >
         <Flex direction={{ base: "column" }} justify="center">

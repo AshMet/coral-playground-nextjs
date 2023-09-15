@@ -59,7 +59,7 @@ export default function SearchBar(props) {
           format="dd MMM y"
           minDate={new Date()}
           returnValue="range"
-          rangeDivider="until"
+          rangeDivider="to"
           dayPlaceholder=""
           monthPlaceholder=""
           yearPlaceholder=""

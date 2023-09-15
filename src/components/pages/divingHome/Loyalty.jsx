@@ -30,7 +30,7 @@ export default function Footer() {
         bg="linear-gradient(180deg, #FC466B 0%, #3F5EFB 100%)"
         w="100%"
         bgPosition="center"
-        h={{ base: "300px", lg: "250px" }}
+        h={{ base: "400px", lg: "250px" }}
         bgSize="cover"
       >
         <Flex

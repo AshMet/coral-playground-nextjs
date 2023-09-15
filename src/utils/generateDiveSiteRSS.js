@@ -5,7 +5,7 @@ import fs from "fs";
 export default async function generateRssFeed(dive_sites) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
   const activeSites = dive_sites?.filter((site) => {
-    return site.description !== null && site.dive_map !== null && site.id !== 1;
+    return site.description !== null && site.diveMap !== null && site.id !== 1;
   });
 
   const feedOptions = {
@@ -27,12 +27,12 @@ export default async function generateRssFeed(dive_sites) {
 
   activeSites?.forEach((site) => {
     feed.addItem({
-      title: `${site.name} Dive Site near ${site.city.name}, Egypt`,
+      title: `${site.name} Dive Site near ${site.cityName}, Egypt`,
       description: site.description,
       id: `${siteUrl}/dive_sites/${site.slug}`,
       link: `${siteUrl}/dive_sites/${site.slug}`,
       // image: site.dive_map,
-      date: site.updated_at ? new Date(site.updated_at) : new Date(2023, 1, 19),
+      date: site.updatedAt ? new Date(site.updatedAt) : new Date(),
     });
   });
 

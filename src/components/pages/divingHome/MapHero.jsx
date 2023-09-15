@@ -39,7 +39,7 @@ export default function MapHero(props) {
       overflow="hidden"
       bgSize="cover"
       position="relative"
-      h="100vh"
+      h={{ sm: "75vh", lg: "100vh" }}
     >
       <MapBase
         diveSites={diveSites}

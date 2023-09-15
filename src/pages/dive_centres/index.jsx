@@ -9,12 +9,13 @@ import { chakra, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // import { SearchBar } from "views/admin/nfts/profile/components/Search";
 import { supabase } from "../api/index";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import TripSearchBar from "components/fields/TripSearchBar";
+import { TripSearchContext } from "contexts/TripSearchContext";
 import DivingLayout from "layouts/DivingLayout";
 
 // const Moralis = require("moralis/node");
@@ -24,21 +25,15 @@ const ChakraBox = chakra(motion.div, {
 });
 
 export default function DiveSites({ diveCentres }) {
+  const { filterByCity } = useContext(TripSearchContext);
   const [city, setCity] = useState(0);
   const [filtered, setFiltered] = useState();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
 
   useEffect(() => {
-    if (!diveCentres) return null;
-    if (city === 0 || city === "All Cities") {
-      setFiltered(diveCentres);
-      return;
-    }
-    // console.log("centres", diveCentres);
-    const cityFiltered = diveCentres.filter((centre) => centre.city === city);
+    const cityFiltered = filterByCity(diveCentres, city);
     setFiltered(cityFiltered);
-    // console.log("centres", diveCentres);
   }, [diveCentres, city]);
 
   return (
@@ -65,7 +60,7 @@ export default function DiveSites({ diveCentres }) {
         city={city}
         setCity={setCity}
         viewButtons
-        mt={{ base: "180px", md: "80px", xl: "100px" }}
+        mt={{ base: "80px", xl: "100px" }}
       />
       <Text
         mt="25px"

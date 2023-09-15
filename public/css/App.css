@@ -676,8 +676,8 @@ body.chakra-ui-dark .react-date-picker__calendar .react-calendar {
 }
 
 .react-daterange-picker__range-divider{
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 body.chakra-ui-dark .react-calendar--selectRange {

@@ -3,19 +3,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 
-import { useRouter } from "next/router";
 import { createContext, useState, useEffect, useMemo } from "react";
 
 export const TripSearchContext = createContext();
 
 export const TripSearchProvider = ({ children }) => {
-  const router = useRouter();
-
   const today = new Date();
-  const nextMonth = new Date(today.setMonth(today.getMonth() + 5));
-  const [dateRange, onChange] = useState(
-    router.query.length > 0 ? router.query : [new Date(), nextMonth]
-  );
+  const nextMonth = new Date(today.setMonth(today.getMonth() + 3));
+  const [dateRange, onChange] = useState([new Date(), nextMonth]);
 
   const setDateRange = useMemo(() => {
     return (newDate) => {
@@ -27,6 +22,40 @@ export const TripSearchProvider = ({ children }) => {
         : null;
     };
   }, []);
+
+  const filterByDateRange = useMemo(() => {
+    return (trips, range) => {
+      const start = new Date();
+      const end = new Date(today.setMonth(today.getMonth() + 3));
+      if (!trips) return null;
+
+      return trips
+        .filter((trip) => trip?.startDate !== null)
+        .filter(
+          (trip) =>
+            new Date(trip?.startDate).getTime() >=
+              new Date(dateRange ? range[0] : start).getTime() &&
+            new Date(trip?.startDate).getTime() <=
+              new Date(dateRange ? range[1] : end).getTime()
+        );
+    };
+  });
+
+  const filterByCity = useMemo(() => {
+    return (trips, city) => {
+      if (!trips) return null;
+      if (city === 0 || city === "All Cities") {
+        return trips;
+      }
+      if (trips[0].diveCentreCity) {
+        return trips.filter((trip) => trip.diveCentreCity === city);
+      }
+      if (trips[0].city.name) {
+        return trips.filter((trip) => trip.city.name === city);
+      }
+      return trips.filter((trip) => trip.city === city);
+    };
+  });
 
   // Local Storage: setting & getting data
   useEffect(() => {
@@ -51,6 +80,8 @@ export const TripSearchProvider = ({ children }) => {
       // setCity,
       dateRange,
       setDateRange,
+      filterByDateRange,
+      filterByCity,
     }),
     [dateRange, setDateRange]
   );

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable consistent-return */
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable import/no-cycle */
@@ -23,42 +24,19 @@ const ChakraBox = chakra(motion.div, {
 
 export default function DiveTrips(props) {
   const { diveSites, diveCentres, diveTrips, cities } = props;
-  const { dateRange } = useContext(TripSearchContext);
-  const [city, setCity] = useState(0);
+  const { dateRange, filterByDateRange, filterByCity } =
+    useContext(TripSearchContext);
 
-  // const [startDate, setStartDate] = useState(router.query.startDate || today);
-  // const [endDate, setEndDate] = useState(router.query.endDate || nextMonth);
+  const [city, setCity] = useState(0);
   const [filtered, setFiltered] = useState();
 
-  // console.log("router", router.query.endDate);
-  // console.log("startDate", startDate);
-  // console.log("endDate", endDate);
-
   useEffect(() => {
-    if (!diveTrips) return null;
-    if (city === 0 || city === "All Cities") {
-      setFiltered(diveTrips);
-      return;
-    }
-    const cityFiltered = diveTrips.filter(
-      (trip) => trip.diveCentreCity === city
-    );
+    const cityFiltered = filterByCity(diveTrips, city);
     setFiltered(cityFiltered);
   }, [diveTrips, city]);
 
   useEffect(() => {
-    const today = new Date();
-    const nextMonth = new Date(today.setMonth(today.getMonth() + 5));
-    if (!diveTrips) return null;
-    const dateFiltered = diveTrips
-      .filter((trip) => trip.startDate !== null)
-      .filter(
-        (trip) =>
-          new Date(trip.startDate).getTime() >=
-            new Date(dateRange ? dateRange[0] : today).getTime() &&
-          new Date(trip.startDate).getTime() <=
-            new Date(dateRange ? dateRange[1] : nextMonth).getTime()
-      );
+    const dateFiltered = filterByDateRange(diveTrips, dateRange);
     setFiltered(dateFiltered);
   }, [diveTrips, dateRange]);
 
@@ -93,10 +71,6 @@ export default function DiveTrips(props) {
       <TripSearchBar
         city={city}
         setCity={setCity}
-        // startDate={startDate}
-        // endDate={endDate}
-        // setStartDate={setStartDate}
-        // setEndDate={setEndDate}
         viewButtons
         mt="40px"
         mb="20px"

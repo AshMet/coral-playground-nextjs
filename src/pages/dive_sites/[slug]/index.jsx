@@ -25,7 +25,7 @@ export default function DiveSitePage({ diveSite }) {
   const router = useRouter();
   const { slug } = router.query;
 
-  // console.log("siteData", diveSite);
+  console.log("siteData", diveSite);
   useEffect(() => {
     posthog.capture("$pageview", {
       "Dive Site": diveSite.name,
@@ -40,20 +40,20 @@ export default function DiveSitePage({ diveSite }) {
       .select(
         `
           id, slug,
-          dive_trips: trip_sites!dive_site_id(
-            dive_trip: dive_trip_id (id, name, description, notes, min_cert, active, price, deposit,
-              stripe_price_id, start_date, start_time, check_in, 
-              dive_sites: trip_sites!dive_trip_id(
-                dive_site:dive_site_id(id, name, latitude, longitude)),
-              dive_centre: dive_centres (id, name, latitude, longitude))
+          diveTrips: trip_sites!dive_site_id(
+            diveTrip: dive_trip_id (id, name, description, notes, minCert: min_cert, active, price, deposit,
+              stripePriceId: stripe_price_id, startDate: start_date, startTime: start_time, checkIn: check_in, 
+              diveSites: trip_sites!dive_trip_id(
+                diveSite:dive_site_id(id, name, latitude, longitude)),
+              diveCentre: dive_centres (id, name, latitude, longitude))
             )
           )
         `
       )
       .eq("slug", slug)
       .single();
-    // console.log("siteTripData", data);
-    setTrips(data.dive_trips);
+    console.log("siteTripData", data);
+    setTrips(data?.diveTrips || []);
     setLoading(false);
   }
 
@@ -61,6 +61,8 @@ export default function DiveSitePage({ diveSite }) {
     fetchSiteTrips();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log("site_trips", trips);
 
   return (
     <>
@@ -75,7 +77,7 @@ export default function DiveSitePage({ diveSite }) {
           url: `https://www.coralplayground.com/dive_sites/${diveSite.slug}`,
           images: [
             {
-              url: diveSite.dive_map,
+              url: diveSite.diveMap,
               width: 1200,
               height: 630,
               alt: `Dive Site Cover Photo - ${diveSite.name}`,
@@ -99,7 +101,7 @@ export default function DiveSitePage({ diveSite }) {
               <Card
                 bgSize="100% 100%"
                 minH={{ base: "200px", md: "100%" }}
-                bgImage={diveSite.dive_map || "/img/diving/dive_site_bg.jpg"}
+                bgImage={diveSite.diveMap || "/img/diving/dive_site_bg.jpg"}
               >
                 <Button
                   variant="no-hover"
@@ -121,14 +123,14 @@ export default function DiveSitePage({ diveSite }) {
               description={diveSite.description}
               city={diveSite.city.name}
               country={diveSite.country.countries.name}
-              minDepth={diveSite.min_depth}
-              maxDepth={diveSite.max_depth}
-              minVisibility={diveSite.min_visibility}
-              maxVisibility={diveSite.max_visibility}
-              minCurrent={diveSite.min_current}
-              maxCurrent={diveSite.max_current}
+              minDepth={diveSite.minDepth}
+              maxDepth={diveSite.maxDepth}
+              minVisibility={diveSite.minVisibility}
+              maxVisibility={diveSite.maxVisibility}
+              minCurrent={diveSite.minCurrent}
+              maxCurrent={diveSite.maxCurrent}
               access={diveSite.access}
-              cert_level={diveSite.cert_level}
+              cert_level={diveSite.certLevel}
               diveTypes={diveSite.tags}
               species={diveSite.species}
             />
@@ -150,7 +152,7 @@ export default function DiveSitePage({ diveSite }) {
           {trips && (
             <Box gridArea="1 / 2 / 2 / 3">
               <TripsSidebar
-                trips={trips}
+                trips={trips.map((trip) => trip.diveTrip)}
                 diveSite={diveSite}
                 loading={loading}
               />
@@ -185,12 +187,12 @@ export const getStaticProps = async ({ params: { slug } }) => {
   const { data: diveSite } = await supabase
     .from("dive_sites")
     .select(
-      `id, slug, name, description, latitude, longitude, min_visibility, max_visibility,
-        min_depth, max_depth, min_current, max_current, cert_level, tags, access, dive_map, 
+      `id, slug, name, description, latitude, longitude, minVisibility: min_visibility, maxVisibility: max_visibility,
+        minDepth: min_depth, maxDepth: max_depth, minCurrent: min_current, maxCurrent: max_current, certLevel: cert_level, tags, access, diveMap: dive_map, 
         city: cities (name),
         country: cities (countries (name)),
         species: site_species!dive_site_id (
-          specie: species_id (id, name, cover_photo))`
+          specie: species_id (id, name, coverPhoto: cover_photo))`
     )
     .match({ slug })
     .single();
@@ -199,7 +201,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
     props: {
       diveSite,
     },
-    revalidate: 86400,
+    revalidate: 60,
   };
 };
 

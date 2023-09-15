@@ -41,7 +41,7 @@ export default function TripsMap(props) {
     <Card
       bg={bg}
       height="200px"
-      maxW={{ base: "400px" }}
+      // maxW={{ base: "400px" }}
       mb="10px"
       mx={0}
       p={0}
@@ -78,12 +78,12 @@ export default function TripsMap(props) {
         {/* Show all dive sites with trips from given diveCentre */}
         {diveCentre &&
           trips?.map((trip) =>
-            trip.dive_sites.map((site) => (
+            trip.diveSites.map((site) => (
               <Marker
                 key={`${trip.id}-${site.id}`}
                 position={{
-                  lat: site.dive_site.latitude,
-                  lng: site.dive_site.longitude,
+                  lat: site.diveSite.latitude,
+                  lng: site.diveSite.longitude,
                 }}
                 // onClick={() => setMapLocation(location)}
                 icon={{
@@ -98,10 +98,10 @@ export default function TripsMap(props) {
         {diveSite &&
           trips?.map((trip) => (
             <Marker
-              key={trip.dive_trip.dive_centre.id}
+              key={trip.id}
               position={{
-                lat: trip.dive_trip.dive_centre.latitude,
-                lng: trip.dive_trip.dive_centre.longitude,
+                lat: trip.diveCentre.latitude,
+                lng: trip.diveCentre.longitude,
               }}
               icon={{
                 url: "/img/diving/dive_centre_marker.svg",

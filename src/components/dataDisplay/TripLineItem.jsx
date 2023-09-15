@@ -33,9 +33,9 @@ export default function TripLineItem(props) {
   const [value, onChange] = useState();
 
   const siteNames =
-    trip.name || trip.dive_sites?.map((site) => site.name).join(" + ");
-  const diveDate = trip.start_date;
-  const diveTime = trip.start_time;
+    trip.name || trip.diveSites?.map((site) => site.name).join(" + ");
+  const diveDate = trip.startDate;
+  const diveTime = trip.startTime;
   const selectedDate = diveDate ? new Date(diveDate) : new Date(value);
 
   // function setDateTime() {
@@ -59,8 +59,8 @@ export default function TripLineItem(props) {
 
   // console.log("value", value);
   // console.log("selectedDate", selectedDate);
-
   // console.log("TripLineItem trip", trip);
+
   return (
     <Flex justifyContent="center" alignItems="center" w="100%" {...rest}>
       <Flex direction="column" align="start" me="auto" w="100%">
@@ -76,7 +76,7 @@ export default function TripLineItem(props) {
         <Flex align="center">
           <Icon me="8px" as={IoStorefrontOutline} w="16px" h="16px" />
           <Text color={textColor} fontSize="md" me="6px" fontWeight="500">
-            {trip.dive_centre.name}
+            {trip?.diveCentre?.name}
           </Text>
         </Flex>
 
@@ -146,12 +146,12 @@ export default function TripLineItem(props) {
                 id: trip.id,
                 title: siteNames,
                 itemType: "diveTrip",
-                centreName: trip.dive_centre.name,
+                centreName: trip.diveCentre.name,
                 // diveDate: diveDate ? new Date(diveDate) : new Date(value),
                 diveDate: combineDateAndTime(selectedDate, diveTime),
                 diveTime,
                 price: trip.price,
-                priceId: trip.stripe_price_id,
+                priceId: trip.stripePriceId,
                 deposit: trip.deposit,
               })
             }

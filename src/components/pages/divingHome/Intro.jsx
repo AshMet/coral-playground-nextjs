@@ -25,7 +25,7 @@ export default function CallToActionWithAnnotation() {
             direction="column"
             mx="auto"
             mb="40px"
-            mt="80px"
+            mt={{ sm: "20px", lg: "80px" }}
             maxW={{ base: "100%", md: "100%", lg: "80%", xl: "70%" }}
             textAlign="center"
           >

@@ -6,7 +6,7 @@ import Card from "components/card/Card";
 import TripLineItem from "components/dataDisplay/TripLineItem";
 
 export default function RegularTrips(props) {
-  const { trips, diveSite } = props;
+  const { trips } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
   return (
     <Card mt={5}>
@@ -22,7 +22,7 @@ export default function RegularTrips(props) {
             align="center"
           >
             <TripLineItem
-              trip={diveSite ? trip.dive_trip : trip}
+              trip={trip}
               icon={
                 <Icon as={MdAddCircle} color={textColor} w="20px" h="18px" />
               }

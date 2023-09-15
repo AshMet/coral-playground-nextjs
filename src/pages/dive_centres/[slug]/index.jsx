@@ -15,27 +15,27 @@ import CentreInfo from "components/pages/diveCentre/CentreInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
 import DivingLayout from "layouts/DivingLayout";
 
-export default function DiveCentre({ diveCentreData }) {
+export default function DiveCentre({ diveCentre }) {
   const router = useRouter();
   const { slug } = router.query;
   const posthog = usePostHog();
 
   const [trips, setTrips] = useState([]);
-  const [diveCentre, setDiveCentre] = useState(true);
+  // const [diveCentre, setDiveCentre] = useState(true);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     posthog.capture("$pageview", {
-      "Dive Centre": diveCentreData.name,
-      City: diveCentreData.city,
-      Country: diveCentreData.country,
+      "Dive Centre": diveCentre.name,
+      City: diveCentre.city,
+      Country: diveCentre.country,
     });
   }, []);
 
-  useEffect(() => {
-    setDiveCentre(diveCentreData);
-    // console.log("diveCentre", diveCentreData);
-  }, [diveCentreData]);
+  // useEffect(() => {
+  //   setDiveCentre(diveCentreData);
+  //   // console.log("diveCentre", diveCentreData);
+  // }, [diveCentreData]);
 
   async function fetchCentreTrips() {
     const { data } = await supabase
@@ -43,19 +43,19 @@ export default function DiveCentre({ diveCentreData }) {
       .select(
         `
           id, slug,
-          dive_trips:dive_trips(id, name, description, notes, min_cert, active, price, deposit,
-            stripe_price_id, start_date, start_time, check_in,
-            dive_sites:trip_sites!dive_trip_id(
-              dive_site:dive_site_id(id, name, latitude, longitude)),
-            dive_centre: dive_centres(id, name, latitude, longitude)
+          diveTrips:dive_trips(id, name, description, notes, minCert: min_cert, active, price, deposit,
+            stripePriceId: stripe_price_id, startDate: start_date, startTime: start_time, checkIn: check_in,
+            diveSites:trip_sites!dive_trip_id(
+              diveSite:dive_site_id(id, name, latitude, longitude)),
+            diveCentre: dive_centres(id, name, latitude, longitude)
           )
         `
       )
       .eq("slug", slug)
       .single();
-    setTrips(data?.dive_trips || []);
+    setTrips(data?.diveTrips || []);
     setLoading(false);
-    // console.log("centreTripData", data);
+    console.log("centreTripData", data);
   }
 
   useEffect(() => {
@@ -154,7 +154,7 @@ export default function DiveCentre({ diveCentreData }) {
 
 export async function getServerSideProps(context) {
   const { slug } = context.query;
-  const { data: diveCentreData } = await supabase
+  const { data: diveCentre } = await supabase
     .from("dive_centres_view")
     .select(
       `id, name, description, address, latitude, longitude, paymentMethods, equipment, services, languages, memberships,
@@ -166,7 +166,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      diveCentreData,
+      diveCentre,
     },
   };
 }

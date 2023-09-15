@@ -36,6 +36,7 @@ import Map, {
 import Card from "components/card/Card";
 
 import "mapbox-gl/dist/mapbox-gl.css";
+
 import MapMarker from "./MapMarker";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -92,6 +93,12 @@ export default function MapBase(props) {
             pitch: 65,
             zoom: 12,
             scrollZoom: false,
+            // touchZoom: false,
+            doubleClickZoom: true,
+            // dragPan: false,
+            // dragRotate: false,
+            // touchRotate: false,
+            // keyboard: false,
           }}
           {...settings}
           style={{ borderRadius: "20px", width: "100%", height: "100%" }}
@@ -133,6 +140,14 @@ export default function MapBase(props) {
           {/* <Source type="geojson" data={logojson}>
             <Layer {...layerStyle} />
           </Source> */}
+          {/* <TripSearchBar
+            // city={city}
+            // setCity={setCity}
+            title
+            searchButton
+            mt="calc(100vh - 200px)"
+            mb="20px"
+          /> */}
         </Map>
       </Card>
     </Flex>

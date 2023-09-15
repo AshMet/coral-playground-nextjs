@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-cycle */
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable consistent-return */
@@ -7,11 +8,12 @@ import { chakra, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { supabase } from "../api/index";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import TripSearchBar from "components/fields/TripSearchBar";
+import { TripSearchContext } from "contexts/TripSearchContext";
 import DivingLayout from "layouts/DivingLayout";
 import generateDiveSiteRSS from "utils/generateDiveSiteRSS";
 
@@ -20,22 +22,16 @@ const ChakraBox = chakra(motion.div, {
 });
 
 export default function DiveSites({ diveSites }) {
+  const { filterByCity } = useContext(TripSearchContext);
   const textColor = useColorModeValue("secondaryGray.900", "white");
 
-  const [country, setCountry] = useState();
   const [city, setCity] = useState(0);
   const [filtered, setFiltered] = useState();
 
   useEffect(() => {
-    if (!diveSites) return null;
-    if (city === 0 || city === "All Cities") {
-      setFiltered(diveSites);
-      return;
-    }
-    const cityFiltered = diveSites.filter((site) => site.city.name === city);
+    const cityFiltered = filterByCity(diveSites, city);
     setFiltered(cityFiltered);
-    // console.log("site data", data);
-  }, [diveSites, city, country]);
+  }, [diveSites, city]);
 
   return (
     <>
@@ -59,11 +55,10 @@ export default function DiveSites({ diveSites }) {
       />
       <TripSearchBar
         city={city}
-        country={country}
         setCity={setCity}
-        setCountry={setCountry}
+        cityFilter
         viewButtons
-        mt={{ base: "180px", md: "80px", xl: "100px" }}
+        mt={{ base: "80px", xl: "100px" }}
       />
       <Text
         mt="25px"
@@ -87,15 +82,15 @@ export default function DiveSites({ diveSites }) {
                       <DiveSiteCard
                         key={site.id}
                         id={site.id}
-                        image={site.dive_map || "/img/diving/dive_site_bg.jpg"}
+                        image={site.diveMap || "/img/diving/dive_site_bg.jpg"}
                         name={site.name}
                         tagList={site.tags}
-                        minDepth={site.min_depth}
-                        maxDepth={site.max_depth}
-                        minVisibility={site.max_visibility}
-                        maxVisibility={site.max_visibility}
-                        minCurrent={site.min_current}
-                        maxCurrent={site.max_current}
+                        minDepth={site.minDepth}
+                        maxDepth={site.maxDepth}
+                        minVisibility={site.maxVisibility}
+                        maxVisibility={site.maxVisibility}
+                        minCurrent={site.minCurrent}
+                        maxCurrent={site.maxCurrent}
                         type="diveSite"
                         // address={`${site.city}, ${site.country}`}
                       />
@@ -112,10 +107,10 @@ export default function DiveSites({ diveSites }) {
 
 export async function getStaticProps() {
   const { data: diveSites } = await supabase
-    .from("dive_sites")
+    .from("dive_sites_view")
     .select(
-      ` id, slug, name, description, latitude, longitude, min_visibility, max_visibility, min_depth, max_depth,
-        min_current, max_current, cert_level, tags, access, dive_map, updated_at, city: cities (name)`
+      ` id, slug, name, description, latitude, longitude, minVisibility, maxVisibility, minDepth, maxDepth,
+        minCurrent, maxCurrent, certLevel, tags, access, diveMap, cityName`
     )
     .order("name", { ascending: true });
   await generateDiveSiteRSS(diveSites);

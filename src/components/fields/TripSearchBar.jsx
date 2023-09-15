@@ -20,7 +20,8 @@ import DateRangeField from "components/fields/DateRangeField";
 // import SearchBar from "components/navbar/searchBar/SearchBar";
 
 export default function TripSearchBar(props) {
-  const { city, setCity, searchButton, viewButtons, ...rest } = props;
+  const { city, setCity, cityFilter, searchButton, viewButtons, ...rest } =
+    props;
 
   const menuBg = useColorModeValue("purple.600", "purple.400");
   // const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -39,10 +40,10 @@ export default function TripSearchBar(props) {
   );
 
   return (
-    <Flex mx="20px">
+    <Flex mx={{ sm: "10px" }}>
       <Spacer />
       <Flex
-        w={{ sm: "100%", md: "80%" }}
+        w={{ sm: "100%", lg: "80%" }}
         alignItems="center"
         flexDirection={{ sm: "column", md: "row" }}
         bg={menuBg}
@@ -50,6 +51,7 @@ export default function TripSearchBar(props) {
         p="10px"
         borderRadius="30px"
         boxShadow={shadow}
+        zIndex={100}
         {...rest}
       >
         {/* <SearchBar
@@ -57,19 +59,20 @@ export default function TripSearchBar(props) {
         me="10px"
         borderRadius="30px"
       /> */}
-        <CityField
-          city={city}
-          setCity={setCity}
-          ml={{ sm: "10px", md: "0px" }}
-          mb={{ sm: "10px", md: "unset" }}
-          me="10px"
-          borderRadius="30px"
-          w={{ sm: "100%", md: "400px" }}
-        />
+        {cityFilter && (
+          <CityField
+            city={city}
+            setCity={setCity}
+            ml={{ sm: "10px", md: "0px" }}
+            mb={{ sm: "10px", md: "unset" }}
+            me="10px"
+            borderRadius="30px"
+            w={{ sm: "100%", md: "400px" }}
+          />
+        )}
         <DateRangeField
           ml={{ sm: "10px", md: "0px" }}
           mb={{ sm: "10px", md: "unset" }}
-          me="10px"
           borderRadius="30px"
           w={{ sm: "100%" }}
         />
@@ -79,6 +82,7 @@ export default function TripSearchBar(props) {
             <Flex direction="row">
               <Button
                 variant="brand"
+                ml="10px"
                 me="10px"
                 borderRadius="30px"
                 _hover={hoverButton}
