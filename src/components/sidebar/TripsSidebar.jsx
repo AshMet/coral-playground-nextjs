@@ -48,7 +48,9 @@ export default function TripSidebar({ trips, diveSite, diveCentre, ...rest }) {
           the <Icon as={MdAddCircle} color="brand.400" w="16px" h="16px" />{" "}
           button
         </Text>
-        <TripsMap trips={trips} diveSite={diveSite} diveCentre={diveCentre} />
+        {(trips || diveSite.latitude || diveCentre.latitude) && (
+          <TripsMap trips={trips} diveSite={diveSite} diveCentre={diveCentre} />
+        )}
         <TripSearchBar mb="20" w="100%" mt="20px" mx="0px" />
         {filtered?.length > 0 ? (
           filtered?.map((trip) => (

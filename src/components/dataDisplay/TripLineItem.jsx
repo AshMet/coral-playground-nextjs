@@ -100,10 +100,10 @@ export default function TripLineItem(props) {
                   minDate={new Date()}
                   clearIcon={null}
                   calendarIcon={null}
-                  tileDisabled={({ date, view }) =>
-                    (view === "month" && date.getDay() === 0) ||
-                    date.getDay() === 6
-                  }
+                  // tileDisabled={({ date, view }) =>
+                  //   (view === "month" && date.getDay() === 0) ||
+                  //   date.getDay() === 6
+                  // }
                 />
               </Flex>
             </Tooltip>

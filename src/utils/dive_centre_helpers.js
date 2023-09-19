@@ -39,7 +39,7 @@ export const getCalendarDives = (diveTrips) => {
           // byweekday: ["mo", "fr"],
           dtstart: combineDateAndTime(trip.start_date, trip.start_time, 0), // will also accept '20120201T103000'
           // until: "2023-11-08", // will also accept '20120201'
-          tileDisabled: () => new Date(2023, 10, 10),
+          // tileDisabled: () => new Date(2023, 10, 10),
         },
       }))
     : [];

@@ -1,35 +1,41 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
 import { Flex } from "@chakra-ui/react";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
+import { NextSeo } from "next-seo";
 
 import Card from "components/card/Card";
-import SearchTableDiveSites from "components/pages/diveSiteAdmin/SearchTableDiveSites";
+import SearchTableDiveCentres from "components/pages/admin/dive_centres/SearchTableDiveCentres";
 import DivingLayout from "layouts/DivingLayout";
 
-const columnsDataSites = [
+const columnsDataCentres = [
   {
-    Header: "MAP",
-    accessor: "dive_map",
+    Header: "COVER",
+    accessor: "coverPhotoUrl",
+  },
+  {
+    Header: "ID",
+    accessor: "id",
   },
   {
     Header: "NAME",
     accessor: "name",
   },
   {
-    Header: "MIN_VIS",
-    accessor: "min_visibility",
+    Header: "DESC",
+    accessor: "description",
   },
   {
-    Header: "MAX_VIS",
-    accessor: "max_visibility",
+    Header: "ADDRESS",
+    accessor: "address",
   },
   {
-    Header: "DEPTH",
-    accessor: "max_depth",
+    Header: "PAYMENT",
+    accessor: "paymentMethods",
   },
   {
-    Header: "CURRENT",
-    accessor: "max_current",
+    Header: "EQUIPMENT",
+    accessor: "equipment",
   },
   {
     Header: "LAT",
@@ -40,12 +46,28 @@ const columnsDataSites = [
     accessor: "longitude",
   },
   {
-    Header: "ACCESS",
-    accessor: "access",
+    Header: "MEMBERSHIPS",
+    accessor: "memberships",
   },
   {
-    Header: "TAGS",
-    accessor: "tags",
+    Header: "LANGUAGES",
+    accessor: "languages",
+  },
+  {
+    Header: "SERVICES",
+    accessor: "services",
+  },
+  {
+    Header: "CITY",
+    accessor: "city",
+  },
+  {
+    Header: "CITY_ID",
+    accessor: "cityId",
+  },
+  {
+    Header: "ACTIVE",
+    accessor: "active",
   },
   {
     Header: "SITE_ACTIONS",
@@ -53,16 +75,19 @@ const columnsDataSites = [
   },
 ];
 
-export default function SitesList({ diveSites }) {
+export default function CentresList({ diveCentres }) {
   return (
-    <Flex direction="column" pt={{ sm: "125px", lg: "75px" }}>
-      <Card px="0px">
-        <SearchTableDiveSites
-          tableData={diveSites}
-          columnsData={columnsDataSites}
-        />
-      </Card>
-    </Flex>
+    <>
+      <NextSeo noindex nofollow />
+      <Flex direction="column" pt={{ sm: "125px", lg: "75px" }}>
+        <Card px="0px">
+          <SearchTableDiveCentres
+            tableData={diveCentres}
+            columnsData={columnsDataCentres}
+          />
+        </Card>
+      </Flex>
+    </>
   );
 }
 
@@ -74,12 +99,9 @@ export const getServerSideProps = async (ctx) => {
     data: { session },
   } = await supabase.auth.getSession();
 
-  const { data: diveSites } = await supabase
-    .from("dive_sites")
-    .select(
-      ` id, name, description, latitude, longitude, min_visibility, max_visibility, min_depth, max_depth,
-        min_current, max_current, cert_level, tags, access, dive_map, updated_at, city: cities (name)`
-    )
+  const { data: diveCentres } = await supabase
+    .from("dive_centres_view")
+    .select("*")
     .order("name", { ascending: true });
 
   // const { data: superAdmin } = await supabase.rpc("is_claims_admin", {});
@@ -92,7 +114,7 @@ export const getServerSideProps = async (ctx) => {
   if (userRole === "ADMIN") {
     return {
       props: {
-        diveSites,
+        diveCentres,
         session,
         user: session.user,
         centreData: [],
@@ -108,6 +130,6 @@ export const getServerSideProps = async (ctx) => {
   };
 };
 
-SitesList.getLayout = function getLayout(page) {
+CentresList.getLayout = function getLayout(page) {
   return <DivingLayout>{page}</DivingLayout>;
 };

@@ -343,7 +343,7 @@ export default function Login() {
                       Keep me logged in
                     </FormLabel>
                   </FormControl>
-                  <NavLink to="/auth/forgot-password">
+                  <NavLink to="/auth/forgot_password">
                     <Text
                       color={textColorBrand}
                       fontSize="sm"

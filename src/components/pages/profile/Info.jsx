@@ -13,6 +13,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/router";
 
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
@@ -24,6 +25,7 @@ export default function Info(props) {
   const textColorSecondary = "secondaryGray.600";
   const supabase = useSupabaseClient();
   const user = useUser();
+  const router = useRouter();
 
   const handleProfileChange = (e) => {
     setProfile({
@@ -152,7 +154,10 @@ export default function Info(props) {
           fontWeight="500"
           ms="auto"
           _hover={{ bgColor: "brand.100" }}
-          onClick={() => supabase.auth.signOut()}
+          onClick={() => {
+            supabase.auth.signOut();
+            router.push("/");
+          }}
         >
           Sign Out
         </Button>

@@ -51,7 +51,6 @@ export default function TripSearchBar(props) {
         p="10px"
         borderRadius="30px"
         boxShadow={shadow}
-        zIndex={100}
         {...rest}
       >
         {/* <SearchBar
@@ -75,14 +74,14 @@ export default function TripSearchBar(props) {
           mb={{ sm: "10px", md: "unset" }}
           borderRadius="30px"
           w={{ sm: "100%" }}
+          mr={{ sm: "10px", md: "0px" }}
         />
         <Spacer />
-        <Flex direction="row">
+        <Flex direction="row" ml="10px">
           {viewButtons && (
             <Flex direction="row">
               <Button
                 variant="brand"
-                ml="10px"
                 me="10px"
                 borderRadius="30px"
                 _hover={hoverButton}

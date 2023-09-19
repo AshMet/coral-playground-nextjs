@@ -204,7 +204,10 @@ function SignedInMenuList() {
           >
             <Button
               // isLoading={isAuthenticating}
-              onClick={() => supabase.auth.signOut()}
+              onClick={() => {
+                supabase.auth.signOut();
+                router.push("/");
+              }}
               variant="link"
               color="brand.100"
               size="sm"

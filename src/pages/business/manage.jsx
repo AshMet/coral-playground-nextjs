@@ -66,10 +66,11 @@ export const getServerSideProps = async (ctx) => {
       coverPhotoUrl, city, country, slug, ownerId, active`
     )
     .eq("ownerId", userId)
+    .limit(1)
     .single();
 
   console.log("userId: ", userId);
-  console.log("dive_centre: ", diveCentre);
+  console.log("dive_centre: ", diveCentre[0]);
 
   // debugger;
 
