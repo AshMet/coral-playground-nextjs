@@ -13,8 +13,8 @@ import {
   useToast,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useRouter } from "next/router";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { NextSeo } from "next-seo";
 import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
@@ -35,8 +35,6 @@ export default function Login() {
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const supabase = useSupabaseClient();
-  const user = useUser();
-  const router = useRouter();
   const toast = useToast();
   const posthog = usePostHog();
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
@@ -178,62 +176,70 @@ export default function Login() {
     // router.push(`/dive_centres.id}`);
   };
 
-  if (user) {
-    router.push("/users/me");
-  } else
-    return (
-      <>
-        <NextSeo
-          title="Login"
-          description="Login Page"
-          canonical="https://www.coralplayground.com/auth/login"
-          openGraph={{
-            type: "website",
-            title: "Coral Playground | Login",
-            description: "Dive Centres Login Page",
-            url: "https://www.coralplayground.com/auth/login",
-            images: [
-              {
-                url: "https://www.coralplayground.com/svg/coral-logo.svg",
-                width: 800,
-                height: 400,
-                alt: "Coral Playground Logo",
-              },
-            ],
-          }}
-        />
-        <LoginLayout
-          illustrationBackground="/img/diving/3-clownfish.jpg"
-          image="/img/diving/3-clownfish.jpg"
+  return (
+    <>
+      <NextSeo
+        title="Login"
+        description="Login Page"
+        canonical="https://www.coralplayground.com/auth/login"
+        openGraph={{
+          type: "website",
+          title: "Coral Playground | Login",
+          description: "Dive Centres Login Page",
+          url: "https://www.coralplayground.com/auth/login",
+          images: [
+            {
+              url: "https://www.coralplayground.com/svg/coral-logo.svg",
+              width: 800,
+              height: 400,
+              alt: "Coral Playground Logo",
+            },
+          ],
+        }}
+      />
+      <LoginLayout
+        illustrationBackground="/img/diving/3-clownfish.jpg"
+        image="/img/diving/3-clownfish.jpg"
+      >
+        <Flex
+          maxW={{ base: "100%", md: "max-content" }}
+          w="100%"
+          mx={{ base: "auto", lg: "0px" }}
+          me="auto"
+          h="100%"
+          alignItems="start"
+          justifyContent="center"
+          mb={{ base: "30px", md: "60px" }}
+          px={{ base: "25px", md: "0px" }}
+          mt={{ base: "40px", md: "7vh" }}
+          flexDirection="column"
         >
-          <Flex
-            maxW={{ base: "100%", md: "max-content" }}
-            w="100%"
-            mx={{ base: "auto", lg: "0px" }}
-            me="auto"
-            h="100%"
-            alignItems="start"
-            justifyContent="center"
-            mb={{ base: "30px", md: "60px" }}
-            px={{ base: "25px", md: "0px" }}
-            mt={{ base: "40px", md: "7vh" }}
-            flexDirection="column"
-          >
-            <Box me="auto">
-              <Heading color={textColor} fontSize="36px" mb="10px">
-                Sign In
-              </Heading>
-              <Text
-                mb="36px"
-                ms="4px"
-                color={textColorSecondary}
-                fontWeight="400"
-                fontSize="md"
-              >
-                Select your preferred method below:
-              </Text>
-            </Box>
+          <Box me="auto">
+            <Heading color={textColor} fontSize="36px" mb="10px">
+              Sign In
+            </Heading>
+            <Text
+              mb="36px"
+              ms="4px"
+              color={textColorSecondary}
+              fontWeight="400"
+              fontSize="md"
+            >
+              Select your preferred method below:
+            </Text>
+          </Box>
 
+          <Flex
+            zIndex="2"
+            direction="column"
+            w={{ base: "100%", md: "420px" }}
+            maxW="100%"
+            background="transparent"
+            borderRadius="15px"
+            mx={{ base: "auto", lg: "unset" }}
+            me="auto"
+            mb={{ base: "20px", md: "auto" }}
+          >
             <Flex
               zIndex="2"
               direction="column"
@@ -245,156 +251,157 @@ export default function Login() {
               me="auto"
               mb={{ base: "20px", md: "auto" }}
             >
-              <Flex
-                zIndex="2"
-                direction="column"
-                w={{ base: "100%", md: "420px" }}
-                maxW="100%"
-                background="transparent"
-                borderRadius="15px"
-                mx={{ base: "auto", lg: "unset" }}
-                me="auto"
-                mb={{ base: "20px", md: "auto" }}
-              >
-                {userData.role !== "business" && (
-                  <>
-                    <Button
-                      fontSize="sm"
-                      me="0px"
-                      mb="26px"
-                      py="15px"
-                      h="50px"
-                      borderRadius="16px"
-                      bg={googleBg}
-                      color={googleText}
-                      fontWeight="500"
-                      _hover={googleHover}
-                      _active={googleActive}
-                      _focus={googleActive}
-                      onClick={loginGoogle}
-                      disabled={loading}
-                    >
-                      <Icon as={FcGoogle} w="20px" h="20px" me="10px" />
-                      Sign in with Google
-                    </Button>
-                    <Flex align="center" mb="25px">
-                      <HSeparator />
-                      <Text color={textColorSecondary} mx="14px">
-                        or
-                      </Text>
-                      <HSeparator />
-                    </Flex>
-                  </>
-                )}
-                <InputField
-                  name="email"
-                  label="Email"
-                  value={email}
-                  placeholder="Email"
-                  onChange={handleChange}
-                  isError={email === ""}
-                  errorMessage="Email cannot be empty"
-                  isRequired
-                />
-                <InputGroup size="md">
-                  <InputField
-                    name="password"
-                    value={password}
-                    label="Password"
-                    isRequired
-                    variant="auth"
+              {userData.role !== "business" && (
+                <>
+                  <Button
                     fontSize="sm"
-                    ms={{ base: "0px", md: "4px" }}
-                    placeholder="Min. 8 characters"
-                    mb="24px"
-                    size="lg"
-                    type={show ? "text" : "password"}
-                    isError={password === ""}
-                    errorMessage="Password cannot be empty"
-                    onChange={handleChange}
-                  />
-                  <InputRightElement
-                    display="flex"
-                    alignItems="center"
-                    mt="30px"
+                    me="0px"
+                    mb="26px"
+                    py="15px"
+                    h="50px"
+                    borderRadius="16px"
+                    bg={googleBg}
+                    color={googleText}
+                    fontWeight="500"
+                    _hover={googleHover}
+                    _active={googleActive}
+                    _focus={googleActive}
+                    onClick={loginGoogle}
+                    disabled={loading}
                   >
-                    <Icon
-                      color={textColorSecondary}
-                      _hover={{ cursor: "pointer" }}
-                      as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                      onClick={togglePassVis}
-                    />
-                  </InputRightElement>
-                </InputGroup>
-                <Flex justifyContent="space-between" align="center" mb="24px">
-                  <FormControl display="flex" alignItems="center">
-                    <Checkbox
-                      id="remember-login"
-                      colorScheme="brandScheme"
-                      me="10px"
-                    />
-                    <FormLabel
-                      htmlFor="remember-login"
-                      mb="0"
-                      fontWeight="normal"
-                      color={textColor}
-                      fontSize="sm"
-                    >
-                      Keep me logged in
-                    </FormLabel>
-                  </FormControl>
-                  <NavLink to="/auth/forgot_password">
+                    <Icon as={FcGoogle} w="20px" h="20px" me="10px" />
+                    Sign in with Google
+                  </Button>
+                  <Flex align="center" mb="25px">
+                    <HSeparator />
+                    <Text color={textColorSecondary} mx="14px">
+                      or
+                    </Text>
+                    <HSeparator />
+                  </Flex>
+                </>
+              )}
+              <InputField
+                name="email"
+                label="Email"
+                value={email}
+                placeholder="Email"
+                onChange={handleChange}
+                isError={email === ""}
+                errorMessage="Email cannot be empty"
+                isRequired
+              />
+              <InputGroup size="md">
+                <InputField
+                  name="password"
+                  value={password}
+                  label="Password"
+                  isRequired
+                  variant="auth"
+                  fontSize="sm"
+                  ms={{ base: "0px", md: "4px" }}
+                  placeholder="Min. 8 characters"
+                  mb="24px"
+                  size="lg"
+                  type={show ? "text" : "password"}
+                  isError={password === ""}
+                  errorMessage="Password cannot be empty"
+                  onChange={handleChange}
+                />
+                <InputRightElement display="flex" alignItems="center" mt="30px">
+                  <Icon
+                    color={textColorSecondary}
+                    _hover={{ cursor: "pointer" }}
+                    as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                    onClick={togglePassVis}
+                  />
+                </InputRightElement>
+              </InputGroup>
+              <Flex justifyContent="space-between" align="center" mb="24px">
+                <FormControl display="flex" alignItems="center">
+                  <Checkbox
+                    id="remember-login"
+                    colorScheme="brandScheme"
+                    me="10px"
+                  />
+                  <FormLabel
+                    htmlFor="remember-login"
+                    mb="0"
+                    fontWeight="normal"
+                    color={textColor}
+                    fontSize="sm"
+                  >
+                    Keep me logged in
+                  </FormLabel>
+                </FormControl>
+                <NavLink to="/auth/forgot_password">
+                  <Text
+                    color={textColorBrand}
+                    fontSize="sm"
+                    w="124px"
+                    fontWeight="500"
+                  >
+                    Forgot password?
+                  </Text>
+                </NavLink>
+              </Flex>
+              <Button
+                variant="brand"
+                fontSize="14px"
+                fontWeight="500"
+                w="100%"
+                h="50"
+                mb="24px"
+                onClick={signInEmailPass}
+                disabled={loading}
+              >
+                Sign In
+              </Button>
+              <Flex
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="start"
+                maxW="100%"
+                mt="0px"
+              >
+                <Text color={textColorDetails} fontWeight="400" fontSize="14px">
+                  Not registered yet?
+                  <NavLink to="/auth/signup">
                     <Text
                       color={textColorBrand}
-                      fontSize="sm"
-                      w="124px"
+                      as="span"
+                      ms="5px"
                       fontWeight="500"
                     >
-                      Forgot password?
+                      Create an Account
                     </Text>
                   </NavLink>
-                </Flex>
-                <Button
-                  variant="brand"
-                  fontSize="14px"
-                  fontWeight="500"
-                  w="100%"
-                  h="50"
-                  mb="24px"
-                  onClick={signInEmailPass}
-                  disabled={loading}
-                >
-                  Sign In
-                </Button>
-                <Flex
-                  flexDirection="column"
-                  justifyContent="center"
-                  alignItems="start"
-                  maxW="100%"
-                  mt="0px"
-                >
-                  <Text
-                    color={textColorDetails}
-                    fontWeight="400"
-                    fontSize="14px"
-                  >
-                    Not registered yet?
-                    <NavLink to="/auth/signup">
-                      <Text
-                        color={textColorBrand}
-                        as="span"
-                        ms="5px"
-                        fontWeight="500"
-                      >
-                        Create an Account
-                      </Text>
-                    </NavLink>
-                  </Text>
-                </Flex>
+                </Text>
               </Flex>
             </Flex>
           </Flex>
-        </LoginLayout>
-      </>
-    );
+        </Flex>
+      </LoginLayout>
+    </>
+  );
 }
+
+export const getServerSideProps = async (ctx) => {
+  // Create authenticated Supabase Client
+  const supabase = createPagesServerClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  // console.log("session:", session);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/users/me",
+        permanent: false,
+      },
+    };
+  }
+  return {};
+};
