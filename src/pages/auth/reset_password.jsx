@@ -19,7 +19,7 @@ import AlertPopup from "components/alerts/AlertPopup";
 import LoginLayout from "layouts/LoginLayout";
 // import * as gtag from "lib/data/gtag";
 
-export default function Login() {
+export default function ResetPassword() {
   // Chakra color mode
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
@@ -30,8 +30,8 @@ export default function Login() {
   const posthog = usePostHog();
 
   const [loading, setLoading] = useState(false);
-  const [userData, setUserData] = useState({ email: "" });
-  const { email } = userData;
+  const [userData, setUserData] = useState({ password: "" });
+  const { password } = userData;
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -39,52 +39,29 @@ export default function Login() {
 
   const resetPass = async () => {
     setLoading(true);
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/reset_password`,
+    await supabase.auth.updateUser({ password: userData });
+    // Success Alert
+    toast({
+      position: "top",
+      render: () => (
+        <AlertPopup
+          type="success"
+          text="Password Reset Complete"
+          subtext="Your new password is now active"
+        />
+      ),
     });
-    // Alert & Analytics for failed load
-    if (error) {
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup
-            type="danger"
-            text="Unable to Reset Password"
-            subtext={error.message}
-          />
-        ),
-      });
-      // gtag.event({
-      //   action: "pass-reset-error",
-      //   category: "button",
-      //   label: "User",
-      //   // value: newItem.title,
-      // });
-      posthog.capture("Password Reset Failed");
-    } else {
-      // Success Alert
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup
-            type="success"
-            text="Password Reset Successful"
-            subtext="Please check your email to complete"
-          />
-        ),
-      });
-      // Success Analytics Tag
-      // gtag.event({
-      //   action: "pass-reset-success",
-      //   category: "button",
-      //   label: "User",
-      //   // value: newItem.title,
-      // });
-      posthog.capture("Password Reset");
-    }
+    // Success Analytics Tag
+    // gtag.event({
+    //   action: "pass-reset-success",
+    //   category: "button",
+    //   label: "User",
+    //   // value: newItem.title,
+    // });
+    posthog.capture("Password Reset Complete");
 
     setLoading(false);
-    // router.push(`/dive_centres/${data.id}`);
+    router.push("/users/me");
   };
 
   if (user) {
@@ -114,7 +91,7 @@ export default function Login() {
               fontSize={{ base: "3xl", md: "36px" }}
               mb="16px"
             >
-              Forgot your password?
+              Reset your password
             </Heading>
             <Text
               color={textColorSecondary}
@@ -122,9 +99,7 @@ export default function Login() {
               w={{ base: "100%", lg: "456px" }}
               maxW="100%"
             >
-              No problem. Just let us know your email address and we&apos;ll
-              email you a password reset link that will allow you to choose a
-              new one.
+              Enter your new password below to reset it.
             </Text>
           </Box>
 
@@ -159,16 +134,16 @@ export default function Login() {
                   color={textColor}
                   mb="8px"
                 >
-                  Email
+                  New Password
                 </FormLabel>
                 <Input
-                  name="email"
-                  value={email}
+                  name="password"
+                  value={password}
                   isRequired
                   variant="auth"
                   fontSize="sm"
-                  type="email"
-                  placeholder="user@email.com"
+                  type="text"
+                  placeholder="*********"
                   mb="24px"
                   size="lg"
                   onChange={handleChange}
@@ -184,7 +159,7 @@ export default function Login() {
                 onClick={resetPass}
                 disabled={loading}
               >
-                Email password reset link
+                Save new password
               </Button>
             </Flex>
           </Flex>
