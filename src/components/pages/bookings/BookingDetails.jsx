@@ -24,7 +24,7 @@ export default function BookingDetails(props) {
   const {
     courseId,
     courseName,
-    diveDate,
+    startDate,
     diveTime,
     price,
     priceId,
@@ -115,7 +115,7 @@ export default function BookingDetails(props) {
                 </Text>
                 <Spacer />
                 <Text>
-                  {diveDate?.toLocaleDateString("en-US", {
+                  {startDate?.toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -146,7 +146,7 @@ export default function BookingDetails(props) {
                   title: courseName,
                   itemType: "certification",
                   centreName,
-                  diveDate,
+                  startDate,
                   diveTime,
                   price,
                   priceId,

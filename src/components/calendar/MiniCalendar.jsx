@@ -24,8 +24,8 @@ import Card from "components/card/Card";
 export default function MiniCalendar(props) {
   const {
     selectRange,
-    diveDate,
-    setDiveDate,
+    startDate,
+    setStartDate,
     setDiveTime,
     diveTime,
     diveCount,
@@ -58,21 +58,21 @@ export default function MiniCalendar(props) {
         <Flex direction="column">
           <Tabs variant="line" colorScheme="purple" isFitted>
             <TabList>
-              <Tab>Daily Dives</Tab>
-              <Tab>One-Time Dives</Tab>
+              <Tab>Generic Dives</Tab>
+              <Tab>Calendar Dives</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
                 <Text mt="30px" mb="20px" maxW="450px">
-                  If no date is selected, your customers will be able to select
-                  their preferred date. Just select your usual departure time
-                  below:
+                  Use this option to create a generic dive package that a
+                  customer can book at any time. The customer will be able to
+                  select a date and time for the dive.
                 </Text>
               </TabPanel>
               <TabPanel>
                 <FormLabel
                   ms="10px"
-                  htmlFor="diveDate"
+                  htmlFor="startDate"
                   fontSize="sm"
                   color={textColor}
                   fontWeight="bold"
@@ -81,8 +81,8 @@ export default function MiniCalendar(props) {
                   Dive Date
                 </FormLabel>
                 <Calendar
-                  onChange={setDiveDate}
-                  value={diveDate}
+                  onChange={setStartDate}
+                  value={startDate}
                   selectRange={selectRange}
                   view="month"
                   tileContent={<Text color="brand.500" />}

@@ -94,7 +94,7 @@ export default function Info(props) {
       <Flex direction="column" mb="40px">
         <FormLabel
           ms="10px"
-          htmlFor="checkIn"
+          htmlFor="divingCert"
           fontSize="sm"
           fontWeight="bold"
           _placeholder={{ color: "secondaryGray.600" }}

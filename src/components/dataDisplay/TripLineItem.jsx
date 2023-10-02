@@ -1,12 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 // Chakra imports
 import {
+  Badge,
+  Box,
   Button,
   Flex,
   Icon,
   Text,
   Tooltip,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 // Custom components
 import { useContext, useState } from "react";
@@ -17,53 +21,54 @@ import { IoStorefrontOutline } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
 
 import { CartContext } from "contexts/CartContext";
-import "../../../public/css/MiniCalendar.module.css";
-// import "react-calendar/dist/Calendar.css";
-// import "react-datetime-picker/dist/DateTimePicker.css";
-// import "react-clock/dist/Clock.css";
+import { combineDateAndTime } from "utils/dive_centre_helpers";
+
+import TimeTile from "./TimeTile";
 
 export default function TripLineItem(props) {
-  const { trip, icon, ...rest } = props;
+  const { trip, tripRules, type, icon, ...rest } = props;
+  const { id, name, price, stripePriceId, deposit, startTime, diveCentre } =
+    trip || {};
   const { addToCart } = useContext(CartContext);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   // const bgHover = useColorModeValue("brand.100", "brand.100");
   // const bgFocus = useColorModeValue("brand.200", "brand.200");
 
-  const [value, onChange] = useState();
+  const [selectedDate, onChange] = useState();
+  const { isOpen, onToggle } = useDisclosure();
 
   const siteNames =
-    trip.name || trip.diveSites?.map((site) => site.name).join(" + ");
-  const diveDate = trip.startDate;
-  const diveTime = trip.startTime;
-  const selectedDate = diveDate ? new Date(diveDate) : new Date(value);
+    name || trip.diveSites?.map((site) => site.name).join(" + ");
 
-  // function setDateTime() {
-  //   const newDate = c;
-  //   diveTime
-  //     ? newDate.setHours(diveTime.split(":")[0], diveTime.split(":")[1])
-  //     : newDate.setHours(0, 0);
-  //   return newDate.toLocaleString("en-US", { timeZone: "Africa/Cairo" });
-  // }
+  const getTileColor = ({ date, view }) =>
+    view === "month" &&
+    tripRules
+      ?.map((item) => new Date(item).toISOString().split("T")[0])
+      .includes(new Date(date).toISOString().split("T")[0])
+      ? "trip-calendar-selectable"
+      : "trip-calendar-nonselectable";
 
-  function combineDateAndTime(date, time) {
-    const year = date.getFullYear();
-    const month = date.getMonth(); // Jan is 0, dec is 11
-    const day = date.getDate();
-    const hours = time.split(":")[0];
-    const minutes = time.split(":")[1];
-    return new Date(year, month, day, hours, minutes, 0);
-    // const dateString = `${year}-${month}-${day}`;
-    // return new Date(`${dateString} ${time}`);
-  }
+  const getDisabledTiles = ({ date }) =>
+    !tripRules
+      ?.map((item) => new Date(item).toISOString().split("T")[0])
+      .includes(new Date(date).toISOString().split("T")[0]);
 
-  // console.log("value", value);
   // console.log("selectedDate", selectedDate);
-  // console.log("TripLineItem trip", trip);
+  // console.log("selectedDate", selectedDate);
+  // console.log("SiteTripLineItem trip", trip);
 
   return (
     <Flex justifyContent="center" alignItems="center" w="100%" {...rest}>
-      <Flex direction="column" align="start" me="auto" w="100%">
+      <Box onClick={onToggle}>
+        <TimeTile
+          date={new Date(selectedDate)}
+          time={startTime}
+          color="white"
+          bg="purple.400"
+        />
+      </Box>
+      <Flex direction="column" align="start" me="auto" w="100%" ml="10px">
         <Flex direction="row" align="stretch" me="auto">
           <Flex align="center">
             <Icon me="8px" as={HiOutlineLocationMarker} w="16px" h="16px" />
@@ -76,45 +81,35 @@ export default function TripLineItem(props) {
         <Flex align="center">
           <Icon me="8px" as={IoStorefrontOutline} w="16px" h="16px" />
           <Text color={textColor} fontSize="md" me="6px" fontWeight="500">
-            {trip?.diveCentre?.name}
+            {type === "diveSite" && trip?.diveCentre?.name}
+            <Badge colorScheme="purple" size="sm" padding={1}>
+              {tripRules?.length} Trips
+            </Badge>
           </Text>
         </Flex>
 
         <Flex align="center">
           <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
-          {diveDate ? (
-            <Text color={textColor} fontSize="sm" fontWeight="500">
-              {new Date(diveDate).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
-            </Text>
-          ) : (
-            <Tooltip label="Select Date before adding to cart">
-              <Flex align="center">
-                <DatePicker
-                  onChange={onChange}
-                  value={value}
-                  format="dd MMM y"
-                  minDate={new Date()}
-                  clearIcon={null}
-                  calendarIcon={null}
-                  // tileDisabled={({ date, view }) =>
-                  //   (view === "month" && date.getDay() === 0) ||
-                  //   date.getDay() === 6
-                  // }
-                />
-              </Flex>
-            </Tooltip>
-          )}
+          <Flex align="center">
+            <DatePicker
+              onChange={onChange}
+              value={selectedDate}
+              // format="dd MMM y"
+              minDate={new Date()}
+              clearIcon={null}
+              calendarIcon={null}
+              tileClassName={getTileColor}
+              tileDisabled={getDisabledTiles}
+              isOpen={isOpen}
+            />
+          </Flex>
           <Text
             ml="5px"
             color={textColor}
             fontSize="md"
             me="6px"
             fontWeight="500"
-          >{`@ ${diveTime?.split(":")[0]}:${diveTime?.split(":")[1]}`}</Text>
+          >{`@ ${startTime?.split(":")[0]}:${startTime?.split(":")[1]}`}</Text>
         </Flex>
       </Flex>
 
@@ -135,7 +130,8 @@ export default function TripLineItem(props) {
           <Button
             align="center"
             justifyContent="center"
-            bg="brand.100"
+            // bg="brand.100"
+            colorScheme="brand"
             w="37px"
             h="37px"
             mt="10px"
@@ -143,16 +139,15 @@ export default function TripLineItem(props) {
             borderRadius="10px"
             onClick={() =>
               addToCart({
-                id: trip.id,
-                title: siteNames,
+                id,
+                title: name,
                 itemType: "diveTrip",
-                centreName: trip.diveCentre.name,
-                // diveDate: diveDate ? new Date(diveDate) : new Date(value),
-                diveDate: combineDateAndTime(selectedDate, diveTime),
-                diveTime,
-                price: trip.price,
-                priceId: trip.stripePriceId,
-                deposit: trip.deposit,
+                centreName: diveCentre.name,
+                startDate: combineDateAndTime(selectedDate, startTime),
+                diveTime: startTime,
+                price,
+                priceId: stripePriceId,
+                deposit,
               })
             }
             {...rest}

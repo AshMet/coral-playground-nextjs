@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import AlertPopup from "components/alerts/AlertPopup";
 // import MiniCalendar from "components/calendar/MiniCalendar";
 import DiveSelection from "components/pages/bookings/DiveSelection";
+// import Scheduling from "components/pages/diveTrips/Scheduling";
 import Scheduling from "components/pages/diveTrips/Scheduling";
 import Summary from "components/pages/diveTrips/Summary";
 import TripDetails from "components/pages/diveTrips/TripDetails";
@@ -18,20 +19,63 @@ import DivingLayout from "layouts/DivingLayout";
 
 export default function CreateCentreTrip() {
   const [selectedSites, setSelectedSites] = useState([]);
-  const [price, setPrice] = useState();
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
-  const [checkIn, setCheckIn] = useState("1_hour");
-  const [duration, setDuration] = useState();
-  const [minCert, setMinCert] = useState("open_water");
-  const [active, setActive] = useState(true);
-  const [diveTime, setDiveTime] = useState("07:00");
-  const [diveDate, setDiveDate] = useState();
-  const [diveCount, setDiveCount] = useState(1);
+  const [tripType, setTripType] = useState("generic");
+  // const [price, setPrice] = useState();
+  // const [name, setName] = useState();
+  // const [description, setDescription] = useState();
+  // const [checkIn, setCheckIn] = useState("1_hour");
+  // const [durationUnit, setDurationUnit] = useState("hours");
+  // const [durationAmt, setDurationAmt] = useState(8);
+  // const [minCert, setMinCert] = useState("open_water");
+  // const [active, setActive] = useState(true);
+  // const [diveTime, setDiveTime] = useState("07:00");
+  // const [diveDate, setDiveDate] = useState();
+  // const [diveCount, setDiveCount] = useState(1);
   const [deposit, setDeposit] = useState();
   const toast = useToast();
   const posthog = usePostHog();
   const supabase = useSupabaseClient();
+  const today = new Date();
+  const nextMonth = new Date(today.setMonth(today.getMonth() + 3));
+
+  const initialState = {
+    name: "",
+    description: "",
+    startDate: new Date(),
+    startTime: "07:00",
+    frequency: "Daily",
+    diveCount: 1,
+    // eslint-disable-next-line prettier/prettier
+    duration: {"hours": 8},
+    timezone: "Africa/Cairo",
+    recurEndDate: nextMonth,
+    checkinDuration: 60,
+    recurDays: [],
+    price: 0,
+    minCert: "open_water",
+    active: false,
+    generic: true,
+  };
+
+  const [diveTrip, setDiveTrip] = useState(initialState);
+
+  const {
+    name,
+    diveCount,
+    description,
+    active,
+    duration,
+    startDate,
+    startTime,
+    minCert,
+    price,
+    frequency,
+    timezone,
+    recurDays,
+    recurEndDate,
+    checkin,
+    generic,
+  } = diveTrip || {};
 
   const getStripePriceId = (n) => {
     switch (n) {
@@ -90,17 +134,22 @@ export default function CreateCentreTrip() {
         {
           name,
           description,
-          check_in: checkIn,
-          start_date: diveDate,
-          start_time: diveTime,
+          start_date: startDate,
+          start_time: startTime,
           duration,
           min_cert: minCert,
           active,
           price,
           dive_count: diveCount,
+          frequency,
           stripe_price_id: getStripePriceId(diveCount),
           deposit: getDeposit(diveCount),
           dive_centre_id: diveCentre.id,
+          timezone,
+          recur_days: recurDays,
+          recur_end_date: recurEndDate,
+          checkin,
+          generic,
         },
       ])
       .select("*")
@@ -124,21 +173,23 @@ export default function CreateCentreTrip() {
 
     if (diveTripError) {
       // console.log("new trip error", diveTripError);
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup
-            type="error"
-            text="Unable to save Dive Trip"
-            subtext={diveTripError}
-          />
-        ),
-      });
+      // toast({
+      //   position: "top",
+      //   render: () => (
+      //     <AlertPopup
+      //       type="error"
+      //       text="Unable to save Dive Trip"
+      //       subtext={diveTripError}
+      //     />
+      //   ),
+      // });
       posthog.capture("Dive Trip Creation Failed", {
         "Dive Centre": diveCentre?.name,
         Error: diveTripError.message,
       });
-    } else if (data) {
+    }
+    // else
+    if (data) {
       toast({
         position: "top",
         render: () => (
@@ -163,9 +214,31 @@ export default function CreateCentreTrip() {
     }
   }
 
+  // console.log("diveTrip", diveTrip);
+
   useEffect(() => {
     setDeposit(getDeposit(diveCount));
   }, [diveCount]);
+
+  useEffect(() => {
+    const noSitesName = `${diveCount} Dive Package`;
+    const sitesName = selectedSites?.map((site) => site.name).join(" + ");
+    if (tripType === "site-specific") {
+      setDiveTrip({
+        ...diveTrip,
+        name:
+          selectedSites.length <= diveCount - 1 && selectedSites.length > 0
+            ? `${sitesName} (${diveCount} dives)`
+            : sitesName,
+      });
+    } else {
+      setDiveTrip({ ...diveTrip, name: noSitesName });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSites, diveCount, tripType]);
+
+  // console.log("generic", tripType);
+  // console.log("diveTrip", diveTrip);
 
   return (
     <Box p="0px" mx="auto" mt="100px" maxW="100%">
@@ -178,22 +251,13 @@ export default function CreateCentreTrip() {
         <Box>
           {/* Row 1: Map */}
           <DiveSelection
-            setName={setName}
+            diveTrip={diveTrip}
+            setDiveTrip={setDiveTrip}
             selectedSites={selectedSites}
             setSelectedSites={setSelectedSites}
-            setDiveDate={setDiveDate}
-            diveCount={diveCount}
           />
           {/* Row 2: Calendar */}
-          <Scheduling
-            selectRange={false}
-            diveDate={diveDate}
-            setDiveDate={setDiveDate}
-            setDiveTime={setDiveTime}
-            diveTime={diveTime}
-            diveCount={diveCount}
-            setDiveCount={setDiveCount}
-          />
+          <Scheduling diveTrip={diveTrip} setDiveTrip={setDiveTrip} />
           {/* <MiniCalendar
             selectRange={false}
             diveDate={diveDate}
@@ -207,30 +271,16 @@ export default function CreateCentreTrip() {
           {/* Row 3: Trip form */}
           <TripDetails
             mb="20px"
-            name={name}
-            price={price}
-            minCert={minCert}
-            description={description}
-            checkIn={checkIn}
-            duration={duration}
-            active={active}
-            setActive={setActive}
-            setPrice={setPrice}
-            setMinCert={setMinCert}
-            setDescription={setDescription}
-            setCheckIn={setCheckIn}
-            setDuration={setDuration}
+            diveTrip={diveTrip}
+            setDiveTrip={setDiveTrip}
+            selectedSites={selectedSites}
+            setSelectedSites={setSelectedSites}
+            tripType={tripType}
+            setTripType={setTripType}
           />
         </Box>
         <Flex direction="column" mt={{ sm: "20px", md: "0px" }}>
-          <Summary
-            name={name}
-            diveDate={diveDate}
-            diveTime={diveTime}
-            duration={duration}
-            price={price}
-            deposit={deposit}
-          />
+          <Summary diveTrip={diveTrip} deposit={deposit} />
           <Button
             // isLoading={tripDives.length === 0}
             // isDisabled={tripDives.length === 0}
@@ -245,7 +295,7 @@ export default function CreateCentreTrip() {
             ms="auto"
             onClick={saveDiveTrip}
           >
-            Add Dive Trip
+            Create Dive Trip
           </Button>
         </Flex>
       </Grid>

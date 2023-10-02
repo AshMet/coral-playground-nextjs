@@ -147,8 +147,8 @@ export default function TripRow({
                   title: trip.name,
                   itemType: "diveTrip",
                   centreName: trip.diveCentreName,
-                  // diveDate: diveDate ? new Date(diveDate) : new Date(value),
-                  diveDate: combineDateAndTime(
+                  // diveDate: diveDate ? new Date(startDate) : new Date(value),
+                  startDate: combineDateAndTime(
                     new Date(trip.startDate),
                     trip.startTime
                   ),

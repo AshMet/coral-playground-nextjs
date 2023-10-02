@@ -7,6 +7,7 @@ import rrulePlugin from "@fullcalendar/rrule";
 
 function EventCalendar(props) {
   const { initialDate, calendarDives } = props;
+  // console.log("calendarDives", calendarDives);
 
   return (
     <FullCalendar
@@ -23,7 +24,7 @@ function EventCalendar(props) {
       initialDate={initialDate}
       editable
       minHeight="400px"
-      height="100%"
+      height="600px"
       slotWidth={10}
       customIcons={false}
     />

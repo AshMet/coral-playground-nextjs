@@ -35,7 +35,7 @@ export default function EquipmentSelection(props) {
     title: item.name,
     itemType: "equipment",
     centreName: "",
-    diveDate: "",
+    startDate: "",
     diveTime: "",
     price: item.price,
     priceId: item.stripe_price_id,

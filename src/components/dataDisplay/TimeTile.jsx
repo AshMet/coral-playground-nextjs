@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable react/prop-types */
 import { Flex, Stack, Text } from "@chakra-ui/react";
 
@@ -14,22 +15,36 @@ export default function TimeTile({ date, time, tileSize, ...rest }) {
         borderRadius="15px"
         bg="purple.400"
         color="black"
+        p={2}
         {...rest}
       >
         <Text
-          mb="2px"
+          // mb="2px"
           fontWeight="500"
           fontSize={tileSize === "sm" ? "sm" : "md"}
         >
-          {date.toLocaleDateString("en-US", {
-            day: "numeric",
-            month: "short",
-          })}
+          {!isNaN(date)
+            ? date.toLocaleDateString("en-US", {
+                month: "short",
+              })
+            : ""}
         </Text>
         <Text
           lineHeight="100%"
-          fontSize={tileSize === "sm" ? "15px" : "25px"}
+          fontSize={isNaN(date) || tileSize === "sm" ? "sm" : "md"}
           fontWeight="700"
+          align="center"
+        >
+          {!isNaN(date)
+            ? date.toLocaleDateString("en-US", {
+                day: "numeric",
+              })
+            : "Select Date"}
+        </Text>
+        <Text
+          // mb="2px"
+          fontWeight="500"
+          fontSize={tileSize === "sm" ? "sm" : "md"}
         >
           {time?.split(":")[0]}:{time?.split(":")[1]}
         </Text>

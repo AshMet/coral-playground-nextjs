@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable react/prop-types */
 import { Flex } from "@chakra-ui/react";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";

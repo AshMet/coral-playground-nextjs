@@ -50,7 +50,7 @@ export default function SummaryTable({ lineItems }) {
                       <TripSummary
                         title={item.title}
                         centreName={item.centreName}
-                        diveDate={item.diveDate}
+                        startDate={item.startDate}
                       />
                     </Td>
                     <Td>1</Td>

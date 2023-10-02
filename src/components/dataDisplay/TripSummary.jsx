@@ -7,13 +7,12 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoMdTime } from "react-icons/io";
 import { IoStorefrontOutline } from "react-icons/io5";
 
-import "../../../public/css/MiniCalendar.module.css";
 // import "react-calendar/dist/Calendar.css";
 // import "react-datetime-picker/dist/DateTimePicker.css";
 // import "react-clock/dist/Clock.css";
 
 export default function TripSummary(props) {
-  const { title, centreName, diveDate } = props; // , diveTime
+  const { title, centreName, startDate } = props; // , diveTime
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
 
@@ -43,17 +42,17 @@ export default function TripSummary(props) {
             </Text>
           </Flex>
         )}
-        {diveDate && (
+        {startDate && (
           <Flex align="center">
             <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
             <Text color="secondaryGray.600" fontSize="sm" fontWeight="500">
-              {new Date(diveDate).toLocaleDateString("en-US", {
+              {new Date(startDate).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "short",
                 day: "numeric",
               })}
               {" @ "}
-              {new Date(diveDate).toLocaleTimeString("en-US", {
+              {new Date(startDate).toLocaleTimeString("en-US", {
                 hour: "2-digit",
                 minute: "2-digit",
               })}

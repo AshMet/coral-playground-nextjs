@@ -96,8 +96,9 @@ export const getServerSideProps = async (ctx) => {
   const { data: diveTrips } = await supabase
     .from("dive_trips")
     .select(
-      `id, name, description, notes, min_cert, active, price, deposit, stripe_price_id,
-          start_date, start_time, check_in, frequency, recur_count, dur, created_at, updated_at,
+      `id, name, description, min_cert, active, price, deposit, stripe_price_id,
+          start_date, start_time, checkin, frequency, recur_days, recur_end_date,
+          duration, generic, timezone, dive_count, created_at, updated_at,
           dive_sites:trip_sites!dive_trip_id(
             dive_site:dive_site_id(id, name, latitude, longitude))
       `

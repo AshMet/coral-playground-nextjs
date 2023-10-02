@@ -526,7 +526,7 @@ export default function DiveCentreForm(props) {
             <FormLabel
               ms="10px"
               mt={{ md: "30px" }}
-              htmlFor="checkIn"
+              htmlFor="cityId"
               fontSize="sm"
               fontWeight="bold"
               _placeholder={{ color: placeholderColor }}

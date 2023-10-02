@@ -43,8 +43,10 @@ export default function DiveCentre({ diveCentre }) {
       .select(
         `
           id, slug,
-          diveTrips:dive_trips(id, name, description, notes, minCert: min_cert, active, price, deposit,
-            stripePriceId: stripe_price_id, startDate: start_date, startTime: start_time, checkIn: check_in,
+          diveTrips:dive_trips(id, name, description, minCert: min_cert, active,
+            frequency, duration, timezone, price, deposit, generic,
+            recurDays: recur_days, recurEndDate: recur_end_date,
+            stripePriceId: stripe_price_id, startDate: start_date, startTime: start_time, checkin,
             diveSites:trip_sites!dive_trip_id(
               diveSite:dive_site_id(id, name, latitude, longitude)),
             diveCentre: dive_centres(id, name, latitude, longitude)

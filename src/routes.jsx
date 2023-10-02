@@ -13,7 +13,7 @@ const routes = [
   // {
   //   name: "Home",
   //   path: "https://www.coralplayground.com",
-  //   icon: <Icon as={TbScubaMask} width="15px" height="20px" color="inherit" />,
+  //   icon: <Icon as={TbScubaMask} width="20px" height="20px" color="inherit" />,
   //   collapse: false,
   // },
   {
@@ -21,7 +21,7 @@ const routes = [
     layout: "",
     path: "/dive_trips",
     component: DiveTrips,
-    icon: <Icon as={LuShip} width="15px" height="20px" color="inherit" />,
+    icon: <Icon as={LuShip} width="20px" height="20px" color="inherit" />,
     collapse: false,
   },
   {
@@ -30,7 +30,7 @@ const routes = [
     path: "/certifications",
     component: Certifications,
     icon: (
-      <Icon as={TbCertificate} width="15px" height="20px" color="inherit" />
+      <Icon as={TbCertificate} width="20px" height="20px" color="inherit" />
     ),
   },
   {
@@ -38,7 +38,7 @@ const routes = [
     layout: "",
     path: "/dive_sites",
     component: DiveSites,
-    icon: <Icon as={TbScubaMask} width="15px" height="20px" color="inherit" />,
+    icon: <Icon as={TbScubaMask} width="20px" height="20px" color="inherit" />,
   },
   {
     name: "Dive Centres",
@@ -48,7 +48,7 @@ const routes = [
     icon: (
       <Icon
         as={IoStorefrontOutline}
-        width="15px"
+        width="20px"
         height="20px"
         color="inherit"
       />

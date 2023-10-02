@@ -56,7 +56,7 @@ function CartList(props) {
             // id={dive.id}
             title={dive.title}
             subTitle={dive.centreName}
-            startDate={dive.diveDate}
+            startDate={dive.startDate}
             startTime={dive.diveTime}
             // itemType: "diveTrip",
             price={dive.price / 100}

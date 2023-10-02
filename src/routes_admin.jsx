@@ -1,39 +1,57 @@
 /* eslint-disable import/no-cycle */
 import { Icon } from "@chakra-ui/react";
 import { IoStorefrontOutline } from "react-icons/io5";
-import { TbCalendar, TbUser } from "react-icons/tb";
+import { LuShip } from "react-icons/lu";
+import { TbScubaMask, TbSettingsCog } from "react-icons/tb";
 
-import DiveCentre from "pages/business/manage";
-import User from "pages/users/me";
+import DiveCentres from "pages/admin/dive_centres";
+import DiveSites from "pages/admin/dive_sites";
+import DiveTrips from "pages/admin/dive_trips";
 
 const routes = [
   {
-    name: "Business Admin",
-    path: "/users" || "/business/manage",
+    name: "Super Admin",
+    path: "/users",
     icon: (
-      <Icon
-        as={IoStorefrontOutline}
-        width="15px"
-        height="20px"
-        color="inherit"
-      />
+      <Icon as={TbSettingsCog} width="20px" height="20px" color="purple.500" />
     ),
     collapse: true,
     items: [
       {
-        name: "Profile",
+        name: "Dive Sites",
         layout: "",
-        path: "/users/me",
-        component: User,
-        icon: <Icon as={TbUser} width="15px" height="20px" color="inherit" />,
+        path: "/admin/dive_sites",
+        component: DiveSites,
+        icon: (
+          <Icon
+            as={TbScubaMask}
+            width="20px"
+            height="20px"
+            color="purple.500"
+          />
+        ),
       },
       {
-        name: "Manage Dive Centre",
+        name: "Dive Centres",
         layout: "",
-        path: "/business/manage",
-        component: DiveCentre,
+        path: "/admin/dive_centres",
+        component: DiveCentres,
         icon: (
-          <Icon as={TbCalendar} width="15px" height="20px" color="inherit" />
+          <Icon
+            as={IoStorefrontOutline}
+            width="20px"
+            height="20px"
+            color="purple.500"
+          />
+        ),
+      },
+      {
+        name: "Dive Trips",
+        layout: "",
+        path: "/admin/dive_trips",
+        component: DiveTrips,
+        icon: (
+          <Icon as={LuShip} width="20px" height="20px" color="purple.500" />
         ),
       },
     ],

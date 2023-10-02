@@ -47,8 +47,9 @@ function createKey(site) {
 }
 
 export default function DiveSelection(props) {
-  const { setName, selectedSites, setSelectedSites, setDiveDate, diveCount } =
-    props;
+  const { selectedSites, setSelectedSites } = props;
+
+  // const { diveCount } = diveTrip || {};
 
   const [mapLocation, setMapLocation] = useState("Select Location");
   const [diveSites, setDiveSites] = useState();
@@ -73,20 +74,28 @@ export default function DiveSelection(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    const noSitesName = `${diveCount} Dive Package`;
-    const sitesName = selectedSites?.map((site) => site.name).join(" + ");
-    if (selectedSites.length === 0) {
-      setName(noSitesName);
-    } else if (selectedSites.length > 0) {
-      setName(
-        selectedSites.length <= diveCount - 1
-          ? `${sitesName} (${diveCount} dives)`
-          : sitesName
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedSites, diveCount]);
+  // useEffect(() => {
+  //   const noSitesName = `${diveCount} Dive Package`;
+  //   const sitesName = selectedSites?.map((site) => site.name).join(" + ");
+  //   if (selectedSites.length === 0) {
+  //     // setName(noSitesName);
+  //     setDiveTrip({ ...diveTrip, name: noSitesName });
+  //   } else if (selectedSites.length > 0) {
+  //     setDiveTrip({
+  //       ...diveTrip,
+  //       name:
+  //         selectedSites.length <= diveCount - 1
+  //           ? `${sitesName} (${diveCount} dives)`
+  //           : sitesName,
+  //     });
+  //     // setName(
+  //     //   selectedSites.length <= diveCount - 1
+  //     //     ? `${sitesName} (${diveCount} dives)`
+  //     //     : sitesName
+  //     // );
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [selectedSites, diveCount]);
 
   // Add items to cart
   function addSite(newItem) {
@@ -290,7 +299,7 @@ export default function DiveSelection(props) {
             mt={2}
             onClick={() => {
               setSelectedSites([]);
-              setDiveDate();
+              setStartDate();
             }}
           >
             Clear Sites

@@ -328,7 +328,7 @@ export default function Liveaboards({ diveTrips }) {
                     title: selectedTrip.name,
                     itemType: "diveTrip",
                     centreName: selectedTrip.diveCentreName,
-                    // diveDate: diveDate ? new Date(diveDate) : new Date(value),
+                    // diveDate: diveDate ? new Date(startDate) : new Date(value),
                     diveDate: combineDateAndTime(
                       new Date(selectedTrip.startDate),
                       selectedTrip.startTime

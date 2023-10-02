@@ -63,7 +63,7 @@ export default function Courses({ certifications }) {
   const [price, setPrice] = useState();
   const [priceId, setPriceId] = useState();
   const [courseName, setCourseName] = useState();
-  const [diveDate, setDiveDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
   const [diveTime] = useState("07:00:00");
   const [courses, setCourses] = useState();
   const [deposit, setDeposit] = useState();
@@ -293,8 +293,8 @@ export default function Courses({ certifications }) {
               </Text>
             </Flex>
             <Calendar
-              onChange={setDiveDate}
-              value={diveDate}
+              onChange={setStartDate}
+              value={startDate}
               // selectRange={selectRange}
               view="month"
               tileContent={<Text color="brand.500" />}
@@ -316,7 +316,7 @@ export default function Courses({ certifications }) {
               price={price}
               priceId={priceId}
               // setSelectedDate={setSelectedDate}
-              diveDate={diveDate}
+              startDate={startDate}
               diveTime={diveTime}
               deposit={deposit}
               gridArea={{ md: "1 / 2 / 2 / 3", lg: "2 / 1 / 3 / 2" }}

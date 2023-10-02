@@ -23,8 +23,8 @@
 
 // Chakra imports
 import { Flex } from "@chakra-ui/react";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 
-import { supabase } from "../../api/index";
 import Card from "components/card/Card";
 import SearchTableOrders from "components/pages/orders/SearchTableOrders";
 import DivingLayout from "layouts/DivingLayout";
@@ -56,7 +56,7 @@ const columnsDataOrders = [
   },
 ];
 
-export default function OrdersList({ orders }) {
+export default function Orders({ orders }) {
   const tableDataOrders = orders
     // .filter((order) => trip.start_date === null)
     .map((order) => ({
@@ -83,16 +83,45 @@ export default function OrdersList({ orders }) {
   );
 }
 
-export const getServerSideProps = async ({ params: { slug } }) => {
-  const { data: diveCentreId } = await supabase
-    .from("dive_centres")
-    .select("id")
-    .eq("slug", slug);
+export const getServerSideProps = async (ctx) => {
+  // Create authenticated Supabase Client
+  const supabase = createPagesServerClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  const userId = session?.user.id;
+
+  const { data: diveCentre } = await supabase
+    .from("dive_centres_view")
+    .select(`id, name, city, country, slug, ownerId, active`)
+    .eq("ownerId", userId)
+    .limit(1)
+    .single();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+
+  if (diveCentre?.ownerId !== userId || diveCentre?.ownerId === null) {
+    return {
+      props: {
+        session,
+        user: session.user,
+        centreData: [],
+      },
+    };
+  }
 
   const { data: trips } = await supabase
     .from("dive_trips")
     .select("id")
-    .eq("dive_centre_id", diveCentreId);
+    .eq("dive_centre_id", diveCentre.id);
 
   // console.log("trip list:", trips);
 
@@ -143,6 +172,6 @@ export const getServerSideProps = async ({ params: { slug } }) => {
   };
 };
 
-OrdersList.getLayout = function getLayout(page) {
+Orders.getLayout = function getLayout(page) {
   return <DivingLayout>{page}</DivingLayout>;
 };

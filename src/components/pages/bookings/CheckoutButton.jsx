@@ -102,7 +102,7 @@ export default function CheckoutButton() {
         .map((item) => ({
           order_id: order.id,
           dive_trip_id: item.id,
-          user_selected_time: item.diveDate,
+          user_selected_time: item.startDate,
           quantity: 1,
         }));
       // Format insert Data as array only for multiple items
@@ -125,7 +125,7 @@ export default function CheckoutButton() {
         .map((item) => ({
           order_id: order.id,
           certification_id: item.id,
-          user_selected_time: item.diveDate,
+          user_selected_time: item.startDate,
           quantity: 1,
         }));
       const { error: certLineItemError } = await supabase

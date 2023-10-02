@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable react/prop-types */
 // Chakra imports
@@ -10,32 +11,57 @@ import {
   Select,
   useColorModeValue,
   Switch,
+  RadioGroup,
+  Radio,
+  NumberInput,
+  NumberInputField,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
 import TextField from "components/fields/TextField";
 
-export default function Settings(props) {
-  const {
-    name,
-    price,
-    minCert,
-    description,
-    checkIn,
-    duration,
-    active,
-    setActive,
-    setDuration,
-    setDescription,
-    setCheckIn,
-    setPrice,
-    setMinCert,
-  } = props;
+export default function TripDetails(props) {
+  const { diveTrip, setDiveTrip, tripType, setTripType } = props;
+
+  const { name, description, checkin, diveCount, price, minCert, active } =
+    diveTrip || {};
+
+  const [tripPrice, setTripPrice] = useState();
+  const [tripActive, setTripActive] = useState(false);
+
+  useEffect(() => {
+    setDiveTrip({
+      ...diveTrip,
+      price: Number(tripPrice) * 100,
+    });
+  }, [tripPrice]);
+
+  useEffect(() => {
+    setDiveTrip({
+      ...diveTrip,
+      active: tripActive,
+    });
+  }, [tripActive]);
+
+  useEffect(() => {
+    const generic = tripType === "generic";
+    setDiveTrip({
+      ...diveTrip,
+      generic,
+    });
+  }, [tripType]);
 
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
   const borderColor = useColorModeValue("secondaryGray.100", "whiteAlpha.100");
+  const handleChange = (e) => {
+    setDiveTrip({ ...diveTrip, [e.target.name]: e.target.value });
+  };
+  const handleNumberChange = (e) => {
+    setDiveTrip({ ...diveTrip, [e.target.name]: Number(e.target.value) });
+  };
 
   return (
     <FormControl>
@@ -48,39 +74,92 @@ export default function Settings(props) {
             Please provide all relevant details for your planned dive trip
           </Text>
         </Flex>
+        <RadioGroup mb={10} onChange={setTripType} value={tripType}>
+          <Flex
+            gap={{ sm: 4, md: 10, lg: 20 }}
+            direction="row"
+            justify="center"
+          >
+            <Radio size="lg" colorScheme="red" value="generic">
+              Generic Dive Package
+            </Radio>
+            <Radio size="lg" colorScheme="green" value="site-specific">
+              Specific Dive Sites
+            </Radio>
+          </Flex>
+        </RadioGroup>
         <SimpleGrid
           columns={{ sm: 1, md: 2 }}
           spacing={{ base: "20px", xl: "20px" }}
         >
+          <Flex direction="column" justify="center">
+            <FormLabel
+              ms="10px"
+              htmlFor="numberDives"
+              fontSize="sm"
+              color={textColorPrimary}
+              fontWeight="bold"
+              _hover={{ cursor: "pointer" }}
+            >
+              Number of Dives
+            </FormLabel>
+            <NumberInput
+              fontSize="sm"
+              id="diveCount"
+              variant="main"
+              // h="40px"
+              maxh="44px"
+              placeholder="Select..."
+              borderColor={borderColor}
+            >
+              <NumberInputField
+                name="diveCount"
+                color={textColorPrimary}
+                value={Number(diveCount)}
+                min={1}
+                max={10}
+                defaultValue={1}
+                // onChange={(e) => setDiveCount(Number(e.target.value))}
+                onChange={handleNumberChange}
+                isError={diveCount === ""}
+                errorMessage="Dive Count cannot be empty"
+                isRequired
+              />
+              {/* <NumberInputStepper>
+            <NumberIncrementStepper
+              onChange={(e) => setDiveCount(Number(e.target.value))}
+            />
+            <NumberDecrementStepper />
+          </NumberInputStepper> */}
+            </NumberInput>
+          </Flex>
+
           <InputField
             mb="0px"
-            id="name"
+            name="name"
             label="Name"
             value={name}
             isRequired
-            isDisabled
-            placeholder="Defaults to names of dive sites"
+            // isDisabled
+            placeholder={
+              tripType === "generic"
+                ? "Defaults to number of dives"
+                : "Defaults to names of dive sites"
+            }
+            onChange={handleChange}
             // onChange={(e) => setName(e.target.value)}
           />
           <InputField
             mb="0px"
-            id="price"
+            name="price"
             label={`Price (${
               price ? (price / 100).toFixed(2) : "Enter value in"
             } Euro)`}
-            value={price ? price / 100 : 0}
-            placeholder="Total Price including commission"
-            onChange={(e) => setPrice(Number(e.target.value) * 100)}
-          />
-          <InputField
-            mb="0px"
-            id="duration"
-            default={8}
-            label={`Trip Duration (${duration || "Enter value in"} hours)`}
-            // value={duration}
-            isError={duration !== "" && isNaN(duration)}
-            placeholder="Total length of the dive trip"
-            onChange={(e) => setDuration(Number(e.target.value))}
+            value={price && price / 100}
+            placeholder="Total Price in Euros including commission"
+            onChange={(e) => setTripPrice(e.target.value)}
+            isError={price === "" || price < 1}
+            errorMessage="Price cannot be empty"
           />
           <Flex direction="column">
             <Flex direction="column" mb="20px">
@@ -95,21 +174,21 @@ export default function Settings(props) {
                 Check In
               </FormLabel>
               <Select
+                name="checkin"
                 fontSize="sm"
-                id="checkIn"
+                id="checkin"
                 variant="main"
                 h="44px"
                 maxh="44px"
-                placeholder="Select..."
                 borderColor={borderColor}
-                // placeholder="How long before the dive should the user arrive?"
-                value={checkIn}
-                onChange={(e) => setCheckIn(e.target.value)}
+                placeholder="How long before the dive should the user arrive?"
+                value={checkin}
+                onChange={handleChange}
               >
-                <option value="30_minutes">30 minutes before</option>
-                <option value="1_hour">1 hour before</option>
-                <option value="1.5_hours">1.5 hours before</option>
-                <option value="2_hours">2 hours before</option>
+                <option value={30}>30 minutes before departure</option>
+                <option value={60}>1 hour before departure</option>
+                <option value={90}>1.5 hours before departure</option>
+                <option value={120}>2 hours before departure</option>
               </Select>
             </Flex>
           </Flex>
@@ -126,54 +205,30 @@ export default function Settings(props) {
                 Minimum Certification Level
               </FormLabel>
               <Select
+                name="minCert"
                 fontSize="sm"
                 id="minCert"
                 variant="main"
                 h="44px"
                 maxh="44px"
-                placeholder="Select..."
+                // placeholder="Select..."
                 borderColor={borderColor}
                 value={minCert}
-                onChange={(e) => setMinCert(e.target.value)}
+                onChange={handleChange}
               >
                 <option value="open_water">Open Water</option>
                 <option value="advanced">Advanced</option>
                 <option value="dive_master">Dive Master</option>
               </Select>
             </Flex>
-            {/* <Flex direction="column">
-              <FormLabel
-                ms="10px"
-                htmlFor="minCert"
-                fontSize="sm"
-                fontWeight="bold"
-                _placeholder={{ color: textColorSecondary }}
-                _hover={{ cursor: "pointer" }}
-              >
-                Status
-              </FormLabel>
-              <Select
-                fontSize="sm"
-                id="status"
-                variant="main"
-                h="44px"
-                maxh="44px"
-                placeholder="Select..."
-                borderColor={borderColor}
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </Select>
-            </Flex> */}
             <Flex>
               <Switch
-                colorScheme="teal"
-                value={active}
-                defaultChecked
-                onChange={() => setActive(!active)}
                 id="active"
+                name="active"
+                colorScheme="purple"
+                isChecked={tripActive}
+                defaultChecked
+                onChange={() => setTripActive(!tripActive)}
               />
               <FormLabel
                 ms="10px"
@@ -190,13 +245,14 @@ export default function Settings(props) {
             </Flex>
           </Flex>
           <TextField
+            name="description"
             id="description"
             label="Description"
             mb="0px"
             h="100%"
             value={description}
             placeholder="Additional Information about the trip"
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={handleChange}
           />
         </SimpleGrid>
       </Card>

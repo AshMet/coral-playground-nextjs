@@ -71,8 +71,8 @@ export const CartProvider = ({ children }) => {
       });
       return;
     }
-    // if (!(newItem.diveDate instanceof Date) || newItem.diveDate !== null) {
-    if (isNaN(newItem.diveDate.getTime())) {
+    // if (!(newItem.startDate instanceof Date) || newItem.startDate !== null) {
+    if (isNaN(newItem.startDate.getTime())) {
       toast({
         position: "top",
         render: () => (

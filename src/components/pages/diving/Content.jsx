@@ -18,7 +18,7 @@ export default function Content(props) {
     diverName,
     email,
     title,
-    diveDate,
+    startDate,
     diveTime,
     diverCert,
     lastDive,

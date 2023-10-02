@@ -140,6 +140,18 @@ option {
   color: white;
 }
 
+.trip-calendar-selectable {
+  background-color: #18ffaa;
+  color: black!important;
+  border-radius: "20px";
+}
+
+.trip-calendar-nonselectable {
+  background-color: rgb(50, 50, 50);
+  color: black!important;
+  border-radius: "20px";
+}
+
 /* DARK MODE */
 
 body.chakra-ui-dark .react-calendar {
@@ -704,10 +716,13 @@ body.chakra-ui-dark .react-daterange-picker__button svg {
   background-color: #7551FF;
 }
 .fc-event.info {
-  background-color: green;
+  background-color: #01b574;
 }
 body.chakra-ui-dark .fc-event {
   background-color: rgb(159, 122, 234);
+}
+body.chakra-ui-dark .fc-event.info {
+  background-color: #01b574;
 }
 
 .fc-event-title {

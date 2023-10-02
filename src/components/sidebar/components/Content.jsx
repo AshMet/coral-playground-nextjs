@@ -5,6 +5,7 @@ import { Box, Flex, Stack } from "@chakra-ui/react";
 import { useUser } from "@supabase/auth-helpers-react";
 
 import adminRoutes from "../../../routes_admin";
+import businessRoutes from "../../../routes_business";
 import Brand from "components/sidebar/components/Brand";
 import Links from "components/sidebar/components/Links";
 
@@ -45,6 +46,9 @@ function SidebarContent(props) {
         >
           <Links mini={mini} hovered={hovered} routes={routes} />
           {user?.user_metadata.user_role === "business" && (
+            <Links mini={mini} hovered={hovered} routes={businessRoutes} />
+          )}
+          {user?.app_metadata.user_role === "ADMIN" && (
             <Links mini={mini} hovered={hovered} routes={adminRoutes} />
           )}
           {/* <AdminLinks /> */}
