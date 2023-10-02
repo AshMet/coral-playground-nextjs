@@ -93,6 +93,14 @@ export const getServerSideProps = async (ctx) => {
 
   const userId = session?.user.id;
 
+  if (!session)
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+
   const { data: diveCentre } = await supabase
     .from("dive_centres_view")
     .select(`id, name, city, country, slug, ownerId, active`)
@@ -100,10 +108,10 @@ export const getServerSideProps = async (ctx) => {
     .limit(1)
     .single();
 
-  if (!session)
+  if (!diveCentre)
     return {
       redirect: {
-        destination: "/",
+        destination: "/business/manage",
         permanent: false,
       },
     };

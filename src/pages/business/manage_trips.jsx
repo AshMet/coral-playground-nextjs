@@ -77,7 +77,7 @@ export default function TripsList({ diveTrips }) {
             calendarDives={getCalendarDives(diveTrips)}
           />
           <SearchTableDiveTrips
-            tableData={diveTrips.filter((dive) => !dive.generic)}
+            tableData={diveTrips.filter((dive) => !dive?.generic)}
             columnsData={columnsDataTrips}
           />
         </Card>
@@ -96,6 +96,13 @@ export const getServerSideProps = async (ctx) => {
 
   const userId = session?.user.id;
 
+  if (!session)
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
   // console.log("session:", session);
 
   const { data: diveCentre } = await supabase
@@ -111,12 +118,10 @@ export const getServerSideProps = async (ctx) => {
   // console.log("userId: ", userId);
   // console.log("dive_centre: ", diveCentre[0]);
 
-  // debugger;
-
-  if (!session)
+  if (!diveCentre)
     return {
       redirect: {
-        destination: "/",
+        destination: "/business/manage",
         permanent: false,
       },
     };
