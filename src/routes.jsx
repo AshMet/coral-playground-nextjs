@@ -1,13 +1,12 @@
-/* eslint-disable import/no-cycle */
 import { Icon } from "@chakra-ui/react";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { LuShip } from "react-icons/lu";
 import { TbCertificate, TbScubaMask } from "react-icons/tb";
 
-import Certifications from "pages/certifications";
-import DiveCentres from "pages/dive_centres";
-import DiveSites from "pages/dive_sites";
-import DiveTrips from "pages/dive_trips";
+// import Certifications from "pages/certifications";
+// import DiveCentres from "pages/dive_centres";
+// import DiveSites from "pages/dive_sites";
+// import DiveTrips from "pages/dive_trips";
 
 const routes = [
   // {
@@ -20,7 +19,7 @@ const routes = [
     name: "Dive Trips",
     layout: "",
     path: "/dive_trips",
-    component: DiveTrips,
+    // component: DiveTrips,
     icon: <Icon as={LuShip} width="20px" height="20px" color="inherit" />,
     collapse: false,
   },
@@ -28,7 +27,7 @@ const routes = [
     name: "Certifications",
     layout: "",
     path: "/certifications",
-    component: Certifications,
+    // component: Certifications,
     icon: (
       <Icon as={TbCertificate} width="20px" height="20px" color="inherit" />
     ),
@@ -37,14 +36,14 @@ const routes = [
     name: "Dive Sites",
     layout: "",
     path: "/dive_sites",
-    component: DiveSites,
+    // component: DiveSites,
     icon: <Icon as={TbScubaMask} width="20px" height="20px" color="inherit" />,
   },
   {
     name: "Dive Centres",
     layout: "",
     path: "/dive_centres",
-    component: DiveCentres,
+    // component: DiveCentres,
     icon: (
       <Icon
         as={IoStorefrontOutline}

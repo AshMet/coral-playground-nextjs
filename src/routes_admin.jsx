@@ -1,17 +1,16 @@
-/* eslint-disable import/no-cycle */
 import { Icon } from "@chakra-ui/react";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { LuShip } from "react-icons/lu";
 import { TbScubaMask, TbSettingsCog } from "react-icons/tb";
 
-import DiveCentres from "pages/admin/dive_centres";
-import DiveSites from "pages/admin/dive_sites";
-import DiveTrips from "pages/admin/dive_trips";
+// import DiveCentres from "pages/admin/dive_centres";
+// import DiveSites from "pages/admin/dive_sites";
+// import DiveTrips from "pages/admin/dive_trips";
 
 const routes = [
   {
     name: "Super Admin",
-    path: "/users",
+    path: "/admin",
     icon: (
       <Icon as={TbSettingsCog} width="20px" height="20px" color="purple.500" />
     ),
@@ -21,7 +20,7 @@ const routes = [
         name: "Dive Sites",
         layout: "",
         path: "/admin/dive_sites",
-        component: DiveSites,
+        // component: DiveSites,
         icon: (
           <Icon
             as={TbScubaMask}
@@ -35,7 +34,7 @@ const routes = [
         name: "Dive Centres",
         layout: "",
         path: "/admin/dive_centres",
-        component: DiveCentres,
+        // component: DiveCentres,
         icon: (
           <Icon
             as={IoStorefrontOutline}
@@ -49,7 +48,7 @@ const routes = [
         name: "Dive Trips",
         layout: "",
         path: "/admin/dive_trips",
-        component: DiveTrips,
+        // component: DiveTrips,
         icon: (
           <Icon as={LuShip} width="20px" height="20px" color="purple.500" />
         ),

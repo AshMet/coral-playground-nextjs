@@ -99,7 +99,7 @@ function SearchTableDiveTrips(props) {
   return (
     <Flex direction="column" w="100%" overflowX="scroll">
       <Button
-        colorScheme="green"
+        colorScheme="brand"
         maxW="200px"
         ml="20px"
         mt="40px"

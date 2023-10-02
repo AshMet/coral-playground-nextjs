@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 /* eslint-disable react/prop-types */
 // chakra imports
 import { Box, Flex, Stack } from "@chakra-ui/react";
@@ -29,7 +28,13 @@ function SidebarContent(props) {
   // const avatar4 = `https://avatars.dicebear.com/api/miniavs/${username}.svg`;
   // SIDEBAR
   return (
-    <Flex direction="column" height="100%" pt="25px" borderRadius="30px">
+    <Flex
+      direction="column"
+      height="100%"
+      pt="25px"
+      borderRadius="30px"
+      align="center"
+    >
       <Brand mini={mini} hovered={hovered} />
       <Stack direction="column" mb="auto" mt="8px">
         <Box

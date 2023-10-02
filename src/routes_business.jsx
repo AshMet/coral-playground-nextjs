@@ -1,17 +1,16 @@
-/* eslint-disable import/no-cycle */
 import { Icon } from "@chakra-ui/react";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { TbCalendar, TbReportMoney, TbUser } from "react-icons/tb";
 
-import DiveCentre from "pages/business/manage";
-import DiveTrip from "pages/business/manage_trips";
-import User from "pages/users/me";
+// import DiveCentre from "pages/business/manage";
+// import DiveTrip from "pages/business/manage_trips";
+// import User from "pages/users/me";
 
 const routes = [
   {
     name: "Business Admin",
-    path: "/users" || "/business/manage",
+    path: "/users" || "/business",
     icon: (
       <Icon
         as={MdOutlineAdminPanelSettings}
@@ -26,7 +25,7 @@ const routes = [
         name: "Profile",
         layout: "",
         path: "/users/me",
-        component: User,
+        // component: User,
         icon: (
           <Icon as={TbUser} width="20px" height="20px" color="yellow.500" />
         ),
@@ -35,7 +34,7 @@ const routes = [
         name: "Manage Business",
         layout: "",
         path: "/business/manage",
-        component: DiveCentre,
+        // component: DiveCentre,
         icon: (
           <Icon
             as={IoStorefrontOutline}
@@ -49,7 +48,7 @@ const routes = [
         name: "Manage Trips",
         layout: "",
         path: "/business/manage_trips",
-        component: DiveTrip,
+        // component: DiveTrip,
         icon: (
           <Icon as={TbCalendar} width="20px" height="20px" color="yellow.500" />
         ),
@@ -58,7 +57,7 @@ const routes = [
         name: "Orders",
         layout: "",
         path: "/business/orders",
-        component: DiveTrip,
+        // component: DiveTrip,
         icon: (
           <Icon
             as={TbReportMoney}
