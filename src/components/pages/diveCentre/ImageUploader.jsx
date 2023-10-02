@@ -20,11 +20,11 @@ export default function DiveCentreCover({ diveCentre }) {
     const { error } = await supabase
       .from("dive_centres")
       .update({
-        id: diveCentre.id,
+        id: diveCentre?.id,
         cover_photo: newCoverPhotoUrl,
         // updated_at: new Date().toISOString(),
       })
-      .eq("id", diveCentre.id);
+      .eq("id", diveCentre?.id);
     // Alert & Analytics for successful load
     toast({
       position: "top",
@@ -43,7 +43,7 @@ export default function DiveCentreCover({ diveCentre }) {
     //   value: diveCentre.id,
     // });
     posthog.capture("Updated Dive Centre Cover Photo", {
-      "Dive Centre": diveCentre.name,
+      "Dive Centre": diveCentre?.name,
     });
     // Alert & Analytics for failed load
     if (error) {
@@ -64,7 +64,7 @@ export default function DiveCentreCover({ diveCentre }) {
       //   // value: newItem.title,
       // });
       posthog.capture("Dive Centre Cover Photo Update Failed", {
-        "Dive Centre": diveCentre.name,
+        "Dive Centre": diveCentre?.name,
       });
     }
   }
@@ -98,7 +98,7 @@ export default function DiveCentreCover({ diveCentre }) {
         w=""
         minH={{ base: "200px", md: "100%" }}
         h="400px"
-        bgImage={diveCentre.coverPhotoUrl || "/img/diving/dive_centre_bg.jpg"}
+        bgImage={diveCentre?.coverPhotoUrl || "/img/diving/dive_centre_bg.jpg"}
       >
         <Box mt="auto">
           {/* <Button

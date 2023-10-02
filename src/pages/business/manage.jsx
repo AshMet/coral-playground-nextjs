@@ -1,14 +1,8 @@
-/* eslint-disable import/no-cycle */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-throw-literal */
-/* eslint-disable consistent-return */
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
+
 import { Box } from "@chakra-ui/react";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { NextSeo } from "next-seo";
-import { useEffect, useState } from "react";
 import {} from "react-icons/io";
 
 import Card from "components/card/Card";
@@ -18,14 +12,9 @@ import NoCentreCard from "components/pages/diveCentreManage/NoCentreCard";
 import DivingLayout from "layouts/DivingLayout";
 
 export default function Profile(props) {
-  const { centreData, diveTrips } = props;
-  const [diveCentre, setDiveCentre] = useState(centreData);
-  console.log("manage", diveTrips);
-
-  useEffect(() => {
-    if (!centreData) return null;
-    setDiveCentre(centreData);
-  }, [centreData]);
+  const { diveCentre, diveTrips } = props;
+  // console.log("manage centre", diveCentre);
+  // console.log("manage", diveTrips);
 
   return (
     <Box>
@@ -33,13 +22,13 @@ export default function Profile(props) {
         <NextSeo noindex nofollow />
         <Box pt={{ sm: "60px", xl: "100px" }}>
           <Card p={{ base: "15px", md: "30px" }}>
-            {diveCentre.length === 0 ? (
-              <NoCentreCard />
-            ) : (
+            {diveCentre ? (
               <CentreCard diveCentre={diveCentre} />
+            ) : (
+              <NoCentreCard />
             )}
           </Card>
-          {diveCentre.length !== 0 && (
+          {diveCentre && (
             <CentreTrips diveCentre={diveCentre} diveTrips={diveTrips} />
           )}
         </Box>
@@ -50,14 +39,14 @@ export default function Profile(props) {
 
 export const getServerSideProps = async (ctx) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },
   } = await supabase.auth.getSession();
   const userId = session?.user.id;
 
-  console.log("session:", session);
+  // console.log("session:", session);
 
   const { data: diveCentre } = await supabase
     .from("dive_centres_view")
@@ -69,8 +58,8 @@ export const getServerSideProps = async (ctx) => {
     .limit(1)
     .single();
 
-  console.log("userId: ", userId);
-  console.log("dive_centre: ", diveCentre[0]);
+  // console.log("userId: ", userId);
+  // console.log("dive_centre: ", diveCentre[0]);
 
   // debugger;
 
@@ -103,15 +92,15 @@ export const getServerSideProps = async (ctx) => {
             dive_site:dive_site_id(id, name, latitude, longitude))
       `
     )
-    .eq("dive_centre_id", diveCentre.id);
+    .eq("dive_centre_id", diveCentre?.id);
   // .order("updated_at", { ascending: true });
 
-  console.log("diveTrips: ", diveTrips);
+  // console.log("diveTrips: ", diveTrips);
   return {
     props: {
       session,
       user: session.user,
-      centreData: diveCentre ?? [],
+      diveCentre,
       diveTrips,
     },
   };

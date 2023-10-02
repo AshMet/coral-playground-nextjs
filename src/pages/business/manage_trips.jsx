@@ -143,7 +143,7 @@ export const getServerSideProps = async (ctx) => {
     props: {
       session,
       user: session.user,
-      centreData: diveCentre ?? [],
+      diveCentre,
       diveTrips,
     },
   };

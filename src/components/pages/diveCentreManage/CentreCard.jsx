@@ -32,7 +32,7 @@ export default function CentreCard(props) {
   const textColor = useColorModeValue("gray.700", "white");
   const textColorActive = useColorModeValue("green.600", "green.400");
   const textColorInactive = useColorModeValue("red.700", "red.400");
-  const [active, setActive] = useState(diveCentre.active);
+  const [active, setActive] = useState(diveCentre?.active);
 
   const router = useRouter();
   const iconColor = useColorModeValue("brand.500", "white");
@@ -59,7 +59,7 @@ export default function CentreCard(props) {
       .from("dive_centres")
       .update({ active: newStatus })
       .select()
-      .eq("id", diveCentre.id);
+      .eq("id", diveCentre?.id);
 
     if (error) {
       toast({
@@ -79,7 +79,7 @@ export default function CentreCard(props) {
       //   // value: newItem.title,
       // });
       posthog.capture("Dive Centre Update Failed", {
-        "Dive Centre": diveCentre.name,
+        "Dive Centre": diveCentre?.name,
       });
     }
     if (data) {
@@ -100,8 +100,8 @@ export default function CentreCard(props) {
       //   // value: newItem.title,
       // });
       posthog.capture("Dive Centre Updated", {
-        "Dive Centre": diveCentre.name,
-        Status: diveCentre.active ? "Active" : "Inactive",
+        "Dive Centre": diveCentre?.name,
+        Status: diveCentre?.active ? "Active" : "Inactive",
       });
     }
   }
@@ -113,7 +113,7 @@ export default function CentreCard(props) {
           <Flex>
             <Flex direction="column">
               <Text fontSize="md" color={textColor} fontWeight="700">
-                {diveCentre.name}
+                {diveCentre?.name}
               </Text>
               <Text fontSize="sm" color="gray.500" fontWeight="500">
                 Dive Centre
@@ -121,7 +121,7 @@ export default function CentreCard(props) {
             </Flex>
           </Flex>
           <OwnerDiveCentreMenu
-            diveCentreSlug={diveCentre.slug}
+            diveCentreSlug={diveCentre?.slug}
             icon={
               <Icon
                 as={IoEllipsisHorizontal}
@@ -169,7 +169,7 @@ export default function CentreCard(props) {
                 h="56px"
                 mb="5px"
                 boxShadow={shadow}
-                onClick={() => router.push(`/dive_centres/${diveCentre.slug}`)}
+                onClick={() => router.push(`/dive_centres/${diveCentre?.slug}`)}
                 icon={
                   <Icon
                     as={AiOutlineShop}
@@ -245,7 +245,7 @@ export default function CentreCard(props) {
                 mb="5px"
                 boxShadow={shadow}
                 onClick={() =>
-                  router.push(`/dive_centres/${diveCentre.slug}/order_list`)
+                  router.push(`/dive_centres/${diveCentre?.slug}/order_list`)
                 }
                 icon={
                   <Icon as={MdAttachMoney} color={redIcon} w="24px" h="24px" />
