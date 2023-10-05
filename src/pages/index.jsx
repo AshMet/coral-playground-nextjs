@@ -14,7 +14,7 @@ import Loyalty from "components/pages/divingHome/Loyalty";
 import MapHero from "components/pages/divingHome/MapHero";
 import Mission from "components/pages/divingHome/Mission";
 import LandingLayout from "layouts/LandingLayout";
-import { supabase } from "utils/supabase";
+import { supabase } from "utils/initializers/supabase";
 
 export default function Home({ diveSites, diveCentres }) {
   return (

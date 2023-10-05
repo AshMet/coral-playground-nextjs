@@ -27,8 +27,8 @@ import SwitchField from "components/fields/SwitchField";
 import TextField from "components/fields/TextField";
 // import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import MapWithAutoComplete from "components/maps/MapWithAutoComplete";
+import { updateBrevoBusinessName } from "utils/helpers/brevoContacts";
 // import * as gtag from "lib/data/gtag";
-import { updateBrevoBusinessName } from "utils/sendInBlue/contacts";
 
 export default function DiveCentreForm(props) {
   const { diveCentre, setDiveCentre, newOwnerId, noRedirect } = props;
@@ -306,8 +306,10 @@ export default function DiveCentreForm(props) {
             Create your Dive Centre
           </Text>
           <Text fontSize="md" color={textColorSecondary}>
-            Once published, customers will be able to view your dive centre and
-            book diving trips
+            Start by searching for your business on the map. If the marker
+            doesn&apos;t accurately represent your location, you can drag the
+            marker to the correct spot. Once done, confirm the information and
+            click &quot;Create Dive Centre&quot;.
           </Text>
         </Flex>
         {/* <ImageUploader avatarUrl={avatarUrl} setAvatarUrl={setAvatarUrl} /> */}

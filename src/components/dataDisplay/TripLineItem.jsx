@@ -21,7 +21,11 @@ import { IoStorefrontOutline } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
 
 import { CartContext } from "contexts/CartContext";
-import { combineDateAndTime } from "utils/dive_centre_helpers";
+import {
+  combineDateAndTime,
+  getTileColor,
+  getDisabledTiles,
+} from "utils/helpers/diveCentresHelper";
 
 import TimeTile from "./TimeTile";
 
@@ -40,19 +44,6 @@ export default function TripLineItem(props) {
 
   const siteNames =
     name || trip.diveSites?.map((site) => site.name).join(" + ");
-
-  const getTileColor = ({ date, view }) =>
-    view === "month" &&
-    tripRules
-      ?.map((item) => new Date(item).toISOString().split("T")[0])
-      .includes(new Date(date).toISOString().split("T")[0])
-      ? "trip-calendar-selectable"
-      : "trip-calendar-nonselectable";
-
-  const getDisabledTiles = ({ date }) =>
-    !tripRules
-      ?.map((item) => new Date(item).toISOString().split("T")[0])
-      .includes(new Date(date).toISOString().split("T")[0]);
 
   // console.log("selectedDate", selectedDate);
   // console.log("selectedDate", selectedDate);
@@ -98,8 +89,10 @@ export default function TripLineItem(props) {
               minDate={new Date()}
               clearIcon={null}
               calendarIcon={null}
-              tileClassName={getTileColor}
-              tileDisabled={getDisabledTiles}
+              tileClassName={({ date, view }) =>
+                getTileColor({ date, view }, tripRules)
+              }
+              tileDisabled={({ date }) => getDisabledTiles({ date }, tripRules)}
               isOpen={isOpen}
             />
           </Flex>

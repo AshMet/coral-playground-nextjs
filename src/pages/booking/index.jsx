@@ -47,7 +47,7 @@ import EquipmentSelection from "components/pages/bookings/EquipmentSelection";
 import SummaryTable from "components/pages/bookings/SummaryTable";
 import { CartContext } from "contexts/CartContext";
 import DivingLayout from "layouts/DivingLayout";
-import { supabase } from "utils/supabase";
+import { supabase } from "utils/initializers/supabase";
 
 export default function NewBooking({ equipment }) {
   const [activeBullets, setActiveBullets] = useState({

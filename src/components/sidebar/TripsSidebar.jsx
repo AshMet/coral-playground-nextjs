@@ -5,7 +5,6 @@
 import { Flex, Text, Icon, useColorModeValue, Divider } from "@chakra-ui/react";
 import { useContext } from "react";
 import { MdAddCircle } from "react-icons/md";
-import { RRule, RRuleSet, datetime } from "rrule";
 
 import Card from "components/card/Card";
 import TripLineItem from "components/dataDisplay/TripLineItem";
@@ -13,74 +12,23 @@ import TripSearchBar from "components/fields/TripSearchBar";
 import { TripSearchContext } from "contexts/TripSearchContext";
 import {
   getGenericDives,
-  getRruleFreq,
-  getRruleDays,
-} from "utils/dive_centre_helpers";
+  getFilteredRules,
+} from "utils/helpers/diveCentresHelper";
 
 import TripsMap from "./components/TripsMap";
 
 export default function TripSidebar({ trips, diveSite, diveCentre, ...rest }) {
   const { dateRange } = useContext(TripSearchContext);
-  const today = new Date();
-  const in3Months = new Date(new Date().setMonth(new Date().getMonth() + 3));
-  // const [filtered, setFiltered] = useState();
-  // const [tripRules, setTripRules] = useState([]);
 
-  const getRRule = (trip, options) =>
-    new RRule({
-      ...options,
-      freq: getRruleFreq(trip.frequency),
-      byweekday: getRruleDays(trip.recurDays),
-      tzid: trip.timezone,
-      dtstart: new Date(trip.startDate ? trip.startDate : today),
-      until: new Date(trip.recurEndDate ? trip.recurEndDate : in3Months),
-      ...(trip.frequency === "One Time" && { interval: 1 }),
-    });
-  const getGenericRRule = (trip, range, options) =>
-    new RRule({
-      ...options,
-      freq: RRule.DAILY,
-      tzid: trip.timezone,
-      dtstart: new Date(today),
-      until: new Date(in3Months),
-    });
-
-  const getFilteredRules = (trip, range) => {
-    const ruleSet = new RRuleSet();
-    const start = new Date(range ? range[0] : today);
-    const end = new Date(range ? range[1] : in3Months);
-    const filterStart = datetime(
-      start.getFullYear(),
-      start.getMonth() + 1,
-      start.getDate()
-    );
-    const filterEnd = datetime(
-      end.getFullYear(),
-      end.getMonth() + 1,
-      end.getDate()
-    );
-    trip.generic
-      ? ruleSet.rrule(getGenericRRule(trip, {}))
-      : ruleSet.rrule(getRRule(trip, {}));
-    return ruleSet.between(filterStart, filterEnd);
-  };
-
-  // console.log("trips", trips);
+  // console.log("sidebar trips", trips);
   // console.log("filtered", filtered);
   // console.log("dateRange", dateRange);
-
-  // useEffect(() => {
-  //   const dateFiltered = filterByDateRange(trips, dateRange);
-  //   setFiltered(dateFiltered);
-  // }, [trips, dateRange]);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorTertiary = useColorModeValue(
     "secondaryGray.700",
     "secondaryGray.500"
   );
-
-  // console.log("sidebar trips", trips);
 
   return (
     <Flex direction="column">
@@ -164,7 +112,6 @@ export default function TripSidebar({ trips, diveSite, diveCentre, ...rest }) {
           </Text>
         )}
       </Card>
-      {/* <RegularTrips trips={getGenericDives(trips)} diveSite={diveSite} /> */}
     </Flex>
   );
 }

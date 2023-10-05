@@ -15,7 +15,7 @@ import DiveSiteCard from "components/card/DiveSiteCard";
 import TripSearchBar from "components/fields/TripSearchBar";
 import { TripSearchContext } from "contexts/TripSearchContext";
 import DivingLayout from "layouts/DivingLayout";
-import generateDiveSiteRSS from "utils/generateDiveSiteRSS";
+import generateDiveSiteRSS from "utils/helpers/generateDiveSiteRSS";
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === "children",

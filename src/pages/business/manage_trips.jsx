@@ -9,7 +9,7 @@ import Card from "components/card/Card";
 import SearchTableDiveTrips from "components/pages/admin/dive_trips/SearchTableDiveTrips";
 import EventCalendar from "components/pages/diveCentreManage/EventCalendar";
 import DivingLayout from "layouts/DivingLayout";
-import { getCalendarDives } from "utils/dive_centre_helpers";
+import { getCalendarDives } from "utils/helpers/diveCentresHelper";
 
 const columnsDataTrips = [
   {

@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/prop-types */
@@ -10,8 +12,8 @@ import {
   Text,
   useToast,
   useColorMode,
-  useColorModeValue,
   Spinner,
+  Badge,
 } from "@chakra-ui/react";
 import {
   GoogleMap,
@@ -74,29 +76,6 @@ export default function DiveSelection(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   const noSitesName = `${diveCount} Dive Package`;
-  //   const sitesName = selectedSites?.map((site) => site.name).join(" + ");
-  //   if (selectedSites.length === 0) {
-  //     // setName(noSitesName);
-  //     setDiveTrip({ ...diveTrip, name: noSitesName });
-  //   } else if (selectedSites.length > 0) {
-  //     setDiveTrip({
-  //       ...diveTrip,
-  //       name:
-  //         selectedSites.length <= diveCount - 1
-  //           ? `${sitesName} (${diveCount} dives)`
-  //           : sitesName,
-  //     });
-  //     // setName(
-  //     //   selectedSites.length <= diveCount - 1
-  //     //     ? `${sitesName} (${diveCount} dives)`
-  //     //     : sitesName
-  //     // );
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [selectedSites, diveCount]);
-
   // Add items to cart
   function addSite(newItem) {
     const alreadyInCart = selectedSites.some((item) => item.id === newItem.id);
@@ -139,7 +118,7 @@ export default function DiveSelection(props) {
 
   // console.log(data);
   const { colorMode } = useColorMode();
-  const textColor = useColorModeValue("secondaryGray.900", "white");
+  // const textColor = useColorModeValue("secondaryGray.900", "white");
 
   const mapOptions = {
     styles: colorMode === "light" ? LightMap : DarkMap,
@@ -181,131 +160,126 @@ export default function DiveSelection(props) {
     //  setCenter(place.pos)
   };
 
-  return (
-    <Card mb="20px">
-      {loading ? (
-        <Spinner size="lg" />
-      ) : (
-        <>
-          <Text fontSize="2xl" fontWeight="700" color={textColor}>
-            Select Dives
-          </Text>
-          <Text
-            fontSize="md"
-            fontWeight="500"
-            color="secondaryGray.600"
-            mb="30px"
-          >
-            Add your dive sites to get started
-          </Text>
-          <Flex direction="column">
+  return loading ? (
+    <Spinner size="lg" />
+  ) : (
+    <>
+      <Flex direction="column">
+        <Card
+          minH="300px"
+          p="0px"
+          // pr={{ sm: "0px", lg: "20px" }}
+          pb={{ sm: "20px", lg: "0px" }}
+        >
+          <Box height="100%" position="relative">
             <Card
-              minH="400px"
-              p="0px"
-              pr={{ sm: "0px", lg: "20px" }}
-              pb={{ sm: "20px", lg: "0px" }}
+              m={0}
+              p={0}
+              h={{ sm: "300px", md: "300px" }}
+              w="100%"
+              overflow="hidden"
             >
-              <Box height="100%" minH="400px" position="relative">
-                <Card
-                  m={0}
-                  p={0}
-                  h={{ sm: "425px", md: "425px" }}
-                  w="100%"
-                  overflow="hidden"
-                >
-                  <GoogleMap
-                    mapContainerStyle={containerStyle}
-                    center={center}
-                    zoom={4}
-                    options={mapOptions}
-                    mb="0px"
-                  >
-                    {diveSites && (
-                      <MarkerClusterer options={clusterOptions}>
-                        {(clusterer) =>
-                          diveSites.map((site) => (
-                            <Marker
-                              key={createKey(site)}
-                              position={{
-                                lat: site.latitude,
-                                lng: site.longitude,
-                              }}
-                              clusterer={clusterer}
-                              onClick={(event) =>
-                                markerClickHandler(event, site)
-                              }
-                              // onClick={(() => setMapLocation(site), onOpen)}
-                              icon={{
-                                url: "/img/diving/dive_site_marker.svg",
-                                scaledSize:
-                                  site.latitude === mapLocation.latitude
-                                    ? new window.google.maps.Size(50, 50)
-                                    : new window.google.maps.Size(34, 34),
-                              }}
-                            >
-                              {infoOpen &&
-                                site.latitude === mapLocation.latitude && (
-                                  <InfoWindow
-                                    onCloseClick={() => setInfoOpen(false)}
-                                    position={{
-                                      lat: site.latitude,
-                                      lng: site.longitude,
-                                    }}
+              <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={center}
+                zoom={4}
+                options={mapOptions}
+                mb="0px"
+              >
+                {diveSites && (
+                  <MarkerClusterer options={clusterOptions}>
+                    {(clusterer) =>
+                      diveSites.map((site) => (
+                        <Marker
+                          key={createKey(site)}
+                          position={{
+                            lat: site.latitude,
+                            lng: site.longitude,
+                          }}
+                          clusterer={clusterer}
+                          onClick={(event) => markerClickHandler(event, site)}
+                          // onClick={(() => setMapLocation(site), onOpen)}
+                          icon={{
+                            url: "/img/diving/dive_site_marker.svg",
+                            scaledSize:
+                              site.latitude === mapLocation.latitude
+                                ? new window.google.maps.Size(50, 50)
+                                : new window.google.maps.Size(34, 34),
+                          }}
+                        >
+                          {infoOpen &&
+                            site.latitude === mapLocation.latitude && (
+                              <InfoWindow
+                                onCloseClick={() => setInfoOpen(false)}
+                                position={{
+                                  lat: site.latitude,
+                                  lng: site.longitude,
+                                }}
+                              >
+                                <Flex align="center" w="100%">
+                                  <Text
+                                    ms="auto"
+                                    color="gray.500"
+                                    me="20px"
+                                    fontSize="lg"
+                                    fontWeight="500"
                                   >
-                                    <Flex align="center" w="100%">
-                                      <Text
-                                        ms="auto"
-                                        color="gray.500"
-                                        me="20px"
-                                        fontSize="lg"
-                                        fontWeight="500"
-                                      >
-                                        {site.name}
-                                      </Text>
-                                      <Button
-                                        me="10px"
-                                        bgColor="brand.100"
-                                        _hover={{ bg: "brand.500" }}
-                                        borderRadius="50%"
-                                        h="38px"
-                                        w="38px"
-                                        onClick={() => addSite(site)}
-                                      >
-                                        <Icon
-                                          as={MdAdd}
-                                          color="white"
-                                          h="24px"
-                                          w="24px"
-                                        />
-                                      </Button>
-                                    </Flex>
-                                  </InfoWindow>
-                                )}
-                            </Marker>
-                          ))
-                        }
-                      </MarkerClusterer>
-                    )}
-                  </GoogleMap>
-                </Card>
-              </Box>
+                                    {site.name}
+                                  </Text>
+                                  <Button
+                                    me="10px"
+                                    bgColor="brand.100"
+                                    _hover={{ bg: "brand.500" }}
+                                    borderRadius="50%"
+                                    h="38px"
+                                    w="38px"
+                                    onClick={() => addSite(site)}
+                                  >
+                                    <Icon
+                                      as={MdAdd}
+                                      color="white"
+                                      h="24px"
+                                      w="24px"
+                                    />
+                                  </Button>
+                                </Flex>
+                              </InfoWindow>
+                            )}
+                        </Marker>
+                      ))
+                    }
+                  </MarkerClusterer>
+                )}
+              </GoogleMap>
             </Card>
-          </Flex>
-          <Button
-            size="lg"
-            color="white"
-            bgColor="brand.300"
-            _hover={{ bg: "brand.400" }}
-            mt={2}
-            onClick={() => {
-              setSelectedSites([]);
-              setStartDate();
-            }}
-          >
-            Clear Sites
-          </Button>
-        </>
+          </Box>
+        </Card>
+      </Flex>
+      {selectedSites.length > 0 && (
+        <Flex mt={3} mb={3} flexWrap="wrap">
+          <Text mr={5} mt={3}>
+            Selected Sites:{" "}
+          </Text>
+          {selectedSites.map((site, index) => (
+            <Badge key={index} colorScheme="green" mr={3} mt={3}>
+              {site.name}
+            </Badge>
+          ))}
+        </Flex>
       )}
-    </Card>
+      <Button
+        size="lg"
+        color="white"
+        bgColor="brand.300"
+        _hover={{ bg: "brand.400" }}
+        mt={2}
+        onClick={() => {
+          setSelectedSites([]);
+          setStartDate();
+        }}
+      >
+        Clear Sites
+      </Button>
+    </>
   );
 }

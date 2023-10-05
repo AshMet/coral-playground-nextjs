@@ -8,7 +8,7 @@ import { buffer } from "micro";
 import { PostHog } from "posthog-node";
 import Stripe from "stripe";
 
-import { getServiceSupabase } from "utils/supabase";
+import { getServiceSupabase } from "utils/initializers/supabase";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const supabase = getServiceSupabase();

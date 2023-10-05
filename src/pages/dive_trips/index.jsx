@@ -16,7 +16,6 @@ import Destinations from "components/pages/diveTrips/Destinations";
 import Upcoming from "components/pages/diveTrips/Upcoming";
 import { TripSearchContext } from "contexts/TripSearchContext";
 import DivingLayout from "layouts/DivingLayout";
-// import generateDiveSiteRSS from "utils/generateDiveSiteRSS";
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === "children",

@@ -32,8 +32,8 @@ import InputField from "components/fields/InputField";
 import NavLink from "components/navLinks/NavLink";
 import LoginLayout from "layouts/LoginLayout";
 // import * as gtag from "lib/data/gtag";
-import { addBrevoContact } from "utils/sendInBlue/contacts";
-import { sendBrevoMail } from "utils/sendInBlue/sendMail";
+import { addBrevoContact } from "utils/helpers/brevoContacts";
+import { sendBrevoMail } from "utils/helpers/brevoSendMail";
 
 export default function SignUp() {
   const supabase = useSupabaseClient();

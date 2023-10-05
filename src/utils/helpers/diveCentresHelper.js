@@ -1,4 +1,10 @@
-import { RRule } from "rrule";
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import { datetime, RRule, RRuleSet } from "rrule";
+
+export const today = new Date();
+export const in3Months = new Date(
+  new Date().setMonth(new Date().getMonth() + 3)
+);
 
 export const combineDateAndTime = (date, time, duration = 0) => {
   const formattedDate = new Date(date);
@@ -13,13 +19,13 @@ export const combineDateAndTime = (date, time, duration = 0) => {
 
 export const getRruleFreq = (freq) => {
   switch (freq) {
-    case "daily":
+    case "Daily":
       return RRule.DAILY;
-    case "weekly":
+    case "Weekly":
       return RRule.WEEKLY;
-    case "monthly":
+    case "Monthly":
       return RRule.MONTHLY;
-    case "once":
+    case "One Time":
       return RRule.YEARLY;
     default:
       return RRule.MONTHLY;
@@ -52,17 +58,65 @@ export const getRruleDays = (oldArr = []) => {
   return newArr;
 };
 
-// export const getRrule = (trip) => {
-//   const rule = new RRule({
-//     freq: getRruleFreq(trip.frequency),
-//     byweekday: getRruleDays(trip.recurDays || []),
-//     tzid: trip.timezone,
-//     dtstart: trip.startDate,
-//     until: trip.recurEndDate,
-//     ...(trip.frequency === "One Time" && { interval: 1 }),
-//   });
-//   return rule.all();
-// };
+export const getTileColor = ({ date, view }, tripRules) =>
+  view === "month" &&
+  tripRules
+    ?.map((item) => new Date(item).toISOString().split("T")[0])
+    .includes(new Date(date).toISOString().split("T")[0])
+    ? "trip-calendar-selectable"
+    : "trip-calendar-nonselectable";
+
+export const getDisabledTiles = ({ date }, tripRules) =>
+  !tripRules
+    ?.map((item) => new Date(item).toISOString().split("T")[0])
+    .includes(new Date(date).toISOString().split("T")[0]);
+
+// const getTileContent = ({ date, view }) =>
+//   view === "month" &&
+//   tripsRule
+//     .map((item) => new Date(item).toISOString().split("T")[0])
+//     .includes(new Date(date).toISOString().split("T")[0]) ? (
+//     <StatusIndicator />
+//   ) : null;
+
+export const getRRule = (trip, options) =>
+  new RRule({
+    ...options,
+    freq: getRruleFreq(trip.frequency),
+    byweekday: getRruleDays(trip.recurDays),
+    tzid: trip.timezone,
+    dtstart: new Date(trip.startDate ? trip.startDate : today),
+    until: new Date(trip.recurEndDate ? trip.recurEndDate : in3Months),
+    ...(trip.frequency === "One Time" && { interval: 1 }),
+  });
+const getGenericRRule = (trip, range, options) =>
+  new RRule({
+    ...options,
+    freq: RRule.DAILY,
+    tzid: trip.timezone,
+    dtstart: new Date(today),
+    until: new Date(in3Months),
+  });
+
+export const getFilteredRules = (trip, range) => {
+  const ruleSet = new RRuleSet();
+  const start = new Date(range ? range[0] : today);
+  const end = new Date(range ? range[1] : in3Months);
+  const filterStart = datetime(
+    start.getFullYear(),
+    start.getMonth() + 1,
+    start.getDate()
+  );
+  const filterEnd = datetime(
+    end.getFullYear(),
+    end.getMonth() + 1,
+    end.getDate()
+  );
+  trip.generic
+    ? ruleSet.rrule(getGenericRRule(trip, {}))
+    : ruleSet.rrule(getRRule(trip, {}));
+  return ruleSet.between(filterStart, filterEnd);
+};
 
 export const getGenericDives = (diveTrips) => {
   return diveTrips?.filter((trip) => trip.generic === true);

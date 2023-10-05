@@ -22,14 +22,15 @@ option {
   color: #9277fe;
 }
 
-/* MiniCalendar component css - REMOVE FROM GLOBAL SCOPE */
-/* LIGHT MODE + GENERAL */
+/* --------------------------------------------------------------------- */
+/* React Calendar - LIGHT MODE + GENERAL */
+/* --------------------------------------------------------------------- */
 
 .react-calendar {
   border: unset;
   /* background-color: transparent; */
   font-family: "DM Sans", sans-serif;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px 0px, rgba(0, 0, 0, 0.4) 0px 15px 40px 0px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px 0px, rgba(0, 0, 0, 0.4) 0px 15px 40px 0px; */
 }
 .react-calendar__navigation__prev2-button {
   display: none;
@@ -40,6 +41,11 @@ option {
 .react-calendar__navigation {
   align-items: center;
   padding-left: 30px;
+}
+
+.react-date-picker__calendar.react-date-picker__calendar--open{
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px 0px, rgba(0, 0, 0, 0.4) 0px 15px 40px 0px;
+  border-radius: 20px;
 }
 /* abbr[title] {
   border-bottom: none;
@@ -141,18 +147,21 @@ option {
 }
 
 .trip-calendar-selectable {
-  background-color: #18ffaa;
-  color: black!important;
+  color: rgb(0, 146, 0)!important;
+  background-color: #b8ffe5;
   border-radius: "20px";
 }
 
 .trip-calendar-nonselectable {
-  background-color: rgb(50, 50, 50);
-  color: black!important;
+  color: rgb(172, 0, 0)!important;
+  background-color: rgb(248, 131, 131);
   border-radius: "20px";
 }
 
-/* DARK MODE */
+/* --------------------------------------------------------------------- */
+/* React Calendar - DARK MODE */
+/* --------------------------------------------------------------------- */
+
 
 body.chakra-ui-dark .react-calendar {
   border-radius: 30px;
@@ -218,7 +227,9 @@ body.chakra-ui-dark .react-calendar__tile--rangeEnd:enabled:focus {
   color: white;
 }
 
+/* --------------------------------------------------------------------- */
 /* DateTime Calendar - Light Mode */
+/* --------------------------------------------------------------------- */
 
 .react-date-picker {
   display: inline-flex;
@@ -451,9 +462,10 @@ body.chakra-ui-dark .react-date-picker__calendar .react-calendar {
   border: thin solid #a0a096;
 } */
 
-/* --------------------------------------------------------------- */
 
-/* Starting Clock.css */
+/* --------------------------------------------------------------------- */
+/* Time Picker */
+/* --------------------------------------------------------------------- */
 
 .react-time-picker {
   display: inline-flex;
@@ -553,6 +565,7 @@ body.chakra-ui-dark .react-date-picker__calendar .react-calendar {
 
 /* --------------------------------------------------------------------- */
 /* Date Range Picker */
+/* --------------------------------------------------------------------- */
 
 .react-daterange-picker {
   display: inline-flex;
@@ -692,6 +705,10 @@ body.chakra-ui-dark .react-date-picker__calendar .react-calendar {
   margin-right: 5px;
 }
 
+.react-daterange-picker__calendar.react-daterange-picker__calendar--open{
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px 0px, rgba(0, 0, 0, 0.4) 0px 15px 40px 0px;
+}
+
 body.chakra-ui-dark .react-calendar--selectRange {
   background-color: #1a202c;
 }
@@ -708,9 +725,9 @@ body.chakra-ui-dark .react-daterange-picker__button svg {
   stroke: white;
 }
 
-
 /* --------------------------------------------------------------------- */
 /* Full Calendar */
+/* --------------------------------------------------------------------- */
 
 .fc-event {
   background-color: #7551FF;

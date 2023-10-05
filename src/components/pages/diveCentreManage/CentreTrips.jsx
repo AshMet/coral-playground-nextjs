@@ -3,7 +3,7 @@ import { Grid, Text, useColorModeValue } from "@chakra-ui/react";
 
 import SearchTableDiveTrips from "../admin/dive_trips/SearchTableDiveTrips";
 import Card from "components/card/Card";
-import { getGenericDives } from "utils/dive_centre_helpers";
+import { getGenericDives } from "utils/helpers/diveCentresHelper";
 
 export default function DiveCentreCalendar({ diveCentre, diveTrips }) {
   const textColor = useColorModeValue("secondaryGray.900", "white");

@@ -84,6 +84,18 @@ export default function MapWithAutoComplete(props, { ...rest }) {
     }
   }
 
+  function onMarkerDrag(e) {
+    const { latLng } = e;
+    setLatitude(latLng.lat());
+    setLongitude(latLng.lng());
+    setDiveCentre({
+      ...diveCentre,
+      latitude: latLng.lat(),
+      longitude: latLng.lng(),
+    });
+    // console.log(`place: ${JSON.stringify(place)}`);
+  }
+
   return (
     <Card {...rest} maxH="max-content" w="100%">
       <Card
@@ -125,6 +137,8 @@ export default function MapWithAutoComplete(props, { ...rest }) {
               lat: latitude,
               lng: longitude,
             }}
+            draggable
+            onDragEnd={onMarkerDrag}
             // onClick={() => setMapLocation(location)}
             icon={{
               url: "/img/diving/dive_centre_marker.svg",

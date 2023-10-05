@@ -5,7 +5,7 @@ import { ColorModeScript } from "@chakra-ui/react";
 import type { DocumentContext } from "next/document";
 import Document, { Html, Head, Main } from "next/document";
 
-import { FB_PIXEL_ID } from "../utils/fpixel";
+import { FB_PIXEL_ID } from "../utils/helpers/facebookPixel";
 import customTheme from "lib/styles/customTheme";
 import DeferNextScript from "utils/DeferNextScript";
 

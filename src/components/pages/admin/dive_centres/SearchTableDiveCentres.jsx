@@ -13,6 +13,7 @@ import {
   Badge,
   Button,
   Flex,
+  HStack,
   Icon,
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -38,6 +39,8 @@ import {
   useSortBy,
   useTable,
 } from "react-table";
+
+import AddTripModal from "../dive_trips/AddTripModal";
 
 import CentreModal from "./CentreModal";
 
@@ -295,7 +298,16 @@ function SearchTableDiveCentres(props) {
                     );
                   } else if (cell.column.Header === "SITE_ACTIONS") {
                     data = (
-                      <CentreModal diveCentreData={row.values} type="edit" />
+                      <HStack>
+                        <CentreModal
+                          diveCentreData={row.original}
+                          type="edit"
+                        />
+                        <AddTripModal
+                          diveCentreData={row.original}
+                          btnText="Add Trip"
+                        />
+                      </HStack>
                     );
                   }
                   return (

@@ -23,7 +23,7 @@ import defaultSEOConfig from "../../next-seo.config";
 // import mautic from "../lib/data/mt";
 import { store } from "../lib/redux/store";
 import theme from "../theme/theme";
-import * as fbq from "../utils/fpixel";
+import * as fbq from "../utils/helpers/facebookPixel";
 import { TripSearchProvider } from "contexts/TripSearchContext";
 import "../../public/css/App.css";
 import "../../public/css/Map.css";

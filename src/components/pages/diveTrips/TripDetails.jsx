@@ -29,7 +29,7 @@ export default function TripDetails(props) {
     diveTrip || {};
 
   const [tripPrice, setTripPrice] = useState();
-  const [tripActive, setTripActive] = useState(false);
+  const [tripActive, setTripActive] = useState(active);
 
   useEffect(() => {
     setDiveTrip({
@@ -63,11 +63,13 @@ export default function TripDetails(props) {
     setDiveTrip({ ...diveTrip, [e.target.name]: Number(e.target.value) });
   };
 
+  // console.log("diveTrip", diveTrip);
+
   return (
     <FormControl>
       <Card mb={{ base: "0px", xl: "20px" }}>
         <Flex direction="column" mb="40px" ms="10px">
-          <Text fontSize="xl" color={textColorPrimary} fontWeight="bold">
+          <Text fontSize="2xl" color={textColorPrimary} fontWeight="bold">
             Trip Details
           </Text>
           <Text fontSize="md" color={textColorSecondary}>
@@ -81,10 +83,10 @@ export default function TripDetails(props) {
             justify="center"
           >
             <Radio size="lg" colorScheme="red" value="generic">
-              Generic Dive Package
+              Generic Price List
             </Radio>
             <Radio size="lg" colorScheme="green" value="site-specific">
-              Specific Dive Sites
+              Calendar Item
             </Radio>
           </Flex>
         </RadioGroup>
@@ -180,6 +182,7 @@ export default function TripDetails(props) {
                 variant="main"
                 h="44px"
                 maxh="44px"
+                defaultValue={60}
                 borderColor={borderColor}
                 placeholder="How long before the dive should the user arrive?"
                 value={checkin}

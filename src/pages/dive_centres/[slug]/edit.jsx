@@ -29,7 +29,7 @@ import SwitchField from "components/fields/SwitchField";
 import TextField from "components/fields/TextField";
 import DivingLayout from "layouts/DivingLayout";
 // import * as gtag from "lib/data/gtag";
-import { updateBrevoBusinessName } from "utils/sendInBlue/contacts";
+import { updateBrevoBusinessName } from "utils/helpers/brevoContacts";
 
 export default function UpdateDiveCentre({ diveCentreData }) {
   const toast = useToast();

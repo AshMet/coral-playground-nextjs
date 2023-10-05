@@ -14,7 +14,7 @@ import { NextSeo } from "next-seo";
 
 import BlogCard from "components/card/BlogCard";
 import DivingLayout from "layouts/DivingLayout";
-import generateRssFeed from "utils/generateRSSFeed";
+import generateRssFeed from "utils/helpers/generateRSSFeed";
 
 export async function getStaticProps() {
   const files = fs.readdirSync("src/lib/data/posts");

@@ -7,10 +7,15 @@ import { RRule } from "rrule";
 
 import Card from "components/card/Card";
 import SidebarInvoice from "components/dataDisplay/SidebarInvoice";
+import {
+  getRruleFreq,
+  getRruleDays,
+  getTileColor,
+} from "utils/helpers/diveCentresHelper";
 
-export default function Auction(props) {
+export default function Summary(props) {
   const { diveTrip, deposit } = props;
-  // Chakra Color Mode
+
   const {
     name,
     price,
@@ -28,50 +33,7 @@ export default function Auction(props) {
   );
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
-  const [tripsRule, setTripsRule] = useState([]);
-
-  //-----------------------------------------------------------
-  // Replace these functions with ones from dive_centre_helpers
-  const getRruleFreq = (freq) => {
-    switch (freq) {
-      case "daily":
-        return RRule.DAILY;
-      case "weekly":
-        return RRule.WEEKLY;
-      case "monthly":
-        return RRule.MONTHLY;
-      case "once":
-        return RRule.YEARLY;
-      default:
-        return RRule.MONTHLY;
-    }
-  };
-
-  const getRruleDays = (oldArr) => {
-    const newArr = [];
-    if (oldArr.includes("MO")) {
-      newArr.push(RRule.MO);
-    }
-    if (oldArr.includes("TU")) {
-      newArr.push(RRule.TU);
-    }
-    if (oldArr.includes("WE")) {
-      newArr.push(RRule.WE);
-    }
-    if (oldArr.includes("TH")) {
-      newArr.push(RRule.TH);
-    }
-    if (oldArr.includes("FR")) {
-      newArr.push(RRule.FR);
-    }
-    if (oldArr.includes("SA")) {
-      newArr.push(RRule.SA);
-    }
-    if (oldArr.includes("SU")) {
-      newArr.push(RRule.SU);
-    }
-    return newArr;
-  };
+  const [tripRules, setTripRules] = useState([]);
 
   const rule = new RRule({
     freq: getRruleFreq(frequency),
@@ -82,27 +44,11 @@ export default function Auction(props) {
     ...(frequency === "One Time" && { interval: 1 }),
   });
 
-  //-----------------------------------------------------------
-
   useEffect(() => {
-    setTripsRule(rule.all());
+    setTripRules(rule.all());
   }, [diveTrip]);
 
-  // const getTileContent = ({ date, view }) =>
-  //   view === "month" &&
-  //   tripsRule
-  //     .map((item) => new Date(item).toISOString().split("T")[0])
-  //     .includes(new Date(date).toISOString().split("T")[0]) ? (
-  //     <StatusIndicator />
-  //   ) : null;
-
-  const getTileColor = ({ date, view }) =>
-    view === "month" &&
-    tripsRule
-      .map((item) => new Date(item).toISOString().split("T")[0])
-      .includes(new Date(date).toISOString().split("T")[0])
-      ? "trip-calendar-selectable"
-      : null;
+  // console.log("rrlue", rule.toString());
 
   return (
     <Card
@@ -114,16 +60,8 @@ export default function Auction(props) {
       p="20px"
       mb="20px"
       boxShadow={shadow}
+      bgColor={useColorModeValue("gray.200", "brand.300")}
     >
-      {/* <Flex
-        w="100%"
-        
-        direction="column"
-        border="1px solid"
-        borderColor={borderColor}
-        bg={cardBg}
-        borderRadius="30px"
-      > */}
       <Text fontSize="xl" color={textColorPrimary} fontWeight="bold">
         Trip Summary
       </Text>
@@ -133,17 +71,6 @@ export default function Auction(props) {
       <Text fontWeight="700" color={textColorPrimary} fontSize="30px">
         {name}
       </Text>
-
-      {/* <Text fontSize="xl" color={textColorPrimary} fontWeight="500" mb="28px">
-        {startDate
-          ? `${startDate.toLocaleDateString("en-US", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })} ${frequency}`
-          : frequency}
-        {` @ ${startTime}`}
-      </Text> */}
       <Text fontSize="xl" color={textColorPrimary} fontWeight="500" mb="28px">
         Starting{" "}
         {startDate.toLocaleDateString("en-US", {
@@ -154,9 +81,6 @@ export default function Auction(props) {
         {rule.toText()}
         {` @ ${startTime}`}
       </Text>
-      {/* <Text fontSize="xl" color={textColorPrimary} fontWeight="500" mb="28px">
-        {rule.toText()}
-      </Text> */}
       <Text fontSize="xl" color={textColorPrimary} fontWeight="500" mb="28px">
         Duration:{" "}
         {duration &&
@@ -170,7 +94,9 @@ export default function Auction(props) {
         // value={diveDate}
         // selectRange={selectRange}
         view="month"
-        tileClassName={getTileColor}
+        tileClassName={({ date, view }) =>
+          getTileColor({ date, view }, tripRules)
+        }
         tileDisabled={({ date }) => date.getDay() >= 0}
         // prevLabel={<Icon as={MdChevronLeft} w="24px" h="24px" mt="4px" />}
         // nextLabel={<Icon as={MdChevronRight} w="24px" h="24px" mt="4px" />}
@@ -202,11 +128,6 @@ export default function Auction(props) {
           />
         </Flex>
       </Flex>
-      {/* </Flex> */}
-      {/* 
-      <Button variant="brand" fontSize="sm" fontWeight="500" h="46px">
-        Create Trip
-      </Button> */}
     </Card>
   );
 }

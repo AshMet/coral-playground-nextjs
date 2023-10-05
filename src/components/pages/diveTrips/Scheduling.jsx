@@ -7,6 +7,8 @@ import {
   FormLabel,
   InputGroup,
   Select,
+  Text,
+  Box,
 } from "@chakra-ui/react";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 // import Calendar from "react-calendar";
@@ -16,12 +18,14 @@ import { useEffect, useState } from "react";
 import { TbCalendar } from "react-icons/tb";
 import TimePicker from "react-time-picker/dist/entry.nostyle";
 
+import DiveSelection from "../bookings/DiveSelection";
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
 // import StatusIndicator from "components/icons/StatusIndicator";
 
 export default function Scheduling(props) {
-  const { diveTrip, setDiveTrip, ...rest } = props;
+  const { diveTrip, setDiveTrip, selectedSites, setSelectedSites, ...rest } =
+    props;
 
   const { frequency, duration, recurDays } = diveTrip || {};
 
@@ -43,6 +47,7 @@ export default function Scheduling(props) {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("transparent", "whiteAlpha.100");
+  const textColorSecondary = "secondaryGray.600";
 
   const handleChange = (e) => {
     setDiveTrip({ ...diveTrip, [e.target.name]: e.target.value });
@@ -103,7 +108,7 @@ export default function Scheduling(props) {
   return (
     <Card
       border="1px solid"
-      my={5}
+      mb={5}
       borderColor={borderColor}
       align="center"
       direction="column"
@@ -113,6 +118,15 @@ export default function Scheduling(props) {
       h="max-content"
       {...rest}
     >
+      <Box textAlign="start" mb={5}>
+        <Text fontSize="2xl" color={textColor} fontWeight="bold">
+          Scheduling
+        </Text>
+        <Text fontSize="md" color={textColorSecondary}>
+          Set up your trip schedule below. You can confirm the schedule using
+          the calendar in the Summary section
+        </Text>
+      </Box>
       <Flex direction="column">
         <FormLabel
           ms="10px"
@@ -290,6 +304,22 @@ export default function Scheduling(props) {
           <option value="days">Days</option>
         </Select>
       </Flex>
+      <FormLabel
+        ms="10px"
+        htmlFor="startDate"
+        fontSize="sm"
+        color={textColor}
+        fontWeight="bold"
+        _hover={{ cursor: "pointer" }}
+      >
+        Add dive sites to your trip
+      </FormLabel>
+      <DiveSelection
+        diveTrip={diveTrip}
+        setDiveTrip={setDiveTrip}
+        selectedSites={selectedSites}
+        setSelectedSites={setSelectedSites}
+      />
     </Card>
   );
 }
