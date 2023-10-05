@@ -30,6 +30,7 @@ import {
   Tr,
   useColorModeValue,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
 import { MdChevronRight, MdChevronLeft } from "react-icons/md";
@@ -40,8 +41,7 @@ import {
   useTable,
 } from "react-table";
 
-import AddTripModal from "../dive_trips/AddTripModal";
-
+import AddTripModal from "./AddTripModal";
 import CentreModal from "./CentreModal";
 
 // import EditModal from "./EditModal";
@@ -160,9 +160,16 @@ function SearchTableDiveCentres(props) {
                     );
                   } else if (cell.column.Header === "NAME") {
                     data = (
-                      <Text color={textColor} fontSize="md" fontWeight="500">
-                        {cell.value}
-                      </Text>
+                      <Link href={`/dive_centres/${row.original.slug}`}>
+                        <Text
+                          color="purple.500"
+                          fontWeight="700"
+                          fontSize="xl"
+                          _hover={{ cursor: "pointer" }}
+                        >
+                          {cell.value}
+                        </Text>
+                      </Link>
                     );
                   } else if (cell.column.Header === "COVER") {
                     data = cell.value && (

@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import {
-  Button,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -11,11 +10,13 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
+import { MdAdd } from "react-icons/md";
 
+import IconLinkCircle from "components/fields/IconLinkCircle";
 import DiveTripForm from "components/forms/DiveTripForm";
 import { in3Months } from "utils/helpers/diveCentresHelper";
 
-export default function TripModal({ diveCentreData, btnText }) {
+export default function TripModal({ diveCentreData }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = useRef(null);
@@ -52,14 +53,12 @@ export default function TripModal({ diveCentreData, btnText }) {
   const [diveTrip, setDiveTrip] = useState(initialState);
   return (
     <>
-      <Button
-        colorScheme={btnText === "Edit" ? "red" : "green"}
-        maxW="200px"
-        ml="20px"
+      <IconLinkCircle
+        title="Add Trip"
+        icon={MdAdd}
+        url={`/dive_centres/${diveCentreData?.slug}/dive_trips/new`}
         onClick={onOpen}
-      >
-        {btnText || "New"}
-      </Button>
+      />
 
       <Modal
         initialFocusRef={initialRef}
@@ -82,7 +81,7 @@ export default function TripModal({ diveCentreData, btnText }) {
               diveCentreSlug={diveCentreData.slug}
               diveTrip={diveTrip}
               setDiveTrip={setDiveTrip}
-              nextUrl="/admin/dive_trips"
+              nextUrl="/admin/dive_centres"
             />
           </ModalBody>
         </ModalContent>

@@ -13,10 +13,10 @@ const columnsDataCentres = [
     Header: "COVER",
     accessor: "coverPhotoUrl",
   },
-  {
-    Header: "ID",
-    accessor: "id",
-  },
+  // {
+  //   Header: "ID",
+  //   accessor: "id",
+  // },
   {
     Header: "NAME",
     accessor: "name",

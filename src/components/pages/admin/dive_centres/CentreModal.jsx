@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import {
-  Button,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -10,7 +9,9 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
+import { MdEdit } from "react-icons/md";
 
+import IconLinkCircle from "components/fields/IconLinkCircle";
 import DiveCentreForm from "components/forms/DiveCentreForm";
 
 export default function CentreModal({ diveCentreData, type }) {
@@ -22,15 +23,12 @@ export default function CentreModal({ diveCentreData, type }) {
   const [diveCentre, setDiveCentre] = useState(diveCentreData);
   return (
     <>
-      <Button
-        colorScheme={type === "edit" ? "red" : "green"}
-        maxW="200px"
-        ml="20px"
+      <IconLinkCircle
+        title={type === "edit" ? "Edit" : "Create"}
+        icon={MdEdit}
+        url={`/dive_centres/${diveCentre?.slug}/edit`}
         onClick={onOpen}
-      >
-        {type === "edit" ? "Edit" : "Create New"}
-      </Button>
-
+      />
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
