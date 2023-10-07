@@ -172,7 +172,7 @@ export default function CheckoutButton() {
       const {
         data: { id: custId },
       } = await axios.post(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/api/stripe_customers`,
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/stripe/create_customer`,
         {
           name: diverName, // get from json
           email: diverEmail, // get from json
@@ -219,7 +219,7 @@ export default function CheckoutButton() {
       const {
         data: { id: sessionId },
       } = await axios.post(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/api/checkout_sessions`,
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/stripe/checkout_sessions`,
         {
           items: stripeLineItems,
           metadata: sessionMetadata,

@@ -14,7 +14,7 @@ import {
 } from "utils/helpers/diveCentresHelper";
 
 export default function Summary(props) {
-  const { diveTrip, deposit } = props;
+  const { diveTrip } = props;
 
   const {
     name,
@@ -117,14 +117,14 @@ export default function Summary(props) {
             mb="20px"
             title="Deposit"
             subtitle="Amount paid to Coral Playground"
-            sum={`€${deposit / 100}`}
+            sum={`€${(price * 0.15) / 100}`}
           />
           <Divider mb="20px" />
           <SidebarInvoice
             mb="20px"
             title="Amount Remaining"
             subtitle="Amount paid to dive centre"
-            sum={`€${(price - deposit) / 100}`}
+            sum={`€${(price * 0.85) / 100}`}
           />
         </Flex>
       </Flex>

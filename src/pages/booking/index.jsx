@@ -51,9 +51,9 @@ import { supabase } from "utils/initializers/supabase";
 
 export default function NewBooking({ equipment }) {
   const [activeBullets, setActiveBullets] = useState({
-    product: true,
-    media: false,
-    pricing: false,
+    equipmentTab: true,
+    SummaryTab: false,
+    DiverInfoTab: false,
   });
   const { cartItems } = useContext(CartContext);
 
@@ -104,9 +104,9 @@ export default function NewBooking({ equipment }) {
               w={{ sm: "120px", md: "250px", lg: "300px" }}
               onClick={() =>
                 setActiveBullets({
-                  product: true,
-                  media: false,
-                  pricing: false,
+                  equipmentTab: true,
+                  SummaryTab: false,
+                  DiverInfoTab: false,
                 })
               }
             >
@@ -119,14 +119,14 @@ export default function NewBooking({ equipment }) {
                   content: "''",
                   width: { sm: "120px", md: "250px", lg: "300px" },
                   height: "3px",
-                  bg: activeBullets.media ? "white" : "#8476FF",
+                  bg: activeBullets.SummaryTab ? "white" : "#8476FF",
                   left: { sm: "12px", md: "40px" },
                   top: {
-                    sm: activeBullets.product ? "6px" : "4px",
+                    sm: activeBullets.equipmentTab ? "6px" : "4px",
                     md: null,
                   },
                   position: "absolute",
-                  bottom: activeBullets.product ? "40px" : "38px",
+                  bottom: activeBullets.equipmentTab ? "40px" : "38px",
 
                   transition: "all .3s ease",
                 }}
@@ -134,7 +134,7 @@ export default function NewBooking({ equipment }) {
                 <Box
                   zIndex="1"
                   border="2px solid"
-                  borderColor={activeBullets.product ? "white" : "#8476FF"}
+                  borderColor={activeBullets.equipmentTab ? "white" : "#8476FF"}
                   bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
                   w="16px"
                   h="16px"
@@ -142,15 +142,15 @@ export default function NewBooking({ equipment }) {
                   borderRadius="50%"
                 />
                 <Text
-                  color={activeBullets.product ? "white" : "gray.300"}
-                  fontWeight={activeBullets.product ? "bold" : "normal"}
+                  color={activeBullets.equipmentTab ? "white" : "gray.300"}
+                  fontWeight={activeBullets.equipmentTab ? "bold" : "normal"}
                   display={{ sm: "none", md: "block" }}
                 >
                   Equipment
                 </Text>
                 <Text
-                  color={activeBullets.product ? "white" : "gray.300"}
-                  fontWeight={activeBullets.product ? "bold" : "normal"}
+                  color={activeBullets.equipmentTab ? "white" : "gray.300"}
+                  fontWeight={activeBullets.equipmentTab ? "bold" : "normal"}
                   display={{ sm: "block", md: "none" }}
                 >
                   Step 1
@@ -163,9 +163,9 @@ export default function NewBooking({ equipment }) {
               w={{ sm: "120px", md: "250px", lg: "300px" }}
               onClick={() =>
                 setActiveBullets({
-                  product: true,
-                  media: true,
-                  pricing: false,
+                  equipmentTab: true,
+                  SummaryTab: true,
+                  DiverInfoTab: false,
                 })
               }
             >
@@ -178,11 +178,11 @@ export default function NewBooking({ equipment }) {
                   content: "''",
                   width: { sm: "120px", md: "250px", lg: "300px" },
                   height: "3px",
-                  bg: activeBullets.pricing ? "white" : "#8476FF",
+                  bg: activeBullets.DiverInfoTab ? "white" : "#8476FF",
                   left: { sm: "12px", md: "28px" },
                   top: "6px",
                   position: "absolute",
-                  bottom: activeBullets.media ? "40px" : "38px",
+                  bottom: activeBullets.SummaryTab ? "40px" : "38px",
 
                   transition: "all .3s ease",
                 }}
@@ -190,7 +190,7 @@ export default function NewBooking({ equipment }) {
                 <Box
                   zIndex="1"
                   border="2px solid"
-                  borderColor={activeBullets.media ? "white" : "#8476FF"}
+                  borderColor={activeBullets.SummaryTab ? "white" : "#8476FF"}
                   bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
                   w="16px"
                   h="16px"
@@ -198,15 +198,15 @@ export default function NewBooking({ equipment }) {
                   borderRadius="50%"
                 />
                 <Text
-                  color={activeBullets.media ? "white" : "gray.300"}
-                  fontWeight={activeBullets.media ? "bold" : "normal"}
+                  color={activeBullets.SummaryTab ? "white" : "gray.300"}
+                  fontWeight={activeBullets.SummaryTab ? "bold" : "normal"}
                   display={{ sm: "none", md: "block" }}
                 >
                   Summary
                 </Text>
                 <Text
-                  color={activeBullets.product ? "white" : "gray.300"}
-                  fontWeight={activeBullets.product ? "bold" : "normal"}
+                  color={activeBullets.equipmentTab ? "white" : "gray.300"}
+                  fontWeight={activeBullets.equipmentTab ? "bold" : "normal"}
                   display={{ sm: "block", md: "none" }}
                 >
                   Step 2
@@ -219,9 +219,9 @@ export default function NewBooking({ equipment }) {
               w={{ sm: "120px", md: "250px", lg: "300px" }}
               onClick={() =>
                 setActiveBullets({
-                  product: true,
-                  media: true,
-                  pricing: true,
+                  equipmentTab: true,
+                  SummaryTab: true,
+                  DiverInfoTab: true,
                 })
               }
             >
@@ -234,7 +234,7 @@ export default function NewBooking({ equipment }) {
                 <Box
                   zIndex="1"
                   border="2px solid"
-                  borderColor={activeBullets.pricing ? "white" : "#8476FF"}
+                  borderColor={activeBullets.DiverInfoTab ? "white" : "#8476FF"}
                   bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
                   w="16px"
                   h="16px"
@@ -242,15 +242,15 @@ export default function NewBooking({ equipment }) {
                   borderRadius="50%"
                 />
                 <Text
-                  color={activeBullets.pricing ? "white" : "gray.300"}
-                  fontWeight={activeBullets.pricing ? "bold" : "normal"}
+                  color={activeBullets.DiverInfoTab ? "white" : "gray.300"}
+                  fontWeight={activeBullets.DiverInfoTab ? "bold" : "normal"}
                   display={{ sm: "none", md: "block" }}
                 >
                   Diver Info
                 </Text>
                 <Text
-                  color={activeBullets.product ? "white" : "gray.300"}
-                  fontWeight={activeBullets.product ? "bold" : "normal"}
+                  color={activeBullets.equipmentTab ? "white" : "gray.300"}
+                  fontWeight={activeBullets.equipmentTab ? "bold" : "normal"}
                   display={{ sm: "block", md: "none" }}
                 >
                   Step 3

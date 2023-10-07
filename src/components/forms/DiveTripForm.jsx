@@ -4,6 +4,7 @@
 /* eslint-disable no-plusplus */
 import { Box, Button, Flex, Grid, useToast } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
@@ -12,17 +13,16 @@ import AlertPopup from "components/alerts/AlertPopup";
 import Scheduling from "components/pages/diveTrips/Scheduling";
 import Summary from "components/pages/diveTrips/Summary";
 import TripDetails from "components/pages/diveTrips/TripDetails";
-import { getStripePriceId, getDeposit } from "utils/helpers/ordersHelper";
 
 export default function DiveTripForm(props) {
   const { diveCentreSlug, diveTrip, setDiveTrip, nextUrl } = props;
   const [selectedSites, setSelectedSites] = useState([]);
   const [tripType, setTripType] = useState("generic");
-  const [deposit, setDeposit] = useState();
   const toast = useToast();
   const posthog = usePostHog();
   const supabase = useSupabaseClient();
   const router = useRouter();
+  // const commission = 0.1;
 
   // console.log("new trip centre slug", diveCentreSlug);
   const {
@@ -54,7 +54,39 @@ export default function DiveTripForm(props) {
       .eq("slug", diveCentreSlug)
       .single();
 
-    const { data, error: diveTripError } = await supabase
+    // Create Stripe product
+    const {
+      data: { id: stripeProdId },
+    } = await axios.post(
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/stripe/create_product`,
+      {
+        name,
+        active,
+        description,
+        // metadata: { dive_trip_id: diveTripData.id },
+      }
+    );
+
+    // Create Stripe price
+    const {
+      data: { id: stripePriceId },
+    } = await axios.post(
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/stripe/create_price`,
+      {
+        active,
+        description,
+        currency: "eur",
+        nickname: `${diveCentre.name} - ${name}`,
+        product: stripeProdId,
+        type: "one_time",
+        unit_amount: price,
+        // custom_unit_amount: {
+        //   preset: price * commission,
+        // },
+      }
+    );
+
+    const { data: diveTripData, error: diveTripError } = await supabase
       .from("dive_trips")
       .insert([
         {
@@ -66,10 +98,11 @@ export default function DiveTripForm(props) {
           min_cert: minCert,
           active,
           price,
+          deposit: price * 0.15,
           dive_count: diveCount,
           frequency,
-          stripe_price_id: getStripePriceId(diveCount),
-          deposit: getDeposit(diveCount),
+          stripe_price_id: stripePriceId,
+          stripe_product_id: stripeProdId,
           dive_centre_id: diveCentre.id,
           timezone,
           recur_days: recurDays,
@@ -84,7 +117,7 @@ export default function DiveTripForm(props) {
     // Handle Trip Data
     const insertTripSites = selectedSites.map((site) => ({
       dive_site_id: site.id,
-      dive_trip_id: data.id,
+      dive_trip_id: diveTripData.id,
     }));
 
     await supabase
@@ -109,7 +142,7 @@ export default function DiveTripForm(props) {
         "Dive Centre": diveCentre?.name,
         Error: diveTripError.message,
       });
-    } else if (data) {
+    } else if (diveTripData) {
       toast({
         position: "top",
         render: () => (
@@ -120,25 +153,22 @@ export default function DiveTripForm(props) {
           />
         ),
       });
+
       posthog.capture("Dive Trip Created", {
         "Dive Centre": diveCentre.name,
-        "Dive Trip": data.name,
-        Deposit: data.deposit / 100,
-        Price: data.price / 100,
-        Duration: data.duration,
-        "Dive Count": data.diveCount,
-        "Trip Type": data.generic ? "Generic" : "Site-Specific",
-        Status: data.active ? "Active" : "Inactive",
+        "Dive Trip": diveTripData.name,
+        Deposit: diveTripData.deposit / 100,
+        Price: diveTripData.price / 100,
+        Duration: diveTripData.duration,
+        "Dive Count": diveTripData.diveCount,
+        "Trip Type": diveTripData.generic ? "Generic" : "Site-Specific",
+        Status: diveTripData.active ? "Active" : "Inactive",
       });
       router.push(nextUrl || `/dive_centres/${diveCentreSlug}`);
     }
   }
 
   // console.log("diveTrip", diveTrip);
-
-  useEffect(() => {
-    setDeposit(getDeposit(diveCount));
-  }, [diveCount]);
 
   useEffect(() => {
     const noSitesName = `${diveCount} Dive Package`;
@@ -189,7 +219,7 @@ export default function DiveTripForm(props) {
       </Box>
       <Flex direction="column" mt={{ sm: "20px", md: "0px" }}>
         {/* Row 2: Trip Details */}
-        <Summary diveTrip={diveTrip} deposit={deposit} />
+        <Summary diveTrip={diveTrip} />
         <Button
           // isLoading={tripDives.length === 0}
           // isDisabled={tripDives.length === 0}

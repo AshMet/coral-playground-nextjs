@@ -336,7 +336,7 @@ export default function Liveaboards({ diveTrips }) {
                     diveTime: selectedTrip.startTime,
                     price: selectedTrip.price,
                     priceId: selectedTrip.stripePriceId,
-                    deposit: selectedTrip.depsit,
+                    deposit: selectedTrip.deposit,
                   })
                 }
               >
