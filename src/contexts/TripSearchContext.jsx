@@ -50,8 +50,8 @@ export const TripSearchProvider = ({ children }) => {
       if (trips[0].diveCentreCity) {
         return trips.filter((trip) => trip.diveCentreCity === city);
       }
-      if (trips[0].city.name) {
-        return trips.filter((trip) => trip.city.name === city);
+      if (trips[0].city) {
+        return trips.filter((trip) => trip.city === city);
       }
       return trips.filter((trip) => trip.city === city);
     };

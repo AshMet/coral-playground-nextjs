@@ -31,7 +31,7 @@ import TimeTile from "./TimeTile";
 
 export default function TripLineItem(props) {
   const { trip, tripRules, type, icon, ...rest } = props;
-  const { id, name, price, stripePriceId, deposit, startTime, diveCentre } =
+  const { id, name, price, stripePriceId, deposit, startTime, centreName } =
     trip || {};
   const { addToCart } = useContext(CartContext);
 
@@ -72,8 +72,8 @@ export default function TripLineItem(props) {
         <Flex align="center">
           <Icon me="8px" as={IoStorefrontOutline} w="16px" h="16px" />
           <Text color={textColor} fontSize="md" me="6px" fontWeight="500">
-            {type === "diveSite" && trip?.diveCentre?.name}
-            <Badge colorScheme="purple" size="sm" padding={1}>
+            {type === "diveSite" && trip?.centreName}
+            <Badge colorScheme="green" size="sm" padding={1} ml={2}>
               {tripRules?.length} Trips
             </Badge>
           </Text>
@@ -135,7 +135,7 @@ export default function TripLineItem(props) {
                 id,
                 title: name,
                 itemType: "diveTrip",
-                centreName: diveCentre.name,
+                centreName,
                 startDate: combineDateAndTime(selectedDate, startTime),
                 diveTime: startTime,
                 price,

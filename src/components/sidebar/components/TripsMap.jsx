@@ -100,8 +100,8 @@ export default function TripsMap(props) {
             <Marker
               key={trip.id}
               position={{
-                lat: trip.diveCentre.latitude,
-                lng: trip.diveCentre.longitude,
+                lat: trip.centreLat,
+                lng: trip.centreLng,
               }}
               icon={{
                 url: "/img/diving/dive_centre_marker.svg",

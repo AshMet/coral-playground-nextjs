@@ -39,8 +39,8 @@ export default function SiteInfo({
   species,
   minDepth,
   maxDepth,
-  minVisibility,
-  maxVisibility,
+  minVis,
+  maxVis,
   minCurrent,
   maxCurrent,
   access,
@@ -216,8 +216,8 @@ export default function SiteInfo({
                   <DetailsTab
                     minDepth={minDepth}
                     maxDepth={maxDepth}
-                    minVisibility={minVisibility}
-                    maxVisibility={maxVisibility}
+                    minVis={minVis}
+                    maxVis={maxVis}
                     minCurrent={minCurrent}
                     maxCurrent={maxCurrent}
                     access={access}
@@ -226,7 +226,7 @@ export default function SiteInfo({
                   />
                 </TabPanel>
                 <TabPanel px="0px">
-                  <SpeciesTab collection={species} />
+                  <SpeciesTab species={species} />
                 </TabPanel>
               </TabPanels>
             </Tabs>

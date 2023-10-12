@@ -30,7 +30,7 @@ export default function EquipLineItem(props) {
   const { addToCart } = useContext(CartContext);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const iconBoxBg = useColorModeValue("secondaryGray.300", "navy.700");
+  const iconBoxBg = "secondaryGray.300";
   return (
     <Flex justifyContent="center" alignItems="center" w="100%" {...rest}>
       <IconBox
@@ -38,7 +38,14 @@ export default function EquipLineItem(props) {
         w="42px"
         bg={iconBoxBg}
         me="20px"
-        icon={<Image src={icon} height="30px" width="30px" />}
+        icon={
+          <Image
+            src={icon}
+            height="30px"
+            width="30px"
+            // filter="invert(100%) sepia(0%) saturate(7500%) hue-rotate(70deg) brightness(99%) contrast(107%)"
+          />
+        }
       />
       <Flex direction="column" align="start" me="auto">
         <Text color={textColor} fontSize="md" me="6px" fontWeight="700">

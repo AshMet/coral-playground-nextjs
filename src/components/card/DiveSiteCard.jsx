@@ -34,8 +34,8 @@ export default function DiveSiteCard(props) {
     tagList,
     minDepth,
     maxDepth,
-    minVisibility,
-    maxVisibility,
+    minVis,
+    maxVis,
     minCurrent,
     maxCurrent,
     type,
@@ -188,9 +188,9 @@ export default function DiveSiteCard(props) {
                           <CircProgressMini title="DEP" value={maxDepth} />
                         </Box>
                       )}
-                      {maxVisibility && (
+                      {maxVis && (
                         <Box w="35px" mt="10px">
-                          <CircProgressMini title="VIS" value={maxVisibility} />
+                          <CircProgressMini title="VIS" value={maxVis} />
                         </Box>
                       )}
                       {maxCurrent && (

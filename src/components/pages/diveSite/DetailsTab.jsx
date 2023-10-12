@@ -20,8 +20,8 @@ import IconBox from "components/icons/IconBox";
 export default function DetailsTab({
   minDepth,
   maxDepth,
-  minVisibility,
-  maxVisibility,
+  minVis,
+  maxVis,
   minCurrent,
   maxCurrent,
   access,
@@ -46,12 +46,12 @@ export default function DetailsTab({
               />
             </Card>
           )}
-          {maxVisibility && (
+          {maxVis && (
             <Card p={{ base: "10px", md: "20px" }}>
               <CircularProgress
                 title="Visibility"
-                value={maxVisibility}
-                text={`${minVisibility || "N/A"} - ${maxVisibility || "N/A"}m`}
+                value={maxVis}
+                text={`${minVis || "N/A"} - ${maxVis || "N/A"}m`}
               />
             </Card>
           )}

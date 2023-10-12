@@ -87,8 +87,8 @@ export default function DiveSites({ diveSites }) {
                         tagList={site.tags}
                         minDepth={site.minDepth}
                         maxDepth={site.maxDepth}
-                        minVisibility={site.maxVisibility}
-                        maxVisibility={site.maxVisibility}
+                        minVis={site.maxVis}
+                        maxVis={site.maxVis}
                         minCurrent={site.minCurrent}
                         maxCurrent={site.maxCurrent}
                         type="diveSite"
@@ -109,8 +109,8 @@ export async function getStaticProps() {
   const { data: diveSites } = await supabase
     .from("dive_sites_view")
     .select(
-      ` id, slug, name, description, latitude, longitude, minVisibility, maxVisibility, minDepth, maxDepth,
-        minCurrent, maxCurrent, certLevel, tags, access, diveMap, cityName`
+      ` id, slug, name, description, latitude, longitude, minVis, maxVis, minDepth, maxDepth,
+        minCurrent, maxCurrent, certLevel, tags, access, diveMap, city`
     )
     .order("name", { ascending: true });
   await generateDiveSiteRSS(diveSites);

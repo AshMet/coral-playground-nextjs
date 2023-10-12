@@ -11,7 +11,7 @@ import {
 import Image from "components/actions/NextChakraImg";
 import Card from "components/card/Card";
 
-export default function SpeciesTab({ collection, ...rest }) {
+export default function SpeciesTab({ species, ...rest }) {
   const bgColor = useColorModeValue("white", "navy.900");
 
   const titleCase = (str) => {
@@ -26,7 +26,7 @@ export default function SpeciesTab({ collection, ...rest }) {
   return (
     <Box gridArea="1 / 2 / 2 / 3">
       <SimpleGrid mt="20px" columns={{ sm: 2, md: 4 }} gap="20px" mb="20px">
-        {collection?.map((item) => {
+        {species?.map((item) => {
           return (
             <Card
               p={{ base: "14px", md: "25px" }}
@@ -40,15 +40,15 @@ export default function SpeciesTab({ collection, ...rest }) {
               {...rest}
             >
               <VStack>
-                {item.specie.cover_photo && (
+                {item.coverPhoto && (
                   <Image
-                    src={item.specie.cover_photo}
+                    src={item.coverPhoto}
                     width="100%"
                     height="50px"
                     borderRadius="15px"
                   />
                 )}
-                <Text>{titleCase(item.specie.name)}</Text>
+                <Text>{titleCase(item.speciesName)}</Text>
               </VStack>
             </Card>
           );
