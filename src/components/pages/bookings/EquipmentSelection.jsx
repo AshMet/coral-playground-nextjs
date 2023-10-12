@@ -60,7 +60,7 @@ export default function EquipmentSelection(props) {
         Equipment
       </Text>
       <Text color="grey.500" fontSize="md" fontWeight="500" mb="20px">
-        Select any specialized eqiupment you would like to add to your trip
+        Select any specialized equipment you would like to add to your trip
       </Text>
       <Flex direction="column" w="100%">
         <Flex wrap="wrap">

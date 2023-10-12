@@ -15,13 +15,12 @@ import CentreInfo from "components/pages/diveCentre/CentreInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
 import DivingLayout from "layouts/DivingLayout";
 
-export default function DiveCentre({ diveCentre }) {
+export default function DiveCentre({ diveCentre, centreEquipment }) {
   const router = useRouter();
   const { slug } = router.query;
   const posthog = usePostHog();
 
   const [trips, setTrips] = useState([]);
-  // const [diveCentre, setDiveCentre] = useState(true);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,11 +30,6 @@ export default function DiveCentre({ diveCentre }) {
       Country: diveCentre.country,
     });
   }, []);
-
-  // useEffect(() => {
-  //   setDiveCentre(diveCentreData);
-  //   // console.log("diveCentre", diveCentreData);
-  // }, [diveCentreData]);
 
   async function fetchCentreTrips() {
     const { data } = await supabase
@@ -66,6 +60,7 @@ export default function DiveCentre({ diveCentre }) {
   }, []);
 
   console.log("trips", trips);
+  console.log("centreEquip", centreEquipment);
 
   return (
     <>
@@ -144,6 +139,7 @@ export default function DiveCentre({ diveCentre }) {
               <TripsSidebar
                 trips={trips.filter((trip) => trip.active === true)}
                 diveCentre={diveCentre}
+                centreEquipment={centreEquipment}
                 loading={loading}
               />
             </Box>
@@ -166,9 +162,17 @@ export async function getServerSideProps(context) {
     .match({ slug })
     .single();
 
+  console.log("diveCentre", diveCentre);
+
+  const { data: centreEquipment } = await supabase
+    .from("centre_equipment_view")
+    .select("*")
+    .eq("centreId", diveCentre.id);
+
   return {
     props: {
       diveCentre,
+      centreEquipment,
     },
   };
 }

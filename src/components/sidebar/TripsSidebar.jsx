@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { MdAddCircle } from "react-icons/md";
 
 import Card from "components/card/Card";
+import EquipLineItem from "components/dataDisplay/EquipLineItem";
 import TripLineItem from "components/dataDisplay/TripLineItem";
 import TripSearchBar from "components/fields/TripSearchBar";
 import { TripSearchContext } from "contexts/TripSearchContext";
@@ -17,7 +18,13 @@ import {
 
 import TripsMap from "./components/TripsMap";
 
-export default function TripSidebar({ trips, diveSite, diveCentre, ...rest }) {
+export default function TripSidebar({
+  trips,
+  diveSite,
+  diveCentre,
+  centreEquipment,
+  ...rest
+}) {
   const { dateRange } = useContext(TripSearchContext);
 
   // console.log("sidebar trips", trips);
@@ -112,6 +119,29 @@ export default function TripSidebar({ trips, diveSite, diveCentre, ...rest }) {
           </Text>
         )}
       </Card>
+      {centreEquipment?.length > 0 && (
+        <Card mt={5}>
+          <Text color={textColor} fontSize="2xl" fontWeight="700" mb="20px">
+            Equipment Rentals
+          </Text>
+          {centreEquipment.map((item, index) => (
+            <Flex
+              key={item.id}
+              direction="column"
+              justify="space-between"
+              align="center"
+            >
+              <EquipLineItem
+                item={item}
+                icon={
+                  <Icon as={MdAddCircle} color={textColor} w="20px" h="18px" />
+                }
+              />
+              {centreEquipment?.length > index + 1 && <Divider my="25px" />}
+            </Flex>
+          ))}
+        </Card>
+      )}
     </Flex>
   );
 }

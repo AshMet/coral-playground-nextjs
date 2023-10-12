@@ -75,7 +75,7 @@ const columnsDataCentres = [
   },
 ];
 
-export default function CentresList({ diveCentres }) {
+export default function CentresList({ diveCentres, equipment }) {
   return (
     <>
       <NextSeo noindex nofollow />
@@ -84,6 +84,7 @@ export default function CentresList({ diveCentres }) {
           <SearchTableDiveCentres
             tableData={diveCentres}
             columnsData={columnsDataCentres}
+            equipment={equipment}
           />
         </Card>
       </Flex>
@@ -109,6 +110,7 @@ export const getServerSideProps = async (ctx) => {
   //   "get_my_claim",
   //   '"user_role"'
   // );
+  const { data: equipment } = await supabase.from("equipment").select("*");
   const userRole = session?.user.app_metadata.user_role;
 
   if (userRole === "ADMIN") {
@@ -116,6 +118,7 @@ export const getServerSideProps = async (ctx) => {
       props: {
         diveCentres,
         session,
+        equipment,
         user: session.user,
         centreData: [],
       },

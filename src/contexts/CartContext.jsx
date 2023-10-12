@@ -72,7 +72,10 @@ export const CartProvider = ({ children }) => {
       return;
     }
     // if (!(newItem.startDate instanceof Date) || newItem.startDate !== null) {
-    if (isNaN(newItem.startDate.getTime())) {
+    if (
+      isNaN(newItem.startDate?.getTime()) &&
+      newItem.itemType === "diveTrip"
+    ) {
       toast({
         position: "top",
         render: () => (

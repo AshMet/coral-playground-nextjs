@@ -41,15 +41,13 @@ import {
   useTable,
 } from "react-table";
 
+import AddEquipModal from "./AddEquipModal";
 import AddTripModal from "./AddTripModal";
 import CentreModal from "./CentreModal";
-
-// import EditModal from "./EditModal";
-
 // import { SearchBar } from "components/navbar/searchBar/SearchBar";
 
 function SearchTableDiveCentres(props) {
-  const { columnsData, tableData } = props;
+  const { columnsData, tableData, equipment } = props;
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -314,6 +312,13 @@ function SearchTableDiveCentres(props) {
                           diveCentreData={row.original}
                           btnText="Add Trip"
                         />
+                        {equipment && (
+                          <AddEquipModal
+                            diveCentreData={row.original}
+                            equipment={equipment}
+                            btnText="Add Trip"
+                          />
+                        )}
                       </HStack>
                     );
                   }
