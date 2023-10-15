@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable sonarjs/no-duplicated-branches */
 export const getStripePriceId = (n) => {
   switch (n) {
@@ -32,3 +33,10 @@ export const getDeposit = (n) => {
       return 1500;
   }
 };
+
+// Toggle items from a list of clickable buttons (equipment)
+export function toggleArrayItem(arr, item, setEquipmentList) {
+  arr.map((a) => a.id).includes(item.id)
+    ? setEquipmentList(arr.filter((i) => i.id !== item.id)) // remove item
+    : setEquipmentList([...arr, item]); // add item
+}

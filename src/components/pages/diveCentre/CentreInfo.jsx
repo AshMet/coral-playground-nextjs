@@ -17,6 +17,7 @@ import {
 import { useState } from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 
+import EquipmentSelection from "../bookings/EquipmentSelection";
 import Card from "components/card/Card";
 
 import CollectionTab from "./CollectionTab";
@@ -26,18 +27,19 @@ import DetailsTab from "./DetailsTab";
 // import Instructor from "./Instructor";
 // import Rating from "./Rating";
 
-export default function CentreInfo({
-  name,
-  description,
-  address,
-  city,
-  country,
-  equipment,
-  languages,
-  memberships,
-  services,
-  paymentMethods,
-}) {
+export default function CentreInfo({ diveCentre, equipment }) {
+  const {
+    name,
+    description,
+    address,
+    city,
+    country,
+    services,
+    paymentMethods,
+    languages,
+    memberships,
+  } = diveCentre;
+
   const [tabState, setTabState] = useState("notes");
 
   // Chakra Color Mode
@@ -197,10 +199,15 @@ export default function CentreInfo({
                   />
                 </TabPanel>
                 <TabPanel px="0px">
-                  <CollectionTab
+                  {/* <CollectionTab
                     collection={equipment}
                     folderUrl="/svg/equipment"
                     extension="svg"
+                  /> */}
+
+                  <EquipmentSelection
+                    // summaryTab={summaryTab}
+                    equipment={equipment}
                   />
                 </TabPanel>
               </TabPanels>

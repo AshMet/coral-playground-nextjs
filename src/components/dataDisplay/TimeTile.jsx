@@ -13,7 +13,7 @@ export default function TimeTile({ date, time, tileSize, ...rest }) {
         w={tileSize === "sm" ? "60px" : "77px"}
         h={tileSize === "sm" ? "50px" : "77px"}
         borderRadius="15px"
-        bg="purple.400"
+        bg="brand.400"
         color="black"
         p={2}
         {...rest}

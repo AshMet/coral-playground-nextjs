@@ -224,15 +224,16 @@ function SearchTableDiveTrips(props) {
                   } else if (cell.column.Header === "DURATION") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
-                        {`${Object.entries(cell.value)[0][1]} ${
-                          Object.entries(cell.value)[0][0]
-                        }`}
+                        {cell.value &&
+                          `${Object.entries(cell.value)[0][1]} ${
+                            Object.entries(cell.value)[0][0]
+                          }`}
                       </Text>
                     );
                   } else if (cell.column.Header === "DEPOSIT") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
-                        {`€${cell.value / 100}`}
+                        {`€${(row.original.price * 0.15) / 100}`}
                       </Text>
                     );
                   } else if (cell.column.Header === "PRICE") {

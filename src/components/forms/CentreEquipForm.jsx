@@ -16,7 +16,6 @@ import {
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import axios from "axios";
-import { useRouter } from "next/router";
 import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 
@@ -31,7 +30,7 @@ export default function CentreEquipForm(props) {
     equipment,
     diveCentreEquip,
     setDiveCentreEquip,
-    nextUrl,
+    onOpen,
   } = props;
   const { price, equipmentId, active } = diveCentreEquip || {};
   const textColorSecondary = "secondaryGray.600";
@@ -51,7 +50,6 @@ export default function CentreEquipForm(props) {
   const toast = useToast();
   const posthog = usePostHog();
   const supabase = useSupabaseClient();
-  const router = useRouter();
   // const commission = 0.1;
   const [itemPrice, setItemPrice] = useState();
   const [itemActive, setItemActive] = useState(active);
@@ -110,7 +108,7 @@ export default function CentreEquipForm(props) {
     // console.log("stripePriceId", stripePriceId);
 
     const { data: centreEquipData, error: centreEquipError } = await supabase
-      .from("dive_centre_equipment")
+      .from("centre_equipment")
       .upsert(
         {
           active,
@@ -132,12 +130,12 @@ export default function CentreEquipForm(props) {
         render: () => (
           <AlertPopup
             type="danger"
-            text="Unable to save Dive Trip"
+            text="Unable to Add Centre Equipment"
             subtext={centreEquipError.message}
           />
         ),
       });
-      posthog.capture("Dive Trip Creation Failed", {
+      posthog.capture("Unable to Add Centre Equipment", {
         "Dive Centre": diveCentre?.name,
         Error: centreEquipError.message,
       });
@@ -158,7 +156,9 @@ export default function CentreEquipForm(props) {
         Price: centreEquipData.price / 100,
         Status: centreEquipData.active ? "Active" : "Inactive",
       });
-      router.push(nextUrl || `/dive_centres/${diveCentreSlug}`);
+      // Close modal - this is not working
+      onOpen(false);
+      // router.push(nextUrl || `/dive_centres/${diveCentreSlug}`);
     }
   }
 

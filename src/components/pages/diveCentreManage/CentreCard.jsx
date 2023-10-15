@@ -15,6 +15,7 @@ import { AiOutlineShop } from "react-icons/ai";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 import { MdAdd, MdAttachMoney, MdEdit } from "react-icons/md";
 
+import AddEqiupModal from "../admin/dive_centres/AddEquipModal";
 import AlertPopup from "components/alerts/AlertPopup";
 import IconLinkCircle from "components/fields/IconLinkCircle";
 import SwitchField from "components/fields/SwitchField";
@@ -24,7 +25,7 @@ import OwnerDiveCentreMenu from "components/pages/profile/OwnerDiveCentreMenu";
 // import * as gtag from "lib/data/gtag";
 
 export default function CentreCard(props) {
-  const { diveCentre } = props;
+  const { diveCentre, equipment } = props;
   const supabase = useSupabaseClient();
   const toast = useToast();
   const posthog = usePostHog();
@@ -157,6 +158,7 @@ export default function CentreCard(props) {
               iconColor={greenIcon}
               url={`/dive_centres/${diveCentre?.slug}/dive_trips/new`}
             />
+            <AddEqiupModal diveCentreData={diveCentre} equipment={equipment} />
             <IconLinkCircle
               title="Orders"
               icon={MdAttachMoney}

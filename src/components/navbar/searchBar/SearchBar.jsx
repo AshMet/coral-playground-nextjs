@@ -105,7 +105,7 @@ export default function SearchBar(props) {
         _hover="none"
         px={3}
       >
-        <PopoverHeader pt={4} fontWeight="bold" border="0" color="purple.400">
+        <PopoverHeader pt={4} fontWeight="bold" border="0" color="brand.400">
           Select Dive Site
         </PopoverHeader>
         <PopoverBody overflowY="auto" maxH="250px" scrollBehavior="auto">

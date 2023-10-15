@@ -88,7 +88,7 @@ export default function ShoppingCart() {
   const posthog = usePostHog();
   // console.log("navbar cartItems", cartItems);
   const { clearCart } = useContext(CartContext);
-  const iconBgColor = useColorModeValue("purple.200", "purple.400");
+  const iconBgColor = useColorModeValue("purple.200", "brand.400");
 
   const cartCheckout = () => {
     // gtag.event({

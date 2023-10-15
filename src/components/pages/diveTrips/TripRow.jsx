@@ -56,9 +56,10 @@ export default function TripRow({
   // color={useColorModeValue(colorTextLight, colorTextDark)}
   // bgColor={useColorModeValue(bgColorLight, bgColorDark)}
   const colorTextLight = selected ? "purple.600" : "white";
-  const bgColorLight = selected ? "gray.300" : "purple.400";
+  const bgColorLight = selected ? "gray.300" : "brand.400";
   const colorTextDark = selected ? "purple.600" : "white";
-  const bgColorDark = selected ? "gray.300" : "purple.400";
+  const bgColorDark = selected ? "gray.300" : "brand.400";
+  const tileColor = selected ? "gray.800" : "brand.400";
 
   // console.log("trip", trip);
   // console.log("selectedTrip", selectedTrip);
@@ -85,7 +86,7 @@ export default function TripRow({
           date={new Date(startDate)}
           time={startTime}
           color="white"
-          bg={selected ? "gray.800" : "purple.400"}
+          bg={tileColor}
         />
         <Spacer />
         <Text>to</Text>
@@ -94,7 +95,7 @@ export default function TripRow({
           date={new Date(endDate)}
           time={startTime}
           color="white"
-          bg={selected ? "gray.800" : "purple.400"}
+          bg={selected ? "gray.800" : "brand.400"}
         />
       </Stack>
 

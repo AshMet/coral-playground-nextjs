@@ -15,7 +15,7 @@ import { MdAdd } from "react-icons/md";
 import IconLinkCircle from "components/fields/IconLinkCircle";
 import CentreEquipForm from "components/forms/CentreEquipForm";
 
-export default function AddEqiupModal({ diveCentreData, equipment }) {
+export default function AddEqiupModal({ diveCentreData, equipment, nextUrl }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = useRef(null);
@@ -70,7 +70,8 @@ export default function AddEqiupModal({ diveCentreData, equipment }) {
               diveCentreEquip={diveCentreEquip}
               setDiveCentreEquip={setDiveCentreEquip}
               equipment={equipment}
-              nextUrl="/admin/dive_centres"
+              nextUrl={nextUrl}
+              onOpen={onOpen}
             />
           </ModalBody>
         </ModalContent>

@@ -77,22 +77,20 @@ export default function TripsMap(props) {
 
         {/* Show all dive sites with trips from given diveCentre */}
         {diveCentre &&
-          trips?.map((trip) =>
-            trip.diveSites.map((site) => (
-              <Marker
-                key={`${trip.id}-${site.id}`}
-                position={{
-                  lat: site.diveSite.latitude,
-                  lng: site.diveSite.longitude,
-                }}
-                // onClick={() => setMapLocation(location)}
-                icon={{
-                  url: "/img/diving/dive_site_marker.svg",
-                  scaledSize: new window.google.maps.Size(34, 34),
-                }}
-              />
-            ))
-          )}
+          trips?.map((trip) => (
+            <Marker
+              key={trip.id}
+              position={{
+                lat: trip.siteLat,
+                lng: trip.siteLng,
+              }}
+              // onClick={() => setMapLocation(location)}
+              icon={{
+                url: "/img/diving/dive_site_marker.svg",
+                scaledSize: new window.google.maps.Size(34, 34),
+              }}
+            />
+          ))}
 
         {/* Show all dive centres with trips to given diveSite */}
         {diveSite &&

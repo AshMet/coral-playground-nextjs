@@ -32,26 +32,34 @@ export default function DiveCentre({ diveCentre, centreEquipment }) {
   }, []);
 
   async function fetchCentreTrips() {
+    // const { data } = await supabase
+    //   .from("dive_centres")
+    //   .select(
+    //     `
+    //       id, slug,
+    //       diveTrips:dive_trips(id, name, description, minCert: min_cert, active,
+    //         frequency, duration, timezone, price, deposit, generic,
+    //         recurDays: recur_days, recurEndDate: recur_end_date,
+    //         stripePriceId: stripe_price_id, startDate: start_date, startTime: start_time, checkin,
+    //         diveSites:trip_sites!dive_trip_id(
+    //           diveSite:dive_site_id(id, name, latitude, longitude)),
+    //         diveCentre: dive_centres(id, name, latitude, longitude)
+    //       )
+    //     `
+    //   )
+    //   .eq("slug", slug)
+    //   .single();
+
     const { data } = await supabase
-      .from("dive_centres")
-      .select(
-        `
-          id, slug,
-          diveTrips:dive_trips(id, name, description, minCert: min_cert, active,
-            frequency, duration, timezone, price, deposit, generic,
-            recurDays: recur_days, recurEndDate: recur_end_date,
-            stripePriceId: stripe_price_id, startDate: start_date, startTime: start_time, checkin,
-            diveSites:trip_sites!dive_trip_id(
-              diveSite:dive_site_id(id, name, latitude, longitude)),
-            diveCentre: dive_centres(id, name, latitude, longitude)
-          )
-        `
-      )
-      .eq("slug", slug)
-      .single();
-    setTrips(data?.diveTrips || []);
+      .from("site_centre_trips_view")
+      .select("*")
+      .eq("centreSlug", slug);
+
+    const uniqueTrips = [...new Map(data.map((v) => [v.id, v])).values()];
+
+    setTrips(uniqueTrips || []);
     setLoading(false);
-    console.log("centreTripData", data);
+    // console.log("centreTripData", data);
   }
 
   useEffect(() => {
@@ -107,18 +115,7 @@ export default function DiveCentre({ diveCentre, centreEquipment }) {
               />
             </AspectRatio>
 
-            <CentreInfo
-              name={diveCentre.name}
-              description={diveCentre.description}
-              address={diveCentre.address}
-              city={diveCentre.city}
-              country={diveCentre.country}
-              equipment={diveCentre.equipment}
-              services={diveCentre.services}
-              paymentMethods={diveCentre.paymentMethods}
-              languages={diveCentre.languages}
-              memberships={diveCentre.memberships}
-            />
+            <CentreInfo diveCentre={diveCentre} equipment={centreEquipment} />
           </Box>
           {/* Trip sidebar Load states */}
           {/* <Center>

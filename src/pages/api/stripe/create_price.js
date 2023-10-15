@@ -1,6 +1,4 @@
-// NOTE: This is still failing when the user tries to add a previously created  price
-// NEED TO FIX
-
+/* eslint-disable sonarjs/no-small-switch */
 /* eslint-disable no-useless-escape */
 import Stripe from "stripe";
 
@@ -21,17 +19,26 @@ export default async function handler(req, res) {
         // type: req?.body?.type,
         unit_amount: req?.body?.unit_amount,
       });
+      // console.log("price: ", price);
 
       res.status(200).json(price);
     } catch (err) {
-      const existingPrice = await stripe.prices.search({
-        query: `lookup_key:\'${req?.body?.lookup_key}\'`,
-      });
-      if (existingPrice.length > 0) {
-        // console.log("existingPrice", existingPrice[0]);
-        res.status(200).json(existingPrice[0]);
+      switch (err.type) {
+        case "StripeInvalidRequestError":
+          if (err.param === "lookup_key") {
+            // console.log(`Lookup key exists: ${req.body.lookup_key}`);
+            const existingPrice = await stripe.prices.search({
+              query: `lookup_key:"${req.body.lookup_key}"`,
+            });
+            // console.log("existingPrice: ", existingPrice.data[0]);
+            res.status(200).json(existingPrice.data[0]);
+          }
+          break;
+        default:
+          // console.log(`Another problem occurred, ${err.type}.`);
+          res.status(500).json({ statusCode: 500, message: err.message });
+          break;
       }
-      res.status(500).json({ statusCode: 500, message: err.message });
     }
   } else {
     res.setHeader("Allow", "POST");

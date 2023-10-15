@@ -316,7 +316,7 @@ function SearchTableDiveCentres(props) {
                           <AddEquipModal
                             diveCentreData={row.original}
                             equipment={equipment}
-                            btnText="Add Trip"
+                            btnText="Add Item"
                           />
                         )}
                       </HStack>

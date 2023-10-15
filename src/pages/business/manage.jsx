@@ -11,8 +11,8 @@ import CentreTrips from "components/pages/diveCentreManage/CentreTrips";
 import NoCentreCard from "components/pages/diveCentreManage/NoCentreCard";
 import DivingLayout from "layouts/DivingLayout";
 
-export default function Profile(props) {
-  const { diveCentre, diveTrips } = props;
+export default function Manage(props) {
+  const { diveCentre, diveTrips, centreEquipment, equipment } = props;
   // console.log("manage centre", diveCentre);
   // console.log("manage", diveTrips);
 
@@ -23,13 +23,17 @@ export default function Profile(props) {
         <Box pt={{ sm: "60px", xl: "100px" }}>
           <Card p={{ base: "15px", md: "30px" }}>
             {diveCentre ? (
-              <CentreCard diveCentre={diveCentre} />
+              <CentreCard diveCentre={diveCentre} equipment={equipment} />
             ) : (
               <NoCentreCard />
             )}
           </Card>
           {diveCentre && (
-            <CentreTrips diveCentre={diveCentre} diveTrips={diveTrips} />
+            <CentreTrips
+              diveCentre={diveCentre}
+              diveTrips={diveTrips}
+              centreEquipment={centreEquipment}
+            />
           )}
         </Box>
       </>
@@ -82,19 +86,32 @@ export const getServerSideProps = async (ctx) => {
   }
 
   // Get dive trips with the current dive centre
-  const { data: diveTrips } = await supabase
-    .from("dive_trips")
-    .select(
-      `id, name, description, min_cert, active, price, deposit, stripe_price_id,
-          start_date, start_time, checkin, frequency, recur_days, recur_end_date,
-          duration, generic, timezone, dive_count, created_at, updated_at,
-          dive_sites:trip_sites!dive_trip_id(
-            dive_site:dive_site_id(id, name, latitude, longitude))
-      `
-    )
-    .eq("dive_centre_id", diveCentre?.id);
-  // .order("updated_at", { ascending: true });
+  // const { data: diveTrips } = await supabase
+  //   .from("dive_trips")
+  //   .select(
+  //     `id, name, description, min_cert, active, price, deposit, stripe_price_id,
+  //         start_date, start_time, checkin, frequency, recur_days, recur_end_date,
+  //         duration, generic, timezone, dive_count, created_at, updated_at,
+  //         dive_sites:trip_sites!dive_trip_id(
+  //           dive_site:dive_site_id(id, name, latitude, longitude))
+  //     `
+  //   )
+  //   .eq("dive_centre_id", diveCentre?.id);
+  // // .order("updated_at", { ascending: true });
 
+  // Get dive trips with the current dive centre
+  const { data: diveTrips } = await supabase
+    .from("dive_trips_view")
+    .select("*")
+    .eq("diveCentreId", diveCentre.id)
+    .order("startDate", { ascending: true });
+
+  const { data: equipment } = await supabase.from("equipment").select("*");
+
+  const { data: centreEquipment } = await supabase
+    .from("centre_equipment_view")
+    .select("*")
+    .eq("centreId", diveCentre.id);
   // console.log("diveTrips: ", diveTrips);
   return {
     props: {
@@ -102,10 +119,12 @@ export const getServerSideProps = async (ctx) => {
       user: session.user,
       diveCentre,
       diveTrips,
+      equipment,
+      centreEquipment,
     },
   };
 };
 
-Profile.getLayout = function getLayout(page) {
+Manage.getLayout = function getLayout(page) {
   return <DivingLayout>{page}</DivingLayout>;
 };

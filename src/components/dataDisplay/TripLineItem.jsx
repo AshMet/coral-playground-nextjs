@@ -56,7 +56,7 @@ export default function TripLineItem(props) {
           date={new Date(selectedDate)}
           time={startTime}
           color="white"
-          bg="purple.400"
+          bg="brand.400"
         />
       </Box>
       <Flex direction="column" align="start" me="auto" w="100%" ml="10px">

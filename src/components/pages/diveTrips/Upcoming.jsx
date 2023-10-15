@@ -42,7 +42,7 @@ export default function Upcoming({
             textAlign="center"
           >
             <Heading size="lg">
-              <Text color="purple.400">
+              <Text color="brand.400">
                 Upcoming{" "}
                 <Text as="span" color={textColor}>
                   Dive Trips

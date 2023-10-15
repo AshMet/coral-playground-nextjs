@@ -5,7 +5,8 @@ import SearchTableDiveTrips from "../admin/dive_trips/SearchTableDiveTrips";
 import Card from "components/card/Card";
 import { getGenericDives } from "utils/helpers/diveCentresHelper";
 
-export default function DiveCentreCalendar({ diveCentre, diveTrips }) {
+export default function CentreTrips(props) {
+  const { diveCentre, diveTrips, centreEquipment } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const columnsDataTrips = [
     {
@@ -20,13 +21,36 @@ export default function DiveCentreCalendar({ diveCentre, diveTrips }) {
       Header: "DIVES",
       accessor: "diveCount",
     },
-    {
-      Header: "START TIME",
-      accessor: "startTime",
-    },
+    // {
+    //   Header: "START TIME",
+    //   accessor: "startTime",
+    // },
     {
       Header: "DURATION",
       accessor: "duration",
+    },
+    {
+      Header: "DEPOSIT",
+      accessor: "deposit",
+    },
+    {
+      Header: "PRICE",
+      accessor: "price",
+    },
+    {
+      Header: "ACTIVE",
+      accessor: "active",
+    },
+    {
+      Header: "SITE_ACTIONS",
+      accessor: "actions",
+    },
+  ];
+
+  const columnsDataEquip = [
+    {
+      Header: "NAME",
+      accessor: "equipName",
     },
     {
       Header: "DEPOSIT",
@@ -67,6 +91,10 @@ export default function DiveCentreCalendar({ diveCentre, diveTrips }) {
         <SearchTableDiveTrips
           tableData={getGenericDives(diveTrips)}
           columnsData={columnsDataTrips}
+        />
+        <SearchTableDiveTrips
+          tableData={centreEquipment}
+          columnsData={columnsDataEquip}
         />
         {/* <EventCalendar
           initialDate={new Date()}

@@ -1,21 +1,14 @@
 /* eslint-disable no-undef */
-/* eslint-disable consistent-return */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable react/prop-types */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable no-alert */
-/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-constructed-context-values */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
-import { Tooltip, useToast } from "@chakra-ui/react";
-import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useToast } from "@chakra-ui/react";
 import { usePostHog } from "posthog-js/react";
 import { createContext, useState, useEffect } from "react";
 
 import AlertPopup from "../components/alerts/AlertPopup";
-import equipment from "lib/constants/equipment.json";
+// import equipment from "lib/constants/equipment.json";
 // import * as gtag from "lib/data/gtag";
 import * as sendinblue from "lib/data/sendinblue";
 
@@ -29,8 +22,6 @@ export const CartProvider = ({ children }) => {
   const [notes, setNotes] = useState();
   const [equipmentList, setEquipmentList] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  const supabase = useSupabaseClient();
-  const user = useUser();
   const toast = useToast();
   const posthog = usePostHog();
 
@@ -121,7 +112,7 @@ export const CartProvider = ({ children }) => {
       render: () => (
         <AlertPopup
           type="success"
-          text={`Dive Added: ${newItem.title}`}
+          text={`Item Added: ${newItem.title}`}
           subtext="View Shopping Cart to complete your order"
         />
       ),
@@ -133,24 +124,32 @@ export const CartProvider = ({ children }) => {
     //   value: newItem.title,
     // });
     posthog.capture("Added Item to cart", {
-      "Dive Trip": newItem.title,
+      Item: newItem.title,
+      type: newItem.itemType,
       "Dive Centre": newItem.centreName,
     });
     sendinblue.track("add-to-cart");
   }
 
   // Remove from Cart
-  function removeFromCart(id, name, centreName) {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  function removeFromCart(cartItem) {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.id !== cartItem.id)
+    );
     toast({
       position: "top",
       render: () => (
-        <AlertPopup type="success" text="Item Removed" subtext={name} />
+        <AlertPopup
+          type="success"
+          text="Item Removed"
+          subtext={cartItem.title}
+        />
       ),
     });
     posthog.capture("Removed Item from cart", {
-      "Dive Trip": name,
-      "Dive Centre": centreName,
+      Item: cartItem.title,
+      type: cartItem.itemType,
+      "Dive Centre": cartItem.centreName,
     });
   }
 

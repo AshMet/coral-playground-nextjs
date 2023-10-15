@@ -23,7 +23,7 @@ export default function TripSearchBar(props) {
   const { city, setCity, cityFilter, searchButton, viewButtons, ...rest } =
     props;
 
-  const menuBg = useColorModeValue("purple.600", "purple.400");
+  const menuBg = useColorModeValue("purple.600", "brand.400");
   // const textColor = useColorModeValue("secondaryGray.900", "white");
 
   const hoverButton = useColorModeValue(

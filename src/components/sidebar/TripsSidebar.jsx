@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { MdAddCircle } from "react-icons/md";
 
 import Card from "components/card/Card";
-import EquipLineItem from "components/dataDisplay/EquipLineItem";
+// import EquipLineItem from "components/dataDisplay/EquipLineItem";
 import TripLineItem from "components/dataDisplay/TripLineItem";
 import TripSearchBar from "components/fields/TripSearchBar";
 import { TripSearchContext } from "contexts/TripSearchContext";
@@ -119,7 +119,7 @@ export default function TripSidebar({
           </Text>
         )}
       </Card>
-      {centreEquipment?.length > 0 && (
+      {/* {centreEquipment?.length > 0 && (
         <Card mt={5}>
           <Text color={textColor} fontSize="2xl" fontWeight="700" mb="20px">
             Equipment Rentals
@@ -141,7 +141,7 @@ export default function TripSidebar({
             </Flex>
           ))}
         </Card>
-      )}
+      )} */}
     </Flex>
   );
 }
