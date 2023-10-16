@@ -12,22 +12,25 @@ import {
   Tab,
   TabPanel,
   Icon,
+  chakra,
 } from "@chakra-ui/react";
 // Custom components
 import { useState } from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 
-import EquipmentSelection from "../bookings/EquipmentSelection";
 import Card from "components/card/Card";
 
+import CertsTab from "./CertsTab";
 import CollectionTab from "./CollectionTab";
 import DetailsTab from "./DetailsTab";
+import EquipmentTab from "./EquipmentTab";
 
 // import DetailsTab from "./DetailsTab";
 // import Instructor from "./Instructor";
 // import Rating from "./Rating";
 
-export default function CentreInfo({ diveCentre, equipment }) {
+export default function CentreInfo(props) {
+  const { diveCentre, equipment, centreCerts } = props;
   const {
     name,
     description,
@@ -40,7 +43,7 @@ export default function CentreInfo({ diveCentre, equipment }) {
     memberships,
   } = diveCentre;
 
-  const [tabState, setTabState] = useState("notes");
+  const [tabState, setTabState] = useState("about");
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -79,7 +82,7 @@ export default function CentreInfo({ diveCentre, equipment }) {
                     pb="0px"
                     flexDirection="column"
                     onClick={function () {
-                      setTabState("notes");
+                      setTabState("about");
                     }}
                     me="10px"
                     bg="unset"
@@ -92,7 +95,7 @@ export default function CentreInfo({ diveCentre, equipment }) {
                     <Flex align="center">
                       <Text
                         color={
-                          tabState === "notes" ? textColor : textColorTertiary
+                          tabState === "about" ? textColor : textColorTertiary
                         }
                         fontSize="lg"
                         fontWeight="500"
@@ -104,14 +107,118 @@ export default function CentreInfo({ diveCentre, equipment }) {
                       height="4px"
                       w="100%"
                       transition="0.1s linear"
-                      bg={tabState === "notes" ? "brand.400" : "transparent"}
+                      bg={tabState === "about" ? "brand.400" : "transparent"}
                       mt="15px"
                       borderRadius="30px"
                     />
                   </Tab>
                   <Tab
+                    pb="0px"
+                    flexDirection="column"
                     onClick={function () {
-                      setTabState("resources");
+                      setTabState("equip");
+                    }}
+                    bg="unset"
+                    _selected={{
+                      bg: "none",
+                    }}
+                    _focus={{ border: "none" }}
+                    minW="max-content"
+                  >
+                    <chakra.span pos="relative" display="inline-block">
+                      <Flex align="center">
+                        <Text
+                          color={
+                            tabState === "equip" ? textColor : textColorTertiary
+                          }
+                          fontSize="lg"
+                          fontWeight="500"
+                        >
+                          Rentals
+                        </Text>
+                      </Flex>
+                      <Box
+                        height="4px"
+                        w="100%"
+                        transition="0.1s linear"
+                        bg={tabState === "equip" ? "brand.400" : "transparent"}
+                        mt="15px"
+                        borderRadius="30px"
+                      />
+                      {equipment.length > 0 && (
+                        <chakra.span
+                          pos="absolute"
+                          top="-4px"
+                          right="-1px"
+                          px={2}
+                          py={1}
+                          fontSize="xs"
+                          fontWeight="bold"
+                          lineHeight="none"
+                          color="red.100"
+                          transform="translate(50%,-50%)"
+                          bg="red.600"
+                          rounded="full"
+                        >
+                          {equipment.length}
+                        </chakra.span>
+                      )}
+                    </chakra.span>
+                  </Tab>
+                  <Tab
+                    pb="0px"
+                    flexDirection="column"
+                    onClick={() => setTabState("certs")}
+                    bg="unset"
+                    _selected={{
+                      bg: "none",
+                    }}
+                    _focus={{ border: "none" }}
+                    minW="max-content"
+                  >
+                    <chakra.span pos="relative" display="inline-block">
+                      <Flex align="center">
+                        <Text
+                          color={
+                            tabState === "certs" ? textColor : textColorTertiary
+                          }
+                          fontSize="lg"
+                          fontWeight="500"
+                        >
+                          Courses
+                        </Text>
+                      </Flex>
+                      <Box
+                        height="4px"
+                        w="100%"
+                        transition="0.1s linear"
+                        bg={tabState === "certs" ? "brand.400" : "transparent"}
+                        mt="15px"
+                        borderRadius="30px"
+                      />
+                      {centreCerts.length > 0 && (
+                        <chakra.span
+                          pos="absolute"
+                          top="-4px"
+                          right="-1px"
+                          px={2}
+                          py={1}
+                          fontSize="xs"
+                          fontWeight="bold"
+                          lineHeight="none"
+                          color="red.100"
+                          transform="translate(50%,-50%)"
+                          bg="red.600"
+                          rounded="full"
+                        >
+                          {centreCerts.length}
+                        </chakra.span>
+                      )}
+                    </chakra.span>
+                  </Tab>
+                  <Tab
+                    onClick={function () {
+                      setTabState("services");
                     }}
                     pb="0px"
                     me="10px"
@@ -126,7 +233,7 @@ export default function CentreInfo({ diveCentre, equipment }) {
                     <Flex align="center">
                       <Text
                         color={
-                          tabState === "resources"
+                          tabState === "services"
                             ? textColor
                             : textColorTertiary
                         }
@@ -140,42 +247,7 @@ export default function CentreInfo({ diveCentre, equipment }) {
                       height="4px"
                       w="100%"
                       transition="0.1s linear"
-                      bg={
-                        tabState === "resources" ? "brand.400" : "transparent"
-                      }
-                      mt="15px"
-                      borderRadius="30px"
-                    />
-                  </Tab>
-                  <Tab
-                    pb="0px"
-                    flexDirection="column"
-                    onClick={function () {
-                      setTabState("quiz");
-                    }}
-                    bg="unset"
-                    _selected={{
-                      bg: "none",
-                    }}
-                    _focus={{ border: "none" }}
-                    minW="max-content"
-                  >
-                    <Flex align="center">
-                      <Text
-                        color={
-                          tabState === "quiz" ? textColor : textColorTertiary
-                        }
-                        fontSize="lg"
-                        fontWeight="500"
-                      >
-                        Equipment
-                      </Text>
-                    </Flex>
-                    <Box
-                      height="4px"
-                      w="100%"
-                      transition="0.1s linear"
-                      bg={tabState === "quiz" ? "brand.400" : "transparent"}
+                      bg={tabState === "services" ? "brand.400" : "transparent"}
                       mt="15px"
                       borderRadius="30px"
                     />
@@ -192,22 +264,22 @@ export default function CentreInfo({ diveCentre, equipment }) {
                   />
                 </TabPanel>
                 <TabPanel px="0px">
+                  <EquipmentTab
+                    // summaryTab={summaryTab}
+                    equipment={equipment}
+                  />
+                </TabPanel>
+                <TabPanel px="0px">
+                  <CertsTab
+                    // summaryTab={summaryTab}
+                    centreCerts={centreCerts}
+                  />
+                </TabPanel>
+                <TabPanel px="0px">
                   <CollectionTab
                     collection={services}
                     folderUrl="/svg/services"
                     extension="svg"
-                  />
-                </TabPanel>
-                <TabPanel px="0px">
-                  {/* <CollectionTab
-                    collection={equipment}
-                    folderUrl="/svg/equipment"
-                    extension="svg"
-                  /> */}
-
-                  <EquipmentSelection
-                    // summaryTab={summaryTab}
-                    equipment={equipment}
                   />
                 </TabPanel>
               </TabPanels>

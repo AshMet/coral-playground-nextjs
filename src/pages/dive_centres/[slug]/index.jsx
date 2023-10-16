@@ -15,7 +15,8 @@ import CentreInfo from "components/pages/diveCentre/CentreInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
 import DivingLayout from "layouts/DivingLayout";
 
-export default function DiveCentre({ diveCentre, centreEquipment }) {
+export default function DiveCentre(props) {
+  const { diveCentre, centreEquipment, centreCerts } = props;
   const router = useRouter();
   const { slug } = router.query;
   const posthog = usePostHog();
@@ -115,7 +116,11 @@ export default function DiveCentre({ diveCentre, centreEquipment }) {
               />
             </AspectRatio>
 
-            <CentreInfo diveCentre={diveCentre} equipment={centreEquipment} />
+            <CentreInfo
+              diveCentre={diveCentre}
+              equipment={centreEquipment}
+              centreCerts={centreCerts}
+            />
           </Box>
           {/* Trip sidebar Load states */}
           {/* <Center>
@@ -166,10 +171,16 @@ export async function getServerSideProps(context) {
     .select("*")
     .eq("centreId", diveCentre.id);
 
+  const { data: centreCerts } = await supabase
+    .from("centre_certs_view")
+    .select("*")
+    .eq("centreId", diveCentre.id);
+
   return {
     props: {
       diveCentre,
       centreEquipment,
+      centreCerts,
     },
   };
 }

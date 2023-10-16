@@ -15,17 +15,18 @@ import { AiOutlineShop } from "react-icons/ai";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 import { MdAdd, MdAttachMoney, MdEdit } from "react-icons/md";
 
-import AddEqiupModal from "../admin/dive_centres/AddEquipModal";
+import AddCentreEqiupModal from "../../modals/AddCentreEquipModal";
 import AlertPopup from "components/alerts/AlertPopup";
 import IconLinkCircle from "components/fields/IconLinkCircle";
 import SwitchField from "components/fields/SwitchField";
+import AddCentreCertModal from "components/modals/AddCentreCertModal";
 import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import Invite from "components/pages/diveCentre/Invite";
 import OwnerDiveCentreMenu from "components/pages/profile/OwnerDiveCentreMenu";
 // import * as gtag from "lib/data/gtag";
 
 export default function CentreCard(props) {
-  const { diveCentre, equipment } = props;
+  const { diveCentre, equipment, certs } = props;
   const supabase = useSupabaseClient();
   const toast = useToast();
   const posthog = usePostHog();
@@ -139,7 +140,7 @@ export default function CentreCard(props) {
             desc="If disabled, your dive centre will no longer appear in the search results and will not receive any new bookings."
             labelColor={active ? textColorActive : textColorInactive}
           />
-          <Flex justify="space-between" w="100%" my={5}>
+          <SimpleGrid columns={3} spacing={5} w="100%" my={5}>
             <IconLinkCircle
               title="View Page"
               icon={AiOutlineShop}
@@ -158,14 +159,18 @@ export default function CentreCard(props) {
               iconColor={greenIcon}
               url={`/dive_centres/${diveCentre?.slug}/dive_trips/new`}
             />
-            <AddEqiupModal diveCentreData={diveCentre} equipment={equipment} />
+            <AddCentreEqiupModal
+              diveCentreData={diveCentre}
+              equipment={equipment}
+            />
+            <AddCentreCertModal diveCentreData={diveCentre} certs={certs} />
             <IconLinkCircle
               title="Orders"
               icon={MdAttachMoney}
               iconColor={redIcon}
               url={`/dive_centres/${diveCentre?.slug}/order_list`}
             />
-          </Flex>
+          </SimpleGrid>
           <Invite
             referralCode={`${process.env.NEXT_PUBLIC_SITE_URL}/dive_centres/${diveCentre?.slug}`}
             fbLink="#"

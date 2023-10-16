@@ -4,7 +4,7 @@ import { Flex } from "@chakra-ui/react";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 
 import Card from "components/card/Card";
-import SearchTableDiveSites from "components/pages/admin/dive_sites/SearchTableDiveSites";
+import SearchTableDiveSites from "components/tables/SearchTableDiveSites";
 import DivingLayout from "layouts/DivingLayout";
 
 const columnsDataSites = [

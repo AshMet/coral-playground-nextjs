@@ -2,11 +2,11 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
 import {
-  Badge,
   Box,
   Button,
   Flex,
   Icon,
+  Spacer,
   Text,
   Tooltip,
   useColorModeValue,
@@ -17,22 +17,21 @@ import { useContext, useState } from "react";
 import DatePicker from "react-date-picker/dist/entry.nostyle";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoMdTime } from "react-icons/io";
-import { IoStorefrontOutline } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
 
 import { CartContext } from "contexts/CartContext";
 import {
   combineDateAndTime,
-  getTileColor,
-  getDisabledTiles,
+  // getTileColor,
+  // getDisabledTiles,
 } from "utils/helpers/diveCentresHelper";
 
 import TimeTile from "./TimeTile";
 
 export default function TripLineItem(props) {
-  const { trip, tripRules, type, icon, ...rest } = props;
-  const { id, name, price, stripePriceId, deposit, startTime, centreName } =
-    trip || {};
+  const { centreCert, tripRules, icon, ...rest } = props;
+  const { id, certName, price, stripePriceId, startTime, centreName } =
+    centreCert || {};
   const { addToCart } = useContext(CartContext);
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -42,12 +41,9 @@ export default function TripLineItem(props) {
   const [selectedDate, onChange] = useState();
   const { isOpen, onToggle } = useDisclosure();
 
-  const siteNames =
-    name || trip.diveSites?.map((site) => site.name).join(" + ");
-
   // console.log("selectedDate", selectedDate);
   // console.log("selectedDate", selectedDate);
-  // console.log("SiteTripLineItem trip", trip);
+  // console.log("certLinetem", centreCert);
 
   return (
     <Flex justifyContent="center" alignItems="center" w="100%" {...rest}>
@@ -59,24 +55,15 @@ export default function TripLineItem(props) {
           bg="brand.400"
         />
       </Box>
+      <Spacer />
       <Flex direction="column" align="start" me="auto" w="100%" ml="10px">
         <Flex direction="row" align="stretch" me="auto">
           <Flex align="center">
             <Icon me="8px" as={HiOutlineLocationMarker} w="16px" h="16px" />
             <Text color={textColor} fontSize="md" me="6px" fontWeight="700">
-              {siteNames}
+              {certName}
             </Text>
           </Flex>
-        </Flex>
-
-        <Flex align="center">
-          <Icon me="8px" as={IoStorefrontOutline} w="16px" h="16px" />
-          <Text color={textColor} fontSize="md" me="6px" fontWeight="500">
-            {type === "diveSite" && centreName}
-            <Badge colorScheme="green" size="sm" padding={1} ml={2}>
-              {tripRules?.length} Dates
-            </Badge>
-          </Text>
         </Flex>
 
         <Flex align="center">
@@ -89,10 +76,10 @@ export default function TripLineItem(props) {
               minDate={new Date()}
               clearIcon={null}
               calendarIcon={null}
-              tileClassName={({ date, view }) =>
-                getTileColor({ date, view }, tripRules)
-              }
-              tileDisabled={({ date }) => getDisabledTiles({ date }, tripRules)}
+              // tileClassName={({ date, view }) =>
+              //   getTileColor({ date, view }, tripRules)
+              // }
+              // tileDisabled={({ date }) => getDisabledTiles({ date }, tripRules)}
               isOpen={isOpen}
             />
           </Flex>
@@ -105,7 +92,7 @@ export default function TripLineItem(props) {
           >{`@ ${startTime?.split(":")[0]}:${startTime?.split(":")[1]}`}</Text>
         </Flex>
       </Flex>
-
+      <Spacer />
       <Flex direction="column">
         <Text
           ms="auto"
@@ -133,14 +120,14 @@ export default function TripLineItem(props) {
             onClick={() =>
               addToCart({
                 id,
-                title: name,
-                itemType: "diveTrip",
+                title: certName,
+                itemType: "certification",
                 centreName,
                 startDate: combineDateAndTime(selectedDate, startTime),
                 diveTime: startTime,
                 price,
                 priceId: stripePriceId,
-                deposit,
+                deposit: price * 0.15,
               })
             }
             {...rest}

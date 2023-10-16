@@ -24,23 +24,18 @@ import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
 // import TextField from "components/fields/TextField";
 
-export default function CentreEquipForm(props) {
-  const {
-    diveCentreSlug,
-    equipment,
-    diveCentreEquip,
-    setDiveCentreEquip,
-    onOpen,
-  } = props;
-  const { price, equipmentId, active } = diveCentreEquip || {};
+export default function CentreCertForm(props) {
+  const { diveCentreSlug, certs, diveCentreCert, setDiveCentreCert, onOpen } =
+    props;
+  const { price, certId, active } = diveCentreCert || {};
   const textColorSecondary = "secondaryGray.600";
   const borderColor = useColorModeValue("secondaryGray.100", "whiteAlpha.100");
   // const handleChange = (e) => {
-  //   setDiveCentreEquip({ ...diveCentreEquip, [e.target.name]: e.target.value });
+  //   setDiveCentreCert({ ...diveCentreCert, [e.target.name]: e.target.value });
   // };
   const handleNumberChange = (e) => {
-    setDiveCentreEquip({
-      ...diveCentreEquip,
+    setDiveCentreCert({
+      ...diveCentreCert,
       [e.target.name]: Number(e.target.value),
     });
   };
@@ -55,15 +50,15 @@ export default function CentreEquipForm(props) {
   const [itemActive, setItemActive] = useState(active);
 
   useEffect(() => {
-    setDiveCentreEquip({
-      ...diveCentreEquip,
+    setDiveCentreCert({
+      ...diveCentreCert,
       price: Number(itemPrice) * 100,
     });
   }, [itemPrice]);
 
   useEffect(() => {
-    setDiveCentreEquip({
-      ...diveCentreEquip,
+    setDiveCentreCert({
+      ...diveCentreCert,
       active: itemActive,
     });
   }, [itemActive]);
@@ -75,15 +70,15 @@ export default function CentreEquipForm(props) {
   }, []);
 
   // NOTE: This is still failing when the user tries to add a previously created  price
-  async function saveCentreEquip() {
+  async function saveCentreCert() {
     const { data: diveCentre } = await supabase
       .from("dive_centres")
       .select("id, name")
       .eq("slug", diveCentreSlug)
       .single();
 
-    const selectedItem = equipment.filter((item) => item.id === equipmentId)[0];
-    const equipName = selectedItem.name;
+    const selectedItem = certs.filter((item) => item.id === certId)[0];
+    const certName = selectedItem.name;
     const stripeProdId = selectedItem.stripe_product_id;
 
     // console.log("selectedItem", selectedItem);
@@ -97,8 +92,8 @@ export default function CentreEquipForm(props) {
       {
         // active,
         currency: "eur",
-        nickname: `${equipName} - €${price / 100}`,
-        lookup_key: `${equipName.replace(/ /g, "_").toLowerCase()}_${price}eur`,
+        nickname: `${certName} - €${price / 100}`,
+        lookup_key: `${certName.replace(/ /g, "_").toLowerCase()}_${price}eur`,
         product: stripeProdId,
         type: "one_time",
         unit_amount: price,
@@ -107,54 +102,54 @@ export default function CentreEquipForm(props) {
 
     // console.log("stripePriceId", stripePriceId);
 
-    const { data: centreEquipData, error: centreEquipError } = await supabase
-      .from("centre_equipment")
+    const { data: centreCertData, error: centreCertError } = await supabase
+      .from("centre_certifications")
       .upsert(
         {
           active,
           price,
           stripe_price_id: stripePriceId,
           dive_centre_id: diveCentre.id,
-          equipment_id: equipmentId,
+          certification_id: certId,
         },
         {
-          onConflict: ["dive_centre_id", "equipment_id"],
+          onConflict: ["dive_centre_id", "certification_id"],
         }
       )
       .select("*")
       .single();
 
-    if (centreEquipError) {
+    if (centreCertError) {
       toast({
         position: "top",
         render: () => (
           <AlertPopup
             type="danger"
-            text="Unable to Add Centre Equipment"
-            subtext={centreEquipError.message}
+            text="Unable to Add Centre Course"
+            subtext={centreCertError.message}
           />
         ),
       });
-      posthog.capture("Unable to Add Centre Equipment", {
+      posthog.capture("Unable to Add Centre Course", {
         "Dive Centre": diveCentre?.name,
-        Error: centreEquipError.message,
+        Error: centreCertError.message,
       });
-    } else if (centreEquipData) {
+    } else if (centreCertData) {
       toast({
         position: "top",
         render: () => (
           <AlertPopup
             type="success"
-            text="Equipment Item Added"
+            text="Course Added"
             // subtext={data} // Not Working
           />
         ),
       });
 
-      posthog.capture("Dive Centre Equipment Added", {
+      posthog.capture("Dive Centre Course Added", {
         "Dive Centre": diveCentre.name,
-        Price: centreEquipData.price / 100,
-        Status: centreEquipData.active ? "Active" : "Inactive",
+        Price: centreCertData.price / 100,
+        Status: centreCertData.active ? "Active" : "Inactive",
       });
       // Close modal - this is not working
       onOpen(false);
@@ -163,7 +158,7 @@ export default function CentreEquipForm(props) {
   }
 
   // console.log("generic", tripType);
-  // console.log("centreEqiupment", diveCentreEquip);
+  // console.log("centreEqiupment", diveCentreCert);
 
   return (
     <Flex direction="column" mt={{ sm: "20px", md: "0px" }}>
@@ -177,30 +172,30 @@ export default function CentreEquipForm(props) {
             <Flex direction="column" mb="20px">
               <FormLabel
                 ms="10px"
-                htmlFor="equipment"
+                htmlFor="certifications"
                 fontSize="sm"
                 fontWeight="bold"
                 _placeholder={{ color: textColorSecondary }}
                 _hover={{ cursor: "pointer" }}
               >
-                Equipment
+                Certification
               </FormLabel>
               <Select
-                name="equipmentId"
+                name="certId"
                 fontSize="sm"
-                id="equipment"
+                id="certification"
                 variant="main"
                 h="44px"
                 maxh="44px"
                 defaultValue={60}
                 borderColor={borderColor}
                 placeholder="How long before the dive should the user arrive?"
-                value={equipmentId}
+                value={certId}
                 onChange={handleNumberChange}
               >
-                {equipment.map((item, index) => (
-                  <option value={item.id} key={index}>
-                    {item.name}
+                {certs.map((cert, index) => (
+                  <option value={cert.id} key={index}>
+                    {cert.name}
                   </option>
                 ))}
               </Select>
@@ -255,9 +250,9 @@ export default function CentreEquipForm(props) {
             h="46px"
             ms="auto"
             mt={10}
-            onClick={saveCentreEquip}
+            onClick={saveCentreCert}
           >
-            Add Eqiupment Item
+            Add Course
           </Button>
         </Card>
       </FormControl>

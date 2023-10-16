@@ -12,7 +12,7 @@ import NoCentreCard from "components/pages/diveCentreManage/NoCentreCard";
 import DivingLayout from "layouts/DivingLayout";
 
 export default function Manage(props) {
-  const { diveCentre, diveTrips, centreEquipment, equipment } = props;
+  const { diveCentre, diveTrips, centreEquipment, equipment, certs } = props;
   // console.log("manage centre", diveCentre);
   // console.log("manage", diveTrips);
 
@@ -23,7 +23,11 @@ export default function Manage(props) {
         <Box pt={{ sm: "60px", xl: "100px" }}>
           <Card p={{ base: "15px", md: "30px" }}>
             {diveCentre ? (
-              <CentreCard diveCentre={diveCentre} equipment={equipment} />
+              <CentreCard
+                diveCentre={diveCentre}
+                equipment={equipment}
+                certs={certs}
+              />
             ) : (
               <NoCentreCard />
             )}
@@ -107,6 +111,7 @@ export const getServerSideProps = async (ctx) => {
     .order("startDate", { ascending: true });
 
   const { data: equipment } = await supabase.from("equipment").select("*");
+  const { data: certs } = await supabase.from("certifications").select("*");
 
   const { data: centreEquipment } = await supabase
     .from("centre_equipment_view")
@@ -120,6 +125,7 @@ export const getServerSideProps = async (ctx) => {
       diveCentre,
       diveTrips,
       equipment,
+      certs,
       centreEquipment,
     },
   };

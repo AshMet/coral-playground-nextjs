@@ -18,12 +18,20 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
+import DiveSelection from "../pages/bookings/DiveSelection";
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
 import TextField from "components/fields/TextField";
 
-export default function TripDetails(props) {
-  const { diveTrip, setDiveTrip, tripType, setTripType } = props;
+export default function TripDetailsForm(props) {
+  const {
+    diveTrip,
+    setDiveTrip,
+    tripType,
+    setTripType,
+    selectedSites,
+    setSelectedSites,
+  } = props;
 
   const { name, description, checkin, diveCount, price, minCert, active } =
     diveTrip || {};
@@ -53,7 +61,7 @@ export default function TripDetails(props) {
     });
   }, [tripType]);
 
-  const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
+  const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
   const borderColor = useColorModeValue("secondaryGray.100", "whiteAlpha.100");
   const handleChange = (e) => {
@@ -69,7 +77,7 @@ export default function TripDetails(props) {
     <FormControl>
       <Card mb={{ base: "0px", xl: "20px" }}>
         <Flex direction="column" mb="40px" ms="10px">
-          <Text fontSize="2xl" color={textColorPrimary} fontWeight="bold">
+          <Text fontSize="2xl" color={textColor} fontWeight="bold">
             Trip Details
           </Text>
           <Text fontSize="md" color={textColorSecondary}>
@@ -90,6 +98,24 @@ export default function TripDetails(props) {
             </Radio>
           </Flex>
         </RadioGroup>
+        <Flex display={tripType !== "generic" ? "contents" : "none"}>
+          <FormLabel
+            ms="10px"
+            htmlFor="startDate"
+            fontSize="sm"
+            color={textColor}
+            fontWeight="bold"
+            _hover={{ cursor: "pointer" }}
+          >
+            Add dive sites to your trip
+          </FormLabel>
+          <DiveSelection
+            diveTrip={diveTrip}
+            setDiveTrip={setDiveTrip}
+            selectedSites={selectedSites}
+            setSelectedSites={setSelectedSites}
+          />
+        </Flex>
         <SimpleGrid
           columns={{ sm: 1, md: 2 }}
           spacing={{ base: "20px", xl: "20px" }}
@@ -99,7 +125,7 @@ export default function TripDetails(props) {
               ms="10px"
               htmlFor="numberDives"
               fontSize="sm"
-              color={textColorPrimary}
+              color={textColor}
               fontWeight="bold"
               _hover={{ cursor: "pointer" }}
             >
@@ -116,7 +142,7 @@ export default function TripDetails(props) {
             >
               <NumberInputField
                 name="diveCount"
-                color={textColorPrimary}
+                color={textColor}
                 value={Number(diveCount)}
                 min={1}
                 max={10}

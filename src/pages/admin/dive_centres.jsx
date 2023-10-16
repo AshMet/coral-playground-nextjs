@@ -5,7 +5,7 @@ import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { NextSeo } from "next-seo";
 
 import Card from "components/card/Card";
-import SearchTableDiveCentres from "components/pages/admin/dive_centres/SearchTableDiveCentres";
+import SearchTableDiveCentres from "components/tables/SearchTableDiveCentres";
 import DivingLayout from "layouts/DivingLayout";
 
 const columnsDataCentres = [
@@ -75,7 +75,7 @@ const columnsDataCentres = [
   },
 ];
 
-export default function CentresList({ diveCentres, equipment }) {
+export default function CentresList({ diveCentres, equipment, certs }) {
   return (
     <>
       <NextSeo noindex nofollow />
@@ -85,6 +85,7 @@ export default function CentresList({ diveCentres, equipment }) {
             tableData={diveCentres}
             columnsData={columnsDataCentres}
             equipment={equipment}
+            certs={certs}
           />
         </Card>
       </Flex>
@@ -111,6 +112,7 @@ export const getServerSideProps = async (ctx) => {
   //   '"user_role"'
   // );
   const { data: equipment } = await supabase.from("equipment").select("*");
+  const { data: certs } = await supabase.from("certifications").select("*");
   const userRole = session?.user.app_metadata.user_role;
 
   if (userRole === "ADMIN") {
@@ -119,6 +121,7 @@ export const getServerSideProps = async (ctx) => {
         diveCentres,
         session,
         equipment,
+        certs,
         user: session.user,
         centreData: [],
       },

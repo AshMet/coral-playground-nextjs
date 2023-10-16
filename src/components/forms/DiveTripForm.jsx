@@ -10,9 +10,9 @@ import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 
 import AlertPopup from "components/alerts/AlertPopup";
-import Scheduling from "components/pages/diveTrips/Scheduling";
-import Summary from "components/pages/diveTrips/Summary";
-import TripDetails from "components/pages/diveTrips/TripDetails";
+import TripDetailsForm from "components/forms/TripDetailsForm";
+import TripSchedulingForm from "components/forms/TripSchedulingForm";
+import TripSummaryForm from "components/forms/TripSummaryForm";
 
 export default function DiveTripForm(props) {
   const { diveCentreSlug, diveTrip, setDiveTrip, nextUrl } = props;
@@ -61,11 +61,12 @@ export default function DiveTripForm(props) {
       `${process.env.NEXT_PUBLIC_SITE_URL}/api/stripe/create_product`,
       {
         name,
-        active,
-        description,
+        // active,
+        // description,
         // metadata: { dive_trip_id: diveTripData.id },
       }
     );
+    // console.log("stripeProdId", stripeProdId);
 
     // Create Stripe price
     const {
@@ -73,10 +74,11 @@ export default function DiveTripForm(props) {
     } = await axios.post(
       `${process.env.NEXT_PUBLIC_SITE_URL}/api/stripe/create_price`,
       {
-        active,
-        description,
+        // active,
+        // description,
         currency: "eur",
-        nickname: `${diveCentre.name} - ${name}`,
+        nickname: `${name} - €${price / 100}`,
+        lookup_key: `${name.replace(/ /g, "_").toLowerCase()}_${price}eur`,
         product: stripeProdId,
         type: "one_time",
         unit_amount: price,
@@ -85,6 +87,8 @@ export default function DiveTripForm(props) {
         // },
       }
     );
+
+    // console.log("stripePriceId", stripePriceId);
 
     const { data: diveTripData, error: diveTripError } = await supabase
       .from("dive_trips")
@@ -198,16 +202,8 @@ export default function DiveTripForm(props) {
       gap={5}
     >
       <Box>
-        {/* Row 1: Scheduling */}
-        <Scheduling
-          diveTrip={diveTrip}
-          setDiveTrip={setDiveTrip}
-          selectedSites={selectedSites}
-          setSelectedSites={setSelectedSites}
-        />
-
-        {/* Row 2: Trip Details */}
-        <TripDetails
+        {/* Row 1: Trip Details */}
+        <TripDetailsForm
           mb="20px"
           diveTrip={diveTrip}
           setDiveTrip={setDiveTrip}
@@ -216,10 +212,17 @@ export default function DiveTripForm(props) {
           tripType={tripType}
           setTripType={setTripType}
         />
+        {/* Row 2: Scheduling */}
+        <TripSchedulingForm
+          diveTrip={diveTrip}
+          setDiveTrip={setDiveTrip}
+          selectedSites={selectedSites}
+          setSelectedSites={setSelectedSites}
+        />
       </Box>
       <Flex direction="column" mt={{ sm: "20px", md: "0px" }}>
         {/* Row 2: Trip Details */}
-        <Summary diveTrip={diveTrip} />
+        <TripSummaryForm diveTrip={diveTrip} />
         <Button
           // isLoading={tripDives.length === 0}
           // isDisabled={tripDives.length === 0}

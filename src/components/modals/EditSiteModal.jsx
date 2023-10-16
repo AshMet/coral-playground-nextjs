@@ -14,7 +14,7 @@ import { useRef, useState } from "react";
 
 import InputField from "components/fields/InputField";
 
-export default function EditModal({ diveSiteData }) {
+export default function EditSiteModal({ diveSiteData }) {
   const { name } = diveSiteData;
   const { isOpen, onOpen, onClose } = useDisclosure();
 

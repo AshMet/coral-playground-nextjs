@@ -13,7 +13,7 @@ import {
   getTileColor,
 } from "utils/helpers/diveCentresHelper";
 
-export default function Summary(props) {
+export default function TripSummaryForm(props) {
   const { diveTrip } = props;
 
   const {

@@ -43,8 +43,8 @@ import { useContext, useRef, useState } from "react";
 // Custom components
 import DiverInfo from "components/pages/bookings/DiverInfo";
 // import DiveSelection from "components/pages/bookings/DiveSelection";
-import EquipmentSelection from "components/pages/bookings/EquipmentSelection";
 import SummaryTable from "components/pages/bookings/SummaryTable";
+import EquipmentSelection from "components/pages/diveCentre/EquipmentTab";
 import { CartContext } from "contexts/CartContext";
 import DivingLayout from "layouts/DivingLayout";
 import { supabase } from "utils/initializers/supabase";

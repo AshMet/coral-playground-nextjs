@@ -6,7 +6,7 @@ import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { NextSeo } from "next-seo";
 
 import Card from "components/card/Card";
-import SearchTableDiveTrips from "components/pages/admin/dive_trips/SearchTableDiveTrips";
+import SearchTableDiveTrips from "components/tables/SearchTableDiveTrips";
 import DivingLayout from "layouts/DivingLayout";
 
 const columnsDataTrips = [

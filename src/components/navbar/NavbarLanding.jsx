@@ -252,14 +252,14 @@ export default function LandingNavbar(props) {
               border="none"
             >
               <Flex flexDirection="column" p="10px">
-                {/* <MenuItem
+                <MenuItem
                   _hover={{ bg: "none" }}
                   _focus={{ bg: "none" }}
                   borderRadius="8px"
                   px="14px"
                 >
                   <Link
-                    href="/map"
+                    href="/dive_trips"
                     color={menuTextColor}
                     fontSize="md"
                     fontWeight="500"
@@ -267,9 +267,9 @@ export default function LandingNavbar(props) {
                     my="auto"
                     _hover={{ color: hoverColor, cursor: "pointer" }}
                   >
-                    Map
+                    Dive Trips
                   </Link>
-                </MenuItem> */}
+                </MenuItem>
                 <MenuItem
                   _hover={{ bg: "none" }}
                   _focus={{ bg: "none" }}

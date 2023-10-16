@@ -13,17 +13,18 @@ import { useRef, useState } from "react";
 import { MdAdd } from "react-icons/md";
 
 import IconLinkCircle from "components/fields/IconLinkCircle";
-import CentreEquipForm from "components/forms/CentreEquipForm";
+import CentreCertForm from "components/forms/CentreCertForm";
 
-export default function AddEqiupModal({ diveCentreData, equipment, nextUrl }) {
+export default function AddCentreCertModal(props) {
+  const { diveCentreData, certs, nextUrl } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = useRef(null);
   const finalRef = useRef(null);
 
   const initialState = {
-    equipmentId: equipment[0].id,
-    stripePriceId: equipment[0].stripe_price_id,
+    certId: certs[0].id,
+    stripePriceId: certs[0].stripe_price_id,
     price: 0,
     active: true,
     diveCentreId: diveCentreData.id,
@@ -37,11 +38,11 @@ export default function AddEqiupModal({ diveCentreData, equipment, nextUrl }) {
 
   // console.log("diveCentreData", diveCentreData);
 
-  const [diveCentreEquip, setDiveCentreEquip] = useState(initialState);
+  const [diveCentreCert, setDiveCentreCert] = useState(initialState);
   return (
     <>
       <IconLinkCircle
-        title="Equip"
+        title="Certs"
         icon={MdAdd}
         url={`/dive_centres/${diveCentreData?.slug}`}
         onClick={onOpen}
@@ -59,17 +60,16 @@ export default function AddEqiupModal({ diveCentreData, equipment, nextUrl }) {
           <ModalCloseButton />
           <ModalBody pb={10} bgColor={useColorModeValue("white", "navy.800")}>
             <Text color={textColor} fontSize="xl" fontWeight="700" mt="10px">
-              Add Equipment item to {diveCentreData.name}
+              Add Course to {diveCentreData.name}
             </Text>
             <Text color={textColorTertiary} fontSize="md" mb="30px">
-              Select which equipment you want to customers to be able to add to
-              their dive trip
+              Select which certification course you would like to sign up for
             </Text>
-            <CentreEquipForm
+            <CentreCertForm
               diveCentreSlug={diveCentreData.slug}
-              diveCentreEquip={diveCentreEquip}
-              setDiveCentreEquip={setDiveCentreEquip}
-              equipment={equipment}
+              diveCentreCert={diveCentreCert}
+              setDiveCentreCert={setDiveCentreCert}
+              certs={certs}
               nextUrl={nextUrl}
               onOpen={onOpen}
             />

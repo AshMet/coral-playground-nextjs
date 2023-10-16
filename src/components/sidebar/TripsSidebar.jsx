@@ -2,7 +2,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 
-import { Flex, Text, Icon, useColorModeValue, Divider } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Icon,
+  useColorModeValue,
+  Divider,
+  Badge,
+} from "@chakra-ui/react";
 import { useContext } from "react";
 import { MdAddCircle } from "react-icons/md";
 
@@ -36,6 +43,8 @@ export default function TripSidebar({
     "secondaryGray.700",
     "secondaryGray.500"
   );
+
+  const genericDives = getGenericDives(trips);
 
   return (
     <Flex direction="column">
@@ -80,18 +89,40 @@ export default function TripSidebar({
               </Flex>
             ))
         ) : (
-          <Text fontSize="md" fontWeight="500" color="textColor" mb="30px">
+          <Text
+            fontSize="md"
+            fontWeight="500"
+            color="textColorTertiary"
+            mb="30px"
+          >
             No Dive Trips are scheduled for your selected dates. Please modify
             your dates or check back soon, new trips are added regularly
           </Text>
         )}
       </Card>
       <Card mt={5}>
-        <Text color={textColor} fontSize="2xl" fontWeight="700" mb="20px">
-          Price List
-        </Text>
-        {trips.length > 0 ? (
-          getGenericDives(trips).map((trip, index) => (
+        <Flex gap={5}>
+          <Text color={textColor} fontSize="2xl" fontWeight="700" mb="20px">
+            Price List
+          </Text>
+          {genericDives.length > 0 && (
+            <Badge
+              bgColor="brand.100"
+              color="white"
+              borderRadius="15px"
+              display="flex"
+              // w="30px"
+              h="25px"
+              px={4}
+              py={2}
+              justifyContent="center"
+            >
+              {genericDives.length}
+            </Badge>
+          )}
+        </Flex>
+        {genericDives.length > 0 ? (
+          genericDives.map((trip, index) => (
             <Flex
               key={trip.id}
               direction="column"
@@ -113,7 +144,12 @@ export default function TripSidebar({
             </Flex>
           ))
         ) : (
-          <Text fontSize="md" fontWeight="500" color="brand.400" mb="30px">
+          <Text
+            fontSize="md"
+            fontWeight="500"
+            color="textColorTertiary"
+            mb="30px"
+          >
             This business has not added any items to their price list. Check
             back soon, new items are added regularly
           </Text>

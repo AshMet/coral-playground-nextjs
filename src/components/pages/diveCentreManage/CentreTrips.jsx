@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Grid, Text, useColorModeValue } from "@chakra-ui/react";
 
-import SearchTableDiveTrips from "../admin/dive_trips/SearchTableDiveTrips";
+import SearchTableDiveTrips from "../../tables/SearchTableDiveTrips";
 import Card from "components/card/Card";
 import { getGenericDives } from "utils/helpers/diveCentresHelper";
 

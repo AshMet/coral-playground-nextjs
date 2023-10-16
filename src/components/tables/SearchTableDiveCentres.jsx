@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+/* eslint-disable sonarjs/no-identical-functions */
 /* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable sonarjs/no-duplicate-string */
@@ -11,6 +13,7 @@ import {
   Badge,
   Button,
   Flex,
+  HStack,
   Icon,
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -27,6 +30,8 @@ import {
   Tr,
   useColorModeValue,
 } from "@chakra-ui/react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useMemo } from "react";
 import { MdChevronRight, MdChevronLeft } from "react-icons/md";
 import {
@@ -36,12 +41,14 @@ import {
   useTable,
 } from "react-table";
 
-import EditModal from "./EditModal";
-
+import AddCentreEquipModal from "../modals/AddCentreEquipModal";
+import AddTripModal from "../modals/AddTripModal";
+import CentreModal from "../modals/CentreModal";
+import AddCentreCertModal from "components/modals/AddCentreCertModal";
 // import { SearchBar } from "components/navbar/searchBar/SearchBar";
 
-function SearchTableDiveSites(props) {
-  const { columnsData, tableData } = props;
+function SearchTableDiveCentres(props) {
+  const { columnsData, tableData, equipment, certs } = props;
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -86,8 +93,19 @@ function SearchTableDiveSites(props) {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
   const brandColor = useColorModeValue("brand.500", "brand.400");
+  const router = useRouter();
+
   return (
     <Flex direction="column" w="100%" overflowX="scroll">
+      <Button
+        colorScheme="green"
+        maxW="200px"
+        ml="20px"
+        onClick={() => router.push("/dive_centres/new")}
+      >
+        Create New
+      </Button>
+      {/* <CentreModal type="new" /> */}
       <Flex
         align={{ sm: "flex-start", lg: "flex-start" }}
         justify={{ sm: "flex-start", lg: "flex-start" }}
@@ -133,13 +151,26 @@ function SearchTableDiveSites(props) {
               <Tr {...row.getRowProps()} key={index}>
                 {row.cells.map((cell, index) => {
                   let data = "";
-                  if (cell.column.Header === "NAME") {
+                  if (cell.column.Header === "ID") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "MAP") {
+                  } else if (cell.column.Header === "NAME") {
+                    data = (
+                      <Link href={`/dive_centres/${row.original.slug}`}>
+                        <Text
+                          color="purple.500"
+                          fontWeight="700"
+                          fontSize="xl"
+                          _hover={{ cursor: "pointer" }}
+                        >
+                          {cell.value}
+                        </Text>
+                      </Link>
+                    );
+                  } else if (cell.column.Header === "COVER") {
                     data = cell.value && (
                       <Avatar
                         src={cell.value}
@@ -149,30 +180,18 @@ function SearchTableDiveSites(props) {
                         borderRadius="14px"
                       />
                     );
-                  } else if (cell.column.Header === "MIN_VIS") {
+                  } else if (cell.column.Header === "DESC") {
                     data = (
-                      <Text color={textColor} fontSize="md" fontWeight="500">
-                        {cell.value}
-                      </Text>
-                    );
-                  } else if (cell.column.Header === "MAX_VIS") {
-                    data = (
-                      <Text color={textColor} fontSize="md" fontWeight="500">
-                        {cell.value}
-                      </Text>
-                    );
-                  } else if (cell.column.Header === "DEPTH") {
-                    data = (
-                      <Badge
-                        colorScheme={cell.value < 32 ? "green" : "red"}
-                        color={cell.value < 32 ? "green.500" : "red.500"}
+                      <Text
+                        noOfLines={5}
+                        color={textColor}
                         fontSize="md"
                         fontWeight="500"
                       >
                         {cell.value}
-                      </Badge>
+                      </Text>
                     );
-                  } else if (cell.column.Header === "CURRENT") {
+                  } else if (cell.column.Header === "ADDRESS") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
                         {cell.value}
@@ -190,20 +209,122 @@ function SearchTableDiveSites(props) {
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "ACCESS") {
+                  } else if (cell.column.Header === "PAYMENT") {
+                    data = cell.value.map((item) => {
+                      return (
+                        <Badge
+                          colorScheme="purple"
+                          color="purple.500"
+                          fontSize="xs"
+                          fontWeight="500"
+                          p={1}
+                        >
+                          {item}
+                        </Badge>
+                      );
+                    });
+                  } else if (cell.column.Header === "EQUIPMENT") {
+                    data = cell.value.map((item) => {
+                      return (
+                        <Badge
+                          colorScheme="purple"
+                          color="purple.500"
+                          fontSize="xs"
+                          fontWeight="500"
+                          p={1}
+                        >
+                          {item}
+                        </Badge>
+                      );
+                    });
+                  } else if (cell.column.Header === "MEMBERSHIPS") {
+                    data = cell.value.map((item) => {
+                      return (
+                        <Badge
+                          colorScheme="purple"
+                          color="purple.500"
+                          fontSize="xs"
+                          fontWeight="500"
+                          p={1}
+                        >
+                          {item}
+                        </Badge>
+                      );
+                    });
+                  } else if (cell.column.Header === "LANGUAGES") {
+                    data = cell.value.map((item) => {
+                      return (
+                        <Badge
+                          colorScheme="purple"
+                          color="purple.500"
+                          fontSize="xs"
+                          fontWeight="500"
+                          p={1}
+                        >
+                          {item}
+                        </Badge>
+                      );
+                    });
+                  } else if (cell.column.Header === "SERVICES") {
+                    data = cell.value.map((item) => {
+                      return (
+                        <Badge
+                          colorScheme="purple"
+                          color="purple.500"
+                          fontSize="xs"
+                          fontWeight="500"
+                          p={1}
+                        >
+                          {item}
+                        </Badge>
+                      );
+                    });
+                  } else if (cell.column.Header === "CITY") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "TAGS") {
+                  } else if (cell.column.Header === "CITY_ID") {
                     data = (
                       <Text color={textColor} fontSize="md" fontWeight="500">
                         {cell.value}
                       </Text>
+                    );
+                  } else if (cell.column.Header === "ACTIVE") {
+                    data = (
+                      <Badge
+                        colorScheme={cell.value === true ? "green" : "red"}
+                        color={cell.value === true ? "green.500" : "red.500"}
+                        fontSize="md"
+                        fontWeight="500"
+                      >
+                        {cell.value === true ? "Yes" : "No"}
+                      </Badge>
                     );
                   } else if (cell.column.Header === "SITE_ACTIONS") {
-                    data = <EditModal diveSiteData={cell} />;
+                    data = (
+                      <HStack>
+                        <CentreModal
+                          diveCentreData={row.original}
+                          type="edit"
+                        />
+                        <AddTripModal
+                          diveCentreData={row.original}
+                          btnText="Add Trip"
+                        />
+                        <AddCentreEquipModal
+                          diveCentreData={row.original}
+                          equipment={equipment}
+                          btnText="Add Item"
+                        />
+                        <AddCentreCertModal
+                          diveCentreData={row.original}
+                          certs={certs}
+                          btnText="Add Cert"
+                        />
+                      </HStack>
+                    );
                   }
                   return (
                     <Td
@@ -338,4 +459,4 @@ function SearchTableDiveSites(props) {
   );
 }
 
-export default SearchTableDiveSites;
+export default SearchTableDiveCentres;

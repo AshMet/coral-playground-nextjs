@@ -18,14 +18,12 @@ import { useEffect, useState } from "react";
 import { TbCalendar } from "react-icons/tb";
 import TimePicker from "react-time-picker/dist/entry.nostyle";
 
-import DiveSelection from "../bookings/DiveSelection";
 import Card from "components/card/Card";
 import InputField from "components/fields/InputField";
 // import StatusIndicator from "components/icons/StatusIndicator";
 
-export default function Scheduling(props) {
-  const { diveTrip, setDiveTrip, selectedSites, setSelectedSites, ...rest } =
-    props;
+export default function TripSchedulingForm(props) {
+  const { diveTrip, setDiveTrip, ...rest } = props;
 
   const { frequency, duration, recurDays } = diveTrip || {};
 
@@ -304,22 +302,6 @@ export default function Scheduling(props) {
           <option value="days">Days</option>
         </Select>
       </Flex>
-      <FormLabel
-        ms="10px"
-        htmlFor="startDate"
-        fontSize="sm"
-        color={textColor}
-        fontWeight="bold"
-        _hover={{ cursor: "pointer" }}
-      >
-        Add dive sites to your trip
-      </FormLabel>
-      <DiveSelection
-        diveTrip={diveTrip}
-        setDiveTrip={setDiveTrip}
-        selectedSites={selectedSites}
-        setSelectedSites={setSelectedSites}
-      />
     </Card>
   );
 }
