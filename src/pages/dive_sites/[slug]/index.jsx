@@ -25,7 +25,7 @@ export default function DiveSitePage({ diveSite, species }) {
   const router = useRouter();
   const { slug } = router.query;
 
-  console.log("siteData", diveSite);
+  // console.log("siteData", diveSite);
   useEffect(() => {
     posthog.capture("$pageview", {
       "Dive Site": diveSite.name,
@@ -56,7 +56,7 @@ export default function DiveSitePage({ diveSite, species }) {
       .from("site_centre_trips_view")
       .select("*")
       .eq("siteSlug", slug);
-    console.log("siteTripData", data);
+    // console.log("siteTripData", data);
     setTrips(data || []);
     setLoading(false);
   }
@@ -66,8 +66,8 @@ export default function DiveSitePage({ diveSite, species }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("site_trips", trips);
-  console.log("site_species", species);
+  // console.log("site_trips", trips);
+  // console.log("site_species", species);
 
   return (
     <>

@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
@@ -181,8 +181,8 @@ export default function SignUp() {
         "Welcome to Coral Plaground",
         4
       );
-      console.log("brevoUser", brevoUser);
-      console.log("brevoEmail", brevoEmail);
+      // console.log("brevoUser", brevoUser);
+      // console.log("brevoEmail", brevoEmail);
     }
 
     setLoading(false);

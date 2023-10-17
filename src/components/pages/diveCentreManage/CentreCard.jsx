@@ -13,13 +13,15 @@ import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import { AiOutlineShop } from "react-icons/ai";
 import { IoEllipsisHorizontal } from "react-icons/io5";
-import { MdAdd, MdAttachMoney, MdEdit } from "react-icons/md";
+import { MdAttachMoney, MdEdit } from "react-icons/md";
 
 import AddCentreEqiupModal from "../../modals/AddCentreEquipModal";
 import AlertPopup from "components/alerts/AlertPopup";
+import Card from "components/card/Card";
 import IconLinkCircle from "components/fields/IconLinkCircle";
 import SwitchField from "components/fields/SwitchField";
 import AddCentreCertModal from "components/modals/AddCentreCertModal";
+import AddTripModal from "components/modals/AddTripModal";
 import ImageUploader from "components/pages/diveCentre/ImageUploader";
 import Invite from "components/pages/diveCentre/Invite";
 import OwnerDiveCentreMenu from "components/pages/profile/OwnerDiveCentreMenu";
@@ -36,7 +38,7 @@ export default function CentreCard(props) {
   const [active, setActive] = useState(diveCentre?.active);
 
   const iconColor = useColorModeValue("brand.500", "white");
-  const greenIcon = useColorModeValue("green.500", "white");
+  // const greenIcon = useColorModeValue("green.500", "white");
   const redIcon = useColorModeValue("red.500", "white");
   const yellowIcon = useColorModeValue("yellow.500", "white");
 
@@ -130,16 +132,6 @@ export default function CentreCard(props) {
           spacing={{ base: "20px", xl: "0px" }}
           ml={{ sm: 0, lg: 5 }}
         >
-          <SwitchField
-            me="30px"
-            id="1"
-            isChecked={active}
-            onChange={() => updateStatus(!active)}
-            // onChange={() => setActive(!active)}
-            label={`Status: ${active ? "Active" : "Not Active"}`}
-            desc="If disabled, your dive centre will no longer appear in the search results and will not receive any new bookings."
-            labelColor={active ? textColorActive : textColorInactive}
-          />
           <SimpleGrid columns={3} spacing={5} w="100%" my={5}>
             <IconLinkCircle
               title="View Page"
@@ -153,12 +145,13 @@ export default function CentreCard(props) {
               iconColor={yellowIcon}
               url={`/dive_centres/${diveCentre?.slug}/edit`}
             />
-            <IconLinkCircle
+            {/* <IconLinkCircle
               title="Add Trip"
               icon={MdAdd}
               iconColor={greenIcon}
               url={`/dive_centres/${diveCentre?.slug}/dive_trips/new`}
-            />
+            /> */}
+            <AddTripModal diveCentreData={diveCentre} btnText="Add Trip" />
             <AddCentreEqiupModal
               diveCentreData={diveCentre}
               equipment={equipment}
@@ -171,6 +164,18 @@ export default function CentreCard(props) {
               url={`/dive_centres/${diveCentre?.slug}/order_list`}
             />
           </SimpleGrid>
+          <Card bg={active ? "green.100" : "red.100"} mb={5} px={5} py={3}>
+            <SwitchField
+              // me="30px"
+              id="1"
+              isChecked={active}
+              onChange={() => updateStatus(!active)}
+              // onChange={() => setActive(!active)}
+              label={`Status: ${active ? "Active" : "Not Active"}`}
+              desc="If disabled, your dive centre will no longer appear in the search results and will not receive any new bookings."
+              labelColor={active ? textColorActive : textColorInactive}
+            />
+          </Card>
           <Invite
             referralCode={`${process.env.NEXT_PUBLIC_SITE_URL}/dive_centres/${diveCentre?.slug}`}
             fbLink="#"

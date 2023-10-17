@@ -10,7 +10,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
-import { MdAdd } from "react-icons/md";
+import { FaRegAddressCard } from "react-icons/fa";
 
 import IconLinkCircle from "components/fields/IconLinkCircle";
 import CentreCertForm from "components/forms/CentreCertForm";
@@ -43,7 +43,7 @@ export default function AddCentreCertModal(props) {
     <>
       <IconLinkCircle
         title="Certs"
-        icon={MdAdd}
+        icon={FaRegAddressCard}
         url={`/dive_centres/${diveCentreData?.slug}`}
         onClick={onOpen}
       />

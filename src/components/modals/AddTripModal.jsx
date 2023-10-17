@@ -10,7 +10,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
-import { MdAdd } from "react-icons/md";
+import { LuShip } from "react-icons/lu";
 
 import IconLinkCircle from "components/fields/IconLinkCircle";
 import DiveTripForm from "components/forms/DiveTripForm";
@@ -55,7 +55,7 @@ export default function TripModal({ diveCentreData }) {
     <>
       <IconLinkCircle
         title="Add Trip"
-        icon={MdAdd}
+        icon={LuShip}
         url={`/dive_centres/${diveCentreData?.slug}/dive_trips/new`}
         onClick={onOpen}
       />

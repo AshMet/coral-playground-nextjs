@@ -10,7 +10,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
-import { MdAdd } from "react-icons/md";
+import { TbScubaMask } from "react-icons/tb";
 
 import IconLinkCircle from "components/fields/IconLinkCircle";
 import CentreEquipForm from "components/forms/CentreEquipForm";
@@ -43,7 +43,7 @@ export default function AddCentreEqiupModal(props) {
     <>
       <IconLinkCircle
         title="Equip"
-        icon={MdAdd}
+        icon={TbScubaMask}
         url={`/dive_centres/${diveCentreData?.slug}`}
         onClick={onOpen}
       />

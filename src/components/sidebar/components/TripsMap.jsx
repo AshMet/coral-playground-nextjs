@@ -35,6 +35,8 @@ export default function TripsMap(props) {
     libraries,
   });
 
+  // console.log("map trips", trips);
+
   if (loadError) return "Error Loading Maps";
   if (!isLoaded) return "Loading Map";
   return (

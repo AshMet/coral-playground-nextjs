@@ -3,7 +3,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/prop-types */
-/* eslint-disable no-console */
 import {
   Box,
   Button,
@@ -69,6 +68,7 @@ export default function DiveSelection(props) {
     // console.log("siteTripData", data);
     setDiveSites(sites);
     setLoading(false);
+    // console.log("selection sites supa", sites);
   }
 
   useEffect(() => {
@@ -159,6 +159,7 @@ export default function DiveSelection(props) {
     // if you want to center the selected Marker
     //  setCenter(place.pos)
   };
+  // console.log("selection sites", diveSites);
 
   return loading ? (
     <Spinner size="lg" />
@@ -190,7 +191,7 @@ export default function DiveSelection(props) {
                   <MarkerClusterer options={clusterOptions}>
                     {(clusterer) =>
                       diveSites
-                        .filter((site) => site.latitude === 0)
+                        .filter((site) => site.latitude !== 0)
                         .map((site) => (
                           <Marker
                             key={site.id}

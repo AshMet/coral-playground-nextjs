@@ -146,7 +146,7 @@ export default function CentreEquipForm(props) {
           <AlertPopup
             type="success"
             text="Equipment Item Added"
-            // subtext={data} // Not Working
+            subtext={centreEquipData.equipName}
           />
         ),
       });

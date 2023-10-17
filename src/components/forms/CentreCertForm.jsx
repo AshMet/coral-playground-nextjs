@@ -141,7 +141,7 @@ export default function CentreCertForm(props) {
           <AlertPopup
             type="success"
             text="Course Added"
-            // subtext={data} // Not Working
+            subtext={centreCertData.certName}
           />
         ),
       });

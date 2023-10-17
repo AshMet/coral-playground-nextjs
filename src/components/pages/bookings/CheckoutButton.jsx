@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
-/* eslint-disable no-console */
 import { Button, useToast } from "@chakra-ui/react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";

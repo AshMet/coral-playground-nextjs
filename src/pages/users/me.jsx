@@ -182,7 +182,7 @@ export const getServerSideProps = async (ctx) => {
   } = await supabase.auth.getSession();
   const userId = session?.user.id;
 
-  console.log("session:", session);
+  // console.log("session:", session);
 
   const { data } = await supabase
     .from("dive_centres")

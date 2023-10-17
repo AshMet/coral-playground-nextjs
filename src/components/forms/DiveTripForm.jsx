@@ -153,7 +153,7 @@ export default function DiveTripForm(props) {
           <AlertPopup
             type="success"
             text="Dive Trip Saved"
-            // subtext={data} // Not Working
+            subtext={diveTripData.name} // Not Working
           />
         ),
       });
