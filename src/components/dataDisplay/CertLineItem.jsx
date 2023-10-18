@@ -1,3 +1,5 @@
+// Not currently used
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 // Chakra imports
@@ -89,7 +91,10 @@ export default function TripLineItem(props) {
             fontSize="md"
             me="6px"
             fontWeight="500"
-          >{`@ ${startTime?.split(":")[0]}:${startTime?.split(":")[1]}`}</Text>
+          >
+            {startTime &&
+              `@ ${startTime.split(":")[0]}:${startTime.split(":")[1]}`}
+          </Text>
         </Flex>
       </Flex>
       <Spacer />

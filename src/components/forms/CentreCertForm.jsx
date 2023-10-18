@@ -189,7 +189,7 @@ export default function CentreCertForm(props) {
                 maxh="44px"
                 defaultValue={60}
                 borderColor={borderColor}
-                placeholder="How long before the dive should the user arrive?"
+                placeholder="Select a certification level"
                 value={certId}
                 onChange={handleNumberChange}
               >

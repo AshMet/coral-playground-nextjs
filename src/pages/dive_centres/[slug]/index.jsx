@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-console */
 /* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
 // Chakra imports
@@ -68,8 +67,8 @@ export default function DiveCentre(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("trips", trips);
-  console.log("centreEquip", centreEquipment);
+  // console.log("trips", trips);
+  // console.log("centreEquip", centreEquipment);
 
   return (
     <>
@@ -164,7 +163,7 @@ export async function getServerSideProps(context) {
     .match({ slug })
     .single();
 
-  console.log("diveCentre", diveCentre);
+  // console.log("diveCentre", diveCentre);
 
   const { data: centreEquipment } = await supabase
     .from("centre_equipment_view")

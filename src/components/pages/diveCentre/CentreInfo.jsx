@@ -59,7 +59,7 @@ export default function CentreInfo(props) {
           {name}
         </Text>
       </Flex>
-      <Flex mb="15px" alignSelf="start" cursor="pointer">
+      <Flex mb="30px" alignSelf="start" cursor="pointer">
         <Icon
           as={HiOutlineLocationMarker}
           ms="auto"
@@ -75,8 +75,8 @@ export default function CentreInfo(props) {
       <Box w="100%" mb="40px">
         <Flex direction={{ base: "column", "3xl": "row" }}>
           <Box me={{ md: "40px", "3xl": "40px" }}>
-            <Tabs variant="soft-rounded" colorScheme="brandTabs" mb="60px">
-              <TabList overflowX={{ sm: "scroll", lg: "unset" }}>
+            <Tabs variant="soft-rounded" colorScheme="brandTabs" mb="10px">
+              <TabList overflowX={{ sm: "scroll", lg: "unset" }} pt="10px">
                 <Flex>
                   <Tab
                     pb="0px"
