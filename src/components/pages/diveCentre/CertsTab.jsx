@@ -16,7 +16,7 @@ export default function CertsTab(props) {
       <Flex direction="column" w="100%">
         <Flex wrap="wrap">
           {centreCerts?.length > 0 ? (
-            <SimpleGrid columns={{ sm: 2, md: 3 }} gap="20px" w="100%">
+            <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap="20px" w="100%">
               {centreCerts.map((cert) => (
                 <CentreCertTile key={cert.id} item={cert} />
               ))}
