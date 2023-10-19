@@ -9,6 +9,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
+// import { Item } from "@supabase/ui/dist/cjs/components/Menu/Menu";
 import Image from "next/image";
 import { useContext, useMemo, useState } from "react";
 import DatePicker from "react-date-picker/dist/entry.nostyle";
@@ -26,7 +27,7 @@ function CentreCertTile({ item }) {
     centreName,
     coverPhoto,
   } = item || {};
-  const { addToCart, removeFromCart, cartItems } = useContext(CartContext);
+  const { addToCart, cartItems } = useContext(CartContext);
   const priceColor = useColorModeValue("green.300", "green.500");
   const iconColor = useColorModeValue(
     "",
@@ -35,20 +36,20 @@ function CentreCertTile({ item }) {
   const selectedBgColor = useColorModeValue("brand.400", "brand.400");
 
   const [selectedDate, onChange] = useState();
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen } = useDisclosure();
 
-  function toggleCartItem(cartItem) {
-    cartItems.map((a) => a.id).includes(cartItem.id)
-      ? removeFromCart(cartItem) // remove item
-      : addToCart(cartItem); // add item
-  }
+  // function handleClick(cartItem) {
+  //   cartItems.map((a) => a.id).includes(cartItem.id)
+  //     ? removeFromCart(cartItem) // remove item
+  //     : addToCart(cartItem); // add item
+  // }
 
   const setDate = useMemo(() => {
     return (newDate) => {
       // setStartDate(newDate[0]);
       // setEndDate(newDate[1]);
       onChange(newDate);
-      toggleCartItem({
+      addToCart({
         id,
         title: certName,
         itemType: "certification",
@@ -61,6 +62,7 @@ function CentreCertTile({ item }) {
       });
     };
   }, []);
+
   return (
     <Button
       key={item.id}
@@ -70,13 +72,17 @@ function CentreCertTile({ item }) {
       mb={3}
       justifyContent="center"
       minH="180px"
-      _hover={{
-        background: "brand.300",
-        color: "white",
-        filter: iconColor,
-      }}
+      // _hover={{
+      //   background: "brand.300",
+      //   color: "white",
+      //   filter: iconColor,
+      // }}
       bgColor={cartItems.map((a) => a.id).includes(item.id) && selectedBgColor}
-      onClick={onToggle}
+      // onClick={
+      //   cartItems.map((a) => a.id).includes(item.id)
+      //     ? removeFromCart(item)
+      //     : onToggle
+      // }
     >
       <VStack>
         <Image
@@ -112,7 +118,7 @@ function CentreCertTile({ item }) {
             fontWeight="500"
           >{`@ ${startTime?.split(":")[0]}:${startTime?.split(":")[1]}`}</Text>
         </Flex>
-        <Text mt="0px" color={priceColor}>
+        <Text fontSize="3xl" fontWeight="900" mt="0px" color={priceColor}>
           {item.price === 0 ? "FREE" : `€${item.price / 100}`}
         </Text>
       </VStack>

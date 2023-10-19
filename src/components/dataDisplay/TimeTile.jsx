@@ -18,29 +18,32 @@ export default function TimeTile({ date, time, tileSize, ...rest }) {
         p={2}
         {...rest}
       >
-        <Text
-          // mb="2px"
-          fontWeight="500"
-          fontSize={tileSize === "sm" ? "sm" : "md"}
-        >
-          {!isNaN(date)
-            ? date.toLocaleDateString("en-US", {
-                month: "short",
-              })
-            : ""}
-        </Text>
-        <Text
-          lineHeight="100%"
-          fontSize={isNaN(date) || tileSize === "sm" ? "sm" : "md"}
-          fontWeight="700"
-          align="center"
-        >
-          {!isNaN(date)
-            ? date.toLocaleDateString("en-US", {
-                day: "numeric",
-              })
-            : "Select Date"}
-        </Text>
+        <Flex direction={tileSize === "sm" ? "row-reverse" : "column"}>
+          <Text
+            // mb={0}
+            fontWeight="500"
+            fontSize={tileSize === "sm" ? "sm" : "md"}
+            // display={tileSize === "sm" ? "sm" : "md"}
+          >
+            {!isNaN(date)
+              ? date.toLocaleDateString("en-US", {
+                  month: "short",
+                })
+              : ""}
+          </Text>
+          <Text
+            mr={1}
+            fontSize={isNaN(date) || tileSize === "sm" ? "sm" : "md"}
+            fontWeight="700"
+            align="center"
+          >
+            {!isNaN(date)
+              ? date.toLocaleDateString("en-US", {
+                  day: "numeric",
+                })
+              : "Select Date"}
+          </Text>
+        </Flex>
         <Text
           // mb="2px"
           fontWeight="500"

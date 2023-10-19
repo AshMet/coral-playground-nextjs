@@ -38,6 +38,7 @@ function CartList(props) {
     <Card
       {...rest}
       overflowY="auto"
+      minW={{ md: "400px" }}
       maxH="350px"
       scrollBehavior="auto"
       bg={menuBg}
@@ -49,18 +50,7 @@ function CartList(props) {
         </Text>
       </Box>
       {cartItems.length > 0 ? (
-        cartItems.map((dive) => (
-          <CartRow
-            key={dive.id}
-            // id={dive.id}
-            title={dive.title}
-            subTitle={dive.centreName}
-            startDate={dive.startDate}
-            startTime={dive.diveTime}
-            // itemType: "diveTrip",
-            price={dive.price / 100}
-          />
-        ))
+        cartItems.map((dive) => <CartRow key={dive.id} item={dive} />)
       ) : (
         <Flex align="center">
           <Icon

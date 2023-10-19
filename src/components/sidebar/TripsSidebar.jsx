@@ -140,7 +140,6 @@ export default function TripSidebar({
               {trips?.filter((x) => x.generic === true).length > index + 1 && (
                 <Divider my="25px" />
               )}
-              {/* {trip.length > index + 1 && <Divider my="25px" />} */}
             </Flex>
           ))
         ) : (
