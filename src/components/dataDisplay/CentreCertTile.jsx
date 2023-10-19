@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable react/prop-types */
 import {
-  Button,
+  Box,
   Flex,
   Text,
   VStack,
@@ -64,7 +64,7 @@ function CentreCertTile({ item }) {
   }, []);
 
   return (
-    <Button
+    <Box
       key={item.id}
       borderRadius="15px"
       display="flex"
@@ -122,7 +122,7 @@ function CentreCertTile({ item }) {
           {item.price === 0 ? "FREE" : `€${item.price / 100}`}
         </Text>
       </VStack>
-    </Button>
+    </Box>
   );
 }
 
