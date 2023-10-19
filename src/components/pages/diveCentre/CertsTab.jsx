@@ -32,25 +32,3 @@ export default function CertsTab(props) {
     </Box>
   );
 }
-
-/* <Flex
-                key={cert.id}
-                direction="column"
-                justify="space-between"
-                align="center"
-                w="100%"
-              >
-                <CertLineItem
-                  centreCert={cert}
-                  // tripRules={getFilteredRules(trip, dateRange)}
-                  icon={
-                    <Icon
-                      as={MdAddCircle}
-                      color={textColor}
-                      w="20px"
-                      h="18px"
-                    />
-                  }
-                />
-                {centreCerts?.length > index + 1 && <Divider my="25px" />}
-              </Flex> */
