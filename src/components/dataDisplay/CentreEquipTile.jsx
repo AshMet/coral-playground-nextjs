@@ -13,7 +13,10 @@ function CentreEquipTile({ item }) {
     "",
     "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
   );
+  const selectedIconColor =
+    "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)";
   const selectedBgColor = useColorModeValue("brand.400", "brand.400");
+  const isInCart = cartItems.map((a) => a.id).includes(item.id);
 
   function toggleCartItem(cartItem) {
     cartItems.map((a) => a.id).includes(cartItem.id)
@@ -30,11 +33,11 @@ function CentreEquipTile({ item }) {
       justifyContent="center"
       minH="130px"
       _hover={{
-        background: "brand.300",
-        color: "white",
-        filter: iconColor,
+        boxShadow: "0.1em 0.1em 3em rgba(0,0,0,0.3)",
+        zIndex: 10,
+        transform: "scale(1.05)",
       }}
-      bgColor={cartItems.map((a) => a.id).includes(item.id) && selectedBgColor}
+      bgColor={isInCart && selectedBgColor}
       onClick={() =>
         toggleCartItem({
           id: item.id,
@@ -50,13 +53,20 @@ function CentreEquipTile({ item }) {
       <VStack>
         <Image
           src={item?.icon}
-          width="100%"
+          width="100px"
           height="40px"
           borderRadius="15px"
-          filter={iconColor}
+          style={{
+            filter: isInCart ? selectedIconColor : iconColor,
+          }}
         />
         <Text mb={0}>{item.equipName}</Text>
-        <Text mt="0px" color={priceColor}>
+        <Text
+          fontSize="2xl"
+          fontWeight="900"
+          mt="0px"
+          color={isInCart ? "green.200" : priceColor}
+        >
           {item.price === 0 ? "FREE" : `+€${item.price / 100}`}
         </Text>
       </VStack>

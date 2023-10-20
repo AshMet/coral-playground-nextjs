@@ -24,7 +24,7 @@ import { CartContext } from "contexts/CartContext";
 import CheckoutButton from "./CheckoutButton";
 
 export default function DiverInfo(props) {
-  const { summaryTab } = props;
+  const { summaryTab, ...rest } = props;
 
   const user = useUser();
   const router = useRouter();
@@ -56,7 +56,7 @@ export default function DiverInfo(props) {
   return (
     <FormControl>
       {user ? (
-        <Card mb={{ base: "0px", xl: "20px" }}>
+        <Card mb={{ base: "0px", xl: "20px" }} {...rest}>
           <Flex direction="column" mb="40px" ms="10px">
             <Text fontSize="xl" color={textColorPrimary} fontWeight="bold">
               Diver Information
@@ -67,7 +67,7 @@ export default function DiverInfo(props) {
             </Text>
           </Flex>
           <SimpleGrid
-            columns={{ sm: 1, md: 2 }}
+            columns={{ sm: 1, md: 1 }}
             spacing={{ base: "20px", xl: "20px" }}
           >
             <InputField
@@ -157,17 +157,7 @@ export default function DiverInfo(props) {
               onChange={(e) => setNotes(e.target.value)}
             />
           </SimpleGrid>
-          <Flex justify="space-between" mt="24px">
-            <Button
-              variant="light"
-              fontSize="sm"
-              borderRadius="16px"
-              w={{ base: "128px", md: "148px" }}
-              h="46px"
-              onClick={() => summaryTab.current.click()}
-            >
-              Prev
-            </Button>
+          <Flex mt="24px">
             <CheckoutButton />
           </Flex>
         </Card>

@@ -4,52 +4,83 @@
 /* eslint-disable react/prop-types */
 // Chakra imports
 import {
-  Box,
-  Button,
   Flex,
   Icon,
   Spacer,
   Text,
-  Tooltip,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 // Custom components
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import DatePicker from "react-date-picker/dist/entry.nostyle";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoMdTime } from "react-icons/io";
-import { MdAddCircle } from "react-icons/md";
 
 import { CartContext } from "contexts/CartContext";
-import {
-  combineDateAndTime,
-  // getTileColor,
-  // getDisabledTiles,
-} from "utils/helpers/diveCentresHelper";
+import { combineDateAndTime } from "utils/helpers/diveCentresHelper";
 
-import TimeTile from "./TimeTile";
+export default function GenericTripLineItem(props) {
+  const { trip, tripRules, type, icon, ...rest } = props;
+  const { id, name, price, stripePriceId, startTime, centreName } = trip || {};
+  const { addToCart, cartItems } = useContext(CartContext);
 
-export default function TripLineItem(props) {
-  const { centreCert, tripRules, icon, ...rest } = props;
-  const { id, certName, price, stripePriceId, startTime, centreName } =
-    centreCert || {};
-  const { addToCart } = useContext(CartContext);
-
-  const textColor = useColorModeValue("secondaryGray.900", "white");
+  const priceColor = useColorModeValue("green.500", "green.200");
   // const bgHover = useColorModeValue("brand.100", "brand.100");
   // const bgFocus = useColorModeValue("brand.200", "brand.200");
 
   const [selectedDate, onChange] = useState();
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen } = useDisclosure();
 
+  // const selectedIconColor =
+  //   "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)";
+  // const tileColor = useColorModeValue("gray.100", "whiteAlpha.200");
+  const selectedBgColor = useColorModeValue("brand.400", "brand.400");
+  const isInCart = cartItems.map((a) => a.id).includes(trip.id);
+
+  const setDate = useMemo(() => {
+    return (newDate) => {
+      // setStartDate(newDate[0]);
+      // setEndDate(newDate[1]);
+      onChange(newDate);
+      addToCart({
+        id,
+        title: name,
+        itemType: "diveTrip",
+        centreName,
+        startDate: combineDateAndTime(newDate, startTime),
+        diveTime: startTime,
+        price,
+        priceId: stripePriceId,
+        deposit: price * 0.15,
+      });
+    };
+  }, []);
   // console.log("selectedDate", selectedDate);
   // console.log("selectedDate", selectedDate);
   // console.log("certLinetem", centreCert);
 
   return (
-    <Flex justifyContent="center" alignItems="center" w="100%" {...rest}>
-      <Box onClick={onToggle}>
+    <Flex
+      justifyContent="center"
+      alignItems="center"
+      w="100%"
+      borderRadius={10}
+      bgColor={isInCart ? selectedBgColor : ""}
+      my={isInCart ? "-20px" : ""}
+      py={isInCart ? "20px" : ""}
+      px={isInCart ? "10px" : ""}
+      _hover={{
+        boxShadow: "0.1em 0.1em 3em rgba(0,0,0,0.3)",
+        zIndex: 10,
+        transform: "scale(1.05)",
+        my: isInCart ? "" : "-20px",
+        py: isInCart ? "" : "20px",
+        px: isInCart ? "" : "10px",
+      }}
+      {...rest}
+    >
+      {/* <Box onClick={onToggle}>
         <TimeTile
           date={new Date(selectedDate)}
           time={startTime}
@@ -57,13 +88,18 @@ export default function TripLineItem(props) {
           bg="brand.400"
         />
       </Box>
-      <Spacer />
+      <Spacer /> */}
       <Flex direction="column" align="start" me="auto" w="100%" ml="10px">
         <Flex direction="row" align="stretch" me="auto">
           <Flex align="center">
             <Icon me="8px" as={HiOutlineLocationMarker} w="16px" h="16px" />
-            <Text color={textColor} fontSize="md" me="6px" fontWeight="700">
-              {certName}
+            <Text
+              color={isInCart && "white"}
+              fontSize="md"
+              me="6px"
+              fontWeight="700"
+            >
+              {name}
             </Text>
           </Flex>
         </Flex>
@@ -72,9 +108,9 @@ export default function TripLineItem(props) {
           <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
           <Flex align="center">
             <DatePicker
-              onChange={onChange}
+              onChange={setDate}
               value={selectedDate}
-              // format="dd MMM y"
+              format="dd MMM y"
               minDate={new Date()}
               clearIcon={null}
               calendarIcon={null}
@@ -87,7 +123,7 @@ export default function TripLineItem(props) {
           </Flex>
           <Text
             ml="5px"
-            color={textColor}
+            color={isInCart && "white"}
             fontSize="md"
             me="6px"
             fontWeight="500"
@@ -100,18 +136,14 @@ export default function TripLineItem(props) {
       <Spacer />
       <Flex direction="column">
         <Text
-          ms="auto"
-          color="green.500"
-          fontSize="sm"
-          me="6px"
-          fontWeight="700"
+          fontSize="2xl"
+          fontWeight="900"
+          mt="0px"
+          color={isInCart ? "green.200" : priceColor}
         >
-          €
-          <Text as="span" fontSize="lg">
-            {price / 100}
-          </Text>
+          {trip.price === 0 ? "FREE" : `€${trip.price / 100}`}
         </Text>
-        <Tooltip label="Add to Cart">
+        {/* <Tooltip label="Add to Cart">
           <Button
             align="center"
             justifyContent="center"
@@ -139,7 +171,7 @@ export default function TripLineItem(props) {
           >
             <Icon as={MdAddCircle} color="white" w="24px" h="24px" />
           </Button>
-        </Tooltip>
+        </Tooltip> */}
       </Flex>
     </Flex>
   );

@@ -44,7 +44,7 @@ export default function CollectionTab({
               _hover={{
                 boxShadow: "0.1em 0.1em 3em rgba(0,0,0,0.3)",
                 zIndex: 10,
-                transform: "scale(2.2)",
+                transform: "scale(1.05)",
               }}
               {...rest}
             >

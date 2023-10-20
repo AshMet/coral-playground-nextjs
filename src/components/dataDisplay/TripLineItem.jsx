@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/cognitive-complexity */
+/* eslint-disable complexity */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 // Chakra imports
@@ -13,7 +15,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 // Custom components
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import DatePicker from "react-date-picker/dist/entry.nostyle";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoMdTime } from "react-icons/io";
@@ -33,14 +35,34 @@ export default function TripLineItem(props) {
   const { trip, tripRules, type, icon, ...rest } = props;
   const { id, name, price, stripePriceId, deposit, startTime, centreName } =
     trip || {};
-  const { addToCart } = useContext(CartContext);
 
-  const textColor = useColorModeValue("secondaryGray.900", "white");
-  // const bgHover = useColorModeValue("brand.100", "brand.100");
-  // const bgFocus = useColorModeValue("brand.200", "brand.200");
+  const priceColor = useColorModeValue("green.500", "green.200");
+  const selectedBgColor = useColorModeValue("brand.400", "brand.400");
 
   const [selectedDate, onChange] = useState();
   const { isOpen, onToggle } = useDisclosure();
+  const { cartItems, addToCart } = useContext(CartContext);
+
+  const isInCart = cartItems.map((a) => a.id).includes(trip.id);
+
+  const setDate = useMemo(() => {
+    return (newDate) => {
+      // setStartDate(newDate[0]);
+      // setEndDate(newDate[1]);
+      onChange(newDate);
+      addToCart({
+        id,
+        title: name,
+        itemType: "diveTrip",
+        centreName,
+        startDate: combineDateAndTime(newDate, startTime),
+        diveTime: startTime,
+        price,
+        priceId: stripePriceId,
+        deposit: price * 0.15,
+      });
+    };
+  }, []);
 
   const siteNames =
     name || trip.diveSites?.map((site) => site.name).join(" + ");
@@ -50,28 +72,68 @@ export default function TripLineItem(props) {
   // console.log("SiteTripLineItem trip", trip);
 
   return (
-    <Flex justifyContent="center" alignItems="center" w="100%" {...rest}>
+    <Flex
+      justifyContent="center"
+      alignItems="center"
+      w="100%"
+      borderRadius={10}
+      bgColor={isInCart ? selectedBgColor : ""}
+      my={isInCart ? "-20px" : ""}
+      py={isInCart ? "20px" : ""}
+      px={isInCart ? "10px" : ""}
+      _hover={{
+        boxShadow: "0.1em 0.1em 3em rgba(0,0,0,0.3)",
+        zIndex: 10,
+        transform: "scale(1.05)",
+        my: isInCart ? "" : "-20px",
+        py: isInCart ? "" : "20px",
+        px: isInCart ? "" : "10px",
+      }}
+      {...rest}
+    >
       <Box onClick={onToggle}>
         <TimeTile
           date={new Date(selectedDate)}
           time={startTime}
-          color="white"
-          bg="brand.400"
+          color={isInCart ? "brand.400" : "white"}
+          bg={isInCart ? "white" : "brand.400"}
         />
       </Box>
       <Flex direction="column" align="start" me="auto" w="100%" ml="10px">
         <Flex direction="row" align="stretch" me="auto">
           <Flex align="center">
-            <Icon me="8px" as={HiOutlineLocationMarker} w="16px" h="16px" />
-            <Text color={textColor} fontSize="md" me="6px" fontWeight="700">
+            <Icon
+              me="8px"
+              as={HiOutlineLocationMarker}
+              w="16px"
+              h="16px"
+              color={isInCart && "white"}
+            />
+            <Text
+              color={isInCart && "white"}
+              fontSize="md"
+              me="6px"
+              fontWeight="700"
+            >
               {siteNames}
             </Text>
           </Flex>
         </Flex>
 
         <Flex align="center">
-          <Icon me="8px" as={IoStorefrontOutline} w="16px" h="16px" />
-          <Text color={textColor} fontSize="md" me="6px" fontWeight="500">
+          <Icon
+            me="8px"
+            as={IoStorefrontOutline}
+            w="16px"
+            h="16px"
+            color={isInCart && "white"}
+          />
+          <Text
+            color={isInCart && "white"}
+            fontSize="md"
+            me="6px"
+            fontWeight="500"
+          >
             {type === "diveSite" && centreName}
             <Badge colorScheme="green" size="sm" padding={1} ml={2}>
               {tripRules?.length} Dates
@@ -80,12 +142,18 @@ export default function TripLineItem(props) {
         </Flex>
 
         <Flex align="center">
-          <Icon me="8px" as={IoMdTime} w="16px" h="16px" />
+          <Icon
+            me="8px"
+            as={IoMdTime}
+            w="16px"
+            h="16px"
+            color={isInCart && "white"}
+          />
           <Flex align="center">
             <DatePicker
-              onChange={onChange}
+              onChange={setDate}
               value={selectedDate}
-              // format="dd MMM y"
+              format="dd MMM y"
               minDate={new Date()}
               clearIcon={null}
               calendarIcon={null}
@@ -98,7 +166,7 @@ export default function TripLineItem(props) {
           </Flex>
           <Text
             ml="5px"
-            color={textColor}
+            color={isInCart && "white"}
             fontSize="md"
             me="6px"
             fontWeight="500"
@@ -108,16 +176,12 @@ export default function TripLineItem(props) {
 
       <Flex direction="column">
         <Text
-          ms="auto"
-          color="green.500"
-          fontSize="sm"
-          me="6px"
-          fontWeight="700"
+          fontSize="2xl"
+          fontWeight="900"
+          mt="0px"
+          color={isInCart ? "green.200" : priceColor}
         >
-          €
-          <Text as="span" fontSize="lg">
-            {price / 100}
-          </Text>
+          {trip.price === 0 ? "FREE" : `€${trip.price / 100}`}
         </Text>
         <Tooltip label="Add to Cart">
           <Button

@@ -33,10 +33,15 @@ function CentreCertTile({ item }) {
     "",
     "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)"
   );
+  const selectedIconColor =
+    "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)";
+  const tileColor = useColorModeValue("gray.100", "whiteAlpha.200");
   const selectedBgColor = useColorModeValue("brand.400", "brand.400");
 
   const [selectedDate, onChange] = useState();
   const { isOpen } = useDisclosure();
+
+  const isInCart = cartItems.map((a) => a.id).includes(item.id);
 
   // function handleClick(cartItem) {
   //   cartItems.map((a) => a.id).includes(cartItem.id)
@@ -72,12 +77,17 @@ function CentreCertTile({ item }) {
       mb={3}
       justifyContent="center"
       minH="180px"
+      _hover={{
+        boxShadow: "0.1em 0.1em 3em rgba(0,0,0,0.3)",
+        zIndex: 10,
+        transform: "scale(1.2)",
+      }}
       // _hover={{
-      //   background: "brand.300",
-      //   color: "white",
+      //   // background: "brand.300",
+      //   // color: "white",
       //   filter: iconColor,
       // }}
-      bgColor={cartItems.map((a) => a.id).includes(item.id) && selectedBgColor}
+      bgColor={isInCart ? selectedBgColor : tileColor}
       // onClick={
       //   cartItems.map((a) => a.id).includes(item.id)
       //     ? removeFromCart(item)
@@ -87,20 +97,25 @@ function CentreCertTile({ item }) {
       <VStack>
         <Image
           src={
+            "/svg/certifications/padi_logo.svg" ||
             coverPhoto ||
             "https://stzgaygfnnszcvhmnbqy.supabase.co/storage/v1/object/public/cover-photos/certifications/open-water-diver.png"
           }
-          width="40px"
-          height="60px"
-          borderRadius="15px"
-          filter={iconColor}
+          width="150px"
+          height="50px"
+          // borderRadius="15px"
+          style={{
+            filter: isInCart ? selectedIconColor : iconColor,
+          }}
         />
-        <Text mb={0}>{item.certName}</Text>
+        <Text mb={0} color={isInCart && "white"} fontWeight="bold">
+          {item.certName}
+        </Text>
         <Flex align="center">
           <DatePicker
             onChange={setDate}
             value={selectedDate}
-            // format="dd MMM y"
+            format="dd MMM y"
             minDate={new Date()}
             clearIcon={null}
             calendarIcon={null}
@@ -110,15 +125,20 @@ function CentreCertTile({ item }) {
             // tileDisabled={({ date }) => getDisabledTiles({ date }, tripRules)}
             isOpen={isOpen}
           />
-          <Text
+          {/* <Text
             ml="5px"
-            // color={textColor}
+            color={isInCart && "white"}
             fontSize="md"
             me="6px"
             fontWeight="500"
-          >{`@ ${startTime?.split(":")[0]}:${startTime?.split(":")[1]}`}</Text>
+          >{`@ ${startTime?.split(":")[0]}:${startTime?.split(":")[1]}`}</Text> */}
         </Flex>
-        <Text fontSize="3xl" fontWeight="900" mt="0px" color={priceColor}>
+        <Text
+          fontSize="2xl"
+          fontWeight="900"
+          mt="0px"
+          color={isInCart ? "green.200" : priceColor}
+        >
           {item.price === 0 ? "FREE" : `€${item.price / 100}`}
         </Text>
       </VStack>

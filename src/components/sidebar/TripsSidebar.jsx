@@ -15,6 +15,7 @@ import { MdAddCircle } from "react-icons/md";
 
 import Card from "components/card/Card";
 // import EquipLineItem from "components/dataDisplay/EquipLineItem";
+import GenericTripLineItem from "components/dataDisplay/GenericTripLineItem";
 import TripLineItem from "components/dataDisplay/TripLineItem";
 import TripSearchBar from "components/fields/TripSearchBar";
 import { TripSearchContext } from "contexts/TripSearchContext";
@@ -53,9 +54,7 @@ export default function TripSidebar({
           Upcoming Dive Trips
         </Text>
         <Text color={textColorTertiary} fontSize="md" mb="16px">
-          Add a dive to your cart by selecting your preferred date and clicking
-          the <Icon as={MdAddCircle} color="brand.400" w="16px" h="16px" />{" "}
-          button
+          Select your preferred date to add a dive to your shopping cart.
         </Text>
         {(trips || diveSite.latitude || diveCentre.latitude) && (
           <TripsMap trips={trips} diveSite={diveSite} diveCentre={diveCentre} />
@@ -129,7 +128,7 @@ export default function TripSidebar({
               justify="space-between"
               align="center"
             >
-              <TripLineItem
+              <GenericTripLineItem
                 trip={trip}
                 tripRules={getFilteredRules(trip, dateRange)}
                 type={diveCentre ? "diveCentre" : "diveSite"}

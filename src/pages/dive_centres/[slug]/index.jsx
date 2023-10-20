@@ -53,7 +53,8 @@ export default function DiveCentre(props) {
     const { data } = await supabase
       .from("site_centre_trips_view")
       .select("*")
-      .eq("centreSlug", slug);
+      .eq("centreSlug", slug)
+      .order("name", { ascending: true });
 
     const uniqueTrips = [...new Map(data.map((v) => [v.id, v])).values()];
 
@@ -95,7 +96,7 @@ export default function DiveCentre(props) {
         <Grid
           maxW="100%"
           display={{ base: "block", lg: "grid" }}
-          pt={{ base: "130px", md: "80px", xl: "80px" }}
+          pt="80px"
           gridTemplateColumns="1.7fr 1fr"
         >
           <Box
@@ -168,12 +169,14 @@ export async function getServerSideProps(context) {
   const { data: centreEquipment } = await supabase
     .from("centre_equipment_view")
     .select("*")
-    .eq("centreId", diveCentre.id);
+    .eq("centreId", diveCentre.id)
+    .order("equipName", { ascending: true });
 
   const { data: centreCerts } = await supabase
     .from("centre_certs_view")
     .select("*")
-    .eq("centreId", diveCentre.id);
+    .eq("centreId", diveCentre.id)
+    .order("certName", { ascending: true });
 
   return {
     props: {

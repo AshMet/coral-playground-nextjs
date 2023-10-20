@@ -10,18 +10,20 @@ import {
   Th,
   Thead,
   Tr,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 import Card from "components/card/Card";
 import TripSummary from "components/dataDisplay/TripSummary";
 
-export default function SummaryTable({ lineItems }) {
+export default function SummaryTable({ lineItems, ...rest }) {
   // const { lineItems } = useContext(CartContext);
   // console.log(lineItems);
+  const priceColor = useColorModeValue("green.500", "green.200");
   return (
-    <Card p="30px">
+    <Card p="30px" {...rest}>
       <Text fontSize="2xl" fontWeight="700" mb="20px">
-        Price Summary
+        Order Summary
       </Text>
       <Text color="grey.500" fontSize="md" fontWeight="500" mb="20px">
         Please review prices carefully. <br />
@@ -54,8 +56,26 @@ export default function SummaryTable({ lineItems }) {
                       />
                     </Td>
                     <Td>1</Td>
-                    <Td isNumeric>€{item.price / 100}</Td>
-                    <Td isNumeric>€{item.deposit / 100}</Td>
+                    <Td isNumeric>
+                      <Text
+                        fontSize="lg"
+                        fontWeight="900"
+                        mt="0px"
+                        color={priceColor}
+                      >
+                        €${item.price / 100}
+                      </Text>
+                    </Td>
+                    <Td isNumeric>
+                      <Text
+                        fontSize="lg"
+                        fontWeight="900"
+                        mt="0px"
+                        color={priceColor}
+                      >
+                        €${item.deposit / 100}
+                      </Text>
+                    </Td>
                   </Tr>
                 ))
               ) : (
