@@ -19,7 +19,7 @@ export default function Content(props) {
     email,
     title,
     startDate,
-    diveTime,
+    startTime,
     diverCert,
     lastDive,
     certLevel,
@@ -129,7 +129,7 @@ export default function Content(props) {
               Booking Status
             </Text>
             <Text color={textColor} fontSize="36px" fontWeight="700">
-              {diveTime}
+              {startTime}
             </Text>
             <Text
               w="max-content"

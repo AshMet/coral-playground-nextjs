@@ -36,7 +36,6 @@ export default function NewBooking() {
           mb="20px"
           templateColumns={{ base: "2.4fr 1fr", lg: "2.2fr 1.2fr" }}
           direction="column"
-          pt={{ base: "130px", md: "80px", xl: "80px" }}
         >
           <SummaryTable
             lineItems={cartItems}

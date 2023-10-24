@@ -28,24 +28,10 @@ import Card from "components/card/Card";
 // }
 
 export default function Course(props) {
-  const {
-    id,
-    imageUrl,
-    title,
-    description,
-    agency,
-    duration,
-    category,
-    price,
-    priceId,
-    setPrice,
-    setPriceId,
-    setCourseId,
-    setCourseName,
-    deposit,
-    setDeposit,
-    selected,
-  } = props;
+  const { cert, selectedCertId, setSelectedCertId } = props;
+  const { id, imageUrl, name, description, agency, duration, category, price } =
+    cert;
+  const selected = selectedCertId === id;
   const textColor = useColorModeValue("navy.700", "white");
   const selectedTextColor = "white";
   const selectedBgColor = useColorModeValue("brand.500", "brand.400");
@@ -68,11 +54,12 @@ export default function Course(props) {
       minH={{ md: "450px", xl: "auto" }}
       bg={selected && selectedBgColor}
       onClick={() => {
-        setCourseName(title);
-        setCourseId(id);
-        setPrice(price);
-        setPriceId(priceId);
-        setDeposit(deposit);
+        setSelectedCertId(id);
+        // setCourseName(title);
+        // setCourseId(id);
+        // setPrice(price);
+        // setPriceId(priceId);
+        // setDeposit(deposit);
       }}
     >
       <Flex direction={{ base: "column", md: "column", xl: "row" }}>
@@ -111,7 +98,7 @@ export default function Course(props) {
                   fontWeight="700"
                   lineHeight="100%"
                 >
-                  {title}
+                  {name}
                 </Text>
                 <Button
                   p="0px"

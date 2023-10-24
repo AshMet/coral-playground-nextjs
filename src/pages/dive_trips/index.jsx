@@ -63,7 +63,6 @@ export default function DiveTrips(props) {
         diveSites={diveSites}
         diveCentres={diveCentres}
         h={{ sm: "calc(100vh - 110px)", md: "50vh" }}
-        pt={{ sm: "50px", lg: "100px" }}
         gridArea="1 / 1 / 1 / 1"
         scrollZoom
       />

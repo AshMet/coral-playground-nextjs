@@ -94,7 +94,6 @@ export default function DiveSitePage({ diveSite, species }) {
         <Grid
           maxW="100%"
           display={{ base: "block", lg: "grid" }}
-          pt={{ md: "80px", lg: "100px" }}
           gridTemplateColumns="1.7fr 1fr"
         >
           <Box

@@ -269,7 +269,7 @@ export default function UpdateDiveCentre({ diveCentreData }) {
   };
 
   return (
-    <Box p="0px" mx="auto" mt="100px">
+    <Box p="0px" mx="auto">
       <FormControl>
         <Card mb={{ base: "0px", xl: "20px" }}>
           <Flex direction="column" mb="40px" ms="10px">

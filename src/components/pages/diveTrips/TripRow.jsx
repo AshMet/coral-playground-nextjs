@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/cognitive-complexity */
+/* eslint-disable complexity */
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable react/prop-types */
 import {
@@ -11,22 +13,14 @@ import {
   ListItem,
   Spacer,
 } from "@chakra-ui/react";
+// import dayjs from "dayjs";
 import { useContext } from "react";
 import { TbCertificate, TbScubaMask } from "react-icons/tb";
 
-import TimeTile from "components/dataDisplay/TimeTile";
+import TimeTilePicker from "components/dataDisplay/TimeTilePicker";
 import { CartContext } from "contexts/CartContext";
-
-function combineDateAndTime(date, time) {
-  const year = date.getFullYear();
-  const month = date.getMonth(); // Jan is 0, dec is 11
-  const day = date.getDate();
-  const hours = time.split(":")[0];
-  const minutes = time.split(":")[1];
-  return new Date(year, month, day, hours, minutes, 0);
-  // const dateString = `${year}-${month}-${day}`;
-  // return new Date(`${dateString} ${time}`);
-}
+import { createDateTimeFromPicker } from "utils/helpers/diveCentresHelper";
+// import { createDateTimeFromPicker } from "utils/helpers/diveCentresHelper";
 
 export default function TripRow({
   trip,
@@ -42,32 +36,48 @@ export default function TripRow({
     diveCount,
     startDate,
     startTime,
-    endDate,
-    // duration,
+    timezone,
+    // endDate,
+    duration,
     price,
-    deposit,
+    // deposit,
     // stripePriceId,
     // checkIn,
   } = trip;
 
-  const { addToCart } = useContext(CartContext);
+  const { cartItems, addToCart } = useContext(CartContext);
   const selected = selectedTrip?.id === id;
+  const isInCart = cartItems.map((a) => a.id).includes(trip.id);
 
   // color={useColorModeValue(colorTextLight, colorTextDark)}
   // bgColor={useColorModeValue(bgColorLight, bgColorDark)}
-  const colorTextLight = selected ? "purple.600" : "white";
-  const bgColorLight = selected ? "gray.300" : "brand.400";
-  const colorTextDark = selected ? "purple.600" : "white";
-  const bgColorDark = selected ? "gray.300" : "brand.400";
-  const tileColor = selected ? "gray.800" : "brand.400";
+  const colorTextLight = selected || isInCart ? "purple.600" : "white";
+  const bgColorLight = selected || isInCart ? "gray.300" : "brand.400";
+  const colorTextDark = selected || isInCart ? "purple.600" : "white";
+  const bgColorDark = selected || isInCart ? "gray.300" : "brand.400";
+  const tileColor = selected || isInCart ? "gray.800" : "brand.400";
+
+  // const tripStartDate = createDateTimeFromPicker(
+  //   startDate,
+  //   startTime,
+  //   "Africa/Cairo",
+  //   { hours: 0 }
+  // );
+  // const tripEndDate = createDateTimeFromPicker(
+  //   startDate,
+  //   startTime,
+  //   "Africa/Cairo",
+  //   duration
+  // );
+  // dayjs(startDate).add(dayjs.duration(duration));
 
   // console.log("trip", trip);
   // console.log("selectedTrip", selectedTrip);
 
   return (
     <Stack
-      p={selected ? 6 : 3}
-      bgColor={selected ? "purple.600" : "transparent"}
+      p={selected || isInCart ? 6 : 3}
+      bgColor={selected || isInCart ? "brand.400" : "transparent"}
       justifyContent={{
         base: "center",
         md: "space-around",
@@ -79,29 +89,36 @@ export default function TripRow({
       alignItems={{ md: "center" }}
       mt={0}
       borderRadius={10}
-      color={selected && "white"}
+      color={selected || isInCart ? "white" : ""}
     >
       <Stack direction="row" justify="center" align="center">
-        <TimeTile
-          date={new Date(startDate)}
+        <TimeTilePicker
+          date={startDate}
           time={startTime}
+          timezone={timezone}
+          duration={{ hours: 0 }}
           color="white"
           bg={tileColor}
         />
         <Spacer />
         <Text>to</Text>
         <Spacer />
-        <TimeTile
-          date={new Date(endDate)}
+        <TimeTilePicker
+          date={startDate}
           time={startTime}
+          timezone={timezone}
+          duration={duration}
           color="white"
-          bg={selected ? "gray.800" : "brand.400"}
+          bg={selected || isInCart ? "gray.800" : "brand.400"}
         />
       </Stack>
 
       <Stack w={{ sm: "100%", lg: "45%" }} pl="20px">
         <Heading size="md">{name}</Heading>
-        <Text color="gray.500" fontSize="xl">
+        <Text
+          color={selected || isInCart ? "gray.300" : "gray.500"}
+          fontSize="xl"
+        >
           {diveCentreName}
         </Text>
       </Stack>
@@ -126,7 +143,7 @@ export default function TripRow({
         <Text fontSize="sm" color={useColorModeValue("green.400", "green.200")}>
           Deposit:{" "}
           <Text as="span" fontSize="xl" fontWeight="black">
-            €{deposit / 100}
+            €{((price * 0.15) / 100).toFixed(2)}
           </Text>
         </Text>
         <Text fontSize="sm">
@@ -149,11 +166,11 @@ export default function TripRow({
                   itemType: "diveTrip",
                   centreName: trip.diveCentreName,
                   // diveDate: diveDate ? new Date(startDate) : new Date(value),
-                  startDate: combineDateAndTime(
-                    new Date(trip.startDate),
+                  startDate: createDateTimeFromPicker(
+                    trip.startDate,
                     trip.startTime
                   ),
-                  diveTime: trip.startTime,
+                  startTime: trip.startTime,
                   price: trip.price,
                   priceId: trip.stripePriceId,
                   deposit: trip.depsit,
@@ -161,7 +178,7 @@ export default function TripRow({
               : setSelectedTrip(trip)
           }
         >
-          {bookable && "Add to Cart"}
+          {bookable && isInCart ? "Added to Cart" : "Add to Cart"}
           {!bookable && (selected ? "Selected" : "Select this trip")}
         </Button>
       </Stack>

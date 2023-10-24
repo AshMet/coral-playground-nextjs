@@ -53,13 +53,7 @@ export default function DiveSites({ diveSites }) {
           ],
         }}
       />
-      <TripSearchBar
-        city={city}
-        setCity={setCity}
-        cityFilter
-        viewButtons
-        mt={{ base: "80px", xl: "100px" }}
-      />
+      <TripSearchBar city={city} setCity={setCity} cityFilter viewButtons />
       <Text
         mt="25px"
         mb="36px"

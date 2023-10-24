@@ -33,7 +33,7 @@ export default function CreateDiveCentre() {
   return (
     <>
       <NextSeo noindex nofollow />
-      <Box p="0px" mx="auto" mt="100px">
+      <Box p="0px" mx="auto">
         <DiveCentreForm
           diveCentre={diveCentre}
           setDiveCentre={setDiveCentre}

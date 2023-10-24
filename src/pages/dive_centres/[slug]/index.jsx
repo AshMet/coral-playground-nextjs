@@ -96,7 +96,6 @@ export default function DiveCentre(props) {
         <Grid
           maxW="100%"
           display={{ base: "block", lg: "grid" }}
-          pt="80px"
           gridTemplateColumns="1.7fr 1fr"
         >
           <Box

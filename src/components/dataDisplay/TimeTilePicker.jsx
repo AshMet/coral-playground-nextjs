@@ -2,9 +2,12 @@
 /* eslint-disable react/prop-types */
 import { Flex, Stack, Text } from "@chakra-ui/react";
 
+import { createDateTimeFromPicker } from "utils/helpers/diveCentresHelper";
+
 export default function TimeTile(props) {
   const { date, time, timezone, duration, tileSize, ...rest } = props;
 
+  const tripDate = createDateTimeFromPicker(date, time, timezone, duration);
   // console.log("tripDate", tripDate);
 
   return (
@@ -29,23 +32,16 @@ export default function TimeTile(props) {
             fontSize={tileSize === "sm" ? "sm" : "md"}
             // display={tileSize === "sm" ? "sm" : "md"}
           >
-            {!isNaN(date)
-              ? date.toLocaleDateString("en-US", {
-                  month: "short",
-                })
-              : ""}
+            {/* {!isNaN(tripDate) ? tripDate.month() : ""} */}
+            {tripDate.format("MMM")}
           </Text>
           <Text
             mr={1}
-            fontSize={isNaN(date) || tileSize === "sm" ? "sm" : "md"}
+            fontSize={isNaN(tripDate) || tileSize === "sm" ? "sm" : "md"}
             fontWeight="700"
             align="center"
           >
-            {!isNaN(date)
-              ? date.toLocaleDateString("en-US", {
-                  day: "numeric",
-                })
-              : "Select Date"}
+            {!isNaN(tripDate) ? tripDate.date() : "Select Date"}
           </Text>
         </Flex>
         <Text
@@ -53,8 +49,8 @@ export default function TimeTile(props) {
           fontWeight="500"
           fontSize={tileSize === "sm" ? "sm" : "md"}
         >
-          {/* {!isNaN(tripDate) ? tripDate.format("HH:mm") : "Select Date"} */}
-          {time?.split(":")[0]}:{time?.split(":")[1]}
+          {!isNaN(tripDate) ? tripDate.format("HH:mm") : "Select Date"}
+          {/* {time?.split(":")[0]}:{time?.split(":")[1]} */}
         </Text>
       </Flex>
     </Stack>

@@ -24,6 +24,7 @@ export default function CheckoutButton() {
     lastDive,
     notes,
   } = useContext(CartContext);
+  // console.log("certItems", cartItems);
 
   const supabase = useSupabaseClient();
   const user = useUser();

@@ -12,7 +12,7 @@ import { IoStorefrontOutline } from "react-icons/io5";
 // import "react-clock/dist/Clock.css";
 
 export default function TripSummary(props) {
-  const { title, centreName, startDate } = props; // , diveTime
+  const { title, centreName, startDate } = props;
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
 

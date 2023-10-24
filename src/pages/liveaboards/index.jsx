@@ -329,11 +329,11 @@ export default function Liveaboards({ diveTrips }) {
                     itemType: "diveTrip",
                     centreName: selectedTrip.diveCentreName,
                     // diveDate: diveDate ? new Date(startDate) : new Date(value),
-                    diveDate: combineDateAndTime(
+                    startDate: combineDateAndTime(
                       new Date(selectedTrip.startDate),
                       selectedTrip.startTime
                     ),
-                    diveTime: selectedTrip.startTime,
+                    startTime: selectedTrip.startTime,
                     price: selectedTrip.price,
                     priceId: selectedTrip.stripePriceId,
                     deposit: selectedTrip.deposit,

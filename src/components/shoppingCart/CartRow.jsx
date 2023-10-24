@@ -9,7 +9,7 @@ import { CartContext } from "contexts/CartContext";
 export default function CartRow(props) {
   const { removeFromCart } = useContext(CartContext);
   const { item, ...rest } = props;
-  const { startDate, diveTime, title, price } = item;
+  const { startDate, startTime, title, price } = item;
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   // const iconBoxBg = useColorModeValue("secondaryGray.300", "navy.700");
@@ -23,7 +23,7 @@ export default function CartRow(props) {
     >
       {/* <TimeTile
         date={new Date(startDate)}
-        time={diveTime}
+        time={startTime}
         color="white"
         // bg={selected ? "gray.800" : "purple.400"}
         tileSize="sm"
@@ -41,7 +41,7 @@ export default function CartRow(props) {
               day: "numeric",
             })}
             {" @ "}
-            {diveTime?.split(":")[0]}:{diveTime?.split(":")[1]}
+            {startTime?.split(":")[0]}:{startTime?.split(":")[1]}
           </Text>
         )}
       </Flex>

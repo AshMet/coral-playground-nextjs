@@ -6,35 +6,41 @@
 import {
   Badge,
   Box,
-  Button,
   Flex,
   Icon,
   Text,
-  Tooltip,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 // Custom components
+import dayjs from "dayjs";
 import { useContext, useMemo, useState } from "react";
 import DatePicker from "react-date-picker/dist/entry.nostyle";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoMdTime } from "react-icons/io";
 import { IoStorefrontOutline } from "react-icons/io5";
-import { MdAddCircle } from "react-icons/md";
 
 import { CartContext } from "contexts/CartContext";
 import {
-  combineDateAndTime,
   getTileColor,
   getDisabledTiles,
+  // combineDateAndTime,
 } from "utils/helpers/diveCentresHelper";
 
 import TimeTile from "./TimeTile";
 
 export default function TripLineItem(props) {
   const { trip, tripRules, type, icon, ...rest } = props;
-  const { id, name, price, stripePriceId, deposit, startTime, centreName } =
-    trip || {};
+  const {
+    id,
+    name,
+    price,
+    stripePriceId,
+    // deposit,
+    startTime,
+    centreName,
+    timezone,
+  } = trip || {};
 
   const priceColor = useColorModeValue("green.500", "green.200");
   const selectedBgColor = useColorModeValue("brand.400", "brand.400");
@@ -49,14 +55,26 @@ export default function TripLineItem(props) {
     return (newDate) => {
       // setStartDate(newDate[0]);
       // setEndDate(newDate[1]);
+      // console.log("newDate", newDate);
+      // const formattedDate = dayjs
+      //   .utc(newDate)
+      //   .tz("Africa/Cairo")
+      //   .format("DD MMM YYYY");
+      // console.log("formattedDate", formattedDate);
+      // const newDateObj = combineDateAndTime(formattedDate, startTime, timezone, {
+      //   hours: 0,
+      // });
+      // console.log("newDateObj", newDateObj);
       onChange(newDate);
+      // onChange(dayjs(newDate).tz("Africa/Cairo").format());
+      // create separatet timme  tiile ss
       addToCart({
         id,
         title: name,
         itemType: "diveTrip",
         centreName,
-        startDate: combineDateAndTime(newDate, startTime),
-        diveTime: startTime,
+        startDate: dayjs.utc(newDate).tz("Africa/Cairo").format(),
+        startTime,
         price,
         priceId: stripePriceId,
         deposit: price * 0.15,
@@ -93,8 +111,10 @@ export default function TripLineItem(props) {
     >
       <Box onClick={onToggle}>
         <TimeTile
-          date={new Date(selectedDate)}
+          date={dayjs(selectedDate).format("DD MMM YYYY")}
           time={startTime}
+          timezone={timezone}
+          duration={{ hours: 0 }}
           color={isInCart ? "brand.400" : "white"}
           bg={isInCart ? "white" : "brand.400"}
         />
@@ -183,7 +203,7 @@ export default function TripLineItem(props) {
         >
           {trip.price === 0 ? "FREE" : `€${trip.price / 100}`}
         </Text>
-        <Tooltip label="Add to Cart">
+        {/* <Tooltip label="Add to Cart">
           <Button
             align="center"
             justifyContent="center"
@@ -200,7 +220,8 @@ export default function TripLineItem(props) {
                 title: name,
                 itemType: "diveTrip",
                 centreName,
-                startDate: combineDateAndTime(selectedDate, startTime),
+                startDate: selectedDate,
+                startTime,
                 diveTime: startTime,
                 price,
                 priceId: stripePriceId,
@@ -211,7 +232,7 @@ export default function TripLineItem(props) {
           >
             <Icon as={MdAddCircle} color="white" w="24px" h="24px" />
           </Button>
-        </Tooltip>
+        </Tooltip> */}
       </Flex>
     </Flex>
   );

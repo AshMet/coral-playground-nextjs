@@ -79,7 +79,7 @@ export default function CentresList({ diveCentres, equipment, certs }) {
   return (
     <>
       <NextSeo noindex nofollow />
-      <Flex direction="column" pt={{ sm: "125px", lg: "75px" }}>
+      <Flex direction="column">
         <Card px="0px">
           <SearchTableDiveCentres
             tableData={diveCentres}

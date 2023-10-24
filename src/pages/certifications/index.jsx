@@ -39,74 +39,39 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  Icon,
 } from "@chakra-ui/react";
 // Custom components
 import { NextSeo } from "next-seo";
-import { useEffect, useState } from "react";
-import Calendar from "react-calendar";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { useState } from "react";
 
 import { supabase } from "../api";
-// import MiniCalendar from "components/calendar/MiniCalendar";
-import Card from "components/card/Card";
-// import Schedule from "views/admin/main/account/courses/components/Schedule";
 import Course from "components/card/Course";
-import BookingDetails from "components/pages/bookings/BookingDetails";
+import CertSidebar from "components/dataDisplay/CertSidebar";
 import { VSeparator } from "components/separator/Separator";
 import DivingLayout from "layouts/DivingLayout";
-// import courses from "lib/constants/courses.json";
 
-export default function Courses({ certifications }) {
+export default function Courses({ certs, certCentres }) {
   const [tabState, setTabState] = useState("all");
-  const [courseId, setCourseId] = useState();
-  const [price, setPrice] = useState();
-  const [priceId, setPriceId] = useState();
-  const [courseName, setCourseName] = useState();
-  const [startDate, setStartDate] = useState(new Date());
-  const [diveTime] = useState("07:00:00");
-  const [courses, setCourses] = useState();
-  const [deposit, setDeposit] = useState();
+  const [selectedCertId, setSelectedCertId] = useState();
+  const [selectedCentreCert, setSelectedCentreCert] = useState();
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const textColorSecondary = useColorModeValue(
-    "secondaryGray.700",
-    "secondaryGray.300"
-  );
 
-  useEffect(() => {
-    if (!certifications) return null;
-    setCourses(certifications);
-  }, [certifications]);
+  // console.log("certCentres", certCentres);
 
   const CourseTab = (props) => {
     const { category } = props;
-    const courseList = courses?.filter(
-      (course) => course.category === category
-    );
-    // console.log(`${category}: ${JSON.stringify(courseList)}`)
+    const categoryCerts = certs?.filter((cert) => cert.category === category);
     return (
       <SimpleGrid column="1" gap="20px">
-        {courseList?.map((course) => {
+        {categoryCerts?.map((cert) => {
           return (
             <Course
-              key={course.id}
-              id={course.id}
-              imageUrl={course.cover_photo}
-              title={course.name}
-              description={course.description}
-              agency={course.agency}
-              duration={course.duration}
-              category={course.category}
-              price={parseFloat(course.price)}
-              priceId={course.stripe_price_id}
-              deposit={course.deposit}
-              setCourseId={setCourseId}
-              setCourseName={setCourseName}
-              setPrice={setPrice}
-              setPriceId={setPriceId}
-              setDeposit={setDeposit}
-              selected={courseName === course.name}
+              key={cert.id}
+              cert={cert}
+              selectedCertId={selectedCertId}
+              setSelectedCertId={setSelectedCertId}
+              selected={selectedCertId === cert.id}
             />
           );
         })}
@@ -121,8 +86,7 @@ export default function Courses({ certifications }) {
         description="A list of all availble dive certifications"
       />
       <Grid
-        pt={{ base: "130px", md: "80px", xl: "80px" }}
-        gridTemplateColumns={{ md: "2.15fr 1fr", xl: "2.5fr 1fr" }}
+        gridTemplateColumns={{ md: "2.15fr 1fr", xl: "2.2fr 1fr" }}
         display={{ base: "block", lg: "grid" }}
       >
         <Flex gridArea="1 / 1 / 2 / 2" display={{ base: "block", lg: "flex" }}>
@@ -265,78 +229,51 @@ export default function Courses({ certifications }) {
               </TabPanel>
             </TabPanels>
           </Tabs>
-          <VSeparator mx="30px" h="100%" />
+          <VSeparator mx="15px" h="100%" />
         </Flex>
-        <Card
-          align="center"
-          direction="column"
-          gridArea="1 / 2 / 2 / 3"
-          w="100%"
-        >
-          <Grid
-            templateColumns={{ md: "repeat(2, 1fr)", lg: "1fr" }}
-            display={{ base: "block", "3xl": "grid" }}
-            gridColumnGap="20px"
-          >
-            <Flex direction="column" mb="20px">
-              <Text
-                color={textColor}
-                fontSize="lg"
-                fontWeight="700"
-                lineHeight="100%"
-              >
-                Complete Your Booking
-              </Text>
-              <Text color={textColorSecondary} fontSize="sm" mt="10px">
-                Select the certification, date and dive centre, then add to your
-                cart for checkout
-              </Text>
-            </Flex>
-            <Calendar
-              onChange={setStartDate}
-              value={startDate}
-              // selectRange={selectRange}
-              view="month"
-              tileContent={<Text color="brand.500" />}
-              prevLabel={<Icon as={MdChevronLeft} w="24px" h="24px" mt="4px" />}
-              nextLabel={
-                <Icon as={MdChevronRight} w="24px" h="24px" mt="4px" />
-              }
-            />
-            {/* <MiniCalendar
-              gridArea={{ md: "1 / 1 / 2 / 2;", lg: "1 / 1 / 2 / 2" }}
-              selectRange={false}
-              mb="20px"
-              setSelectedDate={setSelectedDate}
-              setDiveTime={setDiveTime}
-            /> */}
-            <BookingDetails
-              courseName={courseName}
-              courseId={courseId}
-              price={price}
-              priceId={priceId}
-              // setSelectedDate={setSelectedDate}
-              startDate={startDate}
-              diveTime={diveTime}
-              deposit={deposit}
-              gridArea={{ md: "1 / 2 / 2 / 3", lg: "2 / 1 / 3 / 2" }}
-              mb="20px"
-            />
-          </Grid>
-        </Card>
+        {/* <Calendar
+          onChange={setStartDate}
+          value={startDate}
+          // selectRange={selectRange}
+          view="month"
+          tileContent={<Text color="brand.500" />}
+          prevLabel={<Icon as={MdChevronLeft} w="24px" h="24px" mt="4px" />}
+          nextLabel={
+            <Icon as={MdChevronRight} w="24px" h="24px" mt="4px" />
+          }
+        /> */}
+        <CertSidebar
+          selectedCertId={selectedCertId}
+          selectedCentreCert={selectedCentreCert}
+          setSelectedCentreCert={setSelectedCentreCert}
+          certCentres={certCentres.filter(
+            (cert) => cert.certId === selectedCertId
+          )}
+        />
       </Grid>
     </>
   );
 }
 
 export async function getStaticProps() {
-  const { data: certifications } = await supabase
+  const { data: certs } = await supabase
     .from("certifications")
     .select(
       "id, name, description, agency, duration, category, price, deposit, stripe_price_id, cover_photo"
     );
+
+  const { data: certCentres } = await supabase
+    .from("centre_certs_view")
+    .select("*");
+
+  // const { data: certifications } = await supabase.from("certifications").select(
+  //   `id, name, description, agency, duration, category, price, deposit, stripe_price_id, cover_photo,
+  //     diveCentres: centre_certifications!certification_id (
+  //       diveCentre: dive_centre_id (id, name))`
+  // );
+
   return {
-    props: { certifications },
+    props: { certs, certCentres },
     revalidate: 86400,
   };
 }

@@ -43,12 +43,7 @@ export default function Invoice({ session, lineItems }) {
         description="Your dive booking has completed successfully"
         canonical="https://www.coralplayground.com/booking"
       />
-      <Box
-        mt={{ base: "130px", md: "80px", xl: "80px" }}
-        textAlign="center"
-        pb={10}
-        px={6}
-      >
+      <Box textAlign="center" pb={10} px={6}>
         <Heading as="h2" size="xl" mt={6} mb={2}>
           Congrats, you&apos;re going diving!
         </Heading>

@@ -11,6 +11,7 @@ import AlertPopup from "../components/alerts/AlertPopup";
 // import equipment from "lib/constants/equipment.json";
 // import * as gtag from "lib/data/gtag";
 import * as sendinblue from "lib/data/sendinblue";
+import { createDateTimeFromPicker } from "utils/helpers/diveCentresHelper";
 
 export const CartContext = createContext();
 
@@ -48,6 +49,14 @@ export const CartProvider = ({ children }) => {
     const alreadyInCart = cartItems.some(
       (item) => item.name + item.id === newItem.name + newItem.id
     );
+
+    const tripDate = createDateTimeFromPicker(
+      newItem.startDate,
+      newItem.startTime,
+      "Africa/Cairo",
+      { hours: 0 }
+    );
+
     // console.log("newItem", newItem);
     if (alreadyInCart) {
       toast({
@@ -63,10 +72,7 @@ export const CartProvider = ({ children }) => {
       return;
     }
     // if (!(newItem.startDate instanceof Date) || newItem.startDate !== null) {
-    if (
-      isNaN(newItem.startDate?.getTime()) &&
-      newItem.itemType === "diveTrip"
-    ) {
+    if (!isNaN(tripDate) && newItem.itemType === "diveTrip") {
       toast({
         position: "top",
         render: () => (

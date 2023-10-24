@@ -44,7 +44,7 @@ export default function CreateCentreTrip() {
   return (
     <>
       <NextSeo noindex nofollow />
-      <Box p="0px" mx="auto" mt="100px" maxW="100%">
+      <Box p="0px" mx="auto" maxW="100%">
         <DiveTripForm
           diveTrip={diveTrip}
           setDiveTrip={setDiveTrip}

@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
+import dayjs from "dayjs";
+import dayjsDuration from "dayjs/plugin/duration";
+import dayjsTimezone from "dayjs/plugin/timezone";
+import dayjsUTC from "dayjs/plugin/utc";
 import { datetime, RRule, RRuleSet } from "rrule";
+
+dayjs.extend(dayjsDuration);
+dayjs.extend(dayjsUTC);
+dayjs.extend(dayjsTimezone);
 
 export const today = new Date();
 export const in3Months = new Date(
@@ -15,6 +23,27 @@ export const combineDateAndTime = (date, time, duration = 0) => {
   const hours = Number(time.split(":")[0]) + duration;
   const minutes = time.split(":")[1];
   return new Date(year, month, day, hours, minutes, 0);
+};
+
+export const createDateTimeFromPicker = (
+  date,
+  time,
+  tz = "Africa/Cairo",
+  duration = { hours: 0 }
+) => {
+  const datetimeString = `${date} ${time}`;
+  // console.log("datetimeString", datetimeString);
+  // const combined = dayjs.tz(datetimeString, tz).utc(true).format();
+  const combined = dayjs.utc(datetimeString).tz(tz);
+  // const combined2 = dayjs(datetimeString).tz(tz);
+  // console.log("combined", combined);
+  // console.log("combined2", combined2);
+
+  const combinedWithOffset = dayjs.utc(combined).add(dayjs.duration(duration));
+  // const combinedWithOffset2 = dayjs(combined).add(dayjs.duration(duration));
+  // console.log("combinedWithOffset", combinedWithOffset);
+  // console.log("combinedWithOffset2", combinedWithOffset2);
+  return dayjs(combinedWithOffset);
 };
 
 export const getRruleFreq = (freq) => {

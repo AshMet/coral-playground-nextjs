@@ -60,7 +60,7 @@ function CentreCertTile({ item }) {
         itemType: "certification",
         centreName,
         startDate: combineDateAndTime(newDate, startTime),
-        diveTime: startTime,
+        startTime,
         price,
         priceId: stripePriceId,
         deposit: price * 0.15,

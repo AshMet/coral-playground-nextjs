@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 // Not currently used
 
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -18,10 +19,12 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoMdTime } from "react-icons/io";
 
 import { CartContext } from "contexts/CartContext";
+import { combineDateAndTime } from "utils/helpers/diveCentresHelper";
 
-export default function GenericTripLineItem(props) {
-  const { trip, tripRules, type, icon, ...rest } = props;
-  const { id, name, price, stripePriceId, startTime, centreName } = trip || {};
+export default function CertCentreLineItem(props) {
+  const { certCentre, tripRules, type, icon, ...rest } = props;
+  const { id, certName, price, stripePriceId, startTime, centreName } =
+    certCentre;
   const { addToCart, cartItems } = useContext(CartContext);
 
   const priceColor = useColorModeValue("green.500", "green.200");
@@ -31,11 +34,8 @@ export default function GenericTripLineItem(props) {
   const [selectedDate, onChange] = useState();
   const { isOpen } = useDisclosure();
 
-  // const selectedIconColor =
-  //   "invert(100%) sepia(0%) saturate(2%) hue-rotate(142deg) brightness(105%) contrast(101%)";
-  // const tileColor = useColorModeValue("gray.100", "whiteAlpha.200");
   const selectedBgColor = useColorModeValue("brand.400", "brand.400");
-  const isInCart = cartItems.map((a) => a.id).includes(trip.id);
+  const isInCart = cartItems?.map((a) => a.id).includes(id);
 
   const setDate = useMemo(() => {
     return (newDate) => {
@@ -44,10 +44,10 @@ export default function GenericTripLineItem(props) {
       onChange(newDate);
       addToCart({
         id,
-        title: name,
+        title: certName,
         itemType: "diveTrip",
         centreName,
-        startDate: newDate,
+        startDate: combineDateAndTime(newDate, startTime),
         startTime,
         price,
         priceId: stripePriceId,
@@ -89,7 +89,7 @@ export default function GenericTripLineItem(props) {
               me="6px"
               fontWeight="700"
             >
-              {name}
+              {centreName}
             </Text>
           </Flex>
         </Flex>
@@ -131,7 +131,7 @@ export default function GenericTripLineItem(props) {
           mt="0px"
           color={isInCart ? "green.200" : priceColor}
         >
-          {trip.price === 0 ? "FREE" : `€${trip.price / 100}`}
+          {certCentre?.price === 0 ? "FREE" : `€${certCentre?.price / 100}`}
         </Text>
       </Flex>
     </Flex>

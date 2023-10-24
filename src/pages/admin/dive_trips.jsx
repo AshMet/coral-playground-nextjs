@@ -80,7 +80,7 @@ export default function TripsList({ diveTrips }) {
   return (
     <>
       <NextSeo noindex nofollow />
-      <Flex direction="column" pt={{ sm: "125px", lg: "75px" }}>
+      <Flex direction="column">
         <Card px="0px">
           <SearchTableDiveTrips
             tableData={diveTrips}

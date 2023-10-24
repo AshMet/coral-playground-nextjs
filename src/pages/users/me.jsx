@@ -108,52 +108,51 @@ export default function Profile(props) {
   };
 
   return (
-    <Box>
-      <>
-        <NextSeo
-          title="User Account"
-          description="User Profile & Settings"
-          canonical="https://www.coralplayground.com/"
-          openGraph={{
-            type: "website",
-            title: "Coral Playground | User Account",
-            description: "User Profile & Settings",
-            url: "https://www.coralplayground.com/",
-            images: [
-              {
-                url: "https://www.coralplayground.com/svg/coral-logo.svg",
-                width: 800,
-                height: 400,
-                alt: "Coral Playground Logo",
-              },
-            ],
-          }}
-        />
-        <Box pt={{ sm: "60px", xl: "100px" }}>
-          <SimpleGrid
-            mb="20px"
-            columns={{ sm: 1, lg: 2 }}
-            spacing={{ base: "20px", xl: "20px" }}
-          >
-            {/* Column Left */}
-            <Flex direction="column">
-              <Banner
-                uid={user.id}
-                profile={profile}
-                setProfile={setProfile}
-                updateProfile={updateProfile}
-              />
-            </Flex>
-            {/* Column Right */}
-            <Flex direction="column">
-              <Info
-                profile={profile}
-                setProfile={setProfile}
-                updateProfile={updateProfile}
-              />
-            </Flex>
-          </SimpleGrid>
-          {/* <Box>
+    <>
+      <NextSeo
+        title="User Account"
+        description="User Profile & Settings"
+        canonical="https://www.coralplayground.com/"
+        openGraph={{
+          type: "website",
+          title: "Coral Playground | User Account",
+          description: "User Profile & Settings",
+          url: "https://www.coralplayground.com/",
+          images: [
+            {
+              url: "https://www.coralplayground.com/svg/coral-logo.svg",
+              width: 800,
+              height: 400,
+              alt: "Coral Playground Logo",
+            },
+          ],
+        }}
+      />
+      <Box>
+        <SimpleGrid
+          mb="20px"
+          columns={{ sm: 1, lg: 2 }}
+          spacing={{ base: "20px", xl: "20px" }}
+        >
+          {/* Column Left */}
+          <Flex direction="column">
+            <Banner
+              uid={user.id}
+              profile={profile}
+              setProfile={setProfile}
+              updateProfile={updateProfile}
+            />
+          </Flex>
+          {/* Column Right */}
+          <Flex direction="column">
+            <Info
+              profile={profile}
+              setProfile={setProfile}
+              updateProfile={updateProfile}
+            />
+          </Flex>
+        </SimpleGrid>
+        {/* <Box>
             {userRole === "business" ? (
               <Text fontSize="xl" fontWeight="bold" mb={5}>
                 Manage your business
@@ -167,9 +166,8 @@ export default function Profile(props) {
               </>
             )}
           </Box> */}
-        </Box>
-      </>
-    </Box>
+      </Box>
+    </>
   );
 }
 

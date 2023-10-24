@@ -56,7 +56,7 @@ const columnsDataSites = [
 
 export default function SitesList({ diveSites }) {
   return (
-    <Flex direction="column" pt={{ sm: "125px", lg: "75px" }}>
+    <Flex direction="column">
       <Card px="0px">
         <SearchTableDiveSites
           tableData={diveSites}
