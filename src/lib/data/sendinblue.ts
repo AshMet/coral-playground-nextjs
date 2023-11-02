@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
 
+import axios from "axios";
+
 type SendinblueTracker = {
   identify: (
     email: string,
@@ -91,4 +93,36 @@ export function page(
     }
     window.sendinblue.page(eventName, visitorProperties);
   }
+}
+
+/**
+ * Tracks events serverside
+ */
+export function serverTrack(
+  eventName: EventName,
+  email: string,
+  {
+    properties = {},
+    eventData = {},
+  }: {
+    properties?: VisitorProperties;
+    eventData?: { [key: string]: string };
+  } = {}
+) {
+  return axios.post(
+    "https://in-automate.brevo.com/api/v2/trackEvent",
+    {
+      email,
+      event: eventName,
+      properties,
+      eventdata: eventData,
+    },
+    {
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        "ma-key": process.env.BREVO_MA_KEY as string,
+      },
+    }
+  );
 }

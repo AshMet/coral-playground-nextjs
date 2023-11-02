@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
@@ -42,6 +41,8 @@ import {
 } from "@chakra-ui/react";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import axios from "axios";
+import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
@@ -55,9 +56,10 @@ import InputField from "components/fields/InputField";
 import NavLink from "components/navLinks/NavLink";
 import { HSeparator } from "components/separator/Separator";
 import LoginLayout from "layouts/LoginLayout";
+import * as sendinblue from "lib/data/sendinblue";
 // import * as gtag from "lib/data/gtag";
 import { addBrevoContact } from "utils/helpers/brevoContacts";
-import { sendBrevoMail } from "utils/helpers/brevoSendMail";
+// import { sendBrevoMail } from "utils/helpers/brevoSendMail";
 
 export default function SignUp() {
   // Chakra color mode
@@ -78,6 +80,7 @@ export default function SignUp() {
     { bg: "secondaryGray.300" },
     { bg: "whiteAlpha.200" }
   );
+  const router = useRouter();
 
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -174,19 +177,38 @@ export default function SignUp() {
       //   // value: newItem.title,
       // });
       // Add user to Brevo
-      const brevoUser = await addBrevoContact(firstName, lastName, email, role);
-      const brevoEmail = await sendBrevoMail(
-        "Coral Playground",
-        email,
-        "Welcome to Coral Plaground",
-        4
+      await addBrevoContact(firstName, lastName, email, role);
+      sendinblue.track("signed_up", {
+        EMAIL: email,
+      });
+      axios.post(
+        "https://in-automate.brevo.com/api/v2/trackEvent",
+        {
+          email,
+          event: "signed_up",
+          // properties,
+          // eventdata: eventData,
+        },
+        {
+          headers: {
+            accept: "application/json",
+            "content-type": "application/json",
+            "ma-key": "5jhg8jrrc75q3sj0uq2pctlg",
+          },
+        }
       );
+      // const brevoEmail = await sendBrevoMail(
+      //   "Coral Playground",
+      //   email,
+      //   "Welcome to Coral Plaground",
+      //   4
+      // );
       // console.log("brevoUser", brevoUser);
       // console.log("brevoEmail", brevoEmail);
     }
 
     setLoading(false);
-    // router.push(`/dive_centres/${data.id}`);
+    router.push(`/users/me`);
   };
 
   const signUpGoogle = async () => {
@@ -503,5 +525,5 @@ export const getServerSideProps = async (ctx) => {
       },
     };
   }
-  return {};
+  return { props: {} };
 };

@@ -4,6 +4,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useToast } from "@chakra-ui/react";
+import { useUser } from "@supabase/auth-helpers-react";
 import { usePostHog } from "posthog-js/react";
 import { createContext, useState, useEffect } from "react";
 
@@ -25,6 +26,7 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const toast = useToast();
   const posthog = usePostHog();
+  const user = useUser();
 
   // Local Storage: setting & getting data
   useEffect(() => {
@@ -134,7 +136,11 @@ export const CartProvider = ({ children }) => {
       type: newItem.itemType,
       "Dive Centre": newItem.centreName,
     });
-    sendinblue.track("add-to-cart");
+    sendinblue.track("add-to-cart", {
+      EMAIL: user?.email,
+      FIRSTNAME: user?.user_metadata.first_name,
+      LASTNAME: user?.user_metadata.last_name,
+    });
   }
 
   // Remove from Cart

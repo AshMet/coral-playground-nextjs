@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     // USERTYPE: userType.charAt(0).toUpperCase() + userType.slice(1),
     // BUSINESSNAME: req?.body?.businessName,
   };
-  newContact.listIds = [5];
+  newContact.listIds = req?.body?.role === "business" ? [5] : [11];
 
   if (req.method === "POST") {
     try {

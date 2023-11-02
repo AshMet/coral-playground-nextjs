@@ -15,12 +15,15 @@ import {
 } from "@chakra-ui/react";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import axios from "axios";
+import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+
 // import { TbBuildingStore, TbScubaMask } from "react-icons/tb";
 
 import AlertPopup from "components/alerts/AlertPopup";
@@ -28,6 +31,7 @@ import InputField from "components/fields/InputField";
 import NavLink from "components/navLinks/NavLink";
 import { HSeparator } from "components/separator/Separator";
 import LoginLayout from "layouts/LoginLayout";
+import * as sendinblue from "lib/data/sendinblue";
 // import * as gtag from "lib/data/gtag";
 
 export default function Login() {
@@ -49,7 +53,7 @@ export default function Login() {
     { bg: "secondaryGray.300" },
     { bg: "whiteAlpha.200" }
   );
-
+  const router = useRouter();
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({
@@ -65,12 +69,56 @@ export default function Login() {
 
   const signInEmailPass = async () => {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
     // Alert & Analytics for failed load
-    if (error) {
+    if (data) {
+      // Success Alert
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="success"
+            text="Login Successful"
+            // subtext="Please confirm your email to complete registration"
+          />
+        ),
+      });
+      // Success Analytics Tag
+      posthog.capture("Login", {
+        Email: email,
+        Method: "Email",
+      });
+      sendinblue.track("signed_in", {
+        EMAIL: email,
+      });
+
+      axios.post(
+        "https://in-automate.brevo.com/api/v2/trackEvent",
+        {
+          email,
+          event: "logged_in",
+          // properties,
+          // eventdata: eventData,
+        },
+        {
+          headers: {
+            accept: "application/json",
+            "content-type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "ma-key": process.env.BREVO_MA_KEY,
+          },
+        }
+      );
+      // gtag.event({
+      //   action: "login-success",
+      //   category: "button",
+      //   label: "User",
+      //   // value: newItem.title,
+      // });
+    } else {
       toast({
         position: "top",
         render: () => (
@@ -92,62 +140,19 @@ export default function Login() {
         Method: "Email",
         Error: error.message,
       });
-    } else {
-      // Success Alert
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup
-            type="success"
-            text="Login Successful"
-            // subtext="Please confirm your email to complete registration"
-          />
-        ),
-      });
-      // Success Analytics Tag
-      posthog.capture("Login", {
-        Email: email,
-        Method: "Email",
-      });
-      // gtag.event({
-      //   action: "login-success",
-      //   category: "button",
-      //   label: "User",
-      //   // value: newItem.title,
-      // });
     }
 
     setLoading(false);
-    // router.push(`/dive_centres/${data.id}`);
+    router.push(`/users/me`);
   };
 
   const loginGoogle = async () => {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithOAuth({
+    const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
     });
     // Alert & Analytics for failed load
-    if (error) {
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup
-            type="danger"
-            text="Unable to Login using Google, please try a different method"
-            subtext={error.message}
-          />
-        ),
-      });
-      // gtag.event({
-      //   action: "google-login-error",
-      //   category: "button",
-      //   label: "User",
-      //   // value: newItem.title,
-      // });
-      posthog.capture("Google Login Failed", {
-        Error: error.message,
-      });
-    } else {
+    if (data) {
       // Success Alert
       toast({
         position: "top",
@@ -170,10 +175,30 @@ export default function Login() {
         Email: email,
         Method: "Google",
       });
+    } else {
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="danger"
+            text="Unable to Login using Google, please try a different method"
+            subtext={error.message}
+          />
+        ),
+      });
+      // gtag.event({
+      //   action: "google-login-error",
+      //   category: "button",
+      //   label: "User",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Google Login Failed", {
+        Error: error.message,
+      });
     }
 
     setLoading(false);
-    // router.push(`/dive_centres.id}`);
+    router.push("/users/me");
   };
 
   return (
@@ -403,5 +428,5 @@ export const getServerSideProps = async (ctx) => {
       },
     };
   }
-  return {};
+  return { props: {} };
 };

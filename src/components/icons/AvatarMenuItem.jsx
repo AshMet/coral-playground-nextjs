@@ -96,7 +96,7 @@ function SignedOutMenuList({ iconColor }) {
               size="sm"
               color="brand.100"
               leftIcon={<ProfileIcon />}
-              onClick={() => router.push("/auth/signup")}
+              onClick={() => router.push("/business/signup")}
             >
               Register Business
             </Button>
