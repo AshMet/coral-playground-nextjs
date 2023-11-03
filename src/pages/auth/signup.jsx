@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable import/no-extraneous-dependencies */
 /*!
   _   _  ___  ____  ___ ________  _   _   _   _ ___   ____  ____   ___  
@@ -33,7 +34,6 @@ import {
   Icon,
   InputGroup,
   InputRightElement,
-  Link,
   SimpleGrid,
   Text,
   useToast,
@@ -42,14 +42,15 @@ import {
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { IoStorefrontOutline } from "react-icons/io5";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
-// import { TbBuildingStore, TbScubaMask } from "react-icons/tb";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import InputField from "components/fields/InputField";
@@ -69,7 +70,6 @@ export default function SignUp() {
   const toast = useToast();
   const posthog = usePostHog();
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
-  const textColorBrand = useColorModeValue("brand.500", "white");
   const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
   const googleText = useColorModeValue("navy.700", "white");
   const googleHover = useColorModeValue(
@@ -114,7 +114,7 @@ export default function SignUp() {
       return;
     }
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -126,29 +126,7 @@ export default function SignUp() {
       },
     });
     // Alert & Analytics for failed load
-    if (error) {
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup
-            type="danger"
-            text="Unable to Sign Up"
-            subtext={error.message}
-          />
-        ),
-      });
-      // gtag.event({
-      //   action: "signup-error",
-      //   category: "button",
-      //   label: "User",
-      //   // value: newItem.title,
-      // });
-      posthog.capture("Sign Up Failed", {
-        Email: email,
-        Method: "Email",
-        Error: error.message,
-      });
-    } else {
+    if (data) {
       // Success Alert
       toast({
         position: "top",
@@ -193,7 +171,7 @@ export default function SignUp() {
           headers: {
             accept: "application/json",
             "content-type": "application/json",
-            "ma-key": "5jhg8jrrc75q3sj0uq2pctlg",
+            "ma-key": process.env.BREVO_MA_KEY,
           },
         }
       );
@@ -205,6 +183,48 @@ export default function SignUp() {
       // );
       // console.log("brevoUser", brevoUser);
       // console.log("brevoEmail", brevoEmail);
+    } else {
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="danger"
+            text="Unable to Sign Up"
+            subtext={error.message}
+          />
+        ),
+      });
+      // gtag.event({
+      //   action: "signup-error",
+      //   category: "button",
+      //   label: "User",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("Sign Up Failed", {
+        Email: email,
+        Method: "Email",
+        Error: error.message,
+      });
+      await addBrevoContact(firstName, lastName, email, role);
+      sendinblue.track("signed_up", {
+        EMAIL: email,
+      });
+      axios.post(
+        "https://in-automate.brevo.com/api/v2/trackEvent",
+        {
+          email,
+          event: "signed_up",
+          // properties,
+          // eventdata: eventData,
+        },
+        {
+          headers: {
+            accept: "application/json",
+            "content-type": "application/json",
+            "ma-key": process.env.BREVO_MA_KEY,
+          },
+        }
+      );
     }
 
     setLoading(false);
@@ -213,33 +233,15 @@ export default function SignUp() {
 
   const signUpGoogle = async () => {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithOAuth({
+    const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
     });
+    // console.log("data", data);
     // Alert & Analytics for failed load
-    if (error) {
-      toast({
-        position: "top",
-        render: () => (
-          <AlertPopup
-            type="danger"
-            text="Unable to Login using Google, please try a different method"
-            subtext={error.message}
-          />
-        ),
+    if (data) {
+      await supabase.auth.admin.updateUserById(data.user.id, {
+        app_metadata: { user_role: "diver" },
       });
-      // gtag.event({
-      //   action: "google-login-error",
-      //   category: "button",
-      //   label: "User",
-      //   // value: newItem.title,
-      // });
-      posthog.capture("SignUp Failed", {
-        Email: email,
-        Method: "Google",
-        Error: error.message,
-      });
-    } else {
       // Success Alert
       toast({
         position: "top",
@@ -262,10 +264,32 @@ export default function SignUp() {
         Email: email,
         Method: "Google",
       });
+    } else {
+      toast({
+        position: "top",
+        render: () => (
+          <AlertPopup
+            type="danger"
+            text="Unable to Login using Google, please try a different method"
+            subtext={error.message}
+          />
+        ),
+      });
+      // gtag.event({
+      //   action: "google-login-error",
+      //   category: "button",
+      //   label: "User",
+      //   // value: newItem.title,
+      // });
+      posthog.capture("SignUp Failed", {
+        Email: email,
+        Method: "Google",
+        Error: error.message,
+      });
     }
 
     setLoading(false);
-    // router.push(`/dive_centres/${data.id}`);
+    router.push(`/users/me`);
   };
 
   return (
@@ -307,18 +331,6 @@ export default function SignUp() {
             <Heading as="h1" color={textColor} fontSize="36px" mb="10px">
               Sign Up
             </Heading>
-            <Text
-              mb="36px"
-              ms="4px"
-              color={textColorSecondary}
-              fontWeight="400"
-              fontSize="md"
-            >
-              Sign Up as a Business Instead?
-              <Link href="/business/signup" color="brand.100" ml={3}>
-                Click Here
-              </Link>
-            </Text>
           </Box>
 
           <Flex
@@ -332,175 +344,174 @@ export default function SignUp() {
             me="auto"
             mb={{ base: "20px", md: "auto" }}
           >
-            <Flex
-              zIndex="2"
-              direction="column"
-              w={{ base: "100%", md: "420px" }}
-              maxW="100%"
-              background="transparent"
-              borderRadius="15px"
-              mx={{ base: "auto", lg: "unset" }}
-              me="auto"
-              mb={{ base: "20px", md: "auto" }}
-            >
-              {userData.role !== "business" && (
-                <>
-                  <Button
-                    fontSize="sm"
-                    me="0px"
-                    mb="26px"
-                    py="15px"
-                    h="50px"
-                    borderRadius="16px"
-                    bg={googleBg}
-                    color={googleText}
-                    fontWeight="500"
-                    _hover={googleHover}
-                    _active={googleActive}
-                    _focus={googleActive}
-                    onClick={signUpGoogle}
-                    disabled={loading}
-                  >
-                    <Icon as={FcGoogle} w="20px" h="20px" me="10px" />
-                    Sign up with Google
-                  </Button>
-                  <Flex align="center" mb="25px">
-                    <HSeparator />
-                    <Text color={textColorSecondary} mx="14px">
-                      or
-                    </Text>
-                    <HSeparator />
-                  </Flex>
-                </>
-              )}
-              <SimpleGrid
-                columns={{ base: "1", md: "2" }}
-                gap={{ sm: "10px", md: "26px" }}
-              >
-                <Flex direction="column">
-                  <InputField
-                    name="firstName"
-                    label="First Name"
-                    value={firstName}
-                    placeholder="First Name"
-                    onChange={handleChange}
-                    isError={firstName === ""}
-                    errorMessage="First name cannot be empty"
-                    isRequired
-                  />
-                </Flex>
-                <Flex direction="column">
-                  <InputField
-                    name="lastName"
-                    label="Last Name"
-                    value={lastName}
-                    placeholder="Last Name"
-                    onChange={handleChange}
-                    isError={lastName === ""}
-                    errorMessage="Last name cannot be empty"
-                    isRequired
-                  />
-                </Flex>
-              </SimpleGrid>
-
-              <InputField
-                name="email"
-                label="Email"
-                value={email}
-                placeholder="Email"
-                onChange={handleChange}
-                isError={email === ""}
-                errorMessage="Email cannot be empty"
-                isRequired
-              />
-              <InputGroup size="md">
-                <InputField
-                  name="password"
-                  value={password}
-                  label="Password"
-                  isRequired
-                  variant="auth"
+            {userData.role !== "business" && (
+              <>
+                <Button
                   fontSize="sm"
-                  ms={{ base: "0px", md: "4px" }}
-                  placeholder="Min. 8 characters"
-                  mb="24px"
-                  size="lg"
-                  type={show ? "text" : "password"}
-                  isError={password === ""}
-                  errorMessage="Password cannot be empty"
+                  me="0px"
+                  mb="10px"
+                  py="15px"
+                  h="50px"
+                  borderRadius="16px"
+                  fontWeight="500"
+                  bg="brand.500"
+                  color="white"
+                  _hover={{ bg: "brand.600" }}
+                  onClick={() => router.push("/business/signup")}
+                >
+                  <Icon as={IoStorefrontOutline} w="20px" h="20px" me="10px" />
+                  Switch to Business Account
+                </Button>
+                <Button
+                  fontSize="sm"
+                  me="0px"
+                  mb="26px"
+                  py="15px"
+                  h="50px"
+                  borderRadius="16px"
+                  bg={googleBg}
+                  color={googleText}
+                  fontWeight="500"
+                  _hover={googleHover}
+                  _active={googleActive}
+                  _focus={googleActive}
+                  onClick={signUpGoogle}
+                  disabled={loading}
+                >
+                  <Icon as={FcGoogle} w="20px" h="20px" me="10px" />
+                  Sign up with Google
+                </Button>
+                <Flex align="center" mb="25px">
+                  <HSeparator />
+                  <Text color={textColorSecondary} mx="14px">
+                    or
+                  </Text>
+                  <HSeparator />
+                </Flex>
+              </>
+            )}
+            <SimpleGrid
+              columns={{ base: "1", md: "2" }}
+              gap={{ sm: "10px", md: "26px" }}
+            >
+              <Flex direction="column">
+                <InputField
+                  name="firstName"
+                  label="First Name"
+                  value={firstName}
+                  placeholder="First Name"
                   onChange={handleChange}
+                  isError={firstName === ""}
+                  errorMessage="First name cannot be empty"
+                  isRequired
                 />
-                <InputRightElement display="flex" alignItems="center" mt="30px">
-                  <Icon
-                    color={textColorSecondary}
-                    _hover={{ cursor: "pointer" }}
-                    as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                    onClick={togglePassVis}
-                  />
-                </InputRightElement>
-              </InputGroup>
-              <Flex justifyContent="space-between" align="center" mb="24px">
-                <FormControl display="flex" alignItems="start">
-                  <Checkbox
-                    id="remember-login"
-                    colorScheme="brandScheme"
-                    me="10px"
-                    mt="3px"
-                    isChecked={consented}
-                    onChange={() => setConsented(!consented)}
-                    isRequired
-                  />
-                  <FormLabel
-                    htmlFor="remember-login"
-                    mb="0"
-                    fontWeight="normal"
-                    color={textColor}
-                    fontSize="sm"
-                  >
-                    By creating an account means you agree to the{" "}
-                    <Link href="../legal/terms" fontWeight="500">
-                      Terms and Conditions,
-                    </Link>{" "}
-                    and our{" "}
-                    <Link href="../legal/privacy" fontWeight="500">
-                      Privacy Policy
-                    </Link>
-                  </FormLabel>
-                </FormControl>
               </Flex>
-              <Button
-                variant="brand"
-                fontSize="14px"
-                fontWeight="500"
-                w="100%"
-                h="50"
+              <Flex direction="column">
+                <InputField
+                  name="lastName"
+                  label="Last Name"
+                  value={lastName}
+                  placeholder="Last Name"
+                  onChange={handleChange}
+                  isError={lastName === ""}
+                  errorMessage="Last name cannot be empty"
+                  isRequired
+                />
+              </Flex>
+            </SimpleGrid>
+
+            <InputField
+              name="email"
+              label="Email"
+              value={email}
+              placeholder="Email"
+              onChange={handleChange}
+              isError={email === ""}
+              errorMessage="Email cannot be empty"
+              isRequired
+            />
+            <InputGroup size="md">
+              <InputField
+                name="password"
+                value={password}
+                label="Password"
+                isRequired
+                variant="auth"
+                fontSize="sm"
+                ms={{ base: "0px", md: "4px" }}
+                placeholder="Min. 8 characters"
                 mb="24px"
-                onClick={signUpEmailPass}
-                disabled={loading}
-              >
-                Create my account
-              </Button>
-              <Flex
-                flexDirection="column"
-                justifyContent="center"
-                alignItems="start"
-                maxW="100%"
-                mt="0px"
-              >
-                <Text color={textColorDetails} fontWeight="400" fontSize="sm">
-                  Already a member?
-                  <NavLink to="/auth/login">
-                    <Text
-                      color={textColorBrand}
-                      as="span"
-                      ms="5px"
-                      fontWeight="500"
-                    >
-                      Sign in
-                    </Text>
-                  </NavLink>
-                </Text>
-              </Flex>
+                size="lg"
+                type={show ? "text" : "password"}
+                isError={password === ""}
+                errorMessage="Password cannot be empty"
+                onChange={handleChange}
+              />
+              <InputRightElement display="flex" alignItems="center" mt="30px">
+                <Icon
+                  color={textColorSecondary}
+                  _hover={{ cursor: "pointer" }}
+                  as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                  onClick={togglePassVis}
+                />
+              </InputRightElement>
+            </InputGroup>
+            <Flex justifyContent="space-between" align="center" mb="24px">
+              <FormControl display="flex" alignItems="start">
+                <Checkbox
+                  id="remember-login"
+                  colorScheme="brandScheme"
+                  me="10px"
+                  mt="3px"
+                  isChecked={consented}
+                  onChange={() => setConsented(!consented)}
+                  isRequired
+                />
+                <FormLabel
+                  htmlFor="remember-login"
+                  mb="0"
+                  fontWeight="normal"
+                  color={textColor}
+                  fontSize="sm"
+                >
+                  By creating an account means you agree to the{" "}
+                  <Link href="../legal/terms" fontWeight="500">
+                    Terms and Conditions,
+                  </Link>{" "}
+                  and our{" "}
+                  <Link href="../legal/privacy" fontWeight="500">
+                    Privacy Policy
+                  </Link>
+                </FormLabel>
+              </FormControl>
+            </Flex>
+            <Button
+              variant="brand"
+              fontSize="14px"
+              fontWeight="500"
+              w="100%"
+              h="50"
+              mb="24px"
+              onClick={signUpEmailPass}
+              disabled={loading}
+            >
+              Create my account
+            </Button>
+            <Flex
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="start"
+              maxW="100%"
+              mt="0px"
+            >
+              <Text color={textColorDetails} fontWeight="400" fontSize="sm">
+                Already a member?
+                <NavLink to="/auth/login">
+                  <Text color="brand.100" as="span" ms="5px" fontWeight="500">
+                    Sign in
+                  </Text>
+                </NavLink>
+              </Text>
             </Flex>
           </Flex>
         </Flex>

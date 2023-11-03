@@ -26,8 +26,7 @@ import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
-
-// import { TbBuildingStore, TbScubaMask } from "react-icons/tb";
+import { TbScubaMask } from "react-icons/tb";
 
 import AlertPopup from "components/alerts/AlertPopup";
 import InputField from "components/fields/InputField";
@@ -212,22 +211,9 @@ export default function SignUp() {
             <Heading as="h1" color={textColor} fontSize="36px" mb="10px">
               Business Sign Up
             </Heading>
-            <Text
-              mb="36px"
-              ms="4px"
-              color={textColorSecondary}
-              fontWeight="400"
-              fontSize="md"
-            >
-              Sign Up as a Diver Instead?
-              <Link href="/auth/signup" color="brand.100" ml={3}>
-                Click Here
-              </Link>
-            </Text>
           </Box>
 
           <Flex
-            zIndex="2"
             direction="column"
             w={{ base: "100%", md: "420px" }}
             maxW="100%"
@@ -237,155 +223,159 @@ export default function SignUp() {
             me="auto"
             mb={{ base: "20px", md: "auto" }}
           >
-            <Flex
-              zIndex="2"
-              direction="column"
-              w={{ base: "100%", md: "420px" }}
-              maxW="100%"
-              background="transparent"
-              borderRadius="15px"
-              mx={{ base: "auto", lg: "unset" }}
-              me="auto"
-              mb={{ base: "20px", md: "auto" }}
+            <Button
+              fontSize="sm"
+              me="0px"
+              mb="30px"
+              py="15px"
+              h="50px"
+              borderRadius="16px"
+              fontWeight="500"
+              bg="brand.500"
+              color="white"
+              _hover={{ bg: "brand.600" }}
+              onClick={() => router.push("/auth/signup")}
             >
-              <SimpleGrid
-                columns={{ base: "1", md: "2" }}
-                gap={{ sm: "10px", md: "26px" }}
-              >
-                <Flex direction="column">
-                  <InputField
-                    name="firstName"
-                    label="First Name"
-                    value={firstName}
-                    placeholder="First Name"
-                    onChange={handleChange}
-                    isError={firstName === ""}
-                    errorMessage="First name cannot be empty"
-                    isRequired
-                  />
-                </Flex>
-                <Flex direction="column">
-                  <InputField
-                    name="lastName"
-                    label="Last Name"
-                    value={lastName}
-                    placeholder="Last Name"
-                    onChange={handleChange}
-                    isError={lastName === ""}
-                    errorMessage="Last name cannot be empty"
-                    isRequired
-                  />
-                </Flex>
-              </SimpleGrid>
-
-              <InputField
-                name="businessName"
-                label="Business Name"
-                value={businessName}
-                placeholder="Name of your dive centre"
-                onChange={handleChange}
-                isError={businessName === ""}
-                errorMessage="Business Name cannot be empty"
-                isRequired
-              />
-              <InputField
-                name="email"
-                label="Email"
-                value={email}
-                placeholder="Email"
-                onChange={handleChange}
-                isError={email === ""}
-                errorMessage="Email cannot be empty"
-                isRequired
-              />
-              <InputGroup size="md">
+              <Icon as={TbScubaMask} w="20px" h="20px" me="10px" />
+              Switch to Diver Account
+            </Button>
+            <SimpleGrid
+              columns={{ base: "1", md: "2" }}
+              gap={{ sm: "10px", md: "26px" }}
+            >
+              <Flex direction="column">
                 <InputField
-                  name="password"
-                  value={password}
-                  label="Password"
-                  isRequired
-                  variant="auth"
-                  fontSize="sm"
-                  ms={{ base: "0px", md: "4px" }}
-                  placeholder="Min. 8 characters"
-                  mb="24px"
-                  size="lg"
-                  type={show ? "text" : "password"}
-                  isError={password === ""}
-                  errorMessage="Password cannot be empty"
+                  name="firstName"
+                  label="First Name"
+                  value={firstName}
+                  placeholder="First Name"
                   onChange={handleChange}
+                  isError={firstName === ""}
+                  errorMessage="First name cannot be empty"
+                  isRequired
                 />
-                <InputRightElement display="flex" alignItems="center" mt="30px">
-                  <Icon
-                    color={textColorSecondary}
-                    _hover={{ cursor: "pointer" }}
-                    as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                    onClick={togglePassVis}
-                  />
-                </InputRightElement>
-              </InputGroup>
-              <Flex justifyContent="space-between" align="center" mb="24px">
-                <FormControl display="flex" alignItems="start">
-                  <Checkbox
-                    id="remember-login"
-                    colorScheme="brandScheme"
-                    me="10px"
-                    mt="3px"
-                    isChecked={consented}
-                    onChange={() => setConsented(!consented)}
-                    isRequired
-                  />
-                  <FormLabel
-                    htmlFor="remember-login"
-                    mb="0"
-                    fontWeight="normal"
-                    color={textColor}
-                    fontSize="sm"
-                  >
-                    By creating an account means you agree to the{" "}
-                    <Link href="../legal/terms" fontWeight="500">
-                      Terms and Conditions,
-                    </Link>{" "}
-                    and our{" "}
-                    <Link href="../legal/privacy" fontWeight="500">
-                      Privacy Policy
-                    </Link>
-                  </FormLabel>
-                </FormControl>
               </Flex>
-              <Button
-                variant="brand"
-                fontSize="14px"
-                fontWeight="500"
-                w="100%"
-                h="50"
+              <Flex direction="column">
+                <InputField
+                  name="lastName"
+                  label="Last Name"
+                  value={lastName}
+                  placeholder="Last Name"
+                  onChange={handleChange}
+                  isError={lastName === ""}
+                  errorMessage="Last name cannot be empty"
+                  isRequired
+                />
+              </Flex>
+            </SimpleGrid>
+
+            <InputField
+              name="businessName"
+              label="Business Name"
+              value={businessName}
+              placeholder="Name of your dive centre"
+              onChange={handleChange}
+              isError={businessName === ""}
+              errorMessage="Business Name cannot be empty"
+              isRequired
+            />
+            <InputField
+              name="email"
+              label="Email"
+              value={email}
+              placeholder="Email"
+              onChange={handleChange}
+              isError={email === ""}
+              errorMessage="Email cannot be empty"
+              isRequired
+            />
+            <InputGroup size="md">
+              <InputField
+                name="password"
+                value={password}
+                label="Password"
+                isRequired
+                variant="auth"
+                fontSize="sm"
+                ms={{ base: "0px", md: "4px" }}
+                placeholder="Min. 8 characters"
                 mb="24px"
-                onClick={signUpEmailPass}
-                disabled={loading}
-              >
-                Create my account
-              </Button>
-              <Flex
-                flexDirection="column"
-                justifyContent="center"
-                alignItems="start"
-                maxW="100%"
-                mt="0px"
-              >
-                <Text color={textColorDetails} fontWeight="400" fontSize="sm">
-                  Already a member?
-                  <NavLink to="/auth/login">
-                    <Text
-                      color={textColorBrand}
-                      as="span"
-                      ms="5px"
-                      fontWeight="500"
-                    >
-                      Sign in
-                    </Text>
-                  </NavLink>
-                </Text>
-              </Flex>
+                size="lg"
+                type={show ? "text" : "password"}
+                isError={password === ""}
+                errorMessage="Password cannot be empty"
+                onChange={handleChange}
+              />
+              <InputRightElement display="flex" alignItems="center" mt="30px">
+                <Icon
+                  color={textColorSecondary}
+                  _hover={{ cursor: "pointer" }}
+                  as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                  onClick={togglePassVis}
+                />
+              </InputRightElement>
+            </InputGroup>
+            <Flex justifyContent="space-between" align="center" mb="24px">
+              <FormControl display="flex" alignItems="start">
+                <Checkbox
+                  id="remember-login"
+                  colorScheme="brandScheme"
+                  me="10px"
+                  mt="3px"
+                  isChecked={consented}
+                  onChange={() => setConsented(!consented)}
+                  isRequired
+                />
+                <FormLabel
+                  htmlFor="remember-login"
+                  mb="0"
+                  fontWeight="normal"
+                  color={textColor}
+                  fontSize="sm"
+                >
+                  By creating an account means you agree to the{" "}
+                  <Link href="../legal/terms" fontWeight="500">
+                    Terms and Conditions,
+                  </Link>{" "}
+                  and our{" "}
+                  <Link href="../legal/privacy" fontWeight="500">
+                    Privacy Policy
+                  </Link>
+                </FormLabel>
+              </FormControl>
+            </Flex>
+            <Button
+              variant="brand"
+              fontSize="14px"
+              fontWeight="500"
+              w="100%"
+              h="50"
+              mb="24px"
+              onClick={signUpEmailPass}
+              disabled={loading}
+            >
+              Create my account
+            </Button>
+            <Flex
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="start"
+              maxW="100%"
+              mt="0px"
+            >
+              <Text color={textColorDetails} fontWeight="400" fontSize="sm">
+                Already a member?
+                <NavLink to="/auth/login">
+                  <Text
+                    color={textColorBrand}
+                    as="span"
+                    ms="5px"
+                    fontWeight="500"
+                  >
+                    Sign in
+                  </Text>
+                </NavLink>
+              </Text>
             </Flex>
           </Flex>
         </Flex>
