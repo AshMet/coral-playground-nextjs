@@ -21,8 +21,6 @@
 
 */
 
-// Chakra imports
-import { Flex } from "@chakra-ui/react";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 
 import Card from "components/card/Card";
@@ -72,14 +70,12 @@ export default function Orders({ orders }) {
       actions: "Actions",
     }));
   return (
-    <Flex direction="column" pt={{ sm: "125px", lg: "75px" }}>
-      <Card px="0px">
-        <SearchTableOrders
-          tableData={tableDataOrders}
-          columnsData={columnsDataOrders}
-        />
-      </Card>
-    </Flex>
+    <Card px="0px">
+      <SearchTableOrders
+        tableData={tableDataOrders}
+        columnsData={columnsDataOrders}
+      />
+    </Card>
   );
 }
 

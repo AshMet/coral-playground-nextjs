@@ -1,15 +1,15 @@
 import {
-  Button,
   Flex,
-  HStack,
+  // HStack,
+  // Icon,
+  // Button,
   Heading,
-  Icon,
   Stack,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import Link from "next/link";
-import { IoLogoWhatsapp } from "react-icons/io5";
+// import Link from "next/link";
+// import { IoLogoWhatsapp } from "react-icons/io5";
 
 const Contact = () => {
   // Chakra Color Mode
@@ -64,7 +64,7 @@ const Contact = () => {
                 Call one of our booking agents today and we will do our best to
                 organize your trip <br />
               </Text>
-              <Button
+              {/* <Button
                 h="50px"
                 mt={5}
                 bg="linear-gradient(135deg, #00E676 0%, #1EBEA5 100%)"
@@ -77,7 +77,7 @@ const Contact = () => {
                     </Text>
                   </Link>
                 </HStack>
-              </Button>
+              </Button> */}
             </Text>
           </Flex>
         </Flex>

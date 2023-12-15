@@ -20,26 +20,24 @@ export default function Manage(props) {
     <Box>
       <>
         <NextSeo noindex nofollow />
-        <Box pt={{ sm: "60px", xl: "100px" }}>
-          <Card p={{ base: "15px", md: "30px" }}>
-            {diveCentre ? (
-              <CentreCard
-                diveCentre={diveCentre}
-                equipment={equipment}
-                certs={certs}
-              />
-            ) : (
-              <NoCentreCard />
-            )}
-          </Card>
-          {diveCentre && (
-            <CentreTrips
+        <Card p={{ base: "15px", md: "30px" }}>
+          {diveCentre ? (
+            <CentreCard
               diveCentre={diveCentre}
-              diveTrips={diveTrips}
-              centreEquipment={centreEquipment}
+              equipment={equipment}
+              certs={certs}
             />
+          ) : (
+            <NoCentreCard />
           )}
-        </Box>
+        </Card>
+        {diveCentre && (
+          <CentreTrips
+            diveCentre={diveCentre}
+            diveTrips={diveTrips}
+            centreEquipment={centreEquipment}
+          />
+        )}
       </>
     </Box>
   );

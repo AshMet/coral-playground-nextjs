@@ -1,7 +1,6 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
-import { Flex } from "@chakra-ui/react";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { NextSeo } from "next-seo";
 
@@ -70,18 +69,16 @@ export default function TripsList({ diveTrips }) {
   return (
     <>
       <NextSeo noindex nofollow />
-      <Flex direction="column" pt={{ sm: "125px", lg: "75px" }}>
-        <Card padding="30px">
-          <EventCalendar
-            initialDate={new Date()}
-            calendarDives={getCalendarDives(diveTrips)}
-          />
-          <SearchTableDiveTrips
-            tableData={diveTrips.filter((dive) => !dive?.generic)}
-            columnsData={columnsDataTrips}
-          />
-        </Card>
-      </Flex>
+      <Card padding="30px">
+        <EventCalendar
+          initialDate={new Date()}
+          calendarDives={getCalendarDives(diveTrips)}
+        />
+        <SearchTableDiveTrips
+          tableData={diveTrips.filter((dive) => !dive?.generic)}
+          columnsData={columnsDataTrips}
+        />
+      </Card>
     </>
   );
 }
