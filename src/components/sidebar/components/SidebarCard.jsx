@@ -39,7 +39,7 @@ export default function SidebarDocs() {
           <>
             <Box>
               <Image
-                src={`https://avatars.dicebear.com/api/miniavs/${username}.svg`}
+                src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${username}`}
                 alt="profile"
                 height={100}
                 width={100}

@@ -5,12 +5,14 @@
 /* eslint-disable react/prop-types */
 
 import { chakra, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+// import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { useContext, useEffect, useState } from "react";
 
-import { supabase } from "../api/index";
+import { supabase } from "../api";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import TripSearchBar from "components/fields/TripSearchBar";
 import { TripSearchContext } from "contexts/TripSearchContext";
@@ -27,6 +29,27 @@ export default function DiveSites({ diveSites }) {
 
   const [city, setCity] = useState(0);
   const [filtered, setFiltered] = useState();
+  const [userLikes, setUserLikes] = useState([]);
+
+  const supabaseClient = useSupabaseClient();
+  const user = useUser();
+
+  async function getUserLikes() {
+    const { data: likes } = await supabaseClient
+      .from("site_likes")
+      .select("*")
+      .eq("user_id", user.id);
+    const siteIds = likes.map((like) => like.dive_site_id);
+    setUserLikes(siteIds);
+  }
+
+  useEffect(() => {
+    if (!user) return null;
+    getUserLikes();
+  }, [user]);
+
+  // console.log("user", user);
+  // console.log("userLikes", userLikes);
 
   useEffect(() => {
     const cityFiltered = filterByCity(diveSites, city);
@@ -85,6 +108,8 @@ export default function DiveSites({ diveSites }) {
                         maxVis={site.maxVis}
                         minCurrent={site.minCurrent}
                         maxCurrent={site.maxCurrent}
+                        userId={user?.id}
+                        isLiked={!!userLikes?.includes(site.id)}
                         type="diveSite"
                         // address={`${site.city}, ${site.country}`}
                       />
@@ -100,6 +125,9 @@ export default function DiveSites({ diveSites }) {
 }
 
 export async function getStaticProps() {
+  // Create authenticated Supabase Client
+  // const supabase = createPagesServerClient(ctx);
+
   const { data: diveSites } = await supabase
     .from("dive_sites_view")
     .select(

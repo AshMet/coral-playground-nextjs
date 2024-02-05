@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 import { supabase } from "../../api/index";
 import Card from "components/card/Card";
+import LikeButton from "components/icons/LikeButton";
 import CentreInfo from "components/pages/diveCentre/CentreInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
 import DivingLayout from "layouts/DivingLayout";
@@ -112,7 +113,9 @@ export default function DiveCentre(props) {
                 bgImage={
                   diveCentre?.coverPhotoUrl || "/img/diving/dive_centre_bg.jpg"
                 }
-              />
+              >
+                <LikeButton diveCentreId={diveCentre.id} />
+              </Card>
             </AspectRatio>
 
             <CentreInfo

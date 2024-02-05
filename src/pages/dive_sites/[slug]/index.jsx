@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
@@ -13,6 +14,7 @@ import { useEffect, useState } from "react";
 // import slugify from "slugify";
 
 import Card from "components/card/Card";
+import LikeButton from "components/icons/LikeButton";
 import SiteInfo from "components/pages/diveSite/SiteInfo";
 import TripsSidebar from "components/sidebar/TripsSidebar";
 import DivingLayout from "layouts/DivingLayout";
@@ -107,6 +109,7 @@ export default function DiveSitePage({ diveSite, species }) {
                 minH={{ base: "200px", md: "100%" }}
                 bgImage={diveSite.diveMap || "/img/diving/dive_site_bg.jpg"}
               >
+                <LikeButton diveSiteId={diveSite.id} />
                 <Button
                   variant="no-hover"
                   w="max-content"

@@ -5,6 +5,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable sonarjs/no-duplicate-string */
 import { chakra, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
@@ -27,13 +28,32 @@ export default function DiveSites({ diveCentres }) {
   const { filterByCity } = useContext(TripSearchContext);
   const [city, setCity] = useState(0);
   const [filtered, setFiltered] = useState();
-
+  const [userLikes, setUserLikes] = useState([]);
   const textColor = useColorModeValue("secondaryGray.900", "white");
+
+  const supabaseClient = useSupabaseClient();
+  const user = useUser();
+
+  async function getUserLikes() {
+    const { data: likes } = await supabaseClient
+      .from("centre_likes")
+      .select("*")
+      .eq("user_id", user.id);
+    const centreIds = likes.map((like) => like.dive_centre_id);
+    setUserLikes(centreIds);
+  }
+
+  useEffect(() => {
+    if (!user) return null;
+    getUserLikes();
+  }, [user]);
 
   useEffect(() => {
     const cityFiltered = filterByCity(diveCentres, city);
     setFiltered(cityFiltered);
   }, [diveCentres, city]);
+
+  // console.log("userLikes", userLikes);
 
   return (
     <>
@@ -83,6 +103,7 @@ export default function DiveSites({ diveCentres }) {
                           "/img/diving/dive_centre_bg.jpg"
                         }
                         name={centre.name}
+                        isLiked={!!userLikes?.includes(centre.id)}
                         type="diveCentre"
                         // address={`${site.city}, ${site.country}`}
                       />

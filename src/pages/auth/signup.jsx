@@ -228,7 +228,7 @@ export default function SignUp() {
     }
 
     setLoading(false);
-    router.push(`/users/me`);
+    router.push(`/`);
   };
 
   const signUpGoogle = async () => {

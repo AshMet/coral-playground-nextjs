@@ -14,6 +14,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom Components
+// import { createClient } from "utils/supabase/component";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
@@ -128,7 +129,7 @@ function SignedInMenuList() {
           // name={user.email}
           src={
             user?.user_metadata.avatar_url ||
-            `https://avatars.dicebear.com/api/miniavs/${user.email}.svg`
+            `https://api.dicebear.com/7.x/miniavs/svg?seed=${user?.user_metadata.username}`
           }
           size="sm"
           w="40px"

@@ -143,7 +143,7 @@ export default function Login() {
     }
 
     setLoading(false);
-    router.push(`/users/me`);
+    router.push(`/users/${data.user?.user_metadata.username}`);
   };
 
   const loginGoogle = async () => {

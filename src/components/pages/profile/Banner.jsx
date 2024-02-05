@@ -11,6 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/router";
 import { usePostHog } from "posthog-js/react";
 import { useRef, useState } from "react";
 
@@ -27,6 +28,7 @@ export default function Settings(props) {
   const inputRef = useRef(null);
   const toast = useToast();
   const user = useUser();
+  const router = useRouter();
   const posthog = usePostHog();
 
   // async function downloadImage(path) {
@@ -119,7 +121,7 @@ export default function Settings(props) {
         mx="auto"
         src={
           profile.avatarUrl ||
-          `https://avatars.dicebear.com/api/miniavs/${user?.email}.svg`
+          `https://api.dicebear.com/7.x/miniavs/svg?seed=${user?.user_metadata.username}`
         }
         h="87px"
         w="87px"
@@ -153,7 +155,15 @@ export default function Settings(props) {
         {/* <label className="button primary block" htmlFor="single">
           {uploading ? "Uploading ..." : "Upload"}
         </label> */}
-        <Button onClick={() => inputRef.current.click()}>
+        <Button
+          mt="20px"
+          variant="solid"
+          bgColor="brand.100"
+          fontSize="sm"
+          fontWeight="500"
+          _hover={{ bgColor: "red" }}
+          onClick={() => inputRef.current.click()}
+        >
           {uploading ? "Uploading ..." : "Upload Avatar"}
         </Button>
         <input
@@ -169,6 +179,17 @@ export default function Settings(props) {
           onChange={uploadAvatar}
           disabled={uploading}
         />
+        <Button
+          mt="20px"
+          variant="solid"
+          bgColor="brand.400"
+          fontSize="sm"
+          fontWeight="500"
+          _hover={{ bgColor: "brand.300" }}
+          onClick={() => router.push(`/users/${profile?.username}`)}
+        >
+          Go to my profile
+        </Button>
       </Flex>
     </Card>
   );

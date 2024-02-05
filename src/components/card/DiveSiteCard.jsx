@@ -4,8 +4,10 @@
 // Chakra imports
 import {
   Box,
+  Button,
   chakra,
   Flex,
+  Icon,
   SimpleGrid,
   Spinner,
   Text,
@@ -14,6 +16,7 @@ import {
 import { motion, isValidMotionProp } from "framer-motion";
 // import { usePostHog } from "posthog-js/react";
 // import slugify from "slugify";
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 import Image from "../actions/NextChakraImg";
 import { CircProgressMini } from "components/charts/CircularProgress";
@@ -38,12 +41,14 @@ export default function DiveSiteCard(props) {
     maxVis,
     minCurrent,
     maxCurrent,
+    userId,
+    isLiked,
     type,
     isLoading,
     ...rest
   } = props;
   // const posthog = usePostHog();
-  // const [like, setLike] = useState(false);
+
   const textColor = useColorModeValue("navy.700", "white");
   const bgImg =
     type === "dive_site"
@@ -96,30 +101,27 @@ export default function DiveSiteCard(props) {
                   layout="responsive"
                 />
               )}
-              {/* <Button
-                    position="absolute"
-                    bg="white"
-                    _hover={{ bg: "whiteAlpha.900" }}
-                    _active={{ bg: "white" }}
-                    _focus={{ bg: "white" }}
-                    p="0px !important"
-                    top="14px"
-                    right="14px"
-                    borderRadius="50%"
-                    minW="36px"
-                    h="36px"
-                    onClick={() => {
-                      setLike(!like);
-                    }}
-                  >
-                    <Icon
-                      transition="0.2s linear"
-                      w="20px"
-                      h="20px"
-                      as={like ? IoHeart : IoHeartOutline}
-                      color="brand.500"
-                    />
-                  </Button> */}
+              <Button
+                position="absolute"
+                bg="white"
+                _hover={{ bg: "whiteAlpha.900" }}
+                _active={{ bg: "white" }}
+                _focus={{ bg: "white" }}
+                p="0px !important"
+                top="14px"
+                right="14px"
+                borderRadius="50%"
+                minW="36px"
+                h="36px"
+              >
+                <Icon
+                  transition="0.2s linear"
+                  w="20px"
+                  h="20px"
+                  as={isLiked ? IoHeart : IoHeartOutline}
+                  color="brand.100"
+                />
+              </Button>
             </Box>
           )}
           <Flex

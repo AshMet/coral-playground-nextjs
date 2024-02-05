@@ -14,7 +14,6 @@ import {
   Tabs,
   TabList,
   TabPanels,
-  Tab,
   TabPanel,
   Icon,
 } from "@chakra-ui/react";
@@ -25,6 +24,7 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 import Card from "components/card/Card";
+import SectionTab from "components/menu/SectionTab";
 
 import DetailsTab from "./DetailsTab";
 import SpeciesTab from "./SpeciesTab";
@@ -103,111 +103,24 @@ export default function SiteInfo({
             <Tabs variant="soft-rounded" colorScheme="brandTabs" mb="60px">
               <TabList overflowX={{ sm: "scroll", lg: "unset" }}>
                 <Flex>
-                  <Tab
-                    onClick={function () {
-                      setTabState("description");
-                    }}
-                    pb="0px"
-                    me="10px"
-                    bg="unset"
-                    _selected={{
-                      bg: "none",
-                    }}
-                    _focus={{ border: "none" }}
-                    minW="max-content"
-                    flexDirection="column"
-                  >
-                    <Flex align="center">
-                      <Text
-                        color={
-                          tabState === "description"
-                            ? textColor
-                            : textColorTertiary
-                        }
-                        fontSize="lg"
-                        fontWeight="500"
-                      >
-                        Description
-                      </Text>
-                    </Flex>
-                    <Box
-                      height="4px"
-                      w="100%"
-                      transition="0.1s linear"
-                      bg={
-                        tabState === "description" ? "brand.400" : "transparent"
-                      }
-                      mt="15px"
-                      borderRadius="30px"
-                    />
-                  </Tab>
-                  <Tab
-                    pb="0px"
-                    flexDirection="column"
-                    onClick={function () {
-                      setTabState("info");
-                    }}
-                    bg="unset"
-                    _selected={{
-                      bg: "none",
-                    }}
-                    _focus={{ border: "none" }}
-                    minW="max-content"
-                  >
-                    <Flex align="center">
-                      <Text
-                        color={
-                          tabState === "info" ? textColor : textColorTertiary
-                        }
-                        fontSize="lg"
-                        fontWeight="500"
-                      >
-                        Details
-                      </Text>
-                    </Flex>
-                    <Box
-                      height="4px"
-                      w="100%"
-                      transition="0.1s linear"
-                      bg={tabState === "info" ? "brand.400" : "transparent"}
-                      mt="15px"
-                      borderRadius="30px"
-                    />
-                  </Tab>
-                  <Tab
-                    pb="0px"
-                    flexDirection="column"
-                    onClick={function () {
-                      setTabState("species");
-                    }}
-                    me="10px"
-                    bg="unset"
-                    _selected={{
-                      bg: "none",
-                    }}
-                    _focus={{ border: "none" }}
-                    minW="max-content"
-                  >
-                    <Flex align="center">
-                      <Text
-                        color={
-                          tabState === "species" ? textColor : textColorTertiary
-                        }
-                        fontSize="lg"
-                        fontWeight="500"
-                      >
-                        Species
-                      </Text>
-                    </Flex>
-                    <Box
-                      height="4px"
-                      w="100%"
-                      transition="0.1s linear"
-                      bg={tabState === "species" ? "brand.400" : "transparent"}
-                      mt="15px"
-                      borderRadius="30px"
-                    />
-                  </Tab>
+                  <SectionTab
+                    title="Description"
+                    stateName="description"
+                    tabState={tabState}
+                    setTabState={setTabState}
+                  />
+                  <SectionTab
+                    title="Details"
+                    stateName="info"
+                    tabState={tabState}
+                    setTabState={setTabState}
+                  />
+                  <SectionTab
+                    title="Species"
+                    stateName="species"
+                    tabState={tabState}
+                    setTabState={setTabState}
+                  />
                 </Flex>
               </TabList>
               <TabPanels pt="30px">

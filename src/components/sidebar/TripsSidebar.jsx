@@ -99,60 +99,66 @@ export default function TripSidebar({
           </Text>
         )}
       </Card>
-      <Card mt={5}>
-        <Flex gap={5}>
-          <Text color={textColor} fontSize="2xl" fontWeight="700" mb="20px">
-            Price List
-          </Text>
-          {genericDives.length > 0 && (
-            <Badge
-              bgColor="brand.100"
-              color="white"
-              borderRadius="15px"
-              display="flex"
-              // w="30px"
-              h="25px"
-              px={4}
-              py={2}
-              justifyContent="center"
+      {diveCentre && (
+        <Card mt={5}>
+          <Flex gap={5}>
+            <Text color={textColor} fontSize="2xl" fontWeight="700" mb="20px">
+              Price List
+            </Text>
+            {genericDives.length > 0 && (
+              <Badge
+                bgColor="brand.100"
+                color="white"
+                borderRadius="15px"
+                display="flex"
+                // w="30px"
+                h="25px"
+                px={4}
+                py={2}
+                justifyContent="center"
+              >
+                {genericDives.length}
+              </Badge>
+            )}
+          </Flex>
+          {genericDives.length > 0 ? (
+            genericDives.map((trip, index) => (
+              <Flex
+                key={trip.id}
+                direction="column"
+                justify="space-between"
+                align="center"
+              >
+                <GenericTripLineItem
+                  trip={trip}
+                  tripRules={getFilteredRules(trip, dateRange)}
+                  type={diveCentre ? "diveCentre" : "diveSite"}
+                  icon={
+                    <Icon
+                      as={MdAddCircle}
+                      color={textColor}
+                      w="20px"
+                      h="18px"
+                    />
+                  }
+                />
+                {trips?.filter((x) => x.generic === true).length >
+                  index + 1 && <Divider my="25px" />}
+              </Flex>
+            ))
+          ) : (
+            <Text
+              fontSize="md"
+              fontWeight="500"
+              color="textColorTertiary"
+              mb="30px"
             >
-              {genericDives.length}
-            </Badge>
+              This business has not added any items to their price list. Check
+              back soon, new items are added regularly
+            </Text>
           )}
-        </Flex>
-        {genericDives.length > 0 ? (
-          genericDives.map((trip, index) => (
-            <Flex
-              key={trip.id}
-              direction="column"
-              justify="space-between"
-              align="center"
-            >
-              <GenericTripLineItem
-                trip={trip}
-                tripRules={getFilteredRules(trip, dateRange)}
-                type={diveCentre ? "diveCentre" : "diveSite"}
-                icon={
-                  <Icon as={MdAddCircle} color={textColor} w="20px" h="18px" />
-                }
-              />
-              {trips?.filter((x) => x.generic === true).length > index + 1 && (
-                <Divider my="25px" />
-              )}
-            </Flex>
-          ))
-        ) : (
-          <Text
-            fontSize="md"
-            fontWeight="500"
-            color="textColorTertiary"
-            mb="30px"
-          >
-            This business has not added any items to their price list. Check
-            back soon, new items are added regularly
-          </Text>
-        )}
-      </Card>
+        </Card>
+      )}
       {/* {centreEquipment?.length > 0 && (
         <Card mt={5}>
           <Text color={textColor} fontSize="2xl" fontWeight="700" mb="20px">
