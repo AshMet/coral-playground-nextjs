@@ -121,7 +121,7 @@ export default function Settings(props) {
         mx="auto"
         src={
           profile.avatarUrl ||
-          `https://api.dicebear.com/7.x/miniavs/svg?seed=${user?.user_metadata.username}`
+          `https://api.dicebear.com/7.x/personas/svg?seed=${user?.user_metadata.username}`
         }
         h="87px"
         w="87px"

@@ -11,14 +11,11 @@ import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { useContext, useEffect, useState } from "react";
 
-// import { SearchBar } from "views/admin/nfts/profile/components/Search";
 import { supabase } from "../api/index";
 import DiveSiteCard from "components/card/DiveSiteCard";
 import TripSearchBar from "components/fields/TripSearchBar";
 import { TripSearchContext } from "contexts/TripSearchContext";
 import DivingLayout from "layouts/DivingLayout";
-
-// const Moralis = require("moralis/node");
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === "children",

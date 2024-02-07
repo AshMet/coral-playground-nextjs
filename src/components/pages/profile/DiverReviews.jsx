@@ -48,7 +48,7 @@ export default function ReviewsTab({ commentRecipientId }) {
             <Comment
               avatar={
                 review.avatarUrl ||
-                `https://api.dicebear.com/7.x/miniavs/svg?seed=${review.username}`
+                `https://api.dicebear.com/7.x/personas/svg?seed=${review.username}`
               }
               name={review.username ? `@${review.username}` : review.firstName}
               text={review.review}

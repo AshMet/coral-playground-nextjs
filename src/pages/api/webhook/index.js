@@ -36,8 +36,7 @@ const createUser = (customerId) => {
 };
 
 const createBooking = async (session) => {
-  // create booking on moralis using metadata passed from session
-  // Including sessionId
+  // create booking using metadata passed from session including sessionId
   const customer = await stripe.customers.retrieve(session.customer);
   console.log("webhook customer", customer);
   console.log("webhook session", session);

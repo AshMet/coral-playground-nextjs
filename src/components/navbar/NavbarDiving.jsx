@@ -1,13 +1,10 @@
-/* eslint-disable sonarjs/no-duplicate-string */
-/* eslint-disable import/no-cycle */
-/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable no-undef */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable no-undef */
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/no-children-prop */
+/* eslint-disable import/no-extraneous-dependencies */
+
 // Chakra Imports
 import {
   Box,
@@ -27,14 +24,6 @@ import NavbarDivingLinks from "./NavbarDivingLinks";
 
 export default function NavbarDiving(props) {
   const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener("scroll", changeNavbar);
-
-    return () => {
-      window.removeEventListener("scroll", changeNavbar);
-    };
-  });
 
   const { secondary, message, brandText, mini, setMini, hovered } = props;
 
@@ -57,6 +46,14 @@ export default function NavbarDiving(props) {
       setScrolled(false);
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeNavbar);
+
+    return () => {
+      window.removeEventListener("scroll", changeNavbar);
+    };
+  });
 
   return (
     <Box
@@ -176,7 +173,6 @@ export default function NavbarDiving(props) {
 
 NavbarDiving.propTypes = {
   brandText: PropTypes.string,
-  variant: PropTypes.string,
   secondary: PropTypes.bool,
   fixed: PropTypes.bool,
   onOpen: PropTypes.func,

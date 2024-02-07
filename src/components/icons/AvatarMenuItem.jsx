@@ -129,7 +129,7 @@ function SignedInMenuList() {
           // name={user.email}
           src={
             user?.user_metadata.avatar_url ||
-            `https://api.dicebear.com/7.x/miniavs/svg?seed=${user?.user_metadata.username}`
+            `https://api.dicebear.com/7.x/personas/svg?seed=${user?.user_metadata.username}`
           }
           size="sm"
           w="40px"

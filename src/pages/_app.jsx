@@ -7,7 +7,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
-import { Analytics } from "@vercel/analytics/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Script from "next/script";
@@ -180,7 +179,6 @@ const MyApp = ({ Component, pageProps }) => {
                 </Head>
                 <DefaultSeo {...defaultSEOConfig} />
                 {getLayout(<Component {...pageProps} />)}
-                <Analytics />
               </TripSearchProvider>
             </PostHogProvider>
           </Provider>

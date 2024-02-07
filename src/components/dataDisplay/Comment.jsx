@@ -13,7 +13,7 @@ export default function Comment(props) {
   return (
     <Flex mb="30px" {...rest}>
       <Avatar
-        src={avatar || `https://api.dicebear.com/7.x/miniavs/svg?seed=${name}`}
+        src={avatar || `https://api.dicebear.com/7.x/personas/svg?seed=${name}`}
         w="50px"
         h="50px"
         me="15px"

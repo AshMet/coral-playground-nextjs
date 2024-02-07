@@ -79,7 +79,7 @@ export default function DiveCentre({ profile }) {
                 mx="auto"
                 src={
                   profile?.avatarUrl ||
-                  `https://api.dicebear.com/7.x/miniavs/svg?seed=${profile?.username}`
+                  `https://api.dicebear.com/7.x/personas/svg?seed=${profile?.username}`
                 }
                 h="87px"
                 w="87px"
