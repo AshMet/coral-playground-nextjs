@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import { Avatar, Flex, Link, Text, useColorModeValue } from "@chakra-ui/react";
+import { Avatar, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 
 // Custom components
 // import React from "react";
@@ -9,7 +9,6 @@ export default function Comment(props) {
   const { avatar, name, text, tags, time, ratingsValues, ...rest } = props;
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const textColorSecondary = useColorModeValue("secondaryGray.600", "white");
   return (
     <Flex mb="30px" {...rest}>
       <Avatar
@@ -19,13 +18,14 @@ export default function Comment(props) {
         me="15px"
       />
       <Flex direction="column">
-        <Text color={textColor} fontWeight="400" fontSize="md" mt="6px">
-          <Text as="span" fontSize="md" color={textColor} fontWeight="700">
-            {name}
-          </Text>{" "}
+        <Text color={textColor} fontWeight="400" fontSize="md">
+          {name}
+        </Text>
+        <Text fontSize="md" color={textColor} fontWeight="700" mt="6px">
           {text}
         </Text>
-        <Flex>
+        {/* Add this back in when you add tagging functionality */}
+        {/* <Flex>
           {tags &&
             tags.map((tag, key) => {
               return (
@@ -41,10 +41,10 @@ export default function Comment(props) {
                 </Link>
               );
             })}
-        </Flex>
+        </Flex> */}
         <Flex>{ratingsValues}</Flex>
         <Flex align="center">
-          <Text fontSize="md" color={textColorSecondary} fontWeight="500">
+          <Text fontSize="md" color="secondaryGray.600" fontWeight="500">
             {time}
           </Text>
           {/* <Button

@@ -113,16 +113,26 @@ export default function ReviewsTab({ centreId }) {
       </Flex>
 
       <Box mt="30px">
-        {reviews?.map((review) => (
-          <Comment
-            avatar={review.avatarUrl}
-            name={review.username ? `@${review.username}` : review.firstName}
-            text={review.review}
-            tags={["photography", "portrait", "image"]}
-            time={dayjs(review.createdAt).fromNow()}
-            pe="20px"
-          />
-        ))}
+        {reviews?.length > 0 ? (
+          reviews?.map((review) => (
+            <Comment
+              avatar={review.avatarUrl}
+              name={review.username ? `@${review.username}` : review.firstName}
+              text={review.review}
+              // tags={["photography", "portrait", "image"]}
+              time={dayjs(review.createdAt).fromNow()}
+              pe="20px"
+            />
+          ))
+        ) : (
+          <>
+            <Text color={textColorTertiary} fontSize="md">
+              {" "}
+              No Comments Yet. Be the first to add a comment.
+            </Text>
+            <AddReviewModal centreId={centreId} />
+          </>
+        )}
       </Box>
     </Flex>
   );

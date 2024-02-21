@@ -7,7 +7,6 @@
 import { chakra, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
-import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { useContext, useEffect, useState } from "react";
 
@@ -90,22 +89,18 @@ export default function DiveSites({ diveCentres }) {
             {filtered &&
               filtered.map((centre) => {
                 return (
-                  <Link href={`/dive_centres/${centre.slug}`} passHref>
-                    <a>
-                      <DiveSiteCard
-                        key={centre.id}
-                        id={centre.id}
-                        image={
-                          centre.coverPhotoUrl ||
-                          "/img/diving/dive_centre_bg.jpg"
-                        }
-                        name={centre.name}
-                        isLiked={!!userLikes?.includes(centre.id)}
-                        type="diveCentre"
-                        // address={`${site.city}, ${site.country}`}
-                      />
-                    </a>
-                  </Link>
+                  <DiveSiteCard
+                    key={centre.id}
+                    id={centre.id}
+                    image={
+                      centre.coverPhotoUrl || "/img/diving/dive_centre_bg.jpg"
+                    }
+                    name={centre.name}
+                    isLiked={!!userLikes?.includes(centre.id)}
+                    type="diveCentre"
+                    linkHref={`/dive_centres/${centre.slug}`}
+                    // address={`${site.city}, ${site.country}`}
+                  />
                 );
               })}
           </SimpleGrid>

@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { Avatar, Tag, TagLabel } from "@chakra-ui/react";
-import Link from "next/link";
 import { Marker } from "react-map-gl";
 
 import DiveSiteCard from "components/card/DiveSiteCard";
@@ -44,21 +43,18 @@ export default function MapMarker(props) {
           <TagLabel>{location.name}</TagLabel>
         </Tag>
       ) : (
-        <Link href={siteUrl} passHref>
-          <a>
-            <DiveSiteCard
-              key={location.id}
-              id={location.id}
-              name={location.name}
-              tagList={location.tags}
-              type={type}
-              image={
-                type === "diveSite" ? location.diveMap : location.coverPhotoUrl
-              }
-              zIndex={3}
-            />
-          </a>
-        </Link>
+        <DiveSiteCard
+          key={location.id}
+          id={location.id}
+          name={location.name}
+          linkHref={siteUrl}
+          tagList={location.tags}
+          type={type}
+          image={
+            type === "diveSite" ? location.diveMap : location.coverPhotoUrl
+          }
+          zIndex={3}
+        />
       )}
     </Marker>
   );

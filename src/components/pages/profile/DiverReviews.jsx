@@ -59,10 +59,13 @@ export default function ReviewsTab({ commentRecipientId }) {
             />
           ))
         ) : (
-          <Text color={textColorTertiary} fontSize="md">
-            {" "}
-            No Comments Yet. Be the first to add a comment.
-          </Text>
+          <>
+            <Text color={textColorTertiary} fontSize="md">
+              {" "}
+              No Comments Yet. Be the first to add a comment.
+            </Text>
+            <AddDiverReviewModal commentRecipientId={commentRecipientId} />
+          </>
         )}
       </Box>
     </Card>

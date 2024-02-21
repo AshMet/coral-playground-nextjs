@@ -8,7 +8,6 @@ import { chakra, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 // import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { motion, AnimatePresence, isValidMotionProp } from "framer-motion";
-import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { useContext, useEffect, useState } from "react";
 
@@ -94,27 +93,24 @@ export default function DiveSites({ diveSites }) {
             {filtered &&
               filtered.map((site) => {
                 return (
-                  <Link href={`/dive_sites/${site.slug}`} passHref>
-                    <a>
-                      <DiveSiteCard
-                        key={site.id}
-                        id={site.id}
-                        image={site.diveMap || "/img/diving/dive_site_bg.jpg"}
-                        name={site.name}
-                        tagList={site.tags}
-                        minDepth={site.minDepth}
-                        maxDepth={site.maxDepth}
-                        minVis={site.maxVis}
-                        maxVis={site.maxVis}
-                        minCurrent={site.minCurrent}
-                        maxCurrent={site.maxCurrent}
-                        userId={user?.id}
-                        isLiked={!!userLikes?.includes(site.id)}
-                        type="diveSite"
-                        // address={`${site.city}, ${site.country}`}
-                      />
-                    </a>
-                  </Link>
+                  <DiveSiteCard
+                    key={site.id}
+                    id={site.id}
+                    image={site.diveMap || "/img/diving/dive_site_bg.jpg"}
+                    name={site.name}
+                    linkHref={`/dive_sites/${site.slug}`}
+                    tagList={site.tags}
+                    minDepth={site.minDepth}
+                    maxDepth={site.maxDepth}
+                    minVis={site.maxVis}
+                    maxVis={site.maxVis}
+                    minCurrent={site.minCurrent}
+                    maxCurrent={site.maxCurrent}
+                    userId={user?.id}
+                    isLiked={!!userLikes?.includes(site.id)}
+                    type="diveSite"
+                    // address={`${site.city}, ${site.country}`}
+                  />
                 );
               })}
           </SimpleGrid>
