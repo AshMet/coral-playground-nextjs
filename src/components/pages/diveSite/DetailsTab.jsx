@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { FaRegAddressCard } from "react-icons/fa";
 import { IoBoatOutline } from "react-icons/io5";
+import { TbScubaMask } from "react-icons/tb";
 
 import Card from "components/card/Card";
 import CircularProgress from "components/charts/CircularProgress";
@@ -130,7 +131,7 @@ export default function DetailsTab({
               minW="40px"
               bg={iconBoxBg}
               me="18px"
-              icon={<FaRegAddressCard h="20px" w="20px" color={iconColor} />}
+              icon={<TbScubaMask h="20px" w="20px" color={iconColor} />}
             />
             <Flex direction="column">
               <Text fontSize="sm" fontWeight="bold" color={textColor}>
