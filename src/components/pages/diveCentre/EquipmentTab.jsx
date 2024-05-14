@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import {
   Box,

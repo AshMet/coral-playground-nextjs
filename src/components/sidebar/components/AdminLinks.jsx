@@ -1,12 +1,13 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/no-array-index-key */
 import { Icon, ListItem, Text, useColorModeValue } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import DiveCentres from "pages/diving/dive_centres";
 import { FaCircle } from "react-icons/fa";
 import { MdHome } from "react-icons/md";
 
 import NavLink from "components/navLinks/NavLink";
-import DiveCentres from "pages/diving/dive_centres";
 
 const adminRoutes = [
   {
